@@ -68,6 +68,7 @@ namespace CodeGen
         }
 
         Scriban.Template _messageTemplate = Scriban.Template.Parse(@"
+            [ReverseUnion({{id}}, typeof(ServerMessage))]
             public class {{entity}}{{method}}Message : EntityMessage
             {
                 {{ for arg in arguments }}
@@ -92,8 +93,6 @@ namespace CodeGen
                     );
                 }
             }
-
-            [Union({{id}},typeof({{entity}}{{method}}Message))] public abstract partial class ServerMessage { }
             ");
         class MsgArg
         {
@@ -136,16 +135,40 @@ namespace CodeGen
             var cds = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().Single();
             return cds;
         }
-        public static string GetFromStreamFromType(string type)
+        public static string GetFromStreamFromType(string type, string propName)
         {
-            return "GetInt";
+            switch (type)
+            {
+                case "float":
+                    return $"_ghostedEntity.{propName} = stream.GetFloat();";
+                case "long":
+                    return $"_ghostedEntity.{propName} = stream.GetLong();";
+                case "int":
+                    return $"_ghostedEntity.{propName} = stream.GetInt();";
+                case "string":
+                    return $"_ghostedEntity.{propName} = stream.GetString();";
+                case "bool":
+                    return $"_ghostedEntity.{propName} = stream.GetBool();";
+                default:
+                    return $"_ghostedEntity.{propName} = MessagePackSerializer.Deserialize<{type}>(stream.GetBytesWithLength());";
+            }
         }
-        public static string PutToStreamFromType(string type)
+        public static string PutToStreamFromType(string type, string propName)
         {
-            return "Put";
+            switch(type)
+            {
+                case "float":
+                case "int":
+                case "string":
+                case "bool":
+                case "long":
+                    return $"stream.Put({propName});";
+                default:
+                    return $"var bytes = MessagePackSerializer.Serialize({propName}); stream.PutBytesWithLength(bytes, 0, bytes.Length);";
+            }
         }
         Scriban.Template _ghostEntityTemplate = Scriban.Template.Parse(@"
-            class {{entity}}Ghost : {{entity}}, IGhost
+            public class {{entity}}Ghost : {{entity}}, IGhost
             {
                 {{entity}} _ghostedEntity;
                 int _deltaMask;
@@ -160,7 +183,7 @@ namespace CodeGen
                     {{for syncProp in sync}}
                     if ((mask & (1 << {{syncProp.index}})) != 0)
                     {
-                        _ghostedEntity.{{syncProp.name}} = stream.{{GetFromStreamFromType syncProp.type}}();
+                        {{GetFromStreamFromType syncProp.type syncProp.name}}
                     }
                     {{end}}
                     
@@ -181,18 +204,21 @@ namespace CodeGen
                 {
                     _deltaMask |= 1 << prop;
                 }
-                public void Serialize(NetDataWriter stream, bool initial)
+                public bool Serialize(NetDataWriter stream, bool initial)
                 {
                     int deltaMask = _deltaMask;
                     if (initial)
                         deltaMask = int.MaxValue;
+                    if(deltaMask == 0)
+                        return false;
                     stream.Put(deltaMask);
                     {{for syncProp in sync}}
                     if ((deltaMask & (1 << {{syncProp.index}})) != 0)
                     {
-                        stream.{{PutToStreamFromType syncProp.type }}({{syncProp.name}});
+                        {{PutToStreamFromType syncProp.type syncProp.name }}
                     }
                     {{end}}
+                    return true;
                 }
 
                 public void Swap()
@@ -275,8 +301,8 @@ namespace CodeGen
                 Sync = syncProps,
                 Methods = syncMethods
             });
-            scriptObject.Import(nameof(PutToStreamFromType), (Func<string, string>)((str) => PutToStreamFromType(str)));
-            scriptObject.Import(nameof(GetFromStreamFromType), (Func<string, string>)((str) => GetFromStreamFromType(str)));
+            scriptObject.Import(nameof(PutToStreamFromType), (Func<string, string, string>)((str, str2) => PutToStreamFromType(str, str2)));
+            scriptObject.Import(nameof(GetFromStreamFromType), (Func<string, string, string>)((str, str2) => GetFromStreamFromType(str, str2)));
             var context = new TemplateContext();
             context.PushGlobal(scriptObject);
             var code = _ghostEntityTemplate.Render(context);

@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <StartupObject></StartupObject>  
+    <LangVersion>7.1</LangVersion>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeGen\CodeGen.csproj" />
+    <ProjectReference Include="..\MessagePack\MessagePack.csproj" />
+    <ProjectReference Include="..\Server\Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.88" />
+    <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.88" />
+    <Reference Include="OpenTK">
+      <HintPath>..\TestGame\extlibs\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.Compatibility">
+      <HintPath>..\TestGame\extlibs\OpenTK.Compatibility.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-audio-2">
+      <HintPath>lib\sfmlnet-audio-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-graphics-2">
+      <HintPath>lib\sfmlnet-graphics-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-system-2">
+      <HintPath>lib\sfmlnet-system-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-window-2">
+      <HintPath>lib\sfmlnet-window-2.dll</HintPath>
+    </Reference>
+    <PackageReference Include="LiteNetLib" Version="0.7.7.3" />
+  </ItemGroup>
+
+</Project>
