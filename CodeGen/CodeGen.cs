@@ -46,7 +46,6 @@ namespace CodeGen
 
             var applyToClass = (ClassDeclarationSyntax)context.ProcessingNode;
             results = results.Add(GenerateMasterEntityClass(applyToClass));
-            results = results.Add(GenerateGhostEntityClass(applyToClass));
             results = GenerateMessages(applyToClass, results);
             return Task.FromResult<SyntaxList<MemberDeclarationSyntax>>(results);
 
@@ -75,7 +74,7 @@ namespace CodeGen
                     public {{ arg.type }} {{ arg.name }} { get; set; }
                 {{ end }}
                 
-                public override void Run(ServerEntity entity)
+                public override void Run(NetworkEntity entity)
                 {
                     (({{class}})entity).{{method}}(
                     {{ for arg in arguments 
@@ -113,64 +112,12 @@ namespace CodeGen
         }
 
         Scriban.Template _masterEntityTemplate = Scriban.Template.Parse(@"
-            public class {{entity}}Master : {{entity}} 
+            public class {{entity}}Master : {{entity}} , IGhost
             {
                 {{ for syncProp in sync }}
-                    public override {{ syncProp.type }} {{ syncProp.name }} { get => base.{{ syncProp.name }}; set { base.{{ syncProp.name }} = value; PropChanged({{syncProp.index}}); } }
+                    public override {{ syncProp.type }} {{ syncProp.name }} { get => base.{{ syncProp.name }}; set { base.{{ syncProp.name }} = value; OnPropChanged({{syncProp.index}}); } }
                 {{ end }}
 
-            }");
-        MemberDeclarationSyntax GenerateMasterEntityClass(ClassDeclarationSyntax entityClass)
-        {
-            var syncProps = new List<SyncProp>();
-            int propIndex = 0;
-            foreach (var memberSyntaxNode in entityClass.Members)
-            {
-                if (memberSyntaxNode is PropertyDeclarationSyntax prop)
-                    if (prop.AttributeLists.Any(x => x.Attributes.Any(a => a.Name.ToString() == "Sync")))
-                        syncProps.Add(new SyncProp() { Name = prop.Identifier.ValueText, Type = prop.Type.ToString(), Index = propIndex++ });
-            }
-            var code = _masterEntityTemplate.Render(new { Entity = entityClass.Identifier.ValueText, Sync = syncProps });
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var cds = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().Single();
-            return cds;
-        }
-        public static string GetFromStreamFromType(string type, string propName)
-        {
-            switch (type)
-            {
-                case "float":
-                    return $"_ghostedEntity.{propName} = stream.GetFloat();";
-                case "long":
-                    return $"_ghostedEntity.{propName} = stream.GetLong();";
-                case "int":
-                    return $"_ghostedEntity.{propName} = stream.GetInt();";
-                case "string":
-                    return $"_ghostedEntity.{propName} = stream.GetString();";
-                case "bool":
-                    return $"_ghostedEntity.{propName} = stream.GetBool();";
-                default:
-                    return $"_ghostedEntity.{propName} = MessagePackSerializer.Deserialize<{type}>(stream.GetBytesWithLength());";
-            }
-        }
-        public static string PutToStreamFromType(string type, string propName)
-        {
-            switch(type)
-            {
-                case "float":
-                case "int":
-                case "string":
-                case "bool":
-                case "long":
-                    return $"stream.Put({propName});";
-                default:
-                    return $"var bytes = MessagePackSerializer.Serialize({propName}); stream.PutBytesWithLength(bytes, 0, bytes.Length);";
-            }
-        }
-        Scriban.Template _ghostEntityTemplate = Scriban.Template.Parse(@"
-            public class {{entity}}Ghost : {{entity}}, IGhost
-            {
-                {{entity}} _ghostedEntity;
                 int _deltaMask;
                 public void Clear()
                 {
@@ -187,17 +134,6 @@ namespace CodeGen
                     }
                     {{end}}
                     
-                }
-
-                public void Init(GhostedEntity entity)
-                {
-                    Id = entity.Id;
-                    ServerId = entity.ServerId;
-                    _ghostedEntity = ({{entity}})entity;
-                    _deltaMask = int.MaxValue;
-                    Swap();
-                    _deltaMask = 0;
-                    entity.PropertyChanged = OnPropChanged;
                 }
 
                 void OnPropChanged(int prop)
@@ -221,15 +157,6 @@ namespace CodeGen
                     return true;
                 }
 
-                public void Swap()
-                {
-                    {{for syncProp in sync}}
-                    if ((_deltaMask & (1 << {{syncProp.index}})) != 0)
-                    {
-                        {{syncProp.name}} = _ghostedEntity.{{syncProp.name}};
-                    }
-                    {{end}}
-                }
                 {{for syncMethod in methods}}
                 public override void {{syncMethod.name}}(
                     {{ for arg in syncMethod.arguments 
@@ -246,25 +173,43 @@ namespace CodeGen
                     {{ end }}
                 )
                 {
-                    CurrentServer.HandleEntityMessage(new {{entity}}{{syncMethod.name}}Message() { EntityId = Id, 
-                    {{ for arg in syncMethod.arguments 
-                        if for.last == true 
-                            break 
-                        end }}
-                    {{ arg.name }} = {{ arg.name }},
-                    {{ end }}
-                    {{ for arg in syncMethod.arguments 
-                        if for.last == false 
-                            continue 
-                        end }}
-                    {{ arg.name }} = {{ arg.name }}
-                    {{ end }} });
+                    if(IsCurrentlyExecuting)
+                    {
+                        base.{{syncMethod.name}}({{ for arg in syncMethod.arguments 
+                                if for.last == true 
+                                    break 
+                                end }}{{ arg.name }},
+                            {{ end }}
+                            {{ for arg in syncMethod.arguments 
+                                if for.last == false 
+                                    continue 
+                                end }}{{ arg.name }}
+                            {{ end }} );
+                    }
+                    else
+                    {
+                        CurrentServer.HandleEntityMessage(new {{entity}}{{syncMethod.name}}Message() { EntityId = Id, 
+                        {{ for arg in syncMethod.arguments 
+                            if for.last == true 
+                                break 
+                            end }}
+                        {{ arg.name }} = {{ arg.name }},
+                        {{ end }}
+                        {{ for arg in syncMethod.arguments 
+                            if for.last == false 
+                                continue 
+                            end }}
+                        {{ arg.name }} = {{ arg.name }}
+                        {{ end }} });
+                    }
                 }
                 {{end}}
-            }");
 
-        MemberDeclarationSyntax GenerateGhostEntityClass(ClassDeclarationSyntax entityClass)
+
+            }");
+        MemberDeclarationSyntax GenerateMasterEntityClass(ClassDeclarationSyntax entityClass)
         {
+
             var syncProps = new List<SyncProp>();
             int propIndex = 0;
             foreach (var memberSyntaxNode in entityClass.Members)
@@ -305,11 +250,43 @@ namespace CodeGen
             scriptObject.Import(nameof(GetFromStreamFromType), (Func<string, string, string>)((str, str2) => GetFromStreamFromType(str, str2)));
             var context = new TemplateContext();
             context.PushGlobal(scriptObject);
-            var code = _ghostEntityTemplate.Render(context);
+            var code = _masterEntityTemplate.Render(context);
             context.PopGlobal();
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
             var cds = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().Single();
             return cds;
+        }
+        public static string GetFromStreamFromType(string type, string propName)
+        {
+            switch (type)
+            {
+                case "float":
+                    return $"{propName} = stream.GetFloat();";
+                case "long":
+                    return $"{propName} = stream.GetLong();";
+                case "int":
+                    return $"{propName} = stream.GetInt();";
+                case "string":
+                    return $"{propName} = stream.GetString();";
+                case "bool":
+                    return $"{propName} = stream.GetBool();";
+                default:
+                    return $"{propName} = MessagePackSerializer.Deserialize<{type}>(stream.GetBytesWithLength());";
+            }
+        }
+        public static string PutToStreamFromType(string type, string propName)
+        {
+            switch(type)
+            {
+                case "float":
+                case "int":
+                case "string":
+                case "bool":
+                case "long":
+                    return $"stream.Put({propName});";
+                default:
+                    return $"var bytes = MessagePackSerializer.Serialize({propName}); stream.PutBytesWithLength(bytes, 0, bytes.Length);";
+            }
         }
     }
 }

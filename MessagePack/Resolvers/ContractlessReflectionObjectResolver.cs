@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+#pragma warning disable 0649
 namespace MessagePack.Resolvers
 {
     public static class ContractlessReflectionObjectResolver

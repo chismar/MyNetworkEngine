@@ -55,7 +55,7 @@ namespace GameTest
         [Sync(SyncType.Client)]
         public virtual EntityId CurrentPlayer { get; set; }
         [Sync(SyncType.Client)]
-        public virtual ServerId ClientId { get; set; }
+        public virtual NetworkNodeId ClientId { get; set; }
         [Sync(SyncType.Server)]
         public virtual void SetUp(EntityId match, EntityId player)
         {

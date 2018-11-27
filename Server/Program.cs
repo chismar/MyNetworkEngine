@@ -14,15 +14,15 @@ namespace AnotherAttemptAtMakingMyCluster
 {
     class Program
     {
-        static Server _server;
-        static Server _server2;
+        static NetworkNode _server;
+        static NetworkNode _server2;
         static EntityId _entityId;
         static Random _rand = new Random();
         static void Main(string[] args)
         {
-            _server = new Server(new ServerId() { Id = 345 });
+            _server = new NetworkNode(new NetworkNodeId() { Id = 345 });
             _server.Start(9050, 1);
-            _server2 = new Server(new ServerId() { Id = 574 });
+            _server2 = new NetworkNode(new NetworkNodeId() { Id = 574 });
             _server2.Start(9051, 1);
             _server.Connect(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 }).ContinueWith(OnConnected, null);
             _entityId = _server.Create<TestEntity>((te) => { });
@@ -76,18 +76,18 @@ namespace AnotherAttemptAtMakingMyCluster
 
     public abstract class EntityStatus
     {
-        public ServerEntity Entity { get; set; }
+        public NetworkEntity Entity { get; set; }
     }
     public class Entities<T> : Entities where T : EntityStatus, new()
     {
         public ConcurrentDictionary<EntityId, T> Collection = new ConcurrentDictionary<EntityId, T>();
 
-        public Entities(Server server) : base(server)
+        public Entities(NetworkNode server) : base(server)
         {
         }
 
-        public override IEnumerable<ServerEntity> All => Collection.Values.Select(x => x.Entity);
-        public sealed override void Add(ServerEntity entity)
+        public override IEnumerable<NetworkEntity> All => Collection.Values.Select(x => x.Entity);
+        public sealed override void Add(NetworkEntity entity)
         {
             if (Collection.TryAdd(entity.Id, new T() { Entity = entity }))
             {
@@ -103,7 +103,7 @@ namespace AnotherAttemptAtMakingMyCluster
             }
         }
 
-        public override ServerEntity Get(EntityId id)
+        public override NetworkEntity Get(EntityId id)
         {
             T eStatus;
             Collection.TryGetValue(id, out eStatus);
@@ -118,26 +118,27 @@ namespace AnotherAttemptAtMakingMyCluster
     }
     public abstract class Entities
     {
-        protected Server _server;
-        public Entities(Server server)
+        protected NetworkNode _server;
+        public Entities(NetworkNode server)
         {
             _server = server;
         }
-        public abstract IEnumerable<ServerEntity> All { get; }
-        public Action<ServerEntity> EntityAdded;
-        public Action<ServerEntity> EntityRemoved;
-        public abstract void Add(ServerEntity entity);
+        public abstract IEnumerable<NetworkEntity> All { get; }
+        public Action<NetworkEntity> EntityAdded;
+        public Action<NetworkEntity> EntityRemoved;
+        public abstract void Add(NetworkEntity entity);
         public abstract void Remove(EntityId entityId);
-        public abstract ServerEntity Get(EntityId id);
+        public abstract NetworkEntity Get(EntityId id);
         public abstract TStatus GetStatus<TStatus>(EntityId id) where TStatus : class;
     }
     public class GhostingStatus : EntityStatus
     {
 
     }
+
     public class Ghosting : Entities<GhostingStatus>
     {
-        public Ghosting(Server server) : base(server)
+        public Ghosting(NetworkNode server) : base(server)
         {
         }
 
@@ -146,20 +147,26 @@ namespace AnotherAttemptAtMakingMyCluster
             entities.EntityAdded += OnEntityAdded;
             entities.EntityRemoved += OnEntityRemoved;
         }
-        public static ServerEntity CreateGhost(GhostedEntity obj)
+        public static NetworkEntity CreateGhost(GhostedEntity obj)
         {
-            var ghostType = EntitiesMappings.GetGhostFromMasterType(obj.GetType());
-            var ghost = (IGhost)Activator.CreateInstance(ghostType);
-            ghost.Init(obj);
-            return (ServerEntity)ghost;
+            if (!obj.IsMaster)
+                return obj;
+            var ghost = (IGhost)Activator.CreateInstance(obj.GetType());
+            var stream = new NetDataWriter(true, 100);
+            var ghostEnt = (GhostedEntity)ghost;
+            ghostEnt.Id = obj.Id;
+            ghostEnt.ServerId = obj.ServerId;
+            ((IGhost)obj).Serialize(stream, true);
+            ghost.Deserialize(new NetDataReader(stream.Data));
+            return (NetworkEntity)ghost;
         }
-        private void OnEntityRemoved(ServerEntity obj)
+        private void OnEntityRemoved(NetworkEntity obj)
         {
             if (obj is GhostedEntity)
                 Remove(obj.Id);
         }
 
-        private void OnEntityAdded(ServerEntity obj)
+        private void OnEntityAdded(NetworkEntity obj)
         {
             if (obj is GhostedEntity)
                 Add(CreateGhost((GhostedEntity)obj));
@@ -173,9 +180,9 @@ namespace AnotherAttemptAtMakingMyCluster
                 OnEntityRemoved(ent);
         }
     }
-    class RemoteServer
+    class RemoteNetworkNodes
     {
-        public ServerId Id;
+        public NetworkNodeId Id;
         public NetPeer Peer;
         public bool Clientside;
         public Entities<RemoteStatus> EntitiesReplicatedFromRemote;
@@ -197,20 +204,30 @@ namespace AnotherAttemptAtMakingMyCluster
     [Union(2, typeof(UnreplicateEntity))]
     [Union(3, typeof(HelloPeer))]
     [Union(4, typeof(HelloAnswerPeer))]
+    [Union(5, typeof(GrantAuthorityMessage))]
+    [Union(6, typeof(RevokeAuthorityMessage))]
     public abstract partial class ServerMessage
     {
         [IgnoreMember]
-        public ServerId From { get; set; }
+        public NetworkNodeId From { get; set; }
+    }
+    public class GrantAuthorityMessage : ServerMessage
+    {
+        public EntityId Id { get; set; }
     }
 
+    public class RevokeAuthorityMessage : ServerMessage
+    {
+        public EntityId Id { get; set; }
+    }
     public class HelloPeer : ServerMessage
     {
-        public ServerId MyId { get; set; }
+        public NetworkNodeId MyId { get; set; }
     }
 
     public class HelloAnswerPeer : ServerMessage
     {
-        public ServerId MyId { get; set; }
+        public NetworkNodeId MyId { get; set; }
     }
     public class ReplicateEntity : ServerMessage
     {
@@ -232,31 +249,52 @@ namespace AnotherAttemptAtMakingMyCluster
     {
         void Tick();
     }
-
-    public class Server
+    public interface IEntityTickHook
     {
-        ConcurrentDictionary<ServerId, RemoteServer> _remoteServers = new ConcurrentDictionary<ServerId, RemoteServer>();
+        void Tick(NetworkEntity ent);
+    }
+    public class NetworkNode
+    {
+        Ghosting _ghosting;
+        ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
         Entities<MasterStatus> _entities;
-        public Ghosting Ghosting { get; private set; }
-        public ServerId Id { get; }
+        public NetworkNodeId Id { get; private set; }
         NetManager _netManager;
-        long _entitiesCounter = 0;
+        long _entitiesCounter = 1;
         public bool Started { get; private set; } = false;
-        public event Action<ServerId> NewConnectionEstablished;
+        public event Action<NetworkNodeId> NewConnectionEstablished;
         public event Action<EntityId, Type> GotEntity;
-        public Server(ServerId id)
+        public NetworkNode()
+        {
+            NewNode(NetworkNodeId.Random);
+        }
+        public NetworkNode(NetworkNodeId id)
+        {
+            NewNode(id);
+        }
+
+        void NewNode(NetworkNodeId id)
         {
             Id = id;
             _entities = new Entities<MasterStatus>(this);
-            Ghosting = new Ghosting(this);
-            Ghosting.EntityAdded += (e) =>
+            _ghosting = new Ghosting(this);
+            _ghosting.Add(_entities);
+            _ghosting.EntityAdded += (e) =>
             {
-                GotEntity?.Invoke(e.Id, EntitiesMappings.GetTypeFromGhost(e.GetType()));
+                GotEntity?.Invoke(e.Id, EntitiesMappings.GetDeclaredTypeFromMasterType(e.GetType()));
             };
+        }
+        public IEnumerable<NetworkEntity> AllGhosts()
+        {
+            foreach (var entity in _ghosting.Collection)
+                yield return entity.Value.Entity;
+        }
+        public void Start()
+        {
+            Start((new System.Random().Next() % 30000), 1);
         }
         public void Start(int port, int maxConnections)
         {
-            Ghosting.Add(_entities);
             EventBasedNetListener listener = new EventBasedNetListener();
             _netManager = new NetManager(listener, maxConnections, "Abyss");
             _netManager.DisconnectTimeout = 1000000;
@@ -273,7 +311,7 @@ namespace AnotherAttemptAtMakingMyCluster
         private void OnDisconnect(NetPeer peer, DisconnectInfo disconnectInfo)
         {
             Console.WriteLine("We lost connection: {0}", peer.EndPoint);
-            RemoveRemoteServer(peer, _remoteServers.Single(x => x.Value.Peer == peer).Key);
+            RemoveRemoteServer(peer, _remoteNetworkNodes.Single(x => x.Value.Peer == peer).Key);
         }
 
         private void OnReceiveFromNetwork(NetPeer peer, NetDataReader reader)
@@ -285,7 +323,7 @@ namespace AnotherAttemptAtMakingMyCluster
                 Console.WriteLine("Received null");
             if (msg is EntityMessage)
             {
-                msg.From = _remoteServers.Single(x => x.Value.Peer == peer).Key;
+                msg.From = _remoteNetworkNodes.Single(x => x.Value.Peer == peer).Key;
                 HandleEntityMessage((EntityMessage)msg);
             }
             else if (msg is HelloPeer hp)
@@ -298,12 +336,12 @@ namespace AnotherAttemptAtMakingMyCluster
             }
             else
             {
-                msg.From = _remoteServers.Single(x => x.Value.Peer == peer).Key;
-                HandleInternalMessage(_remoteServers.Single(x => x.Value.Peer == peer).Key, msg);
+                msg.From = _remoteNetworkNodes.Single(x => x.Value.Peer == peer).Key;
+                HandleInternalMessage(_remoteNetworkNodes.Single(x => x.Value.Peer == peer).Key, msg);
             }
         }
 
-        private void HandleInternalMessage(ServerId from, ServerMessage msg)
+        private void HandleInternalMessage(NetworkNodeId from, ServerMessage msg)
         {
             switch (msg)
             {
@@ -316,24 +354,35 @@ namespace AnotherAttemptAtMakingMyCluster
                 case UpdateEntity ue:
                     ApplyUpdateToEntity(from, ue);
                     break;
+                case GrantAuthorityMessage ga:
+                    SetAuthorityFromServer(ga.Id, true);
+                    break;
+                case RevokeAuthorityMessage ga:
+                    SetAuthorityFromServer(ga.Id, false);
+                    break;
             }
         }
 
-        private void RemoveRemoteServer(NetPeer peer, ServerId sid)
+        private void SetAuthorityFromServer(EntityId id, bool authority)
         {
-            _remoteServers.Remove(sid, out var rt);
-            Ghosting.Remove(rt.EntitiesReplicatedFromRemote);
+            GetGhost<NetworkEntity>(id).HasAuthority = authority;
         }
-        private void AddRemoteServer(NetPeer peer, ServerId sid, bool answer)
+
+        private void RemoveRemoteServer(NetPeer peer, NetworkNodeId sid)
         {
-            var remoteServer = new RemoteServer
+            _remoteNetworkNodes.Remove(sid, out var rt);
+            _ghosting.Remove(rt.EntitiesReplicatedFromRemote);
+        }
+        private void AddRemoteServer(NetPeer peer, NetworkNodeId sid, bool answer)
+        {
+            var remoteServer = new RemoteNetworkNodes
             {
                 Peer = peer,
                 Id = sid,
                 EntitiesReplicatedFromRemote = new Entities<RemoteStatus>(this)
             };
-            Ghosting.Add(remoteServer.EntitiesReplicatedFromRemote);
-            _remoteServers.AddOrUpdate(sid, remoteServer, (x, y) => { throw new Exception("Duplicate server from peer"); });
+            _ghosting.Add(remoteServer.EntitiesReplicatedFromRemote);
+            _remoteNetworkNodes.AddOrUpdate(sid, remoteServer, (x, y) => { throw new Exception("Duplicate server from peer"); });
             if (answer)
             {
                 Send(new HelloAnswerPeer() { MyId = Id }, sid);
@@ -341,54 +390,48 @@ namespace AnotherAttemptAtMakingMyCluster
             NewConnectionEstablished?.Invoke(sid);
         }
 
-        private void ApplyUpdateToEntity(ServerId fromSid, UpdateEntity ue)
+        private void ApplyUpdateToEntity(NetworkNodeId fromSid, UpdateEntity ue)
         {
-            ((IGhost)Ghosting.Get(ue.Id)).Deserialize(new NetDataReader(ue.Delta));
+            ((IGhost)_ghosting.Get(ue.Id)).Deserialize(new NetDataReader(ue.Delta));
         }
 
-        private void RemoveReplica(ServerId fromSid, UnreplicateEntity ure)
+        private void RemoveReplica(NetworkNodeId fromSid, UnreplicateEntity ure)
         {
-            _remoteServers[fromSid].EntitiesReplicatedFromRemote.Remove(ure.Id);
+            _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Remove(ure.Id);
         }
 
 
-        private void AddReplica(ServerId fromSid, ReplicateEntity re)
+        private void AddReplica(NetworkNodeId fromSid, ReplicateEntity re)
         {
             var serverEntity = (GhostedEntity)Activator.CreateInstance(EntitiesMappings.MasterTypeFromId(re.EntityType));
             serverEntity.Id = re.Id;
             serverEntity.ServerId = fromSid;
-            //rethink architecture, this does not seem to work out well
-            var pseudoGhost = Ghosting.CreateGhost(serverEntity);
-            ((IGhost)pseudoGhost).Deserialize(new NetDataReader(re.InitialState));
-            _remoteServers[fromSid].EntitiesReplicatedFromRemote.Add(serverEntity);
+            ((IGhost)serverEntity).Deserialize(new NetDataReader(re.InitialState));
+            _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Add(serverEntity);
         }
 
-        private void Send<T>(T msg, ServerId sid) where T : ServerMessage
+        private void Send<T>(T msg, NetworkNodeId sid) where T : ServerMessage
         {
             var bytes = MessagePackSerializer.Serialize<ServerMessage>(msg);
             Console.WriteLine($"Send to {sid} {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(bytes)}");
-            _remoteServers[sid].Peer.Send(bytes, SendOptions.ReliableOrdered);
+            _remoteNetworkNodes[sid].Peer.Send(bytes, SendOptions.ReliableOrdered);
         }
 
         public void Stop()
         {
             _netManager.Stop();
         }
-        public void Update(GhostedEntity entity)
-        {
-            var writer = new NetDataWriter(true, 30);
-            ((IGhost)Ghosting.Get(entity.Id)).Serialize(writer, false);
-            foreach (var remoteServer in _remoteServers)
-                if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(entity.Id))
-                {
-                    Send(new UpdateEntity() { Id = entity.Id, Delta = writer.Data }, remoteServer.Key);
-                }
-        }
-        public void GrantAuthority(EntityId eid, ServerId sid)
+        public void GrantAuthority(EntityId eid, NetworkNodeId sid)
         {
             _entities.Get(eid).AuthorityServerId = sid;
+            Send(new GrantAuthorityMessage() { Id = eid }, sid);
         }
-        public void Replicate(EntityId eid, ServerId sid)
+        public void RemoveAuthority(EntityId eid, NetworkNodeId sid)
+        {
+            _entities.Get(eid).AuthorityServerId = default;
+            Send(new RevokeAuthorityMessage() { Id = eid }, sid);
+        }
+        public void Replicate(EntityId eid, NetworkNodeId sid)
         {
             var ent = _entities.Get(eid);
             var re = new ReplicateEntity() { Id = eid, EntityType = EntitiesMappings.GetIdFromMasterType(ent.GetType()) };
@@ -396,27 +439,35 @@ namespace AnotherAttemptAtMakingMyCluster
             {
                 NetDataWriter writer = new NetDataWriter(true, 30);
                 Console.WriteLine("Serialize initial state");
-                ((IGhost)Ghosting.Get(eid)).Serialize(writer, true);
+                ((IGhost)_entities.Get(eid)).Serialize(writer, true);
                 re.InitialState = writer.Data;
                 Console.WriteLine("After serialize initial state");
             }
-            _remoteServers[sid].EntitiesReplicatedToRemote.AddOrUpdate(eid, true, (x, y) => { throw new Exception("Duplicate replicate to calls"); });
+            _remoteNetworkNodes[sid].EntitiesReplicatedToRemote.AddOrUpdate(eid, true, (x, y) => { throw new Exception("Duplicate replicate to calls"); });
             Send(re, sid);
         }
 
-        public void Unreplicate(EntityId eid, ServerId sid)
+        public void Unreplicate(EntityId eid, NetworkNodeId sid)
         {
-            if (_remoteServers.TryGetValue(sid, out var rs))
+            if (_remoteNetworkNodes.TryGetValue(sid, out var rs))
             {
                 rs.EntitiesReplicatedToRemote.TryRemove(eid, out var irrelevantVal);
             }
             Send(new UnreplicateEntity() { Id = eid }, sid);
         }
 
+        NetworkNodeId GetNodeIDForEntity(EntityId eid)
+        {
+            if (_ghosting.Collection.TryGetValue(eid, out var status))
+                return status.Entity.ServerId;
+            return NetworkNodeId.Invalid;
+        }
         public void HandleEntityMessage(EntityMessage message)
         {
             var eid = message.EntityId;
-            var serverId = Ghosting.Get(eid).ServerId;
+            var serverId = GetNodeIDForEntity(eid);
+            if (serverId.IsInvalid)
+                return;
             if (serverId == Id)
             {
                 _entities.GetStatus<MasterStatus>(eid).Messages.Enqueue(message);
@@ -426,13 +477,13 @@ namespace AnotherAttemptAtMakingMyCluster
                 Send(message, serverId);
             }
         }
-        public T GetGhost<T>(EntityId id) where T : ServerEntity
+        public T GetGhost<T>(EntityId id) where T : NetworkEntity
         {
-            return (T)Ghosting.Get(id);
+            return (T)_ghosting.Get(id);
         }
-        public EntityId Create<T>(Action<T> init = null) where T : ServerEntity
+        public EntityId Create<T>(Action<T> init = null) where T : NetworkEntity
         {
-            var newEntity = (ServerEntity)Activator.CreateInstance(EntitiesMappings.GetMasterTypeFromDeclaredType(typeof(T)));
+            var newEntity = (NetworkEntity)Activator.CreateInstance(EntitiesMappings.GetMasterTypeFromDeclaredType(typeof(T)));
             init?.Invoke((T)newEntity);
             newEntity.ServerId = Id;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
@@ -443,13 +494,13 @@ namespace AnotherAttemptAtMakingMyCluster
         public void Destroy(EntityId eid)
         {
             _entities.Remove(eid);
-            foreach (var remoteServer in _remoteServers)
+            foreach (var remoteServer in _remoteNetworkNodes)
                 if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(eid))
                 {
                     Unreplicate(eid, remoteServer.Key);
                 }
         }
-        public void Teleport(EntityId eid, ServerId sid)
+        public void Teleport(EntityId eid, NetworkNodeId sid)
         {
 
         }
@@ -468,7 +519,7 @@ namespace AnotherAttemptAtMakingMyCluster
                     var hello = MessagePackSerializer.Serialize<ServerMessage>(new HelloPeer() { MyId = Id });
                     peer.Send(hello, SendOptions.ReliableOrdered);
                     int wait = 1000;
-                    while (!_remoteServers.Any(x => x.Value.Peer == peer))
+                    while (!_remoteNetworkNodes.Any(x => x.Value.Peer == peer))
                     {
                         await Task.Delay(10);
                         if (wait-- <= 0)
@@ -484,22 +535,22 @@ namespace AnotherAttemptAtMakingMyCluster
         public async Task Tick()
         {
             await TickLogic();
-            await TickSwapAndSend();
+            await TickSync();
         }
         public async Task TickLogic()
         {
             _netManager.PollEvents();
             await ProcessMessages();
         }
-        public async Task TickSwapAndSend()
+        public async Task TickSync()
         {
-            await Task.WhenAll(Swap(), SerializeAndSend());
+            await SerializeAndSend();
             await Clear();
         }
         private Task Clear()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var entity in Ghosting.Collection)
+            foreach (var entity in _entities.Collection)
             {
                 tasks.Add(Task.Run(() =>
                 {
@@ -510,34 +561,24 @@ namespace AnotherAttemptAtMakingMyCluster
         }
         private Task SerializeAndSend()
         {
-
             List<Task> tasks = new List<Task>();
-            foreach (var entity in Ghosting.Collection)
+            foreach (var entity in _entities.Collection)
             {
                 tasks.Add(Task.Run(() =>
                 {
                     var writer = new NetDataWriter(true, 100);
                     if (((IGhost)entity.Value.Entity).Serialize(writer, false))
-                        foreach (var remoteServer in _remoteServers)
+                    {
+                        foreach (var remoteServer in _remoteNetworkNodes)
                             if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(entity.Key))
                                 Send(new UpdateEntity() { Id = entity.Key, Delta = writer.Data }, remoteServer.Value.Id);
+                        ((IGhost)_ghosting.Get(entity.Value.Entity.Id)).Deserialize(new NetDataReader(writer.Data));
+                    }
                 }));
             }
             return Task.WhenAll(tasks);
         }
-        private Task Swap()
-        {
-            List<Task> tasks = new List<Task>();
-            foreach (var entity in Ghosting.Collection)
-            {
-                tasks.Add(Task.Run(() =>
-                {
-                    ((IGhost)entity.Value.Entity).Swap();
-                }));
-            }
-            return Task.WhenAll(tasks);
-        }
-        public AsyncLocal<ServerId> CurrentServerCallbackId = new AsyncLocal<ServerId>();
+        public AsyncLocal<NetworkNodeId> CurrentServerCallbackId = new AsyncLocal<NetworkNodeId>();
         private Task ProcessMessages()
         {
             List<Task> tasks = new List<Task>();
@@ -547,6 +588,7 @@ namespace AnotherAttemptAtMakingMyCluster
                 if (entity.Value.MessagesToProcess != 0 || entity.Value.Entity is ITicked)
                     tasks.Add(Task.Run(() =>
                     {
+                        NetworkEntity.CurrentlyExecutingInContext.Value = entity.Value.Entity.Id;
                         if (entity.Value.Entity is ITicked ticked)
                             ticked.Tick();
                         for (int i = 0; i < entity.Value.MessagesToProcess; i++)
@@ -555,6 +597,7 @@ namespace AnotherAttemptAtMakingMyCluster
                             CurrentServerCallbackId.Value = message.From;
                             message.Run(entity.Value.Entity);
                         }
+                        NetworkEntity.CurrentlyExecutingInContext.Value = EntityId.Invalid;
                     }));
             }
             return Task.WhenAll(tasks);
@@ -562,20 +605,34 @@ namespace AnotherAttemptAtMakingMyCluster
     }
 
     [MessagePackObject(true)]
-    public struct ServerId
+    public struct NetworkNodeId
     {
+        public static NetworkNodeId Random => new NetworkNodeId() { Id = (new Random().Next()) };
+        public static NetworkNodeId Invalid => default;
+        [IgnoreMember]
+        public bool IsInvalid => this == default;
         public int Id { get; set; }
-        public static bool operator ==(ServerId id, ServerId id2)
+        public static bool operator ==(NetworkNodeId id, NetworkNodeId id2)
         {
             return id.Id == id2.Id;
         }
-        public static bool operator !=(ServerId id, ServerId id2)
+        public static bool operator !=(NetworkNodeId id, NetworkNodeId id2)
         {
             return id.Id != id2.Id;
         }
         public override string ToString()
         {
             return Id.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
     public enum SyncType
@@ -601,14 +658,13 @@ namespace AnotherAttemptAtMakingMyCluster
     {
         static Dictionary<int, Type> _idToMaster = new Dictionary<int, Type>();
         static Dictionary<Type, int> _masterToId = new Dictionary<Type, int>();
-        static Dictionary<Type, Type> _masterToGhost = new Dictionary<Type, Type>();
         static Dictionary<Type, Type> _baseToMaster = new Dictionary<Type, Type>();
-        static Dictionary<Type, Type> _ghostToOriginal = new Dictionary<Type, Type>();
+        static Dictionary<Type, Type> _masterToBase = new Dictionary<Type, Type>();
         static EntitiesMappings()
         {
             var allEntitiesTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.GetTypes())
-                .Where(x => typeof(GhostedEntity) != x && typeof(ServerEntity) != x && typeof(ServerEntity).IsAssignableFrom(x)).ToDictionary(x => x.Name);
+                .Where(x => typeof(GhostedEntity) != x && typeof(NetworkEntity) != x && typeof(NetworkEntity).IsAssignableFrom(x)).ToDictionary(x => x.Name);
 
             var allBaseEntities = allEntitiesTypes.Where(t => t.Value.IsAbstract);
             foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
@@ -617,18 +673,13 @@ namespace AnotherAttemptAtMakingMyCluster
                 var id = (int)(Crc64.Compute(baseEntity.Name) % int.MaxValue);
                 _idToMaster.Add(id, master);
                 _masterToId.Add(master, id);
-                if (typeof(GhostedEntity).IsAssignableFrom(baseEntity))
-                {
-                    var ghost = allEntitiesTypes[baseEntity.Name + "Ghost"];
-                    _masterToGhost.Add(master, ghost);
-                    _ghostToOriginal.Add(ghost, baseEntity);
-                }
                 _baseToMaster.Add(baseEntity, master);
+                _masterToBase.Add(master, baseEntity);
             }
         }
-        public static Type GetGhostFromMasterType(Type type)
+        public static Type GetDeclaredTypeFromMasterType(Type type)
         {
-            return _masterToGhost[type];
+            return _masterToBase[type];
         }
         public static Type GetMasterTypeFromDeclaredType(Type type)
         {
@@ -642,26 +693,24 @@ namespace AnotherAttemptAtMakingMyCluster
         {
             return _masterToId[type];
         }
-
-        internal static Type GetTypeFromGhost(Type type)
-        {
-            return _ghostToOriginal[type];
-        }
     }
-    public abstract class ServerEntity
+    public abstract class NetworkEntity
     {
-
-        public Server CurrentServer;
-        public ServerId ServerId;
-        public ServerId AuthorityServerId;
+        public static AsyncLocal<EntityId> CurrentlyExecutingInContext = new AsyncLocal<EntityId>();
+        protected bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id;
+        public bool IsMaster => CurrentServer.Id == ServerId;
+        public NetworkNode CurrentServer;
+        public NetworkNodeId ServerId;
+        public NetworkNodeId AuthorityServerId;
         public EntityId Id;
+        public virtual bool HasAuthority { get; set; }
         public virtual void OnCreate() { }
         public virtual void OnDestroy() { }
     }
-    public abstract class GhostedEntity : ServerEntity, IEntityPropertyChanged
+    public abstract class GhostedEntity : NetworkEntity, IEntityPropertyChanged
     {
         public Action<int> PropertyChanged { get; set; }
-
+        public override bool HasAuthority { get => base.HasAuthority; set => base.HasAuthority = value; }
         protected void PropChanged(int prop)
         {
             PropertyChanged?.Invoke(prop);
@@ -670,8 +719,6 @@ namespace AnotherAttemptAtMakingMyCluster
 
     public interface IGhost
     {
-        void Init(GhostedEntity entity);
-        void Swap();
         bool Serialize(NetDataWriter stream, bool initial);
         void Deserialize(NetDataReader stream);
         void Clear();
@@ -705,7 +752,7 @@ namespace AnotherAttemptAtMakingMyCluster
     public abstract class EntityMessage : ServerMessage
     {
         public EntityId EntityId { get; set; }
-        public abstract void Run(ServerEntity entity);
+        public abstract void Run(NetworkEntity entity);
     }
 
     public class RemoteConnectionToken
@@ -716,8 +763,15 @@ namespace AnotherAttemptAtMakingMyCluster
     [MessagePackObject(true)]
     public struct EntityId
     {
-        public ServerId Id1;
+        public static EntityId Invalid => default;
+        public NetworkNodeId Id1;
         public long Id2;
+
+        public EntityId(NetworkNodeId id1, long id2)
+        {
+            Id1 = id1;
+            Id2 = id2;
+        }
 
         public override bool Equals(object obj)
         {
@@ -736,6 +790,11 @@ namespace AnotherAttemptAtMakingMyCluster
         public override string ToString()
         {
             return $"{Id1.Id}-{Id2}";
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 

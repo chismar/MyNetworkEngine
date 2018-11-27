@@ -10,15 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GameTest
-{
-    //launch server
-    //create login-matchmaker
-    //can create or join random match
-    //everyone in a match see all the stuff
-    //match has 2 players
-    //players have random cards
-    //hearthstone-like mechanics
-    //
+{ 
     class GameTest
     {
         static string _replicatedName;
@@ -29,7 +21,7 @@ namespace GameTest
         static Text _consoleText;
         static Font _font;
         static string _currentText = "";
-        static Server _server;
+        static NetworkNode _server;
         static RenderWindow _win;
         static CircleShape projectile;
         static EntityId _charId;
@@ -87,7 +79,7 @@ namespace GameTest
                 string additionalStatus = "";
                 if (_server != null && _server.Started)
                 {
-                    var match = (MatchEntity)_server.Ghosting.All.SingleOrDefault(x => x is MatchEntity);
+                    var match = (MatchEntity)_server.AllGhosts().SingleOrDefault(x => x is MatchEntity);
                     if (match != null)
                         additionalStatus = match.State.ToString();
                 }
@@ -99,7 +91,7 @@ namespace GameTest
                     if (myAcc != null)
                     {
                         var myPlayer = _server.GetGhost<PlayerEntity>(myAcc.CurrentPlayer);
-                        var otherPlayer = (PlayerEntity)(myPlayer == null ? null : _server.Ghosting.All.SingleOrDefault(x =>
+                        var otherPlayer = (PlayerEntity)(myPlayer == null ? null : _server.AllGhosts().SingleOrDefault(x =>
                         {
                             if (x is PlayerEntity pe)
                                 if (pe.Id != myPlayer.Id)
@@ -178,7 +170,7 @@ namespace GameTest
                 {
                     _currentTick.Wait();
                     _currentTick = null;
-                    _server.TickSwapAndSend().Wait();
+                    _server.TickSync().Wait();
                 }
             }
         }
@@ -279,7 +271,7 @@ namespace GameTest
             if (cmd.StartsWith("server"))
             {
                 var args = cmd.Split(' ');
-                _server = new Server(new ServerId() { Id = new Random().Next() });
+                _server = new NetworkNode(new NetworkNodeId() { Id = new Random().Next() });
                 _server.Start(9050, 10);
                 _status = $"Server {_server.Id}";
                 var loginEntity = _server.Create<LoginEntity>((e) => { });
@@ -294,7 +286,7 @@ namespace GameTest
                 var port = int.Parse(args[2]);
                 var targetPort = 9050;
                 var name = args[1];
-                _server = new Server(new ServerId() { Id = new Random().Next() });
+                _server = new NetworkNode(new NetworkNodeId() { Id = new Random().Next() });
                 _server.GotEntity += (eid, type) =>
                 {
                     if (type == typeof(LoginEntity))
