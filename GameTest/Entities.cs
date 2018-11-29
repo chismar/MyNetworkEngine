@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace GameTest
 {
-    [GenerateEntitiesCode]
+    [GenerateSyncAttribute]
     public abstract class LoginEntity : GhostedEntity
     {
         Stack<EntityId> _matchesWaitingForJoin = new Stack<EntityId>();
@@ -45,7 +45,7 @@ namespace GameTest
 
         }
     }
-    [GenerateEntitiesCode]
+    [GenerateSyncAttribute]
     public abstract class AccountEntity : GhostedEntity
     {
         [Sync(SyncType.Client)]
@@ -77,7 +77,7 @@ namespace GameTest
         public int Health { get; set; }
         public string Name { get; set; }
     }
-    [GenerateEntitiesCode]
+    [GenerateSyncAttribute]
     public abstract class PlayerEntity : GhostedEntity
     {
         [Sync(SyncType.Master)]
@@ -178,7 +178,7 @@ namespace GameTest
             CardsOnTheTable = CardsOnTheTable;
         }
     }
-    [GenerateEntitiesCode]
+    [GenerateSyncAttribute]
     public abstract class MatchEntity : GhostedEntity, ITicked
     {
         [Sync(SyncType.Client)]

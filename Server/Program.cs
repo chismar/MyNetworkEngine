@@ -152,7 +152,7 @@ namespace AnotherAttemptAtMakingMyCluster
             if (!obj.IsMaster)
                 return obj;
             var ghost = (IGhost)Activator.CreateInstance(obj.GetType());
-            var stream = new NetDataWriter(true, 100);
+            var stream = new NetDataWriter(true, 300);
             var ghostEnt = (GhostedEntity)ghost;
             ghostEnt.Id = obj.Id;
             ghostEnt.ServerId = obj.ServerId;
@@ -244,7 +244,13 @@ namespace AnotherAttemptAtMakingMyCluster
     {
         public EntityId Id { get; set; }
     }
-
+    public abstract class SyncObject
+    {
+        public static T New<T>()
+        {
+            return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
+        }
+    }
     public interface ITicked
     {
         void Tick();
@@ -281,7 +287,7 @@ namespace AnotherAttemptAtMakingMyCluster
             _ghosting.Add(_entities);
             _ghosting.EntityAdded += (e) =>
             {
-                GotEntity?.Invoke(e.Id, EntitiesMappings.GetDeclaredTypeFromMasterType(e.GetType()));
+                GotEntity?.Invoke(e.Id, SyncTypesMap.GetDeclaredTypeFromSyncType(e.GetType()));
             };
         }
         public IEnumerable<NetworkEntity> AllGhosts()
@@ -403,7 +409,7 @@ namespace AnotherAttemptAtMakingMyCluster
 
         private void AddReplica(NetworkNodeId fromSid, ReplicateEntity re)
         {
-            var serverEntity = (GhostedEntity)Activator.CreateInstance(EntitiesMappings.MasterTypeFromId(re.EntityType));
+            var serverEntity = (GhostedEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(re.EntityType));
             serverEntity.Id = re.Id;
             serverEntity.ServerId = fromSid;
             ((IGhost)serverEntity).Deserialize(new NetDataReader(re.InitialState));
@@ -434,7 +440,7 @@ namespace AnotherAttemptAtMakingMyCluster
         public void Replicate(EntityId eid, NetworkNodeId sid)
         {
             var ent = _entities.Get(eid);
-            var re = new ReplicateEntity() { Id = eid, EntityType = EntitiesMappings.GetIdFromMasterType(ent.GetType()) };
+            var re = new ReplicateEntity() { Id = eid, EntityType = SyncTypesMap.GetIdFromSyncType(ent.GetType()) };
             if (ent is GhostedEntity)
             {
                 NetDataWriter writer = new NetDataWriter(true, 30);
@@ -483,7 +489,7 @@ namespace AnotherAttemptAtMakingMyCluster
         }
         public EntityId Create<T>(Action<T> init = null) where T : NetworkEntity
         {
-            var newEntity = (NetworkEntity)Activator.CreateInstance(EntitiesMappings.GetMasterTypeFromDeclaredType(typeof(T)));
+            var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
             init?.Invoke((T)newEntity);
             newEntity.ServerId = Id;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
@@ -562,12 +568,12 @@ namespace AnotherAttemptAtMakingMyCluster
         private Task SerializeAndSend()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var entity in _entities.Collection)
+            foreach (var entity in _ghosting.Collection.Where(x=>x.Value.Entity.ServerId == Id))
             {
                 tasks.Add(Task.Run(() =>
                 {
-                    var writer = new NetDataWriter(true, 100);
-                    if (((IGhost)entity.Value.Entity).Serialize(writer, false))
+                    var writer = new NetDataWriter(true, 500);
+                    if (((IGhost)_entities.Collection[entity.Key].Entity).Serialize(writer, false))
                     {
                         foreach (var remoteServer in _remoteNetworkNodes)
                             if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(entity.Key))
@@ -654,22 +660,26 @@ namespace AnotherAttemptAtMakingMyCluster
             Type = type;
         }
     }
-    public class EntitiesMappings
+    public class SyncTypesMap
     {
         static Dictionary<int, Type> _idToMaster = new Dictionary<int, Type>();
         static Dictionary<Type, int> _masterToId = new Dictionary<Type, int>();
         static Dictionary<Type, Type> _baseToMaster = new Dictionary<Type, Type>();
         static Dictionary<Type, Type> _masterToBase = new Dictionary<Type, Type>();
-        static EntitiesMappings()
+        static SyncTypesMap()
         {
-            var allEntitiesTypes = AppDomain.CurrentDomain.GetAssemblies()
+            var syncTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.GetTypes())
-                .Where(x => typeof(GhostedEntity) != x && typeof(NetworkEntity) != x && typeof(NetworkEntity).IsAssignableFrom(x)).ToDictionary(x => x.Name);
+                .Where(x => typeof(GhostedEntity) != x && 
+                typeof(NetworkEntity) != x && 
+                typeof(SyncObject) != x && 
+                (typeof(NetworkEntity).IsAssignableFrom(x) || typeof(SyncObject).IsAssignableFrom(x))
+                ).ToDictionary(x => x.Name);
 
-            var allBaseEntities = allEntitiesTypes.Where(t => t.Value.IsAbstract);
+            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract);
             foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
             {
-                var master = allEntitiesTypes[baseEntity.Name + "Master"];
+                var master = syncTypes[baseEntity.Name + "Sync"];
                 var id = (int)(Crc64.Compute(baseEntity.Name) % int.MaxValue);
                 _idToMaster.Add(id, master);
                 _masterToId.Add(master, id);
@@ -677,19 +687,19 @@ namespace AnotherAttemptAtMakingMyCluster
                 _masterToBase.Add(master, baseEntity);
             }
         }
-        public static Type GetDeclaredTypeFromMasterType(Type type)
+        public static Type GetDeclaredTypeFromSyncType(Type type)
         {
             return _masterToBase[type];
         }
-        public static Type GetMasterTypeFromDeclaredType(Type type)
+        public static Type GetSyncTypeFromDeclaredType(Type type)
         {
             return _baseToMaster[type];
         }
-        public static Type MasterTypeFromId(int id)
+        public static Type GetSyncTypeFromId(int id)
         {
             return _idToMaster[id];
         }
-        public static int GetIdFromMasterType(Type type)
+        public static int GetIdFromSyncType(Type type)
         {
             return _masterToId[type];
         }
@@ -728,7 +738,7 @@ namespace AnotherAttemptAtMakingMyCluster
         Action<int> PropertyChanged { get; set; }
     }
 
-    [GenerateEntitiesCode]
+    [GenerateSyncAttribute]
     public abstract class TestEntity : GhostedEntity
     {
         [Sync(SyncType.Client)]

@@ -57,9 +57,11 @@ namespace Yogollag
 
         }
     }
-    [GenerateEntitiesCode]
+    [GenerateSyncAttribute]
     public abstract class SessionEntity : GhostedEntity
     {
+        System.Random _random = new Random();
+        List<EntityId> _interactiveEntities = new List<EntityId>();
         Dictionary<NetworkNodeId, EntityId> _chars = new Dictionary<NetworkNodeId, EntityId>();
         [Sync(SyncType.Client)]
         public virtual void Join(string name)
@@ -75,6 +77,16 @@ namespace Yogollag
                 CurrentServer.Replicate(charPair.Value, CurrentServer.CurrentServerCallbackId.Value);
             }
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
+            foreach (var inter in _interactiveEntities)
+            {
+                CurrentServer.Replicate(inter, CurrentServer.CurrentServerCallbackId.Value);
+            }
+            var monumentId = CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
+            _interactiveEntities.Add(monumentId);
+            foreach (var character in _chars)
+            {
+                CurrentServer.Replicate(monumentId, character.Key);
+            }
         }
     }
     public class SimpleServer
@@ -206,6 +218,7 @@ namespace Yogollag
                     _tileShape.Draw(_win, RenderStates.Default);
 
                 }
+            NetworkEntity character = null;
             foreach (var ghost in _node.AllGhosts())
             {
                 if (ghost is ICharacterLikeMovement charLikeMovement)
@@ -219,6 +232,7 @@ namespace Yogollag
                     }
                     if (ghost.HasAuthority)
                     {
+                        character = ghost;
                         if (_win.HasFocus())
                             charLikeMovement.UpdateControls();
                         charLikeMovement.UpdateMovement();
@@ -239,10 +253,94 @@ namespace Yogollag
                     rnd.Render(_win);
                 }
             }
+            GUI.RestoreView = _charView;
+            GUI.Win = _win;
+            if (character != null)
+            {
+                GUI.Begin();
+                DrawStats(character);
+                var inter = DrawInteractions(character);
+                GUI.End();
+                DrawOverlayForInteractive(inter);
+            }
             var tick = _node.Tick();
             _physicsWorld.Update();
             _win.Display();
             tick.Wait();
+        }
+
+        Text _statsText;
+        private void DrawStats(NetworkEntity character)
+        {
+            if (_statsText == null)
+            {
+                _statsText = new Text();
+                _statsText.Font = GUI.Font;
+            }
+
+            _statsText.DisplayedString = "";
+            var statsEntity = character as IStatEntity;
+            foreach (var stat in statsEntity.Stats)
+            {
+                _statsText.DisplayedString += $"{stat.Key} {stat.Value}\n";
+            }
+            _statsText.Draw(_win, RenderStates.Default);
+        }
+
+        Text _interactiveEntName;
+        IInteractive DrawInteractions(NetworkEntity character)
+        {
+            float maxDist = float.MaxValue;
+            IInteractive selectedInteractive = null;
+            foreach (var ghost in _node.AllGhosts())
+            {
+                if (ghost is IInteractive interactive && !ghost.HasAuthority)
+                {
+                    var pos = ghost as IPositionedEntity;
+                    if (pos == null)
+                        continue;
+                    var dist = (pos.Position - ((IPositionedEntity)character).Position).Length;
+                    if (maxDist > dist && dist < 30)
+                    {
+                        maxDist = dist;
+                        selectedInteractive = interactive;
+                    }
+                }
+            }
+            if (selectedInteractive == null)
+                return null;
+            if (_interactiveEntName == null)
+            {
+                _interactiveEntName = new Text();
+                _interactiveEntName.Font = GUI.Font;
+            }
+            _interactiveEntName.Position = new Vector2f(_win.Size.X / 2, 10);
+            _interactiveEntName.DisplayedString = selectedInteractive.Def.Name;
+            _interactiveEntName.Draw(_win, RenderStates.Default);
+            Vector2f btnPos = new Vector2f(0, _win.Size.Y - 30);
+            float distanceBetweenButtons = 30;
+            foreach (var inter in selectedInteractive.Def.Interactions)
+            {
+                if (GUI.DrawButton(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Name))
+                {
+                    if (inter.Predicate == null || inter.Predicate.Check(new ScriptingContext() { Entity = character }))
+                        ((IImpactedEntity)character).RunImpact(null, inter.Impact);
+                }
+            }
+            return selectedInteractive;
+        }
+
+        RectangleShape _interactionOverlay = new RectangleShape(new Vector2f(10, 10));
+        void DrawOverlayForInteractive(IInteractive selectedInteractive)
+        {
+            if (selectedInteractive == null)
+                return;
+            _interactionOverlay.FillColor = Color.Transparent;
+            _interactionOverlay.OutlineColor = Color.Red;
+            _interactionOverlay.OutlineThickness = 2;
+            var iPos = ((IPositionedEntity)selectedInteractive).Position;
+            _interactionOverlay.Position = new Vector2f(iPos.X, -iPos.Y);
+            _interactionOverlay.Draw(_win, RenderStates.Default);
         }
     }
     public interface ICharacterLikeMovement
@@ -388,9 +486,24 @@ namespace Yogollag
     {
         Dictionary<string, float> Stats { get; set; }
     }
+    [GenerateSync]
+    public abstract class SampleComponent : SyncObject
+    {
+        [Sync(SyncType.Client)]
+        public virtual Vec2 Pos { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual Vec2 PrevPos { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual void HandlePos(Vec2 newPos)
+        {
+            PrevPos = Pos;
+            Pos = newPos;
+        }
+    }
+
     //pure methods are ghost-only by default
     //tick methods should be sync-methods
-    [GenerateEntitiesCode]
+    [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
         ICharacterLikeMovement, IRenderable, IPositionedEntity, IStatEntity, IImpactedEntity
     {
@@ -402,6 +515,8 @@ namespace Yogollag
             _movementController = new CharacterLikeMovement(this, this);
         }
 
+        [Sync(SyncType.Client)]
+        public virtual SampleComponent Cmp { get; set; } = SyncObject.New<SampleComponent>();
         [Sync(SyncType.Client)]
         public virtual string Name { get; set; }
         [Sync(SyncType.Client)]

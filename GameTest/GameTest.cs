@@ -312,13 +312,6 @@ namespace GameTest
                 else
                     _status = "Client failed";
             }
-            if (cmd.StartsWith("TP"))
-            {
-                var args = cmd.Split(' ');
-                var x = int.Parse(args[1]);
-                var y = int.Parse(args[2]);
-                _server.GetGhost<CharacterEntity>(_charId).TeleportTo(x, y);
-            }
             if (cmd.StartsWith("play"))
             {
                 var args = cmd.Split(' ');

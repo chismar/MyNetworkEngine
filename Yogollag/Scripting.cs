@@ -1,4 +1,5 @@
 ﻿using AnotherAttemptAtMakingMyCluster;
+using MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +22,7 @@ namespace Yogollag
     static class Scripting
     {
     }
+    [MessagePackObject(true)]
     public class ScriptingContext
     {
         public ScriptingContext Parent;
@@ -34,11 +36,13 @@ namespace Yogollag
     {
         void RunImpact(ScriptingContext originalContext, ImpactDef def);
     }
-    abstract class PredicateDef : Def
+    [MessagePackObject(true)]
+    public abstract class PredicateDef : Def
     {
         public abstract bool Check(ScriptingContext ctx);
     }
-    class CheckEntityStatDef : PredicateDef
+    [ReverseUnion(0, typeof(PredicateDef))]
+    public class CheckEntityStatDef : PredicateDef
     {
         public string StatName { get; set; }
         public float MoreThan { get; set; } = float.MinValue;
@@ -53,11 +57,14 @@ namespace Yogollag
         }
     }
 
+    [MessagePackObject(true)]
     public abstract class ImpactDef : Def
     {
         public abstract void Apply(ScriptingContext ctx);
     }
-    class AllInRangeDef : ImpactDef
+    [MessagePackObject(true)]
+    [ReverseUnion(0, typeof(ImpactDef))]
+    public class AllInRangeDef : ImpactDef
     {
         public float Range { get; set; }
         public PredicateDef Predicate { get; set; }
@@ -90,7 +97,9 @@ namespace Yogollag
         }
     }
 
-    class ChangeEntityStatDef : ImpactDef
+    [MessagePackObject(true)]
+    [ReverseUnion(1, typeof(ImpactDef))]
+    public class ChangeEntityStatDef : ImpactDef
     {
         public string StatName { get; set; }
         public float? Set { get; set; }
