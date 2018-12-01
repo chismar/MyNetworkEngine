@@ -9,6 +9,10 @@
     <LangVersion>7.1</LangVersion>  
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.88" />
     <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.88" />
@@ -19,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CodeGen\CodeGen.csproj" />
     <ProjectReference Include="..\MessagePack\MessagePack.csproj" />
+    <ProjectReference Include="..\ResourcesSystem\Definitions.csproj" />
   </ItemGroup>
 
 </Project>

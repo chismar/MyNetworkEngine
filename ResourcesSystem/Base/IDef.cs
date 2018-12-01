@@ -1,9 +1,105 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
-
-namespace AnotherAttemptAtMakingMyCluster
+namespace Definitions
 {
+    public struct DefIDFull : IEquatable<DefIDFull>
+    {
+        public string Root { get; }
+        public int Line { get; }
+        public int Col { get; }
+        public int ProtoIndex { get; }
+        public ulong RootID() => Root == null? 0 : Crc64.Compute(Root);
+        public DefIDFull(string root, int line, int col, int protoIndex)
+        {
+            Root = root;
+            Line = line;
+            Col = col;
+            ProtoIndex = protoIndex;
+        }
+        public DefIDFull(string root, int line, int col)
+        {
+            Root = root;
+            Line = line;
+            Col = col;
+            ProtoIndex = 0;
+        }
+
+        public DefIDFull(string root)
+        {
+            Root = root;
+            Line = 0;
+            Col = 0;
+            ProtoIndex = 0;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DefIDFull && Equals((DefIDFull)obj);
+        }
+
+        public bool Equals(DefIDFull other)
+        {
+            return Root == other.Root &&
+                   Line == other.Line &&
+                   Col == other.Col && 
+                   ProtoIndex == other.ProtoIndex;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1301723813;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Root);
+            hashCode = hashCode * -1521134295 + Line.GetHashCode();
+            hashCode = hashCode * -1521134295 + Col.GetHashCode();
+            hashCode = hashCode * -1521134295 + ProtoIndex.GetHashCode();
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            if (Col == -1 && Line == -1)
+                return Root;
+            return $"{Root}:{Line}:{Col}:{ProtoIndex}";
+        }
+
+        public static bool operator ==(DefIDFull ref1, DefIDFull ref2)
+        {
+            return ref1.Equals(ref2);
+        }
+
+        public static bool operator !=(DefIDFull ref1, DefIDFull ref2)
+        {
+            return !(ref1 == ref2);
+        }
+
+        public static DefIDFull Parse(string str)
+        {
+            var parts = str.Split(':');
+            switch(parts.Length)
+            {
+                case 1:
+                    return new DefIDFull(parts[0]);
+                case 3:
+                    return new DefIDFull(parts[0], int.Parse(parts[1]), int.Parse(parts[2]));
+                case 4:
+                    return new DefIDFull(parts[0], int.Parse(parts[1]), int.Parse(parts[2]), int.Parse(parts[3]));
+                default:
+                    throw new InvalidOperationException("Cannot parse string str");
+            }
+
+        }
+
+
+    }
+
+    public interface IDef
+    {
+        bool IsRef { get; set; }
+        string LocalId { get; set; }
+        DefIDFull Address { get; set; }
+    }
+
     public class Crc64
     {
         private static readonly ulong[] Table = {

@@ -1,0 +1,48 @@
+{
+    "$type":"InteractiveDef",
+    "Name": "Dark monument ssss",
+    "Interactions":[
+        {
+            "$type":"InteractionDef",
+            "Name": "Get sooooo Mad",
+            "Predicate" : 
+            {
+                "$type":"CheckEntityStatDef",
+                "MoreThan": 10,
+                "StatName": "Insight"    
+            },
+            "Impact": 
+            {
+                "$type": "ChangeEntityStatDef",
+                "StatName": "Madness",
+                "Change": 3
+            }
+        },
+        {
+            "$type":"InteractionDef",
+            "Name": "Get less Mad",
+            "Predicate" : 
+            {
+                "$type":"CheckEntityStatDef",
+                "MoreThan": 10,
+                "StatName": "Insight"    
+            },
+            "Impact": 
+            {
+                "$type": "ChangeEntityStatDef",
+                "StatName": "Madness",
+                "Change": -2
+            }
+        },
+        {
+            "$type":"InteractionDef",
+            "Name": "Get insight",
+            "Impact": 
+            {
+                "$type": "ChangeEntityStatDef",
+                "StatName": "Insight",
+                "Change": 3
+            }
+        }
+    ]
+}

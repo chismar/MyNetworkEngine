@@ -1,4 +1,5 @@
 ﻿using AnotherAttemptAtMakingMyCluster;
+using Definitions;
 using MessagePack;
 using System;
 using System.Collections.Generic;
@@ -28,20 +29,14 @@ namespace Yogollag
         public ScriptingContext Parent;
         public NetworkEntity Entity;
     }
-    public class Def
-    {
-
-    }
     public interface IImpactedEntity
     {
         void RunImpact(ScriptingContext originalContext, ImpactDef def);
     }
-    [MessagePackObject(true)]
-    public abstract class PredicateDef : Def
+    public abstract class PredicateDef : BaseDef
     {
         public abstract bool Check(ScriptingContext ctx);
     }
-    [ReverseUnion(0, typeof(PredicateDef))]
     public class CheckEntityStatDef : PredicateDef
     {
         public string StatName { get; set; }
@@ -57,13 +52,10 @@ namespace Yogollag
         }
     }
 
-    [MessagePackObject(true)]
-    public abstract class ImpactDef : Def
+    public abstract class ImpactDef : BaseDef
     {
         public abstract void Apply(ScriptingContext ctx);
     }
-    [MessagePackObject(true)]
-    [ReverseUnion(0, typeof(ImpactDef))]
     public class AllInRangeDef : ImpactDef
     {
         public float Range { get; set; }
@@ -97,8 +89,6 @@ namespace Yogollag
         }
     }
 
-    [MessagePackObject(true)]
-    [ReverseUnion(1, typeof(ImpactDef))]
     public class ChangeEntityStatDef : ImpactDef
     {
         public string StatName { get; set; }

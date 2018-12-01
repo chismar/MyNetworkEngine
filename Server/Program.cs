@@ -9,6 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MessagePack;
 using CodeGen;
+using Definitions;
+using MessagePack.Resolvers;
+using Definitions;
+using System.IO;
 
 namespace AnotherAttemptAtMakingMyCluster
 {
@@ -261,6 +265,14 @@ namespace AnotherAttemptAtMakingMyCluster
     }
     public class NetworkNode
     {
+        static NetworkNode()
+        {
+            CompositeResolver.RegisterAndSetAsDefault(
+                DefCustomResolver.Instance,
+                StandardResolver.Instance
+            );
+            DefsHolder.Instance = new Defs(new FolderLoader(Path.GetFullPath("../../../Defs")));
+        }
         Ghosting _ghosting;
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
         Entities<MasterStatus> _entities;
@@ -270,6 +282,7 @@ namespace AnotherAttemptAtMakingMyCluster
         public bool Started { get; private set; } = false;
         public event Action<NetworkNodeId> NewConnectionEstablished;
         public event Action<EntityId, Type> GotEntity;
+        
         public NetworkNode()
         {
             NewNode(NetworkNodeId.Random);

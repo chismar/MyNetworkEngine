@@ -321,10 +321,10 @@ namespace Yogollag
             float distanceBetweenButtons = 30;
             foreach (var inter in selectedInteractive.Def.Interactions)
             {
-                if (GUI.DrawButton(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Name))
+                if (GUI.DrawButton(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Def.Name))
                 {
-                    if (inter.Predicate == null || inter.Predicate.Check(new ScriptingContext() { Entity = character }))
-                        ((IImpactedEntity)character).RunImpact(null, inter.Impact);
+                    if (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(new ScriptingContext() { Entity = character }))
+                        ((IImpactedEntity)character).RunImpact(null, inter.Def.Impact.Def);
                 }
             }
             return selectedInteractive;
