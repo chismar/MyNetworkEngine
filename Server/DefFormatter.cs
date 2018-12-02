@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnotherAttemptAtMakingMyCluster
+namespace NetworkEngine
 {
     public class DefFormatter<T> : IMessagePackFormatter<T> where T : class, IDef
     {

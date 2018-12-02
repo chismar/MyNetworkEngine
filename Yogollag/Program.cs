@@ -1,4 +1,4 @@
-﻿using AnotherAttemptAtMakingMyCluster;
+﻿using NetworkEngine;
 using CodeGen;
 using SFML.Graphics;
 using SFML.System;
@@ -10,6 +10,7 @@ using LiteNetLib.Utils;
 using System.Linq;
 using System.Collections.Generic;
 using Volatile;
+using Definitions;
 
 namespace Yogollag
 {
@@ -259,6 +260,7 @@ namespace Yogollag
             {
                 GUI.Begin();
                 DrawStats(character);
+                DrawQuests(character as IQuester);
                 var inter = DrawInteractions(character);
                 GUI.End();
                 DrawOverlayForInteractive(inter);
@@ -287,6 +289,38 @@ namespace Yogollag
             _statsText.Draw(_win, RenderStates.Default);
         }
 
+        Text _questText;
+        bool showQuestLog = false;
+        bool hotKeyPressed = false;
+        void DrawQuests(IQuester quester)
+        {
+            if (_questText == null)
+            {
+                _questText = new Text();
+                _questText.Font = GUI.Font;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.L))
+            {
+                hotKeyPressed = true;
+            }
+            else if (hotKeyPressed)
+            {
+                hotKeyPressed = false;
+                showQuestLog = !showQuestLog;
+            }
+            if (showQuestLog)
+            {
+                var startPos = new Vector2f(100, 100);
+                var sizeY = 40;
+                int index = 0;
+                foreach (var quest in quester.Quests)
+                {
+                    _questText.Position = startPos + new Vector2f(0, sizeY * (index++));
+                    _questText.DisplayedString = quest.QuestDef.Name;
+                    _questText.Draw(_win, RenderStates.Default);
+                }
+            }
+        }
         Text _interactiveEntName;
         IInteractive DrawInteractions(NetworkEntity character)
         {
@@ -319,13 +353,18 @@ namespace Yogollag
             _interactiveEntName.Draw(_win, RenderStates.Default);
             Vector2f btnPos = new Vector2f(0, _win.Size.Y - 30);
             float distanceBetweenButtons = 30;
-            foreach (var inter in selectedInteractive.Def.Interactions)
+            var targetCtx = new ScriptingContext() { Entity = character, Target = ((NetworkEntity)selectedInteractive).Id };
+            var allInteractions = ((IQuester)character).Quests.SelectMany(x => x.QuestDef.AddedInteractions).Where(x => x.Def.Predicate.Def.Check(targetCtx)).Concat(selectedInteractive.Def.Interactions);
+            foreach (var inter in allInteractions)
             {
+                bool isActive = (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx));
+                GUI.IsActive = isActive;
                 if (GUI.DrawButton(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Def.Name))
                 {
-                    if (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(new ScriptingContext() { Entity = character }))
+                    if (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx))
                         ((IImpactedEntity)character).RunImpact(null, inter.Def.Impact.Def);
                 }
+                GUI.IsActive = true;
             }
             return selectedInteractive;
         }
@@ -505,7 +544,7 @@ namespace Yogollag
     //tick methods should be sync-methods
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
-        ICharacterLikeMovement, IRenderable, IPositionedEntity, IStatEntity, IImpactedEntity
+        ICharacterLikeMovement, IRenderable, IPositionedEntity, IStatEntity, IImpactedEntity, IQuester
     {
         SpriteRenderer _spriteRenderer;
         CharacterLikeMovement _movementController;
@@ -515,6 +554,11 @@ namespace Yogollag
             _movementController = new CharacterLikeMovement(this, this);
         }
 
+        public override void OnCreate()
+        {
+            Quests.Add(new QuestInstance() { QuestDef = DefsHolder.Instance.LoadResource<QuestDef>("/ExploreMonumentQuest") });
+            Quests = Quests;
+        }
         [Sync(SyncType.Client)]
         public virtual SampleComponent Cmp { get; set; } = SyncObject.New<SampleComponent>();
         [Sync(SyncType.Client)]
@@ -527,6 +571,8 @@ namespace Yogollag
         public VoltBody PhysicsBody { get => _movementController.PhysicsBody; set => _movementController.PhysicsBody = value; }
         [Sync(SyncType.AuthorityClient)]
         public virtual Dictionary<string, float> Stats { get; set; } = new Dictionary<string, float>();
+        [Sync(SyncType.AuthorityClient)]
+        public virtual List<QuestInstance> Quests { get; set; } = new List<QuestInstance>();
 
         [Sync(SyncType.AuthorityClient)]
         public virtual void ReceivePosition(Vec2 newPosition)
@@ -558,7 +604,7 @@ namespace Yogollag
             _movementController.UpdateMovement();
         }
         [Sync(SyncType.Server)]
-        public virtual void RunImpact(ScriptingContext originalContext, ImpactDef def)
+        public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
             def.Apply(new ScriptingContext() { Entity = this, Parent = originalContext });
         }

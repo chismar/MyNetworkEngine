@@ -1,4 +1,4 @@
-﻿using AnotherAttemptAtMakingMyCluster;
+﻿using NetworkEngine;
 using CodeGen;
 using MessagePack;
 using System;
@@ -20,7 +20,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual Dictionary<string, float> Stats { get; set; }
         [Sync(SyncType.Client)]
-        public virtual InteractiveDef Def { get; set; } = DefsHolder.Instance.LoadResource<InteractiveDef>("/TestInteractions");
+        public virtual InteractiveDef Def { get; set; } = DefsHolder.Instance.LoadResource<InteractiveDef>("/DarkMonument");
         public string Name { get; set; }
 
         static RectangleShape shape = new RectangleShape(new SFML.System.Vector2f(5, 10));
@@ -31,7 +31,7 @@ namespace Yogollag
         }
 
         [Sync(SyncType.Server)]
-        public virtual void RunImpact(ScriptingContext originalContext, ImpactDef def)
+        public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
             def.Apply(new ScriptingContext() { Entity = this, Parent = originalContext });
         }
@@ -50,7 +50,7 @@ namespace Yogollag
     {
         public string Name { get; set; }
         public string Sprite { get; set; }
-        public DefRef<PredicateDef> Predicate { get; set; }
-        public DefRef<ImpactDef> Impact { get; set; }
+        public DefRef<IPredicateDef> Predicate { get; set; }
+        public DefRef<IImpactDef> Impact { get; set; }
     }
 }

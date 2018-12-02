@@ -1,4 +1,4 @@
-﻿using AnotherAttemptAtMakingMyCluster;
+﻿using NetworkEngine;
 using Definitions;
 using MessagePack;
 using System;
@@ -28,21 +28,22 @@ namespace Yogollag
     {
         public ScriptingContext Parent;
         public NetworkEntity Entity;
+        public EntityId Target;
     }
     public interface IImpactedEntity
     {
-        void RunImpact(ScriptingContext originalContext, ImpactDef def);
+        void RunImpact(ScriptingContext originalContext, IImpactDef def);
     }
-    public abstract class PredicateDef : BaseDef
+    public interface IPredicateDef : IDef
     {
-        public abstract bool Check(ScriptingContext ctx);
+        bool Check(ScriptingContext ctx);
     }
-    public class CheckEntityStatDef : PredicateDef
+    public class CheckEntityStatDef : BaseDef, IPredicateDef
     {
         public string StatName { get; set; }
         public float MoreThan { get; set; } = float.MinValue;
         public float LessThan { get; set; } = float.MaxValue;
-        public override bool Check(ScriptingContext ctx)
+        public bool Check(ScriptingContext ctx)
         {
             var statEntity = ctx.Entity as IStatEntity;
             if (statEntity.Stats.TryGetValue(StatName, out var val))
@@ -52,16 +53,16 @@ namespace Yogollag
         }
     }
 
-    public abstract class ImpactDef : BaseDef
+    public interface IImpactDef : IDef
     {
-        public abstract void Apply(ScriptingContext ctx);
+        void Apply(ScriptingContext ctx);
     }
-    public class AllInRangeDef : ImpactDef
+    public class AllInRangeDef : BaseDef, IImpactDef
     {
         public float Range { get; set; }
-        public PredicateDef Predicate { get; set; }
-        public ImpactDef Impact { get; set; }
-        public override void Apply(ScriptingContext ctx)
+        public IPredicateDef Predicate { get; set; }
+        public IImpactDef Impact { get; set; }
+        public void Apply(ScriptingContext ctx)
         {
             var posEnt = ctx as IPositionedEntity;
             if (posEnt == null)
@@ -89,12 +90,12 @@ namespace Yogollag
         }
     }
 
-    public class ChangeEntityStatDef : ImpactDef
+    public class ChangeEntityStatDef : BaseDef, IImpactDef
     {
         public string StatName { get; set; }
         public float? Set { get; set; }
         public float? Change { get; set; }
-        public override void Apply(ScriptingContext ctx)
+        public void Apply(ScriptingContext ctx)
         {
             var statEntity = ctx.Entity as IStatEntity;
             if (statEntity == null)

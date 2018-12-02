@@ -1,0 +1,26 @@
+{
+    "$type":"Quest",
+    "Name": "Explore the monument",
+    "AddedInteractions":
+    [
+        {
+            "$type":"InteractionDef",
+            "Name":"Explore the monument",
+            "Predicate": {
+                "$type":"Target",
+                "Predicate":{
+                    "$type":"TargetType",
+                    "Type":"./DarkMonument"
+                }
+            },
+            "Impact": {
+                "$type":"CompleteQuest",
+                "Quest":"./ExploreMonumentQuest"
+            }
+        }
+    ],
+    "OnComplete":{
+        "$type":"AddQuest",
+        "Quest":"./ReturnToTownQuest"
+    }
+}

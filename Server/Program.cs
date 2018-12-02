@@ -1,5 +1,4 @@
-﻿using AnotherAttemptAtMakingMyCluster.UdpKit;
-using LiteNetLib;
+﻿using LiteNetLib;
 using LiteNetLib.Utils;
 using System;
 using System.Collections.Concurrent;
@@ -14,7 +13,7 @@ using MessagePack.Resolvers;
 using Definitions;
 using System.IO;
 
-namespace AnotherAttemptAtMakingMyCluster
+namespace NetworkEngine
 {
     class Program
     {
@@ -496,6 +495,10 @@ namespace AnotherAttemptAtMakingMyCluster
                 Send(message, serverId);
             }
         }
+        public NetworkEntity GetGhost(EntityId id)
+        {
+            return _ghosting.Get(id);
+        }
         public T GetGhost<T>(EntityId id) where T : NetworkEntity
         {
             return (T)_ghosting.Get(id);
@@ -689,7 +692,7 @@ namespace AnotherAttemptAtMakingMyCluster
                 (typeof(NetworkEntity).IsAssignableFrom(x) || typeof(SyncObject).IsAssignableFrom(x))
                 ).ToDictionary(x => x.Name);
 
-            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract);
+            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract).ToArray();
             foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
             {
                 var master = syncTypes[baseEntity.Name + "Sync"];

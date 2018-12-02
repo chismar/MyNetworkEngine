@@ -17,6 +17,9 @@ namespace Yogollag
         public static RenderWindow Win;
         public static Font Font = new Font("ARIAL.TTF");
         public static View RestoreView;
+
+        public static bool IsActive { get; internal set; }
+
         public static void Begin()
         {
             Win.SetView(Win.DefaultView);
@@ -46,6 +49,9 @@ namespace Yogollag
                 _buttonShape.FillColor = new Color(100, 100, 100, 255);
             else
                 _buttonShape.FillColor = new Color(140, 140, 140, 255);
+
+            if (!GUI.IsActive)
+                _buttonShape.FillColor = new Color(200, 100, 100, 255);
             _buttonText.DisplayedString = text;
             _buttonText.Position = position;
             _buttonShape.Position = position;
@@ -58,25 +64,28 @@ namespace Yogollag
             }
             _buttonText.Draw(Win, RenderStates.Default);
 
-            if (!Mouse.IsButtonPressed(Mouse.Button.Left) && _pressed)
+            if (GUI.IsActive)
             {
-                var hc = _hotControl;
-                if (_index == hc)
+                if (!Mouse.IsButtonPressed(Mouse.Button.Left) && _pressed)
                 {
-                    _pressed = false;
-                    _hotControl = -1;
-                    if (new FloatRect(_buttonShape.Position, _buttonShape.Size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
+                    var hc = _hotControl;
+                    if (_index == hc)
                     {
-                        return true;
+                        _pressed = false;
+                        _hotControl = -1;
+                        if (new FloatRect(_buttonShape.Position, _buttonShape.Size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
+                        {
+                            return true;
+                        }
                     }
                 }
-            }
-            if (Mouse.IsButtonPressed(Mouse.Button.Left))
-            {
-                _pressed = true;
-                if (new FloatRect(_buttonShape.Position, _buttonShape.Size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
+                if (Mouse.IsButtonPressed(Mouse.Button.Left))
                 {
-                    _hotControl = _index;
+                    _pressed = true;
+                    if (new FloatRect(_buttonShape.Position, _buttonShape.Size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
+                    {
+                        _hotControl = _index;
+                    }
                 }
             }
             return false;

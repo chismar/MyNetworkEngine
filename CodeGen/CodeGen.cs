@@ -65,12 +65,12 @@ namespace CodeGen
             var applyToClass = (ClassDeclarationSyntax)context.ProcessingNode;
             var model = context.Compilation.GetSemanticModel(applyToClass.SyntaxTree);
             var symbol = model.GetDeclaredSymbol(applyToClass);
-            if (InheritsFrom("AnotherAttemptAtMakingMyCluster.NetworkEntity", symbol))
+            if (InheritsFrom("NetworkEngine.NetworkEntity", symbol))
             {
                 results = results.Add(GenerateSyncEntityClass(model, applyToClass));
                 results = GenerateMessages(applyToClass, results);
             }
-            else if (InheritsFrom("AnotherAttemptAtMakingMyCluster.SyncObject", symbol))
+            else if (InheritsFrom("NetworkEngine.SyncObject", symbol))
             {
 
                 results = results.Add(GenerateSyncObjClass(model, applyToClass));
@@ -340,7 +340,7 @@ namespace CodeGen
                     if (prop.AttributeLists.Any(x => x.Attributes.Any(a => a.Name.ToString() == "Sync")))
                         syncProps.Add(new SyncProp()
                         {
-                            Ghost = InheritsFrom("AnotherAttemptAtMakingMyCluster.SyncObject", model.GetDeclaredSymbol(prop).Type),
+                            Ghost = InheritsFrom("NetworkEngine.SyncObject", model.GetDeclaredSymbol(prop).Type),
                             Name = prop.Identifier.ValueText,
                             Type = prop.Type.ToString(),
                             Index = propIndex++
