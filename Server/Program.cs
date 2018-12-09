@@ -161,6 +161,7 @@ namespace NetworkEngine
             ghostEnt.ServerId = obj.ServerId;
             ((IGhost)obj).Serialize(stream, true);
             ghost.Deserialize(new NetDataReader(stream.Data));
+            ((GhostedEntity)ghost).OnInit();
             return (NetworkEntity)ghost;
         }
         private void OnEntityRemoved(NetworkEntity obj)
@@ -249,6 +250,8 @@ namespace NetworkEngine
     }
     public abstract class SyncObject
     {
+        [IgnoreMember]
+        public NetworkNode CurrentServer;
         public static T New<T>()
         {
             return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
@@ -281,7 +284,7 @@ namespace NetworkEngine
         public bool Started { get; private set; } = false;
         public event Action<NetworkNodeId> NewConnectionEstablished;
         public event Action<EntityId, Type> GotEntity;
-        
+        public bool Debug { get; set; } = false;
         public NetworkNode()
         {
             NewNode(NetworkNodeId.Random);
@@ -335,10 +338,15 @@ namespace NetworkEngine
         private void OnReceiveFromNetwork(NetPeer peer, NetDataReader reader)
         {
             var msg = MessagePackSerializer.Deserialize<ServerMessage>(reader.Data);
-            if (msg != null)
-                Console.WriteLine($"Received {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(reader.Data)}");
-            else
-                Console.WriteLine("Received null");
+            if (Debug)
+            {
+
+                if (msg != null)
+                    Console.WriteLine($"Received {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(reader.Data)}");
+                else
+                    Console.WriteLine("Received null");
+
+            }
             if (msg is EntityMessage)
             {
                 msg.From = _remoteNetworkNodes.Single(x => x.Value.Peer == peer).Key;
@@ -425,13 +433,15 @@ namespace NetworkEngine
             serverEntity.Id = re.Id;
             serverEntity.ServerId = fromSid;
             ((IGhost)serverEntity).Deserialize(new NetDataReader(re.InitialState));
+            serverEntity.OnInit();
             _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Add(serverEntity);
         }
 
         private void Send<T>(T msg, NetworkNodeId sid) where T : ServerMessage
         {
             var bytes = MessagePackSerializer.Serialize<ServerMessage>(msg);
-            Console.WriteLine($"Send to {sid} {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(bytes)}");
+            if (Debug)
+                Console.WriteLine($"Send to {sid} {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(bytes)}");
             _remoteNetworkNodes[sid].Peer.Send(bytes, SendOptions.ReliableOrdered);
         }
 
@@ -452,6 +462,8 @@ namespace NetworkEngine
         public void Replicate(EntityId eid, NetworkNodeId sid)
         {
             var ent = _entities.Get(eid);
+            if (ent == null)
+                return;
             var re = new ReplicateEntity() { Id = eid, EntityType = SyncTypesMap.GetIdFromSyncType(ent.GetType()) };
             if (ent is GhostedEntity)
             {
@@ -509,6 +521,7 @@ namespace NetworkEngine
             init?.Invoke((T)newEntity);
             newEntity.ServerId = Id;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
+            newEntity.OnInit();
             newEntity.OnCreate();
             _entities.Add(newEntity);
             return newEntity.Id;
@@ -584,7 +597,7 @@ namespace NetworkEngine
         private Task SerializeAndSend()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var entity in _ghosting.Collection.Where(x=>x.Value.Entity.ServerId == Id))
+            foreach (var entity in _ghosting.Collection.Where(x => x.Value.Entity.ServerId == Id))
             {
                 tasks.Add(Task.Run(() =>
                 {
@@ -686,9 +699,9 @@ namespace NetworkEngine
         {
             var syncTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.GetTypes())
-                .Where(x => typeof(GhostedEntity) != x && 
-                typeof(NetworkEntity) != x && 
-                typeof(SyncObject) != x && 
+                .Where(x => typeof(GhostedEntity) != x &&
+                typeof(NetworkEntity) != x &&
+                typeof(SyncObject) != x &&
                 (typeof(NetworkEntity).IsAssignableFrom(x) || typeof(SyncObject).IsAssignableFrom(x))
                 ).ToDictionary(x => x.Name);
 
@@ -731,6 +744,7 @@ namespace NetworkEngine
         public EntityId Id;
         public virtual bool HasAuthority { get; set; }
         public virtual void OnCreate() { }
+        public virtual void OnInit() { }
         public virtual void OnDestroy() { }
     }
     public abstract class GhostedEntity : NetworkEntity, IEntityPropertyChanged

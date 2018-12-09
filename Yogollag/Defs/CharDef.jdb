@@ -1,0 +1,9 @@
+{
+    "$type":"CharacterDef",
+    "Sprite":{
+        "$type":"SpriteDef",
+        "SpriteSheetName":"characters",
+        "X":0,
+        "Y":0
+    }
+}

@@ -55,7 +55,7 @@ namespace Definitions
 
         public DefIDFull GetID(IDef res) => LoadedResources.GetID(res);
 
-        public T LoadResource<T>(string relativePath) where T : IDef
+        public T LoadDef<T>(string relativePath) where T : IDef
         {
             return Deserializer.LoadResource<T>(relativePath);
         }

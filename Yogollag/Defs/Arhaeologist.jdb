@@ -1,0 +1,7 @@
+{
+    "$type":"RoleDef",
+    "InitialQuest":{
+        "$type":"Quest",
+        "Name":"Be an arhaeologist"
+    }
+}

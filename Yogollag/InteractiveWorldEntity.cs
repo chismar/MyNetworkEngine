@@ -7,7 +7,7 @@ using System.Text;
 using LiteNetLib.Utils;
 using SFML.Graphics;
 using Definitions;
-using Definitions;
+using Volatile;
 
 namespace Yogollag
 {
@@ -15,17 +15,21 @@ namespace Yogollag
     public abstract class InteractiveWorldEntity : GhostedEntity,
         IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable
     {
+        public VoltBody PhysicsBody { get; set; }
+        Vec2 _pos;
         [Sync(SyncType.Client)]
-        public virtual Vec2 Position { get; set; }
+        public virtual Vec2 Position { get { return _pos; } set { _pos = value; } }
         [Sync(SyncType.Client)]
         public virtual Dictionary<string, float> Stats { get; set; }
         [Sync(SyncType.Client)]
-        public virtual InteractiveDef Def { get; set; } = DefsHolder.Instance.LoadResource<InteractiveDef>("/DarkMonument");
+        public virtual InteractiveDef Def { get; set; } = DefsHolder.Instance.LoadDef<InteractiveDef>("/DarkMonument");
         public string Name { get; set; }
+        public IRenderableDef RenDef { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         static RectangleShape shape = new RectangleShape(new SFML.System.Vector2f(5, 10));
         public void Render(RenderTarget rt)
         {
+            shape.Origin = new SFML.System.Vector2f(2.5f, 5f);
             shape.Position = new SFML.System.Vector2f(Position.X, -Position.Y);
             shape.Draw(rt, RenderStates.Default);
         }
@@ -44,6 +48,7 @@ namespace Yogollag
     public class InteractiveDef : BaseDef
     {
         public string Name { get; set; }
+        public SpriteDef Def { get; set; }
         public List<DefRef<InteractionDef>> Interactions { get; set; } = new List<DefRef<InteractionDef>>();
     }
     public class InteractionDef : BaseDef

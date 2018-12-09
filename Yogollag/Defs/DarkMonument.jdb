@@ -1,6 +1,6 @@
 {
     "$type":"InteractiveDef",
-    "Name": "Dark monument ssss",
+    "Name": "Dark monument",
     "Interactions":[
         {
             "$type":"InteractionDef",
