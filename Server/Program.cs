@@ -159,6 +159,7 @@ namespace NetworkEngine
             var ghostEnt = (GhostedEntity)ghost;
             ghostEnt.Id = obj.Id;
             ghostEnt.ServerId = obj.ServerId;
+            ghostEnt.AuthorityServerId = obj.AuthorityServerId;
             ((IGhost)obj).Serialize(stream, true);
             ghost.Deserialize(new NetDataReader(stream.Data));
             ((GhostedEntity)ghost).OnInit();
@@ -463,6 +464,8 @@ namespace NetworkEngine
         {
             var ent = _entities.Get(eid);
             if (ent == null)
+                return;
+            if (_remoteNetworkNodes[sid].EntitiesReplicatedToRemote.ContainsKey(eid))
                 return;
             var re = new ReplicateEntity() { Id = eid, EntityType = SyncTypesMap.GetIdFromSyncType(ent.GetType()) };
             if (ent is GhostedEntity)

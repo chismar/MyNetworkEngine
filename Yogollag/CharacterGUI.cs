@@ -54,7 +54,8 @@ namespace Yogollag
                 var text = item.Def.Name;
                 if (item.ItemId == character.ActiveItem)
                     text = $"[{item.Def.Name}]";
-                if (GUI.DrawButton(btnPos = new Vector2f(btnPos.X + distanceBetweenButtons, btnPos.Y), text, Sprites.GetSprite(item.Def.Sprite)))
+                if (GUI.SlotButton(btnPos = new Vector2f(btnPos.X + distanceBetweenButtons, btnPos.Y), 
+                    new Vector2f(distanceBetweenButtons / 2, distanceBetweenButtons / 2), Sprites.GetSprite(item.Def.Sprite)))
                 {
                     character.SetActiveItem(item.ItemId);
                 }
@@ -170,7 +171,7 @@ namespace Yogollag
             {
                 bool isActive = (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx));
                 GUI.IsActive = isActive;
-                if (GUI.DrawButton(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Def.Name))
+                if (GUI.Button(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Def.Name))
                 {
                     if (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx))
                         ((IImpactedEntity)character).RunImpact(null, inter.Def.Impact.Def);

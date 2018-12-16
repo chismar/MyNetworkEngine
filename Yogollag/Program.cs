@@ -60,44 +60,48 @@ namespace Yogollag
         }
     }
     [GenerateSyncAttribute]
+    public abstract class VisibilityEntity : GhostedEntity, ITicked
+    {
+        List<CharacterEntity> _cachedList = new List<CharacterEntity>();
+        public void Tick()
+        {
+            _cachedList.Clear();
+            foreach (var entityGhost in CurrentServer.AllGhosts())
+            {
+                if (entityGhost is CharacterEntity ce)
+                {
+                    _cachedList.Add(ce);
+                }
+            }
+            foreach (var entityGhost in CurrentServer.AllGhosts())
+            {
+                if (entityGhost is IPositionedEntity)
+                {
+                    foreach (var character in _cachedList)
+                        if (!character.AuthorityServerId.IsInvalid)
+                            CurrentServer.Replicate(entityGhost.Id, character.AuthorityServerId);
+                }
+            }
+        }
+    }
+    [GenerateSyncAttribute]
     public abstract class SessionEntity : GhostedEntity
     {
         System.Random _random = new Random();
-        List<EntityId> _interactiveEntities = new List<EntityId>();
-        Dictionary<NetworkNodeId, EntityId> _chars = new Dictionary<NetworkNodeId, EntityId>();
         [Sync(SyncType.Client)]
         public virtual void Join(string name)
         {
             var defaultJob = DefsHolder.Instance.LoadDef<RoleDef>("/Arhaeologist");
             var charDef = DefsHolder.Instance.LoadDef<CharacterDef>("/CharDef");
-            var charId = CurrentServer.Create<CharacterEntity>((ent) => { ent.Job = defaultJob; ent.CharDef = charDef; ent.Name = name; ent.Position = Vec2.Random(10, 10); });
-            foreach (var charPair in _chars)
-            {
-                CurrentServer.Replicate(charId, charPair.Key);
-            }
-            _chars.Add(CurrentServer.CurrentServerCallbackId.Value, charId);
-            foreach (var charPair in _chars)
-            {
-                CurrentServer.Replicate(charPair.Value, CurrentServer.CurrentServerCallbackId.Value);
-            }
+            var charId = CurrentServer.Create<CharacterEntity>((ent) => { ent.AuthorityServerId = CurrentServer.CurrentServerCallbackId.Value; ent.Job = defaultJob; ent.CharDef = charDef; ent.Name = name; ent.Position = Vec2.Random(10, 10); });
+            CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value);
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
-            foreach (var inter in _interactiveEntities)
-            {
-                CurrentServer.Replicate(inter, CurrentServer.CurrentServerCallbackId.Value);
-            }
             var monumentId = CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
             var tabletId = CurrentServer.Create<WorldItemEntity>((ent) =>
             {
                 ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
                 ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/OldTablet");
             });
-            _interactiveEntities.Add(tabletId);
-            _interactiveEntities.Add(monumentId);
-            foreach (var character in _chars)
-            {
-                CurrentServer.Replicate(tabletId, character.Key);
-                CurrentServer.Replicate(monumentId, character.Key);
-            }
         }
     }
     public class SimpleServer
@@ -110,6 +114,7 @@ namespace Yogollag
             _node = new NetworkNode();
             _node.Start(9051, 128);
             _sessionId = _node.Create<SessionEntity>();
+            _node.Create<VisibilityEntity>();
             _node.NewConnectionEstablished += NewConnection;
             _physicsWorld = new VoltWorld();
         }
@@ -719,7 +724,7 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void ActivateItem()
         {
-            var item = Inventory.Items.FirstOrDefault(x => x.ItemId == ActiveItem);
+            var item = GetActiveItem();
             if (item == null)
                 return;
             bool canDo = true;
@@ -745,6 +750,21 @@ namespace Yogollag
         {
             _spriteRenderer.RendererPosition = SmoothPosition;
             _spriteRenderer.Render(rt);
+            var item = GetActiveItem();
+            if (item != null)
+            {
+                var itemSprite = Sprites.GetSprite(item.Def.Sprite);
+                itemSprite.Position = new Vector2f(_spriteRenderer.RendererPosition.X + 3, -_spriteRenderer.RendererPosition.Y);
+                itemSprite.Origin = new Vector2f(itemSprite.TextureRect.Width / 2, itemSprite.TextureRect.Height / 2);
+                itemSprite.Scale = new Vector2f(0.5f, 0.5f);
+                itemSprite.Draw(rt, RenderStates.Default);
+            }
+        }
+
+        public Item GetActiveItem()
+        {
+            var item = Inventory.Items.FirstOrDefault(x => x.ItemId == ActiveItem);
+            return item;
         }
 
 
