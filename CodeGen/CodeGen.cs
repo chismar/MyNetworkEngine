@@ -23,7 +23,24 @@ namespace CodeGen
 
     public class GenerateEntitiesCode : ICodeGenerator
     {
-        private bool InheritsFrom(string baseName, ITypeSymbol symbol)
+        public static bool InheritsFrom(ITypeSymbol baseName, ITypeSymbol symbol)
+        {
+            while (true)
+            {
+                if (symbol == baseName)
+                {
+                    return true;
+                }
+                if (symbol.BaseType != null)
+                {
+                    symbol = symbol.BaseType;
+                    continue;
+                }
+                break;
+            }
+            return false;
+        }
+        public static bool InheritsFrom(string baseName, ITypeSymbol symbol)
         {
             while (true)
             {
@@ -72,12 +89,38 @@ namespace CodeGen
             }
             else if (InheritsFrom("NetworkEngine.SyncObject", symbol))
             {
-
                 results = results.Add(GenerateSyncObjClass(model, applyToClass));
                 results = GenerateObjMessages(applyToClass, results);
             }
+            else if (applyToClass.Identifier.Text == SchemaGenerator.SchemaGenClassName)
+            {
+                List<INamedTypeSymbol> allTypesModel = new List<INamedTypeSymbol>();
+                GetAllSymbolsVisitor visitor = new GetAllSymbolsVisitor(allTypesModel);
+                visitor.Visit(context.Compilation.GlobalNamespace);
+                //results = results.Add(SyntaxFactory.ClassDeclaration("OUTPUT" + Path.Combine(context.ProjectDirectory, "DEFS_SCHEMA.json")));
+                SchemaGenerator.GenerateSchema(context.ProjectDirectory, allTypesModel);
+            }
             return Task.FromResult<SyntaxList<MemberDeclarationSyntax>>(results);
 
+        }
+        public class GetAllSymbolsVisitor : SymbolVisitor
+        {
+            private List<INamedTypeSymbol> allTypesModel;
+
+            public GetAllSymbolsVisitor(List<INamedTypeSymbol> allTypesModel)
+            {
+                this.allTypesModel = allTypesModel;
+            }
+
+            public override void VisitNamespace(INamespaceSymbol symbol)
+            {
+                Parallel.ForEach(symbol.GetMembers(), s => s.Accept(this));
+            }
+
+            public override void VisitNamedType(INamedTypeSymbol symbol)
+            {
+                allTypesModel.Add(symbol);
+            }
         }
 
         private SyntaxList<MemberDeclarationSyntax> GenerateObjMessages(ClassDeclarationSyntax applyToClass, SyntaxList<MemberDeclarationSyntax> results)
@@ -384,7 +427,7 @@ namespace CodeGen
             if (isGhost)
             {
                 return $"var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));\n" +
-                    $"((IGhost)newVal).Deserialize(stream); \n" + 
+                    $"((IGhost)newVal).Deserialize(stream); \n" +
                     $"{propName} = ({type})newVal;";
             }
             else

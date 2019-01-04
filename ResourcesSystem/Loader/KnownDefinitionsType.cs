@@ -4,8 +4,9 @@ namespace Definitions
 {
     public class KnownDefinitionsTypeAttribute : Attribute
     {
-        public bool Serializable { get; set; } = true;
-
+    }
+    public class KnownDefinitionsTypeNotSerializableAttribute : Attribute
+    {
     }
 
 }

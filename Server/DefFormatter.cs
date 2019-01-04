@@ -1,5 +1,4 @@
 ﻿using Definitions;
-using Definitions;
 using MessagePack;
 using MessagePack.Formatters;
 using System;

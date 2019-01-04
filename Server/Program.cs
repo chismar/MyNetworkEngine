@@ -28,17 +28,10 @@ namespace NetworkEngine
             _server2 = new NetworkNode(new NetworkNodeId() { Id = 574 });
             _server2.Start(9051, 1);
             _server.Connect(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 }).ContinueWith(OnConnected, null);
-            _entityId = _server.Create<TestEntity>((te) => { });
+  
 
             Task.Run(Cycle);
             Task.Run(ReplicaCycle);
-            while (true)
-            {
-                string cmd = Console.ReadLine();
-                DoCmd(cmd);
-                Console.WriteLine($"Replica {_server2.GetGhost<TestEntity>(_entityId)?.MySampleProperty}");
-                Console.WriteLine($"Master {_server.GetGhost<TestEntity>(_entityId).MySampleProperty}");
-            }
         }
 
         private static void DoCmd(string cmd)
@@ -50,7 +43,6 @@ namespace NetworkEngine
             if (cmdName == "sampleMethod")
             {
                 var value = int.Parse(args[1]);
-                _server2.GetGhost<TestEntity>(_entityId).MyMethod(value);
             }
         }
 
@@ -711,6 +703,8 @@ namespace NetworkEngine
             var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract).ToArray();
             foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
             {
+                if (!syncTypes.ContainsKey(baseEntity.Name + "Sync"))
+                    Console.WriteLine($"ERROR: no sync type for {baseEntity.Name}");
                 var master = syncTypes[baseEntity.Name + "Sync"];
                 var id = (int)(Crc64.Compute(baseEntity.Name) % int.MaxValue);
                 _idToMaster.Add(id, master);
@@ -769,27 +763,6 @@ namespace NetworkEngine
     interface IEntityPropertyChanged
     {
         Action<int> PropertyChanged { get; set; }
-    }
-
-    [GenerateSyncAttribute]
-    public abstract class TestEntity : GhostedEntity
-    {
-        [Sync(SyncType.Client)]
-        public virtual int MySampleProperty { get; set; }
-        [Sync(SyncType.Client)]
-        public virtual string TestString { get; set; }
-        [Sync(SyncType.Client)]
-        public virtual string TestString2 { get; set; }
-        [Sync(SyncType.Client)]
-        public virtual float X { get; set; }
-        [Sync(SyncType.Client)]
-        public virtual float Y { get; set; }
-
-        [Sync(SyncType.Client)]
-        public virtual void MyMethod(int someValue)
-        {
-            MySampleProperty = someValue;
-        }
     }
 
     public abstract class EntityMessage : ServerMessage

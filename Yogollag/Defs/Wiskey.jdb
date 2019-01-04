@@ -1,0 +1,20 @@
+{
+    "$type":"Item",
+    "Name":"Wiskey",
+    "Sprite": {
+        "$type":"SpriteDef",
+        "SpriteSheetName":"tiles",
+        "X":5,
+        "Y":0
+    },
+    "Impact": 
+    {
+        "$type": "ChangeEntityStatDef",
+        "StatName": "Madness",
+        "Change": -2
+    },
+    "Interactive":{
+        "$type":"InteractiveDef",
+        "Name":"Wiskey"
+    }
+}

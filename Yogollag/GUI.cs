@@ -60,7 +60,7 @@ namespace Yogollag
                     {
                         _pressed = false;
                         _hotControl = -1;
-                        if (new FloatRect(sprite.Position, new Vector2f(sprite.TextureRect.Width, sprite.TextureRect.Height)).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
+                        if (new FloatRect(sprite.Position - sprite.Origin * sprite.Scale.X, size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
                         {
                             return true;
                         }
@@ -69,7 +69,7 @@ namespace Yogollag
                 if (Mouse.IsButtonPressed(Mouse.Button.Left))
                 {
                     _pressed = true;
-                    if (new FloatRect(sprite.Position, new Vector2f(sprite.TextureRect.Width, sprite.TextureRect.Height)).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
+                    if (new FloatRect(sprite.Position - sprite.Origin * sprite.Scale.X, size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
                     {
                         _hotControl = _index;
                     }

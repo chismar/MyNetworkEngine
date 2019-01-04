@@ -1,0 +1,21 @@
+{
+    "$type":"Item",
+    "Name":"Journal",
+    
+    "Sprite": {
+        "$type":"SpriteDef",
+        "SpriteSheetName":"tiles",
+        "X":2,
+        "Y":2
+    },
+    "Impact": 
+    {
+        "$type": "ChangeEntityStatDef",
+        "StatName": "Insight",
+        "Change": 2
+    },
+    "Interactive":{
+        "$type":"InteractiveDef",
+        "Name":"Journal"
+    }
+}

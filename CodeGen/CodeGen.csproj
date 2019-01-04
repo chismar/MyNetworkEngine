@@ -13,4 +13,8 @@
     <PackageReference Include="Scriban" Version="1.2.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ResourcesSystem\Definitions.csproj" />
+  </ItemGroup>
+
 </Project>

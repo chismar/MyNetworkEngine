@@ -15,7 +15,11 @@ using SFML.Audio;
 
 namespace Yogollag
 {
+    [GenerateSync]
+    class DEFS_SCHEMA_BOOTSTRAP
+    {
 
+    }
     class Program
     {
         //client class
@@ -96,11 +100,21 @@ namespace Yogollag
             var charId = CurrentServer.Create<CharacterEntity>((ent) => { ent.AuthorityServerId = CurrentServer.CurrentServerCallbackId.Value; ent.Job = defaultJob; ent.CharDef = charDef; ent.Name = name; ent.Position = Vec2.Random(10, 10); });
             CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value);
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
-            var monumentId = CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
-            var tabletId = CurrentServer.Create<WorldItemEntity>((ent) =>
+            CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
+            CurrentServer.Create<WorldItemEntity>((ent) =>
             {
                 ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
                 ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/OldTablet");
+            });
+            CurrentServer.Create<WorldItemEntity>((ent) =>
+            {
+                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/Journal");
+            });
+            CurrentServer.Create<WorldItemEntity>((ent) =>
+            {
+                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/Wiskey");
             });
         }
     }
