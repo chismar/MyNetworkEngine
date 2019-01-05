@@ -265,6 +265,9 @@ namespace CodeGen
 
                 public void Deserialize(NetDataReader stream)
                 {
+                    var hasAny = stream.GetBool();
+                    if(!hasAny)
+                        return;
                     var mask = stream.GetInt();
                     {{for syncProp in sync}}
                     if ((mask & (1 << {{syncProp.index}})) != 0)
@@ -284,15 +287,23 @@ namespace CodeGen
                 {
                     _deltaMask |= 1 << prop;
                 }
-                public bool Serialize(NetDataWriter stream, bool initial)
+                public bool Serialize(ref NetDataWriter stream, bool initial)
                 {
                     bool hasAny = false;
                     int deltaMask = _deltaMask;
                     if (initial)
                         deltaMask = int.MaxValue;
-                    stream.Put(deltaMask);
+                    
                     if(deltaMask == 0)
+                    {
+                        if(stream != null)
+                            stream.Put(false);
                         return false;
+                    }
+                    if(stream == null)
+                        stream = new NetDataWriter(true, 5);
+                    stream.Put(true);
+                    stream.Put(deltaMask);
                     {{for syncProp in sync}}
                     if ((deltaMask & (1 << {{syncProp.index}})) != 0)
                     {
@@ -301,7 +312,7 @@ namespace CodeGen
                     }
                     {{if syncProp.ghost }}
                     else {
-                        hasAny |= ((IGhost){{syncProp.name}})?.Serialize(stream, initial) ?? false;    
+                        hasAny |= ((IGhost){{syncProp.name}})?.Serialize(ref stream, initial) ?? false;    
                     }
                     {{end}}
                     {{end}}
@@ -451,7 +462,7 @@ namespace CodeGen
         {
             if (isGhost)
             {
-                return $"stream.Put(SyncTypesMap.GetIdFromSyncType({propName}.GetType())); ((IGhost){propName}).Serialize(stream, true);";
+                return $"stream.Put(SyncTypesMap.GetIdFromSyncType({propName}.GetType())); ((IGhost){propName}).Serialize(ref stream, true);";
             }
             else
                 switch (type)

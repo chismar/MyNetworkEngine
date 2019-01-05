@@ -28,7 +28,7 @@ namespace NetworkEngine
             _server2 = new NetworkNode(new NetworkNodeId() { Id = 574 });
             _server2.Start(9051, 1);
             _server.Connect(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 }).ContinueWith(OnConnected, null);
-  
+
 
             Task.Run(Cycle);
             Task.Run(ReplicaCycle);
@@ -48,7 +48,7 @@ namespace NetworkEngine
 
         static void OnConnected(Task<bool> result, object state)
         {
-            _server.Replicate(_entityId, _server2.Id);
+            _server.Replicate(_entityId, _server2.Id, _server);
         }
 
         static async Task ReplicaCycle()
@@ -147,12 +147,12 @@ namespace NetworkEngine
             if (!obj.IsMaster)
                 return obj;
             var ghost = (IGhost)Activator.CreateInstance(obj.GetType());
-            var stream = new NetDataWriter(true, 300);
             var ghostEnt = (GhostedEntity)ghost;
             ghostEnt.Id = obj.Id;
             ghostEnt.ServerId = obj.ServerId;
             ghostEnt.AuthorityServerId = obj.AuthorityServerId;
-            ((IGhost)obj).Serialize(stream, true);
+            NetDataWriter stream = null;
+            ((IGhost)obj).Serialize(ref stream, true);
             ghost.Deserialize(new NetDataReader(stream.Data));
             ((GhostedEntity)ghost).OnInit();
             return (NetworkEntity)ghost;
@@ -183,7 +183,7 @@ namespace NetworkEngine
         public NetPeer Peer;
         public bool Clientside;
         public Entities<RemoteStatus> EntitiesReplicatedFromRemote;
-        public ConcurrentDictionary<EntityId, bool> EntitiesReplicatedToRemote = new ConcurrentDictionary<EntityId, bool>();
+        public Dictionary<EntityId, HashSet<object>> EntitiesReplicatedToRemote = new Dictionary<EntityId, HashSet<object>>();
     }
     class RemoteStatus : EntityStatus
     {
@@ -258,6 +258,79 @@ namespace NetworkEngine
     {
         void Tick(NetworkEntity ent);
     }
+    class NetworkNodeMessage
+    { }
+    class GrantAuthorityInternalMessage : NetworkNodeMessage
+    {
+        private EntityId eid;
+        private NetworkNodeId sid;
+
+        public GrantAuthorityInternalMessage(EntityId eid, NetworkNodeId sid)
+        {
+            this.Eid = eid;
+            this.Sid = sid;
+        }
+
+        public EntityId Eid { get => eid; set => eid = value; }
+        public NetworkNodeId Sid { get => sid; set => sid = value; }
+    }
+    class RevokeAuthorityInternalMessage : NetworkNodeMessage
+    {
+        private EntityId eid;
+        private NetworkNodeId sid;
+
+        public RevokeAuthorityInternalMessage(EntityId eid, NetworkNodeId sid)
+        {
+            this.Eid = eid;
+            this.Sid = sid;
+        }
+
+        public EntityId Eid { get => eid; set => eid = value; }
+        public NetworkNodeId Sid { get => sid; set => sid = value; }
+    }
+    class DestroyEntityMessage : NetworkNodeMessage
+    {
+        private EntityId eid;
+
+        public DestroyEntityMessage(EntityId eid)
+        {
+            this.Eid = eid;
+        }
+
+        public EntityId Eid { get => eid; set => eid = value; }
+    }
+    class ReplicateEntityMessage : NetworkNodeMessage
+    {
+        private EntityId eid;
+        private NetworkNodeId sid;
+
+        public ReplicateEntityMessage(EntityId eid, NetworkNodeId sid, object tag)
+        {
+            this.Eid = eid;
+            this.Sid = sid;
+            Tag = tag;
+        }
+
+        public EntityId Eid { get => eid; set => eid = value; }
+        public NetworkNodeId Sid { get => sid; set => sid = value; }
+        public object Tag { get; }
+    }
+    class UnreplicateEntityMessage : NetworkNodeMessage
+    {
+        private EntityId eid;
+        private NetworkNodeId sid;
+
+        public UnreplicateEntityMessage(EntityId eid, NetworkNodeId sid, object tag)
+        {
+            this.Eid = eid;
+            this.Sid = sid;
+            Tag = tag;
+        }
+
+        public EntityId Eid { get => eid; set => eid = value; }
+        public NetworkNodeId Sid { get => sid; set => sid = value; }
+        public object Tag { get; }
+    }
     public class NetworkNode
     {
         static NetworkNode()
@@ -270,6 +343,7 @@ namespace NetworkEngine
         }
         Ghosting _ghosting;
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
+        ConcurrentQueue<NetworkNodeMessage> _internalMessages = new ConcurrentQueue<NetworkNodeMessage>();
         Entities<MasterStatus> _entities;
         public NetworkNodeId Id { get; private set; }
         NetManager _netManager;
@@ -445,40 +519,41 @@ namespace NetworkEngine
         public void GrantAuthority(EntityId eid, NetworkNodeId sid)
         {
             _entities.Get(eid).AuthorityServerId = sid;
-            Send(new GrantAuthorityMessage() { Id = eid }, sid);
+            _internalMessages.Enqueue(new GrantAuthorityInternalMessage(eid, sid));
         }
         public void RemoveAuthority(EntityId eid, NetworkNodeId sid)
         {
             _entities.Get(eid).AuthorityServerId = default;
-            Send(new RevokeAuthorityMessage() { Id = eid }, sid);
+            _internalMessages.Enqueue(new RevokeAuthorityInternalMessage(eid, sid));
         }
-        public void Replicate(EntityId eid, NetworkNodeId sid)
+        public void Replicate(EntityId eid, NetworkNodeId sid, object tag)
         {
-            var ent = _entities.Get(eid);
-            if (ent == null)
+            if (tag == null)
                 return;
-            if (_remoteNetworkNodes[sid].EntitiesReplicatedToRemote.ContainsKey(eid))
-                return;
-            var re = new ReplicateEntity() { Id = eid, EntityType = SyncTypesMap.GetIdFromSyncType(ent.GetType()) };
-            if (ent is GhostedEntity)
-            {
-                NetDataWriter writer = new NetDataWriter(true, 30);
-                Console.WriteLine("Serialize initial state");
-                ((IGhost)_entities.Get(eid)).Serialize(writer, true);
-                re.InitialState = writer.Data;
-                Console.WriteLine("After serialize initial state");
-            }
-            _remoteNetworkNodes[sid].EntitiesReplicatedToRemote.AddOrUpdate(eid, true, (x, y) => { throw new Exception("Duplicate replicate to calls"); });
-            Send(re, sid);
+            _internalMessages.Enqueue(new ReplicateEntityMessage(eid, sid, tag));
         }
 
-        public void Unreplicate(EntityId eid, NetworkNodeId sid)
+        private void UnreplicateDo(EntityId eid, NetworkNodeId sid, object tag)
         {
             if (_remoteNetworkNodes.TryGetValue(sid, out var rs))
             {
-                rs.EntitiesReplicatedToRemote.TryRemove(eid, out var irrelevantVal);
+                rs.EntitiesReplicatedToRemote.TryGetValue(eid, out var counter);
+                if (tag != null)
+                    counter.Remove(tag);
+                if (counter.Count == 0 || tag == null)
+                {
+                    Send(new UnreplicateEntity() { Id = eid }, sid);
+                    rs.EntitiesReplicatedToRemote.Remove(eid);
+                }
+                else
+                    rs.EntitiesReplicatedToRemote[eid].Remove(tag);
             }
-            Send(new UnreplicateEntity() { Id = eid }, sid);
+        }
+        public void Unreplicate(EntityId eid, NetworkNodeId sid, object tag)
+        {
+            if (tag == null)
+                return;
+            _internalMessages.Enqueue(new UnreplicateEntityMessage(eid, sid, tag));
         }
 
         NetworkNodeId GetNodeIDForEntity(EntityId eid)
@@ -524,11 +599,7 @@ namespace NetworkEngine
         public void Destroy(EntityId eid)
         {
             _entities.Remove(eid);
-            foreach (var remoteServer in _remoteNetworkNodes)
-                if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(eid))
-                {
-                    Unreplicate(eid, remoteServer.Key);
-                }
+            _internalMessages.Enqueue(new DestroyEntityMessage(eid));
         }
         public void Teleport(EntityId eid, NetworkNodeId sid)
         {
@@ -575,20 +646,77 @@ namespace NetworkEngine
         public async Task TickSync()
         {
             await SerializeAndSend();
-            await Clear();
-        }
-        private Task Clear()
-        {
-            List<Task> tasks = new List<Task>();
-            foreach (var entity in _entities.Collection)
+            while (_internalMessages.Count > 0)
             {
-                tasks.Add(Task.Run(() =>
-                {
-                    ((IGhost)entity.Value.Entity).Clear();
-                }));
+                _internalMessages.TryDequeue(out var msg);
+                ProcessInternalMessage(msg);
             }
-            return Task.WhenAll(tasks);
         }
+
+        private void ProcessInternalMessage(NetworkNodeMessage msg)
+        {
+            switch (msg)
+            {
+                case DestroyEntityMessage dem:
+                    {
+                        var eid = dem.Eid;
+                        foreach (var remoteServer in _remoteNetworkNodes)
+                            if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(eid))
+                            {
+                                UnreplicateDo(eid, remoteServer.Key, null);
+                            }
+                    }
+                    break;
+                case ReplicateEntityMessage rem:
+                    {
+                        var sid = rem.Sid;
+                        var eid = rem.Eid;
+                        var ent = _entities.Get(eid);
+                        if (ent == null)
+                            return;
+                        _remoteNetworkNodes[sid].EntitiesReplicatedToRemote.TryGetValue(eid, out var counter);
+                        if (counter != null && counter.Count > 0)
+                        {
+                            _remoteNetworkNodes[sid].EntitiesReplicatedToRemote[eid].Add(rem.Tag);
+                            return;
+                        }
+                        var re = new ReplicateEntity() { Id = eid, EntityType = SyncTypesMap.GetIdFromSyncType(ent.GetType()) };
+                        if (ent is GhostedEntity)
+                        {
+                            Console.WriteLine("Serialize initial state");
+                            NetDataWriter writer = null;
+                            ((IGhost)_entities.Get(eid)).Serialize(ref writer, true);
+                            re.InitialState = writer.Data;
+                            Console.WriteLine("After serialize initial state");
+                        }
+                        var set = new HashSet<object>();
+                        set.Add(rem.Tag);
+                        _remoteNetworkNodes[sid].EntitiesReplicatedToRemote[eid] = set;
+                        Send(re, sid);
+                    }
+                    break;
+                case UnreplicateEntityMessage uem:
+                    {
+                        UnreplicateDo(uem.Eid, uem.Sid, uem.Tag);
+                    }
+                    break;
+                case GrantAuthorityInternalMessage gam:
+                    {
+                        var eid = gam.Eid;
+                        var sid = gam.Sid;
+                        Send(new GrantAuthorityMessage() { Id = eid }, sid);
+                    }
+                    break;
+                case RevokeAuthorityInternalMessage ram:
+                    {
+                        var eid = ram.Eid;
+                        var sid = ram.Sid;
+                        Send(new RevokeAuthorityMessage() { Id = eid }, sid);
+                    }
+                    break;
+            }
+        }
+
         private Task SerializeAndSend()
         {
             List<Task> tasks = new List<Task>();
@@ -596,13 +724,17 @@ namespace NetworkEngine
             {
                 tasks.Add(Task.Run(() =>
                 {
-                    var writer = new NetDataWriter(true, 500);
-                    if (((IGhost)_entities.Collection[entity.Key].Entity).Serialize(writer, false))
+                    NetDataWriter writer = null;
+                    var ent = ((IGhost)_entities.Collection[entity.Key].Entity);
+                    if (ent.Serialize(ref writer, false))
                     {
+                        //var data = new byte[writer.Length];
+                        //Array.Copy(writer.Data, data, writer.Length);
                         foreach (var remoteServer in _remoteNetworkNodes)
                             if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(entity.Key))
                                 Send(new UpdateEntity() { Id = entity.Key, Delta = writer.Data }, remoteServer.Value.Id);
                         ((IGhost)_ghosting.Get(entity.Value.Entity.Id)).Deserialize(new NetDataReader(writer.Data));
+                        ent.Clear();
                     }
                 }));
             }
@@ -756,7 +888,7 @@ namespace NetworkEngine
 
     public interface IGhost
     {
-        bool Serialize(NetDataWriter stream, bool initial);
+        bool Serialize(ref NetDataWriter stream, bool initial);
         void Deserialize(NetDataReader stream);
         void Clear();
     }

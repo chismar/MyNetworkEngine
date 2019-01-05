@@ -28,6 +28,7 @@ namespace Yogollag
             if (character != null)
             {
                 GUI.Begin();
+                GUI.IsActive = true;
                 DrawStats(character);
                 DrawQuests(character as IQuester);
                 var inter = DrawInteractions(character);
@@ -54,7 +55,7 @@ namespace Yogollag
                 var text = item.Def.Name;
                 if (item.ItemId == character.ActiveItem)
                     text = $"[{item.Def.Name}]";
-                if (GUI.SlotButton(btnPos = new Vector2f(btnPos.X + distanceBetweenButtons, btnPos.Y), 
+                if (GUI.SlotButton(btnPos = new Vector2f(btnPos.X + distanceBetweenButtons, btnPos.Y),
                     new Vector2f(distanceBetweenButtons / 2, distanceBetweenButtons / 2), Sprites.GetSprite(item.Def.Sprite)))
                 {
                     character.SetActiveItem(item.ItemId);
@@ -76,7 +77,7 @@ namespace Yogollag
             else if (takeItemHotkey)
             {
                 takeItemHotkey = false;
-                if(currentInteractive is WorldItemEntity wie)
+                if (currentInteractive is WorldItemEntity wie)
                 {
                     wie.BeTaken(character.Id);
                 }
@@ -171,13 +172,20 @@ namespace Yogollag
             {
                 bool isActive = (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx));
                 GUI.IsActive = isActive;
-                if (GUI.Button(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Def.Name))
+                try
                 {
-                    if (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx))
-                        ((IImpactedEntity)character).RunImpact(null, inter.Def.Impact.Def);
+                    if (GUI.Button(btnPos = new Vector2f(btnPos.X, btnPos.Y - distanceBetweenButtons), inter.Def.Name))
+                    {
+                        if (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx))
+                            ((IImpactedEntity)character).RunImpact(null, inter.Def.Impact.Def);
+                    }
                 }
-                GUI.IsActive = true;
+                finally
+                {
+                    GUI.IsActive = true;
+                }
             }
+            GUI.IsActive = true;
             return selectedInteractive;
         }
 

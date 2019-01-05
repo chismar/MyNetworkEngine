@@ -277,7 +277,7 @@ namespace GameTest
                 var loginEntity = _server.Create<LoginEntity>((e) => { });
                 _server.NewConnectionEstablished += (sid) =>
                 {
-                    _server.Replicate(loginEntity, sid);
+                    _server.Replicate(loginEntity, sid, _server);
                 };
             }
             if (cmd.StartsWith("client"))

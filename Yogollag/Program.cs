@@ -83,7 +83,7 @@ namespace Yogollag
                 {
                     foreach (var character in _cachedList)
                         if (!character.AuthorityServerId.IsInvalid)
-                            CurrentServer.Replicate(entityGhost.Id, character.AuthorityServerId);
+                            CurrentServer.Replicate(entityGhost.Id, character.AuthorityServerId, this);
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace Yogollag
             var defaultJob = DefsHolder.Instance.LoadDef<RoleDef>("/Arhaeologist");
             var charDef = DefsHolder.Instance.LoadDef<CharacterDef>("/CharDef");
             var charId = CurrentServer.Create<CharacterEntity>((ent) => { ent.AuthorityServerId = CurrentServer.CurrentServerCallbackId.Value; ent.Job = defaultJob; ent.CharDef = charDef; ent.Name = name; ent.Position = Vec2.Random(10, 10); });
-            CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value);
+            CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value, this);
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
             CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
             CurrentServer.Create<WorldItemEntity>((ent) =>
@@ -135,7 +135,7 @@ namespace Yogollag
 
         private void NewConnection(NetworkNodeId eid)
         {
-            _node.Replicate(_sessionId, eid);
+            _node.Replicate(_sessionId, eid, this);
         }
 
         DateTime _lastUpdateTime;
