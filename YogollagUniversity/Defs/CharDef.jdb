@@ -1,0 +1,39 @@
+{
+    "$type":"GamePlayerEntityDef",
+    "Domains":{
+        "Develop":{
+            "$type":"DomainDef"
+        },
+        "Protect":{
+            "$type":"DomainDef"
+        },
+        "Clear":{
+            "$type":"DomainDef"
+        },
+        "Encrypt":{
+            "$type":"DomainDef"
+        }
+    },
+    "TargetedDomains":{
+        "Trade":{
+            "$type":"DomainDef"
+        },
+        "Hurt":{
+            "$type":"DomainDef"
+        },
+        "Spy":{
+            "$type":"DomainDef"
+        }
+    },
+    "InitialStats":[
+         {
+             "$type": "InitialStat",
+             "Stat": {
+                 "$type": "Stat",
+                 "Name": "Prosperity"
+             },
+             "Value":5
+         }
+    ]
+
+}

@@ -1,0 +1,14 @@
+{
+    "$type":"EnvironmentDef",
+    "InitialStats":[
+         {
+             "$type": "InitialStat",
+             "Stat": {
+                 "$type": "Stat",
+                 "Name": "Prosperity"
+             },
+             "Value":5
+         }
+    ]
+
+}

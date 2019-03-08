@@ -345,6 +345,7 @@ namespace NetworkEngine
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
         ConcurrentQueue<NetworkNodeMessage> _internalMessages = new ConcurrentQueue<NetworkNodeMessage>();
         Entities<MasterStatus> _entities;
+
         public NetworkNodeId Id { get; private set; }
         NetManager _netManager;
         long _entitiesCounter = 1;
@@ -763,6 +764,12 @@ namespace NetworkEngine
                     }));
             }
             return Task.WhenAll(tasks);
+        }
+
+        public T GetWriteEntity<T>(EntityId id) where T : GhostedEntity
+        {
+            _entities.Collection.TryGetValue(id, out var val);
+            return val?.Entity as T;
         }
     }
 

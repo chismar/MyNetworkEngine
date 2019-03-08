@@ -17,7 +17,7 @@ namespace GameTest
         public virtual void Login(string name)
         {
             var acc = CurrentServer.Create<AccountEntity>((ae) => { ae.Name = name; ae.ClientId = CurrentServer.CurrentServerCallbackId.Value; });
-            CurrentServer.Replicate(acc, CurrentServer.CurrentServerCallbackId.Value);
+            CurrentServer.Replicate(acc, CurrentServer.CurrentServerCallbackId.Value, new object());
         }
         [Sync(SyncType.Client)]
         public virtual void StartMatch(EntityId account)
@@ -39,8 +39,8 @@ namespace GameTest
             matchEntity.JoinPlayer(account);
             var accEntity = CurrentServer.GetGhost<AccountEntity>(account);
             var otherAcc = CurrentServer.GetGhost<AccountEntity>(matchEntity.PlayerHost);
-            CurrentServer.Replicate(otherAcc.CurrentPlayer, accEntity.ClientId);
-            CurrentServer.Replicate(newPlayer, otherAcc.ClientId);
+            CurrentServer.Replicate(otherAcc.CurrentPlayer, accEntity.ClientId, new object());
+            CurrentServer.Replicate(newPlayer, otherAcc.ClientId, new object());
             accEntity.SetUp(match, newPlayer);
 
         }
@@ -61,8 +61,8 @@ namespace GameTest
         {
             CurrentMatch = match;
             CurrentPlayer = player;
-            CurrentServer.Replicate(CurrentMatch, ClientId);
-            CurrentServer.Replicate(CurrentPlayer, ClientId);
+            CurrentServer.Replicate(CurrentMatch, ClientId, new object());
+            CurrentServer.Replicate(CurrentPlayer, ClientId, new object());
         }
 
     }

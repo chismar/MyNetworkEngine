@@ -62,7 +62,7 @@
             "fileMatch": [
                 "*.jdb"
             ],
-            "url": "./Yogollag/DEFS_SCHEMA.json"
+            "url": "./YogollagUniversity/DEFS_SCHEMA.json"
         }
     ],
     "sortJSON.orderOverride": ["$type", "$id", "$overrideVars", "$proto", "$vars"]
