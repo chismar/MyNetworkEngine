@@ -22,10 +22,17 @@
         "IPredicate",
         "CheckEntityStatDef",
         "CheckEntityStat",
+        "PredicateAll",
+        "PredicateOnEnvironmentDef",
+        "PredicateOnEnvironment",
         "IImpactDef",
         "IImpact",
-        "AllInRangeDef",
-        "AllInRange",
+        "DoIfDef",
+        "DoIf",
+        "DoAllDef",
+        "DoAll",
+        "TargetEnvironmentDef",
+        "TargetEnvironment",
         "ChangeEntityStatDef",
         "ChangeEntityStat",
         "SpriteDef",
@@ -92,8 +99,15 @@
             "Stat",
             "CheckEntityStatDef",
             "CheckEntityStat",
-            "AllInRangeDef",
-            "AllInRange",
+            "PredicateAll",
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment",
+            "DoIfDef",
+            "DoIf",
+            "DoAllDef",
+            "DoAll",
+            "TargetEnvironmentDef",
+            "TargetEnvironment",
             "ChangeEntityStatDef",
             "ChangeEntityStat",
             "SpriteDef",
@@ -138,7 +152,19 @@
           "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
-          "$ref": "#/definitions/AllInRangeDef"
+          "$ref": "#/definitions/PredicateAll"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+        },
+        {
+          "$ref": "#/definitions/DoIfDef"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -226,10 +252,17 @@
             "IPredicate",
             "CheckEntityStatDef",
             "CheckEntityStat",
+            "PredicateAll",
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment",
             "IImpactDef",
             "IImpact",
-            "AllInRangeDef",
-            "AllInRange",
+            "DoIfDef",
+            "DoIf",
+            "DoAllDef",
+            "DoAll",
+            "TargetEnvironmentDef",
+            "TargetEnvironment",
             "ChangeEntityStatDef",
             "ChangeEntityStat",
             "SpriteDef",
@@ -280,10 +313,22 @@
           "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
+          "$ref": "#/definitions/PredicateAll"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+        },
+        {
           "$ref": "#/definitions/IImpactDef"
         },
         {
-          "$ref": "#/definitions/AllInRangeDef"
+          "$ref": "#/definitions/DoIfDef"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -784,7 +829,10 @@
             "IPredicateDef",
             "IPredicate",
             "CheckEntityStatDef",
-            "CheckEntityStat"
+            "CheckEntityStat",
+            "PredicateAll",
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment"
           ]
         },
         "$vars": {
@@ -805,6 +853,12 @@
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/PredicateAll"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
         }
       ]
     },
@@ -841,8 +895,8 @@
             "CheckEntityStat"
           ]
         },
-        "StatName": {
-          "type": "string"
+        "StatRef": {
+          "$ref": "#/definitions/StatDefField"
         },
         "MoreThan": {
           "oneOf": [
@@ -896,6 +950,146 @@
         }
       ]
     },
+    "PredicateAll": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PredicateAllField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PredicateAll"
+          ]
+        },
+        "And": {
+          "$ref": "#/definitions/IListField"
+        },
+        "Or": {
+          "$ref": "#/definitions/IListField"
+        },
+        "Single": {
+          "$ref": "#/definitions/IListField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "PredicateAllField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PredicateAll"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/PredicateAll"
+        }
+      ]
+    },
+    "PredicateOnEnvironmentDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PredicateOnEnvironmentDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment"
+          ]
+        },
+        "Predicate": {
+          "$ref": "#/definitions/IPredicateDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "PredicateOnEnvironmentDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+        }
+      ]
+    },
     "IImpactDef": {
       "type": "object",
       "additionalProperties": false,
@@ -941,8 +1135,12 @@
           "enum": [
             "IImpactDef",
             "IImpact",
-            "AllInRangeDef",
-            "AllInRange",
+            "DoIfDef",
+            "DoIf",
+            "DoAllDef",
+            "DoAll",
+            "TargetEnvironmentDef",
+            "TargetEnvironment",
             "ChangeEntityStatDef",
             "ChangeEntityStat"
           ]
@@ -964,14 +1162,20 @@
           "$ref": "#/definitions/IImpactDef"
         },
         {
-          "$ref": "#/definitions/AllInRangeDef"
+          "$ref": "#/definitions/DoIfDef"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
         }
       ]
     },
-    "AllInRangeDef": {
+    "DoIfDef": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -981,7 +1185,7 @@
         "$proto": {
           "allOf": [
             {
-              "$ref": "#/definitions/AllInRangeDefField"
+              "$ref": "#/definitions/DoIfDefField"
             }
           ],
           "dependecies": [
@@ -1000,18 +1204,8 @@
         "$type": {
           "type": "string",
           "enum": [
-            "AllInRangeDef",
-            "AllInRange"
-          ]
-        },
-        "Range": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
+            "DoIfDef",
+            "DoIf"
           ]
         },
         "Predicate": {
@@ -1019,19 +1213,22 @@
         },
         "Impact": {
           "$ref": "#/definitions/IImpactDefField"
+        },
+        "Impacts": {
+          "$ref": "#/definitions/IListField"
         }
       },
       "required": [
         "$type"
       ]
     },
-    "AllInRangeDefField": {
+    "DoIfDefField": {
       "properties": {
         "$type": {
           "type": "string",
           "enum": [
-            "AllInRangeDef",
-            "AllInRange"
+            "DoIfDef",
+            "DoIf"
           ]
         },
         "$vars": {
@@ -1048,7 +1245,143 @@
           "type": "string"
         },
         {
-          "$ref": "#/definitions/AllInRangeDef"
+          "$ref": "#/definitions/DoIfDef"
+        }
+      ]
+    },
+    "DoAllDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DoAllDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "DoAllDef",
+            "DoAll"
+          ]
+        },
+        "Impacts": {
+          "$ref": "#/definitions/IListField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "DoAllDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "DoAllDef",
+            "DoAll"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        }
+      ]
+    },
+    "TargetEnvironmentDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TargetEnvironmentDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetEnvironmentDef",
+            "TargetEnvironment"
+          ]
+        },
+        "Impact": {
+          "$ref": "#/definitions/IImpactDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "TargetEnvironmentDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetEnvironmentDef",
+            "TargetEnvironment"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
         }
       ]
     },
@@ -1085,8 +1418,8 @@
             "ChangeEntityStat"
           ]
         },
-        "StatName": {
-          "type": "string"
+        "StatRef": {
+          "$ref": "#/definitions/StatDefField"
         },
         "Set": {
           "oneOf": [
@@ -1094,7 +1427,7 @@
               "type": "string"
             },
             {
-              "type": "number"
+              "type": "integer"
             },
             {
               "type": "object"
@@ -1107,7 +1440,7 @@
               "type": "string"
             },
             {
-              "type": "number"
+              "type": "integer"
             },
             {
               "type": "object"
@@ -1249,8 +1582,12 @@
         "StatDef",
         "IPredicateDef",
         "CheckEntityStatDef",
+        "PredicateAll",
+        "PredicateOnEnvironmentDef",
         "IImpactDef",
-        "AllInRangeDef",
+        "DoIfDef",
+        "DoAllDef",
+        "TargetEnvironmentDef",
         "ChangeEntityStatDef",
         "SpriteDef",
         "float",
@@ -1434,6 +1771,39 @@
         }
       ]
     },
+    "IList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IList"
+          ]
+        },
+        "this[]": {
+          "$ref": "#/definitions/IPredicateDefField"
+        }
+      }
+    },
+    "IListField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IList"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/IList"
+        }
+      ]
+    },
     "Object": {
       "type": "object",
       "additionalProperties": false,
@@ -1479,10 +1849,22 @@
           "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
+          "$ref": "#/definitions/PredicateAll"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+        },
+        {
           "$ref": "#/definitions/IImpactDef"
         },
         {
-          "$ref": "#/definitions/AllInRangeDef"
+          "$ref": "#/definitions/DoIfDef"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -1504,6 +1886,9 @@
         },
         {
           "$ref": "#/definitions/Guid"
+        },
+        {
+          "$ref": "#/definitions/IList"
         },
         {
           "$ref": "#/definitions/Object"

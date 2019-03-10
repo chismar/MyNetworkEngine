@@ -23,12 +23,6 @@
     <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.88" />
     <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.88" />
     <PackageReference Include="NLog" Version="4.5.11" />
-    <Reference Include="OpenTK">
-      <HintPath>..\TestGame\extlibs\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK.Compatibility">
-      <HintPath>..\TestGame\extlibs\OpenTK.Compatibility.dll</HintPath>
-    </Reference>
     <Reference Include="sfmlnet-audio-2">
       <HintPath>..\GameTest\lib\sfmlnet-audio-2.dll</HintPath>
     </Reference>

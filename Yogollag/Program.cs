@@ -19,7 +19,9 @@ namespace Yogollag
     class DEFS_SCHEMA_BOOTSTRAP
     {
 
+
     }
+
     class Program
     {
         //client class

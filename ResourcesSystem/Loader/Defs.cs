@@ -44,7 +44,7 @@ namespace Definitions
         }
 
         public Action<string> Reloaded;
-        
+
         public void Reload(string filter)
         {
             var resourceToRemove = LoadedResources.AllLoaded.Where(v => v.Root != null && v.Root.Contains(filter)).ToArray();
@@ -75,14 +75,14 @@ namespace Definitions
             var gr = new Defs(new FolderLoader(null));
             JsonSerializer serializer = gr.Serializer;
             serializer.Converters.Clear();
-            if(additionalConverters != null)
-            foreach(var conv in additionalConverters)
-            {
-                serializer.Converters.Add(conv);
-            }
+            if (additionalConverters != null)
+                foreach (var conv in additionalConverters)
+                {
+                    serializer.Converters.Add(conv);
+                }
             serializer.Converters.Add(new DefReferenceConverter(gr.Deserializer, false));
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-            serializer.TypeNameHandling = TypeNameHandling.Objects;
+            serializer.TypeNameHandling = TypeNameHandling.Auto;
             path = null;
             if (dir[dir.Length - 1] != '/' && refPath[0] != '/')
                 path = dir + "/" + refPath + ".jdb";
@@ -92,6 +92,7 @@ namespace Definitions
                 Directory.CreateDirectory(dir);
             var str = new StringWriter();
             serializer.Serialize(str, data);
+            System.IO.Directory.CreateDirectory(path.Substring(0, path.LastIndexOf('/')));
             File.WriteAllText(path, str.ToString());
         }
     }

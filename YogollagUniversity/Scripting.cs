@@ -4,6 +4,7 @@ using MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Yogollag
 {
@@ -42,78 +43,104 @@ namespace Yogollag
     }
     public class CheckEntityStatDef : BaseDef, IPredicateDef
     {
-        public string StatName { get; set; }
+        public DefRef<StatDef> StatRef { get; set; }
         public float MoreThan { get; set; } = float.MinValue;
         public float LessThan { get; set; } = float.MaxValue;
         public bool Check(ScriptingContext ctx)
         {
-            /*var statEntity = ctx.Entity as IStatEntity;
-            if (statEntity.Stats.TryGetValue(StatName, out var val))
+            var statEntity = ctx.Entity as IHasStats;
+            if (statEntity.Stats.TryGetValue(StatRef, out var val))
                 return MoreThan < val && LessThan > val;
             else
-                return false;*/
-            return false;
+                return false;
         }
     }
+    public class PredicateAll : BaseDef, IPredicateDef
+    {
+        public IList<DefRef<IPredicateDef>> And { get; set; } = Array.Empty<DefRef<IPredicateDef>>();
+        public IList<DefRef<IPredicateDef>> Or { get; set; } = Array.Empty<DefRef<IPredicateDef>>();
+        public IList<DefRef<IPredicateDef>> Single { get; set; } = Array.Empty<DefRef<IPredicateDef>>();
+        public bool Check(ScriptingContext ctx)
+        {
+            return (And.Count == 0 || And.All(x => x.Def.Check(ctx))) && 
+                (Or.Count == 0 && Or.Any(x => x.Def.Check(ctx))) && 
+                (Single.Count == 0 && Single.Count(x => x.Def.Check(ctx)) == 1);
+        }
+    }
+
+    public class PredicateOnEnvironmentDef : BaseDef, IPredicateDef
+    {
+        public DefRef<IPredicateDef> Predicate { get; set; }
+        public bool Check(ScriptingContext ctx)
+        {
+            var gse = ctx.Entity.CurrentServer.AllGhosts().Single(x => x is GameSessionEntity);
+            var gseCtx = new ScriptingContext() { Parent = ctx, Entity = gse, EntitySelf = gse.Id };
+            return Predicate.Def.Check(gseCtx);
+        }
+    }
+
 
     public interface IImpactDef : IDef
     {
         void Apply(ScriptingContext ctx);
     }
-    public class AllInRangeDef : BaseDef, IImpactDef
+
+    public class DoIfDef : BaseDef, IImpactDef
     {
-        public float Range { get; set; }
-        public IPredicateDef Predicate { get; set; }
-        public IImpactDef Impact { get; set; }
+        public DefRef<IPredicateDef> Predicate { get; set; }
+        public DefRef<IImpactDef> Impact { get; set; }
+        public IList<DefRef<IImpactDef>> Impacts { get; set; } = Array.Empty<DefRef<IImpactDef>>();
         public void Apply(ScriptingContext ctx)
         {
-            /*var posEnt = ctx as IPositionedEntity;
-            if (posEnt == null)
-                return;
-            var charLike = ctx as ICharacterLikeMovement;
-            if (charLike == null)
-                return;
-            var colliders = charLike.PhysicsBody.World.QueryCircle(new Volatile.Vector2(posEnt.Position.X, posEnt.Position.Y), Range);
-            foreach(var collider in colliders)
+            if(Predicate == null || Predicate.Def.Check(ctx))
             {
-                var probablyId = collider.UserData;
-                if(probablyId is EntityId id)
-                {
-                    var colliderEnt = ctx.Entity.CurrentServer.GetGhost<NetworkEntity>(id);
-                    if (colliderEnt == null)
-                        continue;
-                    var impacted = colliderEnt as IImpactedEntity;
-                    if (impacted == null)
-                        continue;
-                    if (Predicate.Check(new ScriptingContext() { Entity = colliderEnt, Parent = ctx }))
-                        impacted.RunImpact(ctx, Impact);
-                }
-            }*/
-
+                if (Impact.Def != null)
+                    Impact.Def.Apply(ctx);
+                foreach (var impact in Impacts)
+                    impact.Def.Apply(ctx);
+            }
+        }
+    }
+    public class DoAllDef : BaseDef, IImpactDef
+    {
+        public IList<DefRef<IImpactDef>> Impacts { get; set; } = Array.Empty<DefRef<IImpactDef>>();
+        public void Apply(ScriptingContext ctx)
+        {
+            foreach (var impact in Impacts)
+                impact.Def.Apply(ctx);
         }
     }
 
-    public class ChangeEntityStatDef : BaseDef, IImpactDef
+    public class TargetEnvironmentDef : BaseDef, IImpactDef
     {
-        public string StatName { get; set; }
-        public float? Set { get; set; }
-        public float? Change { get; set; }
+        public DefRef<IImpactDef> Impact { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            /*var statEntity = ctx.Entity as IStatEntity;
+            var gse = ctx.Entity.CurrentServer.AllGhosts().Single(x => x is GameSessionEntity);
+            ((GameSessionEntity)gse).RunImpact(ctx, Impact.Def);
+        }
+    }
+    public class ChangeEntityStatDef : BaseDef, IImpactDef
+    {
+        public DefRef<StatDef> StatRef { get; set; }
+        public int? Set { get; set; }
+        public int? Change { get; set; }
+        public void Apply(ScriptingContext ctx)
+        {
+            var statEntity = ctx.Entity as IHasStats;
             if (statEntity == null)
                 return;
             if (Set.HasValue)
-                statEntity.Stats[StatName] = Set.Value;
+                statEntity.Stats[StatRef] = Set.Value;
             if (Change.HasValue)
             {
-                if (statEntity.Stats.TryGetValue(StatName, out var prevVal))
-                    statEntity.Stats[StatName] = prevVal + Change.Value;
+                if (statEntity.Stats.TryGetValue(StatRef, out var prevVal))
+                    statEntity.Stats[StatRef] = prevVal + Change.Value;
                 else
-                    statEntity.Stats[StatName] = Change.Value;
+                    statEntity.Stats[StatRef] = Change.Value;
 
             }
-            statEntity.Stats = statEntity.Stats;*/
+            statEntity.Stats = statEntity.Stats;
 
         }
     }

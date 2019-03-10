@@ -10,20 +10,30 @@ using Definitions;
 using Volatile;
 using System.Collections.Concurrent;
 using System.Linq;
+using NLog;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 
 namespace Yogollag
 {
     [GenerateSync]
-    public abstract class GameSessionEntity : GhostedEntity, IHasStats
+    public abstract class GameSessionEntity : GhostedEntity, IHasStats, IImpactedEntity
     {
+        static Logger Logger = LogManager.GetCurrentClassLogger();
+
         [Sync(SyncType.Client)]
         public virtual Dictionary<string, EntityId> Players { get; set; } = new Dictionary<string, EntityId>();
         [Sync(SyncType.Client)]
         public virtual Dictionary<EntityId, PlayerTurnInput> CurrentTurns { get; set; } = new Dictionary<EntityId, PlayerTurnInput>();
+
+        public Dictionary<EntityId, PlayerTurnInput> LastTurns { get; set; } = new Dictionary<EntityId, PlayerTurnInput>();
         [Sync(SyncType.Client)]
         public virtual Dictionary<StatDef, int> Stats { get; set; } = new Dictionary<StatDef, int>();
         [Sync(SyncType.Client)]
         public virtual int CurrentTurn { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual int LastSerializedTurn { get; set; }
 
         [Sync(SyncType.Client)]
         public virtual bool Started { get; set; }
@@ -42,17 +52,21 @@ namespace Yogollag
             Players.Add(name, charId);
             Players = Players;
         }
+        public override void OnCreate()
+        {
+            CurrentTurns = new Dictionary<EntityId, PlayerTurnInput>();
+        }
         [Sync(SyncType.Client)]
         public virtual void Start()
         {
             Started = true;
         }
+        DateTime _lastCalcNewTurnTime = default;
         [Sync(SyncType.Client)]
         public virtual void Check()
         {
             if (!Started)
                 return;
-            CurrentTurns = new Dictionary<EntityId, PlayerTurnInput>();
             foreach (var playerId in Players)
             {
                 var player = CurrentServer.GetGhost<GamePlayerEntity>(playerId.Value);
@@ -61,9 +75,26 @@ namespace Yogollag
                     CurrentTurns[playerId.Value] = player.TurnInput;
                 }
             }
-            if (CurrentTurns.Count == Players.Count)
+            if (CurrentTurns.Count == Players.Count && LastSerializedTurn == CurrentTurn)
                 CalcNewTurn();
+            if (_lastCalcNewTurnTime != default && DateTime.Now.Subtract(_lastCalcNewTurnTime).TotalSeconds > 10 && LastSerializedTurn != CurrentTurn)
+            {
+                SerializeLastTurnData();
+                LastSerializedTurn = CurrentTurn;
+            }
             Stats = Stats;
+        }
+        public class PlayerTurnDesc : BaseDef
+        {
+            public string Name { get; set; }
+            public EntityId Id { get; set; }
+            public Dictionary<string, int> Stats { get; set; }
+            public Dictionary<string, int> Spent { get; set; } //domain key
+        }
+        public class TurnSerializationData : BaseDef
+        {
+            public List<DefRef<PlayerTurnDesc>> PlayerTurns { get; set; }
+            public Dictionary<string, int> Stats { get; set; }
         }
 
         private void CalcNewTurn()
@@ -88,9 +119,35 @@ namespace Yogollag
                 player.AcceptTurn();
             }
             CurrentTurn++;
+            LastTurns = CurrentTurns;
+            CurrentTurns = new Dictionary<EntityId, PlayerTurnInput>();
+            _lastCalcNewTurnTime = DateTime.Now;
 
         }
+
+        private void SerializeLastTurnData()
+        {
+            var lastTurnData = new TurnSerializationData();
+
+            lastTurnData.Stats = Stats.ToDictionary(x => x.Key.ToString(), x => x.Value);
+            lastTurnData.PlayerTurns = LastTurns.Select(x => new DefRef<PlayerTurnDesc>(new PlayerTurnDesc()
+            {
+                Name = CurrentServer.GetGhost<GamePlayerEntity>(x.Key).Name,
+                Id = x.Key,
+                Spent = x.Value.Actions.ToDictionary(a => new DomainKey() { Domain = a.Domain, TargetId = a.Target }.ToString(), a => a.Value),
+                Stats = CurrentServer.GetGhost<GamePlayerEntity>(x.Key).Stats.ToDictionary(a => a.Key.____GetDebugAddress(), a => a.Value)
+            })).ToList();
+            Defs.SimpleSave(Directory.GetCurrentDirectory(), $"/StatisticsPerTurn/{CurrentTurn}", lastTurnData, out var path);
+        }
+        [Sync(SyncType.Server)]
+        public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
+        {
+            if (def == null)
+                return;
+            def.Apply(new ScriptingContext() { Entity = this, EntitySelf = this.Id, Parent = originalContext });
+        }
     }
+
 
     public interface IHasStats
     {
@@ -114,9 +171,20 @@ namespace Yogollag
         public Dictionary<string, DomainDef> Domains { get; set; } = new Dictionary<string, DomainDef>();
         public List<InitialStat> InitialStats { get; set; } = new List<InitialStat>();
     }
+
+    public struct DomainKey
+    {
+        public DomainDef Domain;
+        public EntityId TargetId;
+        public override string ToString()
+        {
+            return $"{TargetId}:{Domain.____GetDebugAddress()}";
+        }
+    }
     [GenerateSync]
     public abstract class GamePlayerEntity : GhostedEntity, IHasStats, IImpactedEntity
     {
+
         [Sync(SyncType.Client)]
         public virtual GamePlayerEntityDef Def { get; set; }
         [Sync(SyncType.Client)]
@@ -132,7 +200,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual int ResourcePoints { get; set; } = 10;
         public int ResourcePointsSpent => SpentPerDomain.Sum(x => x.Value);
-        public ConcurrentDictionary<DomainDef, int> SpentPerDomain { get; set; } = new ConcurrentDictionary<DomainDef, int>();
+        public ConcurrentDictionary<DomainKey, int> SpentPerDomain { get; set; } = new ConcurrentDictionary<DomainKey, int>();
         public override void OnCreate()
         {
             foreach (var stat in Def.InitialStats)
@@ -162,6 +230,7 @@ namespace Yogollag
             def.Apply(new ScriptingContext() { Entity = this, Parent = originalContext });
         }
     }
+
     public class EventDef : BaseDef
     {
         public string Name { get; set; }

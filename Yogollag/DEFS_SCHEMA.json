@@ -33,6 +33,24 @@
         "TileCategory",
         "CharacterDef",
         "Character",
+        "ItemDef",
+        "Item",
+        "QuestDef",
+        "Quest",
+        "TargetTypeDef",
+        "TargetType",
+        "TargetDef",
+        "Target",
+        "AddQuest",
+        "CompleteQuest",
+        "RoleDef",
+        "Role",
+        "IPredicateDef",
+        "IPredicate",
+        "CheckEntityStatDef",
+        "CheckEntityStat",
+        "IImpactDef",
+        "IImpact",
         "AllInRangeDef",
         "AllInRange",
         "ChangeEntityStatDef",
@@ -1108,6 +1126,758 @@
         }
       ]
     },
+    "ItemDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ItemDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ItemDef",
+            "Item"
+          ]
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Sprite": {
+          "$ref": "#/definitions/SpriteDefField"
+        },
+        "Interactive": {
+          "$ref": "#/definitions/InteractiveDefField"
+        },
+        "Predicate": {
+          "$ref": "#/definitions/IPredicateDefField"
+        },
+        "Impact": {
+          "$ref": "#/definitions/IImpactDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ItemDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ItemDef",
+            "Item"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ItemDef"
+        }
+      ]
+    },
+    "QuestDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/QuestDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "QuestDef",
+            "Quest"
+          ]
+        },
+        "Name": {
+          "type": "string"
+        },
+        "AddedInteractions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InteractionDefField"
+          }
+        },
+        "OnComplete": {
+          "$ref": "#/definitions/IImpactDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "QuestDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "QuestDef",
+            "Quest"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/QuestDef"
+        }
+      ]
+    },
+    "TargetTypeDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TargetTypeDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetTypeDef",
+            "TargetType"
+          ]
+        },
+        "Type": {
+          "$ref": "#/definitions/InteractiveDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "TargetTypeDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetTypeDef",
+            "TargetType"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        }
+      ]
+    },
+    "TargetDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TargetDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetDef",
+            "Target"
+          ]
+        },
+        "Predicate": {
+          "$ref": "#/definitions/IPredicateDefField"
+        },
+        "Do": {
+          "$ref": "#/definitions/IImpactDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "TargetDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetDef",
+            "Target"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        }
+      ]
+    },
+    "AddQuest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AddQuestField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "AddQuest"
+          ]
+        },
+        "Quest": {
+          "$ref": "#/definitions/QuestDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "AddQuestField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "AddQuest"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        }
+      ]
+    },
+    "CompleteQuest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompleteQuestField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "CompleteQuest"
+          ]
+        },
+        "Quest": {
+          "$ref": "#/definitions/QuestDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "CompleteQuestField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "CompleteQuest"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        }
+      ]
+    },
+    "RoleDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RoleDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RoleDef",
+            "Role"
+          ]
+        },
+        "InitialQuest": {
+          "$ref": "#/definitions/QuestDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "RoleDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RoleDef",
+            "Role"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        }
+      ]
+    },
+    "IPredicateDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IPredicateDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IPredicateDef",
+            "IPredicate"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "IPredicateDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetTypeDef",
+            "TargetType",
+            "TargetDef",
+            "Target",
+            "IPredicateDef",
+            "IPredicate",
+            "CheckEntityStatDef",
+            "CheckEntityStat"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/IPredicateDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        }
+      ]
+    },
+    "CheckEntityStatDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CheckEntityStatDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "CheckEntityStatDef",
+            "CheckEntityStat"
+          ]
+        },
+        "StatName": {
+          "type": "string"
+        },
+        "MoreThan": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "LessThan": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "CheckEntityStatDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "CheckEntityStatDef",
+            "CheckEntityStat"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        }
+      ]
+    },
+    "IImpactDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IImpactDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IImpactDef",
+            "IImpact"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "IImpactDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetDef",
+            "Target",
+            "AddQuest",
+            "CompleteQuest",
+            "IImpactDef",
+            "IImpact",
+            "AllInRangeDef",
+            "AllInRange",
+            "ChangeEntityStatDef",
+            "ChangeEntityStat"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/IImpactDef"
+        },
+        {
+          "$ref": "#/definitions/AllInRangeDef"
+        },
+        {
+          "$ref": "#/definitions/ChangeEntityStatDef"
+        }
+      ]
+    },
     "AllInRangeDef": {
       "type": "object",
       "additionalProperties": false,
@@ -1444,6 +2214,20 @@
             "TileCategory",
             "CharacterDef",
             "Character",
+            "ItemDef",
+            "Item",
+            "QuestDef",
+            "Quest",
+            "TargetTypeDef",
+            "TargetType",
+            "TargetDef",
+            "Target",
+            "AddQuest",
+            "CompleteQuest",
+            "RoleDef",
+            "Role",
+            "CheckEntityStatDef",
+            "CheckEntityStat",
             "AllInRangeDef",
             "AllInRange",
             "ChangeEntityStatDef",
@@ -1513,6 +2297,30 @@
         },
         {
           "$ref": "#/definitions/CharacterDef"
+        },
+        {
+          "$ref": "#/definitions/ItemDef"
+        },
+        {
+          "$ref": "#/definitions/QuestDef"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
@@ -1623,6 +2431,24 @@
             "TileCategory",
             "CharacterDef",
             "Character",
+            "ItemDef",
+            "Item",
+            "QuestDef",
+            "Quest",
+            "TargetTypeDef",
+            "TargetType",
+            "TargetDef",
+            "Target",
+            "AddQuest",
+            "CompleteQuest",
+            "RoleDef",
+            "Role",
+            "IPredicateDef",
+            "IPredicate",
+            "CheckEntityStatDef",
+            "CheckEntityStat",
+            "IImpactDef",
+            "IImpact",
             "AllInRangeDef",
             "AllInRange",
             "ChangeEntityStatDef",
@@ -1694,6 +2520,36 @@
         },
         {
           "$ref": "#/definitions/CharacterDef"
+        },
+        {
+          "$ref": "#/definitions/ItemDef"
+        },
+        {
+          "$ref": "#/definitions/QuestDef"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        },
+        {
+          "$ref": "#/definitions/IPredicateDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/IImpactDef"
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
@@ -1802,6 +2658,16 @@
         "SlotCategoryDef",
         "TileCategoryDef",
         "CharacterDef",
+        "ItemDef",
+        "QuestDef",
+        "TargetTypeDef",
+        "TargetDef",
+        "AddQuest",
+        "CompleteQuest",
+        "RoleDef",
+        "IPredicateDef",
+        "CheckEntityStatDef",
+        "IImpactDef",
         "AllInRangeDef",
         "ChangeEntityStatDef",
         "SpriteDef",
@@ -2005,6 +2871,36 @@
         },
         {
           "$ref": "#/definitions/CharacterDef"
+        },
+        {
+          "$ref": "#/definitions/ItemDef"
+        },
+        {
+          "$ref": "#/definitions/QuestDef"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        },
+        {
+          "$ref": "#/definitions/IPredicateDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/IImpactDef"
         },
         {
           "$ref": "#/definitions/AllInRangeDef"

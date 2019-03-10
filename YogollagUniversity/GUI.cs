@@ -185,17 +185,35 @@ namespace Yogollag
         }
         public static void DrawOtherPlayer(Vector2f pos, GamePlayerEntity entity)
         {
+            pos += new Vector2f(0, 250);
             if (Button(pos, entity.Name))
             {
 
             }
             int index = 0;
-            float delta = 100;
+            var vec2 = pos + new Vector2f(200, 0);
+            var deltaX = 150f;
             foreach (var targetedDomain in entity.Def.TargetedDomains)
             {
-                if (Button(pos + new Vector2f(delta * index, 0), targetedDomain.Key))
+                _mouseButtonType = Mouse.Button.Left;
+                if (Button(vec2 + new Vector2f(deltaX * index, 0), targetedDomain.Key))
                 {
+                    if (entity.ResourcePointsSpent < entity.ResourcePoints)
+                    {
+                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }, out int value);
+                        entity.SpentPerDomain[new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }] = value + 1;
+                    }
+                }
+                else
+                {
+                    _mouseButtonType = Mouse.Button.Right;
+                    if (Button(vec2 + new Vector2f(deltaX * index, 0), targetedDomain.Key))
+                    {
+                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }, out int value);
+                        if (value != 0)
+                            entity.SpentPerDomain[new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }] = value - 1;
 
+                    }
                 }
                 index++;
             }
@@ -212,7 +230,7 @@ namespace Yogollag
             {
                 var actions = new List<PlayerAction>();
                 foreach (var spentPerDomain in entity.SpentPerDomain)
-                    actions.Add(new PlayerAction() { Domain = spentPerDomain.Key, Value = spentPerDomain.Value });
+                    actions.Add(new PlayerAction() { Domain = spentPerDomain.Key.Domain, Target = spentPerDomain.Key.TargetId, Value = spentPerDomain.Value });
                 entity.MakeNewTurn(new PlayerTurnInput() { Actions = actions });
             }
             foreach (var domainPair in entity.Def.Domains)
@@ -223,8 +241,8 @@ namespace Yogollag
                 {
                     if (entity.ResourcePointsSpent < entity.ResourcePoints)
                     {
-                        entity.SpentPerDomain.TryGetValue(domainPair.Value, out int value);
-                        entity.SpentPerDomain[domainPair.Value] = value + 1;
+                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = domainPair.Value }, out int value);
+                        entity.SpentPerDomain[new DomainKey() { Domain = domainPair.Value }] = value + 1;
                     }
                 }
                 else
@@ -232,9 +250,9 @@ namespace Yogollag
                     _mouseButtonType = Mouse.Button.Right;
                     if (Button(vec2 + new Vector2f(deltaX * index, 0), domainPair.Key))
                     {
-                        entity.SpentPerDomain.TryGetValue(domainPair.Value, out int value);
+                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = domainPair.Value }, out int value);
                         if (value != 0)
-                            entity.SpentPerDomain[domainPair.Value] = value - 1;
+                            entity.SpentPerDomain[new DomainKey() { Domain = domainPair.Value }] = value - 1;
 
                     }
                 }
@@ -278,6 +296,7 @@ namespace Yogollag
                 int index = 0;
                 Vector2f pos = new Vector2f(0, 0);
                 float delta = 50;
+                DrawMyPlayer(character);
                 foreach (var ghost in node.AllGhosts())
                 {
                     if (ghost is GamePlayerEntity)
@@ -287,7 +306,6 @@ namespace Yogollag
                     }
                     index++;
                 }
-                DrawMyPlayer(character);
                 GUI.End();
             }
         }

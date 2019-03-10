@@ -363,7 +363,7 @@ namespace CodeGen
             {
                 var obj = new JObject();
                 obj.Add("type", JToken.FromObject("array"));
-                var constraints = GenerateSchemaForProp((INamedTypeSymbol)type.TypeArguments[0]);
+                var constraints = GenerateSchemaForProp((INamedTypeSymbol)((IArrayTypeSymbol)type).ElementType);
                 obj.Add("items", constraints);
                 return obj;
             }

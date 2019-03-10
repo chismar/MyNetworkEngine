@@ -18,46 +18,16 @@ namespace Yogollag
     [GenerateSync]
     class DEFS_SCHEMA_BOOTSTRAP
     {
-         
+
     }
     class Program
     {
-        //client class
-        //contains renderer, input management, client node, ui, client state
-        //client state can be, in principle, imagined in a redux stile. Although I'm not sure if it should be
-        //still, it's practically a state machine of sorts, similar to that of the UI. And yet, the UI is not strictly a state machine
 
-        //dedicated server class, holds gameplay
-        //I would need improved replication system
-        //delta for lists and sub-objects
-        //methods for sub-objects
-        //authority system - checking if commands has been received from an authorized client
-
-        //resource system
-
-        //in the meanwhile I need to make an object with position, renderer and able to receive commands
-        //it would move using movement component
-        //and commands would be retranslated back to it
-        //all the props would be in the entity itself
-
-
-        //meta server class - login, accounts, other servers locations
-
-
-        //simple physics is implemented
-        //I need interactive objects
-        //proper static objects
-        //stats, spells
-        //for that I would need proper delta lists, components and delta objects - first priority
-        //spell system, impacts, effects, predicates.
-        //Scopes, impacts, predicates
-        /*
-         OnConsume(ConsumeScope): 
-         {
-            ChangeAmount 1
-            Heal
-         }             
-             */
+        //I need statistics per turn
+        //some actual impacts that change stats
+        //win condition and end-turn
+        //chat
+        //and some icons and work on UI
         static void Main(string[] args)
         {
             var server = new SimpleServer();
@@ -202,7 +172,7 @@ namespace Yogollag
                 {
                     if (ghost.HasAuthority)
                     {
-
+                        ((GamePlayerEntity)ghost).MakeNewTurn(new PlayerTurnInput());
                     }
                 }
             }
