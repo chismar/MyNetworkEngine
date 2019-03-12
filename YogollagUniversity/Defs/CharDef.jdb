@@ -2,7 +2,16 @@
     "$type":"GamePlayerEntityDef",
     "Domains":{
         "Develop":{
-            "$type":"DomainDef"
+            "$type":"DomainDef",
+            "ImpactPerValue": {
+                "$type": "ChangeEntityStat",
+                "Change":1,
+                "StatRef": {
+                    "$type": "Stat",
+                    "$id":"TempProsp",
+                    "Name": "Prosperity"
+                }
+            }
         },
         "Protect":{
             "$type":"DomainDef"
@@ -28,10 +37,7 @@
     "InitialStats":[
          {
              "$type": "InitialStat",
-             "Stat": {
-                 "$type": "Stat",
-                 "Name": "Prosperity"
-             },
+             "Stat": "$TempProsp",
              "Value":5
          }
     ]

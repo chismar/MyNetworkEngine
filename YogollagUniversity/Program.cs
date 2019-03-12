@@ -19,6 +19,7 @@ namespace Yogollag
     class DEFS_SCHEMA_BOOTSTRAP
     {
 
+
     }
     class Program
     {
@@ -40,13 +41,13 @@ namespace Yogollag
             botClient.Start(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 });
             Func<Task> su = async () => { server.Update(); };
             Func<Task> cu = async () => { client.Update(); };
-            Func<Task> cu2 = async () => { botClient.Update(); };
+            //Func<Task> cu2 = async () => { botClient.Update(); };
             while (true)
             {
                 var updates = new List<Task>();
                 updates.Add(su());
                 updates.Add(cu());
-                updates.Add(cu2());
+                //updates.Add(cu2());
                 Task.WhenAll(updates);
                 //client.Update();
                 //server.Update();

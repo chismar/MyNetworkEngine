@@ -17,11 +17,19 @@ using System.IO;
 
 namespace Yogollag
 {
+    [MessagePackObject(true)]
+    public struct LoggedAction
+    {
+        public ScriptingContext Context { get; set; }
+        public IImpactDef Def { get; set; }
+    }
     [GenerateSync]
     public abstract class GameSessionEntity : GhostedEntity, IHasStats, IImpactedEntity
     {
         static Logger Logger = LogManager.GetCurrentClassLogger();
 
+        [Sync(SyncType.Client)]
+        public virtual List<LoggedAction> ActionsLog { get; set; } = new List<LoggedAction>();
         [Sync(SyncType.Client)]
         public virtual Dictionary<string, EntityId> Players { get; set; } = new Dictionary<string, EntityId>();
         [Sync(SyncType.Client)]
@@ -99,21 +107,26 @@ namespace Yogollag
 
         private void CalcNewTurn()
         {
+            ActionsLog = new List<LoggedAction>();
             foreach (var turn in CurrentTurns)
             {
                 var player = CurrentServer.GetGhost<GamePlayerEntity>(turn.Key);
                 foreach (var act in turn.Value.Actions)
                 {
+                    if (act.Value == 0)
+                        continue;
                     if (act.Target == default)
                     {
-                        for (int i = 0; i < act.Value; i++)
-                            player.RunImpact(null, act.Domain.ImpactPerValue.Def);
+                        var ctx = new ScriptingContext() { Value = act.Value, EntitySelf = player.Id, From = player.Id };
+                        player.RunImpact(ctx, act.Domain.ImpactPerValue.Def);
                     }
                     else
                     {
-                        for (int i = 0; i < act.Value; i++)
-                            CurrentServer.GetGhost<GamePlayerEntity>(act.Target)
-                                .RunImpact(new ScriptingContext() { EntitySelf = player.Id }, act.Domain.ImpactPerValue.Def);
+                        var ctx = new ScriptingContext() { Value = act.Value, EntitySelf = act.Target, From = player.Id };
+                        CurrentServer
+                            .GetGhost<GamePlayerEntity>(act.Target)
+                            .RunImpact(ctx, act.Domain.ImpactPerValue.Def);
+                        ActionsLog.Add(new LoggedAction() { Context = ctx, Def = act.Domain.ImpactPerValue.Def });
                     }
                 }
                 player.AcceptTurn();
@@ -156,7 +169,7 @@ namespace Yogollag
     [KnownDefinitionsType]
     public struct InitialStat
     {
-        public StatDef Stat { get; set; }
+        public DefRef<StatDef> Stat { get; set; }
         public int Value { get; set; }
     }
     public class EnvironmentDef : BaseDef
@@ -227,7 +240,7 @@ namespace Yogollag
         {
             if (def == null)
                 return;
-            def.Apply(new ScriptingContext() { Entity = this, Parent = originalContext });
+            def.Apply(new ScriptingContext() { Entity = this, EntitySelf = Id, Parent = originalContext });
         }
     }
 

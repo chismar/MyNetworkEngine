@@ -218,6 +218,22 @@ namespace Yogollag
                 index++;
             }
         }
+        private static void DrawLog(Vector2f pos)
+        {
+            var env = (GameSessionEntity)_node.AllGhosts().SingleOrDefault(x=>x is GameSessionEntity);
+            if (env == null)
+                return;
+            var delta = 30f;
+            int index = 0;
+            foreach (var record in env.ActionsLog)
+            {
+                var rPos = pos + new Vector2f(0, delta * index);
+                GUI.IsActive = false;
+                GUI.Button(rPos, record.Def.Address.Root);
+                GUI.IsActive = true;
+                index++;
+            }
+        }
         public static void DrawMyPlayer(GamePlayerEntity entity)
         {
             int index = 0;
