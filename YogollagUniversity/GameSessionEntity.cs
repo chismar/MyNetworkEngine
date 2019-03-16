@@ -29,6 +29,8 @@ namespace Yogollag
         static Logger Logger = LogManager.GetCurrentClassLogger();
 
         [Sync(SyncType.Client)]
+        public virtual EnvironmentDef Def { get; set; }
+        [Sync(SyncType.Client)]
         public virtual List<LoggedAction> ActionsLog { get; set; } = new List<LoggedAction>();
         [Sync(SyncType.Client)]
         public virtual Dictionary<string, EntityId> Players { get; set; } = new Dictionary<string, EntityId>();
@@ -62,6 +64,9 @@ namespace Yogollag
         }
         public override void OnCreate()
         {
+            foreach (var initialStat in Def.InitialStats)
+                Stats[initialStat.Stat] = initialStat.Value;
+            Stats = Stats;
             CurrentTurns = new Dictionary<EntityId, PlayerTurnInput>();
         }
         [Sync(SyncType.Client)]
@@ -241,6 +246,15 @@ namespace Yogollag
             if (def == null)
                 return;
             def.Apply(new ScriptingContext() { Entity = this, EntitySelf = Id, Parent = originalContext });
+        }
+
+        [Sync(SyncType.Server)]
+        public virtual void Defeat()
+        {
+        }
+        [Sync(SyncType.Server)]
+        public virtual void Win()
+        {
         }
     }
 

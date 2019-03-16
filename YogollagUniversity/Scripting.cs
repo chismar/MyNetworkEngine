@@ -80,7 +80,7 @@ namespace Yogollag
         public override float Calc(ScriptingContext context)
         {
             if (context.From != default)
-                return Calcer.Def.Calc(new ScriptingContext() { Entity = context.Entity,EntitySelf = context.From, Parent = context });
+                return Calcer.Def.Calc(new ScriptingContext() { Entity = context.Entity, EntitySelf = context.From, Parent = context });
             else if (context.Parent != null)
                 return Calc(context.Parent);
             else
@@ -197,6 +197,31 @@ namespace Yogollag
         {
             var gse = ctx.Entity.CurrentServer.AllGhosts().Single(x => x is GameSessionEntity);
             ((GameSessionEntity)gse).RunImpact(ctx, Impact.Def);
+        }
+    }
+
+    public class DefeatDef : BaseDef, IImpactDef
+    {
+        public void Apply(ScriptingContext ctx)
+        {
+            ((GamePlayerEntity)ctx.Entity).Defeat();
+        }
+    }
+    public class WinDef : BaseDef, IImpactDef
+    {
+        public void Apply(ScriptingContext ctx)
+        {
+            ((GamePlayerEntity)ctx.Entity).Win();
+        }
+    }
+    public class DoForEveryoneDef : BaseDef, IImpactDef
+    {
+        public DefRef<IImpactDef> Impact { get; set; }
+
+        public void Apply(ScriptingContext ctx)
+        {
+            foreach (var ghost in ctx.Entity.CurrentServer.AllGhosts())
+                (ghost as GameSessionEntity)?.RunImpact(ctx, Impact.Def);
         }
     }
     public class ChangeEntityStatDef : BaseDef, IImpactDef

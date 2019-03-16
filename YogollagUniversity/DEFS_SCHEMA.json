@@ -3,6 +3,11 @@
     "$type": {
       "type": "string",
       "enum": [
+        "BaseDef",
+        "Base",
+        "IDef",
+        "I",
+        "SaveableResource",
         "GamePlayerEntityDef",
         "GamePlayerEntity",
         "EventDef",
@@ -27,10 +32,10 @@
         "CheckEntityStatDef",
         "CheckEntityStat",
         "PredicateAll",
-        "PredicateOnEnvironmentDef",
-        "PredicateOnEnvironment",
         "IImpactDef",
         "IImpact",
+        "PredicateOnEnvironmentDef",
+        "PredicateOnEnvironment",
         "DoIfDef",
         "DoIf",
         "DoAllDef",
@@ -40,16 +45,422 @@
         "ChangeEntityStatDef",
         "ChangeEntityStat",
         "SpriteDef",
-        "Sprite",
-        "BaseDef",
-        "Base",
-        "IDef",
-        "I",
-        "SaveableResource"
+        "Sprite"
       ]
     }
   },
   "definitions": {
+    "BaseDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BaseDef",
+            "Base"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "BaseDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BaseDef",
+            "Base",
+            "SaveableResource",
+            "GamePlayerEntityDef",
+            "GamePlayerEntity",
+            "EventDef",
+            "Event",
+            "DomainDef",
+            "Domain",
+            "StatDef",
+            "Stat",
+            "CalcerDef",
+            "Calcer",
+            "ConstantClacerDef",
+            "ConstantClacer",
+            "StatCalcerDef",
+            "StatCalcer",
+            "FromCalcer",
+            "EnvironmentCalcerDef",
+            "EnvironmentCalcer",
+            "PassedValueDef",
+            "PassedValue",
+            "CheckEntityStatDef",
+            "CheckEntityStat",
+            "PredicateAll",
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment",
+            "DoIfDef",
+            "DoIf",
+            "DoAllDef",
+            "DoAll",
+            "TargetEnvironmentDef",
+            "TargetEnvironment",
+            "ChangeEntityStatDef",
+            "ChangeEntityStat",
+            "SpriteDef",
+            "Sprite"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BaseDef"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        },
+        {
+          "$ref": "#/definitions/GamePlayerEntityDef"
+        },
+        {
+          "$ref": "#/definitions/EventDef"
+        },
+        {
+          "$ref": "#/definitions/DomainDef"
+        },
+        {
+          "$ref": "#/definitions/StatDef"
+        },
+        {
+          "$ref": "#/definitions/CalcerDef"
+        },
+        {
+          "$ref": "#/definitions/ConstantClacerDef"
+        },
+        {
+          "$ref": "#/definitions/StatCalcerDef"
+        },
+        {
+          "$ref": "#/definitions/FromCalcer"
+        },
+        {
+          "$ref": "#/definitions/EnvironmentCalcerDef"
+        },
+        {
+          "$ref": "#/definitions/PassedValueDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/PredicateAll"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+        },
+        {
+          "$ref": "#/definitions/DoIfDef"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
+        },
+        {
+          "$ref": "#/definitions/ChangeEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
+        }
+      ]
+    },
+    "IDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IDef",
+            "I"
+          ]
+        },
+        "IsRef": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "LocalId": {
+          "type": "string"
+        },
+        "Address": {
+          "$ref": "#/definitions/DefIDFullField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "IDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BaseDef",
+            "Base",
+            "IDef",
+            "I",
+            "SaveableResource",
+            "GamePlayerEntityDef",
+            "GamePlayerEntity",
+            "EventDef",
+            "Event",
+            "DomainDef",
+            "Domain",
+            "StatDef",
+            "Stat",
+            "CalcerDef",
+            "Calcer",
+            "ConstantClacerDef",
+            "ConstantClacer",
+            "StatCalcerDef",
+            "StatCalcer",
+            "FromCalcer",
+            "EnvironmentCalcerDef",
+            "EnvironmentCalcer",
+            "PassedValueDef",
+            "PassedValue",
+            "IPredicateDef",
+            "IPredicate",
+            "CheckEntityStatDef",
+            "CheckEntityStat",
+            "PredicateAll",
+            "IImpactDef",
+            "IImpact",
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment",
+            "DoIfDef",
+            "DoIf",
+            "DoAllDef",
+            "DoAll",
+            "TargetEnvironmentDef",
+            "TargetEnvironment",
+            "ChangeEntityStatDef",
+            "ChangeEntityStat",
+            "SpriteDef",
+            "Sprite"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BaseDef"
+        },
+        {
+          "$ref": "#/definitions/IDef"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        },
+        {
+          "$ref": "#/definitions/GamePlayerEntityDef"
+        },
+        {
+          "$ref": "#/definitions/EventDef"
+        },
+        {
+          "$ref": "#/definitions/DomainDef"
+        },
+        {
+          "$ref": "#/definitions/StatDef"
+        },
+        {
+          "$ref": "#/definitions/CalcerDef"
+        },
+        {
+          "$ref": "#/definitions/ConstantClacerDef"
+        },
+        {
+          "$ref": "#/definitions/StatCalcerDef"
+        },
+        {
+          "$ref": "#/definitions/FromCalcer"
+        },
+        {
+          "$ref": "#/definitions/EnvironmentCalcerDef"
+        },
+        {
+          "$ref": "#/definitions/PassedValueDef"
+        },
+        {
+          "$ref": "#/definitions/IPredicateDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/PredicateAll"
+        },
+        {
+          "$ref": "#/definitions/IImpactDef"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+        },
+        {
+          "$ref": "#/definitions/DoIfDef"
+        },
+        {
+          "$ref": "#/definitions/DoAllDef"
+        },
+        {
+          "$ref": "#/definitions/TargetEnvironmentDef"
+        },
+        {
+          "$ref": "#/definitions/ChangeEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
+        }
+      ]
+    },
+    "SaveableResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SaveableResourceField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SaveableResource"
+          ]
+        },
+        "Id": {
+          "$ref": "#/definitions/GuidField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "SaveableResourceField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SaveableResource"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        }
+      ]
+    },
     "GamePlayerEntityDef": {
       "type": "object",
       "additionalProperties": false,
@@ -1011,74 +1422,6 @@
         }
       ]
     },
-    "PredicateOnEnvironmentDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PredicateOnEnvironmentDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "PredicateOnEnvironmentDef",
-            "PredicateOnEnvironment"
-          ]
-        },
-        "Predicate": {
-          "$ref": "#/definitions/IPredicateDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "PredicateOnEnvironmentDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "PredicateOnEnvironmentDef",
-            "PredicateOnEnvironment"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/PredicateOnEnvironmentDef"
-        }
-      ]
-    },
     "IImpactDef": {
       "type": "object",
       "additionalProperties": false,
@@ -1161,6 +1504,74 @@
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
+        }
+      ]
+    },
+    "PredicateOnEnvironmentDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PredicateOnEnvironmentDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment"
+          ]
+        },
+        "Predicate": {
+          "$ref": "#/definitions/IPredicateDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "PredicateOnEnvironmentDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PredicateOnEnvironmentDef",
+            "PredicateOnEnvironment"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
         }
       ]
     },
@@ -1536,420 +1947,12 @@
         }
       ]
     },
-    "BaseDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/BaseDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "BaseDef",
-            "Base"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "BaseDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "GamePlayerEntityDef",
-            "GamePlayerEntity",
-            "EventDef",
-            "Event",
-            "DomainDef",
-            "Domain",
-            "StatDef",
-            "Stat",
-            "CalcerDef",
-            "Calcer",
-            "ConstantClacerDef",
-            "ConstantClacer",
-            "StatCalcerDef",
-            "StatCalcer",
-            "FromCalcer",
-            "EnvironmentCalcerDef",
-            "EnvironmentCalcer",
-            "PassedValueDef",
-            "PassedValue",
-            "CheckEntityStatDef",
-            "CheckEntityStat",
-            "PredicateAll",
-            "PredicateOnEnvironmentDef",
-            "PredicateOnEnvironment",
-            "DoIfDef",
-            "DoIf",
-            "DoAllDef",
-            "DoAll",
-            "TargetEnvironmentDef",
-            "TargetEnvironment",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat",
-            "SpriteDef",
-            "Sprite",
-            "BaseDef",
-            "Base",
-            "SaveableResource"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/GamePlayerEntityDef"
-        },
-        {
-          "$ref": "#/definitions/EventDef"
-        },
-        {
-          "$ref": "#/definitions/DomainDef"
-        },
-        {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/CalcerDef"
-        },
-        {
-          "$ref": "#/definitions/ConstantClacerDef"
-        },
-        {
-          "$ref": "#/definitions/StatCalcerDef"
-        },
-        {
-          "$ref": "#/definitions/FromCalcer"
-        },
-        {
-          "$ref": "#/definitions/EnvironmentCalcerDef"
-        },
-        {
-          "$ref": "#/definitions/PassedValueDef"
-        },
-        {
-          "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/PredicateAll"
-        },
-        {
-          "$ref": "#/definitions/PredicateOnEnvironmentDef"
-        },
-        {
-          "$ref": "#/definitions/DoIfDef"
-        },
-        {
-          "$ref": "#/definitions/DoAllDef"
-        },
-        {
-          "$ref": "#/definitions/TargetEnvironmentDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
-          "$ref": "#/definitions/BaseDef"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        }
-      ]
-    },
-    "IDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IDef",
-            "I"
-          ]
-        },
-        "IsRef": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
-        },
-        "LocalId": {
-          "type": "string"
-        },
-        "Address": {
-          "$ref": "#/definitions/DefIDFullField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "IDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "GamePlayerEntityDef",
-            "GamePlayerEntity",
-            "EventDef",
-            "Event",
-            "DomainDef",
-            "Domain",
-            "StatDef",
-            "Stat",
-            "CalcerDef",
-            "Calcer",
-            "ConstantClacerDef",
-            "ConstantClacer",
-            "StatCalcerDef",
-            "StatCalcer",
-            "FromCalcer",
-            "EnvironmentCalcerDef",
-            "EnvironmentCalcer",
-            "PassedValueDef",
-            "PassedValue",
-            "IPredicateDef",
-            "IPredicate",
-            "CheckEntityStatDef",
-            "CheckEntityStat",
-            "PredicateAll",
-            "PredicateOnEnvironmentDef",
-            "PredicateOnEnvironment",
-            "IImpactDef",
-            "IImpact",
-            "DoIfDef",
-            "DoIf",
-            "DoAllDef",
-            "DoAll",
-            "TargetEnvironmentDef",
-            "TargetEnvironment",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat",
-            "SpriteDef",
-            "Sprite",
-            "BaseDef",
-            "Base",
-            "IDef",
-            "I",
-            "SaveableResource"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/GamePlayerEntityDef"
-        },
-        {
-          "$ref": "#/definitions/EventDef"
-        },
-        {
-          "$ref": "#/definitions/DomainDef"
-        },
-        {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/CalcerDef"
-        },
-        {
-          "$ref": "#/definitions/ConstantClacerDef"
-        },
-        {
-          "$ref": "#/definitions/StatCalcerDef"
-        },
-        {
-          "$ref": "#/definitions/FromCalcer"
-        },
-        {
-          "$ref": "#/definitions/EnvironmentCalcerDef"
-        },
-        {
-          "$ref": "#/definitions/PassedValueDef"
-        },
-        {
-          "$ref": "#/definitions/IPredicateDef"
-        },
-        {
-          "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/PredicateAll"
-        },
-        {
-          "$ref": "#/definitions/PredicateOnEnvironmentDef"
-        },
-        {
-          "$ref": "#/definitions/IImpactDef"
-        },
-        {
-          "$ref": "#/definitions/DoIfDef"
-        },
-        {
-          "$ref": "#/definitions/DoAllDef"
-        },
-        {
-          "$ref": "#/definitions/TargetEnvironmentDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
-          "$ref": "#/definitions/BaseDef"
-        },
-        {
-          "$ref": "#/definitions/IDef"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        }
-      ]
-    },
-    "SaveableResource": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SaveableResourceField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SaveableResource"
-          ]
-        },
-        "Id": {
-          "$ref": "#/definitions/GuidField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SaveableResourceField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SaveableResource"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        }
-      ]
-    },
     "TYPES_ENUM": {
       "type": "string",
       "enum": [
+        "BaseDef",
+        "IDef",
+        "SaveableResource",
         "InitialStat",
         "GamePlayerEntityDef",
         "EventDef",
@@ -1964,17 +1967,13 @@
         "IPredicateDef",
         "CheckEntityStatDef",
         "PredicateAll",
-        "PredicateOnEnvironmentDef",
         "IImpactDef",
+        "PredicateOnEnvironmentDef",
         "DoIfDef",
         "DoAllDef",
         "TargetEnvironmentDef",
         "ChangeEntityStatDef",
         "SpriteDef",
-        "BaseDef",
-        "IDef",
-        "SaveableResource",
-        "TemplateVariable",
         "float",
         "int",
         "bool",
@@ -2021,75 +2020,6 @@
         },
         {
           "$ref": "#/definitions/InitialStat"
-        }
-      ]
-    },
-    "TemplateVariable": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TemplateVariable"
-          ]
-        },
-        "Type": {
-          "$ref": "#/definitions/TYPES_ENUM"
-        },
-        "Value": {
-          "$ref": "#/definitions/ObjectField"
-        }
-      }
-    },
-    "TemplateVariableField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TemplateVariable"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TemplateVariable"
-        }
-      ]
-    },
-    "IList": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IList"
-          ]
-        },
-        "this[]": {
-          "$ref": "#/definitions/IPredicateDefField"
-        }
-      }
-    },
-    "IListField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IList"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/IList"
         }
       ]
     },
@@ -2189,20 +2119,50 @@
         }
       ]
     },
-    "Object": {
+    "IList": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "$type": {
           "type": "string",
           "enum": [
-            "Object"
+            "IList"
           ]
+        },
+        "this[]": {
+          "$ref": "#/definitions/IPredicateDefField"
         }
       }
     },
+    "IListField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IList"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/IList"
+        }
+      ]
+    },
     "ObjectField": {
       "oneOf": [
+        {
+          "$ref": "#/definitions/BaseDef"
+        },
+        {
+          "$ref": "#/definitions/IDef"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        },
         {
           "$ref": "#/definitions/GamePlayerEntityDef"
         },
@@ -2243,10 +2203,10 @@
           "$ref": "#/definitions/PredicateAll"
         },
         {
-          "$ref": "#/definitions/PredicateOnEnvironmentDef"
+          "$ref": "#/definitions/IImpactDef"
         },
         {
-          "$ref": "#/definitions/IImpactDef"
+          "$ref": "#/definitions/PredicateOnEnvironmentDef"
         },
         {
           "$ref": "#/definitions/DoIfDef"
@@ -2264,25 +2224,10 @@
           "$ref": "#/definitions/SpriteDef"
         },
         {
-          "$ref": "#/definitions/BaseDef"
-        },
-        {
-          "$ref": "#/definitions/IDef"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        },
-        {
           "$ref": "#/definitions/TYPES_ENUM"
         },
         {
           "$ref": "#/definitions/InitialStat"
-        },
-        {
-          "$ref": "#/definitions/TemplateVariable"
-        },
-        {
-          "$ref": "#/definitions/IList"
         },
         {
           "$ref": "#/definitions/DefIDFull"
@@ -2291,7 +2236,7 @@
           "$ref": "#/definitions/Guid"
         },
         {
-          "$ref": "#/definitions/Object"
+          "$ref": "#/definitions/IList"
         },
         {
           "type": "number"

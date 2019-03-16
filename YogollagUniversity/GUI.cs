@@ -94,7 +94,7 @@ namespace Yogollag
             return SlotButton(position, new Vector2f(sprite.TextureRect.Width, sprite.TextureRect.Height), sprite);
 
         }
-        public static bool Button(Vector2f position, Vector2f size, string text, Sprite sprite, bool scaleToFit = false)
+        public static bool Button(Vector2f position, Vector2f size, string text, Sprite sprite, bool scaleToFit = false, Color tint = default)
         {
             bool pressed = false;
             if (_mouseButtonType == Mouse.Button.Right)
@@ -114,7 +114,12 @@ namespace Yogollag
             if (_hotControl == _index)
                 _buttonShape.FillColor = new Color(100, 100, 100, 255);
             else
-                _buttonShape.FillColor = new Color(140, 140, 140, 255);
+            {
+                if(tint == default)
+                    _buttonShape.FillColor = new Color(140, 140, 140, 255);
+                else
+                    _buttonShape.FillColor = tint;
+            }
 
             if (!GUI.IsActive)
                 _buttonShape.FillColor = new Color(200, 100, 100, 255);
@@ -183,35 +188,41 @@ namespace Yogollag
         {
             return Button(position, new Vector2f(text.Length * 20, 40), text, sprite, false);
         }
-        public static void DrawOtherPlayer(Vector2f pos, GamePlayerEntity entity)
+        public static bool Button(Vector2f position, string text, Color tint)
         {
-            pos += new Vector2f(0, 250);
+            return Button(position, new Vector2f(text.Length * 20, 40), text, null, false, tint);
+        }
+        static Color _unspentColor = new Color(100, 100, 100, 255);
+        static Color _spentColor = new Color(100, 255, 0, 255);
+        public static void DrawOtherPlayer(Vector2f pos, GamePlayerEntity entity, GamePlayerEntity mainPlayerEntity)
+        {
+            pos += new Vector2f(0, 0);
             if (Button(pos, entity.Name))
             {
 
             }
             int index = 0;
-            var vec2 = pos + new Vector2f(200, 0);
-            var deltaX = 150f;
+            var vec2 = pos + new Vector2f(400, 0);
+            var deltaX = 100f;
             foreach (var targetedDomain in entity.Def.TargetedDomains)
             {
                 _mouseButtonType = Mouse.Button.Left;
-                if (Button(vec2 + new Vector2f(deltaX * index, 0), targetedDomain.Key))
+                mainPlayerEntity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }, out int value);
+
+                if (Button(vec2 + new Vector2f(deltaX * index, 0), targetedDomain.Key, GetSpentColor(mainPlayerEntity.ResourcePoints, value)))
                 {
-                    if (entity.ResourcePointsSpent < entity.ResourcePoints)
+                    if (mainPlayerEntity.ResourcePointsSpent < mainPlayerEntity.ResourcePoints)
                     {
-                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }, out int value);
-                        entity.SpentPerDomain[new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }] = value + 1;
+                        mainPlayerEntity.SpentPerDomain[new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }] = value + 1;
                     }
                 }
                 else
                 {
                     _mouseButtonType = Mouse.Button.Right;
-                    if (Button(vec2 + new Vector2f(deltaX * index, 0), targetedDomain.Key))
+                    if (Button(vec2 + new Vector2f(deltaX * index, 0), targetedDomain.Key, GetSpentColor(mainPlayerEntity.ResourcePoints, value)))
                     {
-                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }, out int value);
                         if (value != 0)
-                            entity.SpentPerDomain[new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }] = value - 1;
+                            mainPlayerEntity.SpentPerDomain[new DomainKey() { Domain = targetedDomain.Value, TargetId = entity.Id }] = value - 1;
 
                     }
                 }
@@ -234,15 +245,24 @@ namespace Yogollag
                 index++;
             }
         }
+        public static Color GetSpentColor(int max, int current)
+        {
+            float lerpValue = (float)current / (float)max;
+            return new Color(
+                ((byte)(int)(_spentColor.R * lerpValue + _unspentColor.R * (1 - lerpValue))),
+                ((byte)(int)(_spentColor.G * lerpValue + _unspentColor.G * (1 - lerpValue))),
+                ((byte)(int)(_spentColor.B * lerpValue + _unspentColor.B * (1 - lerpValue))),
+                ((byte)(int)(_spentColor.A * lerpValue + _unspentColor.A * (1 - lerpValue))));
+        }
         public static void DrawMyPlayer(GamePlayerEntity entity)
         {
             int index = 0;
-            var vec2 = new Vector2f(200, 200);
+            var vec2 = new Vector2f(0, _win.Size.Y - 60);
             var deltaX = 100f;
-            Button(new Vector2f(200, 100), entity.ResourcePointsSpent.ToString());
+            Button(new Vector2f(200, 100), $"Spent: {entity.ResourcePointsSpent}/{entity.ResourcePoints}");
             Button(new Vector2f(200, 400), entity.Turn.ToString());
             Button(new Vector2f(200, 500), entity.LastAcceptedTurn.ToString());
-            if (Button(new Vector2f(200, 000), "Make turn"))
+            if (Button(new Vector2f(_win.Size.X - 200, _win.Size.Y - 60), "Make turn"))
             {
                 var actions = new List<PlayerAction>();
                 foreach (var spentPerDomain in entity.SpentPerDomain)
@@ -253,27 +273,27 @@ namespace Yogollag
             {
                 index++;
                 _mouseButtonType = Mouse.Button.Left;
-                if (Button(vec2 + new Vector2f(deltaX * index, 0), domainPair.Key))
+                entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = domainPair.Value }, out int value);
+
+                if (Button(vec2 + new Vector2f(deltaX * index, 0), domainPair.Key, GetSpentColor(entity.ResourcePoints, value)))
                 {
                     if (entity.ResourcePointsSpent < entity.ResourcePoints)
                     {
-                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = domainPair.Value }, out int value);
                         entity.SpentPerDomain[new DomainKey() { Domain = domainPair.Value }] = value + 1;
                     }
                 }
                 else
                 {
                     _mouseButtonType = Mouse.Button.Right;
-                    if (Button(vec2 + new Vector2f(deltaX * index, 0), domainPair.Key))
+                    if (Button(vec2 + new Vector2f(deltaX * index, 0), domainPair.Key, GetSpentColor(entity.ResourcePoints, value)))
                     {
-                        entity.SpentPerDomain.TryGetValue(new DomainKey() { Domain = domainPair.Value }, out int value);
                         if (value != 0)
                             entity.SpentPerDomain[new DomainKey() { Domain = domainPair.Value }] = value - 1;
 
                     }
                 }
             }
-            vec2 = new Vector2f(200, 300);
+            vec2 = new Vector2f(0, _win.Size.Y - 120);
             index = 0;
             foreach (var stat in entity.Stats)
             {
@@ -284,7 +304,7 @@ namespace Yogollag
             var environmentEntity = (GameSessionEntity)_node.AllGhosts().SingleOrDefault(x => x is GameSessionEntity);
             if (environmentEntity != null)
             {
-                vec2 = new Vector2f(200, 000);
+                vec2 = new Vector2f(0, _win.Size.Y - 240);
                 index = 0;
                 foreach (var stat in environmentEntity.Stats)
                 {
@@ -318,7 +338,7 @@ namespace Yogollag
                     if (ghost is GamePlayerEntity)
                     {
                         if (!ghost.HasAuthority)
-                            DrawOtherPlayer(pos + new Vector2f(0, delta * index), character);
+                            DrawOtherPlayer(pos + new Vector2f(0, delta * index), (GamePlayerEntity)ghost, character);
                     }
                     index++;
                 }

@@ -5,7 +5,7 @@
              "$type": "InitialStat",
              "Stat": {
                  "$type": "Stat",
-                 "Name": "Prosperity"
+                 "Name": "Environment"
              },
              "Value":5
          }
