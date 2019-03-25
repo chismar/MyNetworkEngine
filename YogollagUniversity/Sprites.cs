@@ -17,10 +17,10 @@ namespace Yogollag
             {
                 using (var file = File.Open(path, FileMode.Open))
                 {
-                    _texture = new Texture(file, new IntRect(0, 0, 128, 128));
+                    _texture = new Texture(file, new IntRect(0, 0, size, size));
                 }
-                var countX = (int)_texture.Size.X / size;
-                var countY = (int)_texture.Size.Y / size;
+                var countX = 1;
+                var countY = 1;
                 Sprites = new Sprite[countX, countY];
                 for (int i = 0; i < countX; i++)
                     for (int j = 0; j < countY; j++)
@@ -36,7 +36,7 @@ namespace Yogollag
                 return sheet.Sprites[x, y];
             else
             {
-                var newSheet = new Spritesheet(path, 8);
+                var newSheet = new Spritesheet(path, 512);
                 _sheets.Add(path, newSheet);
                 return newSheet.Sprites[x, y];
             }

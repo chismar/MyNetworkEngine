@@ -115,7 +115,7 @@ namespace Yogollag
                 _buttonShape.FillColor = new Color(100, 100, 100, 255);
             else
             {
-                if(tint == default)
+                if (tint == default)
                     _buttonShape.FillColor = new Color(140, 140, 140, 255);
                 else
                     _buttonShape.FillColor = tint;
@@ -229,21 +229,33 @@ namespace Yogollag
                 index++;
             }
         }
-        private static void DrawLog(Vector2f pos)
+        private static void DrawLog(Vector2f pos, EntityId character)
         {
-            var env = (GameSessionEntity)_node.AllGhosts().SingleOrDefault(x=>x is GameSessionEntity);
+            var env = (GameSessionEntity)_node.AllGhosts().SingleOrDefault(x => x is GameSessionEntity);
             if (env == null)
                 return;
             var delta = 30f;
             int index = 0;
             foreach (var record in env.ActionsLog)
             {
+                bool show = record.Context.EntitySelf == character || record.Context.From == character;
+                if (!show && env.Def.Show.Def != null && !env.Def.Show.Def.Check(new ScriptingContext() { Entity = env, EntitySelf = record.Context.EntitySelf, From = character }))
+                    continue;
                 var rPos = pos + new Vector2f(0, delta * index);
                 GUI.IsActive = false;
-                GUI.Button(rPos, record.Def.Address.Root);
+                GUI.Button(rPos, _node.GetGhost<GamePlayerEntity>(record.Context.EntitySelf).Name + " " + record.Def.CustomName ?? record.Def.Address.ToString());
                 GUI.IsActive = true;
                 index++;
             }
+        }
+        public static Color GetLerpColor(float fromTo, Color from, Color to)
+        {
+            float lerpValue = fromTo;
+            return new Color(
+                ((byte)(int)(to.R * lerpValue + from.R * (1 - lerpValue))),
+                ((byte)(int)(to.G * lerpValue + from.G * (1 - lerpValue))),
+                ((byte)(int)(to.B * lerpValue + from.B * (1 - lerpValue))),
+                ((byte)(int)(to.A * lerpValue + from.A * (1 - lerpValue))));
         }
         public static Color GetSpentColor(int max, int current)
         {
@@ -254,6 +266,36 @@ namespace Yogollag
                 ((byte)(int)(_spentColor.B * lerpValue + _unspentColor.B * (1 - lerpValue))),
                 ((byte)(int)(_spentColor.A * lerpValue + _unspentColor.A * (1 - lerpValue))));
         }
+        static void DrawDev(GamePlayerEntity entity)
+        {
+            var sprite = Sprites.GetSprite(new SpriteDef() { SpriteSheetName = "person", X = 0, Y = 0 });
+            sprite.Scale = new Vector2f(1f / 16f, 1f / 16f);
+            var pos = new Vector2f(100, 300);
+            float maxWidth = 300;
+            var dev = entity.Stats.Single(x => x.Key.Stat.Name.Contains("Prosperity")).Value;
+            for (int i = 0; i < dev; i++)
+            {
+                sprite.Position = pos + new Vector2f((float)i / dev * maxWidth, 0);
+                sprite.Draw(_win, RenderStates.Default);
+            }
+        }
+        static void DrawEnv(GameSessionEntity entity)
+        {
+            if (entity == null)
+                return;
+            var sprite = Sprites.GetSprite(new SpriteDef() { SpriteSheetName = "earth", X = 0, Y = 0 });
+            sprite.Scale = new Vector2f(1f / 8f, 1f / 8f);
+            var pos = new Vector2f(50, 300);
+            var hab = entity.Stats.Single(x => x.Key.Stat.Name.Contains("Hab")).Value;
+            var startHab = entity.Def.InitialStats.Single(x => x.Stat.Def.Name.Contains("Hab")).Value;
+            if (hab < 0)
+                hab = 0;
+            var lerp = 1 - (float)hab / startHab;
+
+            sprite.Position = pos;
+            sprite.Color = GetLerpColor(lerp, Color.Green, Color.Red);
+            sprite.Draw(_win, RenderStates.Default);
+        }
         public static void DrawMyPlayer(GamePlayerEntity entity)
         {
             int index = 0;
@@ -262,6 +304,8 @@ namespace Yogollag
             Button(new Vector2f(200, 100), $"Spent: {entity.ResourcePointsSpent}/{entity.ResourcePoints}");
             Button(new Vector2f(200, 400), entity.Turn.ToString());
             Button(new Vector2f(200, 500), entity.LastAcceptedTurn.ToString());
+            DrawDev(entity);
+            DrawEnv((GameSessionEntity)_node.AllGhosts().SingleOrDefault(x => x is GameSessionEntity));
             if (Button(new Vector2f(_win.Size.X - 200, _win.Size.Y - 60), "Make turn"))
             {
                 var actions = new List<PlayerAction>();
@@ -295,25 +339,27 @@ namespace Yogollag
             }
             vec2 = new Vector2f(0, _win.Size.Y - 120);
             index = 0;
-            foreach (var stat in entity.Stats)
+            foreach (var stat in entity.Stats.Where(x => x.Key.Entity == default))
             {
                 index++;
                 _mouseButtonType = Mouse.Button.Left;
-                Button(vec2 + new Vector2f(deltaX * index, 0), $"{stat.Key.Name} {stat.Value}");
+                Button(vec2 + new Vector2f(deltaX * index, 0), $"{stat.Key.Stat.Name} {stat.Value}");
             }
             var environmentEntity = (GameSessionEntity)_node.AllGhosts().SingleOrDefault(x => x is GameSessionEntity);
             if (environmentEntity != null)
             {
                 vec2 = new Vector2f(0, _win.Size.Y - 240);
                 index = 0;
-                foreach (var stat in environmentEntity.Stats)
+                foreach (var stat in environmentEntity.Stats.Where(x => x.Key.Entity == default))
                 {
                     index++;
                     _mouseButtonType = Mouse.Button.Left;
-                    Button(vec2 + new Vector2f(deltaX * index, 0), $"{stat.Key.Name} {stat.Value}");
+                    Button(vec2 + new Vector2f(deltaX * index, 0), $"{stat.Key.Stat.Name} {stat.Value}");
                 }
             }
+            DrawLog(new Vector2f(500, 100), entity.Id);
         }
+
         static GamePlayerEntity _character;
         static RenderWindow _win;
         static NetworkNode _node;

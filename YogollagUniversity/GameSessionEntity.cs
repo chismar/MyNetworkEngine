@@ -14,6 +14,7 @@ using NLog;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Yogollag
 {
@@ -39,7 +40,7 @@ namespace Yogollag
 
         public Dictionary<EntityId, PlayerTurnInput> LastTurns { get; set; } = new Dictionary<EntityId, PlayerTurnInput>();
         [Sync(SyncType.Client)]
-        public virtual Dictionary<StatDef, int> Stats { get; set; } = new Dictionary<StatDef, int>();
+        public virtual Dictionary<StatKey, int> Stats { get; set; } = new Dictionary<StatKey, int>();
         [Sync(SyncType.Client)]
         public virtual int CurrentTurn { get; set; }
         [Sync(SyncType.Client)]
@@ -64,8 +65,8 @@ namespace Yogollag
         }
         public override void OnCreate()
         {
-            foreach (var initialStat in Def.InitialStats)
-                Stats[initialStat.Stat] = initialStat.Value;
+            foreach (var stat in Def.InitialStats)
+                Stats.Add(new StatKey(stat.Stat), stat.Value);
             Stats = Stats;
             CurrentTurns = new Dictionary<EntityId, PlayerTurnInput>();
         }
@@ -124,6 +125,8 @@ namespace Yogollag
                     {
                         var ctx = new ScriptingContext() { Value = act.Value, EntitySelf = player.Id, From = player.Id };
                         player.RunImpact(ctx, act.Domain.ImpactPerValue.Def);
+                        ActionsLog.Add(new LoggedAction() { Context = ctx, Def = act.Domain.ImpactPerValue.Def });
+
                     }
                     else
                     {
@@ -132,9 +135,15 @@ namespace Yogollag
                             .GetGhost<GamePlayerEntity>(act.Target)
                             .RunImpact(ctx, act.Domain.ImpactPerValue.Def);
                         ActionsLog.Add(new LoggedAction() { Context = ctx, Def = act.Domain.ImpactPerValue.Def });
+
                     }
                 }
-                player.AcceptTurn();
+                Task.Run(async () =>
+                {
+                    await Task.Delay(2000);
+                    player.AcceptTurn();
+                });
+                player.RunEvents();
             }
             CurrentTurn++;
             LastTurns = CurrentTurns;
@@ -153,7 +162,7 @@ namespace Yogollag
                 Name = CurrentServer.GetGhost<GamePlayerEntity>(x.Key).Name,
                 Id = x.Key,
                 Spent = x.Value.Actions.ToDictionary(a => new DomainKey() { Domain = a.Domain, TargetId = a.Target }.ToString(), a => a.Value),
-                Stats = CurrentServer.GetGhost<GamePlayerEntity>(x.Key).Stats.ToDictionary(a => a.Key.____GetDebugAddress(), a => a.Value)
+                Stats = CurrentServer.GetGhost<GamePlayerEntity>(x.Key).Stats.ToDictionary(a => a.Key.Stat.____GetDebugAddress(), a => a.Value)
             })).ToList();
             Defs.SimpleSave(Directory.GetCurrentDirectory(), $"/StatisticsPerTurn/{CurrentTurn}", lastTurnData, out var path);
         }
@@ -167,9 +176,49 @@ namespace Yogollag
     }
 
 
+    [MessagePackObject(true)]
+    public struct StatKey : IEquatable<StatKey>
+    {
+        public EntityId Entity;
+        public StatDef Stat;
+        public StatKey(StatDef stat) : this()
+        {
+            Stat = stat;
+        }
+        public StatKey(EntityId entity, StatDef stat) : this()
+        {
+            Stat = stat;
+            Entity = entity;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is StatKey))
+            {
+                return false;
+            }
+
+            var key = (StatKey)obj;
+            return EqualityComparer<EntityId>.Default.Equals(Entity, key.Entity) &&
+                   EqualityComparer<StatDef>.Default.Equals(Stat, key.Stat);
+        }
+
+        public bool Equals(StatKey other)
+        {
+            return other.Entity == Entity && other.Stat == Stat;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1021637910;
+            hashCode = hashCode * -1521134295 + EqualityComparer<EntityId>.Default.GetHashCode(Entity);
+            hashCode = hashCode * -1521134295 + EqualityComparer<StatDef>.Default.GetHashCode(Stat);
+            return hashCode;
+        }
+    }
     public interface IHasStats
     {
-        Dictionary<StatDef, int> Stats { get; set; }
+        Dictionary<StatKey, int> Stats { get; set; }
     }
     [KnownDefinitionsType]
     public struct InitialStat
@@ -179,6 +228,7 @@ namespace Yogollag
     }
     public class EnvironmentDef : BaseDef
     {
+        public DefRef<IPredicateDef> Show { get; set; }
         public List<EventDef> PossibleEvents { get; set; } = new List<EventDef>();
         public List<InitialStat> InitialStats { get; set; } = new List<InitialStat>();
     }
@@ -208,7 +258,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual string Name { get; set; }
         [Sync(SyncType.Client)]
-        public virtual Dictionary<StatDef, int> Stats { get; set; } = new Dictionary<StatDef, int>();
+        public virtual Dictionary<StatKey, int> Stats { get; set; } = new Dictionary<StatKey, int>();
         [Sync(SyncType.Client)]
         public virtual PlayerTurnInput TurnInput { get; set; }
         [Sync(SyncType.Client)]
@@ -222,7 +272,7 @@ namespace Yogollag
         public override void OnCreate()
         {
             foreach (var stat in Def.InitialStats)
-                Stats.Add(stat.Stat, stat.Value);
+                Stats.Add(new StatKey(stat.Stat), stat.Value);
             Stats = Stats;
         }
         [Sync(SyncType.Client)]
@@ -239,7 +289,15 @@ namespace Yogollag
         {
             LastAcceptedTurn++;
         }
-
+        [Sync(SyncType.Client)]
+        public virtual void RunEvents()
+        {
+            foreach (var possibleEvent in Def.PossibleEvents)
+            {
+                if (possibleEvent.Predicate == null || possibleEvent.Predicate.Def.Check(new ScriptingContext() { Entity = this, EntitySelf = this.Id }))
+                    possibleEvent.Impact.Def.Apply(new ScriptingContext() { Entity = this, EntitySelf = this.Id });
+            }
+        }
         [Sync(SyncType.Server)]
         public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {

@@ -20,6 +20,7 @@ namespace Yogollag
     {
 
 
+
     }
 
     class Program

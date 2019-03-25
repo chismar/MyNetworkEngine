@@ -98,6 +98,7 @@ namespace Definitions
         bool IsRef { get; set; }
         string LocalId { get; set; }
         DefIDFull Address { get; set; }
+        string CustomName { get; set; }
     }
 
     public class Crc64

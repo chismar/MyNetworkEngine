@@ -14,7 +14,7 @@ namespace Definitions
         [NotInSchema]
         [JsonIgnore]    
         bool IDef.IsRef { get; set; }
-
+        public string CustomName { get; set; }
         public string ____GetDebugAddress()
         {
             return (this as IDef).Address.ToString();

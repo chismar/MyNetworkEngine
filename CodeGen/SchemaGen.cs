@@ -306,19 +306,20 @@ namespace CodeGen
                 var canBeCreatedFormPrimAttr = classType.GetAttributes().SingleOrDefault(x => x.AttributeClass.Name == nameof(CanBeCreatedFromAliasedPrimitiveAttribute));
                 if (canBeCreatedFormPrimAttr != null)
                 {
+                    var attr = canBeCreatedFormPrimAttr;
+                    var alias = new JObject();
+                    object valueType = null;
                     try
                     {
-                        var attr = canBeCreatedFormPrimAttr;
-                        var valueType = attr.NamedArguments.Single().Value.Value;
-                        var alias = new JObject();
+                        valueType = attr.NamedArguments.First().Value.Value;
                         GeneratePrimitiveTypeConstraint(alias, valueType.ToString());
-                        if (valueType.ToString() != typeof(string).ToString())
-                            oneOf.Add(alias);
                     }
                     catch(Exception e)
                     {
 
                     }
+                    if (valueType?.ToString() != typeof(string).ToString())
+                        oneOf.Add(alias);
                 }
             }
             return obj;

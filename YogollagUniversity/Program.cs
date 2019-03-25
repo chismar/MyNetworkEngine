@@ -19,7 +19,6 @@ namespace Yogollag
     class DEFS_SCHEMA_BOOTSTRAP
     {
 
-
     }
     class Program
     {
@@ -171,7 +170,10 @@ namespace Yogollag
                 {
                     if (ghost.HasAuthority)
                     {
-                        ((GamePlayerEntity)ghost).MakeNewTurn(new PlayerTurnInput());
+                        var gpe = ghost as GamePlayerEntity;
+                        ((GamePlayerEntity)ghost).MakeNewTurn(
+                            new PlayerTurnInput() { Actions = new List<PlayerAction>() {
+                                new PlayerAction() { Domain = gpe.Def.Domains["Develop"], Value = 5} } });
                     }
                 }
             }

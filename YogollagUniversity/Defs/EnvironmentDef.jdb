@@ -1,14 +1,26 @@
 {
-    "$type":"EnvironmentDef",
-    "InitialStats":[
-         {
-             "$type": "InitialStat",
-             "Stat": {
-                 "$type": "Stat",
-                 "Name": "Environment"
-             },
-             "Value":5
-         }
+    "$type": "EnvironmentDef",
+    "Show": {
+        "$type": "PredicateAll",
+        "Or": [
+            {
+                "$type": "Compare",
+                "More": {
+                    "$type": "StatCalcer",
+                    "Stat": "/Stats/Reveal",
+                    "StatKeyEntity": {
+                        "$type": "FromSelector"
+                    }
+                },
+                "Less":0
+            }
+        ]
+    },
+    "InitialStats": [
+        {
+            "$type": "InitialStat",
+            "Stat": "/Stats/Habitability",
+            "Value": 5
+        }
     ]
-
 }
