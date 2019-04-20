@@ -12,6 +12,7 @@ using Definitions;
 using MessagePack.Resolvers;
 using Definitions;
 using System.IO;
+using System.Collections;
 
 namespace NetworkEngine
 {
@@ -249,6 +250,12 @@ namespace NetworkEngine
         {
             return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
         }
+        public static T New<T>(Type type)
+        {
+            return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(type));
+        }
+
+
     }
     public interface ITicked
     {
@@ -378,23 +385,72 @@ namespace NetworkEngine
             foreach (var entity in _ghosting.Collection)
                 yield return entity.Value.Entity;
         }
-        public void Start()
+        public void Start(bool connectToBroadcast = true)
         {
-            Start((new System.Random().Next() % 30000), 1);
+            Start((new System.Random().Next() % 30000), 1, false, connectToBroadcast);
         }
-        public void Start(int port, int maxConnections)
+        public bool ConnectedToBroadcast = false;
+        public bool Start(int port, int maxConnections, bool broadcast = false, bool connectToBroadcast = false)
         {
             EventBasedNetListener listener = new EventBasedNetListener();
-            _netManager = new NetManager(listener, maxConnections, "Abyss");
+            _netManager = new NetManager(listener);
             _netManager.DisconnectTimeout = 1000000;
-            _netManager.Start(port);
+            var started = _netManager.Start(port);
+            if (!started)
+                return false;
+            listener.ConnectionRequestEvent += Listener_ConnectionRequestEvent;
             listener.NetworkReceiveEvent += OnReceiveFromNetwork;
             listener.PeerConnectedEvent += peer =>
             {
                 Console.WriteLine("We got connection: {0}", peer.EndPoint);
             };
             listener.PeerDisconnectedEvent += OnDisconnect;
+
+            if (broadcast)
+            {
+                _netManager.DiscoveryEnabled = true;
+                listener.NetworkReceiveUnconnectedEvent += (remoteEndPoint, reader, messageType) =>
+                {
+                    Console.WriteLine("receive request");
+                    if (messageType == UnconnectedMessageType.DiscoveryRequest)
+                    {
+                        NetDataWriter wrtier = new NetDataWriter();
+                        wrtier.Put("SERVER DISCOVERY RESPONSE");
+                        _netManager.SendDiscoveryResponse(wrtier, remoteEndPoint);
+                    }
+                };
+            }
+            if (connectToBroadcast)
+            {
+                listener.NetworkReceiveUnconnectedEvent += async (remoteEndPoint, reader, messageType) =>
+                {
+                    Console.WriteLine("receive response");
+                    if (messageType == UnconnectedMessageType.DiscoveryResponse)
+                    {
+                        ConnectedToBroadcast = true;
+                        await Connect(new RemoteConnectionToken() { IP = remoteEndPoint.Address.MapToIPv4().ToString(), Port = remoteEndPoint.Port });
+
+                    }
+                };
+                Task.Run(async () =>
+                {
+                    while (!ConnectedToBroadcast)
+                    {
+                        var w = new NetDataWriter();
+                        w.Put("D");
+                        Console.WriteLine("Send request");
+                        bool res = _netManager.SendDiscoveryRequest(w, 9051);
+                        await Task.Delay(1000);
+                    }
+                });
+            }
             Started = true;
+            return true;
+        }
+
+        private void Listener_ConnectionRequestEvent(ConnectionRequest request)
+        {
+            request.AcceptIfKey("Abyss");
         }
 
         private void OnDisconnect(NetPeer peer, DisconnectInfo disconnectInfo)
@@ -403,14 +459,15 @@ namespace NetworkEngine
             RemoveRemoteServer(peer, _remoteNetworkNodes.Single(x => x.Value.Peer == peer).Key);
         }
 
-        private void OnReceiveFromNetwork(NetPeer peer, NetDataReader reader)
+        private void OnReceiveFromNetwork(NetPeer peer, NetPacketReader reader, DeliveryMethod deliveryMethod)
         {
-            var msg = MessagePackSerializer.Deserialize<ServerMessage>(reader.Data);
+            var myData = new ArraySegment<byte>(reader.RawData, reader.UserDataOffset, reader.UserDataSize);
+            var msg = MessagePackSerializer.Deserialize<ServerMessage>(myData);
             if (Debug)
             {
 
                 if (msg != null)
-                    Console.WriteLine($"Received {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(reader.Data)}");
+                    Console.WriteLine($"Received {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(myData)}");
                 else
                     Console.WriteLine("Received null");
 
@@ -510,7 +567,7 @@ namespace NetworkEngine
             var bytes = MessagePackSerializer.Serialize<ServerMessage>(msg);
             if (Debug)
                 Console.WriteLine($"Send to {sid} {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(bytes)}");
-            _remoteNetworkNodes[sid].Peer.Send(bytes, SendOptions.ReliableOrdered);
+            _remoteNetworkNodes[sid].Peer.Send(bytes, DeliveryMethod.ReliableOrdered);
         }
 
         public void Stop()
@@ -609,17 +666,17 @@ namespace NetworkEngine
 
         public Task<bool> Connect(RemoteConnectionToken token)
         {
-            var peer = _netManager.Connect(token.IP, token.Port);
+            var peer = _netManager.Connect(token.IP, token.Port, "Abyss");
             return Task.Run(async () =>
             {
-                while (peer.ConnectionState == ConnectionState.InProgress)
+                while (peer.ConnectionState == ConnectionState.Outcoming)
                 {
                     await Task.Delay(1);
                 }
                 if (peer.ConnectionState == ConnectionState.Connected)
                 {
                     var hello = MessagePackSerializer.Serialize<ServerMessage>(new HelloPeer() { MyId = Id });
-                    peer.Send(hello, SendOptions.ReliableOrdered);
+                    peer.Send(hello, DeliveryMethod.ReliableOrdered);
                     int wait = 1000;
                     while (!_remoteNetworkNodes.Any(x => x.Value.Peer == peer))
                     {
@@ -735,7 +792,7 @@ namespace NetworkEngine
                             if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(entity.Key))
                                 Send(new UpdateEntity() { Id = entity.Key, Delta = writer.Data }, remoteServer.Value.Id);
                         ((IGhost)_ghosting.Get(entity.Value.Entity.Id)).Deserialize(new NetDataReader(writer.Data));
-                        ent.Clear();
+                        ent.ClearSerialization();
                     }
                 }));
             }
@@ -829,23 +886,44 @@ namespace NetworkEngine
         static Dictionary<Type, int> _masterToId = new Dictionary<Type, int>();
         static Dictionary<Type, Type> _baseToMaster = new Dictionary<Type, Type>();
         static Dictionary<Type, Type> _masterToBase = new Dictionary<Type, Type>();
+
+        public static string GetNameWithoutGenericArity(Type t)
+        {
+            string name = t.Name;
+            int index = name.IndexOf('`');
+            return index == -1 ? name : name.Substring(0, index);
+        }
+        static string[] _allowedAssemblies = new string[]
+        {
+            "Server",
+            "Yogollag",
+            "GameTest"
+        };
         static SyncTypesMap()
         {
             var syncTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(x =>
+                {
+                    for (int i = 0; i < _allowedAssemblies.Length; i++)
+                        if (x.FullName.StartsWith(_allowedAssemblies[i], StringComparison.InvariantCulture))
+                            return true;
+                    return false;
+                })
                 .SelectMany(x => x.GetTypes())
                 .Where(x => typeof(GhostedEntity) != x &&
                 typeof(NetworkEntity) != x &&
                 typeof(SyncObject) != x &&
                 (typeof(NetworkEntity).IsAssignableFrom(x) || typeof(SyncObject).IsAssignableFrom(x))
-                ).ToDictionary(x => x.Name);
+                ).ToDictionary(x => GetNameWithoutGenericArity(x));
 
-            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract).ToArray();
+            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract);
             foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
             {
-                if (!syncTypes.ContainsKey(baseEntity.Name + "Sync"))
-                    Console.WriteLine($"ERROR: no sync type for {baseEntity.Name}");
-                var master = syncTypes[baseEntity.Name + "Sync"];
-                var id = (int)(Crc64.Compute(baseEntity.Name) % int.MaxValue);
+                var eName = GetNameWithoutGenericArity(baseEntity);
+                if (!syncTypes.ContainsKey(eName + "Sync"))
+                    Console.WriteLine($"ERROR: no sync type for {eName}");
+                var master = syncTypes[eName + "Sync"];
+                var id = (int)(Crc64.Compute(eName) % int.MaxValue);
                 _idToMaster.Add(id, master);
                 _masterToId.Add(master, id);
                 _baseToMaster.Add(baseEntity, master);
@@ -858,6 +936,11 @@ namespace NetworkEngine
         }
         public static Type GetSyncTypeFromDeclaredType(Type type)
         {
+            if (type.IsGenericType)
+            {
+                var syncType = _baseToMaster[type.GetGenericTypeDefinition()].MakeGenericType(type.GetGenericArguments()[0]);
+                return syncType;
+            }
             return _baseToMaster[type];
         }
         public static Type GetSyncTypeFromId(int id)
@@ -893,11 +976,12 @@ namespace NetworkEngine
         }
     }
 
+
     public interface IGhost
     {
         bool Serialize(ref NetDataWriter stream, bool initial);
         void Deserialize(NetDataReader stream);
-        void Clear();
+        void ClearSerialization();
     }
     interface IEntityPropertyChanged
     {
@@ -921,11 +1005,13 @@ namespace NetworkEngine
         public static EntityId Invalid => default;
         public NetworkNodeId Id1;
         public long Id2;
+        public long SubObjectId;
 
         public EntityId(NetworkNodeId id1, long id2)
         {
             Id1 = id1;
             Id2 = id2;
+            SubObjectId = 0;
         }
 
         public override bool Equals(object obj)
@@ -950,6 +1036,384 @@ namespace NetworkEngine
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+    }
+
+    public interface IHasCustomSerialization
+    {
+        bool CustomSerialize(ref NetDataWriter stream, bool initial);
+        void CustomDeserialize(NetDataReader stream);
+        void CustomClear();
+    }
+
+    [GenerateSync]
+    public abstract class DeltaList<T> : SyncObject, IHasCustomSerialization, IList<T>
+    {
+        public int Count => _internalList.Count;
+        public bool IsReadOnly { get; }
+        [Sync(SyncType.Master)]
+        public virtual ulong InternalObjectsIdCounter { get; set; } = 0;
+        List<T> _internalList = new List<T>();
+        List<DeltaOperation> _ops = new List<DeltaOperation>();
+        enum OperationType
+        {
+            Add = 0,
+            Insert = 1,
+            SetAt = 2,
+            RemoveAt = 3,
+            Clear = 4
+        }
+        struct DeltaOperation
+        {
+            public OperationType Type;
+            public int Index;
+            public T Object;
+            public List<T> ListBeforeClear;
+            public DeltaOperation(OperationType op, int index, T t) : this()
+            {
+                Type = op;
+                Index = index;
+                Object = t;
+                ListBeforeClear = null;
+            }
+            public DeltaOperation(OperationType op, List<T> listBeforeClear) : this()
+            {
+                Type = op;
+                Index = default;
+                Object = default;
+                ListBeforeClear = listBeforeClear;
+
+            }
+        }
+
+        public void CustomClear()
+        {
+            _ops.Clear();
+            if (IsSyncObjectList)
+                for (int i = 0; i < _internalList.Count; i++)
+                    ((IGhost)_internalList[i]).ClearSerialization();
+        }
+
+        public void CustomDeserialize(NetDataReader stream)
+        {
+            var streamMark = stream.GetByte();
+            var nothing = streamMark == 0;
+            if (nothing)
+                return;
+            var initialStuff = streamMark == 1;
+            var hasDelta = streamMark == 2;
+            if (initialStuff)
+            {
+                _internalList = DeserializeList(stream);
+            }
+            else if (hasDelta)
+            {
+                var opsCount = stream.GetInt();
+                for (int i = 0; i < opsCount; i++)
+                    DeserializeOp(stream);
+                if (IsSyncObjectList)
+                {
+                    DeserializeAllChangesFromStream(stream);
+                }
+            }
+
+        }
+
+        private void DeserializeOp(NetDataReader stream)
+        {
+            var opType = (OperationType)stream.GetByte();
+            switch (opType)
+            {
+                case OperationType.Add:
+                    _internalList.Add(DeserializeObject(stream));
+                    break;
+                case OperationType.Insert:
+                    _internalList.Insert(stream.GetInt(), DeserializeObject(stream));
+                    break;
+                case OperationType.SetAt:
+                    _internalList[stream.GetInt()] = DeserializeObject(stream);
+                    break;
+                case OperationType.RemoveAt:
+                    var remIndex = stream.GetInt();
+                    var obj = _internalList[remIndex];
+                    _internalList.RemoveAt(remIndex);
+                    if (IsSyncObjectList)
+                        ((IGhost)obj).Deserialize(stream);
+                    break;
+                case OperationType.Clear:
+                    if (IsSyncObjectList)
+                        DeserializeAllChangesFromStream(stream);
+                    _internalList.Clear();
+                    break;
+            }
+        }
+
+        void DeserializeAllChangesFromStream(NetDataReader stream)
+        {
+            DeSerializeAllChanges(_internalList, stream);
+        }
+        public bool CustomSerialize(ref NetDataWriter stream, bool initial)
+        {
+            if (initial)
+            {
+                if (_internalList.Count == 0)
+                {
+                    if (stream != null)
+                        stream.Put((byte)0);
+                    return false;
+                }
+
+                if (stream == null)
+                    stream = new NetDataWriter(true, 20);
+                stream.Put((byte)1);
+                SerializeList(_internalList, ref stream, initial);
+                return true;
+            }
+            bool hasAny = false;
+            var pos = stream?.Length ?? 0;
+            if (stream == null)
+                stream = new NetDataWriter(true, 20);
+            stream.Put((byte)0);
+            stream.Put(_ops.Count);
+            if (_ops.Count > 0)
+            {
+                if (stream == null)
+                    stream = new NetDataWriter(true, 5);
+                hasAny = true;
+                foreach (var op in _ops)
+                    SerializeOpToStream(op, stream);
+            }
+            if (IsSyncObjectList)
+            {
+                if (SerializeAllChanges(_internalList, ref stream))
+                    hasAny = true;
+            }
+            if (hasAny)
+                stream.Data[pos] = 2;
+            return hasAny;
+        }
+        private List<T> DeserializeList(NetDataReader stream)
+        {
+            if (IsSyncObjectList)
+            {
+                List<T> list = new List<T>();
+                var count = stream.GetInt();
+                for (int i = 0; i < count; i++)
+                {
+                    var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
+                    ((IGhost)newVal).Deserialize(stream);
+                    list.Add((T)newVal);
+                }
+                return list;
+            }
+            else
+            {
+                var list = MessagePackSerializer.Deserialize<List<T>>(stream.GetBytesWithLength());
+                return list;
+            }
+        }
+
+        private void SerializeList(List<T> list, ref NetDataWriter stream, bool initial)
+        {
+            if (IsSyncObjectList)
+            {
+                stream.Put(_internalList.Count);
+                foreach (var e in _internalList)
+                {
+                    stream.Put(SyncTypesMap.GetIdFromSyncType(e.GetType()));
+                    ((IGhost)e).Serialize(ref stream, initial);
+                }
+
+            }
+            else
+            {
+                var bytes = MessagePackSerializer.Serialize(_internalList);
+                stream.PutBytesWithLength(bytes, 0, bytes.Length);
+            }
+        }
+
+        private void SerializeOpToStream(DeltaOperation op, NetDataWriter stream)
+        {
+            stream.Put((byte)op.Type);
+            switch (op.Type)
+            {
+                case OperationType.Add:
+                    SerializeListElementToStream(op, ref stream);
+                    break;
+                case OperationType.Insert:
+                    stream.Put(op.Index);
+                    SerializeListElementToStream(op, ref stream);
+                    break;
+                case OperationType.SetAt:
+                    stream.Put(op.Index);
+                    SerializeListElementToStream(op, ref stream);
+                    break;
+                case OperationType.RemoveAt:
+                    stream.Put(op.Index);
+                    if (IsSyncObjectList)
+                        SerializeElementChangesToStream(op, ref stream);
+                    break;
+                case OperationType.Clear:
+                    if (IsSyncObjectList)
+                        SerializeAllChanges(op.ListBeforeClear, ref stream);
+                    break;
+            }
+        }
+
+        private void SerializeElementChangesToStream(DeltaOperation op, ref NetDataWriter stream)
+        {
+            ((IGhost)op.Object).Serialize(ref stream, false);
+        }
+
+        private void DeSerializeAllChanges(List<T> list, NetDataReader stream)
+        {
+            if (stream.GetByte() == 0)
+                return;
+            for (int i = 0; i < list.Count; i++)
+            {
+                var e = list[i];
+                ((IGhost)e).Deserialize(stream);
+            }
+        }
+        private bool SerializeAllChanges(List<T> list, ref NetDataWriter stream)
+        {
+            bool hasAny = false;
+            var pos = stream.Length;
+            stream.Put((byte)0);
+            for (int i = 0; i < list.Count; i++)
+            {
+                var e = list[i];
+                bool serialized = ((IGhost)e).Serialize(ref stream, false);
+                if (serialized)
+                {
+                    hasAny = true;
+                    stream.Put(i);
+                }
+            }
+            if (hasAny)
+                stream.Data[pos] = (byte)1; //dirty hack
+            return hasAny;
+        }
+        private T DeserializeObject(NetDataReader stream)
+        {
+            if (IsSyncObjectList)
+            {
+                var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
+                ((IGhost)newVal).Deserialize(stream);
+                return (T)newVal;
+            }
+            else
+            {
+                var obj = MessagePackSerializer.Deserialize<T>(stream.GetBytesWithLength());
+                return obj;
+            }
+
+        }
+        private void SerializeListElementToStream(DeltaOperation op, ref NetDataWriter stream)
+        {
+            if (IsSyncObjectList)
+            {
+                stream.Put(SyncTypesMap.GetIdFromSyncType(op.Object.GetType()));
+                ((IGhost)op.Object).Serialize(ref stream, true);
+            }
+            else
+            {
+                var bytes = MessagePackSerializer.Serialize(op.Object);
+                stream.PutBytesWithLength(bytes, 0, bytes.Length);
+            }
+
+        }
+        bool IsSyncObjectList => typeof(T).BaseType == typeof(SyncObject);
+        private void InternalSetAt(T t, int index)
+        {
+            _internalList[index] = t;
+            _ops.Add(new DeltaOperation(OperationType.SetAt, index, t));
+        }
+        private void InternalInsert(T t, int index)
+        {
+            _internalList.Insert(index, t);
+            _ops.Add(new DeltaOperation(OperationType.Insert, index, t));
+        }
+        private void InternalClear()
+        {
+            if (IsSyncObjectList)
+            {
+                var oldList = _internalList;
+                _internalList = new List<T>();
+                _ops.Add(new DeltaOperation(OperationType.Clear, oldList));
+            }
+            else
+            {
+                _internalList.Clear();
+                _ops.Add(new DeltaOperation(OperationType.Clear, null));
+            }
+        }
+        private void InternalAdd(T t)
+        {
+            _internalList.Add(t);
+            _ops.Add(new DeltaOperation(OperationType.Add, 0, t));
+        }
+        private void InternalRemove(int index)
+        {
+            var t = _internalList[index];
+            _internalList.RemoveAt(index);
+            _ops.Add(new DeltaOperation(OperationType.RemoveAt, index, t));
+        }
+        public T this[int index] { get { return _internalList[index]; } set { InternalSetAt(value, index); } }
+        public void Add(T item)
+        {
+            InternalAdd(item);
+        }
+
+        public void Clear()
+        {
+            InternalClear();
+        }
+
+        public bool Contains(T item)
+        {
+            return _internalList.Contains(item);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            _internalList.CopyTo(array, arrayIndex);
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _internalList.GetEnumerator();
+        }
+
+        public int IndexOf(T item)
+        {
+            return _internalList.IndexOf(item);
+        }
+
+        public void Insert(int index, T item)
+        {
+            InternalInsert(item, index);
+        }
+
+        public bool Remove(T item)
+        {
+            var index = IndexOf(item);
+            if (index >= 0)
+            {
+                InternalRemove(index);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void RemoveAt(int index)
+        {
+            InternalRemove(index);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _internalList.GetEnumerator();
         }
     }
 

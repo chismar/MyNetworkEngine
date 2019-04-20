@@ -166,7 +166,7 @@ namespace Yogollag
             _interactiveEntName.Draw(_win, RenderStates.Default);
             Vector2f btnPos = new Vector2f(0, _win.Size.Y - 30);
             float distanceBetweenButtons = 30;
-            var targetCtx = new ScriptingContext() { Entity = character, Target = ((NetworkEntity)selectedInteractive).Id };
+            var targetCtx = new ScriptingContext() { ProcessingEntity = character, Target = ((NetworkEntity)selectedInteractive).Id };
             var allInteractions = ((IQuester)character).Quests.SelectMany(x => x.QuestDef.AddedInteractions).Where(x => x.Def.Predicate.Def.Check(targetCtx)).Concat(selectedInteractive.Def?.Interactions ?? new List<DefRef<InteractionDef>>());
             foreach (var inter in allInteractions)
             {

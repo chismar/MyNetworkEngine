@@ -126,14 +126,17 @@ namespace Yogollag
         VoltWorld _physicsWorld;
         NetworkNode _node;
         EntityId _sessionId;
-        public void Start()
+        public bool Start()
         {
             _node = new NetworkNode();
-            _node.Start(9051, 128);
+            var started = _node.Start(9051, 128, true);
+            if (!started)
+                return false;
             _sessionId = _node.Create<SessionEntity>();
             _node.Create<VisibilityEntity>();
             _node.NewConnectionEstablished += NewConnection;
             _physicsWorld = new VoltWorld();
+            return true;
         }
 
         private void NewConnection(NetworkNodeId eid)
@@ -200,7 +203,7 @@ namespace Yogollag
         public void Start(RemoteConnectionToken server)
         {
             _node = new NetworkNode();
-            _node.Start();
+            _node.Start(false);
             _connected = _node.Connect(server);
             _win = new RenderWindow(new VideoMode(1024, 720), "SimpleGame");
             _win.SetVerticalSyncEnabled(true);
@@ -746,9 +749,9 @@ namespace Yogollag
                 return;
             bool canDo = true;
             if (item.Def.Predicate.Def != null)
-                canDo = item.Def.Predicate.Def.Check(new ScriptingContext() { Entity = this });
+                canDo = item.Def.Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = this });
             if (canDo)
-                item.Def.Impact.Def.Apply(new ScriptingContext() { Entity = this });
+                item.Def.Impact.Def.Apply(new ScriptingContext() { ProcessingEntity = this });
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void ReceivePosition(Vec2 newPosition)
@@ -797,7 +800,7 @@ namespace Yogollag
         [Sync(SyncType.Server)]
         public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
-            def.Apply(new ScriptingContext() { Entity = this, Parent = originalContext });
+            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext });
         }
 
         [Sync(SyncType.Server)]

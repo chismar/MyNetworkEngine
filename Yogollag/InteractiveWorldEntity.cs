@@ -37,7 +37,7 @@ namespace Yogollag
         [Sync(SyncType.Server)]
         public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
-            def.Apply(new ScriptingContext() { Entity = this, Parent = originalContext });
+            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext });
         }
     }
     public interface IInteractive

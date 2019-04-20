@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Scriban.Runtime;
 using Scriban;
+using System.Text;
 
 namespace CodeGen
 {
@@ -251,20 +252,29 @@ namespace CodeGen
         }
 
         static string _syncObjectTemplateString = @"
-            public class {{obj}}Sync : {{obj}}, IGhost
+            //obj {{obj}} generic {{generic}} hasCustomSerialization {{customser}}
+            //debug info {{debug}}
+            public class {{obj}}Sync{{generic}} : {{obj}}{{generic}}, IGhost
             {
                 {{ for syncProp in sync }}
                     public override {{ syncProp.type }} {{ syncProp.name }} { get => base.{{ syncProp.name }}; set { base.{{ syncProp.name }} = value; OnPropChanged({{syncProp.index}}); } }
                 {{ end }}
 
                 int _deltaMask;
-                public void Clear()
+                public void ClearSerialization()
                 {
+                    {{if customser }}
+                        CustomClear();
+                    {{else}}
                     _deltaMask = 0;
+                    {{end}}
                 }
 
                 public void Deserialize(NetDataReader stream)
                 {
+                    {{if customser }}
+                        CustomDeserialize(stream);
+                    {{else}}
                     var hasAny = stream.GetBool();
                     if(!hasAny)
                         return;
@@ -280,6 +290,7 @@ namespace CodeGen
                     }
                     {{end}}
                     {{end}}
+                    {{end}}
                     
                 }
 
@@ -289,6 +300,9 @@ namespace CodeGen
                 }
                 public bool Serialize(ref NetDataWriter stream, bool initial)
                 {
+                    {{if customser }}
+                        return CustomSerialize(ref stream, initial);
+                    {{else}}
                     bool hasAny = false;
                     int deltaMask = _deltaMask;
                     if (initial)
@@ -317,6 +331,7 @@ namespace CodeGen
                     {{end}}
                     {{end}}
                     return hasAny;
+                    {{end}}
                 }";
 
         Scriban.Template _syncSubObjectTemplate = Scriban.Template.Parse(_syncObjectTemplateString + @"}
@@ -388,6 +403,9 @@ namespace CodeGen
         {
             var syncProps = new List<SyncProp>();
             int propIndex = 0;
+            var typeSymbol = model.GetDeclaredSymbol(entityClass);
+            bool hasCustomSerialization = typeSymbol.AllInterfaces.Any(x => x.Name == "IHasCustomSerialization");
+            
             foreach (var memberSyntaxNode in entityClass.Members)
             {
                 if (memberSyntaxNode is PropertyDeclarationSyntax prop)
@@ -426,7 +444,11 @@ namespace CodeGen
             {
                 Obj = entityClass.Identifier.ValueText,
                 Sync = syncProps,
-                Methods = syncMethods
+                Methods = syncMethods,
+                Customser = hasCustomSerialization,
+                Generic = !typeSymbol.IsGenericType ? "" :
+                $"<{string.Join(',', typeSymbol.TypeParameters.Select(tp => tp.Name))} > ",
+                Debug = string.Join(',', typeSymbol.AllInterfaces.Select(x => x.Name)) + $" {typeSymbol.AllInterfaces.Length}"
             });
             scriptObject.Import(nameof(PutToStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => PutToStreamFromType(b, str, str2)));
             scriptObject.Import(nameof(GetFromStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => GetFromStreamFromType(b, str, str2)));

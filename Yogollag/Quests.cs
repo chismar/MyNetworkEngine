@@ -19,7 +19,7 @@ namespace Yogollag
 
         public bool Check(ScriptingContext ctx)
         {
-            if(ctx.Entity is IInteractive inter)
+            if(ctx.ProcessingEntity is IInteractive inter)
             {
                 return inter.Def == Type.Def;
             }
@@ -32,7 +32,7 @@ namespace Yogollag
         public DefRef<IImpactDef> Do { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            var target = ctx.Entity.CurrentServer.GetGhost(ctx.Target);
+            var target = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target);
             if (target != null && target is IImpactedEntity ie)
             {
                 ie.RunImpact(ctx, Do.Def);
@@ -41,10 +41,10 @@ namespace Yogollag
 
         public bool Check(ScriptingContext ctx)
         {
-            var target = ctx.Entity.CurrentServer.GetGhost(ctx.Target);
+            var target = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target);
             if (target == null)
                 return false;
-            return Predicate.Def.Check(new ScriptingContext() { Entity = target, Parent = ctx });
+            return Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = target, Parent = ctx });
         }
     }
 
@@ -53,7 +53,7 @@ namespace Yogollag
         public DefRef<QuestDef> Quest { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            if (ctx.Entity is IQuester quester)
+            if (ctx.ProcessingEntity is IQuester quester)
             {
                 quester.Quests.Add(new QuestInstance() { QuestDef = Quest.Def });
                 quester.Quests = quester.Quests;
@@ -65,7 +65,7 @@ namespace Yogollag
         public DefRef<QuestDef> Quest { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            if (ctx.Entity is IQuester quester)
+            if (ctx.ProcessingEntity is IQuester quester)
             {
                 var quest = quester.Quests.SingleOrDefault(x => x.QuestDef == Quest.Def);
                 if (quest == null)

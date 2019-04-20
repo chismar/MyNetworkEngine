@@ -23,6 +23,9 @@ namespace Yogollag
     class Program
     {
 
+        static bool _forceServer = true;
+        static bool _forceBot = false;
+        static bool _forceClient = true;
         //I need statistics per turn
         //some actual impacts that change stats
         //win condition and end-turn
@@ -30,23 +33,42 @@ namespace Yogollag
         //and some icons and work on UI
         static void Main(string[] args)
         {
-            var server = new SimpleServer();
-            server.Start();
-            var client = new SimpleClient();
-            client.Start(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 });
+            bool asServer = _forceServer || args.Any(x => x.Contains("server"));
+            bool asClient = _forceClient || args.Any(x => x.Contains("client"));
+            bool withBot = _forceBot || args.Any(x => x.Contains("bot"));
+            Func<Task> su = null;
+            if (asServer)
+            {
 
+                var server = new SimpleServer();
+                var serverStarted = server.Start();
+                su = async () => { server.Update(); };
 
-            var botClient = new BotClient();
-            botClient.Start(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 });
-            Func<Task> su = async () => { server.Update(); };
-            Func<Task> cu = async () => { client.Update(); };
-            Func<Task> cu2 = async () => { botClient.Update(); };
+            }
+            Func<Task> cu = null;
+            if (asClient)
+            {
+                var client = new SimpleClient();
+                client.Start();
+                cu = async () => { client.Update(); };
+            }
+            Func<Task> cu2 = null;
+            if (withBot)
+            {
+                var botClient = new BotClient();
+                botClient.Start();
+                cu2 = async () => { botClient.Update(); };
+
+            }
+
             while (true)
             {
                 var updates = new List<Task>();
-                updates.Add(su());
+                if (su != null)
+                    updates.Add(su());
                 updates.Add(cu());
-                updates.Add(cu2());
+                if (cu2 != null)
+                    updates.Add(cu2());
                 Task.WhenAll(updates);
             }
         }
@@ -78,13 +100,16 @@ namespace Yogollag
     {
         NetworkNode _node;
         EntityId _sessionId;
-        public void Start()
+        public bool Start()
         {
             _node = new NetworkNode();
-            _node.Start(9051, 128);
-            _sessionId = _node.Create<GameSessionEntity>((gse)=> { gse.Def = DefsHolder.Instance.LoadDef<EnvironmentDef>("/EnvironmentDef"); });
+            var started = _node.Start(9051, 128, true);
+            if (!started)
+                return false;
+            _sessionId = _node.Create<GameSessionEntity>((gse) => { gse.Def = DefsHolder.Instance.LoadDef<EnvironmentDef>("/EnvironmentDef"); });
             _node.Create<VisibilityEntity>();
             _node.NewConnectionEstablished += NewConnection;
+            return true;
         }
 
         private void NewConnection(NetworkNodeId eid)
@@ -117,12 +142,10 @@ namespace Yogollag
     {
         CircleShape _debugPhysicsShape = new CircleShape();
         NetworkNode _node;
-        Task<bool> _connected;
-        public void Start(RemoteConnectionToken server)
+        public void Start()
         {
             _node = new NetworkNode();
             _node.Start();
-            _connected = _node.Connect(server);
         }
 
 
@@ -140,12 +163,7 @@ namespace Yogollag
         bool joined = false;
         public void Update()
         {
-            if (!_connected.IsCompleted)
-            {
-                _node.Tick().Wait();
-                return;
-            }
-            else if (!_connected.Result)
+            if (!_node.ConnectedToBroadcast)
             {
                 _node.Tick().Wait();
                 return;
@@ -172,8 +190,11 @@ namespace Yogollag
                     {
                         var gpe = ghost as GamePlayerEntity;
                         ((GamePlayerEntity)ghost).MakeNewTurn(
-                            new PlayerTurnInput() { Actions = new List<PlayerAction>() {
-                                new PlayerAction() { Domain = gpe.Def.Domains["Develop"], Value = 5} } });
+                            new PlayerTurnInput()
+                            {
+                                Actions = new List<PlayerAction>() {
+                                new PlayerAction() { Domain = gpe.Def.Domains["Develop"], Value = 5} }
+                            });
                     }
                 }
             }
@@ -189,11 +210,10 @@ namespace Yogollag
         Task<bool> _connected;
         RenderWindow _win;
         View _charView;
-        public void Start(RemoteConnectionToken server)
+        public void Start()
         {
             _node = new NetworkNode();
             _node.Start();
-            _connected = _node.Connect(server);
             _win = new RenderWindow(new VideoMode(1024, 720), "SimpleGame");
             _win.SetVerticalSyncEnabled(true);
             _win.Closed += RenderWindow_Closed;
@@ -219,12 +239,7 @@ namespace Yogollag
         bool joined = false;
         public void Update()
         {
-            if (!_connected.IsCompleted)
-            {
-                _node.Tick().Wait();
-                return;
-            }
-            else if (!_connected.Result)
+            if (!_node.ConnectedToBroadcast)
             {
                 _node.Tick().Wait();
                 return;
@@ -234,6 +249,7 @@ namespace Yogollag
                 var session = _node.AllGhosts().SingleOrDefault(x => x is GameSessionEntity);
                 if (session != null)
                 {
+                    Console.WriteLine("Send shit");
                     ((GameSessionEntity)session).Login("Name" + (new System.Random()).Next().ToString());
                     joined = true;
                     ((GameSessionEntity)session).Start();

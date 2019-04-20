@@ -9,8 +9,6 @@
         "Interaction",
         "TileModDef",
         "TileMod",
-        "TileDef",
-        "Tile",
         "ScenarioDef",
         "Scenario",
         "PlaceDef",
@@ -23,14 +21,10 @@
         "SlotLinkType",
         "SlotLinkDef",
         "SlotLink",
-        "SlotGenDef",
-        "SlotGen",
         "TilesGenDef",
         "TilesGen",
         "SlotCategoryDef",
         "SlotCategory",
-        "TileCategoryDef",
-        "TileCategory",
         "CharacterDef",
         "Character",
         "ItemDef",
@@ -53,10 +47,6 @@
         "IImpact",
         "AllInRangeDef",
         "AllInRange",
-        "ChangeEntityStatDef",
-        "ChangeEntityStat",
-        "SpriteDef",
-        "Sprite",
         "BaseDef",
         "Base",
         "IDef",
@@ -282,71 +272,6 @@
         },
         {
           "$ref": "#/definitions/TileModDef"
-        }
-      ]
-    },
-    "TileDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TileDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TileDef",
-            "Tile"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "TileDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TileDef",
-            "Tile"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TileDef"
         }
       ]
     },
@@ -780,80 +705,6 @@
         }
       ]
     },
-    "SlotGenDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SlotGenDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SlotGenDef",
-            "SlotGen"
-          ]
-        },
-        "Links": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlotLinkDefField"
-          }
-        },
-        "SlotCategory": {
-          "$ref": "#/definitions/SlotCategoryDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SlotGenDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SlotGenDef",
-            "SlotGen"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SlotGenDef"
-        }
-      ]
-    },
     "TilesGenDef": {
       "type": "object",
       "additionalProperties": false,
@@ -990,71 +841,6 @@
         },
         {
           "$ref": "#/definitions/SlotCategoryDef"
-        }
-      ]
-    },
-    "TileCategoryDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TileCategoryDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TileCategoryDef",
-            "TileCategory"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "TileCategoryDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TileCategoryDef",
-            "TileCategory"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TileCategoryDef"
         }
       ]
     },
@@ -1840,9 +1626,7 @@
             "IImpactDef",
             "IImpact",
             "AllInRangeDef",
-            "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat"
+            "AllInRange"
           ]
         },
         "$vars": {
@@ -1872,9 +1656,6 @@
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
         }
       ]
     },
@@ -1959,188 +1740,6 @@
         }
       ]
     },
-    "ChangeEntityStatDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ChangeEntityStatDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ChangeEntityStatDef",
-            "ChangeEntityStat"
-          ]
-        },
-        "StatName": {
-          "type": "string"
-        },
-        "Set": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ]
-        },
-        "Change": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "ChangeEntityStatDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ChangeEntityStatDef",
-            "ChangeEntityStat"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        }
-      ]
-    },
-    "SpriteDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpriteDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpriteDef",
-            "Sprite"
-          ]
-        },
-        "SpriteSheetName": {
-          "type": "string"
-        },
-        "X": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "Y": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SpriteDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpriteDef",
-            "Sprite"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        }
-      ]
-    },
     "BaseDef": {
       "type": "object",
       "additionalProperties": false,
@@ -2173,6 +1772,9 @@
             "BaseDef",
             "Base"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2190,8 +1792,6 @@
             "Interaction",
             "TileModDef",
             "TileMod",
-            "TileDef",
-            "Tile",
             "ScenarioDef",
             "Scenario",
             "PlaceDef",
@@ -2204,14 +1804,10 @@
             "SlotLinkType",
             "SlotLinkDef",
             "SlotLink",
-            "SlotGenDef",
-            "SlotGen",
             "TilesGenDef",
             "TilesGen",
             "SlotCategoryDef",
             "SlotCategory",
-            "TileCategoryDef",
-            "TileCategory",
             "CharacterDef",
             "Character",
             "ItemDef",
@@ -2230,10 +1826,6 @@
             "CheckEntityStat",
             "AllInRangeDef",
             "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat",
-            "SpriteDef",
-            "Sprite",
             "BaseDef",
             "Base",
             "SaveableResource",
@@ -2263,9 +1855,6 @@
           "$ref": "#/definitions/TileModDef"
         },
         {
-          "$ref": "#/definitions/TileDef"
-        },
-        {
           "$ref": "#/definitions/ScenarioDef"
         },
         {
@@ -2284,16 +1873,10 @@
           "$ref": "#/definitions/SlotLinkDef"
         },
         {
-          "$ref": "#/definitions/SlotGenDef"
-        },
-        {
           "$ref": "#/definitions/TilesGenDef"
         },
         {
           "$ref": "#/definitions/SlotCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/TileCategoryDef"
         },
         {
           "$ref": "#/definitions/CharacterDef"
@@ -2324,12 +1907,6 @@
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/BaseDef"
@@ -2390,6 +1967,9 @@
         },
         "Address": {
           "$ref": "#/definitions/DefIDFullField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2407,8 +1987,6 @@
             "Interaction",
             "TileModDef",
             "TileMod",
-            "TileDef",
-            "Tile",
             "ScenarioDef",
             "Scenario",
             "PlaceDef",
@@ -2421,14 +1999,10 @@
             "SlotLinkType",
             "SlotLinkDef",
             "SlotLink",
-            "SlotGenDef",
-            "SlotGen",
             "TilesGenDef",
             "TilesGen",
             "SlotCategoryDef",
             "SlotCategory",
-            "TileCategoryDef",
-            "TileCategory",
             "CharacterDef",
             "Character",
             "ItemDef",
@@ -2451,10 +2025,6 @@
             "IImpact",
             "AllInRangeDef",
             "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat",
-            "SpriteDef",
-            "Sprite",
             "BaseDef",
             "Base",
             "IDef",
@@ -2486,9 +2056,6 @@
           "$ref": "#/definitions/TileModDef"
         },
         {
-          "$ref": "#/definitions/TileDef"
-        },
-        {
           "$ref": "#/definitions/ScenarioDef"
         },
         {
@@ -2507,16 +2074,10 @@
           "$ref": "#/definitions/SlotLinkDef"
         },
         {
-          "$ref": "#/definitions/SlotGenDef"
-        },
-        {
           "$ref": "#/definitions/TilesGenDef"
         },
         {
           "$ref": "#/definitions/SlotCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/TileCategoryDef"
         },
         {
           "$ref": "#/definitions/CharacterDef"
@@ -2553,12 +2114,6 @@
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/BaseDef"
@@ -2646,17 +2201,14 @@
         "InteractiveDef",
         "InteractionDef",
         "TileModDef",
-        "TileDef",
         "ScenarioDef",
         "PlaceDef",
         "IntGenParameterDef",
         "MapPrefabDef",
         "SlotLinkTypeDef",
         "SlotLinkDef",
-        "SlotGenDef",
         "TilesGenDef",
         "SlotCategoryDef",
-        "TileCategoryDef",
         "CharacterDef",
         "ItemDef",
         "QuestDef",
@@ -2669,8 +2221,6 @@
         "CheckEntityStatDef",
         "IImpactDef",
         "AllInRangeDef",
-        "ChangeEntityStatDef",
-        "SpriteDef",
         "BaseDef",
         "IDef",
         "SaveableResource",
@@ -2837,9 +2387,6 @@
           "$ref": "#/definitions/TileModDef"
         },
         {
-          "$ref": "#/definitions/TileDef"
-        },
-        {
           "$ref": "#/definitions/ScenarioDef"
         },
         {
@@ -2858,16 +2405,10 @@
           "$ref": "#/definitions/SlotLinkDef"
         },
         {
-          "$ref": "#/definitions/SlotGenDef"
-        },
-        {
           "$ref": "#/definitions/TilesGenDef"
         },
         {
           "$ref": "#/definitions/SlotCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/TileCategoryDef"
         },
         {
           "$ref": "#/definitions/CharacterDef"
@@ -2904,12 +2445,6 @@
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/BaseDef"
