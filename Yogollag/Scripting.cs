@@ -303,6 +303,15 @@ namespace Yogollag
     [MessagePackObject(true)]
     public class ScriptingContext
     {
+        public ScriptingContext()
+        {
+
+        }
+        public ScriptingContext(NetworkEntity ent)
+        {
+            ProcessingEntity = ent;
+            Target = ent.Id;
+        }
         public ScriptingContext Parent;
         [IgnoreMember]
         public NetworkEntity ProcessingEntity;

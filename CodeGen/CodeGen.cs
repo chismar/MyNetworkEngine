@@ -257,7 +257,14 @@ namespace CodeGen
             public class {{obj}}Sync{{generic}} : {{obj}}{{generic}}, IGhost
             {
                 {{ for syncProp in sync }}
-                    public override {{ syncProp.type }} {{ syncProp.name }} { get => base.{{ syncProp.name }}; set { base.{{ syncProp.name }} = value; OnPropChanged({{syncProp.index}}); } }
+                    public override {{ syncProp.type }} {{ syncProp.name }} { get => base.{{ syncProp.name }}; 
+                    set { 
+                        base.{{ syncProp.name }} = value; 
+                        OnPropChanged({{syncProp.index}}); 
+                        {{if syncProp.ghost}}
+                        ((SyncObject)base.{{syncProp.name}})?.SetParentEntity(ParentEntity);
+                        {{end}}
+                        } }
                 {{ end }}
 
                 int _deltaMask;
@@ -293,7 +300,14 @@ namespace CodeGen
                     {{end}}
                     
                 }
-
+                public override void SetParentEntityRecursive()
+                {
+                    {{for syncProp in sync}}
+                    {{if syncProp.ghost }}
+                        ((SyncObject){{syncProp.name}})?.SetParentEntity(this.ParentEntity);
+                    {{end}}
+                    {{end}}
+                }
                 void OnPropChanged(int prop)
                 {
                     _deltaMask |= 1 << prop;

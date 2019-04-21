@@ -155,7 +155,7 @@ namespace NetworkEngine
             NetDataWriter stream = null;
             ((IGhost)obj).Serialize(ref stream, true);
             ghost.Deserialize(new NetDataReader(stream.Data));
-            ((GhostedEntity)ghost).OnInit();
+            ((GhostedEntity)ghost).Init();
             return (NetworkEntity)ghost;
         }
         private void OnEntityRemoved(NetworkEntity obj)
@@ -246,6 +246,18 @@ namespace NetworkEngine
     {
         [IgnoreMember]
         public NetworkNode CurrentServer;
+        [IgnoreMember]
+        public NetworkEntity ParentEntity;
+        public virtual void SetParentEntityRecursive() { }
+        public void SetParentEntity(NetworkEntity parentEntity)
+        {
+            ParentEntity = parentEntity;
+            SetParentEntityRecursive();
+        }
+        public void FinishInit()
+        {
+            ((IGhost)this).ClearSerialization();
+        }
         public static T New<T>()
         {
             return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
@@ -558,7 +570,7 @@ namespace NetworkEngine
             serverEntity.Id = re.Id;
             serverEntity.ServerId = fromSid;
             ((IGhost)serverEntity).Deserialize(new NetDataReader(re.InitialState));
-            serverEntity.OnInit();
+            serverEntity.Init();
             _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Add(serverEntity);
         }
 
@@ -649,8 +661,8 @@ namespace NetworkEngine
             init?.Invoke((T)newEntity);
             newEntity.ServerId = Id;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
-            newEntity.OnInit();
             newEntity.OnCreate();
+            newEntity.Init();
             _entities.Add(newEntity);
             return newEntity.Id;
         }
@@ -961,8 +973,14 @@ namespace NetworkEngine
         public NetworkNodeId ServerId;
         public NetworkNodeId AuthorityServerId;
         public EntityId Id;
+        public NetworkEntity ParentEntity => this;
+        public virtual void SetParentEntityRecursive() { }
         public virtual bool HasAuthority { get; set; }
         public virtual void OnCreate() { }
+        public void Init() {
+            SetParentEntityRecursive();
+            OnInit();
+        }
         public virtual void OnInit() { }
         public virtual void OnDestroy() { }
     }
@@ -1050,7 +1068,7 @@ namespace NetworkEngine
     public abstract class DeltaList<T> : SyncObject, IHasCustomSerialization, IList<T>
     {
         public int Count => _internalList.Count;
-        public bool IsReadOnly { get; }
+        public bool IsReadOnly => ((ICollection<T>)_internalList).IsReadOnly;
         [Sync(SyncType.Master)]
         public virtual ulong InternalObjectsIdCounter { get; set; } = 0;
         List<T> _internalList = new List<T>();
@@ -1414,6 +1432,31 @@ namespace NetworkEngine
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _internalList.GetEnumerator();
+        }
+    }
+    [GenerateSync]
+    public abstract class SyncEvent<T> : SyncObject, IHasCustomSerialization
+    {
+        DeltaList<T> _internalSyncList = SyncObject.New<DeltaList<T>>();
+        public event Action<T> OnEvent;
+        public void CustomClear()
+        {
+            ((IGhost)_internalSyncList).ClearSerialization();
+            _internalSyncList.Clear();
+        }
+
+        public void CustomDeserialize(NetDataReader stream)
+        {
+            ((IGhost)_internalSyncList).Deserialize(stream);
+        }
+
+        public bool CustomSerialize(ref NetDataWriter stream, bool initial)
+        {
+            return ((IGhost)_internalSyncList).Serialize(ref stream, initial);
+        }
+        public void Post(T eventArgs)
+        {
+            _internalSyncList.Add(eventArgs);
         }
     }
 
