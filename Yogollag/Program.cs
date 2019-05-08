@@ -104,6 +104,11 @@ namespace Yogollag
             CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value, this);
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
             CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
+            CurrentServer.Create<SimpleSpawner>((ent) => 
+            {
+                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Def = DefsHolder.Instance.LoadDef<SimpleSpawnerDef>("/SimpleSpawnerTest");
+            });
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
                 ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
@@ -344,14 +349,19 @@ namespace Yogollag
     }
     public interface IRenderable
     {
-        IRenderableDef RenDef { get; set; }
-        string Name { get; set; }
+        IRenderableDef RenDef { get; }
+        string Name { get; }
         void Render(RenderTarget rt);
     }
-    public interface IRenderableDef
+    public interface IRenderableDef : IDef
     {
         DefRef<SpriteDef> Sprite { get; set; }
     }
+    public class SpriteRenderedDef : BaseDef, IRenderableDef
+    {
+        public DefRef<SpriteDef> Sprite { get; set; }
+    }
+
 
     public class CharacterDef : BaseDef, IRenderableDef
     {
@@ -364,7 +374,7 @@ namespace Yogollag
         Sprite _sprite;
         Vector2f _lastRenderPosition;
         public Vec2 RendererPosition { get; set; }
-        public string Name { get { return _ren.Name; } set { _ren.Name = value; } }
+        public string Name { get { return _ren.Name; } set {  } }
 
         public IRenderableDef RenDef { get; set; }
 
@@ -375,11 +385,12 @@ namespace Yogollag
             if (_font == null)
                 _font = new Font("../../../ARIAL.TTF");
             _nameText.Font = _font;
-            _nameText.DisplayedString = Name;
+            _nameText.Scale = new Vector2f(0.1f, 0.1f);
         }
         bool _toTheLeft = false;
         public void Render(RenderTarget rt)
         {
+            _nameText.DisplayedString = Name;
             if (_sprite == null)
                 _sprite = Sprites.GetSprite(_ren.RenDef.Sprite);
             var pos = new Vector2f(RendererPosition.X, RendererPosition.Y);

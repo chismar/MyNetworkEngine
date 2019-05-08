@@ -22,14 +22,6 @@ namespace CodeGen
     public class NotInSchemaAttribute : Attribute
     {
     }
-    public class CanBeCreatedFromAliasedPrimitiveAttribute : Attribute
-    {
-        public Type PrimitiveType { get; internal set; }
-        public CanBeCreatedFromAliasedPrimitiveAttribute(Type type)
-        {
-            PrimitiveType = type;
-        }
-    }
     class SchemaGenerator
     {
         //internal static readonly NLog.Logger Logger = LogManager.GetLogger(nameof(SchemaGenerator));
@@ -303,7 +295,7 @@ namespace CodeGen
                 var vars = new JObject();
                 properties.Add("$vars", vars);
                 vars.Add("additionalProperties", RefObject("TemplateVariableField"));
-                var canBeCreatedFormPrimAttr = classType.GetAttributes().SingleOrDefault(x => x.AttributeClass.Name == nameof(CanBeCreatedFromAliasedPrimitiveAttribute));
+                var canBeCreatedFormPrimAttr = classType.GetAttributes().SingleOrDefault(x => x.AttributeClass.Name == "CanBeCreatedFromAliasedPrimitiveAttribute");
                 if (canBeCreatedFormPrimAttr != null)
                 {
                     var attr = canBeCreatedFormPrimAttr;

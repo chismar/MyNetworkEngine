@@ -1,0 +1,36 @@
+{
+   "$type": "SimpleSpawner",
+   "ObjectToSpawn": {
+        "$type": "MobDef",
+        "Name": "Test mob",
+        "RenderableDef": {
+            "$type": "SpriteRenderedDef",
+            "Sprite":{
+                "$type":"SpriteDef",
+                "SpriteSheetName":"characters",
+                "X":0,
+                "Y":0
+            }
+        },
+        "AIEngineDef": {
+            "$type": "AIEngine",
+            "Rules": {
+                "$type": "AIRules",
+                "Rules": [
+                    {
+                        "$type": "AIRule",
+                        "Move": {
+                            "$type": "AIMove",
+                            "DirectionRelativeToTarget": { "Y" : 1}
+                        },
+                        "FixedDuration": 1,
+                        "PointSelector": {
+                            "$type": "RandomPointSelector",
+                            "Radius": 15
+                        }
+                    }
+                ]
+            }
+        }
+   } 
+}

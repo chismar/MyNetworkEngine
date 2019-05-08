@@ -13,6 +13,7 @@ using MessagePack.Resolvers;
 using Definitions;
 using System.IO;
 using System.Collections;
+using System.Reflection;
 
 namespace NetworkEngine
 {
@@ -515,6 +516,7 @@ namespace NetworkEngine
                     RemoveReplica(from, ure);
                     break;
                 case UpdateEntity ue:
+                    Console.WriteLine($"Update {ue.Id}");
                     ApplyUpdateToEntity(from, ue);
                     break;
                 case GrantAuthorityMessage ga:
@@ -655,15 +657,28 @@ namespace NetworkEngine
         {
             return (T)_ghosting.Get(id);
         }
-        public EntityId Create<T>(Action<T> init = null) where T : NetworkEntity
+        public EntityId Create(Type t, Action<NetworkEntity> init = null)
         {
-            var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
-            init?.Invoke((T)newEntity);
+            var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(t));
+            init?.Invoke(newEntity);
+            OnEntityCreated(newEntity);
+            return newEntity.Id;
+        }
+        void OnEntityCreated(NetworkEntity newEntity)
+        {
             newEntity.ServerId = Id;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
             newEntity.OnCreate();
             newEntity.Init();
+            ((IGhost)newEntity).ClearSerialization();
             _entities.Add(newEntity);
+
+        }
+        public EntityId Create<T>(Action<T> init = null) where T : NetworkEntity
+        {
+            var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
+            init?.Invoke((T)newEntity);
+            OnEntityCreated(newEntity);
             return newEntity.Id;
         }
         public void Destroy(EntityId eid)
@@ -817,11 +832,11 @@ namespace NetworkEngine
             foreach (var entity in _entities.Collection)
             {
                 entity.Value.MessagesToProcess = entity.Value.Messages.Count;
-                if (entity.Value.MessagesToProcess != 0 || entity.Value.Entity is ITicked)
+                if (entity.Value.MessagesToProcess != 0 || (entity.Value.Entity is ITicked && entity.Value.Entity.IsMaster))
                     tasks.Add(Task.Run(() =>
                     {
                         NetworkEntity.CurrentlyExecutingInContext.Value = entity.Value.Entity.Id;
-                        if (entity.Value.Entity is ITicked ticked)
+                        if (entity.Value.Entity is ITicked ticked && entity.Value.Entity.IsMaster)
                             ticked.Tick();
                         for (int i = 0; i < entity.Value.MessagesToProcess; i++)
                         {
@@ -898,7 +913,6 @@ namespace NetworkEngine
         static Dictionary<Type, int> _masterToId = new Dictionary<Type, int>();
         static Dictionary<Type, Type> _baseToMaster = new Dictionary<Type, Type>();
         static Dictionary<Type, Type> _masterToBase = new Dictionary<Type, Type>();
-
         public static string GetNameWithoutGenericArity(Type t)
         {
             string name = t.Name;
@@ -911,29 +925,34 @@ namespace NetworkEngine
             "Yogollag",
             "GameTest"
         };
-        static SyncTypesMap()
-        {
-            var syncTypes = AppDomain.CurrentDomain.GetAssemblies()
+        public static IEnumerable<Assembly> InterestingAssemblies => AppDomain.CurrentDomain.GetAssemblies()
                 .Where(x =>
                 {
                     for (int i = 0; i < _allowedAssemblies.Length; i++)
                         if (x.FullName.StartsWith(_allowedAssemblies[i], StringComparison.InvariantCulture))
                             return true;
                     return false;
-                })
+                });
+        static SyncTypesMap()
+        {
+            var syncTypes = InterestingAssemblies
                 .SelectMany(x => x.GetTypes())
                 .Where(x => typeof(GhostedEntity) != x &&
                 typeof(NetworkEntity) != x &&
                 typeof(SyncObject) != x &&
                 (typeof(NetworkEntity).IsAssignableFrom(x) || typeof(SyncObject).IsAssignableFrom(x))
                 ).ToDictionary(x => GetNameWithoutGenericArity(x));
-
             var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract);
             foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
             {
                 var eName = GetNameWithoutGenericArity(baseEntity);
                 if (!syncTypes.ContainsKey(eName + "Sync"))
+                {
+                    if (baseEntity.GetCustomAttribute<GenerateSyncAttribute>() == null)
+                        continue;
                     Console.WriteLine($"ERROR: no sync type for {eName}");
+
+                }
                 var master = syncTypes[eName + "Sync"];
                 var id = (int)(Crc64.Compute(eName) % int.MaxValue);
                 _idToMaster.Add(id, master);
@@ -977,7 +996,8 @@ namespace NetworkEngine
         public virtual void SetParentEntityRecursive() { }
         public virtual bool HasAuthority { get; set; }
         public virtual void OnCreate() { }
-        public void Init() {
+        public void Init()
+        {
             SetParentEntityRecursive();
             OnInit();
         }

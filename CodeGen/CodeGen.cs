@@ -282,9 +282,9 @@ namespace CodeGen
                     {{if customser }}
                         CustomDeserialize(stream);
                     {{else}}
-                    var hasAny = stream.GetBool();
-                    if(!hasAny)
-                        return;
+                    //var hasAny = stream.GetBool();
+                    //if(!hasAny)
+                    //    return;
                     var mask = stream.GetInt();
                     {{for syncProp in sync}}
                     if ((mask & (1 << {{syncProp.index}})) != 0)
@@ -322,15 +322,15 @@ namespace CodeGen
                     if (initial)
                         deltaMask = int.MaxValue;
                     
-                    if(deltaMask == 0)
+                    /*if(deltaMask == 0)
                     {
                         if(stream != null)
                             stream.Put(false);
                         return false;
-                    }
+                    }*/
                     if(stream == null)
                         stream = new NetDataWriter(true, 5);
-                    stream.Put(true);
+                    //stream.Put(true);
                     stream.Put(deltaMask);
                     {{for syncProp in sync}}
                     if ((deltaMask & (1 << {{syncProp.index}})) != 0)
@@ -473,9 +473,14 @@ namespace CodeGen
         {
             if (isGhost)
             {
-                return $"var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));\n" +
+                var nullPrefix = $"var nullOrNot = stream.GetByte(); if(nullOrNot == 0) {{ {propName} = null; }} else ";
+                if (type.StartsWith("Delta") || type.StartsWith("SyncEvent"))
+                    return nullPrefix + $"{{var newVal = SyncObject.New<{type}>();\n" +
                     $"((IGhost)newVal).Deserialize(stream); \n" +
-                    $"{propName} = ({type})newVal;";
+                    $"{propName} = ({type})newVal;}}";
+                return nullPrefix + $"{{var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));\n" +
+                    $"((IGhost)newVal).Deserialize(stream); \n" +
+                    $"{propName} = ({type})newVal;}}";
             }
             else
                 switch (type)
@@ -498,7 +503,11 @@ namespace CodeGen
         {
             if (isGhost)
             {
-                return $"stream.Put(SyncTypesMap.GetIdFromSyncType({propName}.GetType())); ((IGhost){propName}).Serialize(ref stream, true);";
+                var nullPrefix = $"if({propName}==null) stream.Put((byte)0); else {{ stream.Put((byte)1);\n";
+                if(type.StartsWith("Delta") || type.StartsWith("SyncEvent"))
+                    return nullPrefix + $"((IGhost){propName}).Serialize(ref stream, true);}}";
+
+                return nullPrefix + $"stream.Put(SyncTypesMap.GetIdFromSyncType({propName}.GetType())); ((IGhost){propName}).Serialize(ref stream, true);}}";
             }
             else
                 switch (type)

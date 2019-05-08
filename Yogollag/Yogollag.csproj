@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
     <StartupObject></StartupObject>  
-    <LangVersion>7.1</LangVersion>  
+    <LangVersion>8</LangVersion>  
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +22,7 @@
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.88" />
     <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.88" />
+    <PackageReference Include="UrhoSharp" Version="1.9.67" />
     <Reference Include="OpenTK">
       <HintPath>..\TestGame\extlibs\OpenTK.dll</HintPath>
     </Reference>

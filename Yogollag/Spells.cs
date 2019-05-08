@@ -15,7 +15,18 @@ namespace Yogollag
     [MessagePackObject(true)]
     public struct SyncedTime
     {
+        public static float ToSeconds(long time) => (float)new TimeSpan(time).TotalSeconds;
+        public static long Now => DateTime.UtcNow.Ticks;
         public long Time { get; set; }
+        public static implicit operator long(SyncedTime time)
+        {
+            return time.Time;
+        }
+
+        internal static long FromSeconds(float v)
+        {
+            return TimeSpan.FromSeconds(v).Ticks;
+        }
     }
 
     [MessagePackObject(true)]
@@ -23,6 +34,14 @@ namespace Yogollag
     {
         public int Id { get; set; }
         public bool FromClient { get; set; }
+        public static bool operator ==(SpellId x, SpellId y)
+        {
+            return x.Id == y.Id && x.FromClient == y.FromClient;
+        }
+        public static bool operator !=(SpellId x, SpellId y)
+        {
+            return x.Id != y.Id || x.FromClient != y.FromClient;
+        }
     }
     [MessagePackObject(true)]
     public struct SpellFailedToCast
@@ -56,6 +75,14 @@ namespace Yogollag
             return id;
         }
 
+        public virtual SpellId CastFromInsideEntity(SpellCast cast)
+        {
+            if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false)
+                return default;
+            var id = new SpellId() { Id = _localCounterId++, FromClient = false };
+            CastSpell(id, cast);
+            return id;
+        }
         [Sync(SyncType.AuthorityClient)]        
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
@@ -95,7 +122,7 @@ namespace Yogollag
         }
     }
 
-    public class SpellDef
+    public class SpellDef : BaseDef
     {
         public float Duration { get; set; } = 0f;
         public DefRef<IPredicateDef> Predicate { get; set; }
@@ -109,6 +136,8 @@ namespace Yogollag
     public class SpellCast
     {
         public SpellDef Def { get; set; }
+        public EntityId TargetEntity { get; set; }
+        public Vec2 TargetPoint { get; set; }
     }
     [GenerateSync]
     public abstract class SpellInstance : SyncObject
