@@ -20,7 +20,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual Vec2 Position { get { return _pos; } set { _pos = value; } }
         [Sync(SyncType.Client)]
-        public virtual Dictionary<string, float> Stats { get; set; }
+        public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
         [Sync(SyncType.Client)]
         public virtual InteractiveDef Def { get; set; } = DefsHolder.Instance.LoadDef<InteractiveDef>("/DarkMonument");
         public string Name { get; set; }

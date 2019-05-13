@@ -3,6 +3,7 @@ using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Volatile;
 
 namespace Yogollag
 {
@@ -40,6 +41,12 @@ namespace Yogollag
         {
             return new Vec2() { X = p.X * s, Y = p.Y * s };
         }
+
+        internal Vector2 ToVolt()
+        {
+            return new Vector2(X, Y);
+        }
+
         public static Vec2 operator /(Vec2 p, float s)
         {
             return new Vec2() { X = p.X / s, Y = p.Y / s };

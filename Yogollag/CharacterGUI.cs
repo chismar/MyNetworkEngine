@@ -95,9 +95,9 @@ namespace Yogollag
 
             _statsText.DisplayedString = "";
             var statsEntity = character as IStatEntity;
-            foreach (var stat in statsEntity.Stats)
+            foreach (var stat in statsEntity.StatsEngine.Stats)
             {
-                _statsText.DisplayedString += $"{stat.Key} {stat.Value}\n";
+                _statsText.DisplayedString += $"{stat.StatDef.____GetDebugShortName()} {stat.Value}\n";
             }
             _statsText.Draw(_win, RenderStates.Default);
         }

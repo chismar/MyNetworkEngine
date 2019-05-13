@@ -7,18 +7,20 @@ using System.Collections.Generic;
 using System.Text;
 using LiteNetLib.Utils;
 using MessagePack;
+using System.Linq;
 
 namespace Yogollag
 {
     public class MobDef : BaseDef, IEntityObjectDef
     {
+        public DefRef<StatsEngineDef> Stats { get; set; }
         public DefRef<AIEngineDef> AIEngineDef { get; set; }
         public DefRef<IRenderableDef> RenderableDef { get; set; }
         public string Name { get; set; }
     }
 
     [GenerateSync]
-    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity
+    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity
     {
         [Sync(SyncType.Client)]
         public virtual AIEngine AI { get; set; } = SyncObject.New<AIEngine>();
@@ -36,6 +38,8 @@ namespace Yogollag
         public string Name => MobDef.Name;
 
         public Vec2 Position { get => Locomotion.Position; set => Locomotion.Position = value; }
+        [Sync(SyncType.Client)]
+        public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
 
         SpriteRenderer _spriteRenderer;
         public Mob()
@@ -45,6 +49,7 @@ namespace Yogollag
         public override void OnCreate()
         {
             AI.Init(MobDef.AIEngineDef, Spells, Locomotion);
+            StatsEngine.Init(MobDef.Stats);
         }
 
         public void Render(RenderTarget rt)
@@ -57,6 +62,8 @@ namespace Yogollag
         {
             AI.Update();
             Locomotion.Tick();
+            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Health")).Value <= 0)
+                CurrentServer.Destroy(Id);
         }
     }
 }

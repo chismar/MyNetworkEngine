@@ -31,6 +31,16 @@
                     }
                 ]
             }
+        },
+        "Stats":{
+            "$type": "StatsEngine",
+            "Stats": [
+                {
+                    "$type": "StatInstance",
+                    "Stat": "/Health",
+                    "InitialValue":300
+                }
+            ]
         }
    } 
 }

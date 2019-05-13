@@ -12,6 +12,8 @@ namespace Yogollag
 {
     public abstract class BaseStat : SyncObject
     {
+        [Sync(SyncType.Client)]
+        public virtual StatDef StatDef { get; set; }
         public abstract float Value { get; }
     }
     [MessagePackObject]
@@ -37,10 +39,43 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual float ChangeRate { get; set; }
         public override float Value => SyncedTime.ToSeconds(SyncedTime.Now - BreakpointTime) * ChangeRate + BreakpointValue;
+
+        public void Set(float value)
+        {
+            BreakpointValue = value;
+            ChangeRate = 0;
+            BreakpointTime = SyncedTime.Now;
+        }
     }
     [GenerateSync]
     public abstract class StatsEngine : SyncObject
     {
-        public DeltaList<BaseStat> Stats { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual DeltaList<BaseStat> Stats { get; set; } = SyncObject.New<DeltaList<BaseStat>>();
+        public void Init(StatsEngineDef def)
+        {
+            foreach (var statInstDef in def.Stats)
+            {
+                var stat = SyncObject.New<LinearStat>();
+                stat.StatDef = statInstDef.Def.Stat.Def;
+                stat.Set(statInstDef.Def.InitialValue);
+                stat.FinishInit();
+                Stats.Add(stat);
+            }
+        }
     }
+    public class StatInstanceDef : BaseDef
+    {
+        public DefRef<StatDef> Stat { get; set; }
+        public float InitialValue { get; set; }
+    }
+    public class StatsEngineDef : BaseDef
+    {
+        public List<DefRef<StatInstanceDef>> Stats { get; set; } = new List<DefRef<StatInstanceDef>>();
+    }
+    public class StatDef : BaseDef
+    {
+
+    }
+
 }

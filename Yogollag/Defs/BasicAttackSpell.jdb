@@ -1,0 +1,12 @@
+{
+    "$type": "Spell",
+    "Duration":0.3,
+    "ImpactOnSuccess": {
+        "$type": "AllInCircle",
+        "Size":10,
+        "Impact": {
+            "$type": "ChangeEntityStat",
+            "Change":-100
+        }
+    }
+}

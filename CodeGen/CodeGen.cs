@@ -275,10 +275,16 @@ namespace CodeGen
                     {{else}}
                     _deltaMask = 0;
                     {{end}}
+                    {{for syncProp in sync}}
+                    {{if syncProp.ghost }}
+                    ((IGhost){{syncProp.name}})?.ClearSerialization();
+                    {{end}}
+                    {{end}}
                 }
 
                 public void Deserialize(NetDataReader stream)
                 {
+                    CheckStream(stream, {{GetTagForProp obj 1}});
                     {{if customser }}
                         CustomDeserialize(stream);
                     {{else}}
@@ -287,13 +293,18 @@ namespace CodeGen
                     //    return;
                     var mask = stream.GetInt();
                     {{for syncProp in sync}}
+                    CheckStream(stream, {{GetTagForProp syncProp.name 1}});
                     if ((mask & (1 << {{syncProp.index}})) != 0)
                     {
+                    CheckStream(stream, {{GetTagForProp syncProp.name 1}});
                         {{GetFromStreamFromType syncProp.ghost syncProp.type syncProp.name}}
+                    CheckStream(stream, {{GetTagForProp syncProp.name 1}});
                     }
                     {{if syncProp.ghost }}
                     else {
+                    CheckStream(stream, {{GetTagForProp syncProp.name 1}});
                     ((IGhost){{syncProp.name}})?.Deserialize(stream);    
+                    CheckStream(stream, {{GetTagForProp syncProp.name 1}});
                     }
                     {{end}}
                     {{end}}
@@ -313,7 +324,10 @@ namespace CodeGen
                     _deltaMask |= 1 << prop;
                 }
                 public bool Serialize(ref NetDataWriter stream, bool initial)
-                {
+                {   
+                    if(stream == null)
+                        stream = new NetDataWriter(true, 5);
+                    SafeguardStream(stream, {{GetTagForProp obj 1}});    
                     {{if customser }}
                         return CustomSerialize(ref stream, initial);
                     {{else}}
@@ -333,14 +347,19 @@ namespace CodeGen
                     //stream.Put(true);
                     stream.Put(deltaMask);
                     {{for syncProp in sync}}
+                    SafeguardStream(stream, {{GetTagForProp syncProp.name 1}});    
                     if ((deltaMask & (1 << {{syncProp.index}})) != 0)
                     {
+                    SafeguardStream(stream, {{GetTagForProp syncProp.name 1}});    
                         hasAny = true;
                         {{PutToStreamFromType syncProp.ghost syncProp.type syncProp.name }}
+                    SafeguardStream(stream, {{GetTagForProp syncProp.name 1}});    
                     }
                     {{if syncProp.ghost }}
                     else {
-                        hasAny |= ((IGhost){{syncProp.name}})?.Serialize(ref stream, initial) ?? false;    
+                    SafeguardStream(stream, {{GetTagForProp syncProp.name 1}});    
+                        hasAny |= ((IGhost){{syncProp.name}})?.Serialize(ref stream, initial) ?? false;
+                    SafeguardStream(stream, {{GetTagForProp syncProp.name 1}});    
                     }
                     {{end}}
                     {{end}}
@@ -412,25 +431,44 @@ namespace CodeGen
             var cds = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().Single();
             return cds;
         }
+        string GetTypeFromSymbol(ITypeSymbol type)
+        {
+            if (type is IArrayTypeSymbol arType)
+            {
+                return GetTypeFromSymbol(arType.ElementType)+ $"[{string.Concat(Enumerable.Repeat(",", arType.Rank-1))}]";
 
+            }
+            else if (type is INamedTypeSymbol namedType)
+            {
+                if (namedType.IsGenericType)
+                {
+                    return namedType.Name + $"<{string.Join(',',namedType.TypeArguments.Select(t=>GetTypeFromSymbol(t)))}>";
+                }
+                else
+                    return namedType.Name;
+            }
+            else
+                return type.Name;
+        }
         private ScriptObject ExtractDataForSync(SemanticModel model, ClassDeclarationSyntax entityClass)
         {
             var syncProps = new List<SyncProp>();
             int propIndex = 0;
             var typeSymbol = model.GetDeclaredSymbol(entityClass);
             bool hasCustomSerialization = typeSymbol.AllInterfaces.Any(x => x.Name == "IHasCustomSerialization");
-            
-            foreach (var memberSyntaxNode in entityClass.Members)
+            var syncMembers = typeSymbol.GetMembers().Concat(typeSymbol.BaseType.GetMembers())
+                .Where(m => m is IPropertySymbol p && p.GetAttributes().Any(x => x.AttributeClass.Name.StartsWith("Sync")))
+                .Select(x => (IPropertySymbol)x);
+
+            foreach (var syncMember in syncMembers)
             {
-                if (memberSyntaxNode is PropertyDeclarationSyntax prop)
-                    if (prop.AttributeLists.Any(x => x.Attributes.Any(a => a.Name.ToString() == "Sync")))
-                        syncProps.Add(new SyncProp()
-                        {
-                            Ghost = InheritsFrom("NetworkEngine.SyncObject", model.GetDeclaredSymbol(prop).Type),
-                            Name = prop.Identifier.ValueText,
-                            Type = prop.Type.ToString(),
-                            Index = propIndex++
-                        });
+                syncProps.Add(new SyncProp()
+                {
+                    Ghost = InheritsFrom("NetworkEngine.SyncObject", syncMember.Type),
+                    Name = syncMember.Name,
+                    Type = GetTypeFromSymbol(syncMember.Type),
+                    Index = propIndex++
+                });
             }
             var syncMethods = new List<SyncMethod>();
             foreach (var memberSyntaxNode in entityClass.Members)
@@ -466,6 +504,7 @@ namespace CodeGen
             });
             scriptObject.Import(nameof(PutToStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => PutToStreamFromType(b, str, str2)));
             scriptObject.Import(nameof(GetFromStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => GetFromStreamFromType(b, str, str2)));
+            scriptObject.Import(nameof(GetTagForProp), (Func<string, int, string>)((str, i) => GetTagForProp(str, i)));
             return scriptObject;
         }
 
@@ -485,26 +524,30 @@ namespace CodeGen
             else
                 switch (type)
                 {
-                    case "float":
+                    case "Single":
                         return $"{propName} = stream.GetFloat();";
-                    case "long":
+                    case "Int64":
                         return $"{propName} = stream.GetLong();";
-                    case "int":
+                    case "Int32":
                         return $"{propName} = stream.GetInt();";
-                    case "string":
+                    case "String":
                         return $"{propName} = stream.GetString();";
-                    case "bool":
+                    case "Boolean":
                         return $"{propName} = stream.GetBool();";
                     default:
                         return $"{propName} = MessagePackSerializer.Deserialize<{type}>(stream.GetBytesWithLength());";
                 }
+        }
+        public static string GetTagForProp(string propName, int offset)
+        {
+            return (propName.GetHashCode() + 1).ToString();
         }
         public static string PutToStreamFromType(bool isGhost, string type, string propName)
         {
             if (isGhost)
             {
                 var nullPrefix = $"if({propName}==null) stream.Put((byte)0); else {{ stream.Put((byte)1);\n";
-                if(type.StartsWith("Delta") || type.StartsWith("SyncEvent"))
+                if (type.StartsWith("Delta") || type.StartsWith("SyncEvent"))
                     return nullPrefix + $"((IGhost){propName}).Serialize(ref stream, true);}}";
 
                 return nullPrefix + $"stream.Put(SyncTypesMap.GetIdFromSyncType({propName}.GetType())); ((IGhost){propName}).Serialize(ref stream, true);}}";
@@ -512,11 +555,11 @@ namespace CodeGen
             else
                 switch (type)
                 {
-                    case "float":
-                    case "int":
-                    case "string":
-                    case "bool":
-                    case "long":
+                    case "Single":
+                    case "Int32":
+                    case "String":
+                    case "Boolean":
+                    case "Int64":
                         return $"stream.Put({propName});";
                     default:
                         return $"var bytes = MessagePackSerializer.Serialize({propName}); stream.PutBytesWithLength(bytes, 0, bytes.Length);";

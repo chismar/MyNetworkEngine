@@ -1,9 +1,19 @@
 {
-    "$type":"CharacterDef",
+    "$type":"CharacterEntityDef",
     "Sprite":{
         "$type":"SpriteDef",
         "SpriteSheetName":"characters",
         "X":0,
         "Y":0
+    },
+    "StatsEngine": {
+        "$type": "StatsEngine",
+        "Stats": [
+            {
+                "$type": "StatInstance",
+                "Stat": "/Health",
+                "InitialValue":300
+            }
+        ]
     }
 }

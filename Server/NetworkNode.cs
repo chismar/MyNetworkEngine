@@ -268,6 +268,16 @@ namespace NetworkEngine
             return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(type));
         }
 
+        protected void CheckStream(NetDataReader reader, int tag)
+        {
+            var check = reader.GetInt();
+            if (check != tag)
+                throw new Exception($"Magic number mismatch {this.GetType().Name}");
+        }
+        protected void SafeguardStream(NetDataWriter writer, int tag)
+        {
+            writer.Put(tag);
+        }
 
     }
     public interface ITicked
@@ -353,6 +363,7 @@ namespace NetworkEngine
     }
     public class NetworkNode
     {
+        public object CustomData;
         static NetworkNode()
         {
             CompositeResolver.RegisterAndSetAsDefault(
@@ -516,7 +527,6 @@ namespace NetworkEngine
                     RemoveReplica(from, ure);
                     break;
                 case UpdateEntity ue:
-                    Console.WriteLine($"Update {ue.Id}");
                     ApplyUpdateToEntity(from, ue);
                     break;
                 case GrantAuthorityMessage ga:
@@ -809,7 +819,7 @@ namespace NetworkEngine
             {
                 tasks.Add(Task.Run(() =>
                 {
-                    NetDataWriter writer = null;
+                    NetDataWriter writer = new MyOwnNetDataWriter(true, 10);
                     var ent = ((IGhost)_entities.Collection[entity.Key].Entity);
                     if (ent.Serialize(ref writer, false))
                     {
@@ -1003,6 +1013,16 @@ namespace NetworkEngine
         }
         public virtual void OnInit() { }
         public virtual void OnDestroy() { }
+        protected void CheckStream(NetDataReader reader, int tag)
+        {
+            var check = reader.GetInt();
+            if (check != tag)
+                throw new Exception($"Magic number mismatch {this.GetType().Name}");
+        }
+        protected void SafeguardStream(NetDataWriter writer, int tag)
+        {
+            writer.Put(tag);
+        }
     }
     public abstract class GhostedEntity : NetworkEntity, IEntityPropertyChanged
     {
@@ -1083,7 +1103,17 @@ namespace NetworkEngine
         void CustomDeserialize(NetDataReader stream);
         void CustomClear();
     }
+    public class MyOwnNetDataWriter : NetDataWriter
+    {
+        public MyOwnNetDataWriter(bool autoResize, int initialSize) : base(autoResize, initialSize)
+        {
+        }
 
+        public void ResetPosAt(int pos)
+        {
+            _position = pos;
+        }
+    }
     [GenerateSync]
     public abstract class DeltaList<T> : SyncObject, IHasCustomSerialization, IList<T>
     {
@@ -1131,28 +1161,49 @@ namespace NetworkEngine
                 for (int i = 0; i < _internalList.Count; i++)
                     ((IGhost)_internalList[i]).ClearSerialization();
         }
-
+        static int _selfTag = 213145453;
+        static int _initTag = 23125776;
+        static int _desOps = 423346;
+        static int _desChanges = -59424442;
         public void CustomDeserialize(NetDataReader stream)
         {
             var streamMark = stream.GetByte();
+            CheckStream(stream, _selfTag);
             var nothing = streamMark == 0;
             if (nothing)
                 return;
             var initialStuff = streamMark == 1;
-            var hasDelta = streamMark == 2;
+            var hasNoDelta = streamMark == 2;
+            var hasDelta = streamMark == 3;
             if (initialStuff)
             {
                 _internalList = DeserializeList(stream);
+                CheckStream(stream, _initTag);
             }
-            else if (hasDelta)
+            else if (hasNoDelta)
             {
                 var opsCount = stream.GetInt();
-                for (int i = 0; i < opsCount; i++)
-                    DeserializeOp(stream);
+                CheckStream(stream, _initTag);
+                CheckStream(stream, _desOps);
                 if (IsSyncObjectList)
                 {
                     DeserializeAllChangesFromStream(stream);
                 }
+                CheckStream(stream, _desChanges);
+                return;
+            }
+            else if (hasDelta)
+            {
+                var opsCount = stream.GetInt();
+                CheckStream(stream, _initTag);
+                for (int i = 0; i < opsCount; i++)
+                    DeserializeOp(stream);
+                CheckStream(stream, _desOps);
+                if (IsSyncObjectList)
+                {
+                    DeserializeAllChangesFromStream(stream);
+                }
+                CheckStream(stream, _desChanges);
             }
 
         }
@@ -1196,23 +1247,29 @@ namespace NetworkEngine
             {
                 if (_internalList.Count == 0)
                 {
-                    if (stream != null)
-                        stream.Put((byte)0);
+                    if (stream == null)
+                        stream = new NetDataWriter(true, 10);
+                    stream.Put((byte)0);
+                    SafeguardStream(stream, _selfTag);
                     return false;
                 }
 
                 if (stream == null)
                     stream = new NetDataWriter(true, 20);
                 stream.Put((byte)1);
+                SafeguardStream(stream, _selfTag);
                 SerializeList(_internalList, ref stream, initial);
+                SafeguardStream(stream, _initTag);
                 return true;
             }
             bool hasAny = false;
             var pos = stream?.Length ?? 0;
             if (stream == null)
                 stream = new NetDataWriter(true, 20);
-            stream.Put((byte)0);
+            stream.Put((byte)2);
+            SafeguardStream(stream, _selfTag);
             stream.Put(_ops.Count);
+            SafeguardStream(stream, _initTag);
             if (_ops.Count > 0)
             {
                 if (stream == null)
@@ -1221,13 +1278,15 @@ namespace NetworkEngine
                 foreach (var op in _ops)
                     SerializeOpToStream(op, stream);
             }
+            SafeguardStream(stream, _desOps);
             if (IsSyncObjectList)
             {
                 if (SerializeAllChanges(_internalList, ref stream))
                     hasAny = true;
             }
+            SafeguardStream(stream, _desChanges);
             if (hasAny)
-                stream.Data[pos] = 2;
+                stream.Data[pos] = 3;
             return hasAny;
         }
         private List<T> DeserializeList(NetDataReader stream)
@@ -1325,11 +1384,12 @@ namespace NetworkEngine
                 if (serialized)
                 {
                     hasAny = true;
-                    stream.Put(i);
                 }
             }
             if (hasAny)
                 stream.Data[pos] = (byte)1; //dirty hack
+            else
+                ((MyOwnNetDataWriter)stream).ResetPosAt(pos + 1);
             return hasAny;
         }
         private T DeserializeObject(NetDataReader stream)

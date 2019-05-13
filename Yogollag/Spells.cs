@@ -52,7 +52,7 @@ namespace Yogollag
     public abstract class SpellsEngine : SyncObject
     {
         [Sync(SyncType.Client)]
-        public virtual DeltaList<SpellInstance> SyncedSpells { get; set; }
+        public virtual DeltaList<SpellInstance> SyncedSpells { get; set; } = SyncObject.New<DeltaList<SpellInstance>>();
         [Sync(SyncType.Client)]
         public virtual SyncEvent<SpellFailedToCast> SpellFailedEvent { get; set; } = SyncObject.New<SyncEvent<SpellFailedToCast>>();
         public virtual IEnumerable<SpellInstance> AllSpells { get; }
@@ -101,7 +101,8 @@ namespace Yogollag
             inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity));
             Task.Run(async () =>
             {
-                await Task.Delay((int)(inst.Cast.Def.Duration * 1000));
+                await Task.Delay(TimeSpan.FromSeconds(inst.Cast.Def.Duration));
+                FinishSpell(id);
             });
         }
         [Sync(SyncType.AuthorityClient)]

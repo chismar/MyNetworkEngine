@@ -99,12 +99,19 @@ namespace Yogollag
         public virtual void Join(string name)
         {
             var defaultJob = DefsHolder.Instance.LoadDef<RoleDef>("/Arhaeologist");
-            var charDef = DefsHolder.Instance.LoadDef<CharacterDef>("/CharDef");
-            var charId = CurrentServer.Create<CharacterEntity>((ent) => { ent.AuthorityServerId = CurrentServer.CurrentServerCallbackId.Value; ent.Job = defaultJob; ent.CharDef = charDef; ent.Name = name; ent.Position = Vec2.Random(10, 10); });
+            var charDef = DefsHolder.Instance.LoadDef<CharacterEntityDef>("/CharDef");
+            var charId = CurrentServer.Create<CharacterEntity>((ent) =>
+            {
+                ent.AuthorityServerId = CurrentServer.CurrentServerCallbackId.Value;
+                ent.Job = defaultJob;
+                ent.Def = charDef;
+                ent.Name = name;
+                ent.Position = Vec2.Random(10, 10);
+            });
             CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value, this);
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
             CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
-            CurrentServer.Create<SimpleSpawner>((ent) => 
+            CurrentServer.Create<SimpleSpawner>((ent) =>
             {
                 ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
                 ent.Def = DefsHolder.Instance.LoadDef<SimpleSpawnerDef>("/SimpleSpawnerTest");
@@ -141,6 +148,7 @@ namespace Yogollag
             _node.Create<VisibilityEntity>();
             _node.NewConnectionEstablished += NewConnection;
             _physicsWorld = new VoltWorld();
+            _node.CustomData = _physicsWorld;
             return true;
         }
 
@@ -215,6 +223,7 @@ namespace Yogollag
             _win.Closed += RenderWindow_Closed;
             _charView = new View(new FloatRect(-500, -300, 256, 180));
             _physicsWorld = new VoltWorld();
+            _node.CustomData = _physicsWorld;
         }
 
         private void RenderWindow_Closed(object sender, EventArgs e)
@@ -363,8 +372,9 @@ namespace Yogollag
     }
 
 
-    public class CharacterDef : BaseDef, IRenderableDef
+    public class CharacterEntityDef : BaseDef, IRenderableDef, IEntityObjectDef
     {
+        public DefRef<StatsEngineDef> StatsEngine { get; set; }
         public DefRef<SpriteDef> Sprite { get; set; }
     }
     class SpriteRenderer : IRenderable
@@ -374,7 +384,7 @@ namespace Yogollag
         Sprite _sprite;
         Vector2f _lastRenderPosition;
         public Vec2 RendererPosition { get; set; }
-        public string Name { get { return _ren.Name; } set {  } }
+        public string Name { get { return _ren.Name; } set { } }
 
         public IRenderableDef RenDef { get; set; }
 
@@ -563,7 +573,7 @@ namespace Yogollag
     }
     interface IStatEntity
     {
-        Dictionary<string, float> Stats { get; set; }
+        StatsEngine StatsEngine { get; set; }
     }
     [GenerateSync]
     public abstract class SampleComponent : SyncObject
@@ -694,7 +704,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
-        IStatEntity, IImpactedEntity, IQuester, IHasInventory
+        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked
     {
         SpriteRenderer _spriteRenderer;
         CharacterLikeMovement _movementController;
@@ -712,6 +722,7 @@ namespace Yogollag
         }
         public override void OnCreate()
         {
+            StatsEngine.Init(CharDef.StatsEngine);
             if (SecretRole?.InitialQuest.Def != null)
                 Quests.Add(new QuestInstance() { QuestDef = SecretRole.InitialQuest });
             if (Job?.InitialQuest.Def != null)
@@ -722,11 +733,11 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual long ActiveItem { get; set; }
         [Sync(SyncType.AuthorityClient)]
-        public virtual CharacterDef CharDef { get; set; }
-        [Sync(SyncType.AuthorityClient)]
         public virtual RoleDef SecretRole { get; set; }
         [Sync(SyncType.AuthorityClient)]
         public virtual RoleDef Job { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual SpellsEngine SpellsEngine { get; set; } = SyncObject.New<SpellsEngine>();
         [Sync(SyncType.Client)]
         public virtual SampleComponent Cmp { get; set; } = SyncObject.New<SampleComponent>();
         [Sync(SyncType.Client)]
@@ -738,12 +749,15 @@ namespace Yogollag
         public Vec2 SmoothPosition { get; set; }
         public VoltBody PhysicsBody { get => _movementController.PhysicsBody; set => _movementController.PhysicsBody = value; }
         [Sync(SyncType.AuthorityClient)]
-        public virtual Dictionary<string, float> Stats { get; set; } = new Dictionary<string, float>();
+        public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
         [Sync(SyncType.AuthorityClient)]
         public virtual List<QuestInstance> Quests { get; set; } = new List<QuestInstance>();
         [Sync(SyncType.AuthorityClient)]
         public virtual ItemsCollection Inventory { get; set; } = SyncObject.New<ItemsCollection>();
         public IRenderableDef RenDef { get => _spriteRenderer.RenDef; set => _spriteRenderer.RenDef = value; }
+        [Sync(SyncType.Client)]
+        public virtual IEntityObjectDef Def { get; set; }
+        CharacterEntityDef CharDef => (CharacterEntityDef)Def;
 
         [Sync(SyncType.AuthorityClient)]
         public virtual void SetActiveItem(long itemId)
@@ -801,6 +815,9 @@ namespace Yogollag
 
         public void UpdateControls()
         {
+            if (Mouse.IsButtonPressed(Mouse.Button.Left))
+                SpellsEngine.CastFromClientWithPrediction(
+                    new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/BasicAttackSpell") });
             _movementController.UpdateControls();
         }
 
@@ -818,6 +835,11 @@ namespace Yogollag
         public virtual void AddItem(Item item)
         {
             Inventory.AddItem(item);
+        }
+        public void Tick()
+        {
+            if (StatsEngine.Stats.Single(x=>x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Health")).Value <= 0)
+                CurrentServer.Destroy(Id);
         }
     }
 }

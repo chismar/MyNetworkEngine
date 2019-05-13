@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CodeGen;
+using System.Linq;
 
 namespace Yogollag
 {
@@ -42,7 +43,7 @@ namespace Yogollag
     public interface IHasStats { }
     public interface IHasSpells { }
     public interface IHasScripts { }*/ //Quest giver is also a script, as it would seem
-                                     /* Can a quest be a script be a spell be a state be a buff be an action be a group and contain stats? */
+                                       /* Can a quest be a script be a spell be a state be a buff be an action be a group and contain stats? */
 
     /*
      * Spell
@@ -73,233 +74,233 @@ namespace Yogollag
      * 
      */
 
-        /*
-         * After additional thoughts
-         * Stats + Memory - no objections
-         * Spells with counters where counters = triggers - no objections
-         * Effects with state and stateless effects - no objections (allows for QuestEffect and AIScriptEffect)
-         * StatsEngine embeddable everywhere
-         * Additional thought required to ScriptingContext (basically, it's about hiding multiple entities-like inside one)
-         * SpellsEngine, StatsEngine, QuestsEngine, ItemsEngine, AIEngine (can be grouped arbitrary, an entity can
-         * contain multiple ones, and that is managed with TargetSelectors, allows for weird stuff)
-         * I need delta collections, SyncObjectId (inside EntityId) and SyncObject messages
-         */
-         /*
-    public class SpellInvocation
-    {
-        public SpellDef Def { get; set; }
-        public Guid SpellGuid { get; set; }
-    }
-    public abstract class SpellEffectDef : BaseDef
-    {
-        public abstract void Attach(Spell spell);
-        public abstract void Update(Spell spell);
-        public abstract void Detach(Spell spell);
-    }
+    /*
+     * After additional thoughts
+     * Stats + Memory - no objections
+     * Spells with counters where counters = triggers - no objections
+     * Effects with state and stateless effects - no objections (allows for QuestEffect and AIScriptEffect)
+     * StatsEngine embeddable everywhere
+     * Additional thought required to ScriptingContext (basically, it's about hiding multiple entities-like inside one)
+     * SpellsEngine, StatsEngine, QuestsEngine, ItemsEngine, AIEngine (can be grouped arbitrary, an entity can
+     * contain multiple ones, and that is managed with TargetSelectors, allows for weird stuff)
+     * I need delta collections, SyncObjectId (inside EntityId) and SyncObject messages
+     */
+    /*
+public class SpellInvocation
+{
+   public SpellDef Def { get; set; }
+   public Guid SpellGuid { get; set; }
+}
+public abstract class SpellEffectDef : BaseDef
+{
+   public abstract void Attach(Spell spell);
+   public abstract void Update(Spell spell);
+   public abstract void Detach(Spell spell);
+}
 
-    public class StatsDef : BaseDef
-    {
+public class StatsDef : BaseDef
+{
 
-    }
+}
 
-    public class CounterDef : BaseDef
-    {
+public class CounterDef : BaseDef
+{
 
-    }
-    public class StatDef : BaseDef
-    {
+}
+public class StatDef : BaseDef
+{
 
-    }
-    public struct StatKey
-    {
-        public StatDef Stat;
-        public EntityId Eid;
-    }
-    public struct StatModifier
-    {
+}
+public struct StatKey
+{
+   public StatDef Stat;
+   public EntityId Eid;
+}
+public struct StatModifier
+{
 
-    }
-    [GenerateSync]
-    class StatsEngine : SyncObject
-    {
-        //we have a series of stats, both targeted and not
-        //I can add modifier to a statKey = stat + target
-        //I can get a value
-        //I can remove modifier of a statKey
-        //I can add modifier for a time
-        public float GetStatValue(StatKey statKey)
-        {
-            return 0f;
-        }
+}
+[GenerateSync]
+class StatsEngine : SyncObject
+{
+   //we have a series of stats, both targeted and not
+   //I can add modifier to a statKey = stat + target
+   //I can get a value
+   //I can remove modifier of a statKey
+   //I can add modifier for a time
+   public float GetStatValue(StatKey statKey)
+   {
+       return 0f;
+   }
 
-        [Sync(SyncType.Server)]
-        public virtual void SetModifier(StatKey statKey, StatModifier mod)
-        {
+   [Sync(SyncType.Server)]
+   public virtual void SetModifier(StatKey statKey, StatModifier mod)
+   {
 
-        }
-        [Sync(SyncType.Server)]
-        public virtual void SetTimedModifier(StatKey statKey, StatModifier mod, float time)
-        {
+   }
+   [Sync(SyncType.Server)]
+   public virtual void SetTimedModifier(StatKey statKey, StatModifier mod, float time)
+   {
 
-        }
-        [Sync(SyncType.Server)]
-        public virtual void RemoveModifier(StatKey statKey)
-        {
+   }
+   [Sync(SyncType.Server)]
+   public virtual void RemoveModifier(StatKey statKey)
+   {
 
-        }
-    }
-    public struct SpellId
-    {
-        public long Id { get; set; }
-    }
-    [GenerateSync]
-    public class SpellsEngine : SyncObject
-    {
-        public NetworkEntity Owner;
-        [Sync(SyncType.Client)]
-        public virtual Dictionary<SpellId, Spell> Spells { get; set; }
+   }
+}
+public struct SpellId
+{
+   public long Id { get; set; }
+}
+[GenerateSync]
+public class SpellsEngine : SyncObject
+{
+   public NetworkEntity Owner;
+   [Sync(SyncType.Client)]
+   public virtual Dictionary<SpellId, Spell> Spells { get; set; }
 
-        [Sync(SyncType.AuthorityClient)]
-        public virtual void CastSpell(SpellInvocation cast)
-        {
+   [Sync(SyncType.AuthorityClient)]
+   public virtual void CastSpell(SpellInvocation cast)
+   {
 
-        }
-        [Sync(SyncType.AuthorityClient)]
-        public virtual void StopSpell(Guid spellGuid)
-        {
+   }
+   [Sync(SyncType.AuthorityClient)]
+   public virtual void StopSpell(Guid spellGuid)
+   {
 
-        }
-    }
+   }
+}
 
-    public struct SyncronizedTime
-    {
-        public ulong Time { get; set; }
-    }
-    [GenerateSync]
-    public abstract class Counter : SyncObject
-    {
-        public abstract void Init(Spell spell);
-    }
-    static class DefToType
-    {
-        public static Type GetInstanceTypeFromDef(Type type)
-        {
-            return null;
-        }
-    }
+public struct SyncronizedTime
+{
+   public ulong Time { get; set; }
+}
+[GenerateSync]
+public abstract class Counter : SyncObject
+{
+   public abstract void Init(Spell spell);
+}
+static class DefToType
+{
+   public static Type GetInstanceTypeFromDef(Type type)
+   {
+       return null;
+   }
+}
 
-    [GenerateSync]
-    public abstract class Spell : SyncObject
-    {
-        [Sync(SyncType.Client)]
-        public virtual ScriptingContext Ctx { get; set; }
-        [Sync(SyncType.Client)]
-        public virtual SpellDef Def { get; set; }
-        [Sync(SyncType.Client)]
-        public virtual SyncronizedTime StartTime { get; set; }
-        [Sync(SyncType.Master)]
-        public virtual SyncronizedTime LastUpdateTime { get; set; }
-        [Sync(SyncType.Master)]
-        public virtual List<Spell> NestedSpells { get; set; }
-        [Sync(SyncType.AuthorityClient)]
-        public virtual Counter CounterSuccess { get; set; }
-        [Sync(SyncType.AuthorityClient)]
-        public virtual Counter CounterFail { get; set; }
-
-
-        public bool TryStart(NetworkEntity owner, SyncronizedTime currentTime)
-        {
-            foreach (var p in Def.StartPredicates)
-                if (!p.Def.Check(Ctx))
-                    return false;
-            Ctx.ProcessingEntity = owner;
-            foreach(var effect in Def.Effects)
-                effect.Def.Attach(this);
-            foreach (var impact in Def.ImpactsOnStart)
-                impact.Def.Apply(Ctx);
-            CounterSuccess = SyncObject.New<Counter>(DefToType.GetInstanceTypeFromDef(Def.Succees.Def.GetType()));
-            CounterSuccess.Init(this);
-            CounterFail = SyncObject.New<Counter>(DefToType.GetInstanceTypeFromDef(Def.Fail.Def.GetType()));
-            CounterSuccess.Init(this);
-            return true;
-        }
-        public void Update(NetworkEntity owner, SyncronizedTime currentTime)
-        {
-            Ctx.ProcessingEntity = owner;
-            foreach (var effect in Def.Effects)
-                effect.Def.Update(this);
-            foreach (var nestedSpell in NestedSpells)
-            {
-                nestedSpell.Update(owner, currentTime);
-            }
-        }
-        public void OnSpellEnd(NetworkEntity owner, SyncronizedTime currentTime, bool isFail)
-        {
-            Ctx.ProcessingEntity = owner;
-            foreach (var effect in Def.Effects)
-                effect.Def.Detach(this);
-            foreach (var impact in Def.ImpactsOnEnd)
-                impact.Def.Apply(Ctx);
-            if(isFail)
-                foreach (var impact in Def.ImpactsOnFail)
-                    impact.Def.Apply(Ctx);
-            else
-                foreach (var impact in Def.ImpactsOnSuccess)
-                    impact.Def.Apply(Ctx);
-            foreach (var nestedSpell in NestedSpells)
-            {
-                nestedSpell.OnSpellEnd(owner, currentTime, isFail);
-            }
-        }
-    }
-    public class SpellDef : BaseDef
-    {
-        public float Duration { get; set; }
-        public bool IsInfinite { get; set; }
-        public DefRef<StatsDef> Stats { get; set; }
-
-        public List<DefRef<SpellEffectDef>> Effects { get; set; }
-        public List<DefRef<IImpactDef>> ImpactsOnStart { get; set; }
-        public List<DefRef<IImpactDef>> ImpactsOnFail { get; set; }
-        public List<DefRef<IImpactDef>> ImpactsOnSuccess { get; set; }
-        public List<DefRef<IImpactDef>> ImpactsOnEnd { get; set; }
-
-        public List<DefRef<SpellDef>> SubSpells { get; set; }
-
-        public List<DefRef<IPredicateDef>> StartPredicates { get; set; }
-
-        public DefRef<CounterDef> Succees { get; set; }
-        public DefRef<CounterDef> Fail { get; set; }
-    }
+[GenerateSync]
+public abstract class Spell : SyncObject
+{
+   [Sync(SyncType.Client)]
+   public virtual ScriptingContext Ctx { get; set; }
+   [Sync(SyncType.Client)]
+   public virtual SpellDef Def { get; set; }
+   [Sync(SyncType.Client)]
+   public virtual SyncronizedTime StartTime { get; set; }
+   [Sync(SyncType.Master)]
+   public virtual SyncronizedTime LastUpdateTime { get; set; }
+   [Sync(SyncType.Master)]
+   public virtual List<Spell> NestedSpells { get; set; }
+   [Sync(SyncType.AuthorityClient)]
+   public virtual Counter CounterSuccess { get; set; }
+   [Sync(SyncType.AuthorityClient)]
+   public virtual Counter CounterFail { get; set; }
 
 
+   public bool TryStart(NetworkEntity owner, SyncronizedTime currentTime)
+   {
+       foreach (var p in Def.StartPredicates)
+           if (!p.Def.Check(Ctx))
+               return false;
+       Ctx.ProcessingEntity = owner;
+       foreach(var effect in Def.Effects)
+           effect.Def.Attach(this);
+       foreach (var impact in Def.ImpactsOnStart)
+           impact.Def.Apply(Ctx);
+       CounterSuccess = SyncObject.New<Counter>(DefToType.GetInstanceTypeFromDef(Def.Succees.Def.GetType()));
+       CounterSuccess.Init(this);
+       CounterFail = SyncObject.New<Counter>(DefToType.GetInstanceTypeFromDef(Def.Fail.Def.GetType()));
+       CounterSuccess.Init(this);
+       return true;
+   }
+   public void Update(NetworkEntity owner, SyncronizedTime currentTime)
+   {
+       Ctx.ProcessingEntity = owner;
+       foreach (var effect in Def.Effects)
+           effect.Def.Update(this);
+       foreach (var nestedSpell in NestedSpells)
+       {
+           nestedSpell.Update(owner, currentTime);
+       }
+   }
+   public void OnSpellEnd(NetworkEntity owner, SyncronizedTime currentTime, bool isFail)
+   {
+       Ctx.ProcessingEntity = owner;
+       foreach (var effect in Def.Effects)
+           effect.Def.Detach(this);
+       foreach (var impact in Def.ImpactsOnEnd)
+           impact.Def.Apply(Ctx);
+       if(isFail)
+           foreach (var impact in Def.ImpactsOnFail)
+               impact.Def.Apply(Ctx);
+       else
+           foreach (var impact in Def.ImpactsOnSuccess)
+               impact.Def.Apply(Ctx);
+       foreach (var nestedSpell in NestedSpells)
+       {
+           nestedSpell.OnSpellEnd(owner, currentTime, isFail);
+       }
+   }
+}
+public class SpellDef : BaseDef
+{
+   public float Duration { get; set; }
+   public bool IsInfinite { get; set; }
+   public DefRef<StatsDef> Stats { get; set; }
 
-    public class SubSpellDef : SpellDef
-    {
-        public float Offset { get; set; }
-        public int RepeatTimes { get; set; }
-        public float Period { get; set; }
-        public float PeriodicDuration { get; set; }
-    }
+   public List<DefRef<SpellEffectDef>> Effects { get; set; }
+   public List<DefRef<IImpactDef>> ImpactsOnStart { get; set; }
+   public List<DefRef<IImpactDef>> ImpactsOnFail { get; set; }
+   public List<DefRef<IImpactDef>> ImpactsOnSuccess { get; set; }
+   public List<DefRef<IImpactDef>> ImpactsOnEnd { get; set; }
+
+   public List<DefRef<SpellDef>> SubSpells { get; set; }
+
+   public List<DefRef<IPredicateDef>> StartPredicates { get; set; }
+
+   public DefRef<CounterDef> Succees { get; set; }
+   public DefRef<CounterDef> Fail { get; set; }
+}
 
 
 
-    //paradox-style scripting
-    //every predicate and impact has a scope attached to it
-    //for Allods this meant, that they've got a locked entity
-    //here I'm not yet sure
-    //in case it means that, I would have to send stuff across the network in the impact tree for every context switch
-    //and at the same time somehow be able to use "this" and other context stuff (sent with it?)
-    //then the problem of item transactions and the like arrives
-    //at the same time it is solved somewhat elegantntly, as transaction can be thought of as spawning an entity which executes next stuff with a context
-    //seems not that perfomant, but not that bad either, I would have to pass contextes around and keep replications and the like
+public class SubSpellDef : SpellDef
+{
+   public float Offset { get; set; }
+   public int RepeatTimes { get; set; }
+   public float Period { get; set; }
+   public float PeriodicDuration { get; set; }
+}
 
-    //buffs instead of spells
-    //effects + impacts + predicates for buffs
-    //context for implicit roots, transactions as special commands/scope switches, transparent scope/impact scripting, with scopes as imputs
-    static class Scripting
-    {
-    }*/
+
+
+//paradox-style scripting
+//every predicate and impact has a scope attached to it
+//for Allods this meant, that they've got a locked entity
+//here I'm not yet sure
+//in case it means that, I would have to send stuff across the network in the impact tree for every context switch
+//and at the same time somehow be able to use "this" and other context stuff (sent with it?)
+//then the problem of item transactions and the like arrives
+//at the same time it is solved somewhat elegantntly, as transaction can be thought of as spawning an entity which executes next stuff with a context
+//seems not that perfomant, but not that bad either, I would have to pass contextes around and keep replications and the like
+
+//buffs instead of spells
+//effects + impacts + predicates for buffs
+//context for implicit roots, transactions as special commands/scope switches, transparent scope/impact scripting, with scopes as imputs
+static class Scripting
+{
+}*/
     [MessagePackObject(true)]
     public class ScriptingContext
     {
@@ -327,14 +328,15 @@ namespace Yogollag
     }
     public class CheckEntityStatDef : BaseDef, IPredicateDef
     {
-        public string StatName { get; set; }
+        public DefRef<StatDef> StatDef { get; set; }
         public float MoreThan { get; set; } = float.MinValue;
         public float LessThan { get; set; } = float.MaxValue;
         public bool Check(ScriptingContext ctx)
         {
             var statEntity = ctx.ProcessingEntity as IStatEntity;
-            if (statEntity.Stats.TryGetValue(StatName, out var val))
-                return MoreThan < val && LessThan > val;
+            BaseStat stat = statEntity.StatsEngine.Stats.SingleOrDefault(x => x.StatDef == StatDef);
+            if (stat != null)
+                return MoreThan < stat.Value && LessThan > stat.Value;
             else
                 return false;
         }
@@ -379,7 +381,7 @@ namespace Yogollag
 
     public class ChangeEntityStatDef : BaseDef, IImpactDef
     {
-        public string StatName { get; set; }
+        public DefRef<StatDef> StatDef { get; set; }
         public float? Set { get; set; }
         public float? Change { get; set; }
         public void Apply(ScriptingContext ctx)
@@ -387,18 +389,13 @@ namespace Yogollag
             var statEntity = ctx.ProcessingEntity as IStatEntity;
             if (statEntity == null)
                 return;
+            BaseStat stat = statEntity.StatsEngine.Stats.SingleOrDefault(x => x.StatDef == StatDef);
+            if (stat == null)
+                return;
             if (Set.HasValue)
-                statEntity.Stats[StatName] = Set.Value;
+                ((LinearStat)stat).Set(Set.Value);
             if (Change.HasValue)
-            {
-                if (statEntity.Stats.TryGetValue(StatName, out var prevVal))
-                    statEntity.Stats[StatName] = prevVal + Change.Value;
-                else
-                    statEntity.Stats[StatName] = Change.Value;
-
-            }
-            statEntity.Stats = statEntity.Stats;
-
+                ((LinearStat)stat).Set(Change.Value + stat.Value);
         }
     }
 }
