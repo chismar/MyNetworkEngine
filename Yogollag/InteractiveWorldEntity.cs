@@ -13,7 +13,7 @@ namespace Yogollag
 {
     [GenerateSync]
     public abstract class InteractiveWorldEntity : GhostedEntity,
-        IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable
+        IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject
     {
         public VoltBody PhysicsBody { get; set; }
         Vec2 _pos;

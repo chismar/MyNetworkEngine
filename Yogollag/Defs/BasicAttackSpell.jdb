@@ -3,9 +3,10 @@
     "Duration":0.3,
     "ImpactOnSuccess": {
         "$type": "AllInCircle",
-        "Size":10,
+        "Size":100,
         "Impact": {
             "$type": "ChangeEntityStat",
+            "StatDef": "/Health",
             "Change":-100
         }
     }

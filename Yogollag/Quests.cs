@@ -42,7 +42,9 @@ namespace Yogollag
             VoltBody[] bodies = null;
             lock (world)
             {
-                var buffer = world.QueryCircle(((IPositionedEntity)tgt).Position.ToVolt(), Size.Def.Calc(ctx));
+                var pos = ((IPositionedEntity)tgt).Position.ToVolt();
+                var size = Size.Def.Calc(ctx);
+                var buffer = world.QueryCircle(pos, size);
                 if (buffer.Count != 0)
                     bodies = new VoltBody[buffer.Count];
                 for (int i = 0; i < buffer.Count; i++)

@@ -83,7 +83,7 @@ namespace Yogollag
             CastSpell(id, cast);
             return id;
         }
-        [Sync(SyncType.AuthorityClient)]        
+        [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
             if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false)
@@ -101,6 +101,7 @@ namespace Yogollag
             inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity));
             Task.Run(async () =>
             {
+                NetworkEntity.CurrentlyExecutingInContext.Value = default;
                 await Task.Delay(TimeSpan.FromSeconds(inst.Cast.Def.Duration));
                 FinishSpell(id);
             });

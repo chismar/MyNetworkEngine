@@ -165,35 +165,7 @@ namespace CodeGen
 
         }
 
-        Scriban.Template _objectMessageTemplate = Scriban.Template.Parse(@"
-            [ReverseUnion({{id}}, typeof(ServerMessage))]
-            public class {{entity}}{{method}}Message : EntityMessage
-            {
-                {{ for arg in arguments }}
-                    public {{ arg.type }} {{ arg.name }} { get; set; }
-                {{ end }}
-                
-                public override void Run(NetworkEntity entity)
-                {
-/*
-                    (({{class}})entity).{{method}}(
-                    {{ for arg in arguments 
-                        if for.last == true 
-                            break 
-                        end }}
-                    {{ arg.name }},
-                    {{ end }}
-                    {{ for arg in arguments 
-                        if for.last == false 
-                            continue 
-                        end }}
-                    {{ arg.name }}
-                    {{ end }}
-                    );
-*/
-                }
-            }
-            ");
+        Scriban.Template _objectMessageTemplate => _messageTemplate;
         Scriban.Template _messageTemplate = Scriban.Template.Parse(@"
             [ReverseUnion({{id}}, typeof(ServerMessage))]
             public class {{entity}}{{method}}Message : EntityMessage
@@ -202,7 +174,7 @@ namespace CodeGen
                     public {{ arg.type }} {{ arg.name }} { get; set; }
                 {{ end }}
                 
-                public override void Run(NetworkEntity entity)
+                public override void Run(object entity)
                 {
                     (({{class}})entity).{{method}}(
                     {{ for arg in arguments 
@@ -259,6 +231,9 @@ namespace CodeGen
                 {{ for syncProp in sync }}
                     public override {{ syncProp.type }} {{ syncProp.name }} { get => base.{{ syncProp.name }}; 
                     set { 
+                        {{if syncProp.ghost}}
+                        ((SyncObject)base.{{syncProp.name}})?.SetParentEntity(null);
+                        {{end}}
                         base.{{ syncProp.name }} = value; 
                         OnPropChanged({{syncProp.index}}); 
                         {{if syncProp.ghost}}
@@ -367,8 +342,7 @@ namespace CodeGen
                     {{end}}
                 }";
 
-        Scriban.Template _syncSubObjectTemplate = Scriban.Template.Parse(_syncObjectTemplateString + @"}
-        ");
+        Scriban.Template _syncSubObjectTemplate => _syncEntityTemplate;
         Scriban.Template _syncEntityTemplate = Scriban.Template.Parse(_syncObjectTemplateString + @"
                 {{for syncMethod in methods}}
                 public override void {{syncMethod.name}}(
@@ -386,7 +360,7 @@ namespace CodeGen
                     {{ end }}
                 )
                 {
-                    if(IsCurrentlyExecuting)
+                    if(ParentEntity.IsCurrentlyExecuting)
                     {
                         base.{{syncMethod.name}}({{ for arg in syncMethod.arguments 
                                 if for.last == true 

@@ -178,22 +178,28 @@ namespace Yogollag
                     if (charLikeMovement.PhysicsBody == null)
                     {
                         var pos = ((IPositionedEntity)ghost).Position;
-                        var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
-                        var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape);
-                        body.UserData = ghost.Id;
-                        charLikeMovement.PhysicsBody = body;
+                        lock (_physicsWorld)
+                        {
+                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                            body.UserData = ghost.Id;
+                            charLikeMovement.PhysicsBody = body;
+                        }
                     }
                     charLikeMovement.InterpolationUpdate(deltaTime);
                 }
-                if (ghost is InteractiveWorldEntity inter)
+                if (ghost is IVoltSimpleObject inter)
                 {
                     if (inter.PhysicsBody == null)
                     {
                         var pos = ((IPositionedEntity)ghost).Position;
-                        var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
-                        var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
-                        body.UserData = ghost.Id;
-                        inter.PhysicsBody = body;
+                        lock(_physicsWorld)
+                        {
+                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                            var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                            body.UserData = ghost.Id;
+                            inter.PhysicsBody = body;
+                        }
                     }
                     else
                         inter.PhysicsBody.Set(new Vector2(inter.Position.X, inter.Position.Y), 1f);
@@ -204,6 +210,10 @@ namespace Yogollag
             tick.Wait();
         }
 
+    }
+    public interface IVoltSimpleObject : IPositionedEntity
+    {
+        VoltBody PhysicsBody { get; set; }
     }
     public class SimpleClient
     {
@@ -305,7 +315,7 @@ namespace Yogollag
                         charLikeMovement.InterpolationUpdate(deltaTime);
                     }
                 }
-                if (ghost is InteractiveWorldEntity inter)
+                if (ghost is IVoltSimpleObject inter)
                 {
                     if (inter.PhysicsBody == null)
                     {
@@ -567,7 +577,7 @@ namespace Yogollag
             }
         }
     }
-    interface IPositionedEntity
+    public interface IPositionedEntity
     {
         Vec2 Position { get; set; }
     }
@@ -638,7 +648,7 @@ namespace Yogollag
         }
 
         [Sync(SyncType.AuthorityClient)]
-        public void DropItem(Item item)
+        public virtual void DropItem(Item item)
         {
             int slot = Array.IndexOf(Items, item);
             if (slot == -1)
@@ -649,7 +659,7 @@ namespace Yogollag
         }
 
         [Sync(SyncType.AuthorityClient)]
-        public void AddItem(Item item)
+        public virtual void AddItem(Item item)
         {
             InitItems();
             int freeIndex = Array.IndexOf(Items, null);
@@ -662,14 +672,12 @@ namespace Yogollag
                 Items = Items;
             }
         }
-        [Sync(SyncType.AuthorityClient)]
         public bool CanAddItem()
         {
-            InitItems();
             return Array.IndexOf(Items, null) != -1;
         }
         [Sync(SyncType.AuthorityClient)]
-        public void RemoveItem(long itemId)
+        public virtual void RemoveItem(long itemId)
         {
             InitItems();
             var index = Array.FindIndex(Items, x => x.ItemId == itemId);
@@ -679,7 +687,7 @@ namespace Yogollag
             Items = Items;
         }
         [Sync(SyncType.AuthorityClient)]
-        public void MoveItem(long itemId, int slot)
+        public virtual void MoveItem(long itemId, int slot)
         {
             InitItems();
             if (slot < 0 || slot >= Items.Length)
@@ -716,7 +724,6 @@ namespace Yogollag
         public override void OnInit()
         {
             _spriteRenderer.RenDef = CharDef;
-            Inventory.CurrentServer = CurrentServer;
             Inventory.Owner = this;
             Inventory.Size = 10;
         }

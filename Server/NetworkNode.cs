@@ -153,6 +153,7 @@ namespace NetworkEngine
             ghostEnt.Id = obj.Id;
             ghostEnt.ServerId = obj.ServerId;
             ghostEnt.AuthorityServerId = obj.AuthorityServerId;
+            ghostEnt.CurrentServer = obj.CurrentServer;
             NetDataWriter stream = null;
             ((IGhost)obj).Serialize(ref stream, true);
             ghost.Deserialize(new NetDataReader(stream.Data));
@@ -246,12 +247,25 @@ namespace NetworkEngine
     public abstract class SyncObject
     {
         [IgnoreMember]
-        public NetworkNode CurrentServer;
+        public NetworkNode CurrentServer => ParentEntity.CurrentServer;
         [IgnoreMember]
         public NetworkEntity ParentEntity;
+        [Sync(SyncType.Client)]
+        public virtual int SyncId { get; set; }
+        public EntityId Id => new EntityId(ParentEntity.Id.Id1, ParentEntity.Id.Id2, SyncId);
         public virtual void SetParentEntityRecursive() { }
         public void SetParentEntity(NetworkEntity parentEntity)
         {
+            if (ParentEntity != null && ParentEntity.IsMaster && parentEntity != ParentEntity)
+            {
+                ParentEntity.SubObjects.Remove(SyncId);
+                SyncId = 0;
+            }
+            if (parentEntity != null && parentEntity.IsMaster && parentEntity != ParentEntity)
+            {
+                SyncId = ++parentEntity.SyncObjectIdCounter;
+                parentEntity.SubObjects[SyncId] = this;
+            }
             ParentEntity = parentEntity;
             SetParentEntityRecursive();
         }
@@ -321,10 +335,11 @@ namespace NetworkEngine
     class DestroyEntityMessage : NetworkNodeMessage
     {
         private EntityId eid;
-
-        public DestroyEntityMessage(EntityId eid)
+        public NetworkEntity Ent;
+        public DestroyEntityMessage(NetworkEntity ent)
         {
-            this.Eid = eid;
+            this.Eid = ent.Id;
+            Ent = ent;
         }
 
         public EntityId Eid { get => eid; set => eid = value; }
@@ -572,6 +587,8 @@ namespace NetworkEngine
 
         private void RemoveReplica(NetworkNodeId fromSid, UnreplicateEntity ure)
         {
+            var ent = _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Get(ure.Id);
+            ent.Clear();
             _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Remove(ure.Id);
         }
 
@@ -581,6 +598,7 @@ namespace NetworkEngine
             var serverEntity = (GhostedEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(re.EntityType));
             serverEntity.Id = re.Id;
             serverEntity.ServerId = fromSid;
+            serverEntity.CurrentServer = this;
             ((IGhost)serverEntity).Deserialize(new NetDataReader(re.InitialState));
             serverEntity.Init();
             _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Add(serverEntity);
@@ -646,7 +664,7 @@ namespace NetworkEngine
         }
         public void HandleEntityMessage(EntityMessage message)
         {
-            var eid = message.EntityId;
+            var eid = new EntityId(message.EntityId.Id1, message.EntityId.Id2);
             var serverId = GetNodeIDForEntity(eid);
             if (serverId.IsInvalid)
                 return;
@@ -677,6 +695,7 @@ namespace NetworkEngine
         void OnEntityCreated(NetworkEntity newEntity)
         {
             newEntity.ServerId = Id;
+            newEntity.CurrentServer = this;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
             newEntity.OnCreate();
             newEntity.Init();
@@ -693,8 +712,8 @@ namespace NetworkEngine
         }
         public void Destroy(EntityId eid)
         {
+            _internalMessages.Enqueue(new DestroyEntityMessage(_entities.Get(eid)));
             _entities.Remove(eid);
-            _internalMessages.Enqueue(new DestroyEntityMessage(eid));
         }
         public void Teleport(EntityId eid, NetworkNodeId sid)
         {
@@ -755,6 +774,7 @@ namespace NetworkEngine
                 case DestroyEntityMessage dem:
                     {
                         var eid = dem.Eid;
+                        dem.Ent.Clear();
                         foreach (var remoteServer in _remoteNetworkNodes)
                             if (remoteServer.Value.EntitiesReplicatedToRemote.ContainsKey(eid))
                             {
@@ -852,7 +872,10 @@ namespace NetworkEngine
                         {
                             entity.Value.Messages.TryDequeue(out var message);
                             CurrentServerCallbackId.Value = message.From;
-                            message.Run(entity.Value.Entity);
+                            if (message.EntityId.SubObjectId != 0)
+                                message.Run(entity.Value.Entity.Resolve(message.EntityId.SubObjectId));
+                            else
+                                message.Run(entity.Value.Entity);
                         }
                         NetworkEntity.CurrentlyExecutingInContext.Value = EntityId.Invalid;
                     }));
@@ -996,16 +1019,25 @@ namespace NetworkEngine
     public abstract class NetworkEntity
     {
         public static AsyncLocal<EntityId> CurrentlyExecutingInContext = new AsyncLocal<EntityId>();
-        protected bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id;
+        public bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id;
         public bool IsMaster => CurrentServer.Id == ServerId;
         public NetworkNode CurrentServer;
         public NetworkNodeId ServerId;
         public NetworkNodeId AuthorityServerId;
         public EntityId Id;
+        [Sync(SyncType.Client)]
+        public virtual int SyncObjectIdCounter { get; set; }
         public NetworkEntity ParentEntity => this;
         public virtual void SetParentEntityRecursive() { }
         public virtual bool HasAuthority { get; set; }
         public virtual void OnCreate() { }
+        public Dictionary<int, SyncObject> SubObjects = new Dictionary<int, SyncObject>();
+        public SyncObject Resolve(int id)
+        {
+            if (SubObjects.TryGetValue(id, out var so))
+                return so;
+            return null;
+        }
         public void Init()
         {
             SetParentEntityRecursive();
@@ -1013,6 +1045,7 @@ namespace NetworkEngine
         }
         public virtual void OnInit() { }
         public virtual void OnDestroy() { }
+        public virtual void Clear() { }
         protected void CheckStream(NetDataReader reader, int tag)
         {
             var check = reader.GetInt();
@@ -1049,7 +1082,7 @@ namespace NetworkEngine
     public abstract class EntityMessage : ServerMessage
     {
         public EntityId EntityId { get; set; }
-        public abstract void Run(NetworkEntity entity);
+        public abstract void Run(object entity);
     }
 
     public class RemoteConnectionToken
@@ -1063,13 +1096,20 @@ namespace NetworkEngine
         public static EntityId Invalid => default;
         public NetworkNodeId Id1;
         public long Id2;
-        public long SubObjectId;
+        public int SubObjectId;
 
         public EntityId(NetworkNodeId id1, long id2)
         {
             Id1 = id1;
             Id2 = id2;
             SubObjectId = 0;
+        }
+
+        public EntityId(NetworkNodeId id1, long id2, int subObjectId)
+        {
+            Id1 = id1;
+            Id2 = id2;
+            SubObjectId = subObjectId;
         }
 
         public override bool Equals(object obj)
