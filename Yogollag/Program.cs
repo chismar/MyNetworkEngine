@@ -193,7 +193,7 @@ namespace Yogollag
                     if (inter.PhysicsBody == null)
                     {
                         var pos = ((IPositionedEntity)ghost).Position;
-                        lock(_physicsWorld)
+                        lock (_physicsWorld)
                         {
                             var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
                             var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
@@ -223,6 +223,7 @@ namespace Yogollag
         Task<bool> _connected;
         RenderWindow _win;
         View _charView;
+        LocationCreator _debugCreator;
         public void Start(RemoteConnectionToken server)
         {
             _node = new NetworkNode();
@@ -234,6 +235,11 @@ namespace Yogollag
             _charView = new View(new FloatRect(-500, -300, 256, 180));
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
+            var map = DefsHolder.Instance.LoadDef<MapDef>("/TestMapDef");
+            _debugCreator = new LocationCreator(map.Locations[0].CreatorDef, 0);
+            _debugCreator.Setup(map.Locations[0].RootSite, map.Locations[0].Pos, map.Locations[0].Rot);
+            while (_debugCreator.Tick()) ;
+
         }
 
         private void RenderWindow_Closed(object sender, EventArgs e)
@@ -346,10 +352,37 @@ namespace Yogollag
             _charGui.Render(_node, _win, character as CharacterEntity, _charView);
             var tick = _node.Tick();
             _physicsWorld.Update();
+            Transform _rootTransform = Transform.Identity;
+            DrawSite(_debugCreator._rootInstance, _rootTransform);
             _win.Display();
             tick.Wait();
         }
 
+        RectangleShape _rectShape = new RectangleShape();
+        private void DrawSite(MapSiteInstance site, Transform transform)
+        {
+            _rectShape.Size = new Vector2f(site.Def.SizeX, site.Def.SizeY);
+            _rectShape.Position = transform.TransformPoint(site.Pos.X, site.Pos.Y);
+            _rectShape.Rotation = site.Rot;
+            _rectShape.FillColor = Color.Transparent;
+            _rectShape.OutlineThickness = 1;
+            _rectShape.OutlineColor = Color.Red;
+            _rectShape.Draw(_win, RenderStates.Default);
+            foreach (var subSite in site.SubSites)
+            {
+                var siteT = transform;
+                siteT.Translate(new Vector2f(site.Pos.X, site.Pos.Y));
+                //siteT.Rotate(subSite.Value.Rot);
+                DrawSite(subSite.Value, siteT);
+            }
+            foreach (var con in site.Connections)
+            {
+                var siteT = transform;
+                siteT.Translate(new Vector2f(site.Pos.X, site.Pos.Y));
+                //siteT.Rotate(con.Value.Rot);
+                DrawSite(con.Value, siteT);
+            }
+        }
     }
     public interface ICharacterLikeMovement
     {
@@ -845,7 +878,7 @@ namespace Yogollag
         }
         public void Tick()
         {
-            if (StatsEngine.Stats.Single(x=>x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Health")).Value <= 0)
+            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
         }
     }

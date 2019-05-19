@@ -1,0 +1,117 @@
+{
+    "$type": "MapDef",
+    "Locations": [
+        {
+            "$type": "Location",
+            "CreatorDef": {
+                "$type": "LocationCreator",
+                "Palette": [
+                    {
+                        "$type": "MapSite",
+                        "SizeX":10,
+                        "SizeY":13,
+                        /*"Connections": [
+                            {
+                                "$type": "SiteConnection",
+                                "Size":11,
+                                "Pos": {
+                                    "X":10,
+                                    "Y":15
+                                },
+                                "Rot":10
+                            }
+                        ]*/
+                    },{
+                        "$type": "MapSite",
+                        "SizeX":7,
+                        "SizeY":8,
+                        
+                    },
+                    {
+                        "$type": "MapSite",
+                        "SizeX":50,
+                        "SizeY":50,
+                        "Tags": [
+                            {
+                                "$type": "MapSiteTag",
+                                "$id": "RootTag"
+                            }
+                        ],
+                        "Connections": [
+                            {
+                                "$type": "SiteConnection",
+                                "Size":55,
+                                "Pos": {
+                                    "X":70,
+                                    "Y":10
+                                },
+                                //"Rot":10,
+                                "Tags": [ "$RootTag" ]
+                            }
+                        ],
+                        "SubSites": [
+                            {
+                                "$type": "SubSite",
+                                "Pos": {
+                                    "X":10,
+                                    "Y":10
+                                },
+                                //"Rot":5,
+                                "SizeX":15,
+                                "SizeY":15
+                            },
+                            {
+                                "$type": "SubSite",
+                                "Pos": {
+                                    "X":20,
+                                    "Y":10
+                                },
+                                //"Rot":35,
+                                "SizeX":15,
+                                "SizeY":15
+                            },
+                            {
+                                "$type": "SubSite",
+                                "Pos": {
+                                    "X":10,
+                                    "Y":30
+                                },
+                                //"Rot":56,
+                                "SizeX":15,
+                                "SizeY":15
+                            },
+                            {
+                                "$type": "SubSite",
+                                "Pos": {
+                                    "X":15,
+                                    "Y":35
+                                },
+                                //"Rot":81,
+                                "SizeX":15,
+                                "SizeY":15
+                            }
+                        ]
+                    }
+                ]
+            },
+            "RootSite": {
+                "$type": "MapSite",
+                "SubSites": [
+                    {
+                        "$type": "SubSite",
+                        "SizeX":150,
+                        "SizeY":150,
+                        //"Rot":30,
+                        "Pos": {
+                            "X":10,
+                            "Y":10
+                        },
+                        "Tags": [ "$RootTag" ]
+                    }
+                ],
+                "SizeX":2000,
+                "SizeY":2000
+            }
+        }
+    ]
+}
