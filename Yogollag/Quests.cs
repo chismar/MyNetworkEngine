@@ -50,6 +50,8 @@ namespace Yogollag
                 for (int i = 0; i < buffer.Count; i++)
                     bodies[i] = buffer[i];
             }
+            if (bodies == null)
+                return;
             foreach (var body in bodies)
             {
                 if (body.UserData is EntityId eid)

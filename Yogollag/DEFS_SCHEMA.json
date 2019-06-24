@@ -26,6 +26,8 @@
         "PointSelector",
         "RandomPointSelectorDef",
         "RandomPointSelector",
+        "BuildingEntityDef",
+        "BuildingEntity",
         "IEntityObjectDef",
         "IEntityObject",
         "InteractiveDef",
@@ -68,6 +70,16 @@
         "TileCategory",
         "MobDef",
         "Mob",
+        "IHasPhysicalBodyDef",
+        "IHasPhysicalBody",
+        "PhysicalBodyDef",
+        "PhysicalBody",
+        "PhysicalShapeDef",
+        "PhysicalShape",
+        "CirclePhysicalShapeDef",
+        "CirclePhysicalShape",
+        "BoxPhysicalShapeDef",
+        "BoxPhysicalShape",
         "IRenderableDef",
         "IRenderable",
         "SpriteRenderedDef",
@@ -180,6 +192,8 @@
             "PointSelector",
             "RandomPointSelectorDef",
             "RandomPointSelector",
+            "BuildingEntityDef",
+            "BuildingEntity",
             "InteractiveDef",
             "Interactive",
             "InteractionDef",
@@ -220,6 +234,14 @@
             "TileCategory",
             "MobDef",
             "Mob",
+            "PhysicalBodyDef",
+            "PhysicalBody",
+            "PhysicalShapeDef",
+            "PhysicalShape",
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape",
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape",
             "SpriteRenderedDef",
             "SpriteRendered",
             "CharacterEntityDef",
@@ -305,6 +327,9 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
+          "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
           "$ref": "#/definitions/InteractiveDef"
         },
         {
@@ -363,6 +388,18 @@
         },
         {
           "$ref": "#/definitions/MobDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
         },
         {
           "$ref": "#/definitions/SpriteRenderedDef"
@@ -511,6 +548,8 @@
             "PointSelector",
             "RandomPointSelectorDef",
             "RandomPointSelector",
+            "BuildingEntityDef",
+            "BuildingEntity",
             "IEntityObjectDef",
             "IEntityObject",
             "InteractiveDef",
@@ -553,6 +592,16 @@
             "TileCategory",
             "MobDef",
             "Mob",
+            "IHasPhysicalBodyDef",
+            "IHasPhysicalBody",
+            "PhysicalBodyDef",
+            "PhysicalBody",
+            "PhysicalShapeDef",
+            "PhysicalShape",
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape",
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape",
             "IRenderableDef",
             "IRenderable",
             "SpriteRenderedDef",
@@ -647,6 +696,9 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
+          "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
           "$ref": "#/definitions/IEntityObjectDef"
         },
         {
@@ -708,6 +760,21 @@
         },
         {
           "$ref": "#/definitions/MobDef"
+        },
+        {
+          "$ref": "#/definitions/IHasPhysicalBodyDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
         },
         {
           "$ref": "#/definitions/IRenderableDef"
@@ -1501,6 +1568,74 @@
         }
       ]
     },
+    "BuildingEntityDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BuildingEntityDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BuildingEntityDef",
+            "BuildingEntity"
+          ]
+        },
+        "PhysicalBodyDef": {
+          "$ref": "#/definitions/PhysicalBodyDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "BuildingEntityDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BuildingEntityDef",
+            "BuildingEntity"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntityDef"
+        }
+      ]
+    },
     "IEntityObjectDef": {
       "type": "object",
       "additionalProperties": false,
@@ -1544,6 +1679,8 @@
         "$type": {
           "type": "string",
           "enum": [
+            "BuildingEntityDef",
+            "BuildingEntity",
             "IEntityObjectDef",
             "IEntityObject",
             "MobDef",
@@ -1566,6 +1703,9 @@
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntityDef"
         },
         {
           "$ref": "#/definitions/IEntityObjectDef"
@@ -3042,6 +3182,411 @@
         },
         {
           "$ref": "#/definitions/MobDef"
+        }
+      ]
+    },
+    "IHasPhysicalBodyDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IHasPhysicalBodyDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IHasPhysicalBodyDef",
+            "IHasPhysicalBody"
+          ]
+        },
+        "PhysicalBodyDef": {
+          "$ref": "#/definitions/PhysicalBodyDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "IHasPhysicalBodyDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BuildingEntityDef",
+            "BuildingEntity",
+            "IHasPhysicalBodyDef",
+            "IHasPhysicalBody"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
+          "$ref": "#/definitions/IHasPhysicalBodyDef"
+        }
+      ]
+    },
+    "PhysicalBodyDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhysicalBodyDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PhysicalBodyDef",
+            "PhysicalBody"
+          ]
+        },
+        "Shapes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhysicalShapeDefField"
+          }
+        },
+        "IsStatic": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "PhysicalBodyDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PhysicalBodyDef",
+            "PhysicalBody"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyDef"
+        }
+      ]
+    },
+    "PhysicalShapeDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhysicalShapeDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PhysicalShapeDef",
+            "PhysicalShape"
+          ]
+        },
+        "SpriteDef": {
+          "$ref": "#/definitions/SpriteDefField"
+        },
+        "Offset": {
+          "$ref": "#/definitions/Vec2Field"
+        },
+        "Rotation": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "PhysicalShapeDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "PhysicalShapeDef",
+            "PhysicalShape",
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape",
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/PhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
+        }
+      ]
+    },
+    "CirclePhysicalShapeDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CirclePhysicalShapeDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape"
+          ]
+        },
+        "Radius": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "CirclePhysicalShapeDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        }
+      ]
+    },
+    "BoxPhysicalShapeDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BoxPhysicalShapeDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape"
+          ]
+        },
+        "SizeX": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "SizeY": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "BoxPhysicalShapeDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
         }
       ]
     },
@@ -4748,6 +5293,7 @@
         "TargetSelectorDef",
         "PointSelectorDef",
         "RandomPointSelectorDef",
+        "BuildingEntityDef",
         "IEntityObjectDef",
         "InteractiveDef",
         "InteractionDef",
@@ -4772,6 +5318,11 @@
         "SlotCategoryDef",
         "TileCategoryDef",
         "MobDef",
+        "IHasPhysicalBodyDef",
+        "PhysicalBodyDef",
+        "PhysicalShapeDef",
+        "CirclePhysicalShapeDef",
+        "BoxPhysicalShapeDef",
         "IRenderableDef",
         "SpriteRenderedDef",
         "CharacterEntityDef",
@@ -5256,6 +5807,9 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
+          "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
           "$ref": "#/definitions/IEntityObjectDef"
         },
         {
@@ -5317,6 +5871,21 @@
         },
         {
           "$ref": "#/definitions/MobDef"
+        },
+        {
+          "$ref": "#/definitions/IHasPhysicalBodyDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
         },
         {
           "$ref": "#/definitions/IRenderableDef"

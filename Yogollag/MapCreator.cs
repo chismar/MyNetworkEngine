@@ -39,12 +39,12 @@ namespace Yogollag
         }
         bool TryAttach()
         {
-            return _rand.NextDouble() > 0.0f;
+            return _rand.NextDouble() > 0.5f;
         }
 
         bool DoAttach()
         {
-            return _rand.NextDouble() > 0.0f;
+            return _rand.NextDouble() > 0.5f;
         }
         private void ProcessSite(MapSiteInstance site)
         {

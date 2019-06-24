@@ -252,6 +252,7 @@ namespace NetworkEngine
         public NetworkEntity ParentEntity;
         [Sync(SyncType.Client)]
         public virtual int SyncId { get; set; }
+        [IgnoreMember]
         public EntityId Id => new EntityId(ParentEntity.Id.Id1, ParentEntity.Id.Id2, SyncId);
         public virtual void SetParentEntityRecursive() { }
         public void SetParentEntity(NetworkEntity parentEntity)

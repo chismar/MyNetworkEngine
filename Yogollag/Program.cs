@@ -106,29 +106,29 @@ namespace Yogollag
                 ent.Job = defaultJob;
                 ent.Def = charDef;
                 ent.Name = name;
-                ent.Position = Vec2.Random(10, 10);
+                //ent.Position = Vec2.Random(10, 10);
             });
             CurrentServer.Replicate(charId, CurrentServer.CurrentServerCallbackId.Value, this);
             CurrentServer.GrantAuthority(charId, CurrentServer.CurrentServerCallbackId.Value);
-            CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 }; });
+            CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 }; });
             CurrentServer.Create<SimpleSpawner>((ent) =>
             {
-                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
                 ent.Def = DefsHolder.Instance.LoadDef<SimpleSpawnerDef>("/SimpleSpawnerTest");
             });
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
-                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
                 ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/OldTablet");
             });
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
-                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
                 ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/Journal");
             });
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
-                ent.Position = new Vec2() { X = (float)_random.NextDouble() * 30, Y = (float)_random.NextDouble() * 30 };
+                ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
                 ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/Wiskey");
             });
         }
@@ -195,10 +195,13 @@ namespace Yogollag
                         var pos = ((IPositionedEntity)ghost).Position;
                         lock (_physicsWorld)
                         {
-                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
-                            var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
-                            body.UserData = ghost.Id;
-                            inter.PhysicsBody = body;
+                            lock (_physicsWorld)
+                            {
+                                var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                                var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                                body.UserData = ghost.Id;
+                                inter.PhysicsBody = body;
+                            }
                         }
                     }
                     else
@@ -206,6 +209,7 @@ namespace Yogollag
                 }
             }
             var tick = _node.Tick();
+            lock(_physicsWorld)
             _physicsWorld.Update();
             tick.Wait();
         }
@@ -236,7 +240,7 @@ namespace Yogollag
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
             var map = DefsHolder.Instance.LoadDef<MapDef>("/TestMapDef");
-            _debugCreator = new LocationCreator(map.Locations[0].CreatorDef, 0);
+            _debugCreator = new LocationCreator(map.Locations[0].CreatorDef, new Random().Next());
             _debugCreator.Setup(map.Locations[0].RootSite, map.Locations[0].Pos, map.Locations[0].Rot);
             while (_debugCreator.Tick()) ;
 
@@ -295,9 +299,13 @@ namespace Yogollag
                     if (charLikeMovement.PhysicsBody == null)
                     {
                         var pos = ((IPositionedEntity)ghost).Position;
-                        var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10));
-                        body.UserData = ghost.Id;
-                        charLikeMovement.PhysicsBody = body;
+                        lock (_physicsWorld)
+                        {
+                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10));
+                            body.UserData = ghost.Id;
+                            charLikeMovement.PhysicsBody = body;
+
+                        }
                     }
                     else
                     {
@@ -325,11 +333,14 @@ namespace Yogollag
                 {
                     if (inter.PhysicsBody == null)
                     {
-                        var pos = ((IPositionedEntity)ghost).Position;
-                        var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
-                        var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
-                        body.UserData = ghost.Id;
-                        inter.PhysicsBody = body;
+                        lock (_physicsWorld)
+                        {
+                            var pos = ((IPositionedEntity)ghost).Position;
+                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                            var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                            body.UserData = ghost.Id;
+                            inter.PhysicsBody = body;
+                        }
                     }
                     else
                     {
@@ -351,36 +362,34 @@ namespace Yogollag
             }
             _charGui.Render(_node, _win, character as CharacterEntity, _charView);
             var tick = _node.Tick();
-            _physicsWorld.Update();
-            Transform _rootTransform = Transform.Identity;
+            lock (_physicsWorld)
+                _physicsWorld.Update();
+            HierarchyTransform _rootTransform = new HierarchyTransform(Vec2.New(0, 0), 0, null);
             DrawSite(_debugCreator._rootInstance, _rootTransform);
             _win.Display();
             tick.Wait();
         }
 
+
         RectangleShape _rectShape = new RectangleShape();
-        private void DrawSite(MapSiteInstance site, Transform transform)
+        private void DrawSite(MapSiteInstance site, HierarchyTransform parentTransform)
         {
+            var ownTransform = new HierarchyTransform(site.Pos, site.Rot, parentTransform);
+            ownTransform.DrawAsDir(_win, 0.3f);
             _rectShape.Size = new Vector2f(site.Def.SizeX, site.Def.SizeY);
-            _rectShape.Position = transform.TransformPoint(site.Pos.X, site.Pos.Y);
-            _rectShape.Rotation = site.Rot;
             _rectShape.FillColor = Color.Transparent;
             _rectShape.OutlineThickness = 1;
             _rectShape.OutlineColor = Color.Red;
-            _rectShape.Draw(_win, RenderStates.Default);
+            ownTransform.DrawShapeAt(_win, _rectShape, Vec2.New(_rectShape.Size.X, _rectShape.Size.Y), site.AttachedToBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
             foreach (var subSite in site.SubSites)
             {
-                var siteT = transform;
-                siteT.Translate(new Vector2f(site.Pos.X, site.Pos.Y));
                 //siteT.Rotate(subSite.Value.Rot);
-                DrawSite(subSite.Value, siteT);
+                DrawSite(subSite.Value, ownTransform);
             }
             foreach (var con in site.Connections)
             {
-                var siteT = transform;
-                siteT.Translate(new Vector2f(site.Pos.X, site.Pos.Y));
                 //siteT.Rotate(con.Value.Rot);
-                DrawSite(con.Value, siteT);
+                DrawSite(con.Value, ownTransform);
             }
         }
     }
@@ -878,7 +887,7 @@ namespace Yogollag
         }
         public void Tick()
         {
-            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Health")).Value <= 0)
+            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
         }
     }

@@ -37,7 +37,7 @@
             "Stats": [
                 {
                     "$type": "StatInstance",
-                    "Stat": "/Health",
+                    "Stat": "/Stats/Health",
                     "InitialValue":300
                 }
             ]

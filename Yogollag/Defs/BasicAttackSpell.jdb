@@ -6,7 +6,7 @@
         "Size":100,
         "Impact": {
             "$type": "ChangeEntityStat",
-            "StatDef": "/Health",
+            "StatDef": "/Stats/Health",
             "Change":-100
         }
     }

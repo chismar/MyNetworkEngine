@@ -63,7 +63,7 @@ namespace Yogollag
         {
             AI.Update();
             Locomotion.Tick();
-            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Health")).Value <= 0)
+            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
         }
 

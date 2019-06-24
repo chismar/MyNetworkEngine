@@ -23,7 +23,7 @@ namespace Definitions
         {
             var addr = (this as IDef).Address.ToString();
             var idx = addr.LastIndexOf('/');
-            return idx!=-1 ? addr.Substring(idx) : addr;
+            return idx!=-1 ? addr.Substring(idx + 1) : addr;
         }
         public override string ToString()
         {

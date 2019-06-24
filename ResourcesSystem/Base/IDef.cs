@@ -58,7 +58,7 @@ namespace Definitions
 
         public override string ToString()
         {
-            if (Col == -1 && Line == -1)
+            if (Col == 0 && Line == 0 && ProtoIndex == 0)
                 return Root;
             return $"{Root}:{Line}:{Col}:{ProtoIndex}";
         }
