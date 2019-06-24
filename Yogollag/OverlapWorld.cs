@@ -7,7 +7,7 @@ namespace Yogollag
 {
     class OverlapWorld
     {
-        List<OverlapShape> _shapes = new List<OverlapShape>();
+        public List<OverlapShape> _shapes = new List<OverlapShape>();
         private readonly float _sizeX;
         private readonly float _sizeY;
 
@@ -48,11 +48,16 @@ namespace Yogollag
         public Polygon2 Poly;
         public Rotation2 Rot;
         public Vector2 Pos;
+        public float RotAngles;
+        public Vec2 Size;
+        public bool CenterAtTheBottom;
         public OverlapBox(Vec2 pos, Vec2 size, float rot, bool centerAtTheBottom)
         {
+            CenterAtTheBottom = centerAtTheBottom;
+            Size = size;
             var hSize = size / 2;
             var polygon = centerAtTheBottom ?
-                new Polygon2(new[] { new Vector2(-hSize.X, 0), new Vector2(hSize.X, 0), new Vector2(hSize.X, size.Y), new Vector2(-hSize.X, size.Y) })
+                new Polygon2(new[] { new Vector2(-hSize.X, 0), new Vector2(hSize.X, 0), new Vector2(hSize.X, size.Y), new Vector2(-hSize.X, size.Y) }, new Vector2(0, 0))
                 :
                 new Polygon2(new[] { new Vector2(-hSize.X, -hSize.Y), new Vector2(hSize.X, -hSize.Y), new Vector2(hSize.X, hSize.Y), new Vector2(-hSize.X, hSize.Y) });
 
@@ -61,6 +66,7 @@ namespace Yogollag
             Poly = polygon;
             Rot = rotation;
             Pos = position;
+            RotAngles = rot;
         }
         internal override bool Outside(float sizeX, float sizeY)
         {

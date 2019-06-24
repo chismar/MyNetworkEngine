@@ -61,6 +61,10 @@ namespace SharpMath2
         /// </summary>
         public readonly bool Clockwise;
 
+        public Polygon2(Vector2[] vertices, Vector2 center) : this(vertices)
+        {
+            Center = center;
+        }
         /// <summary>
         /// Initializes a polygon with the specified vertices
         /// </summary>

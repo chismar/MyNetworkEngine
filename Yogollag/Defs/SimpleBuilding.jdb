@@ -1,0 +1,68 @@
+{
+    "$type": "BuildingEntity",
+    "PhysicalBodyDef": {
+        "$type": "PhysicalBody",
+        "IsStatic": true,
+        "Shapes": [
+            {
+                "$type": "BoxPhysicalShape",
+                "SpriteDef": {
+                    "$type": "Sprite",
+                    "SpriteSheetName": "Tiles",
+                    "X":4,
+                    "Y":0
+                },
+                "HasBody":false,
+                "SizeX":30,
+                "SizeY":30,
+            },
+            {
+                "$type": "BoxPhysicalShape",
+                "SpriteDef": {
+                    "$type": "Sprite",
+                    "SpriteSheetName": "Tiles",
+                    "X":9,
+                    "Y":2
+                },
+                "Offset":{
+                    "X":0,
+                    "Y":15
+                },
+                "SizeX":30,
+                "SizeY":2
+            },
+            {
+                "$type": "BoxPhysicalShape",
+                "SpriteDef": {
+                    "$type": "Sprite",
+                    "SpriteSheetName": "Tiles",
+                    "X":9,
+                    "Y":2
+                },
+                "Offset":{
+                    "X":-15,
+                    "Y":0
+                },
+                "Rotation":90,
+                "SizeX":30,
+                "SizeY":2
+            },
+            {
+                "$type": "BoxPhysicalShape",
+                "SpriteDef": {
+                    "$type": "Sprite",
+                    "SpriteSheetName": "Tiles",
+                    "X":9,
+                    "Y":2
+                },
+                "Offset":{
+                    "X":15,
+                    "Y":0
+                },
+                "Rotation":90,
+                "SizeX":30,
+                "SizeY":2
+            },
+        ]
+    }
+}

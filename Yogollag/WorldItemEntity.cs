@@ -24,6 +24,9 @@ namespace Yogollag
         public string Name { get; set; }
         public InteractiveDef Def { get { return Item.Interactive; } set { } }
 
+        [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
+
         public void Render(RenderTarget rt)
         {
             var sprite = Sprites.GetSprite(Item.Sprite);

@@ -698,7 +698,7 @@ namespace NetworkEngine
             newEntity.ServerId = Id;
             newEntity.CurrentServer = this;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
-            newEntity.OnCreate();
+            newEntity.Create();
             newEntity.Init();
             ((IGhost)newEntity).ClearSerialization();
             _entities.Add(newEntity);
@@ -1038,6 +1038,11 @@ namespace NetworkEngine
             if (SubObjects.TryGetValue(id, out var so))
                 return so;
             return null;
+        }
+        public void Create()
+        {
+            SetParentEntityRecursive();
+            OnCreate();
         }
         public void Init()
         {

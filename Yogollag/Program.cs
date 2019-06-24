@@ -138,6 +138,7 @@ namespace Yogollag
         VoltWorld _physicsWorld;
         NetworkNode _node;
         EntityId _sessionId;
+        LocationCreator _debugCreator;
         public bool Start()
         {
             _node = new NetworkNode();
@@ -149,6 +150,10 @@ namespace Yogollag
             _node.NewConnectionEstablished += NewConnection;
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
+            var map = DefsHolder.Instance.LoadDef<MapDef>("/TestMapDef");
+            _debugCreator = new LocationCreator(map.Locations[0].CreatorDef, 0);
+            _debugCreator.Setup(map.Locations[0].RootSite, map.Locations[0].Pos, map.Locations[0].Rot);
+            while (_debugCreator.Tick()) ;
             return true;
         }
 
@@ -168,8 +173,36 @@ namespace Yogollag
             var delta = DateTime.UtcNow - _lastUpdateTime;
             return (float)delta.TotalSeconds;
         }
+        bool firstTime = true;
         public void Update()
         {
+            if (firstTime)
+            {
+                var r = new Random(0);
+                firstTime = false;
+                foreach (var site in _debugCreator.Sites)
+                {
+                    if (site.Def.Type.Def != null && site.Def.Type.Def.EntitiesToSpawnOn.Count > 0)
+                    {
+                        var randomEntity = site.Def.Type.Def.EntitiesToSpawnOn[r.Next(site.Def.Type.Def.EntitiesToSpawnOn.Count)].Def;
+                        var objId = _node.Create(EntityObjectsMap.GetTypeFromDef(randomEntity), e=> {
+                            ((IEntityObject)e).Def = randomEntity;
+                            if(site.AttachedToBottom)
+                            {
+                                var t = new HierarchyTransform(site.GlobalPos, site.GlobalRot, null);
+                                var subT = new HierarchyTransform(Vec2.New(0, site.Def.SizeY / 2), 0, t);
+                                ((IPositionedEntity)e).Position = subT.GlobalPos;
+                                ((IPositionedEntity)e).Rotation = subT.GlobalRot;
+                            }
+                            else
+                            {
+                                ((IPositionedEntity)e).Position = site.GlobalPos;
+                                ((IPositionedEntity)e).Rotation = site.GlobalRot;
+                            }
+                        });
+                    }
+                }
+            }
             var deltaTime = GetDeltaTime();
             foreach (var ghost in _node.AllGhosts())
             {
@@ -209,8 +242,8 @@ namespace Yogollag
                 }
             }
             var tick = _node.Tick();
-            lock(_physicsWorld)
-            _physicsWorld.Update();
+            lock (_physicsWorld)
+                _physicsWorld.Update();
             tick.Wait();
         }
 
@@ -240,7 +273,7 @@ namespace Yogollag
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
             var map = DefsHolder.Instance.LoadDef<MapDef>("/TestMapDef");
-            _debugCreator = new LocationCreator(map.Locations[0].CreatorDef, new Random().Next());
+            _debugCreator = new LocationCreator(map.Locations[0].CreatorDef, 0);
             _debugCreator.Setup(map.Locations[0].RootSite, map.Locations[0].Pos, map.Locations[0].Rot);
             while (_debugCreator.Tick()) ;
 
@@ -353,6 +386,8 @@ namespace Yogollag
             }
             if (character != null)
                 _map.Render(_win, ((IPositionedEntity)character).Position, new Vec2() { X = 30, Y = 30 });
+            HierarchyTransform _rootTransform = new HierarchyTransform(Vec2.New(0, 0), 0, null);
+            DrawSite(_debugCreator._rootInstance, _rootTransform);
             foreach (var ghost in _node.AllGhosts())
             {
                 if (ghost is IRenderable rnd)
@@ -364,8 +399,6 @@ namespace Yogollag
             var tick = _node.Tick();
             lock (_physicsWorld)
                 _physicsWorld.Update();
-            HierarchyTransform _rootTransform = new HierarchyTransform(Vec2.New(0, 0), 0, null);
-            DrawSite(_debugCreator._rootInstance, _rootTransform);
             _win.Display();
             tick.Wait();
         }
@@ -390,6 +423,17 @@ namespace Yogollag
             {
                 //siteT.Rotate(con.Value.Rot);
                 DrawSite(con.Value, ownTransform);
+            }
+            foreach (var shape in site.World._shapes)
+            {
+                if (shape is OverlapBox box)
+                {
+
+                    _rectShape.OutlineColor = Color.Green;
+                    _rectShape.Size = new Vector2f(box.Size.X, box.Size.Y);
+                    var t = new HierarchyTransform(Vec2.New(box.Pos.X, box.Pos.Y), box.RotAngles, parentTransform);
+                    t.DrawShapeAt(_win, _rectShape, box.Size, box.CenterAtTheBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
+                }
             }
         }
     }
@@ -532,6 +576,7 @@ namespace Yogollag
         }
         public VoltBody PhysicsBody { get; set; }
         public float Speed => _host.Speed;
+        bool _sprint = false;
         Vec2 _currentDir;
         Vec2 SyncPosition { get => _posEnt.Position; set => _posEnt.Position = value; }
         Vec2 LocalPosition { get; set; }
@@ -586,6 +631,7 @@ namespace Yogollag
                 PhysicsBody.Set(new Vector2(LocalPosition.X, LocalPosition.Y), 1);
                 _host.ReceivePosition(LocalPosition);
             }
+            _sprint = Keyboard.IsKeyPressed(Keyboard.Key.LShift);
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 dir += Vec2.New(-1, 0);
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
@@ -606,7 +652,7 @@ namespace Yogollag
             }
             else
                 _walk.Stop();
-            var velocity = _currentDir * Speed;
+            var velocity = _currentDir * (_sprint ? (Speed * 10) : Speed);
             PhysicsBody.LinearVelocity = new Vector2(velocity.X, velocity.Y);
             var prevPos = LocalPosition;
             LocalPosition = new Vec2() { X = PhysicsBody.Position.x, Y = PhysicsBody.Position.y };
@@ -621,6 +667,7 @@ namespace Yogollag
     }
     public interface IPositionedEntity
     {
+        float Rotation { get; set; }
         Vec2 Position { get; set; }
     }
     interface IStatEntity
@@ -756,6 +803,8 @@ namespace Yogollag
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
         IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked
     {
+        [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
         SpriteRenderer _spriteRenderer;
         CharacterLikeMovement _movementController;
         public CharacterEntity()

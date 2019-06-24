@@ -17,28 +17,30 @@ namespace Yogollag
         public void Init(PhysicalBodyDef def)
         {
             var world = (Volatile.VoltWorld)CurrentServer.CustomData;
-            lock(world)
+            lock (world)
             {
                 var pos = PhysicalPos;
-                VoltShape[] shapes = new VoltShape[def.Shapes.Count];
-                for(int i =0; i < def.Shapes.Count; i++)
+                List<VoltShape> shapes = new List<VoltShape>();
+                for (int i = 0; i < def.Shapes.Count; i++)
                 {
                     var shape = def.Shapes[i].Def;
-                    if(shape is BoxPhysicalShapeDef bshape)
+                    if (!shape.HasBody)
+                        continue;
+                    if (shape is BoxPhysicalShapeDef bshape)
                     {
                         var hSize = new Vec2() { X = bshape.SizeX / 2, Y = bshape.SizeY / 2 };
                         var offset = new Vector2(shape.Offset.X, shape.Offset.Y);
-                        shapes[i] = world.CreatePolygonBodySpace(new[] { new Vector2(-hSize.X, -hSize.Y) + offset, new Vector2(hSize.X, -hSize.Y) + offset, new Vector2(hSize.X, hSize.Y) + offset, new Vector2(-hSize.X, hSize.Y) + offset });
+                        shapes.Add(world.CreatePolygonBodySpace(new[] { new Vector2(-hSize.X, -hSize.Y) + offset, new Vector2(hSize.X, -hSize.Y) + offset, new Vector2(hSize.X, hSize.Y) + offset, new Vector2(-hSize.X, hSize.Y) + offset }));
                     }
                 }
                 VoltBody body;
-                if(def.IsStatic)
+                if (def.IsStatic)
                 {
-                    body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, shapes);
+                    body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, shapes.ToArray());
                 }
                 else
                 {
-                    body = world.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, shapes);
+                    body = world.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, shapes.ToArray());
                 }
                 body.UserData = Id;
             }
@@ -56,6 +58,8 @@ namespace Yogollag
 
         [Sync(SyncType.Client)]
         public virtual Vec2 PhysicalPos { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
         public void DrawDebug()
         {
 
@@ -75,7 +79,7 @@ namespace Yogollag
     public interface IHasPhysicalBodyDef : IDef
 
     {
-        DefRef<PhysicalBodyDef>  PhysicalBodyDef { get; set; }
+        DefRef<PhysicalBodyDef> PhysicalBodyDef { get; set; }
     }
     public class PhysicalBodyDef : BaseDef
     {
@@ -88,6 +92,7 @@ namespace Yogollag
         public DefRef<SpriteDef> SpriteDef { get; set; }
         public Vec2 Offset { get; set; }
         public float Rotation { get; set; }
+        public bool HasBody { get; set; } = true;
     }
 
     public class CirclePhysicalShapeDef : PhysicalShapeDef

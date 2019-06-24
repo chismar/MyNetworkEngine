@@ -5,6 +5,7 @@
             "$type": "Location",
             "CreatorDef": {
                 "$type": "LocationCreator",
+                "SitesCount":100,
                 "Palette": [
                     {
                         "$type": "MapSite",
@@ -18,7 +19,7 @@
                                     "X":-11,
                                     "Y":80
                                 },
-                                "Rot":-90
+                                "Rot":90
                             },
                             {
                                 "$type": "SiteConnection",
@@ -33,10 +34,46 @@
                                 "$type": "SiteConnection",
                                 "Size":51,
                                 "Pos": {
-                                    "X":-11,
+                                    "X":11,
                                     "Y":20
                                 },
                                 "Rot":-90
+                            },
+                            {
+                                "$type": "SiteConnection",
+                                "Size":21,
+                                "Pos": {
+                                    "X":11,
+                                    "Y":30
+                                }, 
+                                "Rot":90
+                            },
+                            {
+                                "$type": "SiteConnection",
+                                "Size":21,
+                                "Pos": {
+                                    "X":11,
+                                    "Y":30
+                                },
+                                "Rot":90
+                            },
+                            {
+                                "$type": "SiteConnection",
+                                "Size":51,
+                                "Pos": {
+                                    "X":-11,
+                                    "Y":0
+                                },
+                                "Rot":90
+                            },
+                            {
+                                "$type": "SiteConnection",
+                                "Size":51,
+                                "Pos": {
+                                    "X":0,
+                                    "Y":101
+                                },
+                                "Rot":0
                             }
                         ],
                         "Tags": [
@@ -50,21 +87,23 @@
                         "$type": "MapSite",
                         "SizeX":10,
                         "SizeY":13,
-                        /*"Connections": [
-                            {
-                                "$type": "SiteConnection",
-                                "Size":11,
-                                "Pos": {
-                                    "X":10,
-                                    "Y":15
-                                },
-                                "Rot":10
-                            }
-                        ]*/
-                    },{
+                        "Type":{
+                            "$type":"MapSiteType",
+                            "EntitiesToSpawnOn":[
+                                "/SimpleBuilding"
+                            ]
+                        }
+                    },
+                    {
                         "$type": "MapSite",
                         "SizeX":7,
                         "SizeY":8,
+                        "Type":{
+                            "$type":"MapSiteType",
+                            "EntitiesToSpawnOn":[
+                                "/SimpleBuilding"
+                            ]
+                        }
                         
                     },
                     {
@@ -88,24 +127,36 @@
                                 "Rot":0,
                                 "Tags": [ "$RoadTag" ]
                             },
-                            /*{
+                            {
                                 "$type": "SiteConnection",
                                 "Size":55,
                                 "Pos": {
-                                    "X":50,
-                                    "Y":30
+                                    "X":0,
+                                    "Y":-55
                                 },
+                                "Rot":180,
                                 "Tags": [ "$RoadTag" ]
                             },
                             {
                                 "$type": "SiteConnection",
                                 "Size":55,
                                 "Pos": {
-                                    "X":50,
-                                    "Y":50
+                                    "X":55,
+                                    "Y":0
                                 },
+                                "Rot":-90,
                                 "Tags": [ "$RoadTag" ]
-                            }*/
+                            },
+                            {
+                                "$type": "SiteConnection",
+                                "Size":55,
+                                "Pos": {
+                                    "X":-55,
+                                    "Y":0
+                                },
+                                "Rot":90,
+                                "Tags": [ "$RoadTag" ]
+                            }
                         ],
                         "SubSites": [
                             {

@@ -23,6 +23,8 @@ namespace Yogollag
     public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity
     {
         [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
+        [Sync(SyncType.Client)]
         public virtual AIEngine AI { get; set; } = SyncObject.New<AIEngine>();
         [Sync(SyncType.Client)]
         public virtual LocomotionEngine Locomotion { get; set; } = SyncObject.New<LocomotionEngine>();

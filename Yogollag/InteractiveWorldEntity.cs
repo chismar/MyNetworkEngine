@@ -15,6 +15,8 @@ namespace Yogollag
     public abstract class InteractiveWorldEntity : GhostedEntity,
         IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject
     {
+        [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
         public VoltBody PhysicsBody { get; set; }
         Vec2 _pos;
         [Sync(SyncType.Client)]

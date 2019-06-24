@@ -17,6 +17,7 @@ namespace Yogollag
         int _sitesCount = 0;
         int _ticksCount = 0;
         Random _rand;
+        public List<MapSiteInstance> Sites = new List<MapSiteInstance>();
         public LocationCreator(LocationCreatorDef def, int seed)
         {
             _def = def;
@@ -29,7 +30,7 @@ namespace Yogollag
         }
         public bool Tick()
         {
-            ProcessSite(_rootInstance);
+            ProcessSite(_rootInstance, new HierarchyTransform(Vec2.New(0,0), 0, null));
             if (_sitesCount >= _def.SitesCount)
                 return false;
             _ticksCount++;
@@ -37,80 +38,99 @@ namespace Yogollag
                 return false;
             return true;
         }
-        bool TryAttach()
+        bool Process()
         {
             return _rand.NextDouble() > 0.5f;
+        }
+        bool TryAttach()
+        {
+            return _rand.NextDouble() > 0.2f;
         }
 
         bool DoAttach()
         {
-            return _rand.NextDouble() > 0.5f;
+            return _rand.NextDouble() > 0.2f;
         }
-        private void ProcessSite(MapSiteInstance site)
+        private void ProcessSite(MapSiteInstance site, HierarchyTransform t)
         {
-            if (site.Def.SubSites.Count != site.SubSites.Count)
-            {
-                for (int i = 0; i < site.Def.SubSites.Count; i++)
+            if (Process())
+                if (site.Def.SubSites.Count != site.SubSites.Count)
                 {
-                    //has free subSites
-                    if (TryAttach())
-                        foreach (var siteDef in _def.Palette)
-                            if (site.Def.SubSites[i].CanPlace(site.World, siteDef.Def))
-                                if (DoAttach())
-                                {
-                                    var instance = site.SubSites[i] = new MapSiteInstance(siteDef, site.Def.SubSites[i].Pos, site.Def.SubSites[i].Rot, false);
-                                    var box = new OverlapBox(instance.Pos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.Rot, instance.AttachedToBottom);
-                                    site.World.Add(box);
-                                    _sitesCount++;
+                    for (int i = 0; i < site.Def.SubSites.Count; i++)
+                    {
+                        //has free subSites
+                        if (TryAttach())
+                            foreach (var siteDef in _def.Palette)
+                                if (site.Def.SubSites[i].CanPlace(site.World, siteDef.Def))
+                                    if (DoAttach())
+                                    {
+                                        var instance = site.SubSites[i] = new MapSiteInstance(siteDef, site.Def.SubSites[i].Pos, site.Def.SubSites[i].Rot, false);
 
-                                    if (_sitesCount >= _def.SitesCount)
-                                        return;
-                                    break;
-                                }
+                                        var localT = new HierarchyTransform(site.Pos, site.Rot, t);
+                                        instance.GlobalPos = t.GetWorldPosInSpaceOf(site.Pos);
+                                        instance.GlobalRot = localT.GlobalRot;
+                                        Sites.Add(instance);
+                                        var box = new OverlapBox(instance.Pos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.Rot, instance.AttachedToBottom);
+                                        site.World.Add(box);
+                                        _sitesCount++;
+
+                                        if (_sitesCount >= _def.SitesCount)
+                                            return;
+                                        break;
+                                    }
+                    }
                 }
-            }
             foreach (var subSite in site.SubSites)
             {
-                ProcessSite(subSite.Value);
-                Transform t = Transform.Identity;
-                t.Translate(subSite.Value.Pos.X, subSite.Value.Pos.Y);
-                ProcessConnections(site, subSite.Value, t);
+                if (Process())
+                {
+                    var localT = new HierarchyTransform(site.Pos, site.Rot, t);
+                    ProcessSite(subSite.Value, localT);
+                }
+                var conT = new HierarchyTransform(subSite.Value.Pos, subSite.Value.Rot, null);
+                if (Process())
+                    ProcessConnections(site, subSite.Value, conT);
             }
         }
 
-        private void ProcessConnections(MapSiteInstance site, MapSiteInstance subSite, Transform t)
+        private void ProcessConnections(MapSiteInstance site, MapSiteInstance subSite, HierarchyTransform t)
         {
-            if (subSite.Def.Connections.Count != subSite.Connections.Count)
-            {
-                //has free connections
-                for (int i = 0; i < subSite.Def.Connections.Count; i++)
+            if (Process())
+                if (subSite.Def.Connections.Count != subSite.Connections.Count)
                 {
-                    if (subSite.Connections.ContainsKey(i))
-                        continue;
-                    if (TryAttach())
-                        foreach (var siteDef in _def.Palette)
-                            if (subSite.Def.Connections[i].CanAttach(site.World, siteDef.Def, t))
-                                if (DoAttach())
-                                {
-                                    var con = subSite.Def.Connections[i];
-                                    var vec = t.TransformPoint(con.Pos.X, con.Pos.Y);
-                                    var instance = subSite.Connections[i] = new MapSiteInstance(siteDef, con.Pos, con.Rot, true);
-                                    var box = new OverlapBox(Vec2.New(vec.X, vec.Y), Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.Rot, instance.AttachedToBottom);
-                                    site.World.Add(box);
-                                    _sitesCount++;
-                                    if (_sitesCount >= _def.SitesCount)
-                                        return;
-                                    break;
-                                }
+                    //has free connections
+                    for (int i = 0; i < subSite.Def.Connections.Count; i++)
+                    {
+                        if (subSite.Connections.ContainsKey(i))
+                            continue;
+                        if (TryAttach())
+                            foreach (var siteDef in _def.Palette)
+                                if (subSite.Def.Connections[i].CanAttach(site.World, siteDef.Def, t))
+                                    if (DoAttach())
+                                    {
+                                        var con = subSite.Def.Connections[i];
+                                        var vec = t.GetWorldPosInSpaceOf(con.Pos);
+                                        var instance = subSite.Connections[i] = new MapSiteInstance(siteDef, con.Pos, con.Rot, true);
+                                        
+                                        Sites.Add(instance);
+                                        var localT = new HierarchyTransform(con.Pos, con.Rot, t);
+                                        instance.GlobalPos = vec;
+                                        instance.GlobalRot = localT.GlobalRot;
+                                        var box = new OverlapBox(vec, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), localT.GlobalRot, instance.AttachedToBottom);
+                                        site.World.Add(box);
+                                        _sitesCount++;
+                                        if (_sitesCount >= _def.SitesCount)
+                                            return;
+                                        break;
+                                    }
 
+                    }
                 }
-            }
             foreach (var connection in subSite.Connections)
             {
-                ProcessSite(connection.Value);
-                var tt = t;
-                tt.Translate(connection.Value.Pos.X, connection.Value.Pos.Y);
-                ProcessConnections(site, connection.Value, tt);
+                var conT = new HierarchyTransform(connection.Value.Pos, connection.Value.Rot, t);
+                ProcessSite(connection.Value, conT);
+                ProcessConnections(site, connection.Value, conT);
             }
         }
     }
@@ -128,6 +148,8 @@ namespace Yogollag
         }
         public Vec2 Pos { get; }
         public float Rot { get; }
+        public Vec2 GlobalPos { get; set; }
+        public float GlobalRot { get; set; }
         public bool AttachedToBottom { get; }
         public MapSiteDef Def { get; }
         public MapSiteDef Substitution;
@@ -161,9 +183,13 @@ namespace Yogollag
 
         public List<DefRef<MapSiteDef>> Palette { get; set; } = new List<DefRef<MapSiteDef>>();
     }
-
+    class MapSiteTypeDef : BaseDef
+    {
+        public List<DefRef<IEntityObjectDef>> EntitiesToSpawnOn { get; set; } = new List<DefRef<IEntityObjectDef>>();
+    }
     class MapSiteDef : BaseDef
     {
+        public DefRef<MapSiteTypeDef> Type { get; set; } 
         public float SizeX { get; set; }
         public float SizeY { get; set; }
         public List<SubSite> SubSites { get; set; } = new List<SubSite>();
@@ -179,12 +205,13 @@ namespace Yogollag
         public float Size { get; set; }
         public List<DefRef<MapSiteTagDef>> Tags { get; set; } = new List<DefRef<MapSiteTagDef>>();
 
-        public bool CanAttach(OverlapWorld world, MapSiteDef site, Transform t)
+        public bool CanAttach(OverlapWorld world, MapSiteDef site, HierarchyTransform t)
         {
             if (Size < site.SizeX)
                 return false;
-            var vec = t.TransformPoint(Pos.X, Pos.Y);
-            var box = new OverlapBox(Vec2.New(vec.X, vec.Y), Vec2.New(site.SizeX, site.SizeY), Rot, true);
+            var localT = new HierarchyTransform(Pos, Rot, t);
+            var vec = t.GetWorldPosInSpaceOf(Pos);
+            var box = new OverlapBox(vec, Vec2.New(site.SizeX, site.SizeY), localT.GlobalRot, true);
             if (!world.CanAdd(box))
                 return false;
             if (Tags.Count != 0)

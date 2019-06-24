@@ -44,6 +44,8 @@
         "Map",
         "LocationCreatorDef",
         "LocationCreator",
+        "MapSiteTypeDef",
+        "MapSiteType",
         "MapSiteDef",
         "MapSite",
         "MapSiteTagDef",
@@ -208,6 +210,8 @@
             "Map",
             "LocationCreatorDef",
             "LocationCreator",
+            "MapSiteTypeDef",
+            "MapSiteType",
             "MapSiteDef",
             "MapSite",
             "MapSiteTagDef",
@@ -349,6 +353,9 @@
         },
         {
           "$ref": "#/definitions/LocationCreatorDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTypeDef"
         },
         {
           "$ref": "#/definitions/MapSiteDef"
@@ -566,6 +573,8 @@
             "Map",
             "LocationCreatorDef",
             "LocationCreator",
+            "MapSiteTypeDef",
+            "MapSiteType",
             "MapSiteDef",
             "MapSite",
             "MapSiteTagDef",
@@ -721,6 +730,9 @@
         },
         {
           "$ref": "#/definitions/LocationCreatorDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTypeDef"
         },
         {
           "$ref": "#/definitions/MapSiteDef"
@@ -2232,6 +2244,77 @@
         }
       ]
     },
+    "MapSiteTypeDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MapSiteTypeDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MapSiteTypeDef",
+            "MapSiteType"
+          ]
+        },
+        "EntitiesToSpawnOn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEntityObjectDefField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "MapSiteTypeDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MapSiteTypeDef",
+            "MapSiteType"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTypeDef"
+        }
+      ]
+    },
     "MapSiteDef": {
       "type": "object",
       "additionalProperties": false,
@@ -2264,6 +2347,9 @@
             "MapSiteDef",
             "MapSite"
           ]
+        },
+        "Type": {
+          "$ref": "#/definitions/MapSiteTypeDefField"
         },
         "SizeX": {
           "oneOf": [
@@ -3385,6 +3471,16 @@
             },
             {
               "type": "number"
+            }
+          ]
+        },
+        "HasBody": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
             }
           ]
         }
@@ -5303,6 +5399,7 @@
         "MapDef",
         "Location",
         "LocationCreatorDef",
+        "MapSiteTypeDef",
         "MapSiteDef",
         "SiteConnection",
         "SubSite",
@@ -5832,6 +5929,9 @@
         },
         {
           "$ref": "#/definitions/LocationCreatorDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTypeDef"
         },
         {
           "$ref": "#/definitions/MapSiteDef"

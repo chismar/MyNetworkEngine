@@ -12,6 +12,8 @@ namespace Yogollag
     [GenerateSync]
     public abstract class SimpleSpawner : GhostedEntity, IEntityObject, ITicked, IPositionedEntity
     {
+        [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
         [Sync(SyncType.Server)]
         public virtual IEntityObjectDef Def { get; set; }
         [Sync(SyncType.Master)]
