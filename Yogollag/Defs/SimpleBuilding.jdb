@@ -12,11 +12,11 @@
                     "X":4,
                     "Y":0
                 },
-                "HasBody":false,
+                "HasBody":true,
                 "SizeX":30,
                 "SizeY":30,
             },
-            {
+            /*{
                 "$type": "BoxPhysicalShape",
                 "SpriteDef": {
                     "$type": "Sprite",
@@ -29,7 +29,7 @@
                     "Y":15
                 },
                 "SizeX":30,
-                "SizeY":2
+                "SizeY":5
             },
             {
                 "$type": "BoxPhysicalShape",
@@ -45,7 +45,7 @@
                 },
                 "Rotation":90,
                 "SizeX":30,
-                "SizeY":2
+                "SizeY":5
             },
             {
                 "$type": "BoxPhysicalShape",
@@ -61,8 +61,8 @@
                 },
                 "Rotation":90,
                 "SizeX":30,
-                "SizeY":2
-            },
+                "SizeY":5
+            },*/
         ]
     }
 }

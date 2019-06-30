@@ -198,7 +198,7 @@ namespace Yogollag
             _interactionOverlay.OutlineColor = Color.Red;
             _interactionOverlay.OutlineThickness = 2;
             var iPos = ((IPositionedEntity)selectedInteractive).Position;
-            _interactionOverlay.Position = new Vector2f(iPos.X, -iPos.Y);
+            _interactionOverlay.Position = new Vector2f(iPos.X, iPos.Y);
             _interactionOverlay.Origin = new Vector2f(5, 5);
             _interactionOverlay.Draw(_win, RenderStates.Default);
         }

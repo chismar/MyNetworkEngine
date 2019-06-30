@@ -185,9 +185,10 @@ namespace Yogollag
                     if (site.Def.Type.Def != null && site.Def.Type.Def.EntitiesToSpawnOn.Count > 0)
                     {
                         var randomEntity = site.Def.Type.Def.EntitiesToSpawnOn[r.Next(site.Def.Type.Def.EntitiesToSpawnOn.Count)].Def;
-                        var objId = _node.Create(EntityObjectsMap.GetTypeFromDef(randomEntity), e=> {
+                        var objId = _node.Create(EntityObjectsMap.GetTypeFromDef(randomEntity), e =>
+                        {
                             ((IEntityObject)e).Def = randomEntity;
-                            if(site.AttachedToBottom)
+                            if (site.AttachedToBottom)
                             {
                                 var t = new HierarchyTransform(site.GlobalPos, site.GlobalRot, null);
                                 var subT = new HierarchyTransform(Vec2.New(0, site.Def.SizeY / 2), 0, t);
@@ -254,7 +255,7 @@ namespace Yogollag
     }
     public class SimpleClient
     {
-        CircleShape _debugPhysicsShape = new CircleShape();
+        RectangleShape _debugPhysicsShape = null;
         VoltWorld _physicsWorld;
         NetworkNode _node;
         Task<bool> _connected;
@@ -269,7 +270,7 @@ namespace Yogollag
             _win = new RenderWindow(new VideoMode(1024, 720), "SimpleGame");
             _win.SetVerticalSyncEnabled(true);
             _win.Closed += RenderWindow_Closed;
-            _charView = new View(new FloatRect(-500, -300, 256, 180));
+            _charView = new View();
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
             var map = DefsHolder.Instance.LoadDef<MapDef>("/TestMapDef");
@@ -324,7 +325,6 @@ namespace Yogollag
             _win.Clear(Color.Blue);
             var deltaTime = GetDeltaTime();
             NetworkEntity character = null;
-            _debugPhysicsShape.FillColor = Color.White;
             foreach (var ghost in _node.AllGhosts())
             {
                 if (ghost is ICharacterLikeMovement charLikeMovement)
@@ -343,9 +343,16 @@ namespace Yogollag
                     else
                     {
                         var pos = ((IPositionedEntity)ghost).Position;
-                        _debugPhysicsShape.Position = new Vector2f(pos.X, -pos.Y);
-                        _debugPhysicsShape.Radius = 10;
-                        _debugPhysicsShape.Draw(_win, RenderStates.Default);
+
+                        if (_debugPhysicsShape == null)
+                            _debugPhysicsShape = new RectangleShape();
+                        var aabb = charLikeMovement.PhysicsBody.AABB;
+                        HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), 0, null);
+                        _debugPhysicsShape.FillColor = Color.Transparent;
+                        _debugPhysicsShape.OutlineColor = Color.Red;
+                        _debugPhysicsShape.OutlineThickness = 1;
+                        _debugPhysicsShape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
+                        v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x* 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
                     }
                     if (ghost.HasAuthority)
                     {
@@ -353,7 +360,8 @@ namespace Yogollag
                         if (_win.HasFocus())
                             charLikeMovement.UpdateControls();
                         charLikeMovement.UpdateMovement();
-                        _charView.Center = new Vector2f(charLikeMovement.SmoothPosition.X, -charLikeMovement.SmoothPosition.Y);
+                        _charView.Center = new Vector2f(charLikeMovement.SmoothPosition.X, charLikeMovement.SmoothPosition.Y);
+                        _charView.Size = new Vector2f(256, -256 * ((float)_win.Size.Y / (float)_win.Size.X));
                         _win.SetView(_charView);
 
                     }
@@ -377,15 +385,22 @@ namespace Yogollag
                     }
                     else
                     {
-                        _debugPhysicsShape.Position = new Vector2f(inter.Position.X, -inter.Position.Y);
-                        _debugPhysicsShape.Radius = 10;
-                        _debugPhysicsShape.Draw(_win, RenderStates.Default);
+                        if (_debugPhysicsShape == null)
+                            _debugPhysicsShape = new RectangleShape();
+                        var aabb = inter.PhysicsBody.AABB;
+                        HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), 0, null);
+
+                        _debugPhysicsShape.FillColor = Color.Transparent;
+                        _debugPhysicsShape.OutlineColor = Color.Red;
+                        _debugPhysicsShape.OutlineThickness = 1;
+                        _debugPhysicsShape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
+                        v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
                         inter.PhysicsBody.Set(new Vector2(inter.Position.X, inter.Position.Y), 1f);
                     }
                 }
             }
-            if (character != null)
-                _map.Render(_win, ((IPositionedEntity)character).Position, new Vec2() { X = 30, Y = 30 });
+            //if (character != null)
+            //    _map.Render(_win, ((IPositionedEntity)character).Position, new Vec2() { X = 30, Y = 30 });
             HierarchyTransform _rootTransform = new HierarchyTransform(Vec2.New(0, 0), 0, null);
             DrawSite(_debugCreator._rootInstance, _rootTransform);
             foreach (var ghost in _node.AllGhosts())
@@ -506,16 +521,15 @@ namespace Yogollag
                 _toTheLeft = inverseToTheLeft;
             _lastRenderPosition = pos;
             pos.Y = -pos.Y;
-            _sprite.Position = pos;
-            _sprite.Origin = new Vector2f(4, 4);
             if (_toTheLeft)
                 _sprite.Scale = new Vector2f(-1, 1);
             else
                 _sprite.Scale = new Vector2f(1, 1);
 
-            _sprite.Draw(rt, RenderStates.Default);
-            _nameText.Position = pos;
-            _nameText.Draw(rt, RenderStates.Default);
+            HierarchyTransform v = new HierarchyTransform(RendererPosition, 0, null);
+            v.DrawSpriteAt(rt, _sprite,
+                Vec2.New(_sprite.TextureRect.Width / 2, _sprite.TextureRect.Height / 2),
+                Vec2.New(0.5f, 0.5f));
         }
     }
     class RandomSoundPlayer
@@ -896,11 +910,12 @@ namespace Yogollag
             var item = GetActiveItem();
             if (item != null)
             {
+                HierarchyTransform v = new HierarchyTransform(SmoothPosition, 0, null);
                 var itemSprite = Sprites.GetSprite(item.Def.Sprite);
-                itemSprite.Position = new Vector2f(_spriteRenderer.RendererPosition.X + 3, -_spriteRenderer.RendererPosition.Y);
-                itemSprite.Origin = new Vector2f(itemSprite.TextureRect.Width / 2, itemSprite.TextureRect.Height / 2);
-                itemSprite.Scale = new Vector2f(0.5f, 0.5f);
-                itemSprite.Draw(rt, RenderStates.Default);
+                v.DrawSpriteAt(rt, itemSprite,
+                    Vec2.New(itemSprite.TextureRect.Width / 2, itemSprite.TextureRect.Height / 2),
+                    Vec2.New(0.5f, 0.5f),
+                    Vec2.New(0.5f, 0.5f));
             }
         }
 

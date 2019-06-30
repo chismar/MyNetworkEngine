@@ -14,6 +14,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class PhysicalBodyEngine : SyncObject
     {
+        public VoltBody VoltBody;
         public void Init(PhysicalBodyDef def)
         {
             var world = (Volatile.VoltWorld)CurrentServer.CustomData;
@@ -30,19 +31,26 @@ namespace Yogollag
                     {
                         var hSize = new Vec2() { X = bshape.SizeX / 2, Y = bshape.SizeY / 2 };
                         var offset = new Vector2(shape.Offset.X, shape.Offset.Y);
-                        shapes.Add(world.CreatePolygonBodySpace(new[] { new Vector2(-hSize.X, -hSize.Y) + offset, new Vector2(hSize.X, -hSize.Y) + offset, new Vector2(hSize.X, hSize.Y) + offset, new Vector2(-hSize.X, hSize.Y) + offset }));
+                        shapes.Add(
+                            world.CreatePolygonBodySpace(
+                                new[] {
+                                    new Vector2(-hSize.X, -hSize.Y) + offset,
+                                    new Vector2(-hSize.X, hSize.Y) + offset,
+                                    new Vector2(hSize.X, hSize.Y) + offset,
+                                    new Vector2(hSize.X, -hSize.Y) + offset }));
                     }
                 }
                 VoltBody body;
                 if (def.IsStatic)
                 {
-                    body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, shapes.ToArray());
+                    body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), 0, shapes.ToArray());
                 }
                 else
                 {
-                    body = world.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, shapes.ToArray());
+                    body = world.CreateDynamicBody(new Vector2(pos.X, pos.Y), 0, shapes.ToArray());
                 }
                 body.UserData = Id;
+                VoltBody = body;
             }
         }
 

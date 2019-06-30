@@ -159,66 +159,7 @@
                             }
                         ],
                         "SubSites": [
-                            {
-                                "$type": "SubSite",
-                                "Pos": {
-                                    "X":10,
-                                    "Y":10
-                                },
-                                //"Rot":5,
-                                "SizeX":15,
-                                "SizeY":15
-                            },
-                            {
-                                "$type": "SubSite",
-                                "Pos": {
-                                    "X":20,
-                                    "Y":10
-                                },
-                                //"Rot":35,
-                                "SizeX":15,
-                                "SizeY":15
-                            },
-                            {
-                                "$type": "SubSite",
-                                "Pos": {
-                                    "X":30,
-                                    "Y":10
-                                },
-                                //"Rot":56,
-                                "SizeX":15,
-                                "SizeY":15
-                            },
-                            {
-                                "$type": "SubSite",
-                                "Pos": {
-                                    "X":40,
-                                    "Y":10
-                                },
-                                //"Rot":81,
-                                "SizeX":15,
-                                "SizeY":15
-                            },
-                            {
-                                "$type": "SubSite",
-                                "Pos": {
-                                    "X":40,
-                                    "Y":20
-                                },
-                                //"Rot":81,
-                                "SizeX":15,
-                                "SizeY":15
-                            },
-                            {
-                                "$type": "SubSite",
-                                "Pos": {
-                                    "X":40,
-                                    "Y":30
-                                },
-                                //"Rot":81,
-                                "SizeX":15,
-                                "SizeY":15
-                            }
+                            
                         ]
                     }
                 ]

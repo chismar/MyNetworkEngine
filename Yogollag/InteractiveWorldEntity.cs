@@ -32,7 +32,7 @@ namespace Yogollag
         public void Render(RenderTarget rt)
         {
             shape.Origin = new SFML.System.Vector2f(2.5f, 5f);
-            shape.Position = new SFML.System.Vector2f(Position.X, -Position.Y);
+            shape.Position = new SFML.System.Vector2f(Position.X, Position.Y);
             shape.Draw(rt, RenderStates.Default);
         }
 

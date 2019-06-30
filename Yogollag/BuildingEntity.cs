@@ -22,12 +22,12 @@ namespace Yogollag
         public float Rotation { get => PhysicalBody.Rotation; set => PhysicalBody.Rotation = value; }
         public Vec2 Position { get => PhysicalBody.PhysicalPos; set => PhysicalBody.PhysicalPos = value; }
 
-        public override void OnCreate()
+        public override void OnInit()
         {
             var physDef = (IHasPhysicalBodyDef)Def;
             PhysicalBody.Init(physDef.PhysicalBodyDef);
         }
-
+        RectangleShape _shape;
         public void Render(RenderTarget rt)
         {
             HierarchyTransform t = new HierarchyTransform(Position, Rotation, null);
@@ -42,6 +42,16 @@ namespace Yogollag
                 }
             }
             t.DrawAsDir(rt, 0.1f);
+            var aabb = PhysicalBody.VoltBody.AABB;
+            if (_shape == null)
+                _shape = new RectangleShape();
+            HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), 0, null);
+            
+            _shape.FillColor = Color.Transparent;
+            _shape.OutlineColor = Color.Red;
+            _shape.OutlineThickness = 1;
+            _shape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
+            v.DrawShapeAt(rt, _shape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
         }
     }
 

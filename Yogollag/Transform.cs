@@ -54,12 +54,15 @@ namespace Yogollag
             shape.Rotation = GlobalRot - 180;
             shape.Draw(rt, RenderStates.Default);
         }
-        public void DrawSpriteAt(RenderTarget rt, Sprite sprite, Vec2 shapeSize, Vec2 pivot)
+        public void DrawSpriteAt(RenderTarget rt, Sprite sprite, Vec2 shapeSize, Vec2 pivot, Vec2? scale = null)
         {
             sprite.Position = _transform.TransformPoint(shapeSize.X * pivot.X, shapeSize.Y * pivot.Y);
             sprite.Rotation = GlobalRot - 180;
             sprite.Origin = new Vector2f(sprite.TextureRect.Width / 2, sprite.TextureRect.Height / 2);
-            sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.Width, shapeSize.Y / sprite.TextureRect.Height);
+            if(scale.HasValue)
+                sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.Width * scale.Value.X, shapeSize.Y / sprite.TextureRect.Height * scale.Value.Y);
+            else
+                sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.Width, shapeSize.Y / sprite.TextureRect.Height);
             sprite.Draw(rt, RenderStates.Default);
         }
         public void DrawAsDir(RenderTarget rt, float scale = 1f)
