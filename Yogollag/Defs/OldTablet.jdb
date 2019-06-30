@@ -10,11 +10,33 @@
     "Impact": 
     {
         "$type": "ChangeEntityStatDef",
-        "StatName": "Madness",
+        "StatDef": "/Stats/Madness",
         "Change": 2
     },
     "Interactive":{
         "$type":"InteractiveDef",
         "Name":"Old tablet"
+    },
+    "Spell": {
+        "$type": "Spell",
+        "CastMode":{
+            "$type":"TargetPointCastDef",
+            "TargetPointSprite":{
+                "$type":"SpriteDef",
+                "SpriteSheetName":"tiles",
+                "X":5,
+                "Y":2
+            }
+        },
+        "Duration":0.3,
+        "ImpactOnSuccess": {
+            "$type": "AllInCircle",
+            "Size":10,
+            "Impact": {
+                "$type": "ChangeEntityStat",
+                "StatDef": "/Stats/Health",
+                "Change":-100
+            }
+        }
     }
 }

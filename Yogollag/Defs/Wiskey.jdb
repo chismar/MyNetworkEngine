@@ -10,11 +10,12 @@
     "Impact": 
     {
         "$type": "ChangeEntityStatDef",
-        "StatName": "Madness",
+        "StatDef": "/Stats/Madness",
         "Change": -2
     },
     "Interactive":{
         "$type":"InteractiveDef",
         "Name":"Wiskey"
-    }
+    },
+
 }

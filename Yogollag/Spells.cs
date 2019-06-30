@@ -86,7 +86,7 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false)
+            if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? false)
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
                 return;
@@ -98,7 +98,7 @@ namespace Yogollag
             inst.Cast = cast;
             inst.FinishInit();
             SyncedSpells.Add(inst);
-            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity));
+            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             Task.Run(async () =>
             {
                 NetworkEntity.CurrentlyExecutingInContext.Value = default;
@@ -112,13 +112,14 @@ namespace Yogollag
             var spell = SyncedSpells.SingleOrDefault(x => x.Id.Id == id.Id);
             if (spell == null)
                 return;
-            if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity)) ?? true)
+            var cast = spell.Cast;
+            if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? true)
             {
-                spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity));
+                spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             }
             else
             {
-                spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity));
+                spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             }
             SyncedSpells.Remove(spell);
         }
@@ -127,6 +128,7 @@ namespace Yogollag
     public class SpellDef : BaseDef
     {
         public float Duration { get; set; } = 0f;
+        public DefRef<SpellCastModeDef> CastMode { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<IPredicateDef> PredicateOnEnd { get; set; }
         public DefRef<IImpactDef> ImpactOnSuccess { get; set; }

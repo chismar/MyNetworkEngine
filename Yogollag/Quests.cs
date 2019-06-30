@@ -42,7 +42,7 @@ namespace Yogollag
             VoltBody[] bodies = null;
             lock (world)
             {
-                var pos = ((IPositionedEntity)tgt).Position.ToVolt();
+                var pos = ctx.TargetPoint.ToVolt();
                 var size = Size.Def.Calc(ctx);
                 var buffer = world.QueryCircle(pos, size);
                 if (buffer.Count != 0)

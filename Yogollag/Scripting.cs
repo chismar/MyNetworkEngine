@@ -312,11 +312,14 @@ static class Scripting
         {
             ProcessingEntity = ent;
             Target = ent.Id;
+            if (ent is IPositionedEntity pe)
+                TargetPoint = pe.Position;
         }
         public ScriptingContext Parent;
         [IgnoreMember]
         public NetworkEntity ProcessingEntity;
         public EntityId Target;
+        public Vec2 TargetPoint;
     }
     public interface IImpactedEntity
     {

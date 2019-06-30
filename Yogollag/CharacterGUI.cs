@@ -15,6 +15,8 @@ namespace Yogollag
         CharacterEntity _character;
         RenderWindow _win;
         NetworkNode _node;
+        object _interactionState;
+        Item _curItem;
         public void Render(NetworkNode node, RenderWindow win, CharacterEntity character, View charView)
         {
             _win = win;
@@ -35,9 +37,30 @@ namespace Yogollag
                 DrawItems(character, inter);
                 GUI.End();
                 DrawOverlayForInteractive(inter);
+                DrawCurrentSpell(character);
             }
         }
+        private void DrawCurrentSpell(CharacterEntity character)
+        {
+            var i = character.GetActiveItem();
+            if (i == null)
+                return;
+            if (i.Def.Spell == null)
+            {
+                _interactionState = null;
+                return;
+            }
+            if (_curItem != i)
+            {
+                _interactionState = null;
+                _curItem = i;
+            }
+            var mPos = Mouse.GetPosition(_win);
+            var worldPos = _win.MapPixelToCoords(mPos);
 
+            _interactionState = i.Def.Spell.Def.CastMode.Def.Update(i.Def.Spell, character, Vec2.New(worldPos.X, worldPos.Y), _interactionState);
+            i.Def.Spell.Def.CastMode.Def.Render(_win, _interactionState);
+        }
         private void Reset()
         {
         }

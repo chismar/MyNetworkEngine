@@ -709,6 +709,7 @@ namespace Yogollag
         public InteractiveDef Interactive { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<IImpactDef> Impact { get; set; }
+        public DefRef<SpellDef> Spell { get; set; }
     }
     [GenerateSync]
     [MessagePackObject(true)]
@@ -928,9 +929,9 @@ namespace Yogollag
 
         public void UpdateControls()
         {
-            if (Mouse.IsButtonPressed(Mouse.Button.Left))
-                SpellsEngine.CastFromClientWithPrediction(
-                    new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/BasicAttackSpell") });
+            //if (Mouse.IsButtonPressed(Mouse.Button.Left))
+            //    SpellsEngine.CastFromClientWithPrediction(
+            //        new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/BasicAttackSpell") });
             _movementController.UpdateControls();
         }
 
