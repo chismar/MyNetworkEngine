@@ -12,11 +12,11 @@
                     "X":4,
                     "Y":0
                 },
-                "HasBody":true,
+                "HasBody":false,
                 "SizeX":30,
                 "SizeY":30,
             },
-            /*{
+            {
                 "$type": "BoxPhysicalShape",
                 "SpriteDef": {
                     "$type": "Sprite",
@@ -62,7 +62,7 @@
                 "Rotation":90,
                 "SizeX":30,
                 "SizeY":5
-            },*/
+            }
         ]
     }
 }

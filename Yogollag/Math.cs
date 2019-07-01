@@ -17,6 +17,18 @@ namespace Yogollag
         {
             return new Vector2f(vec.X, vec.Y);
         }
+        public static implicit operator Vec2(Vector2f vec)
+        {
+            return new Vec2() { X = vec.X, Y = vec.Y };
+        }
+        public static implicit operator Vector2(Vec2 vec)
+        {
+            return new Vector2(vec.X, vec.Y);
+        }
+        public static implicit operator Vec2(Vector2 vec)
+        {
+            return new Vec2() { X = vec.x, Y = vec.y };
+        }
         public static bool operator ==(Vec2 p, Vec2 p2)
         {
             return p.X == p2.Y && p.Y == p2.Y;

@@ -31,23 +31,25 @@ namespace Yogollag
                     {
                         var hSize = new Vec2() { X = bshape.SizeX / 2, Y = bshape.SizeY / 2 };
                         var offset = new Vector2(shape.Offset.X, shape.Offset.Y);
+                        var st = new HierarchyTransform(Vec2.New(0, 0), bshape.Rotation, null);
                         shapes.Add(
                             world.CreatePolygonBodySpace(
                                 new[] {
-                                    new Vector2(-hSize.X, -hSize.Y) + offset,
-                                    new Vector2(-hSize.X, hSize.Y) + offset,
-                                    new Vector2(hSize.X, hSize.Y) + offset,
-                                    new Vector2(hSize.X, -hSize.Y) + offset }));
+                                    (Vector2)st.GetWorldPosInSpaceOf(new Vector2(-hSize.X, -hSize.Y)) + offset,
+                                    (Vector2)st.GetWorldPosInSpaceOf(new Vector2(-hSize.X, hSize.Y)) + offset,
+                                    (Vector2)st.GetWorldPosInSpaceOf(new Vector2(hSize.X, hSize.Y)) + offset,
+                                    (Vector2)st.GetWorldPosInSpaceOf(new Vector2(hSize.X, -hSize.Y)) + offset }));
                     }
                 }
                 VoltBody body;
+                var radFromAngles = Rotation / 180 * MathF.PI;
                 if (def.IsStatic)
                 {
-                    body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), 0, shapes.ToArray());
+                    body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), radFromAngles, shapes.ToArray());
                 }
                 else
                 {
-                    body = world.CreateDynamicBody(new Vector2(pos.X, pos.Y), 0, shapes.ToArray());
+                    body = world.CreateDynamicBody(new Vector2(pos.X, pos.Y), radFromAngles, shapes.ToArray());
                 }
                 body.UserData = Id;
                 VoltBody = body;

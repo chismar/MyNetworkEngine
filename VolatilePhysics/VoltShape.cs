@@ -88,7 +88,7 @@ namespace Volatile
 
     // Body-space bounding AABB for pre-checks during queries/casts
     internal VoltAABB worldSpaceAABB;
-    internal VoltAABB bodySpaceAABB;
+    public VoltAABB bodySpaceAABB;
 
     #region Body-Related
     internal void AssignBody(VoltBody body)
