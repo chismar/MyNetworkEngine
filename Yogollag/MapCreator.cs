@@ -215,7 +215,7 @@ namespace Yogollag
             if (!world.CanAdd(box))
                 return false;
             if (Tags.Count != 0)
-                if (!site.Tags.Any(t => Tags.Any(tt => tt.Def == t)))
+                if (!site.Tags.Any(tag => Tags.Any(tt => tt.Def == tag)))
                     return false;
             return true;
         }

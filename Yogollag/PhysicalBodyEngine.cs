@@ -42,7 +42,7 @@ namespace Yogollag
                     }
                 }
                 VoltBody body;
-                var radFromAngles = Rotation / 180 * MathF.PI;
+                var radFromAngles = Rotation / 180 * Mathf.PI;
                 if (def.IsStatic)
                 {
                     body = world.CreateStaticBody(new Vector2(pos.X, pos.Y), radFromAngles, shapes.ToArray());

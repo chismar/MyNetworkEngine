@@ -10,7 +10,6 @@ using MessagePack;
 using CodeGen;
 using Definitions;
 using MessagePack.Resolvers;
-using Definitions;
 using System.IO;
 using System.Collections;
 using System.Reflection;
@@ -386,7 +385,6 @@ namespace NetworkEngine
                 DefCustomResolver.Instance,
                 StandardResolver.Instance
             );
-            DefsHolder.Instance = new Defs(new FolderLoader(Path.GetFullPath("../../../Defs")));
         }
         Ghosting _ghosting;
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
@@ -561,7 +559,7 @@ namespace NetworkEngine
 
         private void RemoveRemoteServer(NetPeer peer, NetworkNodeId sid)
         {
-            _remoteNetworkNodes.Remove(sid, out var rt);
+            _remoteNetworkNodes.TryRemove(sid, out var rt);
             _ghosting.Remove(rt.EntitiesReplicatedFromRemote);
         }
         private void AddRemoteServer(NetPeer peer, NetworkNodeId sid, bool answer)
@@ -750,8 +748,15 @@ namespace NetworkEngine
 
         public async Task Tick()
         {
-            await TickLogic();
-            await TickSync();
+            try
+            {
+                await TickLogic();
+                await TickSync();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError?.Invoke(e.ToString());
+            }
         }
         public async Task TickLogic()
         {
@@ -1062,6 +1067,16 @@ namespace NetworkEngine
         {
             writer.Put(tag);
         }
+        public static void StaticCheckStream(NetDataReader reader, int tag, string type)
+        {
+            var check = reader.GetInt();
+            if (check != tag)
+                throw new Exception($"Magic number mismatch {type}");
+        }
+        public static void StaticSafeguardStream(NetDataWriter writer, int tag, string type)
+        {
+            writer.Put(tag);
+        }
     }
     public abstract class GhostedEntity : NetworkEntity, IEntityPropertyChanged
     {
@@ -1074,6 +1089,11 @@ namespace NetworkEngine
     }
 
 
+    public interface IGhostLikeSerializer
+    {
+        bool Serialize(ref NetDataWriter stream, bool initial);
+        void Deserialize(NetDataReader stream);
+    }
     public interface IGhost
     {
         bool Serialize(ref NetDataWriter stream, bool initial);

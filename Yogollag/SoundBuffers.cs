@@ -1,4 +1,5 @@
-﻿using SFML.Audio;
+﻿using Definitions;
+using SFML.Audio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Yogollag
                 return buffer;
             else
             {
-                var newBuffer = new SoundBuffer("../../../Defs/Audio/" + name + ".wav");
+                var newBuffer = new SoundBuffer($"{DefsHolder.Instance.Deserializer.Loader.GetRoot()}/Audio/" + name + ".wav");
                 _buffers.Add(name, newBuffer);
                 return newBuffer;
             }

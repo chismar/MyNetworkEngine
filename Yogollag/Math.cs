@@ -1,12 +1,20 @@
-﻿using MessagePack;
+﻿using CodeGen;
+using MessagePack;
 using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Volatile;
-
+using LiteNetLib.Utils;
+using NetworkEngine;
 namespace Yogollag
 {
+    [GenerateSync]
+    public class Vec2Surrogate
+    {
+        public Vec2 Vec { get; set; }
+    }
+
     [MessagePackObject(true)]
     public struct Vec2
     {
