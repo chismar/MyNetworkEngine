@@ -336,7 +336,7 @@ static class Scripting
         public float LessThan { get; set; } = float.MaxValue;
         public bool Check(ScriptingContext ctx)
         {
-            var statEntity = ctx.ProcessingEntity as IStatEntity;
+            var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) as IStatEntity;
             BaseStat stat = statEntity.StatsEngine.Stats.SingleOrDefault(x => x.StatDef == StatDef);
             if (stat != null)
                 return MoreThan < stat.Value && LessThan > stat.Value;
@@ -389,7 +389,7 @@ static class Scripting
         public float? Change { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            var statEntity = ctx.ProcessingEntity as IStatEntity;
+            var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) as IStatEntity;
             if (statEntity == null)
                 return;
             BaseStat stat = statEntity.StatsEngine.Stats.SingleOrDefault(x => x.StatDef == StatDef);

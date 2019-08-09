@@ -680,10 +680,14 @@ namespace NetworkEngine
         }
         public NetworkEntity GetGhost(EntityId id)
         {
+            if (NetworkEntity.CurrentlyExecutingInContext.Value == id)
+                return (T)_entities.Get(id);
             return _ghosting.Get(id);
         }
         public T GetGhost<T>(EntityId id) where T : NetworkEntity
         {
+            if (NetworkEntity.CurrentlyExecutingInContext.Value == id)
+                return (T)_entities.Get(id);
             return (T)_ghosting.Get(id);
         }
         public EntityId Create(Type t, Action<NetworkEntity> init = null)

@@ -816,7 +816,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
-        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked
+        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells
     {
         [Sync(SyncType.Client)]
         public virtual float Rotation { get; set; }

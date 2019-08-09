@@ -20,7 +20,7 @@ namespace Yogollag
         public string Name { get; set; }
     }
     [GenerateSync]
-    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity
+    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity, IHasSpells
     {
         [Sync(SyncType.Client)]
         public virtual float Rotation { get; set; }
@@ -29,7 +29,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual LocomotionEngine Locomotion { get; set; } = SyncObject.New<LocomotionEngine>();
         [Sync(SyncType.Client)]
-        public virtual SpellsEngine Spells { get; set; } = SyncObject.New<SpellsEngine>();
+        public virtual SpellsEngine SpellsEngine { get; set; } = SyncObject.New<SpellsEngine>();
 
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
@@ -51,7 +51,7 @@ namespace Yogollag
         }
         public override void OnCreate()
         {
-            AI.Init(MobDef.AIEngineDef, Spells, Locomotion);
+            AI.Init(MobDef.AIEngineDef, SpellsEngine, Locomotion);
             StatsEngine.Init(MobDef.Stats);
         }
 

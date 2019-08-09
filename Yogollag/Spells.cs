@@ -48,6 +48,11 @@ namespace Yogollag
     {
         public SpellId Id { get; set; }
     }
+    public interface IHasSpells
+    {
+        SpellsEngine SpellsEngine { get; set; }
+    }
+
     [GenerateSync]
     public abstract class SpellsEngine : SyncObject
     {

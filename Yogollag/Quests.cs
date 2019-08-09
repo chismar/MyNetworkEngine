@@ -21,7 +21,7 @@ namespace Yogollag
 
         public bool Check(ScriptingContext ctx)
         {
-            if (ctx.ProcessingEntity is IInteractive inter)
+            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) is IInteractive inter)
             {
                 return inter.Def == Type.Def;
             }
@@ -118,7 +118,7 @@ namespace Yogollag
         public DefRef<QuestDef> Quest { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            if (ctx.ProcessingEntity is IQuester quester)
+            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) is IQuester quester)
             {
                 quester.Quests.Add(new QuestInstance() { QuestDef = Quest.Def });
                 quester.Quests = quester.Quests;
@@ -130,7 +130,7 @@ namespace Yogollag
         public DefRef<QuestDef> Quest { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            if (ctx.ProcessingEntity is IQuester quester)
+            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) is IQuester quester)
             {
                 var quest = quester.Quests.SingleOrDefault(x => x.QuestDef == Quest.Def);
                 if (quest == null)
