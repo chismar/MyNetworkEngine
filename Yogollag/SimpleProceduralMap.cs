@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Volatile;
 
 namespace Yogollag
 {
@@ -93,7 +94,7 @@ namespace Yogollag
                 }
                 while ((gradient.X * gradient.X + gradient.Y * gradient.Y) >= 1);
                 var sqrLength = gradient.X * gradient.X + gradient.Y * gradient.Y;
-                gradient = gradient / MathF.Sqrt(sqrLength);
+                gradient = gradient / Mathf.Sqrt(sqrLength);
 
                 grad[i] = gradient;
             }
@@ -113,8 +114,8 @@ namespace Yogollag
 
         public static float Noise(float x, float y)
         {
-            x = MathF.Abs(x);
-            y = MathF.Abs(y);
+            x = x < 0 ? -x : x;// MathF.Abs(x);
+            y = y < 0 ? -y : y;// MathF.Abs(y);
             var cell = new Vector2f((float)Math.Floor(x), (float)Math.Floor(y));
 
             var total = 0f;

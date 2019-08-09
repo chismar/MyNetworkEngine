@@ -43,7 +43,7 @@ namespace Yogollag
         }
         public static Sprite GetSprite(SpriteDef spriteDef)
         {
-            return GetSprite("../../../Defs/Sprites/" + spriteDef.SpriteSheetName + ".png", spriteDef.X, spriteDef.Y);
+            return GetSprite($"{DefsHolder.Instance.Deserializer.Loader.GetRoot()}/Sprites/" + spriteDef.SpriteSheetName + ".png", spriteDef.X, spriteDef.Y);
         }
     }
 

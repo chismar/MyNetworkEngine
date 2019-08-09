@@ -136,7 +136,7 @@ namespace Yogollag
     public class SimpleServer
     {
         VoltWorld _physicsWorld;
-        NetworkNode _node;
+        public NetworkNode _node;
         EntityId _sessionId;
         LocationCreator _debugCreator;
         public bool Start()
@@ -176,76 +176,84 @@ namespace Yogollag
         bool firstTime = true;
         public void Update()
         {
-            if (firstTime)
+            try
             {
-                var r = new Random(0);
-                firstTime = false;
-                foreach (var site in _debugCreator.Sites)
+
+                if (firstTime)
                 {
-                    if (site.Def.Type.Def != null && site.Def.Type.Def.EntitiesToSpawnOn.Count > 0)
+                    var r = new Random(0);
+                    firstTime = false;
+                    foreach (var site in _debugCreator.Sites)
                     {
-                        var randomEntity = site.Def.Type.Def.EntitiesToSpawnOn[r.Next(site.Def.Type.Def.EntitiesToSpawnOn.Count)].Def;
-                        var objId = _node.Create(EntityObjectsMap.GetTypeFromDef(randomEntity), e =>
+                        if (site.Def.Type.Def != null && site.Def.Type.Def.EntitiesToSpawnOn.Count > 0)
                         {
-                            ((IEntityObject)e).Def = randomEntity;
-                            if (site.AttachedToBottom)
+                            var randomEntity = site.Def.Type.Def.EntitiesToSpawnOn[r.Next(site.Def.Type.Def.EntitiesToSpawnOn.Count)].Def;
+                            var objId = _node.Create(EntityObjectsMap.GetTypeFromDef(randomEntity), e =>
                             {
-                                var t = new HierarchyTransform(site.GlobalPos, site.GlobalRot, null);
-                                var subT = new HierarchyTransform(Vec2.New(0, site.Def.SizeY / 2), 0, t);
-                                ((IPositionedEntity)e).Position = subT.GlobalPos;
-                                ((IPositionedEntity)e).Rotation = subT.GlobalRot;
-                            }
-                            else
-                            {
-                                ((IPositionedEntity)e).Position = site.GlobalPos;
-                                ((IPositionedEntity)e).Rotation = site.GlobalRot;
-                            }
-                        });
-                    }
-                }
-            }
-            var deltaTime = GetDeltaTime();
-            foreach (var ghost in _node.AllGhosts())
-            {
-                if (ghost is ICharacterLikeMovement charLikeMovement)
-                {
-                    if (charLikeMovement.PhysicsBody == null)
-                    {
-                        var pos = ((IPositionedEntity)ghost).Position;
-                        lock (_physicsWorld)
-                        {
-                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
-                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape);
-                            body.UserData = ghost.Id;
-                            charLikeMovement.PhysicsBody = body;
+                                ((IEntityObject)e).Def = randomEntity;
+                                if (site.AttachedToBottom)
+                                {
+                                    var t = new HierarchyTransform(site.GlobalPos, site.GlobalRot, null);
+                                    var subT = new HierarchyTransform(Vec2.New(0, site.Def.SizeY / 2), 0, t);
+                                    ((IPositionedEntity)e).Position = subT.GlobalPos;
+                                    ((IPositionedEntity)e).Rotation = subT.GlobalRot;
+                                }
+                                else
+                                {
+                                    ((IPositionedEntity)e).Position = site.GlobalPos;
+                                    ((IPositionedEntity)e).Rotation = site.GlobalRot;
+                                }
+                            });
                         }
                     }
-                    charLikeMovement.InterpolationUpdate(deltaTime);
                 }
-                if (ghost is IVoltSimpleObject inter)
+                var deltaTime = GetDeltaTime();
+                foreach (var ghost in _node.AllGhosts())
                 {
-                    if (inter.PhysicsBody == null)
+                    if (ghost is ICharacterLikeMovement charLikeMovement)
                     {
-                        var pos = ((IPositionedEntity)ghost).Position;
-                        lock (_physicsWorld)
+                        if (charLikeMovement.PhysicsBody == null)
                         {
+                            var pos = ((IPositionedEntity)ghost).Position;
                             lock (_physicsWorld)
                             {
                                 var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
-                                var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                                var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape);
                                 body.UserData = ghost.Id;
-                                inter.PhysicsBody = body;
+                                charLikeMovement.PhysicsBody = body;
                             }
                         }
+                        charLikeMovement.InterpolationUpdate(deltaTime);
                     }
-                    else
-                        inter.PhysicsBody.Set(new Vector2(inter.Position.X, inter.Position.Y), 1f);
+                    if (ghost is IVoltSimpleObject inter)
+                    {
+                        if (inter.PhysicsBody == null)
+                        {
+                            var pos = ((IPositionedEntity)ghost).Position;
+                            lock (_physicsWorld)
+                            {
+                                lock (_physicsWorld)
+                                {
+                                    var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                                    var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                                    body.UserData = ghost.Id;
+                                    inter.PhysicsBody = body;
+                                }
+                            }
+                        }
+                        else
+                            inter.PhysicsBody.Set(new Vector2(inter.Position.X, inter.Position.Y), 1f);
+                    }
                 }
+                var tick = _node.Tick();
+                lock (_physicsWorld)
+                    _physicsWorld.Update();
+                tick.Wait();
             }
-            var tick = _node.Tick();
-            lock (_physicsWorld)
-                _physicsWorld.Update();
-            tick.Wait();
+            catch (Exception e)
+            {
+                Logger.LogError?.Invoke(e.ToString());
+            }
         }
 
     }
@@ -257,19 +265,22 @@ namespace Yogollag
     {
         RectangleShape _debugPhysicsShape = null;
         VoltWorld _physicsWorld;
-        NetworkNode _node;
+        public NetworkNode _node;
         Task<bool> _connected;
         RenderWindow _win;
         View _charView;
         LocationCreator _debugCreator;
-        public void Start(RemoteConnectionToken server)
+        public void Start(RemoteConnectionToken server, bool render = true)
         {
             _node = new NetworkNode();
             _node.Start(false);
             _connected = _node.Connect(server);
-            _win = new RenderWindow(new VideoMode(1024, 720), "SimpleGame");
-            _win.SetVerticalSyncEnabled(true);
-            _win.Closed += RenderWindow_Closed;
+            if (render)
+            {
+                _win = new RenderWindow(new VideoMode(1024, 720), "SimpleGame");
+                _win.SetVerticalSyncEnabled(true);
+                _win.Closed += RenderWindow_Closed;
+            }
             _charView = new View();
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
@@ -282,7 +293,7 @@ namespace Yogollag
 
         private void RenderWindow_Closed(object sender, EventArgs e)
         {
-            _win.Close();
+            _win?.Close();
         }
 
         DateTime _lastUpdateTime;
@@ -321,8 +332,11 @@ namespace Yogollag
                 }
 
             }
-            _win.DispatchEvents();
-            _win.Clear(Color.Blue);
+            if (_win != null)
+            {
+                _win.DispatchEvents();
+                _win.Clear(Color.Blue);
+            }
             var deltaTime = GetDeltaTime();
             NetworkEntity character = null;
             foreach (var ghost in _node.AllGhosts())
@@ -352,18 +366,22 @@ namespace Yogollag
                         _debugPhysicsShape.OutlineColor = Color.Red;
                         _debugPhysicsShape.OutlineThickness = 1;
                         _debugPhysicsShape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
-                        v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x* 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
+                        if (_win != null)
+                            v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
                     }
                     if (ghost.HasAuthority)
                     {
                         character = ghost;
-                        if (_win.HasFocus())
-                            charLikeMovement.UpdateControls();
+                        if (_win != null)
+                            if (_win.HasFocus())
+                                charLikeMovement.UpdateControls();
                         charLikeMovement.UpdateMovement();
                         _charView.Center = new Vector2f(charLikeMovement.SmoothPosition.X, charLikeMovement.SmoothPosition.Y);
-                        _charView.Size = new Vector2f(256, -256 * ((float)_win.Size.Y / (float)_win.Size.X));
-                        _win.SetView(_charView);
-
+                        if (_win != null)
+                        {
+                            _charView.Size = new Vector2f(256, -256 * ((float)_win.Size.Y / (float)_win.Size.X));
+                            _win.SetView(_charView);
+                        }
                     }
                     else
                     {
@@ -394,7 +412,8 @@ namespace Yogollag
                         _debugPhysicsShape.OutlineColor = Color.Red;
                         _debugPhysicsShape.OutlineThickness = 1;
                         _debugPhysicsShape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
-                        v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
+                        if (_win != null)
+                            v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
                         inter.PhysicsBody.Set(new Vector2(inter.Position.X, inter.Position.Y), 1f);
                     }
                 }
@@ -407,14 +426,17 @@ namespace Yogollag
             {
                 if (ghost is IRenderable rnd)
                 {
-                    rnd.Render(_win);
+                    if (_win != null)
+                        rnd.Render(_win);
                 }
             }
-            _charGui.Render(_node, _win, character as CharacterEntity, _charView);
+            if (_win != null)
+                _charGui.Render(_node, _win, character as CharacterEntity, _charView);
             var tick = _node.Tick();
             lock (_physicsWorld)
                 _physicsWorld.Update();
-            _win.Display();
+            if (_win != null)
+                _win.Display();
             tick.Wait();
         }
 
@@ -504,7 +526,7 @@ namespace Yogollag
         {
             _ren = ren;
             if (_font == null)
-                _font = new Font("../../../ARIAL.TTF");
+                _font = new Font("ARIAL.TTF");
             _nameText.Font = _font;
             _nameText.Scale = new Vector2f(0.1f, 0.1f);
         }
@@ -605,7 +627,7 @@ namespace Yogollag
             var distance = dir.Length;
             var currentDeltaFromLast = DateTime.UtcNow - _timeWhenReceivedPosition;
             var averageDelta = TimeSpan.FromMilliseconds(1000 / properSendRateFromClientPerSecond);
-            float rubberBanding = Math.Max(0, (float)(currentDeltaFromLast / averageDelta) - 0.5f);
+            float rubberBanding = Math.Max(0, (float)(currentDeltaFromLast.TotalSeconds / averageDelta.TotalSeconds) - 0.5f);
             float speedComponent = 1 - rubberBanding;
             var interpolationSpeed = speedComponent * Speed + rubberBanding * (distance / averageDelta.TotalSeconds);
             if (distance < Speed * deltaTime)

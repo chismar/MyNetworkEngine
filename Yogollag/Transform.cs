@@ -46,8 +46,8 @@ namespace Yogollag
             var point = t.TransformPoint(local.X, local.Y);
             return Vec2.New(point.X, point.Y);
         }
-        RectangleShape _rectShape = new RectangleShape();
-        CircleShape _circleShape = new CircleShape();
+        RectangleShape _rectShape;
+        CircleShape _circleShape;
         public void DrawShapeAt(RenderTarget rt, Shape shape, Vec2 shapeSize, Vec2 pivot)
         {
             shape.Position = _transform.TransformPoint(shapeSize.X * pivot.X, shapeSize.Y * pivot.Y);
@@ -67,13 +67,16 @@ namespace Yogollag
         }
         public void DrawAsDir(RenderTarget rt, float scale = 1f)
         {
+            if(_circleShape == null)
+                _circleShape = new CircleShape();
             _circleShape.Radius = 7 * scale;
             _circleShape.FillColor = Color.Transparent;
             _circleShape.OutlineThickness = 1 * scale;
             _circleShape.OutlineColor = Color.Red;
             _circleShape.Position = _transform.TransformPoint(0, 0) + new Vector2f(-7 * scale, -7 * scale);
             _circleShape.Draw(rt, RenderStates.Default);
-
+            if(_rectShape == null)
+                _rectShape = new RectangleShape();
             _rectShape.Size = new Vector2f(2f * scale, 15 * scale);
             _rectShape.Position = _transform.TransformPoint(0f, 0) + new Vector2f(1 * scale, 0);
             _rectShape.Rotation = GlobalRot;

@@ -22,6 +22,22 @@ using System;
 
 namespace Volatile
 {
+    public static class VoltDebug
+    {
+        public static void Assert(bool isTrue)
+        {
+
+        }
+
+        internal static void LogWarning(string v)
+        {
+        }
+
+        internal static void LogError(string v)
+        {
+        }
+    }
+
   public static class VoltUtil
   {
     public static void Swap<T>(ref T a, ref T b)
