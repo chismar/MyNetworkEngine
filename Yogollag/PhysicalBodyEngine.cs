@@ -7,7 +7,6 @@ using LiteNetLib.Utils;
 using LiteNetLib;
 using Volatile;
 using Definitions;
-using MessagePack;
 
 namespace Yogollag
 {

@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeGen\CodeGen.csproj" />
-    <ProjectReference Include="..\MessagePack\MessagePack.csproj" />
     <ProjectReference Include="..\Server\Server.csproj" />
     <ProjectReference Include="..\VolatilePhysics\VolatilePhysics.csproj" />
   </ItemGroup>

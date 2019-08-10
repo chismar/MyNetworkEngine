@@ -1,5 +1,4 @@
 ﻿using CodeGen;
-using MessagePack;
 using NetworkEngine;
 using System.Collections.Generic;
 
@@ -10,7 +9,6 @@ namespace Yogollag
         List<QuestInstance> Quests { get; set; }
     }
 
-    [MessagePackObject(true)]
     public class QuestInstance
     {
         public QuestDef QuestDef { get; set; }

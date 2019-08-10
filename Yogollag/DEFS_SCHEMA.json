@@ -26,6 +26,16 @@
         "PointSelector",
         "RandomPointSelectorDef",
         "RandomPointSelector",
+        "RitualEventsDef",
+        "RitualEvents",
+        "RitualEventPatternDef",
+        "RitualEventPattern",
+        "RitualTokenDef",
+        "RitualToken",
+        "ConcludeRirutalDef",
+        "ConcludeRirutal",
+        "RitualActionDef",
+        "RitualAction",
         "BuildingEntityDef",
         "BuildingEntity",
         "IEntityObjectDef",
@@ -99,8 +109,6 @@
         "Target",
         "AddQuest",
         "CompleteQuest",
-        "RoleDef",
-        "Role",
         "IPredicateDef",
         "IPredicate",
         "CheckEntityStatDef",
@@ -198,6 +206,16 @@
             "PointSelector",
             "RandomPointSelectorDef",
             "RandomPointSelector",
+            "RitualEventsDef",
+            "RitualEvents",
+            "RitualEventPatternDef",
+            "RitualEventPattern",
+            "RitualTokenDef",
+            "RitualToken",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
+            "RitualActionDef",
+            "RitualAction",
             "BuildingEntityDef",
             "BuildingEntity",
             "InteractiveDef",
@@ -265,8 +283,6 @@
             "Target",
             "AddQuest",
             "CompleteQuest",
-            "RoleDef",
-            "Role",
             "CheckEntityStatDef",
             "CheckEntityStat",
             "AllInRangeDef",
@@ -337,6 +353,21 @@
         },
         {
           "$ref": "#/definitions/RandomPointSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventsDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventPatternDef"
+        },
+        {
+          "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
         },
         {
           "$ref": "#/definitions/BuildingEntityDef"
@@ -442,9 +473,6 @@
         },
         {
           "$ref": "#/definitions/CompleteQuest"
-        },
-        {
-          "$ref": "#/definitions/RoleDef"
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
@@ -569,6 +597,16 @@
             "PointSelector",
             "RandomPointSelectorDef",
             "RandomPointSelector",
+            "RitualEventsDef",
+            "RitualEvents",
+            "RitualEventPatternDef",
+            "RitualEventPattern",
+            "RitualTokenDef",
+            "RitualToken",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
+            "RitualActionDef",
+            "RitualAction",
             "BuildingEntityDef",
             "BuildingEntity",
             "IEntityObjectDef",
@@ -642,8 +680,6 @@
             "Target",
             "AddQuest",
             "CompleteQuest",
-            "RoleDef",
-            "Role",
             "IPredicateDef",
             "IPredicate",
             "CheckEntityStatDef",
@@ -721,6 +757,21 @@
         },
         {
           "$ref": "#/definitions/RandomPointSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventsDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventPatternDef"
+        },
+        {
+          "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
         },
         {
           "$ref": "#/definitions/BuildingEntityDef"
@@ -835,9 +886,6 @@
         },
         {
           "$ref": "#/definitions/CompleteQuest"
-        },
-        {
-          "$ref": "#/definitions/RoleDef"
         },
         {
           "$ref": "#/definitions/IPredicateDef"
@@ -1601,6 +1649,340 @@
         },
         {
           "$ref": "#/definitions/RandomPointSelectorDef"
+        }
+      ]
+    },
+    "RitualEventsDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RitualEventsDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventsDef",
+            "RitualEvents"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "RitualEventsDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventsDef",
+            "RitualEvents"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RitualEventsDef"
+        }
+      ]
+    },
+    "RitualEventPatternDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RitualEventPatternDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventPatternDef",
+            "RitualEventPattern"
+          ]
+        },
+        "Pattern": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RitualEventStatField"
+          }
+        },
+        "Spell": {
+          "$ref": "#/definitions/SpellDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "RitualEventPatternDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventPatternDef",
+            "RitualEventPattern"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RitualEventPatternDef"
+        }
+      ]
+    },
+    "RitualTokenDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RitualTokenDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualTokenDef",
+            "RitualToken"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "RitualTokenDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualTokenDef",
+            "RitualToken"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RitualTokenDef"
+        }
+      ]
+    },
+    "ConcludeRirutalDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConcludeRirutalDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ConcludeRirutalDef",
+            "ConcludeRirutal"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ConcludeRirutalDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ConcludeRirutalDef",
+            "ConcludeRirutal"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        }
+      ]
+    },
+    "RitualActionDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RitualActionDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualActionDef",
+            "RitualAction"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "RitualActionDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualActionDef",
+            "RitualAction"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
         }
       ]
     },
@@ -4433,74 +4815,6 @@
         }
       ]
     },
-    "RoleDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RoleDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "RoleDef",
-            "Role"
-          ]
-        },
-        "InitialQuest": {
-          "$ref": "#/definitions/QuestDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "RoleDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "RoleDef",
-            "Role"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/RoleDef"
-        }
-      ]
-    },
     "IPredicateDef": {
       "type": "object",
       "additionalProperties": false,
@@ -4716,6 +5030,10 @@
         "$type": {
           "type": "string",
           "enum": [
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
+            "RitualActionDef",
+            "RitualAction",
             "AllInCircle",
             "TargetDef",
             "Target",
@@ -4741,6 +5059,12 @@
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
         },
         {
           "$ref": "#/definitions/AllInCircle"
@@ -5557,6 +5881,13 @@
         "TargetSelectorDef",
         "PointSelectorDef",
         "RandomPointSelectorDef",
+        "RitualEventsDef",
+        "RitualEventKind",
+        "RitualEventStat",
+        "RitualEventPatternDef",
+        "RitualTokenDef",
+        "ConcludeRirutalDef",
+        "RitualActionDef",
         "BuildingEntityDef",
         "IEntityObjectDef",
         "InteractiveDef",
@@ -5598,7 +5929,6 @@
         "TargetDef",
         "AddQuest",
         "CompleteQuest",
-        "RoleDef",
         "IPredicateDef",
         "CheckEntityStatDef",
         "IImpactDef",
@@ -5651,6 +5981,88 @@
         },
         {
           "$ref": "#/definitions/TemplateVariable"
+        }
+      ]
+    },
+    "RitualEventKind": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventKind"
+          ]
+        },
+        "RitualToken": {
+          "$ref": "#/definitions/RitualTokenDefField"
+        },
+        "List": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RitualEventPatternDefField"
+          }
+        }
+      }
+    },
+    "RitualEventKindField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventKind"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RitualEventKind"
+        }
+      ]
+    },
+    "RitualEventStat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventStat"
+          ]
+        },
+        "Stat": {
+          "$ref": "#/definitions/StatDefField"
+        },
+        "Value": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        }
+      }
+    },
+    "RitualEventStatField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RitualEventStat"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RitualEventStat"
         }
       ]
     },
@@ -6074,6 +6486,21 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
+          "$ref": "#/definitions/RitualEventsDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventPatternDef"
+        },
+        {
+          "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
+        },
+        {
           "$ref": "#/definitions/BuildingEntityDef"
         },
         {
@@ -6188,9 +6615,6 @@
           "$ref": "#/definitions/CompleteQuest"
         },
         {
-          "$ref": "#/definitions/RoleDef"
-        },
-        {
           "$ref": "#/definitions/IPredicateDef"
         },
         {
@@ -6234,6 +6658,12 @@
         },
         {
           "$ref": "#/definitions/TemplateVariable"
+        },
+        {
+          "$ref": "#/definitions/RitualEventKind"
+        },
+        {
+          "$ref": "#/definitions/RitualEventStat"
         },
         {
           "$ref": "#/definitions/Location"

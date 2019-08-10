@@ -6,10 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MessagePack;
 using CodeGen;
 using Definitions;
-using MessagePack.Resolvers;
 using System.IO;
 using System.Collections;
 using System.Reflection;
@@ -197,61 +195,75 @@ namespace NetworkEngine
         public int MessagesToProcess = 0;
     }
 
-    [MessagePackObject(true)]
-    [Union(0, typeof(ReplicateEntity))]
-    [Union(1, typeof(UpdateEntity))]
-    [Union(2, typeof(UnreplicateEntity))]
-    [Union(3, typeof(HelloPeer))]
-    [Union(4, typeof(HelloAnswerPeer))]
-    [Union(5, typeof(GrantAuthorityMessage))]
-    [Union(6, typeof(RevokeAuthorityMessage))]
     public abstract partial class ServerMessage
     {
-        [IgnoreMember]
         public NetworkNodeId From { get; set; }
+
+        public virtual int NetId { get; }
     }
+    [GenerateSync]
     public class GrantAuthorityMessage : ServerMessage
     {
+        [Sync]
         public EntityId Id { get; set; }
+        public override int NetId => 1;
     }
 
+    [GenerateSync]
     public class RevokeAuthorityMessage : ServerMessage
     {
+        [Sync]
         public EntityId Id { get; set; }
+        public override int NetId => 2;
     }
+    [GenerateSync]
     public class HelloPeer : ServerMessage
     {
+        [Sync]
         public NetworkNodeId MyId { get; set; }
+        public override int NetId => 3;
     }
 
+    [GenerateSync]
     public class HelloAnswerPeer : ServerMessage
     {
+        [Sync]
         public NetworkNodeId MyId { get; set; }
+        public override int NetId => 4;
     }
+    [GenerateSync]
     public class ReplicateEntity : ServerMessage
     {
+        [Sync]
         public EntityId Id { get; set; }
+        [Sync]
         public int EntityType { get; set; }
+        [Sync]
         public byte[] InitialState { get; set; }
+        public override int NetId => 5;
     }
+    [GenerateSync]
     public class UpdateEntity : ServerMessage
     {
+        [Sync]
         public EntityId Id { get; set; }
+        [Sync]
         public byte[] Delta { get; set; }
+        public override int NetId => 6;
     }
+    [GenerateSync]
     public class UnreplicateEntity : ServerMessage
     {
+        [Sync]
         public EntityId Id { get; set; }
+        public override int NetId => 7;
     }
     public abstract class SyncObject
     {
-        [IgnoreMember]
         public NetworkNode CurrentServer => ParentEntity.CurrentServer;
-        [IgnoreMember]
         public NetworkEntity ParentEntity;
         [Sync(SyncType.Client)]
         public virtual int SyncId { get; set; }
-        [IgnoreMember]
         public EntityId Id => new EntityId(ParentEntity.Id.Id1, ParentEntity.Id.Id2, SyncId);
         public virtual void SetParentEntityRecursive() { }
         public void SetParentEntity(NetworkEntity parentEntity)
@@ -292,7 +304,6 @@ namespace NetworkEngine
         {
             writer.Put(tag);
         }
-
     }
     public interface ITicked
     {
@@ -346,6 +357,7 @@ namespace NetworkEngine
     }
     class ReplicateEntityMessage : NetworkNodeMessage
     {
+
         private EntityId eid;
         private NetworkNodeId sid;
 
@@ -379,13 +391,6 @@ namespace NetworkEngine
     public class NetworkNode
     {
         public object CustomData;
-        static NetworkNode()
-        {
-            CompositeResolver.RegisterAndSetAsDefault(
-                DefCustomResolver.Instance,
-                StandardResolver.Instance
-            );
-        }
         Ghosting _ghosting;
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
         ConcurrentQueue<NetworkNodeMessage> _internalMessages = new ConcurrentQueue<NetworkNodeMessage>();
@@ -500,14 +505,15 @@ namespace NetworkEngine
         private void OnReceiveFromNetwork(NetPeer peer, NetPacketReader reader, DeliveryMethod deliveryMethod)
         {
             var myData = new ArraySegment<byte>(reader.RawData, reader.UserDataOffset, reader.UserDataSize);
-            var msg = MessagePackSerializer.Deserialize<ServerMessage>(myData);
+            var typeId = reader.GetInt();
+            var msg = (ServerMessage)SyncTypesMap.GetSerializerForObjNetId(typeId).Deserialize(reader);
             if (Debug)
             {
 
-                if (msg != null)
-                    Console.WriteLine($"Received {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(myData)}");
-                else
-                    Console.WriteLine("Received null");
+                //if (msg != null)
+                //    Console.WriteLine($"Received {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(myData)}");
+                //else
+                //    Console.WriteLine("Received null");
 
             }
             if (msg is EntityMessage)
@@ -602,12 +608,15 @@ namespace NetworkEngine
             serverEntity.Init();
             _remoteNetworkNodes[fromSid].EntitiesReplicatedFromRemote.Add(serverEntity);
         }
-
         private void Send<T>(T msg, NetworkNodeId sid) where T : ServerMessage
         {
-            var bytes = MessagePackSerializer.Serialize<ServerMessage>(msg);
-            if (Debug)
-                Console.WriteLine($"Send to {sid} {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(bytes)}");
+            var serializer = SyncTypesMap.GetSerializerForObjType(msg.GetType());
+            NetDataWriter writer = new NetDataWriter(true, 40);
+            writer.Put(msg.NetId);
+            serializer.Serialize(msg, ref writer);
+            var bytes = writer.Data;
+            //if (Debug)
+            //    Console.WriteLine($"Send to {sid} {msg.GetType()} {msg.ToString()} {MessagePackSerializer.ToJson(bytes)}");
             _remoteNetworkNodes[sid].Peer.Send(bytes, DeliveryMethod.ReliableOrdered);
         }
 
@@ -661,7 +670,7 @@ namespace NetworkEngine
                 return status.Entity.ServerId;
             return NetworkNodeId.Invalid;
         }
-        public void HandleEntityMessage(EntityMessage message)
+        public void HandleEntityMessage<T>(T message) where T : EntityMessage
         {
             var eid = new EntityId(message.EntityId.Id1, message.EntityId.Id2);
             var serverId = GetNodeIDForEntity(eid);
@@ -679,7 +688,7 @@ namespace NetworkEngine
         public NetworkEntity GetGhost(EntityId id)
         {
             if (NetworkEntity.CurrentlyExecutingInContext.Value == id)
-                return (T)_entities.Get(id);
+                return _entities.Get(id);
             return _ghosting.Get(id);
         }
         public T GetGhost<T>(EntityId id) where T : NetworkEntity
@@ -734,8 +743,10 @@ namespace NetworkEngine
                 }
                 if (peer.ConnectionState == ConnectionState.Connected)
                 {
-                    var hello = MessagePackSerializer.Serialize<ServerMessage>(new HelloPeer() { MyId = Id });
-                    peer.Send(hello, DeliveryMethod.ReliableOrdered);
+                    var netWriter = new NetDataWriter(true, 30);
+                    netWriter.Put(new HelloPeer().NetId);
+                    SyncTypesMap.GetSerializerForObjType(typeof(HelloPeer)).Serialize(new HelloPeer() { MyId = Id }, ref netWriter);
+                    peer.Send(netWriter.Data, DeliveryMethod.ReliableOrdered);
                     int wait = 1000;
                     while (!_remoteNetworkNodes.Any(x => x.Value.Peer == peer))
                     {
@@ -900,13 +911,13 @@ namespace NetworkEngine
         }
     }
 
-    [MessagePackObject(true)]
+    [GenerateSync]
     public struct NetworkNodeId
     {
         public static NetworkNodeId Random => new NetworkNodeId() { Id = (new Random().Next()) };
         public static NetworkNodeId Invalid => default;
-        [IgnoreMember]
         public bool IsInvalid => this == default;
+        [Sync]
         public int Id { get; set; }
         public static bool operator ==(NetworkNodeId id, NetworkNodeId id2)
         {
@@ -945,7 +956,7 @@ namespace NetworkEngine
     public class SyncAttribute : Attribute
     {
         public SyncType Type { get; }
-        public SyncAttribute(SyncType type)
+        public SyncAttribute(SyncType type = SyncType.Client)
         {
             Type = type;
         }
@@ -956,6 +967,8 @@ namespace NetworkEngine
         static Dictionary<Type, int> _masterToId = new Dictionary<Type, int>();
         static Dictionary<Type, Type> _baseToMaster = new Dictionary<Type, Type>();
         static Dictionary<Type, Type> _masterToBase = new Dictionary<Type, Type>();
+        static Dictionary<Type, IGhostLikeSerializer> _serializers = new Dictionary<Type, IGhostLikeSerializer>();
+        static Dictionary<int, IGhostLikeSerializer> _serializersByNetId = new Dictionary<int, IGhostLikeSerializer>();
         public static string GetNameWithoutGenericArity(Type t)
         {
             string name = t.Name;
@@ -983,26 +996,51 @@ namespace NetworkEngine
                 .Where(x => typeof(GhostedEntity) != x &&
                 typeof(NetworkEntity) != x &&
                 typeof(SyncObject) != x &&
-                (typeof(NetworkEntity).IsAssignableFrom(x) || typeof(SyncObject).IsAssignableFrom(x))
+                typeof(IGhostLikeSerializer) != x &&
+                typeof(ServerMessage) != x &&
+                (typeof(NetworkEntity).IsAssignableFrom(x) ||
+                typeof(SyncObject).IsAssignableFrom(x) ||
+                typeof(IGhostLikeSerializer).IsAssignableFrom(x) ||
+                typeof(ServerMessage).IsAssignableFrom(x) ||
+                x.GetCustomAttribute<GenerateSyncAttribute>() != null)
                 ).ToDictionary(x => GetNameWithoutGenericArity(x));
-            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract);
-            foreach (var baseEntity in allBaseEntities.Select(x => x.Value))
+            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract || typeof(ServerMessage).IsAssignableFrom(t.Value) || t.Value.IsValueType);
+            foreach (var baseObj in allBaseEntities.Select(x => x.Value))
             {
-                var eName = GetNameWithoutGenericArity(baseEntity);
+                var eName = GetNameWithoutGenericArity(baseObj);
                 if (!syncTypes.ContainsKey(eName + "Sync"))
                 {
-                    if (baseEntity.GetCustomAttribute<GenerateSyncAttribute>() == null)
+                    if (baseObj.GetCustomAttribute<GenerateSyncAttribute>() == null)
                         continue;
                     Console.WriteLine($"ERROR: no sync type for {eName}");
 
                 }
-                var master = syncTypes[eName + "Sync"];
+                var sync = syncTypes[eName + "Sync"];
                 var id = (int)(Crc64.Compute(eName) % int.MaxValue);
-                _idToMaster.Add(id, master);
-                _masterToId.Add(master, id);
-                _baseToMaster.Add(baseEntity, master);
-                _masterToBase.Add(master, baseEntity);
+                _idToMaster.Add(id, sync);
+                _masterToId.Add(sync, id);
+                _baseToMaster.Add(baseObj, sync);
+                _masterToBase.Add(sync, baseObj);
+                if (typeof(IGhostLikeSerializer).IsAssignableFrom(sync))
+                {
+                    _serializers.Add(baseObj, (IGhostLikeSerializer)Activator.CreateInstance(sync));
+                    if (typeof(ServerMessage).IsAssignableFrom(baseObj))
+                        _serializersByNetId.Add(((ServerMessage)Activator.CreateInstance(baseObj)).NetId, (IGhostLikeSerializer)Activator.CreateInstance(sync));
+                }
             }
+            _serializers.Add(typeof(byte[]), new ByteArraySerliazer());
+            _serializers.Add(typeof(string), new StringSerializer());
+        }
+        static DefNetworkSerializer _defSerializer = new DefNetworkSerializer();
+        public static IGhostLikeSerializer GetSerializerForObjNetId(int netId)
+        {
+            return _serializersByNetId[netId];
+        }
+        public static IGhostLikeSerializer GetSerializerForObjType(Type type)
+        {
+            if (typeof(IDef).IsAssignableFrom(type))
+                return _defSerializer;
+            return _serializers[type];
         }
         public static Type GetDeclaredTypeFromSyncType(Type type)
         {
@@ -1029,7 +1067,7 @@ namespace NetworkEngine
     public abstract class NetworkEntity
     {
         public static AsyncLocal<EntityId> CurrentlyExecutingInContext = new AsyncLocal<EntityId>();
-        public bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id;
+        public bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id && IsMaster;
         public bool IsMaster => CurrentServer.Id == ServerId;
         public NetworkNode CurrentServer;
         public NetworkNodeId ServerId;
@@ -1095,8 +1133,8 @@ namespace NetworkEngine
 
     public interface IGhostLikeSerializer
     {
-        bool Serialize(ref NetDataWriter stream, bool initial);
-        void Deserialize(NetDataReader stream);
+        bool Serialize(object obj, ref NetDataWriter stream);
+        object Deserialize(NetDataReader stream);
     }
     public interface IGhost
     {
@@ -1113,6 +1151,8 @@ namespace NetworkEngine
     {
         public EntityId EntityId { get; set; }
         public abstract void Run(object entity);
+
+
     }
 
     public class RemoteConnectionToken
@@ -1120,12 +1160,15 @@ namespace NetworkEngine
         public string IP;
         public int Port;
     }
-    [MessagePackObject(true)]
+    [GenerateSync]
     public struct EntityId
     {
         public static EntityId Invalid => default;
+        [Sync]
         public NetworkNodeId Id1;
+        [Sync]
         public long Id2;
+        [Sync]
         public int SubObjectId;
 
         public EntityId(NetworkNodeId id1, long id2)
@@ -1361,10 +1404,10 @@ namespace NetworkEngine
         }
         private List<T> DeserializeList(NetDataReader stream)
         {
+            List<T> list = new List<T>();
+            var count = stream.GetInt();
             if (IsSyncObjectList)
             {
-                List<T> list = new List<T>();
-                var count = stream.GetInt();
                 for (int i = 0; i < count; i++)
                 {
                     var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
@@ -1375,16 +1418,20 @@ namespace NetworkEngine
             }
             else
             {
-                var list = MessagePackSerializer.Deserialize<List<T>>(stream.GetBytesWithLength());
+                var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
+                for (int i = 0; i < count; i++)
+                {
+                    list.Add((T)s.Deserialize(stream));
+                }
                 return list;
             }
         }
 
         private void SerializeList(List<T> list, ref NetDataWriter stream, bool initial)
         {
+            stream.Put(_internalList.Count);
             if (IsSyncObjectList)
             {
-                stream.Put(_internalList.Count);
                 foreach (var e in _internalList)
                 {
                     stream.Put(SyncTypesMap.GetIdFromSyncType(e.GetType()));
@@ -1394,8 +1441,12 @@ namespace NetworkEngine
             }
             else
             {
-                var bytes = MessagePackSerializer.Serialize(_internalList);
-                stream.PutBytesWithLength(bytes, 0, bytes.Length);
+                var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
+                foreach (var e in _internalList)
+                {
+                    stream.Put(SyncTypesMap.GetIdFromSyncType(e.GetType()));
+                    s.Serialize(e, ref stream);
+                }
             }
         }
 
@@ -1472,8 +1523,9 @@ namespace NetworkEngine
             }
             else
             {
-                var obj = MessagePackSerializer.Deserialize<T>(stream.GetBytesWithLength());
-                return obj;
+
+                var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
+                return  (T)s.Deserialize(stream);
             }
 
         }
@@ -1486,8 +1538,9 @@ namespace NetworkEngine
             }
             else
             {
-                var bytes = MessagePackSerializer.Serialize(op.Object);
-                stream.PutBytesWithLength(bytes, 0, bytes.Length);
+                var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
+                stream.Put(SyncTypesMap.GetIdFromSyncType(op.Object.GetType()));
+                s.Serialize(op.Object, ref stream);
             }
 
         }

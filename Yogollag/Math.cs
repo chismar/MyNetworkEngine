@@ -1,5 +1,4 @@
 ﻿using CodeGen;
-using MessagePack;
 using SFML.System;
 using System;
 using System.Collections.Generic;
@@ -9,17 +8,14 @@ using LiteNetLib.Utils;
 using NetworkEngine;
 namespace Yogollag
 {
-    [GenerateSync]
-    public class Vec2Surrogate
-    {
-        public Vec2 Vec { get; set; }
-    }
 
-    [MessagePackObject(true)]
+    [GenerateSync]
     public struct Vec2
     {
         public static Vec2 New(float x, float y) => new Vec2() { X = x, Y = y };
+        [Sync(SyncType.Client)]
         public float X { get; set; }
+        [Sync(SyncType.Client)]
         public float Y { get; set; }
         public static implicit operator Vector2f(Vec2 vec)
         {
@@ -53,9 +49,7 @@ namespace Yogollag
         {
             return new Vec2() { X = p.X - p2.X, Y = p.Y - p2.Y };
         }
-        [IgnoreMember]
         public float Length => (float)Math.Sqrt(X * X + Y * Y);
-        [IgnoreMember]
         public Vec2 Normal => new Vec2() { X = X, Y = Y } / (new Vec2() { X = X, Y = Y }).Length;
         public static Vec2 operator *(Vec2 p, float s)
         {
@@ -91,7 +85,6 @@ namespace Yogollag
         }
     }
 
-    [MessagePackObject(true)]
     public struct Vec2Int
     {
         public static Vec2Int New(int x, int y) => new Vec2Int() { X = x, Y = y };
@@ -117,7 +110,6 @@ namespace Yogollag
         {
             return new Vec2Int() { X = p.X - p2.X, Y = p.Y - p2.Y };
         }
-        [IgnoreMember]
         public float Length => (float)Math.Sqrt(X * X + Y * Y);
 
         public static Vec2Int operator *(Vec2Int p, int s)

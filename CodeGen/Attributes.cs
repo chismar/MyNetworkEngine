@@ -7,11 +7,11 @@ using System.Diagnostics;
 namespace CodeGen
 {
 
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false, AllowMultiple = true)]
 #if !UNITY_EDITOR && !UNITY_STANDALONE
     [CodeGenerationAttribute(typeof(GenerateEntitiesCode))]
+    //[Conditional("CodeGeneration")]
 #endif
-    [Conditional("CodeGeneration")]
     public class GenerateSyncAttribute : Attribute
     {
     }

@@ -73,7 +73,7 @@ namespace Yogollag
             float distanceBetweenButtons = 100;
             foreach (var item in character.Inventory.Items)
             {
-                if (item == null)
+                if (item.Def == null)
                     continue;
                 var text = item.Def.Name;
                 if (item.ItemId == character.ActiveItem)

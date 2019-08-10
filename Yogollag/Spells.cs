@@ -1,6 +1,5 @@
 ﻿using CodeGen;
 using Definitions;
-using MessagePack;
 using NetworkEngine;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ using System.Linq;
 
 namespace Yogollag
 {
-    [MessagePackObject(true)]
     public struct SyncedTime
     {
         public static float ToSeconds(long time) => (float)new TimeSpan(time).TotalSeconds;
@@ -29,7 +27,6 @@ namespace Yogollag
         }
     }
 
-    [MessagePackObject(true)]
     public struct SpellId
     {
         public int Id { get; set; }
@@ -43,7 +40,6 @@ namespace Yogollag
             return x.Id != y.Id || x.FromClient != y.FromClient;
         }
     }
-    [MessagePackObject(true)]
     public struct SpellFailedToCast
     {
         public SpellId Id { get; set; }
@@ -141,7 +137,6 @@ namespace Yogollag
         public DefRef<IImpactDef> ImpactOnStart { get; set; }
     }
 
-    [MessagePackObject(true)]
     public class SpellCast
     {
         public SpellDef Def { get; set; }

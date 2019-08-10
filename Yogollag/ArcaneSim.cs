@@ -4,6 +4,7 @@ using NetworkEngine;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using LiteNetLib.Utils;
 
 namespace Yogollag
 {
@@ -80,7 +81,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual SpellsEngine SpellsEngine { get; set; } = SyncObject.New<SpellsEngine>();
         [Sync(SyncType.Client)]
-        public StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
+        public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
     }
 
     public static class RitualEventCalcer

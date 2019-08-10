@@ -1,12 +1,11 @@
 ﻿using NetworkEngine;
 using Definitions;
-using MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using CodeGen;
 using System.Linq;
-
+using LiteNetLib.Utils;
 namespace Yogollag
 {
     /*
@@ -301,7 +300,7 @@ public class SubSpellDef : SpellDef
 static class Scripting
 {
 }*/
-    [MessagePackObject(true)]
+    [GenerateSync]
     public class ScriptingContext
     {
         public ScriptingContext()
@@ -315,10 +314,12 @@ static class Scripting
             if (ent is IPositionedEntity pe)
                 TargetPoint = pe.Position;
         }
+        [Sync]
         public ScriptingContext Parent;
-        [IgnoreMember]
         public NetworkEntity ProcessingEntity;
+        [Sync]
         public EntityId Target;
+        [Sync]
         public Vec2 TargetPoint;
     }
     public interface IImpactedEntity

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Text;
 
 using LiteNetLib.Utils;
-using MessagePack;
 namespace Yogollag
 {
     [GenerateSync]

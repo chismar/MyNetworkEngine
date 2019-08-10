@@ -5,7 +5,6 @@ using SFML.System;
 using SFML.Window;
 using System;
 using System.Threading.Tasks;
-using MessagePack;
 using LiteNetLib.Utils;
 using System.Linq;
 using System.Collections.Generic;
@@ -734,8 +733,6 @@ namespace Yogollag
         public DefRef<SpellDef> Spell { get; set; }
     }
     [GenerateSync]
-    [MessagePackObject(true)]
-    [Union(1, typeof(ItemSync))]
     public abstract class Item : SyncObject
     {
         [Sync(SyncType.AuthorityClient)]
@@ -751,19 +748,32 @@ namespace Yogollag
         [Sync(SyncType.Server)]
         public virtual long Counter { get; set; }
         [Sync(SyncType.Client)]
-        public virtual Item[] Items { get; set; } = Array.Empty<Item>();
+        public virtual DeltaList<Item> Items { get; set; } = SyncObject.New<DeltaList<Item>>();
         public GhostedEntity Owner;
+
+        int FirstFreeItem(DeltaList<Item> items)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].Def == null)
+                    return i;
+            }
+            return -1;
+            
+        }
         void InitItems()
         {
-            if (Items.Length != Size)
+            if (Items.Count != Size)
             {
-                var newItems = new Item[Size];
-                for (int i = 0; i < Items.Length; i++)
-                    if (newItems.Length > i)
+                var newItems = SyncObject.New<DeltaList<Item>>();
+                for (int i = 0; i < Size; i++)
+                    newItems.Add(SyncObject.New<Item>());
+                for (int i = 0; i < Items.Count; i++)
+                    if (newItems.Count > i)
                         newItems[i] = Items[i];
                     else
                     {
-                        int freeIndex = Array.IndexOf(newItems, null);
+                        int freeIndex = FirstFreeItem(newItems);
                         if (freeIndex != -1)
                             newItems[freeIndex] = Items[i];
                         else
@@ -776,11 +786,10 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void DropItem(Item item)
         {
-            int slot = Array.IndexOf(Items, item);
+            int slot = Items.IndexOf(item);
             if (slot == -1)
                 return;
             Items[slot] = null;
-            Items = Items;
             CurrentServer.Create<WorldItemEntity>((wie) => { wie.Position = ((IPositionedEntity)Owner).Position; wie.Item = item.Def; });
         }
 
@@ -788,37 +797,33 @@ namespace Yogollag
         public virtual void AddItem(Item item)
         {
             InitItems();
-            int freeIndex = Array.IndexOf(Items, null);
+            int freeIndex = FirstFreeItem(Items);
             if (freeIndex == -1)
                 DropItem(item);
             else
             {
                 Items[freeIndex] = item;
                 item.ItemId = Counter++;
-                Items = Items;
             }
         }
         public bool CanAddItem()
         {
-            return Array.IndexOf(Items, null) != -1;
+            return FirstFreeItem(Items) != -1;
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void RemoveItem(long itemId)
         {
             InitItems();
-            var index = Array.FindIndex(Items, x => x.ItemId == itemId);
-            if (index == -1)
-                return;
-            DropItem(Items[index]);
-            Items = Items;
+            var item = Items.First(x => x.ItemId == itemId);
+            DropItem(item);
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void MoveItem(long itemId, int slot)
         {
             InitItems();
-            if (slot < 0 || slot >= Items.Length)
+            if (slot < 0 || slot >= Items.Count)
                 return;
-            var index = Array.FindIndex(Items, x => x.ItemId == itemId);
+            var index = Items.IndexOf(Items.First(x => x.ItemId == itemId));
             if (index == -1)
                 return;
             var prevItem = Items[slot];
@@ -885,7 +890,6 @@ namespace Yogollag
         public VoltBody PhysicsBody { get => _movementController.PhysicsBody; set => _movementController.PhysicsBody = value; }
         [Sync(SyncType.AuthorityClient)]
         public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
-        [Sync(SyncType.AuthorityClient)]
         public virtual List<QuestInstance> Quests { get; set; } = new List<QuestInstance>();
         [Sync(SyncType.AuthorityClient)]
         public virtual ItemsCollection Inventory { get; set; } = SyncObject.New<ItemsCollection>();

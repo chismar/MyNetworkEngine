@@ -65,6 +65,7 @@ namespace CodeGen
             public string Type { get; set; }
             public bool Ghost { get; set; }
             public int Index { get; set; }
+            public string Deref => $"objToSerialize.{Name}";
         }
         class SyncMethod
         {
@@ -75,31 +76,40 @@ namespace CodeGen
         {
             var results = SyntaxFactory.List<MemberDeclarationSyntax>();
             // Our generator is applied to any class that our attribute is applied to.
-            var applyToClass = (ClassDeclarationSyntax)context.ProcessingNode;
-            var model = context.Compilation.GetSemanticModel(applyToClass.SyntaxTree);
-            var symbol = model.GetDeclaredSymbol(applyToClass);
-            if (InheritsFrom("NetworkEngine.NetworkEntity", symbol))
+            var applyToClass = context.ProcessingNode as ClassDeclarationSyntax;
+            var applyToStruct = context.ProcessingNode as StructDeclarationSyntax;
+            var model = context.Compilation.GetSemanticModel(applyToClass?.SyntaxTree ?? applyToStruct.SyntaxTree);
+            if(applyToClass != null)
             {
-                results = results.Add(GenerateSyncEntityClass(model, applyToClass));
-                results = GenerateMessages(model, applyToClass, results);
-            }
-            else if (InheritsFrom("NetworkEngine.SyncObject", symbol))
-            {
-                results = results.Add(GenerateSyncObjClass(model, applyToClass));
-                results = GenerateObjMessages(model, applyToClass, results);
-            }
-            else if (applyToClass.Identifier.Text == SchemaGenerator.SchemaGenClassName)
-            {
-                List<INamedTypeSymbol> allTypesModel = new List<INamedTypeSymbol>();
-                GetAllSymbolsVisitor visitor = new GetAllSymbolsVisitor(allTypesModel);
-                visitor.Visit(context.Compilation.GlobalNamespace);
-                //results = results.Add(SyntaxFactory.ClassDeclaration("OUTPUT" + Path.Combine(context.ProjectDirectory, "DEFS_SCHEMA.json")));
-                SchemaGenerator.GenerateSchema(context.ProjectDirectory, allTypesModel);
-            }
-            else
-            {
+                var symbol = model.GetDeclaredSymbol(applyToClass);
+                if (InheritsFrom("NetworkEngine.NetworkEntity", symbol))
+                {
+                    results = results.Add(GenerateSyncEntityClass(model, applyToClass));
+                    results = GenerateMessages(model, applyToClass, results);
+                }
+                else if (InheritsFrom("NetworkEngine.SyncObject", symbol))
+                {
+                    results = results.Add(GenerateSyncObjClass(model, applyToClass));
+                    results = GenerateObjMessages(model, applyToClass, results);
+                }
+                else if (applyToClass.Identifier.Text == SchemaGenerator.SchemaGenClassName)
+                {
+                    List<INamedTypeSymbol> allTypesModel = new List<INamedTypeSymbol>();
+                    GetAllSymbolsVisitor visitor = new GetAllSymbolsVisitor(allTypesModel);
+                    visitor.Visit(context.Compilation.GlobalNamespace);
+                    //results = results.Add(SyntaxFactory.ClassDeclaration("OUTPUT" + Path.Combine(context.ProjectDirectory, "DEFS_SCHEMA.json")));
+                    SchemaGenerator.GenerateSchema(context.ProjectDirectory, allTypesModel);
+                }
+                else
+                {
 
-                results = results.Add(GenerateStaticSyncObj(model, applyToClass));
+                    results = results.Add(GenerateStaticSyncObj(model, applyToClass));
+                }
+            }
+            else if (applyToStruct != null)
+            {
+                var symbol = model.GetDeclaredSymbol(applyToStruct);
+                results = results.Add(GenerateStaticSyncObj(model, applyToStruct));
             }
             return Task.FromResult<SyntaxList<MemberDeclarationSyntax>>(results);
 
@@ -138,7 +148,7 @@ namespace CodeGen
             return results;
         }
 
-        private ClassDeclarationSyntax GenerateStaticSyncObj(SemanticModel model, ClassDeclarationSyntax applyToClass)
+        private ClassDeclarationSyntax GenerateStaticSyncObj(SemanticModel model, TypeDeclarationSyntax applyToClass)
         {
             ScriptObject scriptObject = ExtractDataForSync(model, applyToClass);
             var context = new TemplateContext();
@@ -179,12 +189,12 @@ namespace CodeGen
 
         Scriban.Template _objectMessageTemplate => _messageTemplate;
         Scriban.Template _messageTemplate = Scriban.Template.Parse(@"
-            [ReverseUnion({{id}}, typeof(ServerMessage))]
             public class {{entity}}{{method}}Message : EntityMessage
             {
+                public override int NetId => {{id}};
+
                 {{ for arg in arguments }}
-                    //[Sync(Sync.Always)]
-                    public virtual {{ arg.type }} {{ arg.name }} { get; set; }
+                    public {{ arg.type }} {{ arg.name }};
                 {{ end }}
                 
                 public override void Run(object entity)
@@ -205,20 +215,55 @@ namespace CodeGen
                     );
                 }
             }
+
+            public class {{entity}}{{method}}MessageSync : IGhostLikeSerializer
+            {
+                public object Deserialize(NetDataReader stream)
+                {
+                    var messageToSerialize = new {{entity}}{{method}}Message();
+                    {{GetFromStreamFromType false ""EntityId"" ""messageToSerialize.EntityId""}}
+                    {{for syncProp in arguments}}
+                    {
+                        {{GetFromStreamFromType syncProp.ghost syncProp.type syncProp.deref}}
+                    }
+                    {{end}}
+                    return messageToSerialize;
+                }
+                public bool Serialize(object objToSerialize, ref NetDataWriter stream)
+                {   
+                    var messageToSerialize = ({{entity}}{{method}}Message)objToSerialize;
+                    if(stream == null)
+                        stream = new NetDataWriter(true, 5);
+                        {{PutToStreamFromType false ""EntityId"" ""messageToSerialize.EntityId"" }}
+                    {{for syncProp in arguments}} 
+                    {
+                        {{PutToStreamFromType syncProp.ghost syncProp.type syncProp.deref }}
+                    }
+                    {{end}}
+                    return true;
+                }
+            }
             ");
         class MsgArg
         {
             public string Name { get; set; }
+            public string Deref => $"messageToSerialize.{Name}";
             public string Type { get; set; }
+            public bool Ghost { get; set; }
         }
         private IEnumerable<MemberDeclarationSyntax> GenerateObjMessage(SemanticModel model, MethodDeclarationSyntax method, string className)
         {
             List<MsgArg> args = new List<MsgArg>();
             foreach (var param in method.ParameterList.Parameters)
             {
-                args.Add(new MsgArg() { Name = param.Identifier.ValueText, Type = param.Type.ToString() });
+                args.Add(new MsgArg() { Name = param.Identifier.ValueText, Type = param.Type.ToString(), Ghost = InheritsFrom("NetworkEngine.SyncObject", model.GetTypeInfo(param.Type).Type) });
             }
-            var code = _objectMessageTemplate.Render(new { Entity = className, Method = method.Identifier.ValueText, Class = className, Arguments = args, Id = (className + method.Identifier.ValueText).GetHashCode() });
+            var scriptObject = new ScriptObject();
+            scriptObject.Import(new { Entity = className, Method = method.Identifier.ValueText, Class = className, Arguments = args, Id = (className + method.Identifier.ValueText).GetHashCode() });
+            scriptObject.Import(nameof(PutToStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => PutToStreamFromType(b, str, str2)));
+            scriptObject.Import(nameof(GetFromStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => GetFromStreamFromType(b, str, str2)));
+            scriptObject.Import(nameof(GetTagForProp), (Func<string, int, string>)((str, i) => GetTagForProp(str, i)));
+            var code = _objectMessageTemplate.Render(scriptObject);
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
             var cds = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>();
             return cds;
@@ -228,70 +273,43 @@ namespace CodeGen
             List<MsgArg> args = new List<MsgArg>();
             foreach (var param in method.ParameterList.Parameters)
             {
-                args.Add(new MsgArg() { Name = param.Identifier.ValueText, Type = param.Type.ToString() });
+                args.Add(new MsgArg() { Name = param.Identifier.ValueText, Type = param.Type.ToString(), Ghost = InheritsFrom("NetworkEngine.SyncObject", model.GetTypeInfo(param.Type).Type) });
             }
-            var code = _messageTemplate.Render(new { Entity = className, Method = method.Identifier.ValueText, Class = className, Arguments = args, Id = (className + method.Identifier.ValueText).GetHashCode() });
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var scriptObject = new ScriptObject();
+            scriptObject.Import(new { Entity = className, Method = method.Identifier.ValueText, Class = className, Arguments = args, Id = (className + method.Identifier.ValueText).GetHashCode() });
+            scriptObject.Import(nameof(PutToStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => PutToStreamFromType(b, str, str2)));
+            scriptObject.Import(nameof(GetFromStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => GetFromStreamFromType(b, str, str2)));
+            scriptObject.Import(nameof(GetTagForProp), (Func<string, int, string>)((str, i) => GetTagForProp(str, i)));
+            var code = _messageTemplate.Render(scriptObject); var syntaxTree = CSharpSyntaxTree.ParseText(code);
             var cds = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>();
             //foreach (var cd in cds.ToArray())
             //    cds = cds.Concat(new[] { GenerateSyncObjClass(model, cd) });
             return cds;
         }
         static Template _staticSyncClassTemplate = Scriban.Template.Parse(@"
-            //obj {{obj}} generic {{generic}} hasCustomSerialization {{customser}}
-            //debug info {{debug}}
-            public class {{obj}}Sync{{generic}} : IGhostLikeSerializer
+            public class {{obj}}Sync : IGhostLikeSerializer
             {
-                public void Deserialize(NetDataReader stream)
+                public object Deserialize(NetDataReader stream)
                 {
-                    NetworkEntity.StaticCheckStream(stream, {{GetTagForProp obj 1}},""{{obj}}"");
-                    {{if customser }}
-                        CustomDeserialize(stream);
-                    {{else}}
-                    //var hasAny = stream.GetBool();
-                    //if(!hasAny)
-                    //    return;
-                    var mask = stream.GetInt();
+                    var objToSerialize = new {{obj}}();
                     {{for syncProp in sync}}
-                    NetworkEntity.StaticCheckStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");
-                    if ((mask & (1 << {{syncProp.index}})) != 0)
                     {
-                    NetworkEntity.StaticCheckStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");
-                        {{GetFromStreamFromType syncProp.ghost syncProp.type syncProp.name}}
-                    NetworkEntity.StaticCheckStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");
-                    }
-                    {{if syncProp.ghost }}
-                    else {
-                    NetworkEntity.StaticCheckStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");
-                    ((IGhost){{syncProp.name}})?.Deserialize(stream);    
-                    NetworkEntity.StaticCheckStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");
+                        {{GetFromStreamFromType syncProp.ghost syncProp.type syncProp.deref}}
                     }
                     {{end}}
-                    {{end}}
-                    {{end}}
-                    
+                    return objToSerialize;
                 }
-                public bool Serialize(ref NetDataWriter stream, bool initial)
+                public bool Serialize(object obj, ref NetDataWriter stream)
                 {   
+                    var objToSerialize = ({{obj}})obj;
                     if(stream == null)
                         stream = new NetDataWriter(true, 5);
-                    NetworkEntity.StaticSafeguardStream(stream, {{GetTagForProp obj 1}},""{{obj}}"");    
-                    {{if customser }}
-                        return CustomSerialize(ref stream, initial);
-                    {{else}}
-                    
-                    if(stream == null)
-                        stream = new NetDataWriter(true, 5);
-                    //stream.Put(true);
-                    {{for syncProp in sync}}
-                    NetworkEntity.StaticSafeguardStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");    
-                    NetworkEntity.StaticSafeguardStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");    
-                        hasAny = true;
-                        {{PutToStreamFromType syncProp.ghost syncProp.type syncProp.name }}
-                    NetworkEntity.StaticSafeguardStream(stream, {{GetTagForProp syncProp.name 1}},""{{obj}}"");    
+                    {{for syncProp in sync}} 
+                    {
+                        {{PutToStreamFromType syncProp.ghost syncProp.type syncProp.deref }}
+                    }
                     {{end}}
                     return true;
-                    {{end}}
                 }
             }");
         static string _syncObjectTemplateString = @"
@@ -495,7 +513,7 @@ namespace CodeGen
             else
                 return type.Name;
         }
-        private ScriptObject ExtractDataForSync(SemanticModel model, ClassDeclarationSyntax entityClass)
+        private ScriptObject ExtractDataForSync(SemanticModel model, TypeDeclarationSyntax entityClass)
         {
             var syncProps = new List<SyncProp>();
             int propIndex = 0;
@@ -505,7 +523,20 @@ namespace CodeGen
                 .Where(m => m is IPropertySymbol p && p.GetAttributes().Any(x => x.AttributeClass.Name.StartsWith("Sync")))
                 .Select(x => (IPropertySymbol)x);
 
+            var syncMembersFields = typeSymbol.GetMembers().Concat(typeSymbol.BaseType.GetMembers())
+                .Where(m => m is IFieldSymbol p && p.GetAttributes().Any(x => x.AttributeClass.Name.StartsWith("Sync")))
+                .Select(x => (IFieldSymbol)x);
             foreach (var syncMember in syncMembers)
+            {
+                syncProps.Add(new SyncProp()
+                {
+                    Ghost = InheritsFrom("NetworkEngine.SyncObject", syncMember.Type),
+                    Name = syncMember.Name,
+                    Type = GetTypeFromSymbol(syncMember.Type),
+                    Index = propIndex++
+                });
+            }
+            foreach (var syncMember in syncMembersFields)
             {
                 syncProps.Add(new SyncProp()
                 {
@@ -536,6 +567,11 @@ namespace CodeGen
                     }
             }
 
+            return GenerateScriptObjForSerializedClass(entityClass, syncProps, typeSymbol, hasCustomSerialization, syncMethods);
+        }
+
+        private ScriptObject GenerateScriptObjForSerializedClass(TypeDeclarationSyntax entityClass, List<SyncProp> syncProps, INamedTypeSymbol typeSymbol, bool hasCustomSerialization, List<SyncMethod> syncMethods)
+        {
             var scriptObject = new ScriptObject();
             scriptObject.Import(new
             {
@@ -543,9 +579,9 @@ namespace CodeGen
                 Sync = syncProps,
                 Methods = syncMethods,
                 Customser = hasCustomSerialization,
-                Generic = !typeSymbol.IsGenericType ? "" :
+                Generic = typeSymbol == null ? "" : !typeSymbol.IsGenericType ? "" :
                 $"<{string.Join(",", typeSymbol.TypeParameters.Select(tp => tp.Name))} > ",
-                Debug = string.Join(",", typeSymbol.AllInterfaces.Select(x => x.Name)) + $" {typeSymbol.AllInterfaces.Length}"
+                Debug = typeSymbol == null ? "" : string.Join(",", typeSymbol.AllInterfaces.Select(x => x.Name)) + $" {typeSymbol.AllInterfaces.Length}"
             });
             scriptObject.Import(nameof(PutToStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => PutToStreamFromType(b, str, str2)));
             scriptObject.Import(nameof(GetFromStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => GetFromStreamFromType(b, str, str2)));
@@ -580,7 +616,7 @@ namespace CodeGen
                     case "Boolean":
                         return $"{propName} = stream.GetBool();";
                     default:
-                        return $"{propName} = MessagePackSerializer.Deserialize<{type}>(stream.GetBytesWithLength());";
+                        return $"{propName} = ({type})SyncTypesMap.GetSerializerForObjType(typeof({type})).Deserialize(stream);";
                 }
         }
         public static string GetTagForProp(string propName, int offset)
@@ -607,7 +643,7 @@ namespace CodeGen
                     case "Int64":
                         return $"stream.Put({propName});";
                     default:
-                        return $"var bytes = MessagePackSerializer.Serialize({propName}); stream.PutBytesWithLength(bytes, 0, bytes.Length);";
+                        return $"SyncTypesMap.GetSerializerForObjType(typeof({type})).Serialize({propName}, ref stream);";
                 }
         }
     }

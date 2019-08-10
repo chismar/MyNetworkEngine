@@ -1,6 +1,5 @@
 ﻿using CodeGen;
 using Definitions;
-using MessagePack;
 using NetworkEngine;
 using System;
 using System.Collections.Concurrent;
@@ -86,7 +85,6 @@ namespace Yogollag
 
     }
 
-    [MessagePackObject(keyAsPropertyName: true)]
     public class MapTile
     {
         public List<TileModDef> TileMods { get; set; }

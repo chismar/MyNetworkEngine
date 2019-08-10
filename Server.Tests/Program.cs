@@ -1,13 +1,11 @@
 ﻿using CodeGen;
 using LiteNetLib.Utils;
-using MessagePack;
 using NetworkEngine;
 using NUnit.Framework;
 using System;
 
 namespace Server.Tests
 {
-    [MessagePackObject(true)]
     public struct SimpleStruct
     {
         public int Value { get; set; }

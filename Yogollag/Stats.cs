@@ -1,6 +1,5 @@
 ﻿using CodeGen;
 using Definitions;
-using MessagePack;
 using NetworkEngine;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ namespace Yogollag
         public virtual StatDef StatDef { get; set; }
         public abstract float Value { get; }
     }
-    [MessagePackObject]
     public struct AccStatModifier
     {
         public float AddMod { get; set; }

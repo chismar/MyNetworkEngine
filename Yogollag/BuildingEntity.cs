@@ -6,7 +6,6 @@ using System.Text;
 using LiteNetLib.Utils;
 using Definitions;
 using SFML.Graphics;
-using MessagePack;
 using Volatile;
 
 namespace Yogollag

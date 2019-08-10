@@ -1,111 +1,93 @@
 ﻿using Definitions;
-using MessagePack;
-using MessagePack.Formatters;
+using LiteNetLib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NetworkEngine
 {
-    public class DefFormatter<T> : IMessagePackFormatter<T> where T : class, IDef
+    public class DefNetworkSerializer : IGhostLikeSerializer
     {
-        public int Serialize(ref byte[] bytes, int offset, T value, IFormatterResolver formatterResolver)
+        public bool Serialize(object obj, ref NetDataWriter stream)
         {
-            if (value == null)
+            if (stream == null)
+                stream = new NetDataWriter(true, 10);
+            var def = (IDef)obj;
+
+            if (obj == null)
             {
-                return MessagePackBinary.WriteNil(ref bytes, offset);
+                stream.Put(false);
+                return true;
             }
 
-            int localOffset = MessagePackBinary.WriteUInt64(ref bytes, offset, value.Address.RootID());
-            var rootRes = value.Address.Line == 0 && value.Address.Line == 0 && value.Address.ProtoIndex == 0;
-            localOffset += MessagePackBinary.WriteBoolean(ref bytes, offset + localOffset, rootRes);
+            stream.Put(true);
+            stream.Put(def.Address.RootID());
+            var rootRes = def.Address.Line == 0 && def.Address.Line == 0 && def.Address.ProtoIndex == 0;
+            stream.Put(rootRes);
             if (!rootRes)
             {
-                localOffset += MessagePackBinary.WriteInt16(ref bytes, offset + localOffset, (short)value.Address.Line);
-                localOffset += MessagePackBinary.WriteInt16(ref bytes, offset + localOffset, (short)value.Address.Col);
-                localOffset += MessagePackBinary.WriteByte(ref bytes, offset + localOffset, (byte)value.Address.ProtoIndex);
+                stream.Put((short)def.Address.Line);
+                stream.Put((short)def.Address.Col);
+                stream.Put((byte)def.Address.ProtoIndex);
             }
-            return localOffset;
+            return true;
         }
 
-        public T Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
+        public object Deserialize(NetDataReader stream)
         {
-            if (MessagePackBinary.IsNil(bytes, offset))
-            {
-                readSize = 1;
+            if (!stream.GetBool())
                 return null;
-            }
+
             DefIDFull defId = default;
-            int crcReadSize = 0;
-            var crcId = MessagePackBinary.ReadUInt64(bytes, offset, out crcReadSize);
-            int rootReadSize;
-            var root = MessagePackBinary.ReadBoolean(bytes, offset + crcReadSize, out rootReadSize);
+            var crcId = stream.GetULong();
+            var root = stream.GetBool();
             if (root)
             {
                 defId = DefsHolder.Instance.NetIDs.GetID(crcId, 0, 0, 0);
-                readSize = crcReadSize + rootReadSize;
             }
             else
             {
-                int lineReadSize;
-                var line = MessagePackBinary.ReadInt16(bytes, offset + crcReadSize + rootReadSize, out lineReadSize);
-                int colReadSize;
-                var col = MessagePackBinary.ReadInt16(bytes, offset + crcReadSize + rootReadSize + lineReadSize, out colReadSize);
-                int protoReadsize;
-                var proto = MessagePackBinary.ReadByte(bytes, offset + crcReadSize + rootReadSize + lineReadSize + colReadSize, out protoReadsize);
+                var line = stream.GetShort();
+                var col = stream.GetShort();
+                var proto = stream.GetByte();
                 defId = DefsHolder.Instance.NetIDs.GetID(crcId, line, col, proto);
-                readSize = crcReadSize + rootReadSize + lineReadSize + colReadSize + protoReadsize;
             }
 
-            return (T)DefsHolder.Instance.LoadResource<IDef>(defId);
+            return DefsHolder.Instance.LoadResource<IDef>(defId);
         }
     }
 
-    public class DefCustomResolver : IFormatterResolver
+    public class ByteArraySerliazer : IGhostLikeSerializer
     {
-        // Resolver should be singleton.
-        public static IFormatterResolver Instance = new DefCustomResolver();
-
-        DefCustomResolver()
+        public object Deserialize(NetDataReader stream)
         {
+            return stream.GetBytesWithLength();
         }
 
-        // GetFormatter<T>'s get cost should be minimized so use type cache.
-        public IMessagePackFormatter<T> GetFormatter<T>()
+        public bool Serialize(object obj, ref NetDataWriter stream)
         {
-            return FormatterCache<T>.formatter;
-        }
-
-        static class FormatterCache<T>
-        {
-            public static readonly IMessagePackFormatter<T> formatter;
-
-            // generic's static constructor should be minimized for reduce type generation size!
-            // use outer helper method.
-            static FormatterCache()
-            {
-                formatter = (IMessagePackFormatter<T>)DefResolverHelper.GetFormatter(typeof(T));
-            }
+            if (stream == null)
+                stream = new NetDataWriter(true, 30);
+            stream.PutBytesWithLength((byte[])obj);
+            return true;
         }
     }
-
-    internal static class DefResolverHelper
+    public class StringSerializer : IGhostLikeSerializer
     {
-        // If type is concrete type, use type-formatter map
-        static readonly Dictionary<Type, object> formatterMap = new Dictionary<Type, object>();
-
-        internal static object GetFormatter(Type t)
+        public static readonly Encoding UTF8 = new UTF8Encoding(false);
+        public object Deserialize(NetDataReader stream)
         {
-            if (!(typeof(IDef).IsAssignableFrom(t)))
-                return null;
-            object formatter;
-            if (!formatterMap.TryGetValue(t, out formatter))
-            {
-                formatterMap.Add(t, formatter = Activator.CreateInstance(typeof(DefFormatter<>).MakeGenericType(t)));
-            }
-            return formatter;
+            return UTF8.GetString(stream.GetBytesWithLength());
+        }
 
-            // If type can not get, must return null for fallback mecanism.
+        public bool Serialize(object obj, ref NetDataWriter stream)
+        {
+            if (stream == null)
+                stream = new NetDataWriter(true, 30);
+
+            var bytes = UTF8.GetBytes((string)obj);
+            stream.PutBytesWithLength(bytes);
+            return true;
         }
     }
 }

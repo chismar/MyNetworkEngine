@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using LiteNetLib.Utils;
-using MessagePack;
 using System.Linq;
 using Volatile;
 
