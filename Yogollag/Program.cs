@@ -138,10 +138,10 @@ namespace Yogollag
         public NetworkNode _node;
         EntityId _sessionId;
         LocationCreator _debugCreator;
-        public bool Start()
+        public bool Start(int port = 9051)
         {
             _node = new NetworkNode();
-            var started = _node.Start(9051, 128, true);
+            var started = _node.Start(port, 128, true);
             if (!started)
                 return false;
             _sessionId = _node.Create<SessionEntity>();
@@ -269,8 +269,10 @@ namespace Yogollag
         RenderWindow _win;
         View _charView;
         LocationCreator _debugCreator;
+        public static bool DoRender = true;
         public void Start(RemoteConnectionToken server, bool render = true)
         {
+            DoRender = render;
             _node = new NetworkNode();
             _node.Start(false);
             _connected = _node.Connect(server);
@@ -568,6 +570,8 @@ namespace Yogollag
         }
         void InitSound()
         {
+            if (!SimpleClient.DoRender)
+                return;
             if (_sounds == null)
             {
                 _sounds = new Sound[_count];
@@ -582,6 +586,8 @@ namespace Yogollag
         }
         public void Play()
         {
+            if (!SimpleClient.DoRender)
+                return;
             InitSound();
             if (_currentSound != null && _currentSound.Status == SoundStatus.Stopped)
                 _currentSound = null;
@@ -593,6 +599,8 @@ namespace Yogollag
         }
         public void Stop()
         {
+            if (!SimpleClient.DoRender)
+                return; 
             InitSound();
             if (_currentSound != null && _currentSound.Status != SoundStatus.Stopped)
                 _currentSound.Stop();
@@ -759,7 +767,7 @@ namespace Yogollag
                     return i;
             }
             return -1;
-            
+
         }
         void InitItems()
         {

@@ -12,7 +12,7 @@ namespace YogollagMockHost
     {
         static void Main(string[] args)
         {
-            DefsHolder.Instance = new Defs(new FolderLoader(Path.GetFullPath("../../../../Yogollag/Defs")));
+            DefsHolder.Instance = new Defs(new FolderLoader(Path.GetFullPath("../../../../../../Yogollag/Defs")));
             Console.WriteLine(DefsHolder.Instance.Deserializer.Loader.GetRoot());
             foreach (var root in DefsHolder.Instance.Deserializer.Loader.AllPossibleRoots)
             {

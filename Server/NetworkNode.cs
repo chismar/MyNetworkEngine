@@ -1067,6 +1067,7 @@ namespace NetworkEngine
     }
     public abstract class NetworkEntity
     {
+        public object UserData;
         public static AsyncLocal<EntityId> CurrentlyExecutingInContext = new AsyncLocal<EntityId>();
         public bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id && IsMaster;
         public bool IsMaster => CurrentServer.Id == ServerId;
