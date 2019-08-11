@@ -5,8 +5,8 @@
     <Platforms>AnyCPU;x64</Platforms>
     <StartupObject></StartupObject>  
     <LangVersion>7.1</LangVersion>
-    <IntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
-    <BaseOutputPath>$(SolutionDir)\build\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\.obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildProjectDirectory)\.bin\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

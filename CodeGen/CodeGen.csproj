@@ -6,8 +6,8 @@
     <ApplicationIcon />
     <StartupObject />
     <Platforms>AnyCPU;x64</Platforms>
-    <IntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
-    <BaseOutputPath>$(SolutionDir)\build\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\.obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildProjectDirectory)\.bin\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
     <AssemblyName>.CodeGen</AssemblyName>
   </PropertyGroup>
 

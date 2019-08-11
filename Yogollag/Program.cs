@@ -524,14 +524,14 @@ namespace Yogollag
         public SpriteRenderer(IRenderable ren)
         {
             _ren = ren;
-            if (_font == null)
-                _font = new Font("ARIAL.TTF");
             _nameText.Font = _font;
             _nameText.Scale = new Vector2f(0.1f, 0.1f);
         }
         bool _toTheLeft = false;
         public void Render(RenderTarget rt)
         {
+            if (_font == null)
+                _font = new Font("ARIAL.TTF");
             _nameText.DisplayedString = Name;
             if (_sprite == null)
                 _sprite = Sprites.GetSprite(_ren.RenDef.Sprite);

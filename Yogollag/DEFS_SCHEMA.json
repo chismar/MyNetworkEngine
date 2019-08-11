@@ -109,6 +109,8 @@
         "Target",
         "AddQuest",
         "CompleteQuest",
+        "RoleDef",
+        "Role",
         "IPredicateDef",
         "IPredicate",
         "CheckEntityStatDef",
@@ -283,6 +285,8 @@
             "Target",
             "AddQuest",
             "CompleteQuest",
+            "RoleDef",
+            "Role",
             "CheckEntityStatDef",
             "CheckEntityStat",
             "AllInRangeDef",
@@ -473,6 +477,9 @@
         },
         {
           "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
@@ -680,6 +687,8 @@
             "Target",
             "AddQuest",
             "CompleteQuest",
+            "RoleDef",
+            "Role",
             "IPredicateDef",
             "IPredicate",
             "CheckEntityStatDef",
@@ -886,6 +895,9 @@
         },
         {
           "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
         },
         {
           "$ref": "#/definitions/IPredicateDef"
@@ -4815,6 +4827,74 @@
         }
       ]
     },
+    "RoleDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RoleDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RoleDef",
+            "Role"
+          ]
+        },
+        "InitialQuest": {
+          "$ref": "#/definitions/QuestDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "RoleDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "RoleDef",
+            "Role"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        }
+      ]
+    },
     "IPredicateDef": {
       "type": "object",
       "additionalProperties": false,
@@ -5929,6 +6009,7 @@
         "TargetDef",
         "AddQuest",
         "CompleteQuest",
+        "RoleDef",
         "IPredicateDef",
         "CheckEntityStatDef",
         "IImpactDef",
@@ -6613,6 +6694,9 @@
         },
         {
           "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
         },
         {
           "$ref": "#/definitions/IPredicateDef"

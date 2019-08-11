@@ -979,7 +979,8 @@ namespace NetworkEngine
         {
             "Server",
             "Yogollag",
-            "GameTest"
+            "GameTest",
+            "Assembly-CSharp"
         };
         public static IEnumerable<Assembly> InterestingAssemblies => AppDomain.CurrentDomain.GetAssemblies()
                 .Where(x =>

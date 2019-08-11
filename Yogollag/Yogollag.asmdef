@@ -1,14 +1,15 @@
 {
-    "name": "UnityClient",
+    "name": "Yogollag",
     "references": [
-        "GUID:4d0f1e542b7ab3d4a95aa23a5befd502",
+        "GUID:de0986874b49deb4792136ff73a3ef25",
+        "GUID:cb4e270a0e2f0f046ad3131de887cb8c",
         "GUID:4b10f1a37c7fd934889333b63a63934e",
-        "GUID:de0986874b49deb4792136ff73a3ef25"
+        "GUID:c1aff9f292789804abc2e2c56df8c8e2"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,

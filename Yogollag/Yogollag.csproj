@@ -7,8 +7,7 @@
     <StartupObject></StartupObject>  
     <LangVersion>latest</LangVersion>  
     <ApplicationIcon />
-    <!--<IntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>-->
-    <!--<BaseOutputPath>$(SolutionDir)\build\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>-->
+    <BaseOutputPath>$(MSBuildProjectDirectory)\.bin\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -5,8 +5,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <ApplicationIcon />
     <StartupObject />
-    <IntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
-    <BaseOutputPath>$(SolutionDir)\build\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\.obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildProjectDirectory)\.bin\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
