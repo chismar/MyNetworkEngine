@@ -60,8 +60,11 @@ public class GameHost : MonoBehaviour
                     var obj = Resources.Load(eo.Def.Address.Root.Substring(1, eo.Def.Address.Root.Length - 1));
                     if (obj == null)
                         ent.UserData = new VisualObject(null);
-                    var go = (GameObject)GameObject.Instantiate(obj);
-                    ent.UserData = go.GetComponent<Visual>().Init(ent);
+                    else
+                    {
+                        var go = (GameObject)GameObject.Instantiate(obj);
+                        ent.UserData = go.GetComponent<Visual>().Init(ent);
+                    }
                 }
                 else if (ent.UserData is VisualObject vo)
                 {
