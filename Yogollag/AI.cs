@@ -82,7 +82,7 @@ namespace Yogollag
                 
                 if (point.HasValue)
                 {
-                    float maxMult = 100;
+                    float maxMult = 1;
                     var dst = (point.Value - ((IPositionedEntity)ParentEntity).Position).Length;
                     var dir = (point.Value - ((IPositionedEntity)ParentEntity).Position).Normal;
                     var mult = dst > maxMult ? maxMult : dst;

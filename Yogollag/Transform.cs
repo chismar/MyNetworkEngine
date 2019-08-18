@@ -46,52 +46,54 @@ namespace Yogollag
             var point = t.TransformPoint(local.X, local.Y);
             return Vec2.New(point.X, point.Y);
         }
-        RectangleShape _rectShape;
-        CircleShape _circleShape;
-        public void DrawShapeAt(RenderTarget rt, Shape shape, Vec2 shapeSize, Vec2 pivot)
+        public void DrawShapeAt(RectShapeHandle shape, Vec2 pivot)
         {
-            shape.Position = _transform.TransformPoint(shapeSize.X * pivot.X, shapeSize.Y * pivot.Y);
+            shape.Pivot = pivot;
+            shape.Position = _transform.TransformPoint(Vec2.New(0,0));
             shape.Rotation = GlobalRot - 180;
-            shape.Draw(rt, RenderStates.Default);
+            EnvironmentAPI.Draw.Rect(shape);
         }
-        public void DrawSpriteAt(RenderTarget rt, Sprite sprite, Vec2 shapeSize, Vec2 pivot, Vec2? scale = null)
+        public void DrawShapeAt(CircleShapeHandle shape, Vec2 pivot)
+        {
+            shape.Position = _transform.TransformPoint(Vec2.New(0, 0));
+            EnvironmentAPI.Draw.Circle(shape);
+        }
+        public void DrawSpriteAt(SpriteHandle sprite, Vec2 shapeSize, Vec2 pivot, Vec2? scale = null)
         {
             sprite.Position = _transform.TransformPoint(shapeSize.X * pivot.X, shapeSize.Y * pivot.Y);
             sprite.Rotation = GlobalRot - 180;
-            sprite.Origin = new Vector2f(sprite.TextureRect.Width / 2, sprite.TextureRect.Height / 2);
-            if(scale.HasValue)
-                sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.Width * scale.Value.X, shapeSize.Y / sprite.TextureRect.Height * scale.Value.Y);
+            sprite.Origin = new Vector2f(sprite.TextureRect.X / 2, sprite.TextureRect.Y / 2);
+            if (scale.HasValue)
+                sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.X * scale.Value.X, shapeSize.Y / sprite.TextureRect.Y * scale.Value.Y);
             else
-                sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.Width, shapeSize.Y / sprite.TextureRect.Height);
-            sprite.Draw(rt, RenderStates.Default);
+                sprite.Scale = new Vector2f(shapeSize.X / sprite.TextureRect.X, shapeSize.Y / sprite.TextureRect.Y);
+            EnvironmentAPI.Draw.Sprite(sprite);
         }
-        public void DrawAsDir(RenderTarget rt, float scale = 1f)
+        public void DrawAsDir(float scale = 1f)
         {
-            if(_circleShape == null)
-                _circleShape = new CircleShape();
-            _circleShape.Radius = 7 * scale;
-            _circleShape.FillColor = Color.Transparent;
-            _circleShape.OutlineThickness = 1 * scale;
-            _circleShape.OutlineColor = Color.Red;
-            _circleShape.Position = _transform.TransformPoint(0, 0) + new Vector2f(-7 * scale, -7 * scale);
-            _circleShape.Draw(rt, RenderStates.Default);
-            if(_rectShape == null)
-                _rectShape = new RectangleShape();
-            _rectShape.Size = new Vector2f(2f * scale, 15 * scale);
-            _rectShape.Position = _transform.TransformPoint(0f, 0) + new Vector2f(1 * scale, 0);
-            _rectShape.Rotation = GlobalRot;
-            _rectShape.FillColor = Color.Transparent;
-            _rectShape.OutlineThickness = 1 * scale;
-            _rectShape.OutlineColor = Color.Red;
-            _rectShape.Draw(rt, RenderStates.Default);
+            var circleShape = new CircleShapeHandle();
+            circleShape.Radius = 7 * scale;
+            circleShape.FillColor = Color.Transparent;
+            circleShape.OutlineThickness = 1 * scale;
+            circleShape.OutlineColor = Color.Magenta;
+            circleShape.Position = _transform.TransformPoint(0, 0);
+            EnvironmentAPI.Draw.Circle(circleShape);
+            var rectShape = new RectShapeHandle();
+            rectShape.Size = new Vector2f(2f * scale, 15 * scale);
+            rectShape.Position = _transform.TransformPoint(0f, 0);
+            rectShape.Rotation = GlobalRot;
+            rectShape.FillColor = Color.Transparent;
+            rectShape.OutlineThickness = 1 * scale;
+            rectShape.OutlineColor = Color.Magenta;
+            EnvironmentAPI.Draw.Rect(rectShape);
 
-            _rectShape.Size = new Vector2f(2f * scale, 12 * scale);
-            _rectShape.Position = _transform.TransformPoint(0f, 0f) + new Vector2f(0, 1 * scale);
-            _rectShape.Rotation = GlobalRot - 90;
-            _rectShape.FillColor = Color.Transparent;
-            _rectShape.OutlineThickness = 1 * scale;
-            _rectShape.OutlineColor = Color.Blue;
-            _rectShape.Draw(rt, RenderStates.Default);
+            rectShape.Size = new Vector2f(2f * scale, 12 * scale);
+            rectShape.Position = _transform.TransformPoint(0f, 0f);
+            rectShape.Rotation = GlobalRot - 90;
+            rectShape.FillColor = Color.Transparent;
+            rectShape.OutlineThickness = 1 * scale;
+            rectShape.OutlineColor = Color.Magenta;
+            EnvironmentAPI.Draw.Rect(rectShape);
         }
         public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform parent)
         {
@@ -99,5 +101,29 @@ namespace Yogollag
             _rot = rotation;
             _parent = parent;
         }
+    }
+
+    public struct CircleShapeHandle
+    {
+        public float Radius { get; set; }
+        public Vec2 Position { get; set; }
+        public Color FillColor { get; set; }
+        public float OutlineThickness { get; set; }
+        public Color OutlineColor { get; set; }
+    }
+    public struct RectShapeHandle
+    {
+        public Vec2 Size { get; set; }
+        public Vec2 Position { get; set; }
+        public float Rotation { get; set; }
+        public Color FillColor { get; set; }
+        public float OutlineThickness { get; set; }
+        public Color OutlineColor { get; set; }
+        public Vec2 Pivot { get; internal set; }
+    }
+    public struct TextHandle
+    {
+        public Vec2 Position { get; set; }
+        public string Text { get; set; }
     }
 }

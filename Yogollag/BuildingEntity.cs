@@ -27,7 +27,6 @@ namespace Yogollag
             var physDef = (IHasPhysicalBodyDef)Def;
             PhysicalBody.Init(physDef.PhysicalBodyDef);
         }
-        RectangleShape _shape;
         public void Render(RenderTarget rt)
         {
             HierarchyTransform t = new HierarchyTransform(Position, Rotation, null);
@@ -35,35 +34,34 @@ namespace Yogollag
             {
                 if (shape.Def is BoxPhysicalShapeDef box)
                 {
-                    var sprite = Sprites.GetSprite(box.SpriteDef);
+                    var sprite = Sprites.GetSpriteHandle(box.SpriteDef);
                     var subT = new HierarchyTransform(box.Offset, box.Rotation, t);
-                    subT.DrawSpriteAt(rt, sprite, Vec2.New(box.SizeX, box.SizeY), Vec2.New(0, 0));
-                    subT.DrawAsDir(rt, 0.1f);
+                    subT.DrawSpriteAt(sprite, Vec2.New(box.SizeX, box.SizeY), Vec2.New(0.5f, 0.5f));
+                    subT.DrawAsDir(0.1f);
                 }
             }
-            t.DrawAsDir(rt, 0.1f);
+            t.DrawAsDir(0.1f);
             var aabb = PhysicalBody.VoltBody.AABB;
-            if (_shape == null)
-                _shape = new RectangleShape();
+            var _shape = new RectShapeHandle();
             HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), PhysicalBody.Rotation, null);
-            
+
             _shape.FillColor = Color.Transparent;
             _shape.OutlineColor = Color.Red;
             _shape.OutlineThickness = 1;
             _shape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
-            v.DrawShapeAt(rt, _shape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
-            lock(PhysicalBody.VoltBody.World)
+            v.DrawShapeAt(_shape, Vec2.New(0.5f, 0.5f));
+            lock (PhysicalBody.VoltBody.World)
             {
-                foreach(var shape in PhysicalBody.VoltBody.shapes)
+                foreach (var shape in PhysicalBody.VoltBody.shapes)
                 {
-                    if(shape is VoltPolygon vp)
+                    if (shape is VoltPolygon vp)
                     {
                         HierarchyTransform vpt = new HierarchyTransform(Vec2.New(vp.bodySpaceAABB.Center.x, vp.bodySpaceAABB.Center.y), 0, v);
                         _shape.FillColor = Color.Transparent;
                         _shape.OutlineColor = Color.Yellow;
                         _shape.OutlineThickness = 1;
                         _shape.Size = new SFML.System.Vector2f(vp.bodySpaceAABB.Extent.x * 2, vp.bodySpaceAABB.Extent.y * 2);
-                        vpt.DrawShapeAt(rt, _shape, Vec2.New(vp.bodySpaceAABB.Extent.x * 2, vp.bodySpaceAABB.Extent.y * 2), Vec2.New(0.5f, 0.5f));
+                        vpt.DrawShapeAt(_shape, Vec2.New(0.5f, 0.5f));
                     }
                 }
             }

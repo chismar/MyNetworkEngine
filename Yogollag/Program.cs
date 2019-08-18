@@ -112,7 +112,7 @@ namespace Yogollag
             CurrentServer.Create<InteractiveWorldEntity>((ent) => { ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 }; });
             CurrentServer.Create<SimpleSpawner>((ent) =>
             {
-                ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
+                ent.Position = new Vec2() { X = 0 + (float)_random.NextDouble() * 30, Y = 0 + (float)_random.NextDouble() * 30 };
                 ent.Def = DefsHolder.Instance.LoadDef<SimpleSpawnerDef>("/SimpleSpawnerTest");
             });
             CurrentServer.Create<WorldItemEntity>((ent) =>
@@ -161,17 +161,7 @@ namespace Yogollag
             _node.Replicate(_sessionId, eid, this);
         }
 
-        DateTime _lastUpdateTime;
-        float GetDeltaTime()
-        {
-            if (_lastUpdateTime == default(DateTime))
-            {
-                _lastUpdateTime = DateTime.UtcNow;
-                return 1 / 60f;
-            }
-            var delta = DateTime.UtcNow - _lastUpdateTime;
-            return (float)delta.TotalSeconds;
-        }
+       
         bool firstTime = true;
         public void Update()
         {
@@ -206,7 +196,7 @@ namespace Yogollag
                         }
                     }
                 }
-                var deltaTime = GetDeltaTime();
+                var deltaTime = EnvironmentAPI.Time.DeltaTime;
                 foreach (var ghost in _node.AllGhosts())
                 {
                     if (ghost is ICharacterLikeMovement charLikeMovement)
@@ -216,7 +206,7 @@ namespace Yogollag
                             var pos = ((IPositionedEntity)ghost).Position;
                             lock (_physicsWorld)
                             {
-                                var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                                var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10);
                                 var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape);
                                 body.UserData = ghost.Id;
                                 charLikeMovement.PhysicsBody = body;
@@ -233,7 +223,7 @@ namespace Yogollag
                             {
                                 lock (_physicsWorld)
                                 {
-                                    var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                                    var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10);
                                     var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
                                     body.UserData = ghost.Id;
                                     inter.PhysicsBody = body;
@@ -282,6 +272,10 @@ namespace Yogollag
                 _win.SetVerticalSyncEnabled(true);
                 _win.Closed += RenderWindow_Closed;
             }
+            EnvironmentAPI.Input = new SFMLInput() { _win = _win };
+            EnvironmentAPI.Draw = new SFMLDrawApi() { _win = _win };
+            EnvironmentAPI.Time = new SFMLTime();
+            EnvironmentAPI.Win = new SFMLWindowApi() { _win = _win };
             _charView = new View();
             _physicsWorld = new VoltWorld();
             _node.CustomData = _physicsWorld;
@@ -349,7 +343,7 @@ namespace Yogollag
                         var pos = ((IPositionedEntity)ghost).Position;
                         lock (_physicsWorld)
                         {
-                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10));
+                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10));
                             body.UserData = ghost.Id;
                             charLikeMovement.PhysicsBody = body;
 
@@ -359,23 +353,20 @@ namespace Yogollag
                     {
                         var pos = ((IPositionedEntity)ghost).Position;
 
-                        if (_debugPhysicsShape == null)
-                            _debugPhysicsShape = new RectangleShape();
+                        var _debugPhysicsShape = new RectShapeHandle();
                         var aabb = charLikeMovement.PhysicsBody.AABB;
                         HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), 0, null);
                         _debugPhysicsShape.FillColor = Color.Transparent;
                         _debugPhysicsShape.OutlineColor = Color.Red;
                         _debugPhysicsShape.OutlineThickness = 1;
                         _debugPhysicsShape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
-                        if (_win != null)
-                            v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
+                        v.DrawShapeAt(_debugPhysicsShape, Vec2.New(0.5f, 0.5f));
                     }
                     if (ghost.HasAuthority)
                     {
                         character = ghost;
-                        if (_win != null)
-                            if (_win.HasFocus())
-                                charLikeMovement.UpdateControls();
+                        if (_win != null ? _win.HasFocus() : true)
+                            charLikeMovement.UpdateControls();
                         charLikeMovement.UpdateMovement();
                         _charView.Center = new Vector2f(charLikeMovement.SmoothPosition.X, charLikeMovement.SmoothPosition.Y);
                         if (_win != null)
@@ -396,7 +387,7 @@ namespace Yogollag
                         lock (_physicsWorld)
                         {
                             var pos = ((IPositionedEntity)ghost).Position;
-                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 10f, 10);
+                            var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10);
                             var body = _physicsWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
                             body.UserData = ghost.Id;
                             inter.PhysicsBody = body;
@@ -404,8 +395,7 @@ namespace Yogollag
                     }
                     else
                     {
-                        if (_debugPhysicsShape == null)
-                            _debugPhysicsShape = new RectangleShape();
+                        var _debugPhysicsShape = new RectShapeHandle();
                         var aabb = inter.PhysicsBody.AABB;
                         HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), 0, null);
 
@@ -414,7 +404,7 @@ namespace Yogollag
                         _debugPhysicsShape.OutlineThickness = 1;
                         _debugPhysicsShape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
                         if (_win != null)
-                            v.DrawShapeAt(_win, _debugPhysicsShape, Vec2.New(aabb.Extent.x * 2, aabb.Extent.y * 2), Vec2.New(0.5f, 0.5f));
+                            v.DrawShapeAt(_debugPhysicsShape, Vec2.New(0.5f, 0.5f));
                         inter.PhysicsBody.Set(new Vector2(inter.Position.X, inter.Position.Y), 1f);
                     }
                 }
@@ -427,12 +417,10 @@ namespace Yogollag
             {
                 if (ghost is IRenderable rnd)
                 {
-                    if (_win != null)
-                        rnd.Render(_win);
+                    rnd.Render(_win);
                 }
             }
-            if (_win != null)
-                _charGui.Render(_node, _win, character as CharacterEntity, _charView);
+            _charGui.Render(_node, _win, character as CharacterEntity, _charView);
             var tick = _node.Tick();
             lock (_physicsWorld)
                 _physicsWorld.Update();
@@ -442,16 +430,16 @@ namespace Yogollag
         }
 
 
-        RectangleShape _rectShape = new RectangleShape();
         private void DrawSite(MapSiteInstance site, HierarchyTransform parentTransform)
         {
             var ownTransform = new HierarchyTransform(site.Pos, site.Rot, parentTransform);
-            ownTransform.DrawAsDir(_win, 0.3f);
+            ownTransform.DrawAsDir(0.3f);
+            var _rectShape = new RectShapeHandle();
             _rectShape.Size = new Vector2f(site.Def.SizeX, site.Def.SizeY);
             _rectShape.FillColor = Color.Transparent;
             _rectShape.OutlineThickness = 1;
             _rectShape.OutlineColor = Color.Red;
-            ownTransform.DrawShapeAt(_win, _rectShape, Vec2.New(_rectShape.Size.X, _rectShape.Size.Y), site.AttachedToBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
+            ownTransform.DrawShapeAt(_rectShape, site.AttachedToBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
             foreach (var subSite in site.SubSites)
             {
                 //siteT.Rotate(subSite.Value.Rot);
@@ -470,7 +458,7 @@ namespace Yogollag
                     _rectShape.OutlineColor = Color.Green;
                     _rectShape.Size = new Vector2f(box.Size.X, box.Size.Y);
                     var t = new HierarchyTransform(Vec2.New(box.Pos.X, box.Pos.Y), box.RotAngles, parentTransform);
-                    t.DrawShapeAt(_win, _rectShape, box.Size, box.CenterAtTheBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
+                    t.DrawShapeAt(_rectShape, box.CenterAtTheBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
                 }
             }
         }
@@ -481,6 +469,7 @@ namespace Yogollag
         float Speed { get; }
         //ghost
         Vec2 SmoothPosition { get; set; }
+        float SmoothRotation { get; set; }
         //client->server
         void ReceivePosition(Vec2 newPosition);
         //ghost (client and server)
@@ -514,7 +503,6 @@ namespace Yogollag
     class SpriteRenderer : IRenderable
     {
         static Font _font;
-        Text _nameText = new Text();
         Sprite _sprite;
         Vector2f _lastRenderPosition;
         public Vec2 RendererPosition { get; set; }
@@ -526,17 +514,11 @@ namespace Yogollag
         public SpriteRenderer(IRenderable ren)
         {
             _ren = ren;
-            _nameText.Font = _font;
-            _nameText.Scale = new Vector2f(0.1f, 0.1f);
         }
         bool _toTheLeft = false;
         public void Render(RenderTarget rt)
         {
-            if (_font == null)
-                _font = new Font("ARIAL.TTF");
-            _nameText.DisplayedString = Name;
-            if (_sprite == null)
-                _sprite = Sprites.GetSprite(_ren.RenDef.Sprite);
+            var _sprite = Sprites.GetSpriteHandle(_ren.RenDef.Sprite);
             var pos = new Vector2f(RendererPosition.X, RendererPosition.Y);
             bool inverseToTheLeft = _lastRenderPosition.X > pos.X;
             bool moved = _lastRenderPosition != pos;
@@ -550,8 +532,8 @@ namespace Yogollag
                 _sprite.Scale = new Vector2f(1, 1);
 
             HierarchyTransform v = new HierarchyTransform(RendererPosition, 0, null);
-            v.DrawSpriteAt(rt, _sprite,
-                Vec2.New(_sprite.TextureRect.Width / 2, _sprite.TextureRect.Height / 2),
+            v.DrawSpriteAt(_sprite,
+                Vec2.New(_sprite.TextureRect.X / 2, _sprite.TextureRect.Y / 2),
                 Vec2.New(0.5f, 0.5f));
         }
     }
@@ -600,7 +582,7 @@ namespace Yogollag
         public void Stop()
         {
             if (!SimpleClient.DoRender)
-                return; 
+                return;
             InitSound();
             if (_currentSound != null && _currentSound.Status != SoundStatus.Stopped)
                 _currentSound.Stop();
@@ -624,6 +606,8 @@ namespace Yogollag
         Vec2 SyncPosition { get => _posEnt.Position; set => _posEnt.Position = value; }
         Vec2 LocalPosition { get; set; }
         public Vec2 SmoothPosition { get => _host.SmoothPosition; set => _host.SmoothPosition = value; }
+        public float SmoothRotation { get => _host.SmoothRotation; set => _host.SmoothRotation = value; }
+
         int properSendRateFromClientPerSecond = 10;
         DateTime _timeWhenReceivedPosition;
         TimeSpan _lastDeltaBetweenPositions;
@@ -667,21 +651,21 @@ namespace Yogollag
         {
             Vec2 dir = Vec2.New(0, 0);
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.Space))
             {
                 LocalPosition = new Vec2() { X = 0, Y = 0 };
                 SmoothPosition = LocalPosition;
                 PhysicsBody.Set(new Vector2(LocalPosition.X, LocalPosition.Y), 1);
                 _host.ReceivePosition(LocalPosition);
             }
-            _sprint = Keyboard.IsKeyPressed(Keyboard.Key.LShift);
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+            _sprint = EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.LShift);
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.A))
                 dir += Vec2.New(-1, 0);
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.D))
                 dir += Vec2.New(1, 0);
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.W))
                 dir += Vec2.New(0, 1);
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.S))
                 dir += Vec2.New(0, -1);
             _currentDir = dir;
         }
@@ -893,7 +877,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual Vec2 Position { get; set; }
         [Sync(SyncType.Client)]
-        public virtual float Speed { get; set; } = 20f;
+        public virtual float Speed { get; set; } = 1f;
         public Vec2 SmoothPosition { get; set; }
         public VoltBody PhysicsBody { get => _movementController.PhysicsBody; set => _movementController.PhysicsBody = value; }
         [Sync(SyncType.AuthorityClient)]
@@ -905,6 +889,8 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
         CharacterEntityDef CharDef => (CharacterEntityDef)Def;
+
+        public float SmoothRotation { get; set; }
 
         [Sync(SyncType.AuthorityClient)]
         public virtual void SetActiveItem(long itemId)
@@ -946,9 +932,9 @@ namespace Yogollag
             if (item != null)
             {
                 HierarchyTransform v = new HierarchyTransform(SmoothPosition, 0, null);
-                var itemSprite = Sprites.GetSprite(item.Def.Sprite);
-                v.DrawSpriteAt(rt, itemSprite,
-                    Vec2.New(itemSprite.TextureRect.Width / 2, itemSprite.TextureRect.Height / 2),
+                var itemSprite = Sprites.GetSpriteHandle(item.Def.Sprite);
+                v.DrawSpriteAt(itemSprite,
+                    Vec2.New(itemSprite.TextureRect.X / 2, itemSprite.TextureRect.Y / 2),
                     Vec2.New(0.5f, 0.5f),
                     Vec2.New(0.5f, 0.5f));
             }
@@ -963,9 +949,9 @@ namespace Yogollag
 
         public void UpdateControls()
         {
-            //if (Mouse.IsButtonPressed(Mouse.Button.Left))
-            //    SpellsEngine.CastFromClientWithPrediction(
-            //        new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/BasicAttackSpell") });
+            if (EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))
+                SpellsEngine.CastFromClientWithPrediction(
+                    new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/TestAttackSpell") });
             _movementController.UpdateControls();
         }
 

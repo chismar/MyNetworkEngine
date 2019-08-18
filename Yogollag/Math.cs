@@ -83,6 +83,13 @@ namespace Yogollag
         {
             return new Vec2() { X = (float)_random.NextDouble() * maxX, Y = (float)_random.NextDouble() * maxY };
         }
+        public static float AngleBetween(Vec2 vector1, Vec2 vector2)
+        {
+            float sin = vector1.X * vector2.Y - vector2.X * vector1.Y;
+            float cos = vector1.X * vector2.X + vector1.Y * vector2.Y;
+
+            return (float)(Math.Atan2(sin, cos) * (180 / Math.PI));
+        }
     }
 
     public struct Vec2Int

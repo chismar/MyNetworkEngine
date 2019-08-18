@@ -23,8 +23,8 @@ namespace Yogollag
         public override void Render(RenderTarget rt, object state)
         {
             var selfState = (TargetPointCastState)state;
-            var s = Sprites.GetSprite(TargetPointSprite);
-            selfState.T.DrawSpriteAt(rt, s, Vec2.New(1, 1), Vec2.New(0.5f, 0.5f));
+            var s = Sprites.GetSpriteHandle(TargetPointSprite);
+            selfState.T.DrawSpriteAt(s, Vec2.New(1, 1), Vec2.New(0.5f, 0.5f));
         }
 
         public override object Update(SpellDef spell, CharacterEntity ent, Vec2 targetWorldPos, object state)
@@ -33,12 +33,12 @@ namespace Yogollag
             if (selfState == null)
                 selfState = new TargetPointCastState();
             selfState.T = new HierarchyTransform(targetWorldPos, 0, null);
-            if (Mouse.IsButtonPressed(Mouse.Button.Left) && !selfState.MouseWasPressed)
+            if (EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left) && !selfState.MouseWasPressed)
             {
                 ent.SpellsEngine.CastFromClientWithPrediction(new SpellCast() { Def = spell, TargetPoint = targetWorldPos });
 
             }
-            if (!Mouse.IsButtonPressed(Mouse.Button.Left))
+            if (!EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))
             {
                 selfState.MouseWasPressed = false;
             }

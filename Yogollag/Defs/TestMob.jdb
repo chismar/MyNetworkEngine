@@ -21,10 +21,10 @@
                         "$type": "AIMove",
                         "DirectionRelativeToTarget": { "Y" : 1}
                     },
-                    "FixedDuration": 1,
+                    "FixedDuration": 5,
                     "PointSelector": {
                         "$type": "RandomPointSelector",
-                        "Radius": 15
+                        "Radius": 100
                     }
                 }
             ]

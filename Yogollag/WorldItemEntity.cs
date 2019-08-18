@@ -28,11 +28,11 @@ namespace Yogollag
 
         public void Render(RenderTarget rt)
         {
-            var sprite = Sprites.GetSprite(Item.Sprite);
+            var sprite = Sprites.GetSpriteHandle(Item.Sprite);
             sprite.Origin = new SFML.System.Vector2f(2.5f, 5f);
             sprite.Position = new SFML.System.Vector2f(Position.X, Position.Y);
-            //sprite.Scale = new SFML.System.Vector2f(1, 1);
-            sprite.Draw(rt, RenderStates.Default);
+            sprite.Scale = new SFML.System.Vector2f(1, 1);
+            EnvironmentAPI.Draw.Sprite(sprite);
         }
 
         [Sync(SyncType.Client)]

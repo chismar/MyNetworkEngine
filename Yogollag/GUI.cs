@@ -15,27 +15,34 @@ namespace Yogollag
         static RectangleShape _buttonShape;
         static int _index;
         public static RenderWindow Win;
-        public static Font Font = new Font("ARIAL.TTF");
+        public static Font Font;
         public static View RestoreView;
 
         public static bool IsActive { get; internal set; }
 
         public static void Begin()
         {
-            Win.SetView(Win.DefaultView);
+            if(Win != null)
+            {
+                Font = new Font("ARIAL.TTF");
+                Win.SetView(Win.DefaultView);
+            }
             _index = 0;
         }
         public static void End()
         {
-            Win.SetView(RestoreView);
-            if (!Mouse.IsButtonPressed(Mouse.Button.Left))
+            if (Win != null)
+            {
+                Win.SetView(RestoreView);
+            }
+            if (!EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))
             {
                 _hotControl = -1;
                 _pressed = false;
             }
         }
 
-        public static bool SlotButton(Vector2f position, Vector2f size, Sprite sprite)
+        public static bool SlotButton(Vector2f position, Vector2f size, SpriteHandle sprite)
         {
             _index++;
 
@@ -46,10 +53,10 @@ namespace Yogollag
 
             if (!GUI.IsActive)
                 sprite.Color = new Color(200, 100, 100, 255);
-            sprite.Scale = new Vector2f(size.X / sprite.TextureRect.Width, size.Y / sprite.TextureRect.Height);
-            sprite.Origin = new Vector2f(sprite.TextureRect.Width / 2, sprite.TextureRect.Height / 2);
+            sprite.Scale = new Vector2f(size.X / sprite.TextureRect.X, size.Y / sprite.TextureRect.Y);
+            sprite.Origin = new Vector2f(sprite.TextureRect.X / 2, sprite.TextureRect.Y / 2);
             sprite.Position = position;
-            sprite.Draw(Win, RenderStates.Default);
+            EnvironmentAPI.Draw.SpriteGUI(sprite);
 
             if (GUI.IsActive)
             {
@@ -78,14 +85,14 @@ namespace Yogollag
             return false;
 
         }
-        public static bool SlotButton(Vector2f position, Sprite sprite)
+        public static bool SlotButton(Vector2f position, SpriteHandle sprite)
         {
-            return SlotButton(position, new Vector2f(sprite.TextureRect.Width, sprite.TextureRect.Height), sprite);
+            return SlotButton(position, new Vector2f(sprite.TextureRect.X, sprite.TextureRect.Y), sprite);
 
         }
-        public static bool Button(Vector2f position, Vector2f size, string text, Sprite sprite, bool scaleToFit = false)
+        public static bool Button(Vector2f position, Vector2f size, string text, SpriteHandle sprite, bool scaleToFit = false)
         {
-            _index++;
+            /*_index++;
             if (_buttonText == null)
             {
                 _buttonText = new Text();
@@ -106,21 +113,21 @@ namespace Yogollag
             _buttonShape.Position = position;
             _buttonShape.Size = size;
             _buttonShape.Draw(Win, RenderStates.Default);
-            if (sprite != null)
+            if (sprite.SpriteDef != null)
             {
                 if (scaleToFit)
-                    sprite.Scale = new Vector2f(size.X / sprite.TextureRect.Width, size.Y / sprite.TextureRect.Height);
+                    sprite.Scale = new Vector2f(size.X / sprite.TextureRect.X, size.Y / sprite.TextureRect.Y);
                 else
                     sprite.Scale = new Vector2f(1, 1);
-                sprite.Origin = new Vector2f(sprite.TextureRect.Width / 2, sprite.TextureRect.Height / 2);
+                sprite.Origin = new Vector2f(sprite.TextureRect.X / 2, sprite.TextureRect.Y / 2);
                 sprite.Position = position;
-                sprite.Draw(Win, RenderStates.Default);
+                EnvironmentAPI.Draw.SpriteGUI(sprite);
             }
             _buttonText.Draw(Win, RenderStates.Default);
 
             if (GUI.IsActive)
             {
-                if (!Mouse.IsButtonPressed(Mouse.Button.Left) && _pressed)
+                if (!EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left) && _pressed)
                 {
                     var hc = _hotControl;
                     if (_index == hc)
@@ -133,7 +140,7 @@ namespace Yogollag
                         }
                     }
                 }
-                if (Mouse.IsButtonPressed(Mouse.Button.Left))
+                if (EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))
                 {
                     _pressed = true;
                     if (new FloatRect(_buttonShape.Position, _buttonShape.Size).Contains(Mouse.GetPosition(Win).X, Mouse.GetPosition(Win).Y))
@@ -142,14 +149,15 @@ namespace Yogollag
                     }
                 }
             }
-            return false;
+            return false;*/
+            return EnvironmentAPI.Imgui.Button(position, size, text, sprite, scaleToFit);
 
         }
-        public static bool Button(Vector2f position, Sprite sprite, string text = null)
+        public static bool Button(Vector2f position, SpriteHandle sprite, string text = null)
         {
-            return Button(position, new Vector2f(sprite.TextureRect.Width, sprite.TextureRect.Height), text, sprite);
+            return Button(position, new Vector2f(sprite.TextureRect.X, sprite.TextureRect.Y), text, sprite);
         }
-        public static bool Button(Vector2f position, string text, Sprite sprite = null)
+        public static bool Button(Vector2f position, string text, SpriteHandle sprite = default)
         {
             return Button(position, new Vector2f(text.Length * 20, 40), text, sprite, false);
         }

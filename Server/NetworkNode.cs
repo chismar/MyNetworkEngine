@@ -402,6 +402,7 @@ namespace NetworkEngine
         public bool Started { get; private set; } = false;
         public event Action<NetworkNodeId> NewConnectionEstablished;
         public event Action<EntityId, Type> GotEntity;
+        public event Action<EntityId, Type, GhostedEntity> LostEntity;
         public bool Debug { get; set; } = false;
         public NetworkNode()
         {
@@ -421,6 +422,10 @@ namespace NetworkEngine
             _ghosting.EntityAdded += (e) =>
             {
                 GotEntity?.Invoke(e.Id, SyncTypesMap.GetDeclaredTypeFromSyncType(e.GetType()));
+            };
+            _ghosting.EntityRemoved += (e) =>
+            {
+                LostEntity?.Invoke(e.Id, SyncTypesMap.GetDeclaredTypeFromSyncType(e.GetType()), (GhostedEntity)e);
             };
         }
         public IEnumerable<NetworkEntity> AllGhosts()

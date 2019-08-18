@@ -11,10 +11,12 @@ using System.Linq;
 
 namespace Yogollag
 {
+    [GenerateSync]
     public struct SyncedTime
     {
         public static float ToSeconds(long time) => (float)new TimeSpan(time).TotalSeconds;
         public static long Now => DateTime.UtcNow.Ticks;
+        [Sync]
         public long Time { get; set; }
         public static implicit operator long(SyncedTime time)
         {
@@ -26,10 +28,12 @@ namespace Yogollag
             return TimeSpan.FromSeconds(v).Ticks;
         }
     }
-
+    [GenerateSync]
     public struct SpellId
     {
+        [Sync]
         public int Id { get; set; }
+        [Sync]
         public bool FromClient { get; set; }
         public static bool operator ==(SpellId x, SpellId y)
         {
@@ -56,7 +60,7 @@ namespace Yogollag
         public virtual DeltaList<SpellInstance> SyncedSpells { get; set; } = SyncObject.New<DeltaList<SpellInstance>>();
         [Sync(SyncType.Client)]
         public virtual SyncEvent<SpellFailedToCast> SpellFailedEvent { get; set; } = SyncObject.New<SyncEvent<SpellFailedToCast>>();
-        public virtual IEnumerable<SpellInstance> AllSpells { get; }
+        public virtual IEnumerable<SpellInstance> AllSpells => SyncedSpells;
         List<SpellInstance> _predictedSpells = new List<SpellInstance>();
         public SpellsEngine()
         {
@@ -137,10 +141,15 @@ namespace Yogollag
         public DefRef<IImpactDef> ImpactOnStart { get; set; }
     }
 
-    public class SpellCast
+
+    [GenerateSync]
+    public struct SpellCast
     {
+        [Sync]
         public SpellDef Def { get; set; }
+        [Sync]
         public EntityId TargetEntity { get; set; }
+        [Sync]
         public Vec2 TargetPoint { get; set; }
     }
     [GenerateSync]

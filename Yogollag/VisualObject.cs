@@ -14,14 +14,20 @@ namespace Yogollag
             this._api = api;
         }
         List<VisualComponent> _components = new List<VisualComponent>();
-        public void AddVisualComponent(VisualComponent cmp)
+        public VisualComponent AddVisualComponent(VisualComponent cmp)
         {
             _components.Add(cmp);
+            return cmp;
         }
         public void Update()
         {
             foreach (var cmp in _components)
                 cmp.Update(_api);
+        }
+
+        public void Destroy()
+        {
+            _api.Destroy();
         }
     }
 
@@ -107,5 +113,8 @@ namespace Yogollag
     {
         void SetLogicalTransform(Vec2 pos, float rotation);
         void SetAnimatorBool(string name, bool value);
+        void SetAnimatorFloat(string name, float value);
+        void SetVisualRotation(float rotation);
+        void Destroy();
     }
 }

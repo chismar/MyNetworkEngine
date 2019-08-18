@@ -7,6 +7,24 @@ using System.Text;
 
 namespace Yogollag
 {
+    public struct SpriteHandle
+    {
+
+        public SpriteHandle(SpriteDef spriteDef) : this()
+        {
+            SpriteDef = spriteDef;
+        }
+
+        public Vec2 Position { get; set; }
+        public Vec2 Pivot { get; set; }
+        public float Rotation { get; set; }
+        public Vec2 Origin { get; set; }
+        public Vec2 Scale { get; set; }
+        public Vec2 TextureRect { get; set; }
+        public Vec2 Size => Vec2.New(TextureRect.X * Scale.X, TextureRect.Y * Scale.Y);
+        public SpriteDef SpriteDef { get; set; }
+        public Color Color { get; set; }
+    }
     static class Sprites
     {
         static Dictionary<string, Spritesheet> _sheets = new Dictionary<string, Spritesheet>();
@@ -44,6 +62,10 @@ namespace Yogollag
         public static Sprite GetSprite(SpriteDef spriteDef)
         {
             return GetSprite($"{DefsHolder.Instance.Deserializer.Loader.GetRoot()}/Sprites/" + spriteDef.SpriteSheetName + ".png", spriteDef.X, spriteDef.Y);
+        }
+        public static SpriteHandle GetSpriteHandle(SpriteDef spriteDef)
+        {
+            return new SpriteHandle(spriteDef) { TextureRect = Vec2.New(8,8)};
         }
     }
 
