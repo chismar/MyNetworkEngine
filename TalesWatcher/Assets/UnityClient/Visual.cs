@@ -20,7 +20,7 @@ public class Visual : MonoBehaviour, IVisualAPI
     public void SetLogicalTransform(Vec2 pos, float rotation)
     {
         transform.position = new Vector3(pos.X, 0, pos.Y);
-        //transform.rotation = Quaternion.Euler(0, rotation, 0);
+        transform.rotation = Quaternion.Euler(0, rotation, 0);
     }
 
     public void SetVisualRotation(float rotation)

@@ -22,10 +22,6 @@
         "AIMove",
         "TargetSelectorDef",
         "TargetSelector",
-        "PointSelectorDef",
-        "PointSelector",
-        "RandomPointSelectorDef",
-        "RandomPointSelector",
         "RitualEventsDef",
         "RitualEvents",
         "RitualEventPatternDef",
@@ -64,8 +60,6 @@
         "Scenario",
         "PlaceDef",
         "Place",
-        "IntGenParameterDef",
-        "IntGenParameter",
         "MapPrefabDef",
         "MapPrefab",
         "SlotLinkTypeDef",
@@ -102,12 +96,6 @@
         "Item",
         "QuestDef",
         "Quest",
-        "TargetTypeDef",
-        "TargetType",
-        "AllInCircle",
-        "TargetDef",
-        "Target",
-        "AddQuest",
         "CompleteQuest",
         "RoleDef",
         "Role",
@@ -115,10 +103,6 @@
         "IPredicate",
         "CheckEntityStatDef",
         "CheckEntityStat",
-        "IImpactDef",
-        "IImpact",
-        "AllInRangeDef",
-        "AllInRange",
         "ChangeEntityStatDef",
         "ChangeEntityStat",
         "SimpleSpawnerDef",
@@ -204,10 +188,6 @@
             "AIMove",
             "TargetSelectorDef",
             "TargetSelector",
-            "PointSelectorDef",
-            "PointSelector",
-            "RandomPointSelectorDef",
-            "RandomPointSelector",
             "RitualEventsDef",
             "RitualEvents",
             "RitualEventPatternDef",
@@ -244,8 +224,6 @@
             "Scenario",
             "PlaceDef",
             "Place",
-            "IntGenParameterDef",
-            "IntGenParameter",
             "MapPrefabDef",
             "MapPrefab",
             "SlotLinkTypeDef",
@@ -278,19 +256,11 @@
             "Item",
             "QuestDef",
             "Quest",
-            "TargetTypeDef",
-            "TargetType",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "AddQuest",
             "CompleteQuest",
             "RoleDef",
             "Role",
             "CheckEntityStatDef",
             "CheckEntityStat",
-            "AllInRangeDef",
-            "AllInRange",
             "ChangeEntityStatDef",
             "ChangeEntityStat",
             "SimpleSpawnerDef",
@@ -353,12 +323,6 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
-          "$ref": "#/definitions/PointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
-        },
-        {
           "$ref": "#/definitions/RitualEventsDef"
         },
         {
@@ -413,9 +377,6 @@
           "$ref": "#/definitions/PlaceDef"
         },
         {
-          "$ref": "#/definitions/IntGenParameterDef"
-        },
-        {
           "$ref": "#/definitions/MapPrefabDef"
         },
         {
@@ -464,18 +425,6 @@
           "$ref": "#/definitions/QuestDef"
         },
         {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
           "$ref": "#/definitions/CompleteQuest"
         },
         {
@@ -483,9 +432,6 @@
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -600,10 +546,6 @@
             "AIMove",
             "TargetSelectorDef",
             "TargetSelector",
-            "PointSelectorDef",
-            "PointSelector",
-            "RandomPointSelectorDef",
-            "RandomPointSelector",
             "RitualEventsDef",
             "RitualEvents",
             "RitualEventPatternDef",
@@ -642,8 +584,6 @@
             "Scenario",
             "PlaceDef",
             "Place",
-            "IntGenParameterDef",
-            "IntGenParameter",
             "MapPrefabDef",
             "MapPrefab",
             "SlotLinkTypeDef",
@@ -680,12 +620,6 @@
             "Item",
             "QuestDef",
             "Quest",
-            "TargetTypeDef",
-            "TargetType",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "AddQuest",
             "CompleteQuest",
             "RoleDef",
             "Role",
@@ -693,10 +627,6 @@
             "IPredicate",
             "CheckEntityStatDef",
             "CheckEntityStat",
-            "IImpactDef",
-            "IImpact",
-            "AllInRangeDef",
-            "AllInRange",
             "ChangeEntityStatDef",
             "ChangeEntityStat",
             "SimpleSpawnerDef",
@@ -762,12 +692,6 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
-          "$ref": "#/definitions/PointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
-        },
-        {
           "$ref": "#/definitions/RitualEventsDef"
         },
         {
@@ -825,9 +749,6 @@
           "$ref": "#/definitions/PlaceDef"
         },
         {
-          "$ref": "#/definitions/IntGenParameterDef"
-        },
-        {
           "$ref": "#/definitions/MapPrefabDef"
         },
         {
@@ -882,18 +803,6 @@
           "$ref": "#/definitions/QuestDef"
         },
         {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
           "$ref": "#/definitions/CompleteQuest"
         },
         {
@@ -904,12 +813,6 @@
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/IImpactDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -1520,147 +1423,6 @@
         },
         {
           "$ref": "#/definitions/TargetSelectorDef"
-        }
-      ]
-    },
-    "PointSelectorDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PointSelectorDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "PointSelectorDef",
-            "PointSelector"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "PointSelectorDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "PointSelectorDef",
-            "PointSelector",
-            "RandomPointSelectorDef",
-            "RandomPointSelector"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/PointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
-        }
-      ]
-    },
-    "RandomPointSelectorDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RandomPointSelectorDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "RandomPointSelectorDef",
-            "RandomPointSelector"
-          ]
-        },
-        "Radius": {
-          "$ref": "#/definitions/CalcerDefField"
-        },
-        "_rand": {
-          "$ref": "#/definitions/RandomField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "RandomPointSelectorDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "RandomPointSelectorDef",
-            "RandomPointSelector"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
         }
       ]
     },
@@ -3046,71 +2808,6 @@
         }
       ]
     },
-    "IntGenParameterDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IntGenParameterDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IntGenParameterDef",
-            "IntGenParameter"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "IntGenParameterDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IntGenParameterDef",
-            "IntGenParameter"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/IntGenParameterDef"
-        }
-      ]
-    },
     "MapPrefabDef": {
       "type": "object",
       "additionalProperties": false,
@@ -4481,286 +4178,6 @@
         }
       ]
     },
-    "TargetTypeDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TargetTypeDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetTypeDef",
-            "TargetType"
-          ]
-        },
-        "Type": {
-          "$ref": "#/definitions/InteractiveDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "TargetTypeDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetTypeDef",
-            "TargetType"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        }
-      ]
-    },
-    "AllInCircle": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AllInCircleField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AllInCircle"
-          ]
-        },
-        "Offset": {
-          "$ref": "#/definitions/Vec2Field"
-        },
-        "Size": {
-          "$ref": "#/definitions/CalcerDefField"
-        },
-        "Impact": {
-          "$ref": "#/definitions/IImpactDefField"
-        },
-        "Predicate": {
-          "$ref": "#/definitions/IPredicateDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "AllInCircleField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AllInCircle"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        }
-      ]
-    },
-    "TargetDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TargetDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetDef",
-            "Target"
-          ]
-        },
-        "Predicate": {
-          "$ref": "#/definitions/IPredicateDefField"
-        },
-        "Do": {
-          "$ref": "#/definitions/IImpactDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "TargetDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetDef",
-            "Target"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        }
-      ]
-    },
-    "AddQuest": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AddQuestField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AddQuest"
-          ]
-        },
-        "Quest": {
-          "$ref": "#/definitions/QuestDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "AddQuestField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AddQuest"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        }
-      ]
-    },
     "CompleteQuest": {
       "type": "object",
       "additionalProperties": false,
@@ -4938,11 +4355,6 @@
         "$type": {
           "type": "string",
           "enum": [
-            "TargetTypeDef",
-            "TargetType",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
             "IPredicateDef",
             "IPredicate",
             "CheckEntityStatDef",
@@ -4961,15 +4373,6 @@
       "oneOf": [
         {
           "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
         },
         {
           "$ref": "#/definitions/IPredicateDef"
@@ -5064,189 +4467,6 @@
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
-        }
-      ]
-    },
-    "IImpactDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IImpactDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IImpactDef",
-            "IImpact"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "IImpactDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
-            "RitualActionDef",
-            "RitualAction",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "AddQuest",
-            "CompleteQuest",
-            "IImpactDef",
-            "IImpact",
-            "AllInRangeDef",
-            "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
-        },
-        {
-          "$ref": "#/definitions/RitualActionDef"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
-          "$ref": "#/definitions/CompleteQuest"
-        },
-        {
-          "$ref": "#/definitions/IImpactDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        }
-      ]
-    },
-    "AllInRangeDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AllInRangeDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AllInRangeDef",
-            "AllInRange"
-          ]
-        },
-        "Range": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "Predicate": {
-          "$ref": "#/definitions/IPredicateDefField"
-        },
-        "Impact": {
-          "$ref": "#/definitions/IImpactDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "AllInRangeDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AllInRangeDef",
-            "AllInRange"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
         }
       ]
     },
@@ -5959,8 +5179,6 @@
         "AIRuleDef",
         "AIMoveDef",
         "TargetSelectorDef",
-        "PointSelectorDef",
-        "RandomPointSelectorDef",
         "RitualEventsDef",
         "RitualEventKind",
         "RitualEventStat",
@@ -5985,7 +5203,6 @@
         "MapSiteTagDef",
         "ScenarioDef",
         "PlaceDef",
-        "IntGenParameterDef",
         "MapPrefabDef",
         "SlotLinkTypeDef",
         "SlotLinkDef",
@@ -5993,6 +5210,7 @@
         "TilesGenDef",
         "SlotCategoryDef",
         "TileCategoryDef",
+        "Vec2",
         "MobDef",
         "IHasPhysicalBodyDef",
         "PhysicalBodyDef",
@@ -6004,16 +5222,10 @@
         "CharacterEntityDef",
         "ItemDef",
         "QuestDef",
-        "TargetTypeDef",
-        "AllInCircle",
-        "TargetDef",
-        "AddQuest",
         "CompleteQuest",
         "RoleDef",
         "IPredicateDef",
         "CheckEntityStatDef",
-        "IImpactDef",
-        "AllInRangeDef",
         "ChangeEntityStatDef",
         "SimpleSpawnerDef",
         "SpellCastModeDef",
@@ -6324,6 +5536,72 @@
         }
       ]
     },
+    "Vec2": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Vec2"
+          ]
+        },
+        "X": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "Y": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "Length": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "Normal": {
+          "$ref": "#/definitions/Vec2Field"
+        },
+        "_random": {
+          "$ref": "#/definitions/RandomField"
+        }
+      }
+    },
+    "Vec2Field": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Vec2"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Vec2"
+        }
+      ]
+    },
     "DefIDFull": {
       "type": "object",
       "additionalProperties": false,
@@ -6420,102 +5698,6 @@
         }
       ]
     },
-    "Vec2": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Vec2"
-          ]
-        },
-        "X": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "Y": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "Length": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "Normal": {
-          "$ref": "#/definitions/Vec2Field"
-        },
-        "_random": {
-          "$ref": "#/definitions/RandomField"
-        }
-      }
-    },
-    "Vec2Field": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Vec2"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/Vec2"
-        }
-      ]
-    },
-    "Random": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Random"
-          ]
-        }
-      }
-    },
-    "RandomField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Random"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/Random"
-        }
-      ]
-    },
     "Object": {
       "type": "object",
       "additionalProperties": false,
@@ -6559,12 +5741,6 @@
         },
         {
           "$ref": "#/definitions/TargetSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/PointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
           "$ref": "#/definitions/RitualEventsDef"
@@ -6624,9 +5800,6 @@
           "$ref": "#/definitions/PlaceDef"
         },
         {
-          "$ref": "#/definitions/IntGenParameterDef"
-        },
-        {
           "$ref": "#/definitions/MapPrefabDef"
         },
         {
@@ -6681,18 +5854,6 @@
           "$ref": "#/definitions/QuestDef"
         },
         {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
           "$ref": "#/definitions/CompleteQuest"
         },
         {
@@ -6703,12 +5864,6 @@
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/IImpactDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -6759,19 +5914,19 @@
           "$ref": "#/definitions/SubSite"
         },
         {
+          "$ref": "#/definitions/Vec2"
+        },
+        {
           "$ref": "#/definitions/DefIDFull"
         },
         {
           "$ref": "#/definitions/Guid"
         },
         {
-          "$ref": "#/definitions/Vec2"
+          "$ref": "#/definitions/Object"
         },
         {
           "$ref": "#/definitions/Random"
-        },
-        {
-          "$ref": "#/definitions/Object"
         },
         {
           "type": "number"
@@ -6781,6 +5936,36 @@
         },
         {
           "type": "string"
+        }
+      ]
+    },
+    "Random": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Random"
+          ]
+        }
+      }
+    },
+    "RandomField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Random"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Random"
         }
       ]
     }

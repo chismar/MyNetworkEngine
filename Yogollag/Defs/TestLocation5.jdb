@@ -1,0 +1,37 @@
+{
+  "$type": "MapSiteDef",
+  "CustomName": null,
+  "AttachmentPoint": {
+    "$type": "Vec2",
+    "X": -7.49,
+    "Y": -0.77
+  },
+  "AttachmentRotation": -270.0,
+  "AttachmentSize": 8.286091,
+  "Type": {
+    "$type": "MapSiteTypeDef",
+    "CustomName": null,
+    "EntitiesToSpawnOn": [
+      "/SimpleBuilding6"
+    ]
+  },
+  "SizeX": 4.0,
+  "SizeY": 4.0,
+  "SubSites": [],
+  "Connections": [
+    {
+      "$type": "SiteConnection",
+      "Pos": {
+        "$type": "Vec2",
+        "X": 2.88,
+        "Y": 1.6
+      },
+      "Rot": -90.0,
+      "Size": 136.330032,
+      "Tags": []
+    }
+  ],
+  "Tags": [
+    "/Tags/Road"
+  ]
+}

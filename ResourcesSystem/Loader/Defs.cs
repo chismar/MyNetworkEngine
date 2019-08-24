@@ -82,7 +82,7 @@ namespace Definitions
                 }
             serializer.Converters.Add(new DefReferenceConverter(gr.Deserializer, false));
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-            serializer.TypeNameHandling = TypeNameHandling.Auto;
+            serializer.TypeNameHandling = TypeNameHandling.Objects;
             path = null;
             if (dir[dir.Length - 1] != '/' && refPath[0] != '/')
                 path = dir + "/" + refPath + ".jdb";

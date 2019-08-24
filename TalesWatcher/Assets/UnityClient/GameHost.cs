@@ -19,6 +19,7 @@ public class GameHost : MonoBehaviour
     void Start()
     {
         Definitions.Logger.LogError += (s) => Debug.LogError(s);
+        Definitions.Logger.Log += (s) => Debug.LogError(s);
         DefsHolder.Instance = new Defs(new FolderLoader(Application.dataPath + "/../../Yogollag/Defs"));
         Debug.LogError(DefsHolder.Instance.Deserializer.Loader.GetRoot());
         foreach (var root in DefsHolder.Instance.Deserializer.Loader.AllPossibleRoots)
@@ -58,6 +59,15 @@ public class GameHost : MonoBehaviour
     }
     void Update()
     {
+        if (Input.mouseScrollDelta.magnitude > Mathf.Epsilon)
+        {
+            var curScale = ((UnityDrawImpl)EnvironmentAPI.Draw)._scale;
+            if (Input.mouseScrollDelta.y > 0)
+                curScale += 0.3f;
+            else
+                curScale -= 0.3f;
+            ((UnityDrawImpl)EnvironmentAPI.Draw)._scale = Mathf.Clamp(curScale, 0.1f, 10f);
+        }
         foreach (var ent in client._node.AllGhosts())
         {
             if (ent is IEntityObject eo && ent.UserData == null)

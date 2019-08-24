@@ -1,0 +1,15 @@
+{
+    "name": "UnityClientEditor",
+    "references": [
+        "GUID:39b5fd8f38326d142b68272cb7ab0a4e"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

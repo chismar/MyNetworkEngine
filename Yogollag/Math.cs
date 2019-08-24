@@ -6,12 +6,25 @@ using System.Text;
 using Volatile;
 using LiteNetLib.Utils;
 using NetworkEngine;
+using Newtonsoft.Json;
+using Definitions;
+
 namespace Yogollag
 {
 
     [GenerateSync]
+    [KnownDefinitionsType]
     public struct Vec2
     {
+        public override string ToString()
+        {
+            return $"{X}:{Y}";
+        }
+        public Vec2(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
         public static Vec2 New(float x, float y) => new Vec2() { X = x, Y = y };
         [Sync(SyncType.Client)]
         public float X { get; set; }
@@ -49,7 +62,13 @@ namespace Yogollag
         {
             return new Vec2() { X = p.X - p2.X, Y = p.Y - p2.Y };
         }
+        public static Vec2 operator -(Vec2 p)
+        {
+            return new Vec2(-p.X, -p.Y);
+        }
+        [JsonIgnore]
         public float Length => (float)Math.Sqrt(X * X + Y * Y);
+        [JsonIgnore]
         public Vec2 Normal => new Vec2() { X = X, Y = Y } / (new Vec2() { X = X, Y = Y }).Length;
         public static Vec2 operator *(Vec2 p, float s)
         {

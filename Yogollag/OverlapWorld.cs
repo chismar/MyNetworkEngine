@@ -5,7 +5,7 @@ using SharpMath2;
 using Microsoft.Xna.Framework;
 namespace Yogollag
 {
-    class OverlapWorld
+    public class OverlapWorld
     {
         public List<OverlapShape> _shapes = new List<OverlapShape>();
         private readonly float _sizeX;
@@ -21,8 +21,8 @@ namespace Yogollag
             foreach (var otherShape in _shapes)
                 if (shape.Overlaps(otherShape))
                     return false;
-            if (shape.Outside(_sizeX, _sizeY))
-                return false;
+            //if (shape.Outside(_sizeX, _sizeY))
+            //    return false;
             return true;
         }
         public void Add(OverlapShape shape)

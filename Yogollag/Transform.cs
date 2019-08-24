@@ -7,9 +7,10 @@ using SFML.System;
 
 namespace Yogollag
 {
-    class HierarchyTransform
+    public class HierarchyTransform
     {
         Vec2 _pos;
+        Vec2 _attachmentOffset;
         float _rot;
         HierarchyTransform _parent;
         public float GlobalRot
@@ -37,6 +38,7 @@ namespace Yogollag
                 Transform t = _parent == null ? Transform.Identity : _parent._transform;
                 t.Translate(_pos.X, _pos.Y);
                 t.Rotate(_rot);
+                t.Translate(_attachmentOffset);
                 return t;
             }
         }
@@ -95,11 +97,12 @@ namespace Yogollag
             rectShape.OutlineColor = Color.Magenta;
             EnvironmentAPI.Draw.Rect(rectShape);
         }
-        public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform parent)
+        public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform parent, Vec2 attachmentOffset = default)
         {
             _pos = Vec2.New(pos.X, pos.Y);
             _rot = rotation;
             _parent = parent;
+            _attachmentOffset = attachmentOffset;
         }
     }
 

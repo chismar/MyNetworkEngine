@@ -6,7 +6,6 @@ namespace Definitions
 {
     public class DeserializerImpl
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public readonly ILoader Loader;
         public LoadedDefsHolder LoadedDefs { get; }
@@ -58,9 +57,10 @@ namespace Definitions
                     LoadFromDisk(relativePath);
                     //ProfileSampleEnd();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     Context = new LoadingContext();
+                    Logger.LogError?.Invoke(e.ToString());
                     throw;
                 }
                 finally
@@ -70,7 +70,7 @@ namespace Definitions
                 if (LoadedDefs.GetExisting(id, type, out resource))
                     return resource;
 
-                Logger.Error("Resource {0} not found", id.ToString());
+                Logger.LogError?.Invoke($"Resource {id} not found");
                 return null;
             }
         }
@@ -102,7 +102,7 @@ namespace Definitions
                 }
                 catch (Exception e)
                 {
-                    Logger.Error($"Exception  while loading {relativePath} {e}");
+                    Logger.LogError?.Invoke($"Exception  while loading {relativePath} {e}");
                     return null;
                 }
                 finally

@@ -298,7 +298,8 @@ namespace Definitions
                     var prop = props[(string)reader.Value];
                     reader.Read(); //here we are reading value
                     //bool isObj = reader.TokenType == JsonToken.StartObject;
-                    prop.ValueProvider.SetValue(defInstance, serializer.Deserialize(reader, prop.PropertyType));
+                    var obj = serializer.Deserialize(reader, prop.PropertyType);
+                    prop.ValueProvider.SetValue(defInstance, obj);
                     //here we should be at the last token of previous deserializer
                     reader.Read();
                     ClearComments(reader);

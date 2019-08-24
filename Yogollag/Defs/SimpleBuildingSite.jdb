@@ -1,0 +1,16 @@
+{
+  "$type": "MapSiteDef",
+  "CustomName": null,
+  "Type": {
+    "$type": "MapSiteTypeDef",
+    "CustomName": null,
+    "EntitiesToSpawnOn": [
+      "/SimpleBuilding"
+    ]
+  },
+  "SizeX": 4.0,
+  "SizeY": 5.0,
+  "SubSites": [],
+  "Connections": [],
+  "Tags": []
+}

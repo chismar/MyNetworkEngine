@@ -61,16 +61,17 @@ namespace Yogollag
                         //has free subSites
                         if (TryAttach())
                             foreach (var siteDef in _def.Palette)
-                                if (site.Def.SubSites[i].CanPlace(site.World, siteDef.Def))
+                                if (site.Def.SubSites[i].CanPlace(site.World, siteDef.Def, t))
                                     if (DoAttach())
                                     {
                                         var instance = site.SubSites[i] = new MapSiteInstance(siteDef, site.Def.SubSites[i].Pos, site.Def.SubSites[i].Rot, false);
 
-                                        var localT = new HierarchyTransform(site.Pos, site.Rot, t);
-                                        instance.GlobalPos = t.GetWorldPosInSpaceOf(site.Pos);
-                                        instance.GlobalRot = localT.GlobalRot;
+                                        //var localT = new HierarchyTransform(site.Pos, site.Rot, t);
+                                        var subT = new HierarchyTransform(instance.Pos, instance.Rot, t);
+                                        instance.GlobalPos = subT.GlobalPos;
+                                        instance.GlobalRot = subT.GlobalRot;
                                         Sites.Add(instance);
-                                        var box = new OverlapBox(instance.Pos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.Rot, instance.AttachedToBottom);
+                                        var box = new OverlapBox(instance.GlobalPos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.Rot, instance.AttachedToBottom);
                                         site.World.Add(box);
                                         _sitesCount++;
 
@@ -82,14 +83,13 @@ namespace Yogollag
                 }
             foreach (var subSite in site.SubSites)
             {
+                var localT = new HierarchyTransform(subSite.Value.Pos, subSite.Value.Rot, t);
                 if (Process())
                 {
-                    var localT = new HierarchyTransform(site.Pos, site.Rot, t);
                     ProcessSite(subSite.Value, localT);
                 }
-                var conT = new HierarchyTransform(subSite.Value.Pos, subSite.Value.Rot, null);
                 if (Process())
-                    ProcessConnections(site, subSite.Value, conT);
+                    ProcessConnections(site, subSite.Value, localT);
             }
         }
 
@@ -109,14 +109,16 @@ namespace Yogollag
                                     if (DoAttach())
                                     {
                                         var con = subSite.Def.Connections[i];
-                                        var vec = t.GetWorldPosInSpaceOf(con.Pos);
+                                        //var vec = t.GetWorldPosInSpaceOf(con.Pos);
                                         var instance = subSite.Connections[i] = new MapSiteInstance(siteDef, con.Pos, con.Rot, true);
                                         
                                         Sites.Add(instance);
-                                        var localT = new HierarchyTransform(con.Pos, con.Rot, t);
-                                        instance.GlobalPos = vec;
-                                        instance.GlobalRot = localT.GlobalRot;
-                                        var box = new OverlapBox(vec, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), localT.GlobalRot, instance.AttachedToBottom);
+                                        var localT = new HierarchyTransform(instance.Pos, instance.Rot, t);
+                                        var attachmentrT = new HierarchyTransform(default, instance.Def.AttachmentRotation, localT);
+                                        var attachmenttT = new HierarchyTransform(-instance.Def.AttachmentPoint, 0, attachmentrT);
+                                        instance.GlobalPos = attachmenttT.GlobalPos;
+                                        instance.GlobalRot = attachmenttT.GlobalRot;
+                                        var box = new OverlapBox(attachmenttT.GlobalPos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), attachmenttT.GlobalRot, instance.AttachedToBottom);
                                         site.World.Add(box);
                                         _sitesCount++;
                                         if (_sitesCount >= _def.SitesCount)
@@ -128,9 +130,12 @@ namespace Yogollag
                 }
             foreach (var connection in subSite.Connections)
             {
-                var conT = new HierarchyTransform(connection.Value.Pos, connection.Value.Rot, t);
-                ProcessSite(connection.Value, conT);
-                ProcessConnections(site, connection.Value, conT);
+                var localT = new HierarchyTransform(connection.Value.Pos, connection.Value.Rot, t);
+                var attachmentrT = new HierarchyTransform(default, connection.Value.Def.AttachmentRotation, localT);
+                var attachmenttT = new HierarchyTransform(-connection.Value.Def.AttachmentPoint, 0, attachmentrT);
+
+                ProcessSite(connection.Value, attachmenttT);
+                ProcessConnections(site, connection.Value, attachmenttT);
             }
         }
     }
@@ -183,12 +188,15 @@ namespace Yogollag
 
         public List<DefRef<MapSiteDef>> Palette { get; set; } = new List<DefRef<MapSiteDef>>();
     }
-    class MapSiteTypeDef : BaseDef
+    public class MapSiteTypeDef : BaseDef
     {
         public List<DefRef<IEntityObjectDef>> EntitiesToSpawnOn { get; set; } = new List<DefRef<IEntityObjectDef>>();
     }
-    class MapSiteDef : BaseDef
+    public class MapSiteDef : BaseDef
     {
+        public Vec2 AttachmentPoint { get; set; }
+        public float AttachmentRotation { get; set; }
+        public float AttachmentSize { get; set; }
         public DefRef<MapSiteTypeDef> Type { get; set; } 
         public float SizeX { get; set; }
         public float SizeY { get; set; }
@@ -198,20 +206,22 @@ namespace Yogollag
 
     }
     [KnownDefinitionsType]
-    class SiteConnection
+    public class SiteConnection
     {
         public Vec2 Pos { get; set; }
         public float Rot { get; set; }
-        public float Size { get; set; }
+        private float _size;
+        public float Size { get { return _size; } set { _size = Math.Abs(value); } }
         public List<DefRef<MapSiteTagDef>> Tags { get; set; } = new List<DefRef<MapSiteTagDef>>();
 
         public bool CanAttach(OverlapWorld world, MapSiteDef site, HierarchyTransform t)
         {
-            if (Size < site.SizeX)
+            if (Size < site.AttachmentSize)
                 return false;
             var localT = new HierarchyTransform(Pos, Rot, t);
-            var vec = t.GetWorldPosInSpaceOf(Pos);
-            var box = new OverlapBox(vec, Vec2.New(site.SizeX, site.SizeY), localT.GlobalRot, true);
+            var attachmentrT = new HierarchyTransform(default, site.AttachmentRotation, localT);
+            var attachmenttT = new HierarchyTransform(-site.AttachmentPoint, 0, attachmentrT);
+            var box = new OverlapBox(attachmenttT.GlobalPos, Vec2.New(site.SizeX, site.SizeY), attachmenttT.GlobalRot, true);
             if (!world.CanAdd(box))
                 return false;
             if (Tags.Count != 0)
@@ -222,18 +232,19 @@ namespace Yogollag
     }
 
     [KnownDefinitionsType]
-    class SubSite
+    public class SubSite
     {
         public Vec2 Pos { get; set; }
         public float Rot { get; set; }
         public float SizeX { get; set; }
         public float SizeY { get; set; }
         public List<DefRef<MapSiteTagDef>> Tags { get; set; } = new List<DefRef<MapSiteTagDef>>();
-        public bool CanPlace(OverlapWorld world, MapSiteDef site)
+        public bool CanPlace(OverlapWorld world, MapSiteDef site, HierarchyTransform tr)
         {
             if (SizeX < site.SizeX || SizeY < site.SizeY)
                 return false;
-            var box = new OverlapBox(Pos, Vec2.New(site.SizeX, site.SizeY), Rot, false);
+            var localT = new HierarchyTransform(Pos, Rot, tr);
+            var box = new OverlapBox(localT.GlobalPos, Vec2.New(site.SizeX, site.SizeY), localT.GlobalRot, false);
             if (!world.CanAdd(box))
                 return false;
             if (Tags.Count != 0)
@@ -243,7 +254,7 @@ namespace Yogollag
         }
     }
 
-    class MapSiteTagDef : BaseDef
+    public class MapSiteTagDef : BaseDef
     {
 
     }

@@ -24,6 +24,18 @@ namespace Yogollag
 
     class Program
     {
+
+
+        //interesting thought - proper resource system and ECS are alike. They might very well be the same systems
+        //still, doesn't answer on what to do with ghosting without asyncrony. 
+        //backing fields are one way of "free ghosting". Basically, if I need backing fields (and I probably do?)
+        //so the issue is - do I want to pay memory and computing cost for scalability or I want a non-scalable system.
+        //can I make that a toggle?
+        //Math -> I need to switch over to System.Numerics
+        //ECS stuff might work as low-level parts of the engine. I wouldn't need ghosting for those.
+        //The idea is - in some cases I do not require other entities or I now for sure which do I require.
+        //That means that I need ghosting only for properties that are part of "scripted" behaviours, like spell system and such
+        //while simulated part, like movement, is mostly free to do its things
         //client class
         //contains renderer, input management, client node, ui, client state
         //client state can be, in principle, imagined in a redux stile. Although I'm not sure if it should be
@@ -161,7 +173,7 @@ namespace Yogollag
             _node.Replicate(_sessionId, eid, this);
         }
 
-       
+
         bool firstTime = true;
         public void Update()
         {
@@ -180,18 +192,9 @@ namespace Yogollag
                             var objId = _node.Create(EntityObjectsMap.GetTypeFromDef(randomEntity), e =>
                             {
                                 ((IEntityObject)e).Def = randomEntity;
-                                if (site.AttachedToBottom)
-                                {
-                                    var t = new HierarchyTransform(site.GlobalPos, site.GlobalRot, null);
-                                    var subT = new HierarchyTransform(Vec2.New(0, site.Def.SizeY / 2), 0, t);
-                                    ((IPositionedEntity)e).Position = subT.GlobalPos;
-                                    ((IPositionedEntity)e).Rotation = subT.GlobalRot;
-                                }
-                                else
-                                {
-                                    ((IPositionedEntity)e).Position = site.GlobalPos;
-                                    ((IPositionedEntity)e).Rotation = site.GlobalRot;
-                                }
+                                ((IPositionedEntity)e).Position = site.GlobalPos;
+                                ((IPositionedEntity)e).Rotation = site.GlobalRot;
+
                             });
                         }
                     }
@@ -432,14 +435,14 @@ namespace Yogollag
 
         private void DrawSite(MapSiteInstance site, HierarchyTransform parentTransform)
         {
-            var ownTransform = new HierarchyTransform(site.Pos, site.Rot, parentTransform);
+            var ownTransform = new HierarchyTransform(site.Pos, site.Rot, parentTransform, site.AttachedToBottom ? new Vec2(0, site.Def.SizeY) : default);
             ownTransform.DrawAsDir(0.3f);
             var _rectShape = new RectShapeHandle();
             _rectShape.Size = new Vector2f(site.Def.SizeX, site.Def.SizeY);
             _rectShape.FillColor = Color.Transparent;
             _rectShape.OutlineThickness = 1;
             _rectShape.OutlineColor = Color.Red;
-            ownTransform.DrawShapeAt(_rectShape, site.AttachedToBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
+            ownTransform.DrawShapeAt(_rectShape, Vec2.New(0.5f, 0.5f));
             foreach (var subSite in site.SubSites)
             {
                 //siteT.Rotate(subSite.Value.Rot);
@@ -454,11 +457,10 @@ namespace Yogollag
             {
                 if (shape is OverlapBox box)
                 {
-
                     _rectShape.OutlineColor = Color.Green;
                     _rectShape.Size = new Vector2f(box.Size.X, box.Size.Y);
-                    var t = new HierarchyTransform(Vec2.New(box.Pos.X, box.Pos.Y), box.RotAngles, parentTransform);
-                    t.DrawShapeAt(_rectShape, box.CenterAtTheBottom ? Vec2.New(0.5f, 1.0f) : Vec2.New(0.5f, 0.5f));
+                    var t = new HierarchyTransform(Vec2.New(box.Pos.X, box.Pos.Y), box.RotAngles, null);
+                    t.DrawShapeAt(_rectShape, Vec2.New(0.5f, 0.5f));
                 }
             }
         }
@@ -659,15 +661,20 @@ namespace Yogollag
                 _host.ReceivePosition(LocalPosition);
             }
             _sprint = EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.LShift);
-            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.A))
-                dir += Vec2.New(-1, 0);
-            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.D))
-                dir += Vec2.New(1, 0);
+            //if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.A))
+            //    dir += Vec2.New(-1, 0);
+            //if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.D))
+            //    dir += Vec2.New(1, 0);
             if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.W))
                 dir += Vec2.New(0, 1);
-            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.S))
-                dir += Vec2.New(0, -1);
-            _currentDir = dir;
+            //if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.S))
+            //    dir += Vec2.New(0, -1);
+            var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
+            Transform t = Transform.Identity;
+            var a = -Vec2.AngleBetween(mouseDir, new Vec2(0, 1));
+            t.Rotate(a);
+            var tv = t.TransformPoint(dir.X, dir.Y);
+            _currentDir = new Vec2(tv.X, tv.Y);
         }
 
         DateTime _lastSendTime;
@@ -685,7 +692,7 @@ namespace Yogollag
             LocalPosition = new Vec2() { X = PhysicsBody.Position.x, Y = PhysicsBody.Position.y };
             SmoothPosition = LocalPosition;
             var delta = DateTime.UtcNow - _lastSendTime;
-            if ((LocalPosition - prevPos).Length >= float.Epsilon && (_lastSendTime == default || delta.TotalSeconds > 0.1))
+            if ((LocalPosition - prevPos).Length >= float.Epsilon && (_lastSendTime == default || delta.TotalSeconds > 0.025))
             {
                 _lastSendTime = DateTime.UtcNow;
                 _host.ReceivePosition(LocalPosition);
@@ -877,7 +884,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual Vec2 Position { get; set; }
         [Sync(SyncType.Client)]
-        public virtual float Speed { get; set; } = 1f;
+        public virtual float Speed { get; set; } = 5f;
         public Vec2 SmoothPosition { get; set; }
         public VoltBody PhysicsBody { get => _movementController.PhysicsBody; set => _movementController.PhysicsBody = value; }
         [Sync(SyncType.AuthorityClient)]
