@@ -221,7 +221,9 @@ namespace CodeGen
                 public object Deserialize(NetDataReader stream)
                 {
                     var messageToSerialize = new {{entity}}{{method}}Message();
+                    {
                     {{GetFromStreamFromType false ""EntityId"" ""messageToSerialize.EntityId""}}
+                    }
                     {{for syncProp in arguments}}
                     {
                         {{GetFromStreamFromType syncProp.ghost syncProp.type syncProp.deref}}
@@ -234,7 +236,9 @@ namespace CodeGen
                     var messageToSerialize = ({{entity}}{{method}}Message)objToSerialize;
                     if(stream == null)
                         stream = new NetDataWriter(true, 5);
-                        {{PutToStreamFromType false ""EntityId"" ""messageToSerialize.EntityId"" }}
+                    {
+                    {{PutToStreamFromType false ""EntityId"" ""messageToSerialize.EntityId"" }}
+                    }
                     {{for syncProp in arguments}} 
                     {
                         {{PutToStreamFromType syncProp.ghost syncProp.type syncProp.deref }}
@@ -616,7 +620,7 @@ namespace CodeGen
                     case "Boolean":
                         return $"{propName} = stream.GetBool();";
                     default:
-                        return $"{propName} = ({type})SyncTypesMap.GetSerializerForObjType(typeof({type})).Deserialize(stream);";
+                        return $"var has = stream.GetBool(); {propName} = !has? default : ({type})SyncTypesMap.GetSerializerForObjType(typeof({type})).Deserialize(stream);";
                 }
         }
         public static string GetTagForProp(string propName, int offset)
@@ -643,7 +647,7 @@ namespace CodeGen
                     case "Int64":
                         return $"stream.Put({propName});";
                     default:
-                        return $"SyncTypesMap.GetSerializerForObjType(typeof({type})).Serialize({propName}, ref stream);";
+                        return $"if({propName} != default ) {{ stream.Put(true); SyncTypesMap.GetSerializerForObjType(typeof({type})).Serialize({propName}, ref stream); }} else {{ stream.Put(false); }}";
                 }
         }
     }

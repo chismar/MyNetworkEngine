@@ -46,7 +46,7 @@ namespace Yogollag
             var i = character.GetActiveItem();
             if (i == null)
                 return;
-            if (i.Def.Spell == null)
+            if (i.ItemDef.Spell == null)
             {
                 _interactionState = null;
                 return;
@@ -57,8 +57,8 @@ namespace Yogollag
                 _curItem = i;
             }
 
-            _interactionState = i.Def.Spell.Def.CastMode.Def.Update(i.Def.Spell, character, EnvironmentAPI.Input.GlobalMousePos, _interactionState);
-            i.Def.Spell.Def.CastMode.Def.Render(_win, _interactionState);
+            _interactionState = i.ItemDef.Spell.Def.CastMode.Def.Update(i.ItemDef.Spell, character, EnvironmentAPI.Input.GlobalMousePos, _interactionState);
+            i.ItemDef.Spell.Def.CastMode.Def.Render(_win, _interactionState);
         }
         private void Reset()
         {
@@ -72,13 +72,13 @@ namespace Yogollag
             float distanceBetweenButtons = 100;
             foreach (var item in character.Inventory.Items)
             {
-                if (item.Def == null)
+                if (item.ItemDef == null)
                     continue;
-                var text = item.Def.Name;
+                var text = item.ItemDef.Name;
                 if (item.ItemId == character.ActiveItem)
-                    text = $"[{item.Def.Name}]";
+                    text = $"[{item.ItemDef.Name}]";
                 if (GUI.SlotButton(btnPos = new Vector2f(btnPos.X + distanceBetweenButtons, btnPos.Y),
-                    new Vector2f(distanceBetweenButtons / 2, distanceBetweenButtons / 2), Sprites.GetSpriteHandle(item.Def.Sprite)))
+                    new Vector2f(distanceBetweenButtons / 2, distanceBetweenButtons / 2), Sprites.GetSpriteHandle(item.ItemDef.Sprite)))
                 {
                     character.SetActiveItem(item.ItemId);
                 }
@@ -172,11 +172,11 @@ namespace Yogollag
             }
             if (selectedInteractive == null)
                 return null;
-            EnvironmentAPI.Draw.Text(new TextHandle() { Position = Vec2.New(EnvironmentAPI.Win.Size.X / 2, 10), Text = selectedInteractive.Def?.Name });
+            EnvironmentAPI.Draw.Text(new TextHandle() { Position = Vec2.New(EnvironmentAPI.Win.Size.X / 2, 10), Text = selectedInteractive.InteractiveDef?.Name });
             Vector2f btnPos = new Vector2f(0, EnvironmentAPI.Win.Size.Y - 30);
             float distanceBetweenButtons = 30;
             var targetCtx = new ScriptingContext() { ProcessingEntity = character, Target = ((NetworkEntity)selectedInteractive).Id };
-            var allInteractions = ((IQuester)character).Quests.SelectMany(x => x.QuestDef.AddedInteractions).Where(x => x.Def.Predicate.Def.Check(targetCtx)).Concat(selectedInteractive.Def?.Interactions ?? new List<DefRef<InteractionDef>>());
+            var allInteractions = ((IQuester)character).Quests.SelectMany(x => x.QuestDef.AddedInteractions).Where(x => x.Def.Predicate.Def.Check(targetCtx)).Concat(selectedInteractive.InteractiveDef?.Interactions ?? new List<DefRef<InteractionDef>>());
             foreach (var inter in allInteractions)
             {
                 bool isActive = (inter.Def.Predicate.Def == null || inter.Def.Predicate.Def.Check(targetCtx));

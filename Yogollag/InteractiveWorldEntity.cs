@@ -23,7 +23,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
         [Sync(SyncType.Client)]
-        public virtual InteractiveDef Def { get; set; } = DefsHolder.Instance.LoadDef<InteractiveDef>("/DarkMonument");
+        public virtual InteractiveDef InteractiveDef { get; set; } = DefsHolder.Instance.LoadDef<InteractiveDef>("/DarkMonument");
         public string Name { get; set; }
         public IRenderableDef RenDef { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -43,7 +43,7 @@ namespace Yogollag
     }
     public interface IInteractive
     {
-        InteractiveDef Def { get; set; }
+        InteractiveDef InteractiveDef { get; set; }
     }
 
     public class InteractiveDef : BaseDef

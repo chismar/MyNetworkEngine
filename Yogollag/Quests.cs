@@ -23,7 +23,7 @@ namespace Yogollag
         {
             if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) is IInteractive inter)
             {
-                return inter.Def == Type.Def;
+                return inter.InteractiveDef == Type.Def;
             }
             return false;
         }

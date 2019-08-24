@@ -74,11 +74,11 @@ public class GameHost : MonoBehaviour
             {
                 var obj = Resources.Load(eo.Def.Address.Root.Substring(1, eo.Def.Address.Root.Length - 1));
                 if (obj == null)
-                    ent.UserData = new VisualObject(null);
+                    ent.UserData = new VisualObject(eo, null);
                 else
                 {
                     var go = (GameObject)GameObject.Instantiate(obj);
-                    ent.UserData = go.GetComponent<Visual>().Init(ent);
+                    ent.UserData = go.GetComponent<Visual>().Init(eo);
                 }
             }
             else if (ent.UserData is VisualObject vo)
@@ -96,9 +96,15 @@ public class GameHost : MonoBehaviour
     private void OnGUI()
     {
         if (Event.current.type != EventType.Repaint)
-            return;
-        ((UnityTimeImpl)EnvironmentAPI.Time).Update();
-        client.Update();
+        {
+            ((UnityTimeImpl)EnvironmentAPI.Time).Update();
+            client.Update(onlyDrawGUI:true);
+        }
+        else
+        {
+            ((UnityTimeImpl)EnvironmentAPI.Time).Update();
+            client.Update(onlyDrawGUI:false);
+        }
     }
 
 }

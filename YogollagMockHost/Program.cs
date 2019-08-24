@@ -24,7 +24,7 @@ namespace YogollagMockHost
             var client = new SimpleClient();
             client.Start(new RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 });
             Func<Task> su = async () => { server.Update(); };
-            Func<Task> cu = async () => { client.Update(); };
+            Func<Task> cu = async () => { client.Update(false); };
             while (true)
             {
                 var updates = new List<Task>();

@@ -145,6 +145,14 @@ namespace Yogollag
     [GenerateSync]
     public struct SpellCast
     {
+        public static bool operator ==(SpellCast cast, SpellCast cast2)
+        {
+            return cast.Def == cast2.Def && cast.TargetEntity == cast2.TargetEntity && cast.TargetPoint == cast2.TargetPoint;
+        }
+        public static bool operator !=(SpellCast cast, SpellCast cast2)
+        {
+            return !(cast == cast2);
+        }
         [Sync]
         public SpellDef Def { get; set; }
         [Sync]

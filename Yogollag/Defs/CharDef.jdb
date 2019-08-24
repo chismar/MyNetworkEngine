@@ -16,6 +16,16 @@
             },
             {
                 "$type": "StatInstance",
+                "Stat": "/Stats/Madness",
+                "InitialValue":0
+            },
+            {
+                "$type": "StatInstance",
+                "Stat": "/Stats/Insight",
+                "InitialValue":0
+            },
+            {
+                "$type": "StatInstance",
                 "Stat": "/Stats/Arcane",
                 "InitialValue":300
             },

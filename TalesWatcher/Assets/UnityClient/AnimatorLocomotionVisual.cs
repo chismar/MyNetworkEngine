@@ -12,7 +12,7 @@ namespace Assets.UnityClient
 {
     class AnimatorLocomotionVisual : VisualSetup
     {
-        public override VisualComponent Init(NetworkEntity ent)
+        protected override VisualComponent Init(IEntityObject ent)
         {
             return new AnimatedLocomotion(ent);
         }
@@ -20,10 +20,10 @@ namespace Assets.UnityClient
 
     class AnimatedLocomotion : VisualComponent
     {
-        private NetworkEntity _ent;
+        private IEntityObject _ent;
         private Vec2 _lastPos;
         private float _lastRot;
-        public AnimatedLocomotion(NetworkEntity ent)
+        public AnimatedLocomotion(IEntityObject ent)
         {
             this._ent = ent;
         }

@@ -15,7 +15,7 @@ using SFML.Audio;
 namespace Yogollag
 {
     [GenerateSync]
-    class DEFS_SCHEMA_BOOTSTRAP
+    public class DEFS_SCHEMA_BOOTSTRAP
     {
 
 
@@ -130,17 +130,23 @@ namespace Yogollag
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
                 ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
-                ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/OldTablet");
+                ent.Item = SyncObject.New<Item>();
+                ent.Item.ItemDef = DefsHolder.Instance.LoadDef<ItemDef>("/OldTablet");
+                ((IEntityObject)ent).Def = DefsHolder.Instance.LoadDef<WorldItemEntityDef>("/WorldItemDef"); 
             });
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
                 ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
-                ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/Journal");
+                ent.Item = SyncObject.New<Item>();
+                ent.Item.ItemDef = DefsHolder.Instance.LoadDef<ItemDef>("/Journal");
+                ((IEntityObject)ent).Def = DefsHolder.Instance.LoadDef<WorldItemEntityDef>("/WorldItemDef");
             });
             CurrentServer.Create<WorldItemEntity>((ent) =>
             {
                 ent.Position = new Vec2() { X = 20 + (float)_random.NextDouble() * 30, Y = 20 + (float)_random.NextDouble() * 30 };
-                ent.Item = DefsHolder.Instance.LoadDef<ItemDef>("/Wiskey");
+                ent.Item = SyncObject.New<Item>();
+                ent.Item.ItemDef = DefsHolder.Instance.LoadDef<ItemDef>("/Wiskey");
+                ((IEntityObject)ent).Def = DefsHolder.Instance.LoadDef<WorldItemEntityDef>("/WorldItemDef");
             });
         }
     }
@@ -308,8 +314,14 @@ namespace Yogollag
         bool joined = false;
         SimpleProceduralMap _map = new SimpleProceduralMap();
         CharacterGUI _charGui = new CharacterGUI();
-        public void Update()
+        NetworkEntity character = null;
+        public void Update(bool onlyDrawGUI)
         {
+            if(onlyDrawGUI && character != null)
+            {
+                _charGui.Render(_node, _win, character as CharacterEntity, _charView);
+                return;
+            }
             if (!_connected.IsCompleted)
             {
                 _node.Tick().Wait();
@@ -336,7 +348,6 @@ namespace Yogollag
                 _win.Clear(Color.Blue);
             }
             var deltaTime = GetDeltaTime();
-            NetworkEntity character = null;
             foreach (var ghost in _node.AllGhosts())
             {
                 if (ghost is ICharacterLikeMovement charLikeMovement)
@@ -722,7 +733,7 @@ namespace Yogollag
             Pos = newPos;
         }
     }
-    public class ItemDef : BaseDef
+    public class ItemDef : BaseDef, IEntityObjectDef
     {
         public string Name { get; set; }
         public SpriteDef Sprite { get; set; }
@@ -732,12 +743,13 @@ namespace Yogollag
         public DefRef<SpellDef> Spell { get; set; }
     }
     [GenerateSync]
-    public abstract class Item : SyncObject
+    public abstract class Item : SyncObject, IEntityObject
     {
         [Sync(SyncType.AuthorityClient)]
         public virtual long ItemId { get; set; }
         [Sync(SyncType.AuthorityClient)]
-        public virtual ItemDef Def { get; set; }
+        public virtual ItemDef ItemDef { get; set; }
+        public IEntityObjectDef Def { get { return ItemDef; } set { ItemDef = (ItemDef)value; } }
     }
     [GenerateSync]
     public abstract class ItemsCollection : SyncObject
@@ -754,7 +766,7 @@ namespace Yogollag
         {
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].Def == null)
+                if (items[i].ItemDef == null)
                     return i;
             }
             return -1;
@@ -789,7 +801,7 @@ namespace Yogollag
             if (slot == -1)
                 return;
             Items[slot] = null;
-            CurrentServer.Create<WorldItemEntity>((wie) => { wie.Position = ((IPositionedEntity)Owner).Position; wie.Item = item.Def; });
+            CurrentServer.Create<WorldItemEntity>((wie) => { wie.Position = ((IPositionedEntity)Owner).Position; wie.Item = item; });
         }
 
         [Sync(SyncType.AuthorityClient)]
@@ -913,10 +925,10 @@ namespace Yogollag
             if (item == null)
                 return;
             bool canDo = true;
-            if (item.Def.Predicate.Def != null)
-                canDo = item.Def.Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = this });
+            if (item.ItemDef.Predicate.Def != null)
+                canDo = item.ItemDef.Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = this });
             if (canDo)
-                item.Def.Impact.Def.Apply(new ScriptingContext() { ProcessingEntity = this });
+                item.ItemDef.Impact.Def.Apply(new ScriptingContext() { ProcessingEntity = this });
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void ReceivePosition(Vec2 newPosition)
@@ -939,7 +951,7 @@ namespace Yogollag
             if (item != null)
             {
                 HierarchyTransform v = new HierarchyTransform(SmoothPosition, 0, null);
-                var itemSprite = Sprites.GetSpriteHandle(item.Def.Sprite);
+                var itemSprite = Sprites.GetSpriteHandle(item.ItemDef.Sprite);
                 v.DrawSpriteAt(itemSprite,
                     Vec2.New(itemSprite.TextureRect.X / 2, itemSprite.TextureRect.Y / 2),
                     Vec2.New(0.5f, 0.5f),
@@ -969,7 +981,7 @@ namespace Yogollag
         [Sync(SyncType.Server)]
         public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
-            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext });
+            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext, Target = this.Id });
         }
 
         [Sync(SyncType.Server)]

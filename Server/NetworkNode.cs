@@ -705,15 +705,21 @@ namespace NetworkEngine
         public EntityId Create(Type t, Action<NetworkEntity> init = null)
         {
             var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(t));
+            OnEntityCreatedFirstInit(newEntity);
             init?.Invoke(newEntity);
             OnEntityCreated(newEntity);
             return newEntity.Id;
         }
-        void OnEntityCreated(NetworkEntity newEntity)
+
+        private void OnEntityCreatedFirstInit(NetworkEntity newEntity)
         {
             newEntity.ServerId = Id;
             newEntity.CurrentServer = this;
             newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
+        }
+
+        void OnEntityCreated(NetworkEntity newEntity)
+        {
             newEntity.Create();
             newEntity.Init();
             ((IGhost)newEntity).ClearSerialization();
@@ -723,6 +729,7 @@ namespace NetworkEngine
         public EntityId Create<T>(Action<T> init = null) where T : NetworkEntity
         {
             var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
+            OnEntityCreatedFirstInit(newEntity);
             init?.Invoke((T)newEntity);
             OnEntityCreated(newEntity);
             return newEntity.Id;
@@ -1010,9 +1017,11 @@ namespace NetworkEngine
                 typeof(ServerMessage).IsAssignableFrom(x) ||
                 x.GetCustomAttribute<GenerateSyncAttribute>() != null)
                 ).ToDictionary(x => GetNameWithoutGenericArity(x));
-            var allBaseEntities = syncTypes.Where(t => t.Value.IsAbstract || typeof(ServerMessage).IsAssignableFrom(t.Value) || t.Value.IsValueType);
+            var allBaseEntities = syncTypes.Where(t => t.Value.GetCustomAttribute<GenerateSyncAttribute>() != null || typeof(ServerMessage).IsAssignableFrom(t.Value));
             foreach (var baseObj in allBaseEntities.Select(x => x.Value))
             {
+                if (baseObj.Name == "DEFS_SCHEMA_BOOTSTRAP")
+                    continue;
                 var eName = GetNameWithoutGenericArity(baseObj);
                 if (!syncTypes.ContainsKey(eName + "Sync"))
                 {

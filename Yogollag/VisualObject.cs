@@ -1,4 +1,5 @@
-﻿using NetworkEngine;
+﻿using Definitions;
+using NetworkEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,11 @@ namespace Yogollag
 {
     public class VisualObject
     {
+        public IEntityObject Obj;
         private readonly IVisualAPI _api;
-        public VisualObject(IVisualAPI api)
+        public VisualObject(IEntityObject obj, IVisualAPI api)
         {
+            Obj = obj;
             this._api = api;
         }
         List<VisualComponent> _components = new List<VisualComponent>();
@@ -33,7 +36,7 @@ namespace Yogollag
 
     public abstract class VisualComponent
     {
-        public GhostedEntity Entity;
+        public IEntityObject Entity;
         public abstract void Update(IVisualAPI api);
     }
 
@@ -63,6 +66,27 @@ namespace Yogollag
         }
     }
 
+    public class LocatorVisual : VisualComponent, IFieldTarget<IEntityObject>
+    {
+        public void SetValue(IEntityObject value, IVisualAPI api)
+        {
+            api.AttachVisualObject(this, value);
+        }
+
+        public override void Update(IVisualAPI api)
+        {
+
+        }
+    }
+
+
+    public class EObjBinding : FieldBinding<IEntityObject>
+    {
+        public EObjBinding(string fieldPath, IFieldTarget<IEntityObject> target) : base(fieldPath, target)
+        {
+
+        }
+    }
     public class FieldBinding<T> : VisualComponent
     {
         private readonly string[] _fieldPath;
@@ -111,6 +135,7 @@ namespace Yogollag
 
     public interface IVisualAPI
     {
+        void AttachVisualObject(LocatorVisual locator, IEntityObject obj);
         void SetLogicalTransform(Vec2 pos, float rotation);
         void SetAnimatorBool(string name, bool value);
         void SetAnimatorFloat(string name, float value);

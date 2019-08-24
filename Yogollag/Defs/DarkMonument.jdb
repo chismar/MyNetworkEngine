@@ -9,12 +9,12 @@
             {
                 "$type":"CheckEntityStatDef",
                 "MoreThan": 10,
-                "StatName": "Insight"    
+                "StatDef": "/Stats/Insight"    
             },
             "Impact": 
             {
                 "$type": "ChangeEntityStatDef",
-                "StatName": "Madness",
+                "StatDef": "/Stats/Madness",
                 "Change": 3
             }
         },
@@ -25,12 +25,12 @@
             {
                 "$type":"CheckEntityStatDef",
                 "MoreThan": 10,
-                "StatName": "Insight"    
+                "StatDef": "/Stats/Insight"    
             },
             "Impact": 
             {
                 "$type": "ChangeEntityStatDef",
-                "StatName": "Madness",
+                "StatDef": "/Stats/Madness",
                 "Change": -2
             }
         },
@@ -40,7 +40,7 @@
             "Impact": 
             {
                 "$type": "ChangeEntityStatDef",
-                "StatName": "Insight",
+                "StatDef": "/Stats/Insight",
                 "Change": 3
             }
         }

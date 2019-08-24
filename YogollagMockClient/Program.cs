@@ -11,7 +11,7 @@ namespace YogollagMockClient
             client.Start(new NetworkEngine.RemoteConnectionToken() { IP = "127.0.0.1", Port = 9051 });
             while(true)
             {
-                client.Update();
+                client.Update(false);
             }
         }
     }
