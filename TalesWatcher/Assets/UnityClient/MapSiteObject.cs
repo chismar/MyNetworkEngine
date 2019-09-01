@@ -23,7 +23,7 @@ class MapSiteObject : MonoBehaviour, IExportable
             siteDef.SubSites.Add(new SubSite()
             {
                 Pos = new Vec2(subSite.transform.position.x, subSite.transform.position.z),
-                Rot = -subSite.transform.rotation.eulerAngles.y,
+                Rot = subSite.transform.rotation.eulerAngles.y,
                 SizeX = subSite.transform.lossyScale.x,
                 SizeY = subSite.transform.lossyScale.z,
                 Tags = subSite.Tags.Select((x) => { var r = new DefRef<MapSiteTagDef>(new MapSiteTagDef()); ((IDef)r.Def).Address = new DefIDFull($"/Tags/{x}"); return r; }).ToList()
@@ -34,7 +34,7 @@ class MapSiteObject : MonoBehaviour, IExportable
             siteDef.Connections.Add(new SiteConnection()
             {
                 Pos = new Vec2(connection.transform.position.x, connection.transform.position.z),
-                Rot = -connection.transform.rotation.eulerAngles.y,
+                Rot = 360-connection.transform.rotation.eulerAngles.y,
                 Size = connection.transform.lossyScale.x,
                 Tags = connection.Tags.Select((x) => { var r = new DefRef<MapSiteTagDef>(new MapSiteTagDef()); ((IDef)r.Def).Address = new DefIDFull($"/Tags/{x}"); return r; }).ToList()
             });
@@ -55,14 +55,14 @@ class MapSiteObject : MonoBehaviour, IExportable
         if(attachment != null)
         {
             siteDef.AttachmentPoint = new Vec2(attachment.transform.position.x, attachment.transform.position.z);
-            siteDef.AttachmentRotation = -attachment.transform.rotation.eulerAngles.y;
+            siteDef.AttachmentRotation = attachment.transform.rotation.eulerAngles.y;
             siteDef.AttachmentSize = Mathf.Abs(attachment.transform.lossyScale.x);
         }
-        Defs.SimpleSave(Application.dataPath + "/../../Yogollag/Defs", gameObject.name, siteDef, out var path);
+        Defs.SimpleSave(Application.dataPath + "/../../Yogollag/Defs", gameObject.name + "Location", siteDef, out var path);
         Debug.Log($"Saved at {path}");
     }
 
-    class RefStubEntityObjectDef : BaseDef, IEntityObjectDef
+    public class RefStubEntityObjectDef : BaseDef, IEntityObjectDef
     {
 
     }

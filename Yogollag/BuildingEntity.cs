@@ -41,30 +41,6 @@ namespace Yogollag
                 }
             }
             t.DrawAsDir(0.1f);
-            var aabb = PhysicalBody.VoltBody.AABB;
-            var _shape = new RectShapeHandle();
-            HierarchyTransform v = new HierarchyTransform(Vec2.New(aabb.Center.x, aabb.Center.y), PhysicalBody.Rotation, null);
-
-            _shape.FillColor = Color.Transparent;
-            _shape.OutlineColor = Color.Red;
-            _shape.OutlineThickness = 1;
-            _shape.Size = new SFML.System.Vector2f(aabb.Extent.x * 2, aabb.Extent.y * 2);
-            v.DrawShapeAt(_shape, Vec2.New(0.5f, 0.5f));
-            lock (PhysicalBody.VoltBody.World)
-            {
-                foreach (var shape in PhysicalBody.VoltBody.shapes)
-                {
-                    if (shape is VoltPolygon vp)
-                    {
-                        HierarchyTransform vpt = new HierarchyTransform(Vec2.New(vp.bodySpaceAABB.Center.x, vp.bodySpaceAABB.Center.y), 0, v);
-                        _shape.FillColor = Color.Transparent;
-                        _shape.OutlineColor = Color.Yellow;
-                        _shape.OutlineThickness = 1;
-                        _shape.Size = new SFML.System.Vector2f(vp.bodySpaceAABB.Extent.x * 2, vp.bodySpaceAABB.Extent.y * 2);
-                        vpt.DrawShapeAt(_shape, Vec2.New(0.5f, 0.5f));
-                    }
-                }
-            }
         }
     }
 

@@ -10,9 +10,14 @@ using Volatile;
 
 namespace Yogollag
 {
+
+    public class InteractiveWorldEntityDef : BaseDef, IEntityObjectDef
+    {
+        public DefRef<InteractiveDef> InteractiveDef { get; set; }
+    }
     [GenerateSync]
     public abstract class InteractiveWorldEntity : GhostedEntity,
-        IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject
+        IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject, IEntityObject
     {
         [Sync(SyncType.Client)]
         public virtual float Rotation { get; set; }
@@ -23,11 +28,17 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
         [Sync(SyncType.Client)]
-        public virtual InteractiveDef InteractiveDef { get; set; } = DefsHolder.Instance.LoadDef<InteractiveDef>("/DarkMonument");
+        public virtual InteractiveDef InteractiveDef { get; set; }
         public string Name { get; set; }
         public IRenderableDef RenDef { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [Sync]
+        public virtual IEntityObjectDef Def { get; set; }
 
         static RectangleShape shape = new RectangleShape(new SFML.System.Vector2f(5, 10));
+        public override void OnCreate()
+        {
+            InteractiveDef = ((InteractiveWorldEntityDef)Def).InteractiveDef;
+        }
         public void Render(RenderTarget rt)
         {
             shape.Origin = new SFML.System.Vector2f(2.5f, 5f);

@@ -59,6 +59,13 @@ public class GameHost : MonoBehaviour
     }
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.M))
+            ((UnityDrawImpl)EnvironmentAPI.Draw).Draw = !((UnityDrawImpl)EnvironmentAPI.Draw).Draw;
+
+        if (Input.GetKeyDown(KeyCode.U))
+            ((UnityDrawImpl)EnvironmentAPI.Draw).DrawUI = !((UnityDrawImpl)EnvironmentAPI.Draw).DrawUI;
+
         if (Input.mouseScrollDelta.magnitude > Mathf.Epsilon)
         {
             var curScale = ((UnityDrawImpl)EnvironmentAPI.Draw)._scale;
@@ -68,29 +75,6 @@ public class GameHost : MonoBehaviour
                 curScale -= 0.3f;
             ((UnityDrawImpl)EnvironmentAPI.Draw)._scale = Mathf.Clamp(curScale, 0.1f, 10f);
         }
-        foreach (var ent in client._node.AllGhosts())
-        {
-            if (ent is IEntityObject eo && ent.UserData == null)
-            {
-                var obj = Resources.Load(eo.Def.Address.Root.Substring(1, eo.Def.Address.Root.Length - 1));
-                if (obj == null)
-                    ent.UserData = new VisualObject(eo, null);
-                else
-                {
-                    var go = (GameObject)GameObject.Instantiate(obj);
-                    ent.UserData = go.GetComponent<Visual>().Init(eo);
-                }
-            }
-            else if (ent.UserData is VisualObject vo)
-            {
-                vo.Update();
-            }
-        }
-        while (_entitiesToRemove.TryDequeue(out var remEnt))
-        {
-            if (remEnt.UserData is VisualObject vo)
-                vo.Destroy();
-        }
     }
 
     private void OnGUI()
@@ -98,12 +82,42 @@ public class GameHost : MonoBehaviour
         if (Event.current.type != EventType.Repaint)
         {
             ((UnityTimeImpl)EnvironmentAPI.Time).Update();
-            client.Update(onlyDrawGUI:true);
+            client.Update(onlyDrawGUI: true);
         }
         else
         {
             ((UnityTimeImpl)EnvironmentAPI.Time).Update();
-            client.Update(onlyDrawGUI:false);
+            client.Update(onlyDrawGUI: false);
+            foreach (var ent in client._node.AllGhosts())
+            {
+                if (ent is IEntityObject eo && ent.UserData == null)
+                {
+                    var obj = Resources.Load(eo.Def.Address.Root.Substring(1, eo.Def.Address.Root.Length - 1));
+                    if (obj == null)
+                        ent.UserData = new VisualObject(eo, null);
+                    else
+                    {
+                        var go = (GameObject)GameObject.Instantiate(obj);
+                        ent.UserData = go.GetComponent<Visual>().Init(eo);
+                    }
+                }
+                else if (ent.UserData is VisualObject vo)
+                {
+                    try
+                    {
+                        vo.Update();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
+                }
+            }
+            while (_entitiesToRemove.TryDequeue(out var remEnt))
+            {
+                if (remEnt.UserData is VisualObject vo)
+                    vo.Destroy();
+            }
         }
     }
 

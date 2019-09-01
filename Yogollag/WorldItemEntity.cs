@@ -13,7 +13,7 @@ namespace Yogollag
 {
     public class WorldItemEntityDef : BaseDef, IEntityObjectDef
     {
-
+        public List<DefRef<ItemDef>> ChooseFromDefaultItems { get; set; } = new List<DefRef<ItemDef>>();
     }
     [GenerateSync]
     public abstract class WorldItemEntity : GhostedEntity,
@@ -31,6 +31,21 @@ namespace Yogollag
         public virtual float Rotation { get; set; }
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
+        public override void OnCreate()
+        {
+            var wied = ((WorldItemEntityDef)Def);
+            if(Item == null && wied.ChooseFromDefaultItems.Count == 0)
+            {
+                CurrentServer.Destroy(Id);
+            }
+            else if (Item == null)
+            {
+                var item = SyncObject.New<Item>();
+                item.ItemDef = wied.ChooseFromDefaultItems[new Random().Next(wied.ChooseFromDefaultItems.Count)].Def;
+                item.FinishInit();
+                Item = item;
+            }
+        }
 
         public void Render(RenderTarget rt)
         {

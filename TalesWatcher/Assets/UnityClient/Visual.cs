@@ -22,7 +22,7 @@ public class Visual : MonoBehaviour, IVisualAPI
     public void SetLogicalTransform(Vec2 pos, float rotation)
     {
         transform.position = new Vector3(pos.X, 0, pos.Y);
-        transform.rotation = Quaternion.Euler(0, rotation, 0);
+        transform.rotation = Quaternion.Euler(0, 360-rotation, 0);
     }
 
     public void SetVisualRotation(float rotation)
@@ -38,8 +38,8 @@ public class Visual : MonoBehaviour, IVisualAPI
         VisualPrefab = _animator?.gameObject;
         var vo = new VisualObject(ent, this);
         vo.AddVisualComponent(new TransformSync() { Entity = (IEntityObject)ent });
-        foreach (var setup in gameObject.GetComponents<VisualSetup>())
-            vo.AddVisualComponent(setup.GetOrCreate(ent)).Entity = (IEntityObject)ent;
+        //foreach (var setup in gameObject.GetComponents<VisualSetup>())
+        //    vo.AddVisualComponent(setup.GetOrCreate(ent)).Entity = (IEntityObject)ent;
         foreach (var setup in gameObject.GetComponentsInChildren<VisualSetup>())
             vo.AddVisualComponent(setup.GetOrCreate(ent)).Entity = (IEntityObject)ent;
         var locators = gameObject.GetComponentsInChildren<Locator>();

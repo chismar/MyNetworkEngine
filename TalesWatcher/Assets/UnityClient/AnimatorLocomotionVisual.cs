@@ -20,7 +20,8 @@ namespace Assets.UnityClient
 
     class AnimatedLocomotion : VisualComponent
     {
-        private IEntityObject _ent;
+        private IEntityObject
+            _ent;
         private Vec2 _lastPos;
         private float _lastRot;
         public AnimatedLocomotion(IEntityObject ent)
@@ -63,7 +64,7 @@ namespace Assets.UnityClient
                 _lastPos = pos;
                 //api.SetAnimatorFloat("VelocityX", velocity.X);
                 //api.SetAnimatorFloat("VelocityY", velocity.Y);
-                api.SetAnimatorBool("IsRun", velocity.Length > 0.01f);
+                api.SetAnimatorBool("IsRun", velocity.Length > 0);
             }
         }
     }

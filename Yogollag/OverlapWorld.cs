@@ -8,6 +8,7 @@ namespace Yogollag
     public class OverlapWorld
     {
         public List<OverlapShape> _shapes = new List<OverlapShape>();
+        public List<OverlapShape> _failedShapes = new List<OverlapShape>();
         private readonly float _sizeX;
         private readonly float _sizeY;
 
@@ -34,6 +35,11 @@ namespace Yogollag
         {
             _shapes.Remove(shape);
         }
+
+        internal void AddFailedBox(OverlapBox box)
+        {
+            _failedShapes.Add(box);
+        }
     }
 
     public abstract class OverlapShape
@@ -56,7 +62,7 @@ namespace Yogollag
             CenterAtTheBottom = centerAtTheBottom;
             Size = size;
             var hSize = size / 2;
-            var polygon = centerAtTheBottom ?
+            var polygon = false ?
                 new Polygon2(new[] { new Vector2(-hSize.X, 0), new Vector2(hSize.X, 0), new Vector2(hSize.X, size.Y), new Vector2(-hSize.X, size.Y) }, new Vector2(0, 0))
                 :
                 new Polygon2(new[] { new Vector2(-hSize.X, -hSize.Y), new Vector2(hSize.X, -hSize.Y), new Vector2(hSize.X, hSize.Y), new Vector2(-hSize.X, hSize.Y) });

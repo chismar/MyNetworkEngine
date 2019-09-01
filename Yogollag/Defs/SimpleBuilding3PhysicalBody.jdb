@@ -1,0 +1,315 @@
+{
+  "$type": "PhysicalBodyDef",
+  "CustomName": null,
+  "Shapes": [
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 0.56,
+        "Y": -19.23
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 17.85,
+      "SizeY": 1.0
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -9.11,
+        "Y": -15.57
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 7.100005,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -9.109999,
+        "Y": -1.50999928
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 11.2900076,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -9.110001,
+        "Y": 15.9500008
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 4.40000343,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 10.04,
+        "Y": -15.57
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 7.100005,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 10.04,
+        "Y": -1.07999992
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 12.310009,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -6.56,
+        "Y": 8.890001
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 4.86000252,
+      "SizeY": 9.950005
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -2.61000013,
+        "Y": -0.279999733
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 9.650006,
+      "SizeY": 2.6100018
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 9.190001,
+        "Y": -17.72
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 3.2300024,
+      "SizeY": 2.95000219
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 9.35,
+        "Y": -17.79
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 3.2300024,
+      "SizeY": 2.95000219
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 3.31,
+        "Y": 5.700001
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 8.71,
+        "Y": 3.29
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -7.59999943,
+        "Y": 3.31000042
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 7.54,
+        "Y": 8.860001
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 4.86,
+      "SizeY": 9.95
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 3.79,
+        "Y": -0.279999733
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 9.650006,
+      "SizeY": 2.6100018
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -2.61000013,
+        "Y": 6.08
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -2.19,
+        "Y": 12.23
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 8.709999,
+        "Y": 15.1400013
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -7.59999847,
+        "Y": 15.1600018
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.04000068,
+      "SizeY": 1.06000066
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 9.940001,
+        "Y": 15.9500008
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 4.40000343,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -5.34,
+        "Y": 18.51
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 6.67,
+      "SizeY": 1.02
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 6.19,
+        "Y": 18.51
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 6.67,
+      "SizeY": 1.02
+    }
+  ],
+  "IsStatic": true
+}

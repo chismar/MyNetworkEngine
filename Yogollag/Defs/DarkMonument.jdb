@@ -1,48 +1,51 @@
 {
-    "$type":"InteractiveDef",
-    "Name": "Dark monument",
-    "Interactions":[
-        {
-            "$type":"InteractionDef",
-            "Name": "Get sooooo Mad",
-            "Predicate" : 
+    "$type": "InteractiveWorldEntity",
+    "InteractiveDef":{
+        "$type":"InteractiveDef",
+        "Name": "Dark monument",
+        "Interactions":[
             {
-                "$type":"CheckEntityStatDef",
-                "MoreThan": 10,
-                "StatDef": "/Stats/Insight"    
+                "$type":"InteractionDef",
+                "Name": "Get sooooo Mad",
+                "Predicate" : 
+                {
+                    "$type":"CheckEntityStatDef",
+                    "MoreThan": 10,
+                    "StatDef": "/Stats/Insight"    
+                },
+                "Impact": 
+                {
+                    "$type": "ChangeEntityStatDef",
+                    "StatDef": "/Stats/Madness",
+                    "Change": 3
+                }
             },
-            "Impact": 
             {
-                "$type": "ChangeEntityStatDef",
-                "StatDef": "/Stats/Madness",
-                "Change": 3
-            }
-        },
-        {
-            "$type":"InteractionDef",
-            "Name": "Get less Mad",
-            "Predicate" : 
-            {
-                "$type":"CheckEntityStatDef",
-                "MoreThan": 10,
-                "StatDef": "/Stats/Insight"    
+                "$type":"InteractionDef",
+                "Name": "Get less Mad",
+                "Predicate" : 
+                {
+                    "$type":"CheckEntityStatDef",
+                    "MoreThan": 10,
+                    "StatDef": "/Stats/Insight"    
+                },
+                "Impact": 
+                {
+                    "$type": "ChangeEntityStatDef",
+                    "StatDef": "/Stats/Madness",
+                    "Change": -2
+                }
             },
-            "Impact": 
             {
-                "$type": "ChangeEntityStatDef",
-                "StatDef": "/Stats/Madness",
-                "Change": -2
+                "$type":"InteractionDef",
+                "Name": "Get insight",
+                "Impact": 
+                {
+                    "$type": "ChangeEntityStatDef",
+                    "StatDef": "/Stats/Insight",
+                    "Change": 3
+                }
             }
-        },
-        {
-            "$type":"InteractionDef",
-            "Name": "Get insight",
-            "Impact": 
-            {
-                "$type": "ChangeEntityStatDef",
-                "StatDef": "/Stats/Insight",
-                "Change": 3
-            }
-        }
-    ]
+        ]
+    }
 }

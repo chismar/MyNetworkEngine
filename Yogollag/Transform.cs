@@ -38,7 +38,7 @@ namespace Yogollag
                 Transform t = _parent == null ? Transform.Identity : _parent._transform;
                 t.Translate(_pos.X, _pos.Y);
                 t.Rotate(_rot);
-                t.Translate(_attachmentOffset);
+                //t.Translate(_attachmentOffset);
                 return t;
             }
         }
@@ -97,12 +97,11 @@ namespace Yogollag
             rectShape.OutlineColor = Color.Magenta;
             EnvironmentAPI.Draw.Rect(rectShape);
         }
-        public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform parent, Vec2 attachmentOffset = default)
+        public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform parent)
         {
             _pos = Vec2.New(pos.X, pos.Y);
             _rot = rotation;
             _parent = parent;
-            _attachmentOffset = attachmentOffset;
         }
     }
 

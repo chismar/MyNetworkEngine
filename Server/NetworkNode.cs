@@ -19,7 +19,7 @@ namespace NetworkEngine
         static NetworkNode _server;
         static NetworkNode _server2;
         static EntityId _entityId;
-        static Random _rand = new Random();
+        static Random _rand = new Random(0);
         static void Main(string[] args)
         {
             _server = new NetworkNode(new NetworkNodeId() { Id = 345 });
@@ -154,7 +154,7 @@ namespace NetworkEngine
             NetDataWriter stream = null;
             ((IGhost)obj).Serialize(ref stream, true);
             ghost.Deserialize(new NetDataReader(stream.Data));
-            ((GhostedEntity)ghost).Init();
+            //((GhostedEntity)ghost).Init();
             return (NetworkEntity)ghost;
         }
         private void OnEntityRemoved(NetworkEntity obj)

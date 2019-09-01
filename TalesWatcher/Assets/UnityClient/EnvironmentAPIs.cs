@@ -46,6 +46,9 @@ public class UnityInputImpl : InputApi
         var kCode = UnityEngine.KeyCode.None;
         switch (key)
         {
+            case Keyboard.Key.Space:
+                kCode = UnityEngine.KeyCode.Space;
+                break;
             case Keyboard.Key.W:
                 kCode = UnityEngine.KeyCode.W;
                 break;
@@ -91,8 +94,12 @@ public class UnityDrawImpl : DrawApi
 {
     public Material material;
     public float _scale = 5f;
+    public bool Draw = true;
+    public bool DrawUI = true;
     public void Circle(CircleShapeHandle handle)
     {
+        if (!Draw)
+            return;
         GL.PushMatrix();
         GL.LoadIdentity();
         var size = Vec2.New(handle.Radius * 2, handle.Radius * 2);
@@ -107,6 +114,8 @@ public class UnityDrawImpl : DrawApi
     }
     public void Rect(RectShapeHandle handle)
     {
+        if (!Draw)
+            return;
         GL.PushMatrix();
         GL.LoadIdentity();
         FormModelView(handle.Position, handle.Rotation, handle.Size, handle.Pivot);
@@ -131,6 +140,8 @@ public class UnityDrawImpl : DrawApi
     }
     private void DrawRect(Vec2 position, Vec2 size, Color color)
     {
+        if (!Draw)
+            return;
         GL.invertCulling = true;
         //material.color = color;
         GL.Begin(GL.QUADS);
@@ -145,6 +156,8 @@ public class UnityDrawImpl : DrawApi
 
     public void Sprite(SpriteHandle handle)
     {
+        if (!Draw)
+            return;
         GL.PushMatrix();
         GL.LoadIdentity();
         FormModelView(handle.Position, handle.Rotation, handle.Size, handle.Pivot);
@@ -164,6 +177,8 @@ public class UnityDrawImpl : DrawApi
 
     public void SpriteGUI(SpriteHandle handle)
     {
+        if (!DrawUI)
+            return;
         GL.PushMatrix();
         GL.LoadIdentity();
         var position = handle.Position;
@@ -182,6 +197,8 @@ public class UnityDrawImpl : DrawApi
 
     public void Text(TextHandle sprite)
     {
+        if (!DrawUI)
+            return;
         GUI.Label(new UnityEngine.Rect(sprite.Position.X, sprite.Position.Y, 200, 200), new GUIContent() { text = sprite.Text });
     }
 }

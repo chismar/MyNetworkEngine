@@ -40,6 +40,8 @@
         "BuildingEntity",
         "IEntityObjectDef",
         "IEntityObject",
+        "InteractiveWorldEntityDef",
+        "InteractiveWorldEntity",
         "InteractiveDef",
         "Interactive",
         "InteractionDef",
@@ -222,6 +224,8 @@
             "RitualAction",
             "BuildingEntityDef",
             "BuildingEntity",
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity",
             "InteractiveDef",
             "Interactive",
             "InteractionDef",
@@ -379,6 +383,9 @@
         },
         {
           "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
         },
         {
           "$ref": "#/definitions/InteractiveDef"
@@ -625,6 +632,8 @@
             "BuildingEntity",
             "IEntityObjectDef",
             "IEntityObject",
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity",
             "InteractiveDef",
             "Interactive",
             "InteractionDef",
@@ -796,6 +805,9 @@
         },
         {
           "$ref": "#/definitions/IEntityObjectDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
         },
         {
           "$ref": "#/definitions/InteractiveDef"
@@ -989,6 +1001,9 @@
         },
         "Id": {
           "$ref": "#/definitions/GuidField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1056,6 +1071,9 @@
         },
         "Rules": {
           "$ref": "#/definitions/AIRulesDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1127,6 +1145,9 @@
           "items": {
             "$ref": "#/definitions/AIRuleDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1192,6 +1213,9 @@
             "CalcerDef",
             "Calcer"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1369,6 +1393,9 @@
         },
         "CastSpell": {
           "$ref": "#/definitions/SpellDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1437,6 +1464,9 @@
         },
         "DirectionRelativeToTarget": {
           "$ref": "#/definitions/Vec2Field"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1502,6 +1532,9 @@
             "TargetSelectorDef",
             "TargetSelector"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1567,6 +1600,9 @@
             "PointSelectorDef",
             "PointSelector"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1708,6 +1744,9 @@
             "RitualEventsDef",
             "RitualEvents"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1782,6 +1821,9 @@
         },
         "Spell": {
           "$ref": "#/definitions/SpellDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1847,6 +1889,9 @@
             "RitualTokenDef",
             "RitualToken"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1912,6 +1957,9 @@
             "ConcludeRirutalDef",
             "ConcludeRirutal"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -1977,6 +2025,9 @@
             "RitualActionDef",
             "RitualAction"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2045,6 +2096,9 @@
         },
         "PhysicalBodyDef": {
           "$ref": "#/definitions/PhysicalBodyDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2125,6 +2179,8 @@
             "BuildingEntity",
             "IEntityObjectDef",
             "IEntityObject",
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity",
             "MobDef",
             "Mob",
             "CharacterEntityDef",
@@ -2157,6 +2213,9 @@
           "$ref": "#/definitions/IEntityObjectDef"
         },
         {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
+        },
+        {
           "$ref": "#/definitions/MobDef"
         },
         {
@@ -2170,6 +2229,77 @@
         },
         {
           "$ref": "#/definitions/WorldItemEntityDef"
+        }
+      ]
+    },
+    "InteractiveWorldEntityDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/InteractiveWorldEntityDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity"
+          ]
+        },
+        "InteractiveDef": {
+          "$ref": "#/definitions/InteractiveDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "InteractiveWorldEntityDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
         }
       ]
     },
@@ -2217,6 +2347,9 @@
           "items": {
             "$ref": "#/definitions/InteractionDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2294,6 +2427,9 @@
         },
         "Impact": {
           "$ref": "#/definitions/IImpactDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2359,6 +2495,9 @@
             "TileModDef",
             "TileMod"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2424,6 +2563,9 @@
             "TileDef",
             "Tile"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2489,6 +2631,9 @@
             "PrefabDef",
             "Prefab"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2560,6 +2705,9 @@
           "items": {
             "$ref": "#/definitions/LocationField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2651,6 +2799,9 @@
           "items": {
             "$ref": "#/definitions/MapSiteDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2722,6 +2873,9 @@
           "items": {
             "$ref": "#/definitions/IEntityObjectDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2851,6 +3005,9 @@
           "items": {
             "$ref": "#/definitions/MapSiteTagDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2916,6 +3073,9 @@
             "MapSiteTagDef",
             "MapSiteTag"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -2981,6 +3141,9 @@
             "ScenarioDef",
             "Scenario"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3058,6 +3221,9 @@
           "items": {
             "$ref": "#/definitions/MapPrefabDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3123,6 +3289,9 @@
             "IntGenParameterDef",
             "IntGenParameter"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3206,6 +3375,9 @@
           "items": {
             "$ref": "#/definitions/SlotGenDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3271,6 +3443,9 @@
             "SlotLinkTypeDef",
             "SlotLinkType"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3345,6 +3520,9 @@
         },
         "Link": {
           "$ref": "#/definitions/SlotGenDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3420,6 +3598,9 @@
         },
         "SlotCategory": {
           "$ref": "#/definitions/SlotCategoryDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3494,6 +3675,9 @@
         },
         "TileCategory": {
           "$ref": "#/definitions/TileCategoryDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3559,6 +3743,9 @@
             "SlotCategoryDef",
             "SlotCategory"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3624,6 +3811,9 @@
             "TileCategoryDef",
             "TileCategory"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3700,6 +3890,9 @@
           "$ref": "#/definitions/IRenderableDefField"
         },
         "Name": {
+          "type": "string"
+        },
+        "CustomName": {
           "type": "string"
         }
       },
@@ -3855,6 +4048,9 @@
               "type": "boolean"
             }
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -3946,6 +4142,9 @@
               "type": "boolean"
             }
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4031,6 +4230,32 @@
               "type": "number"
             }
           ]
+        },
+        "SpriteDef": {
+          "$ref": "#/definitions/SpriteDefField"
+        },
+        "Offset": {
+          "$ref": "#/definitions/Vec2Field"
+        },
+        "Rotation": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "HasBody": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
         }
       },
       "required": [
@@ -4114,6 +4339,32 @@
             },
             {
               "type": "number"
+            }
+          ]
+        },
+        "SpriteDef": {
+          "$ref": "#/definitions/SpriteDefField"
+        },
+        "Offset": {
+          "$ref": "#/definitions/Vec2Field"
+        },
+        "Rotation": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "HasBody": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
             }
           ]
         }
@@ -4262,6 +4513,9 @@
         },
         "Sprite": {
           "$ref": "#/definitions/SpriteDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4333,6 +4587,9 @@
         },
         "Sprite": {
           "$ref": "#/definitions/SpriteDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4416,6 +4673,9 @@
         },
         "Spell": {
           "$ref": "#/definitions/SpellDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4493,6 +4753,9 @@
         },
         "OnComplete": {
           "$ref": "#/definitions/IImpactDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4561,6 +4824,9 @@
         },
         "Type": {
           "$ref": "#/definitions/InteractiveDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4637,6 +4903,9 @@
         },
         "Predicate": {
           "$ref": "#/definitions/IPredicateDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4707,6 +4976,9 @@
         },
         "Do": {
           "$ref": "#/definitions/IImpactDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4774,6 +5046,9 @@
         },
         "Quest": {
           "$ref": "#/definitions/QuestDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4840,6 +5115,9 @@
         },
         "Quest": {
           "$ref": "#/definitions/QuestDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -4907,6 +5185,9 @@
         },
         "InitialQuest": {
           "$ref": "#/definitions/QuestDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5079,6 +5360,9 @@
               "type": "number"
             }
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5262,6 +5546,9 @@
         },
         "Impact": {
           "$ref": "#/definitions/IImpactDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5356,6 +5643,9 @@
               "type": "object"
             }
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5424,6 +5714,9 @@
         },
         "ObjectToSpawn": {
           "$ref": "#/definitions/IEntityObjectDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5489,6 +5782,9 @@
             "SpellCastModeDef",
             "SpellCastMode"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5655,6 +5951,9 @@
         },
         "ImpactOnStart": {
           "$ref": "#/definitions/IImpactDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5743,6 +6042,9 @@
               "type": "integer"
             }
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5821,6 +6123,9 @@
               "type": "number"
             }
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5892,6 +6197,9 @@
           "items": {
             "$ref": "#/definitions/StatInstanceDefField"
           }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -5957,6 +6265,9 @@
             "StatDef",
             "Stat"
           ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -6022,6 +6333,15 @@
             "WorldItemEntityDef",
             "WorldItemEntity"
           ]
+        },
+        "ChooseFromDefaultItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDefField"
+          }
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
@@ -6080,6 +6400,7 @@
         "RitualActionDef",
         "BuildingEntityDef",
         "IEntityObjectDef",
+        "InteractiveWorldEntityDef",
         "InteractiveDef",
         "InteractionDef",
         "TileModDef",
@@ -6708,6 +7029,9 @@
         },
         {
           "$ref": "#/definitions/IEntityObjectDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
         },
         {
           "$ref": "#/definitions/InteractiveDef"

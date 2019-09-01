@@ -3,11 +3,11 @@
   "CustomName": null,
   "AttachmentPoint": {
     "$type": "Vec2",
-    "X": -7.49,
-    "Y": -0.77
+    "X": -4.97,
+    "Y": -0.12
   },
-  "AttachmentRotation": -270.0,
-  "AttachmentSize": 8.286091,
+  "AttachmentRotation": 89.2665939,
+  "AttachmentSize": 8.280002,
   "Type": {
     "$type": "MapSiteTypeDef",
     "CustomName": null,
@@ -15,20 +15,23 @@
       "/SimpleBuilding6"
     ]
   },
-  "SizeX": 4.0,
-  "SizeY": 4.0,
+  "SizeX": 7.75,
+  "SizeY": 7.62,
   "SubSites": [],
   "Connections": [
     {
       "$type": "SiteConnection",
       "Pos": {
         "$type": "Vec2",
-        "X": 2.88,
-        "Y": 1.6
+        "X": 4.39,
+        "Y": -0.13
       },
-      "Rot": -90.0,
-      "Size": 136.330032,
-      "Tags": []
+      "Rot": 270.0,
+      "Size": 16.3600044,
+      "Tags": [
+        "/Tags/Room",
+        "/Tags/Road"
+      ]
     }
   ],
   "Tags": [

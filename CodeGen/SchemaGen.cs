@@ -243,14 +243,15 @@ namespace CodeGen
                 typeObj.Add("enum", new JArray(new[] { classType.Name, classType.Name.Substring(0, classType.Name.Length - 3) }));
             else
                 typeObj.Add("enum", new JArray(new[] { classType.Name }));
-            var props = classType.GetMembers().Where(x => x.Kind == SymbolKind.Property &&
+            var members = classType.GetMembers().Concat(classType.BaseType?.GetMembers() ?? ImmutableArray<ISymbol>.Empty).Distinct();
+            var props = members.Where(x => x.Kind == SymbolKind.Property &&
             !x.GetAttributes().Any(a => a.AttributeClass.Name == nameof(NotInSchemaAttribute)) &&
             ((IPropertySymbol)x).GetMethod != null);
             foreach (var prop in props)
             {
                 properties.Add(prop.Name, GenerateSchemaForProp((INamedTypeSymbol)((IPropertySymbol)prop).Type));
             }
-            var fields = classType.GetMembers().Where(x => x.Kind == SymbolKind.Field && !x.Name.StartsWith("<") &&
+            var fields = members.Where(x => x.Kind == SymbolKind.Field && !x.Name.StartsWith("<") &&
             !x.GetAttributes().Any(a => a.AttributeClass.Name == nameof(NotInSchemaAttribute)));
             foreach (var prop in fields)
             {

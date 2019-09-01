@@ -19,6 +19,7 @@
     },
     "Spell": {
         "$type": "Spell",
+        "CustomName":"Attack",
         "CastMode":{
             "$type":"TargetPointCastDef",
             "TargetPointSprite":{

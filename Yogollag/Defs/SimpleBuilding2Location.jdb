@@ -1,0 +1,68 @@
+{
+  "$type": "MapSiteDef",
+  "CustomName": null,
+  "AttachmentPoint": {
+    "$type": "Vec2",
+    "X": -14.17,
+    "Y": 0.01
+  },
+  "AttachmentRotation": 90.0,
+  "AttachmentSize": 9.610002,
+  "Type": {
+    "$type": "MapSiteTypeDef",
+    "CustomName": null,
+    "EntitiesToSpawnOn": [
+      "/SimpleBuilding2"
+    ]
+  },
+  "SizeX": 20.0,
+  "SizeY": 20.0,
+  "SubSites": [
+    {
+      "$type": "SubSite",
+      "Pos": {
+        "$type": "Vec2",
+        "X": -6.15,
+        "Y": -6.69
+      },
+      "Rot": 0.0,
+      "SizeX": 4.74,
+      "SizeY": 4.14,
+      "Tags": [
+        "/Tags/Loot"
+      ]
+    },
+    {
+      "$type": "SubSite",
+      "Pos": {
+        "$type": "Vec2",
+        "X": 6.77,
+        "Y": 6.47
+      },
+      "Rot": 0.0,
+      "SizeX": 4.74,
+      "SizeY": 4.14,
+      "Tags": [
+        "/Tags/Loot"
+      ]
+    }
+  ],
+  "Connections": [
+    {
+      "$type": "SiteConnection",
+      "Pos": {
+        "$type": "Vec2",
+        "X": 14.26,
+        "Y": -0.05
+      },
+      "Rot": 270.0,
+      "Size": 10.2900019,
+      "Tags": [
+        "/Tags/Road"
+      ]
+    }
+  ],
+  "Tags": [
+    "/Tags/Room"
+  ]
+}

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using LiteNetLib.Utils;
+using Volatile;
 
 namespace Yogollag
 {
@@ -20,18 +21,24 @@ namespace Yogollag
             Movement = movement;
             if (_lastTimeUpdated == 0)
                 _lastTimeUpdated = SyncedTime.Now;
-            if(movement == default)
+            if (movement == default)
                 _lastTimeUpdated = 0;
         }
 
+        VoltBody _body;
+        public void Init(VoltBody body)
+        {
+            _body = body;
+        }
         public void Tick()
         {
             if (_lastTimeUpdated == 0)
                 return;
-            var seconds = SyncedTime.ToSeconds(SyncedTime.Now - _lastTimeUpdated);
-            _lastTimeUpdated = SyncedTime.Now;
-            var delta = Movement * seconds;
-            Position += delta;
+            lock (_body.World)
+            {
+                _body.LinearVelocity = Movement;
+                Position = _body.Position;
+            }
         }
     }
 }

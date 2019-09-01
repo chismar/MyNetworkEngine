@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1795800783058181421}
   - component: {fileID: -4759550573145409435}
   - component: {fileID: 3834890969089691555}
+  - component: {fileID: 22464053356342618}
   m_Layer: 0
   m_Name: WorldItemDef
   m_TagString: Untagged
@@ -59,6 +60,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VariablePath: Item
   Locator: {fileID: 7364598985908823352}
+--- !u!114 &22464053356342618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2697471041421517318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d09f225dc585bf4a86f9c038e9e9791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 1, y: 1, z: 1}
+  Tags:
+  - Loot
+  EntitiesToSpawnOn:
+  - {fileID: 2697471041421517318}
 --- !u!1 &6458562598849206436
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,7 @@ namespace Yogollag
             if (EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left) && !selfState.MouseWasPressed)
             {
                 ent.SpellsEngine.CastFromClientWithPrediction(new SpellCast() { Def = spell, TargetPoint = targetWorldPos });
+                selfState.MouseWasPressed = true;
 
             }
             if (!EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))

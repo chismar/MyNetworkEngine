@@ -5,13 +5,16 @@
             "CreatorDef": {
                 "$type": "LocationCreator",
                 "SitesCount":50,
+                "TicksCount":1000,
                 "Palette": [
-                   "/TestLocation1",
-                   "/TestLocation2",
-                   "/TestLocation3",
-                   "/TestLocation4",
-                   "/TestLocation5",
-                   "/TestLocation"
+                   "/SimpleBuilding1Location",
+                   "/SimpleBuilding2Location",
+                   "/SimpleBuilding3Location",
+                   "/SimpleBuilding4Location",
+                   "/SimpleBuilding5Location",
+                   "/SimpleBuilding6Location",
+                   "/WorldItemDefLocation",
+                   "/SimpleSpawnerTestLocation",
                 ]
             },
             "RootSite": {

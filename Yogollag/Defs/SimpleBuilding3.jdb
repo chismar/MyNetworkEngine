@@ -1,21 +1,4 @@
 {
     "$type": "BuildingEntity",
-    "PhysicalBodyDef": {
-        "$type": "PhysicalBody",
-        "IsStatic": true,
-        "Shapes": [
-            {
-                "$type": "BoxPhysicalShape",
-                "SpriteDef": {
-                    "$type": "Sprite",
-                    "SpriteSheetName": "Tiles",
-                    "X":4,
-                    "Y":0
-                },
-                "HasBody":false,
-                "SizeX":30,
-                "SizeY":30,
-            }
-        ]
-    }
+    "PhysicalBodyDef": "./SimpleBuilding3PhysicalBody"
 }

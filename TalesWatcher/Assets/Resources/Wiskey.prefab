@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 1444191517000999291}
   - component: {fileID: 8638069098114304212}
   m_Layer: 0
-  m_Name: Whiskey
+  m_Name: Wiskey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

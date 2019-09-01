@@ -54,6 +54,21 @@ namespace Yogollag
             StatsEngine.Init(MobDef.Stats);
         }
 
+        public override void OnInit()
+        {
+            var voltWorld = ((VoltWorld)CurrentServer.CustomData);
+            lock (voltWorld)
+            {
+                var pos = Position;
+                var circleShape = voltWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10);
+                var body = IsMaster ? voltWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape) : voltWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                body.UserData = Id;
+                PhysicsBody = body;
+            }
+            if (IsMaster)
+                Locomotion.Init(PhysicsBody);
+        }
+
         public void Render(RenderTarget rt)
         {
             _spriteRenderer.RendererPosition = Position;

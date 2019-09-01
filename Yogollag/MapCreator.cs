@@ -10,7 +10,7 @@ namespace Yogollag
     //connect new mapsite
     //substitute one mapsite for another
     //subbstitute mapsite for prefab
-    class LocationCreator
+    public class LocationCreator
     {
         public MapSiteInstance _rootInstance;
         LocationCreatorDef _def;
@@ -30,7 +30,7 @@ namespace Yogollag
         }
         public bool Tick()
         {
-            ProcessSite(_rootInstance, new HierarchyTransform(Vec2.New(0,0), 0, null));
+            ProcessSite(_rootInstance, new HierarchyTransform(Vec2.New(0, 0), 0, null));
             if (_sitesCount >= _def.SitesCount)
                 return false;
             _ticksCount++;
@@ -60,7 +60,7 @@ namespace Yogollag
                     {
                         //has free subSites
                         if (TryAttach())
-                            foreach (var siteDef in _def.Palette)
+                            foreach (var siteDef in _def.Palette.Shuffle())
                                 if (site.Def.SubSites[i].CanPlace(site.World, siteDef.Def, t))
                                     if (DoAttach())
                                     {
@@ -71,7 +71,7 @@ namespace Yogollag
                                         instance.GlobalPos = subT.GlobalPos;
                                         instance.GlobalRot = subT.GlobalRot;
                                         Sites.Add(instance);
-                                        var box = new OverlapBox(instance.GlobalPos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.Rot, instance.AttachedToBottom);
+                                        var box = new OverlapBox(instance.GlobalPos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), instance.GlobalRot, instance.AttachedToBottom);
                                         site.World.Add(box);
                                         _sitesCount++;
 
@@ -104,20 +104,20 @@ namespace Yogollag
                         if (subSite.Connections.ContainsKey(i))
                             continue;
                         if (TryAttach())
-                            foreach (var siteDef in _def.Palette)
+                            foreach (var siteDef in _def.Palette.Shuffle())
                                 if (subSite.Def.Connections[i].CanAttach(site.World, siteDef.Def, t))
                                     if (DoAttach())
                                     {
                                         var con = subSite.Def.Connections[i];
                                         //var vec = t.GetWorldPosInSpaceOf(con.Pos);
                                         var instance = subSite.Connections[i] = new MapSiteInstance(siteDef, con.Pos, con.Rot, true);
-                                        
+
                                         Sites.Add(instance);
                                         var localT = new HierarchyTransform(instance.Pos, instance.Rot, t);
                                         var attachmentrT = new HierarchyTransform(default, instance.Def.AttachmentRotation, localT);
                                         var attachmenttT = new HierarchyTransform(-instance.Def.AttachmentPoint, 0, attachmentrT);
                                         instance.GlobalPos = attachmenttT.GlobalPos;
-                                        instance.GlobalRot = attachmenttT.GlobalRot;
+                                        instance.GlobalRot = attachmenttT.GlobalRot;//con.Rot - instance.Def.AttachmentRotation;
                                         var box = new OverlapBox(attachmenttT.GlobalPos, Vec2.New(instance.Def.SizeX, instance.Def.SizeY), attachmenttT.GlobalRot, instance.AttachedToBottom);
                                         site.World.Add(box);
                                         _sitesCount++;
@@ -140,7 +140,7 @@ namespace Yogollag
         }
     }
 
-    class MapSiteInstance
+    public class MapSiteInstance
     {
         public OverlapWorld World;
         public MapSiteInstance(MapSiteDef def, Vec2 pos, float rot, bool attachedToBottom)
@@ -163,7 +163,7 @@ namespace Yogollag
         public Dictionary<int, MapSiteInstance> SubSites { get; set; } = new Dictionary<int, MapSiteInstance>();
     }
 
-    class PrefabDef : BaseDef
+    public class PrefabDef : BaseDef
     { }
 
 
@@ -180,8 +180,27 @@ namespace Yogollag
         public Vec2 Pos { get; set; }
         public float Rot { get; set; }
     }
-
-    class LocationCreatorDef : BaseDef
+    public static class ListShuffle
+    {
+        [ThreadStatic]
+        private static Random rng = new Random(0);
+        public static List<T> Shuffle<T>(this List<T> list)
+        {
+            var shuffledList = new List<T>();
+            shuffledList.AddRange(list);
+            int n = shuffledList.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = shuffledList[k];
+                shuffledList[k] = shuffledList[n];
+                shuffledList[n] = value;
+            }
+            return shuffledList;
+        }
+    }
+    public class LocationCreatorDef : BaseDef
     {
         public int SitesCount { get; set; } = 100;
         public int TicksCount { get; set; } = 100;
@@ -197,7 +216,7 @@ namespace Yogollag
         public Vec2 AttachmentPoint { get; set; }
         public float AttachmentRotation { get; set; }
         public float AttachmentSize { get; set; }
-        public DefRef<MapSiteTypeDef> Type { get; set; } 
+        public DefRef<MapSiteTypeDef> Type { get; set; }
         public float SizeX { get; set; }
         public float SizeY { get; set; }
         public List<SubSite> SubSites { get; set; } = new List<SubSite>();
@@ -223,7 +242,11 @@ namespace Yogollag
             var attachmenttT = new HierarchyTransform(-site.AttachmentPoint, 0, attachmentrT);
             var box = new OverlapBox(attachmenttT.GlobalPos, Vec2.New(site.SizeX, site.SizeY), attachmenttT.GlobalRot, true);
             if (!world.CanAdd(box))
+            {
+                world.AddFailedBox(box);
                 return false;
+
+            }
             if (Tags.Count != 0)
                 if (!site.Tags.Any(tag => Tags.Any(tt => tt.Def == tag)))
                     return false;

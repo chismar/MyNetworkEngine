@@ -97,7 +97,8 @@ namespace Yogollag
                    Y == vec.Y;
         }
 
-        static System.Random _random = new Random();
+        [ThreadStatic]
+        static System.Random _random = new Random(0);
         internal static Vec2 Random(float maxX, float maxY)
         {
             return new Vec2() { X = (float)_random.NextDouble() * maxX, Y = (float)_random.NextDouble() * maxY };
@@ -159,7 +160,8 @@ namespace Yogollag
                    Y == vec.Y;
         }
 
-        static System.Random _random = new Random();
+        [ThreadStatic]
+        static System.Random _random = new Random(0);
         internal static Vec2Int Random(int maxX, int maxY)
         {
             return new Vec2Int() { X = (int)_random.NextDouble() * maxX, Y = (int)_random.NextDouble() * maxY };

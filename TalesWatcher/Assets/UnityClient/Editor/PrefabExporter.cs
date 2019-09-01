@@ -16,6 +16,7 @@ public class PrefabExporter
     private static void ExportPrefab(GameObject obj)
     {
         Debug.Log($"Exporting {obj.name}");
-        obj.GetComponent<IExportable>()?.Export();
+        foreach(var exp in obj.GetComponents<IExportable>())
+            exp.Export();
     }
 }
