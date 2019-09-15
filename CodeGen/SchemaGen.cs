@@ -93,6 +93,8 @@ namespace CodeGen
             _typesThatHaveSubclasses = new HashSet<INamedTypeSymbol>();
             foreach (var type in globalModel)
             {
+                if (type == null)
+                    continue;
                 if (InheritsFrom("Definitions.IDef", type) && !type.IsGenericType)
                 {
                     _defs.Add(type);
@@ -155,14 +157,17 @@ namespace CodeGen
                 _serializableTypes.Clear();
                 foreach (var serClass in types)
                 {
+
                     try
                     {
-                        definitions.Add(serClass.Name, GenerateDefForClass(serClass));
-                        definitions.Add(serClass.Name + "Field", GenerateDefForClassField(serClass));
+                        if (!((IDictionary<string, JToken>)definitions).ContainsKey(serClass.Name))
+                            definitions.Add(serClass.Name, GenerateDefForClass(serClass));
+                        if (!((IDictionary<string, JToken>)definitions).ContainsKey(serClass.Name + "Field"))
+                            definitions.Add(serClass.Name + "Field", GenerateDefForClassField(serClass));
                     }
                     catch (Exception e)
                     {
-
+                        Console.Out.Write($"ERROR: {serClass.Name} {e.ToString()} {e.StackTrace}".Replace(Environment.NewLine, "_"));
                     }
                 }
             }
@@ -401,12 +406,12 @@ namespace CodeGen
             }
             else if (type.EnumUnderlyingType != null)
             {
-
                 var refType = new JObject();
                 refType.Add("type", JToken.FromObject("string"));
                 var enumArray = new JArray();
-                foreach (var eName in ((EnumDeclarationSyntax)type.DeclaringSyntaxReferences.Single().GetSyntax()).Members)
-                    enumArray.Add(JToken.FromObject(eName.Identifier));
+                //foreach (var eName in ((EnumDeclarationSyntax)type.DeclaringSyntaxReferences.Single().GetSyntax()).Members)
+                foreach(var member in type.GetMembers().Where(x=>x.Kind == SymbolKind.Field))
+                    enumArray.Add(JToken.FromObject(member.Name));
                 refType.Add("enum", enumArray);
                 return refType;
 

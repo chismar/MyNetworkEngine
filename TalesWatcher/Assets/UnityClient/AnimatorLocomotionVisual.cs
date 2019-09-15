@@ -12,60 +12,61 @@ namespace Assets.UnityClient
 {
     class AnimatorLocomotionVisual : VisualSetup
     {
-        protected override VisualComponent Init(IEntityObject ent)
+        protected override VisualComponent Init(object ent)
         {
-            return new AnimatedLocomotion(ent);
+            return new AnimatedLocomotion(Visual);
         }
     }
 
     class AnimatedLocomotion : VisualComponent
     {
-        private IEntityObject
-            _ent;
+        private readonly Visual _visual;
         private Vec2 _lastPos;
         private float _lastRot;
-        public AnimatedLocomotion(IEntityObject ent)
+        public AnimatedLocomotion(Visual visual)
         {
-            this._ent = ent;
+            this._visual = visual;
         }
 
-        public override void Update(IVisualAPI api)
+        protected override object ProcessValue(object curValue)
         {
             Vec2 pos;
             float rot;
-            if (_ent is ICharacterLikeMovement clm)
+            if (curValue is ICharacterLikeMovement clm)
             {
                 pos = clm.SmoothPosition;
                 rot = clm.SmoothRotation;
                 if (EnvironmentAPI.Input.MouseDirFromCameraCenter.Length > 0.01)
-                    api.SetVisualRotation(Vec2.AngleBetween(EnvironmentAPI.Input.MouseDirFromCameraCenter, Vec2.New(0, 1)));
+                    _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(EnvironmentAPI.Input.MouseDirFromCameraCenter, Vec2.New(0, 1)), 0);
+
             }
-            else if (_ent is IPositionedEntity pe)
+            else if (curValue is IPositionedEntity pe)
             {
                 pos = pe.Position;
                 rot = pe.Rotation;
             }
             else
-                return;
+                return curValue;
             if (_lastPos == default)
             {
                 _lastPos = pos;
                 _lastRot = rot;
                 //api.SetAnimatorFloat("VelocityX", 0);
                 //api.SetAnimatorFloat("VelocityY", 0);
-                api.SetVisualRotation(0);
-                api.SetAnimatorBool("IsRun", false);
+                _visual.VisualPrefab.transform.rotation = Quaternion.identity;
+                _visual._animator.SetBool("IsRun", false);
             }
             else
             {
                 var velocity = (pos - _lastPos) / Time.deltaTime;
-                if (!(_ent is ICharacterLikeMovement) && ((pos - _lastPos).Length > 0.001))
-                    api.SetVisualRotation(Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)));
+                if (!(curValue is ICharacterLikeMovement) && ((pos - _lastPos).Length > 0.001))
+                    _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)), 0);
                 _lastPos = pos;
                 //api.SetAnimatorFloat("VelocityX", velocity.X);
                 //api.SetAnimatorFloat("VelocityY", velocity.Y);
-                api.SetAnimatorBool("IsRun", velocity.Length > 0);
+                _visual._animator.SetBool("IsRun", velocity.Length > 0);
             }
+            return curValue;
         }
     }
 }

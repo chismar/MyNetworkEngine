@@ -12,7 +12,7 @@ class MapSiteObject : MonoBehaviour, IExportable
     public Vector3 Size = Vector3.one;
     public string[] Tags = Array.Empty<string>();
     public GameObject[] EntitiesToSpawnOn = Array.Empty<GameObject>();
-    public void Export()
+    public BaseDef Export()
     {
         var siteDef = new MapSiteDef();
         var subSites = GetComponentsInChildren<SubSiteObject>();
@@ -58,8 +58,7 @@ class MapSiteObject : MonoBehaviour, IExportable
             siteDef.AttachmentRotation = attachment.transform.rotation.eulerAngles.y;
             siteDef.AttachmentSize = Mathf.Abs(attachment.transform.lossyScale.x);
         }
-        Defs.SimpleSave(Application.dataPath + "/../../Yogollag/Defs", gameObject.name + "Location", siteDef, out var path);
-        Debug.Log($"Saved at {path}");
+        return siteDef;
     }
 
     public class RefStubEntityObjectDef : BaseDef, IEntityObjectDef

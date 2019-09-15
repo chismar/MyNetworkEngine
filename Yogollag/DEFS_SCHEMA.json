@@ -127,6 +127,10 @@
         "SimpleSpawner",
         "SpellCastModeDef",
         "SpellCastMode",
+        "InputTriggersMapDef",
+        "InputTriggersMap",
+        "InputTriggerDef",
+        "InputTrigger",
         "TargetPointCastDef",
         "TargetPointCast",
         "SpellDef",
@@ -303,6 +307,10 @@
             "SimpleSpawner",
             "SpellCastModeDef",
             "SpellCastMode",
+            "InputTriggersMapDef",
+            "InputTriggersMap",
+            "InputTriggerDef",
+            "InputTrigger",
             "TargetPointCastDef",
             "TargetPointCast",
             "SpellDef",
@@ -506,6 +514,12 @@
         },
         {
           "$ref": "#/definitions/SpellCastModeDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggersMapDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggerDef"
         },
         {
           "$ref": "#/definitions/TargetPointCastDef"
@@ -719,6 +733,10 @@
             "SimpleSpawner",
             "SpellCastModeDef",
             "SpellCastMode",
+            "InputTriggersMapDef",
+            "InputTriggersMap",
+            "InputTriggerDef",
+            "InputTrigger",
             "TargetPointCastDef",
             "TargetPointCast",
             "SpellDef",
@@ -940,6 +958,12 @@
         },
         {
           "$ref": "#/definitions/SpellCastModeDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggersMapDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggerDef"
         },
         {
           "$ref": "#/definitions/TargetPointCastDef"
@@ -5823,6 +5847,168 @@
         }
       ]
     },
+    "InputTriggersMapDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/InputTriggersMapDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InputTriggersMapDef",
+            "InputTriggersMap"
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "InputTriggersMapDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InputTriggersMapDef",
+            "InputTriggersMap"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/InputTriggersMapDef"
+        }
+      ]
+    },
+    "InputTriggerDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/InputTriggerDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InputTriggerDef",
+            "InputTrigger"
+          ]
+        },
+        "Combos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputComboField"
+          }
+        },
+        "IsContinious": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "ActivationOnStart": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "InputTriggerDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InputTriggerDef",
+            "InputTrigger"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/InputTriggerDef"
+        }
+      ]
+    },
     "TargetPointCastDef": {
       "type": "object",
       "additionalProperties": false,
@@ -5855,6 +6041,9 @@
             "TargetPointCastDef",
             "TargetPointCast"
           ]
+        },
+        "Input": {
+          "$ref": "#/definitions/InputTriggerDefField"
         },
         "TargetPointSprite": {
           "$ref": "#/definitions/SpriteDefField"
@@ -5931,6 +6120,26 @@
             },
             {
               "type": "number"
+            }
+          ]
+        },
+        "Cooldown": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "OnlyOneAtATime": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
             }
           ]
         },
@@ -6449,6 +6658,9 @@
         "ChangeEntityStatDef",
         "SimpleSpawnerDef",
         "SpellCastModeDef",
+        "InputTriggersMapDef",
+        "InputTriggerDef",
+        "InputCombo",
         "TargetPointCastDef",
         "SpellDef",
         "SpriteDef",
@@ -6833,6 +7045,263 @@
         }
       ]
     },
+    "InputCombo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InputCombo"
+          ]
+        },
+        "Mouse": {
+          "type": "string",
+          "enum": [
+            "Left",
+            "Right",
+            "Middle",
+            "XButton1",
+            "XButton2",
+            "ButtonCount"
+          ]
+        },
+        "Keyboard": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+            "Num0",
+            "Num1",
+            "Num2",
+            "Num3",
+            "Num4",
+            "Num5",
+            "Num6",
+            "Num7",
+            "Num8",
+            "Num9",
+            "Escape",
+            "LControl",
+            "LShift",
+            "LAlt",
+            "LSystem",
+            "RControl",
+            "RShift",
+            "RAlt",
+            "RSystem",
+            "Menu",
+            "LBracket",
+            "RBracket",
+            "SemiColon",
+            "Comma",
+            "Period",
+            "Quote",
+            "Slash",
+            "BackSlash",
+            "Tilde",
+            "Equal",
+            "Dash",
+            "Space",
+            "Return",
+            "BackSpace",
+            "Tab",
+            "PageUp",
+            "PageDown",
+            "End",
+            "Home",
+            "Insert",
+            "Delete",
+            "Add",
+            "Subtract",
+            "Multiply",
+            "Divide",
+            "Left",
+            "Right",
+            "Up",
+            "Down",
+            "Numpad0",
+            "Numpad1",
+            "Numpad2",
+            "Numpad3",
+            "Numpad4",
+            "Numpad5",
+            "Numpad6",
+            "Numpad7",
+            "Numpad8",
+            "Numpad9",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "Pause",
+            "KeyCount"
+          ]
+        },
+        "Keyboard2": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+            "Num0",
+            "Num1",
+            "Num2",
+            "Num3",
+            "Num4",
+            "Num5",
+            "Num6",
+            "Num7",
+            "Num8",
+            "Num9",
+            "Escape",
+            "LControl",
+            "LShift",
+            "LAlt",
+            "LSystem",
+            "RControl",
+            "RShift",
+            "RAlt",
+            "RSystem",
+            "Menu",
+            "LBracket",
+            "RBracket",
+            "SemiColon",
+            "Comma",
+            "Period",
+            "Quote",
+            "Slash",
+            "BackSlash",
+            "Tilde",
+            "Equal",
+            "Dash",
+            "Space",
+            "Return",
+            "BackSpace",
+            "Tab",
+            "PageUp",
+            "PageDown",
+            "End",
+            "Home",
+            "Insert",
+            "Delete",
+            "Add",
+            "Subtract",
+            "Multiply",
+            "Divide",
+            "Left",
+            "Right",
+            "Up",
+            "Down",
+            "Numpad0",
+            "Numpad1",
+            "Numpad2",
+            "Numpad3",
+            "Numpad4",
+            "Numpad5",
+            "Numpad6",
+            "Numpad7",
+            "Numpad8",
+            "Numpad9",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "Pause",
+            "KeyCount"
+          ]
+        }
+      }
+    },
+    "InputComboField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InputCombo"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/InputCombo"
+        }
+      ]
+    },
     "DefIDFull": {
       "type": "object",
       "additionalProperties": false,
@@ -7166,6 +7635,12 @@
           "$ref": "#/definitions/SpellCastModeDef"
         },
         {
+          "$ref": "#/definitions/InputTriggersMapDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggerDef"
+        },
+        {
           "$ref": "#/definitions/TargetPointCastDef"
         },
         {
@@ -7209,6 +7684,9 @@
         },
         {
           "$ref": "#/definitions/Vec2"
+        },
+        {
+          "$ref": "#/definitions/InputCombo"
         },
         {
           "$ref": "#/definitions/DefIDFull"

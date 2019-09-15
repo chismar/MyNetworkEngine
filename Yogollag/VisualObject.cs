@@ -1,145 +1,153 @@
 ﻿using Definitions;
 using NetworkEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Yogollag
 {
-    public class VisualObject
+    public class VisualObject : VisualComponent
     {
-        public IEntityObject Obj;
-        private readonly IVisualAPI _api;
-        public VisualObject(IEntityObject obj, IVisualAPI api)
+        public object Obj;
+        Action _destroy;
+        public VisualObject(object obj, Action destroy)
         {
             Obj = obj;
-            this._api = api;
+            _destroy = destroy;
         }
-        List<VisualComponent> _components = new List<VisualComponent>();
-        public VisualComponent AddVisualComponent(VisualComponent cmp)
-        {
-            _components.Add(cmp);
-            return cmp;
-        }
-        public void Update()
-        {
-            foreach (var cmp in _components)
-                cmp.Update(_api);
-        }
-
         public void Destroy()
         {
-            _api.Destroy();
+            _destroy?.Invoke();
+        }
+
+        protected override object ProcessValue(object curValue)
+        {
+            return curValue;
         }
     }
 
     public abstract class VisualComponent
     {
-        public IEntityObject Entity;
-        public abstract void Update(IVisualAPI api);
+        public object Parent;
+        public object Value;
+        private string[] _fieldPath;
+        private List<VisualComponent> _children;
+        public void Init(object parent, string fieldPath)
+        {
+            Parent = parent;
+            if (string.IsNullOrWhiteSpace(fieldPath))
+                _fieldPath = Array.Empty<string>();
+            else
+                _fieldPath = fieldPath.Trim().Split('.');
+        }
+
+        public void AddChild(VisualComponent child)
+        {
+            if (_children == null)
+                _children = new List<VisualComponent>();
+            _children.Add(child);
+        }
+        public void RemoveChild(VisualComponent child)
+        {
+            _children.Remove(child);
+        }
+        public void Update()
+        {
+            var curValue = GetValueFromTarget();
+            Value = ProcessValue(curValue);
+            if (_children != null)
+                foreach (var child in _children)
+                    child.Update();
+        }
+
+        protected abstract object ProcessValue(object curValue);
+
+        object GetValueFromTarget()
+        {
+            object obj = Parent;
+            if (_fieldPath != null)
+                foreach (var field in _fieldPath)
+                {
+                    var prop = obj.GetType().GetProperty(field, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Static);
+                    if (prop == null)
+                        return null;
+                    obj = prop.GetValue(obj);
+                    if (obj == null)
+                        return null;
+                }
+            return obj;
+        }
     }
 
-    public class TransformSync : VisualComponent
+    public class VisualCollection : VisualComponent
     {
-        public override void Update(IVisualAPI api)
+        private readonly Func<object, VisualComponent> _create;
+        private readonly Action<VisualComponent> _destroy;
+        HashSet<object> _objectsCache = new HashSet<object>();
+        HashSet<object> _removeObjects = new HashSet<object>();
+        Dictionary<object, VisualComponent> _perValueComponent = new Dictionary<object, VisualComponent>();
+        public VisualCollection(Func<object, VisualComponent> create, Action<VisualComponent> destroy)
         {
-            var posEntity = (IPositionedEntity)Entity;
-            api.SetLogicalTransform(posEntity.Position, posEntity.Rotation);
+            this._create = create;
+            this._destroy = destroy;
+        }
+        protected override object ProcessValue(object curValue)
+        {
+            var collection = (ICollection)curValue;
+            if (collection == null)
+                return curValue;
+            _objectsCache.Clear();
+            foreach (var element in collection)
+            {
+                _objectsCache.Add(element);
+                if (!_perValueComponent.TryGetValue(element, out var vc))
+                {
+                    vc = _create(element);
+                    vc.Parent = element;
+                    _perValueComponent[element] = vc;
+                    AddChild(vc);
+                }
+            }
+            _removeObjects.Clear();
+            foreach (var e in _perValueComponent)
+                if (!_objectsCache.Contains(e.Key))
+                    _removeObjects.Add(e.Key);
+            foreach (var r in _removeObjects)
+            {
+                var vcr = _perValueComponent[r];
+                _perValueComponent.Remove(r);
+                _destroy(vcr);
+                RemoveChild(vcr);
+            }
+            return collection;
         }
     }
     public class SpellStartedBinding : VisualComponent
     {
         private readonly string _spellFilter;
-        private readonly IFieldTarget<bool> _target;
 
-        public SpellStartedBinding(string spellFilter, IFieldTarget<bool> target)
+        public SpellStartedBinding(string spellFilter)
         {
             this._spellFilter = spellFilter;
-            this._target = target;
         }
 
-        public override void Update(IVisualAPI api)
+        protected override object ProcessValue(object curValue)
         {
-            var hasSpell = ((IHasSpells)Entity).SpellsEngine.AllSpells.Any(x => x.Cast.Def.CustomName.Contains(_spellFilter));
-            _target.SetValue(hasSpell, api);
+            return ((IHasSpells)curValue).SpellsEngine.AllSpells.Any(x => x.Cast.Def.CustomName.Contains(_spellFilter));
         }
     }
 
-    public class LocatorVisual : VisualComponent, IFieldTarget<IEntityObject>
+    public class LocatorVisual : VisualComponent
     {
-        public void SetValue(IEntityObject value, IVisualAPI api)
+        protected override object ProcessValue(object curValue)
         {
-            api.AttachVisualObject(this, value);
-        }
-
-        public override void Update(IVisualAPI api)
-        {
-
+            return curValue;
         }
     }
 
 
-    public class EObjBinding : FieldBinding<IEntityObject>
-    {
-        public EObjBinding(string fieldPath, IFieldTarget<IEntityObject> target) : base(fieldPath, target)
-        {
 
-        }
-    }
-    public class FieldBinding<T> : VisualComponent
-    {
-        private readonly string[] _fieldPath;
-        private readonly IFieldTarget<T> _target;
 
-        public FieldBinding(string fieldPath, IFieldTarget<T> target)
-        {
-            this._fieldPath = fieldPath.Trim().Split('.');
-            this._target = target;
-        }
-
-        public override void Update(IVisualAPI api)
-        {
-            object obj = Entity;
-            foreach(var field in _fieldPath)
-            {
-                var prop = obj.GetType().GetProperty(field);
-                if (prop == null)
-                    return;
-                obj = prop.GetValue(obj);
-                if (obj == null)
-                    return;
-            }
-            _target.SetValue((T)obj, api);
-        }
-    }
-
-    public class AnimatorBoolTarget : IFieldTarget<bool>
-    {
-        private readonly string _name;
-
-        public AnimatorBoolTarget(string name)
-        {
-            this._name = name;
-        }
-        public void SetValue(bool value, IVisualAPI api)
-        {
-            api.SetAnimatorBool(_name, value);
-        }
-    }
-
-    public interface IFieldTarget<T>
-    {
-        void SetValue(T value, IVisualAPI api);
-    }
-
-    public interface IVisualAPI
-    {
-        void AttachVisualObject(LocatorVisual locator, IEntityObject obj);
-        void SetLogicalTransform(Vec2 pos, float rotation);
-        void SetAnimatorBool(string name, bool value);
-        void SetAnimatorFloat(string name, float value);
-        void SetVisualRotation(float rotation);
-        void Destroy();
-    }
 }

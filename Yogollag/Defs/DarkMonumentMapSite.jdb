@@ -1,0 +1,25 @@
+{
+  "$type": "MapSiteDef",
+  "CustomName": null,
+  "AttachmentPoint": {
+    "$type": "Vec2",
+    "X": 0.0,
+    "Y": 0.0
+  },
+  "AttachmentRotation": 0.0,
+  "AttachmentSize": 0.0,
+  "Type": {
+    "$type": "MapSiteTypeDef",
+    "CustomName": null,
+    "EntitiesToSpawnOn": [
+      "/DarkMonument"
+    ]
+  },
+  "SizeX": 1.0,
+  "SizeY": 1.0,
+  "SubSites": [],
+  "Connections": [],
+  "Tags": [
+    "/Tags/Loot"
+  ]
+}

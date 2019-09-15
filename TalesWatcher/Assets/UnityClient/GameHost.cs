@@ -12,7 +12,7 @@ using System.Collections.Concurrent;
 public class GameHost : MonoBehaviour
 {
     SimpleServer server;
-    SimpleClient client;
+    public SimpleClient client;
     // Start is called before the first frame update
     CancellationTokenSource _source;
     public Material SimpleDrawMaterial;

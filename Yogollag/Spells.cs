@@ -52,12 +52,14 @@ namespace Yogollag
     {
         SpellsEngine SpellsEngine { get; set; }
     }
-
+   
     [GenerateSync]
     public abstract class SpellsEngine : SyncObject
     {
         [Sync(SyncType.Client)]
         public virtual DeltaList<SpellInstance> SyncedSpells { get; set; } = SyncObject.New<DeltaList<SpellInstance>>();
+        [Sync(SyncType.Client)]
+        public virtual DeltaList<PastSpellCooldown> Cooldowns { get; set; } = SyncObject.New<DeltaList<PastSpellCooldown>>();
         [Sync(SyncType.Client)]
         public virtual SyncEvent<SpellFailedToCast> SpellFailedEvent { get; set; } = SyncObject.New<SyncEvent<SpellFailedToCast>>();
         public virtual IEnumerable<SpellInstance> AllSpells => SyncedSpells;
@@ -71,9 +73,13 @@ namespace Yogollag
         {
         }
         int _localCounterId = 1;
+        bool OnCooldown(SpellCast cast)
+        {
+            return Cooldowns.Any(x => x.Def == cast.Def);
+        }
         public SpellId CastFromClientWithPrediction(SpellCast cast)
         {
-            if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false)
+            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = true };
             CastSpell(id, cast);
@@ -82,7 +88,7 @@ namespace Yogollag
 
         public virtual SpellId CastFromInsideEntity(SpellCast cast)
         {
-            if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false)
+            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = false };
             CastSpell(id, cast);
@@ -91,7 +97,7 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? false)
+            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? false))
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
                 return;
@@ -111,6 +117,13 @@ namespace Yogollag
                 FinishSpell(id);
             });
         }
+        [Sync(SyncType.Server)]
+        public virtual void RemoveCooldown(SpellId id)
+        {
+            for (int i = 0; i < Cooldowns.Count; i++)
+                if (Cooldowns[i].Id == id)
+                    Cooldowns.RemoveAt(i);
+        }
         [Sync(SyncType.AuthorityClient)]
         public virtual void FinishSpell(SpellId id)
         {
@@ -127,12 +140,24 @@ namespace Yogollag
                 spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             }
             SyncedSpells.Remove(spell);
+            if(spell.Cast.Def.Cooldown > 0)
+            {
+                Cooldowns.Add(new PastSpellCooldown() { Id = spell.Id, Def = spell.Cast.Def, TimeWhenStarted = spell.Time });
+                Task.Run(async () =>
+                {
+                    NetworkEntity.CurrentlyExecutingInContext.Value = default;
+                    await Task.Delay(TimeSpan.FromSeconds(spell.Cast.Def.Cooldown));
+                    RemoveCooldown(id);
+                });
+            }
         }
     }
 
     public class SpellDef : BaseDef
     {
         public float Duration { get; set; } = 0f;
+        public float Cooldown { get; set; } = 0f;
+        public bool OnlyOneAtATime { get; set; } = false;
         public DefRef<SpellCastModeDef> CastMode { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<IPredicateDef> PredicateOnEnd { get; set; }
@@ -159,6 +184,16 @@ namespace Yogollag
         public EntityId TargetEntity { get; set; }
         [Sync]
         public Vec2 TargetPoint { get; set; }
+    }
+    [GenerateSync]
+    public class PastSpellCooldown
+    {
+        [Sync]
+        public SpellId Id { get; set; }
+        [Sync]
+        public SpellDef Def { get; set; }
+        [Sync]
+        public SyncedTime TimeWhenStarted { get; set; }
     }
     [GenerateSync]
     public abstract class SpellInstance : SyncObject

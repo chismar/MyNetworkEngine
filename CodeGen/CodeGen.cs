@@ -610,14 +610,19 @@ namespace CodeGen
                 switch (type)
                 {
                     case "Single":
+                    case "float":
                         return $"{propName} = stream.GetFloat();";
                     case "Int64":
+                    case "long":
                         return $"{propName} = stream.GetLong();";
                     case "Int32":
+                    case "int":
                         return $"{propName} = stream.GetInt();";
                     case "String":
+                    case "string":
                         return $"{propName} = stream.GetString();";
                     case "Boolean":
+                    case "bool":
                         return $"{propName} = stream.GetBool();";
                     default:
                         return $"var has = stream.GetBool(); {propName} = !has? default : ({type})SyncTypesMap.GetSerializerForObjType(typeof({type})).Deserialize(stream);";
@@ -645,6 +650,11 @@ namespace CodeGen
                     case "String":
                     case "Boolean":
                     case "Int64":
+                    case "float":
+                    case "int":
+                    case "string":
+                    case "bool":
+                    case "long":
                         return $"stream.Put({propName});";
                     default:
                         return $"if({propName} != default ) {{ stream.Put(true); SyncTypesMap.GetSerializerForObjType(typeof({type})).Serialize({propName}, ref stream); }} else {{ stream.Put(false); }}";

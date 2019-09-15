@@ -10,9 +10,10 @@ using System.Text;
 
 namespace Yogollag
 {
-    class CharacterGUI
+    public class CharacterGUI
     {
-        CharacterEntity _character;
+        public CharacterEntity Character;
+        public IInteractive SelectedInteractive;
         RenderWindow _win;
         NetworkNode _node;
         object _interactionState;
@@ -21,9 +22,9 @@ namespace Yogollag
         {
             _win = win;
             _node = node;
-            if (_character != character)
+            if (Character != character)
                 Reset();
-            _character = character;
+            Character = character;
 
             GUI.RestoreView = charView;
             GUI.Win = _win;
@@ -33,10 +34,10 @@ namespace Yogollag
                 GUI.IsActive = true;
                 DrawStats(character);
                 //DrawQuests(character as IQuester);
-                var inter = DrawInteractions(character);
-                DrawItems(character, inter);
+                SelectedInteractive = DrawInteractions(character);
+                DrawItems(character, SelectedInteractive);
                 GUI.End();
-                DrawOverlayForInteractive(inter);
+                DrawOverlayForInteractive(SelectedInteractive);
 
                 DrawCurrentSpell(character);
             }
@@ -57,7 +58,7 @@ namespace Yogollag
                 _curItem = i;
             }
 
-            _interactionState = i.ItemDef.Spell.Def.CastMode.Def.Update(i.ItemDef.Spell, character, EnvironmentAPI.Input.GlobalMousePos, _interactionState);
+            _interactionState = i.ItemDef.Spell.Def.CastMode.Def.Update(i.ItemDef.Spell, character, _interactionState);
             i.ItemDef.Spell.Def.CastMode.Def.Render(_win, _interactionState);
         }
         private void Reset()
@@ -75,7 +76,7 @@ namespace Yogollag
                 if (item.ItemDef == null)
                     continue;
                 var text = item.ItemDef.Name;
-                if (item.ItemId == character.ActiveItem)
+                if (item.ItemId == character.ActiveItemId)
                     text = $"[{item.ItemDef.Name}]";
                 if (GUI.SlotButton(btnPos = new Vector2f(btnPos.X + distanceBetweenButtons, btnPos.Y),
                     new Vector2f(distanceBetweenButtons / 2, distanceBetweenButtons / 2), Sprites.GetSpriteHandle(item.ItemDef.Sprite)))

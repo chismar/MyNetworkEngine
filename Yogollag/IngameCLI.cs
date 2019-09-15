@@ -6,18 +6,24 @@ using System.Text;
 
 namespace Yogollag
 {
-    class IngameCLI
+    public class IngameCLI
     {
         class CliCommand
         {
-            Delegate _cmdDelegate;
+            MethodInfo _cmdDelegate;
             ParameterInfo[] _paramsInfo;
             public CliCommand(MethodInfo method)
             {
-                _cmdDelegate = Delegate.CreateDelegate(method.DeclaringType, method);
+                _cmdDelegate = method;// Delegate.CreateDelegate(method.Ty, method);
                 method.GetParameters();
             }
 
+            public string Run(object[] args)
+            {
+                _cmdDelegate.Invoke(null, args);
+                return $"{_cmdDelegate.Name} Completed";
+
+            }
             public string Run(string[] args)
             {
                 List<object> parsedArgs = new List<object>();
@@ -25,7 +31,8 @@ namespace Yogollag
                 {
                     parsedArgs.Add(ParseArg(_paramsInfo[i - 1], args[i]));
                 }
-                return $"{_cmdDelegate.Method.Name} Completed";
+                _cmdDelegate.Invoke(null, parsedArgs.ToArray());
+                return $"{_cmdDelegate.Name} Completed";
 
             }
 
@@ -39,7 +46,7 @@ namespace Yogollag
         Dictionary<string, CliCommand> _availableCommands = new Dictionary<string, CliCommand>();
         static IngameCLI()
         {
-            _cheatMethods = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).SelectMany(x => x.GetMethods(BindingFlags.Static | BindingFlags.Public)).Where(x => x.GetCustomAttribute<Attribute>() != null).ToList();
+            _cheatMethods = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).SelectMany(x => x.GetMethods(BindingFlags.Static | BindingFlags.Public)).Where(x => x.GetCustomAttribute<CliCommandAttribute>() != null).ToList();
         }
         public IngameCLI()
         {
@@ -73,7 +80,7 @@ namespace Yogollag
             return results.Take(5).Select(x => x.Value);
         }
 
-        public string Run(string cmd)
+        public string Run(string cmd, params object[] arguments)
         {
             cmd = cmd.ToLower();
             try
@@ -87,6 +94,8 @@ namespace Yogollag
                 }
                 if (command == null)
                     return $"Command {args[0]} not found";
+                else if(arguments != null)
+                    return command.Run(arguments);
                 else
                     return command.Run(args);
             }
@@ -221,7 +230,7 @@ namespace Yogollag
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    class CliCommandAttribute : Attribute
+    public class CliCommandAttribute : Attribute
     {
 
     }

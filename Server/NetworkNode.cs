@@ -104,7 +104,9 @@ using System.Reflection;
     её затрагивают только по каким-то фундаментальным вопросам, в остальном распределённо общаясь друг с другом, например
     для получения порядкового номера.)
 
-
+    Важный момент о котором подумал - какой-то из механизмов должен быть легковесным await который не накладывает ограничений,
+    кроме того что исполнитель будет иметь дельту на момент его вызова. Тут главное, чтобы это работало на локальном
+    сервере как-то.
 
 
      */
@@ -1340,7 +1342,7 @@ namespace NetworkEngine
         }
     }
     [GenerateSync]
-    public abstract class DeltaList<T> : SyncObject, IHasCustomSerialization, IList<T>
+    public abstract class DeltaList<T> : SyncObject, IHasCustomSerialization, IList<T>, ICollection
     {
         public int Count => _internalList.Count;
         public bool IsReadOnly => ((ICollection<T>)_internalList).IsReadOnly;
@@ -1657,6 +1659,10 @@ namespace NetworkEngine
 
         }
         bool IsSyncObjectList => typeof(T).BaseType == typeof(SyncObject);
+
+        public bool IsSynchronized { get; }
+        public object SyncRoot { get; }
+
         private void InternalSetAt(T t, int index)
         {
             _internalList[index] = t;
@@ -1747,6 +1753,11 @@ namespace NetworkEngine
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _internalList.GetEnumerator();
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            throw new NotImplementedException();
         }
     }
     [GenerateSync]

@@ -14,7 +14,7 @@ namespace Definitions
     }
 
 
-    public struct DefRef<T> : IRefBase, IDefRef<T> where T : class, IDef
+    public struct DefRef<T> : IRefBase, IDefRef<T>, IEquatable<DefRef<T>> where T : class, IDef
     {
         private T _object;
         private Func<IDef> _loadDelegate;
@@ -81,6 +81,11 @@ namespace Definitions
         public override string ToString()
         {
             return $"Ref -> {Def}";
+        }
+
+        public bool Equals(DefRef<T> other)
+        {
+            return this == other;
         }
 
         public static bool operator == (DefRef<T> a, DefRef<T> b)

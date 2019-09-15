@@ -44,7 +44,7 @@ namespace Yogollag
 
         public static bool SlotButton(Vector2f position, Vector2f size, SpriteHandle sprite)
         {
-            _index++;
+            /*_index++;
 
             if (_hotControl == _index)
                 sprite.Color = new Color(100, 100, 100, 255);
@@ -82,7 +82,8 @@ namespace Yogollag
                     }
                 }
             }
-            return false;
+            return false;*/
+            return EnvironmentAPI.Imgui.Button(position, size, $"{sprite.SpriteDef.____GetDebugShortName()}", sprite, false);
 
         }
         public static bool SlotButton(Vector2f position, SpriteHandle sprite)

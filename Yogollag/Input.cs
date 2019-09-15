@@ -16,6 +16,7 @@ namespace Yogollag
         public static WindowApi Win;
         public static ImguiApi Imgui;
     }
+
     public interface ImguiApi
     {
         bool Button(Vec2 position, Vec2 size, string text, SpriteHandle sprite, bool scaleToFit = false);
@@ -47,6 +48,7 @@ namespace Yogollag
         Vec2 GlobalMousePos { get; }
         Vec2 MouseDirFromCameraCenter { get; }
         bool IsKeyPressed(Keyboard.Key key);
+        bool WasKeyPressed(Keyboard.Key key);
         bool IsButtonPressed(Mouse.Button button);
         bool WasButtonPressed(Mouse.Button button);
     }
@@ -151,6 +153,11 @@ namespace Yogollag
         public bool IsButtonPressed(Mouse.Button button)
         {
             return Mouse.IsButtonPressed(button);
+        }
+
+        public bool WasKeyPressed(Keyboard.Key key)
+        {
+            return Keyboard.IsKeyPressed(key);
         }
     }
 

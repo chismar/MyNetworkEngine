@@ -1,0 +1,31 @@
+{
+    "$type": "Spell",
+    "CustomName":"Attack",
+    "CastMode":{
+        "$type":"TargetPointCastDef",
+        "Input": {
+            "$type": "InputTrigger",
+            "Combos": [
+                {
+                    "Mouse": "Left"
+                }
+            ]
+        },
+        "TargetPointSprite":{
+            "$type":"SpriteDef",
+            "SpriteSheetName":"tiles",
+            "X":5,
+            "Y":2
+        }
+    },
+    "Duration":0.3,
+    "ImpactOnSuccess": {
+        "$type": "AllInCircle",
+        "Size":10,
+        "Impact": {
+            "$type": "ChangeEntityStat",
+            "StatDef": "/Stats/Health",
+            "Change":-100
+        }
+    }
+}

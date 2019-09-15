@@ -9,7 +9,7 @@ using Yogollag;
 
 class PhysicalBodySource : MonoBehaviour, IExportable
 {
-    public void Export()
+    public BaseDef Export()
     {
         var bodyDef = new PhysicalBodyDef();
         bodyDef.IsStatic = true;
@@ -25,7 +25,6 @@ class PhysicalBodySource : MonoBehaviour, IExportable
                 SizeY = box.size.z * box.transform.lossyScale.z
             });
         }
-        Defs.SimpleSave(Application.dataPath + "/../../Yogollag/Defs", gameObject.name + "PhysicalBody", bodyDef, out var path);
-        Debug.Log($"Saved at {path}");
+        return bodyDef;
     }
 }

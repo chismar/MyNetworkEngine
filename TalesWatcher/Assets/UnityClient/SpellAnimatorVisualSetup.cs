@@ -12,9 +12,13 @@ namespace Assets.UnityClient
     {
         public string SpellFilter;
         public string AnimatorFieldName;
-        protected override VisualComponent Init(IEntityObject ent)
+        protected override VisualComponent Init(object ent)
         {
-            return new SpellStartedBinding(SpellFilter, new AnimatorBoolTarget(AnimatorFieldName));
+            return new SpellStartedBinding(SpellFilter);
+        }
+        public void Update()
+        {
+            Visual?._animator?.SetBool(AnimatorFieldName, (bool)(_vc?.Value ?? false));
         }
     }
 }

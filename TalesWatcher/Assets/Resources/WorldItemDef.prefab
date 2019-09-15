@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1795800783058181421}
   - component: {fileID: -4759550573145409435}
-  - component: {fileID: 3834890969089691555}
   - component: {fileID: 22464053356342618}
   m_Layer: 0
   m_Name: WorldItemDef
@@ -46,20 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970a000bc7ecf546b0c5db6abc4b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3834890969089691555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2697471041421517318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5822a1354f5a2814f93c0fd92a08ddfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VariablePath: Item
-  Locator: {fileID: 7364598985908823352}
+  _animator: {fileID: 0}
+  VisualPrefab: {fileID: 0}
 --- !u!114 &22464053356342618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +107,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062de1648fbe89149b49c8486a3ed878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FieldPath: Item
+  Visual: {fileID: 0}

@@ -75,6 +75,7 @@ namespace Yogollag
 
         }
     }
+
     [GenerateSyncAttribute]
     public abstract class VisibilityEntity : GhostedEntity, ITicked
     {
@@ -269,13 +270,13 @@ namespace Yogollag
         }
         bool joined = false;
         SimpleProceduralMap _map = new SimpleProceduralMap();
-        CharacterGUI _charGui = new CharacterGUI();
+        public CharacterGUI CharGUI = new CharacterGUI();
         NetworkEntity character = null;
         public void Update(bool onlyDrawGUI)
         {
             if(onlyDrawGUI && character != null)
             {
-                _charGui.Render(_node, _win, character as CharacterEntity, _charView);
+                CharGUI.Render(_node, _win, character as CharacterEntity, _charView);
                 return;
             }
             if (!_connected.IsCompleted)
@@ -360,7 +361,7 @@ namespace Yogollag
                     rnd.Render(_win);
                 }
             }
-            _charGui.Render(_node, _win, character as CharacterEntity, _charView);
+            CharGUI.Render(_node, _win, character as CharacterEntity, _charView);
             var tick = _node.Tick();
             lock (_physicsWorld)
             {
@@ -851,7 +852,8 @@ namespace Yogollag
             Quests = Quests;
         }
         [Sync(SyncType.Client)]
-        public virtual long ActiveItem { get; set; }
+        public virtual long ActiveItemId { get; set; }
+        public Item ActiveItem => Inventory.Items.SingleOrDefault(x => x.ItemId == ActiveItemId);
         [Sync(SyncType.AuthorityClient)]
         public virtual RoleDef SecretRole { get; set; }
         [Sync(SyncType.AuthorityClient)]
@@ -885,7 +887,7 @@ namespace Yogollag
         {
             var item = Inventory.Items.FirstOrDefault(x => x.ItemId == itemId);
             if (item != null)
-                ActiveItem = itemId;
+                ActiveItemId = itemId;
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void ActivateItem()
@@ -930,7 +932,7 @@ namespace Yogollag
 
         public Item GetActiveItem()
         {
-            var item = Inventory.Items.FirstOrDefault(x => x.ItemId == ActiveItem);
+            var item = Inventory.Items.FirstOrDefault(x => x.ItemId == ActiveItemId);
             return item;
         }
 

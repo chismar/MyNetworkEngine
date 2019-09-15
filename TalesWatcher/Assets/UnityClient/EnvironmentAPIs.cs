@@ -13,9 +13,16 @@ public class UnityWindowApi : WindowApi
 }
 public class UnityImguiApi : ImguiApi
 {
-    public bool Button(Vec2 position, Vec2 size, string text, SpriteHandle sprite, bool scaleToFit = false)
+    public bool Button(Vec2 position, Vec2 size, string text, SpriteHandle spriteHandle, bool scaleToFit = false)
     {
-        return GUI.Button(new Rect(new Vector2(position.X, position.Y), new Vector2(size.X, size.Y)), new GUIContent() { text = text });
+        var sprites = spriteHandle.SpriteDef?.SpriteSheetName != null ?
+            Resources.LoadAll(spriteHandle.SpriteDef.SpriteSheetName) : Array.Empty<UnityEngine.Object>();
+        var sprite = sprites.Length > 0 ? (Sprite)sprites[spriteHandle.SpriteDef.X + spriteHandle.SpriteDef.Y * 16] : null;
+        var posRect = new Rect(new Vector2(position.X, position.Y), new Vector2(size.X, size.Y));
+        var pressed = GUI.Button(posRect, new GUIContent() { text = text });
+        if (sprite != null)
+            GUI.DrawTextureWithTexCoords(posRect, sprite.texture, sprite.rect);
+        return pressed;
     }
 }
 public class UnityInputImpl : InputApi
@@ -33,6 +40,8 @@ public class UnityInputImpl : InputApi
 
     public bool IsButtonPressed(Mouse.Button button)
     {
+        if (button == Mouse.Button.ButtonCount)
+            return true;
         if (button == Mouse.Button.Left)
             return UnityEngine.Input.GetMouseButton(0);
         else if (button == Mouse.Button.Right)
@@ -44,6 +53,8 @@ public class UnityInputImpl : InputApi
     public bool IsKeyPressed(Keyboard.Key key)
     {
         var kCode = UnityEngine.KeyCode.None;
+        if (key == Keyboard.Key.Unknown)
+            return true;
         switch (key)
         {
             case Keyboard.Key.Space:
@@ -70,12 +81,45 @@ public class UnityInputImpl : InputApi
 
     public bool WasButtonPressed(Mouse.Button button)
     {
+        if (button == Mouse.Button.ButtonCount)
+            return false;
         if (button == Mouse.Button.Left)
             return UnityEngine.Input.GetMouseButtonDown(0);
         else if (button == Mouse.Button.Right)
             return UnityEngine.Input.GetMouseButtonDown(1);
         else
             return false;
+    }
+
+    public bool WasKeyPressed(Keyboard.Key key)
+    {
+
+        var kCode = UnityEngine.KeyCode.None;
+        if (key == Keyboard.Key.Unknown)
+            return false;
+        switch (key)
+        {
+
+            case Keyboard.Key.Space:
+                kCode = UnityEngine.KeyCode.Space;
+                break;
+            case Keyboard.Key.W:
+                kCode = UnityEngine.KeyCode.W;
+                break;
+            case Keyboard.Key.A:
+                kCode = UnityEngine.KeyCode.A;
+                break;
+            case Keyboard.Key.S:
+                kCode = UnityEngine.KeyCode.S;
+                break;
+            case Keyboard.Key.D:
+                kCode = UnityEngine.KeyCode.D;
+                break;
+            case Keyboard.Key.LShift:
+                kCode = UnityEngine.KeyCode.LeftShift;
+                break;
+        }
+        return UnityEngine.Input.GetKeyDown(kCode);
     }
 }
 
@@ -202,3 +246,4 @@ public class UnityDrawImpl : DrawApi
         GUI.Label(new UnityEngine.Rect(sprite.Position.X, sprite.Position.Y, 200, 200), new GUIContent() { text = sprite.Text });
     }
 }
+
