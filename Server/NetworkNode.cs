@@ -108,7 +108,19 @@ using System.Reflection;
     кроме того что исполнитель будет иметь дельту на момент его вызова. Тут главное, чтобы это работало на локальном
     сервере как-то.
 
+    Даже сильная транзакция может расширяться на новые энтити - на те, которые создаются у неё в рамках транзакции.
 
+
+
+
+
+    Асинхронность для транзакций не нужна.
+    Ручной begin-end, с мессагами ко всем участвующим, блокирующим их от исполнения чего-то кроме мессаг без их id транзакции.
+    Вместе с мессагой может улететь дельта (точнее может улететь мессага о дельте и требование по версии по исполнению),
+    соответственно мессага должна исполниться либо сразу (если это локальный репозиториий) и об write версию,
+    либо улететь, там проапдейтить местную версию (возможно стоит добавить тут и гостинг на репликах )и исполнить мессагу,
+    после чего новая будет уже с новыми требованиями по версиям. 
+    В конце я просто вручную заканчиваю транзакцию.
      */
 namespace NetworkEngine
 {
@@ -290,6 +302,7 @@ namespace NetworkEngine
     class MasterStatus : EntityStatus
     {
         public ConcurrentQueue<EntityMessage> Messages = new ConcurrentQueue<EntityMessage>();
+        public ConcurrentQueue<EntityMessage> MessagesFallbackQueue = new ConcurrentQueue<EntityMessage>();
         public int MessagesToProcess = 0;
     }
 
@@ -493,7 +506,7 @@ namespace NetworkEngine
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
         ConcurrentQueue<NetworkNodeMessage> _internalMessages = new ConcurrentQueue<NetworkNodeMessage>();
         Entities<MasterStatus> _entities;
-
+        
         public NetworkNodeId Id { get; private set; }
         NetManager _netManager;
         long _entitiesCounter = 1;
@@ -794,9 +807,9 @@ namespace NetworkEngine
                 return _entities.Get(id);
             return _ghosting.Get(id);
         }
-        public T GetGhost<T>(EntityId id) where T : NetworkEntity
+        public T GetGhost<T>(EntityId id, bool forceGhost = false) where T : NetworkEntity
         {
-            if (NetworkEntity.CurrentlyExecutingInContext.Value == id)
+            if (NetworkEntity.CurrentlyExecutingInContext.Value == id && !forceGhost)
                 return (T)_entities.Get(id);
             return (T)_ghosting.Get(id);
         }
@@ -962,7 +975,12 @@ namespace NetworkEngine
                     break;
             }
         }
-
+        void DoTransaction(IEnumerable<GhostedEntity> ents, Func<GhostedEntity, Task> transaction)
+        {
+            //locally, being in one transaction means that all checks of "Current Entity" is true as long as it's
+            //inside transaction
+            //
+        }
         private Task SerializeAndSend()
         {
             List<Task> tasks = new List<Task>();
@@ -986,30 +1004,45 @@ namespace NetworkEngine
             }
             return Task.WhenAll(tasks);
         }
+        //
         public AsyncLocal<NetworkNodeId> CurrentServerCallbackId = new AsyncLocal<NetworkNodeId>();
         private Task ProcessMessages()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var entity in _entities.Collection)
+            foreach (var e in _entities.Collection)
             {
-                entity.Value.MessagesToProcess = entity.Value.Messages.Count;
-                if (entity.Value.MessagesToProcess != 0 || (entity.Value.Entity is ITicked && entity.Value.Entity.IsMaster))
+                var entityState = e.Value;
+                var entity = (GhostedEntity)e.Value.Entity;
+                entityState.MessagesToProcess = entityState.Messages.Count;
+                if (entityState.MessagesToProcess != 0 || (entity is ITicked && entity.IsMaster))
                     tasks.Add(Task.Run(() =>
                     {
-                        NetworkEntity.CurrentlyExecutingInContext.Value = entity.Value.Entity.Id;
-                        if (entity.Value.Entity is ITicked ticked && entity.Value.Entity.IsMaster)
+                        NetworkEntity.CurrentlyExecutingInContext.Value = entity.Id;
+                        if (entity is ITicked ticked && entity.IsMaster)
                             ticked.Tick();
-                        for (int i = 0; i < entity.Value.MessagesToProcess; i++)
+                        for (int i = 0; i < entityState.MessagesToProcess; i++)
                         {
-                            entity.Value.Messages.TryDequeue(out var message);
-                            CurrentServerCallbackId.Value = message.From;
-                            if (message.EntityId.SubObjectId != 0)
-                                message.Run(entity.Value.Entity.Resolve(message.EntityId.SubObjectId));
+                            entityState.Messages.TryDequeue(out var message);
+                            if (message.TransactionId == entity.CurrentTransactionId)
+                            {
+                                CurrentServerCallbackId.Value = message.From;
+                                if (message.EntityId.SubObjectId != 0)
+                                    message.Run(entity.Resolve(message.EntityId.SubObjectId));
+                                else
+                                    message.Run(entity);
+                            }
                             else
-                                message.Run(entity.Value.Entity);
+                                entityState.MessagesFallbackQueue.Enqueue(message);
+                            if(entityState.MessagesFallbackQueue.Count > 0)
+                            {
+                                var swap = entityState.Messages;
+                                entityState.Messages = entityState.MessagesFallbackQueue;
+                                entityState.MessagesFallbackQueue = swap;
+                            }
                         }
                         NetworkEntity.CurrentlyExecutingInContext.Value = EntityId.Invalid;
                     }));
+
             }
             return Task.WhenAll(tasks);
         }
@@ -1234,13 +1267,98 @@ namespace NetworkEngine
             writer.Put(tag);
         }
     }
+    public class Transaction
+    {
+        public Guid Id;
+        public Dictionary<EntityId, GhostedEntity> TargetEntities = new Dictionary<EntityId, GhostedEntity>();
+        public GhostedEntity MainEntity;
+        public Func<GhostedEntity, Task> TransactionBody;
+        public Task TransactionState;
+
+    }
     public abstract class GhostedEntity : NetworkEntity, IEntityPropertyChanged
     {
+        //Queue<Guid> _reservedForTransactions = new Queue<Guid>();
+        public Guid CurrentTransactionId;
+        public long ReservedForTimestamp;
+        public Guid ReservedForTransaction;
+        public Transaction CurrentTransaction;
         public Action<int> PropertyChanged { get; set; }
         public override bool HasAuthority { get => base.HasAuthority; set => base.HasAuthority = value; }
         protected void PropChanged(int prop)
         {
             PropertyChanged?.Invoke(prop);
+        }
+        public Dictionary<Guid, Transaction> OutgoingPendingTransactions = new Dictionary<Guid, Transaction>();
+        public bool HasOutgoingPendingTransactions => OutgoingPendingTransactions.Count > 0;
+
+        //public bool DuringTransaction => CurrentTransaction == null ? false : !CurrentTransaction.TransactionState.IsCompleted;
+
+        public void AddTransaction(Transaction t)
+        {
+            OutgoingPendingTransactions.Add(t.Id, t);
+        }
+        protected void DoTransaction(List<EntityId> entitiesInvolved, Func<GhostedEntity, Task> transactionBody)
+        {
+            var t = new Transaction()
+            {
+                Id = Guid.NewGuid(),
+                TargetEntities = entitiesInvolved.ToDictionary(x => x, x => CurrentServer.GetWriteEntity<GhostedEntity>(x)),
+                MainEntity = this,
+                TransactionBody = transactionBody
+            };
+            AddTransaction(t);
+            var timestamp = DateTime.UtcNow.Ticks;
+            foreach (var involvedEntity in entitiesInvolved)
+                CurrentServer.GetGhost<GhostedEntity>(involvedEntity, forceGhost:true).NotifyOfTransaction(timestamp, t.Id);
+            CurrentServer.GetGhost<GhostedEntity>(this.Id, forceGhost: true).NotifyOfTransaction(timestamp, t.Id);
+        }
+        protected void EndTransaction()
+        {
+            foreach (var involvedEntity in CurrentTransaction.TargetEntities)
+                CurrentServer.GetGhost<GhostedEntity>(involvedEntity.Key, forceGhost: true).NotifyOfTransactionEnd();
+            CurrentServer.GetGhost<GhostedEntity>(this.Id, forceGhost: true).NotifyOfTransactionEnd();
+
+        }
+        [Sync]
+        public virtual void ReadyToBeginTransaction(int counterValue)
+        {
+
+        }
+        List<(long,Guid)> _pendingTransactions = new List<(long,Guid)>();
+        [Sync]
+        public virtual void NotifyOfTransaction(long timestamp, Guid transactionId)
+        {
+            if(CurrentTransactionId == Guid.Empty)
+            {
+                if (ReservedForTransaction == Guid.Empty)
+                {
+                    ReservedForTimestamp = timestamp;
+                    ReservedForTransaction = transactionId;
+                }
+                else
+                {
+                    if(timestamp > ReservedForTimestamp || (timestamp == ReservedForTimestamp && ReservedForTransaction.CompareTo(transactionId) < 0))
+                    {
+                        _pendingTransactions.Add((ReservedForTimestamp, ReservedForTransaction));
+                        ReservedForTimestamp = timestamp;
+                        ReservedForTransaction = transactionId;
+                    }
+                    else if (timestamp < ReservedForTimestamp || (timestamp == ReservedForTimestamp && ReservedForTransaction.CompareTo(transactionId) > 0))
+                    {
+                        _pendingTransactions.Add((timestamp, ReservedForTransaction));
+                    }
+                }
+            }
+            else
+            {
+
+            }
+        }
+        [Sync]
+        public virtual void NotifyOfTransactionEnd()
+        {
+            CurrentTransactionId = Guid.Empty;
         }
     }
 
@@ -1263,6 +1381,9 @@ namespace NetworkEngine
 
     public abstract class EntityMessage : ServerMessage
     {
+        EntityId[] VersionsEntities { get; set; }
+        int[] ProperVersionsOfEntities { get; set; }
+        public Guid TransactionId { get; set; }
         public EntityId EntityId { get; set; }
         public abstract void Run(object entity);
 
