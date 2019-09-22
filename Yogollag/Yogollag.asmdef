@@ -1,12 +1,11 @@
 {
     "name": "Yogollag",
     "references": [
-        "GUID:de0986874b49deb4792136ff73a3ef25",
-        "GUID:cb4e270a0e2f0f046ad3131de887cb8c",
-        "GUID:4b10f1a37c7fd934889333b63a63934e",
-        "GUID:c1aff9f292789804abc2e2c56df8c8e2"
+        "GUID:c1aff9f292789804abc2e2c56df8c8e2",
+        "GUID:fe75542830ff7be4f943eb1192b0b082",
+        "GUID:3a5d96d5f76d8cb4ab5823408c164988",
+        "GUID:ba5f7e15c942d824b9914fd18ffd8b68"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,

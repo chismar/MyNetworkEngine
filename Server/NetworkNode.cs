@@ -1158,7 +1158,7 @@ namespace NetworkEngine
                 {
                     if (baseObj.GetCustomAttribute<GenerateSyncAttribute>() == null)
                         continue;
-                    Console.WriteLine($"ERROR: no sync type for {eName}");
+                    Logger.LogError($"ERROR: no sync type for {eName}");
 
                 }
                 var sync = syncTypes[eName + "Sync"];

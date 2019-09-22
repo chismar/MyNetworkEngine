@@ -2,9 +2,8 @@
     "name": "UnityClientEditor",
     "references": [
         "GUID:39b5fd8f38326d142b68272cb7ab0a4e",
-        "GUID:4b10f1a37c7fd934889333b63a63934e"
+        "GUID:3a5d96d5f76d8cb4ab5823408c164988"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
