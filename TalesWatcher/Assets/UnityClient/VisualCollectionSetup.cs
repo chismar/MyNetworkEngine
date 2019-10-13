@@ -8,10 +8,11 @@ using Yogollag;
 
 public class VisualCollectionSetup : VisualSetup
 {
+    public string Filter;
     public GameObject ElementVisual;
     protected override VisualComponent Init(object ent)
     {
-        return new VisualCollection((obj) =>
+        return new VisualCollection(Filter, (obj) =>
         {
             var go = GameObject.Instantiate(ElementVisual, transform);
             return go.GetComponent<Visual>().Init(obj);

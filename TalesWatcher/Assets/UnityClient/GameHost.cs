@@ -11,6 +11,10 @@ using System.Collections.Concurrent;
 
 public class GameHost : MonoBehaviour
 {
+    public static void NewDefs()
+    {
+        DefsHolder.Instance = new Defs(new FolderLoader(Application.dataPath + "/../../Yogollag/Defs"), false);
+    }
     SimpleServer server;
     public SimpleClient client;
     // Start is called before the first frame update

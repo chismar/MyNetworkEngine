@@ -12,7 +12,7 @@ namespace Definitions
         [JsonProperty("$id", Order = 1, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
         string IDef.LocalId { get; set; }
         [NotInSchema]
-        [JsonIgnore]    
+        [JsonIgnore]
         bool IDef.IsRef { get; set; }
         public string CustomName { get; set; }
         public string ____GetDebugAddress()
@@ -23,7 +23,7 @@ namespace Definitions
         {
             var addr = (this as IDef).Address.ToString();
             var idx = addr.LastIndexOf('/');
-            return idx!=-1 ? addr.Substring(idx + 1) : addr;
+            return idx != -1 ? addr.Substring(idx + 1) : addr;
         }
         public override string ToString()
         {

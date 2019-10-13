@@ -11,33 +11,33 @@ using Volatile;
 namespace Yogollag
 {
 
-    public class InteractiveWorldEntityDef : BaseDef, IEntityObjectDef
-    {
-        public DefRef<InteractiveDef> InteractiveDef { get; set; }
-    }
     [GenerateSync]
     public abstract class InteractiveWorldEntity : GhostedEntity,
         IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject, IEntityObject
     {
+        [Def]
+        public virtual InteractiveDef InteractiveDef { get; set; }
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual float Rotation { get; set; }
         public VoltBody PhysicsBody { get; set; }
         Vec2 _pos;
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual Vec2 Position { get { return _pos; } set { _pos = value; } }
         [Sync(SyncType.Client)]
         public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
         [Sync(SyncType.Client)]
-        public virtual InteractiveDef InteractiveDef { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
         public IRenderableDef RenDef { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [Sync]
         public virtual IEntityObjectDef Def { get; set; }
+        InteractiveDef IInteractive.InteractiveDef { get { return InteractiveDef; } set { throw new NotImplementedException(); } }
 
         static RectangleShape shape = new RectangleShape(new SFML.System.Vector2f(5, 10));
         public override void OnCreate()
         {
-            InteractiveDef = ((InteractiveWorldEntityDef)Def).InteractiveDef;
+
         }
         public void Render(RenderTarget rt)
         {

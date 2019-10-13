@@ -11,16 +11,21 @@ using Definitions;
 namespace Yogollag
 {
     [GenerateSync]
-    public abstract class PhysicalBodyEngine : SyncObject
+    public abstract class PhysicalBodyEngine : SyncObject, IEntityComponent
     {
+        [Def(true)]
+        public virtual List<DefRef<PhysicalShapeDef>> Shapes { get; set; }
+        [Def]
+        public virtual bool IsStatic { get; set; }
         public VoltBody VoltBody;
-        public void Init(PhysicalBodyDef def)
+        public void Init()
         {
             var world = (Volatile.VoltWorld)CurrentServer.CustomData;
             lock (world)
             {
                 var pos = PhysicalPos;
                 List<VoltShape> shapes = new List<VoltShape>();
+                var def = (PhysicalBodyEngineDef)Def;
                 for (int i = 0; i < def.Shapes.Count; i++)
                 {
                     var shape = def.Shapes[i].Def;
@@ -69,6 +74,8 @@ namespace Yogollag
         public virtual Vec2 PhysicalPos { get; set; }
         [Sync(SyncType.Client)]
         public virtual float Rotation { get; set; }
+        public IDef Def { get; set; }
+
         public void DrawDebug()
         {
 
@@ -83,17 +90,6 @@ namespace Yogollag
         {
 
         }
-    }
-
-    public interface IHasPhysicalBodyDef : IDef
-
-    {
-        DefRef<PhysicalBodyDef> PhysicalBodyDef { get; set; }
-    }
-    public class PhysicalBodyDef : BaseDef
-    {
-        public List<DefRef<PhysicalShapeDef>> Shapes { get; set; } = new List<DefRef<PhysicalShapeDef>>();
-        public bool IsStatic { get; set; }
     }
 
     public class PhysicalShapeDef : BaseDef

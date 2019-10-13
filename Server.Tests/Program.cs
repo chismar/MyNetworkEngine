@@ -3,6 +3,7 @@ using LiteNetLib.Utils;
 using NetworkEngine;
 using NUnit.Framework;
 using System;
+using Definitions;
 
 namespace Server.Tests
 {

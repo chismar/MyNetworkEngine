@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 5575981340513832701}
   - component: {fileID: -7973223397973774391}
   - component: {fileID: 6541151315491159644}
+  - component: {fileID: 1136143015717838215}
   m_Layer: 0
   m_Name: SimpleBuilding1
   m_TagString: Untagged
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 081db71ee58b7344cb40349f0c70c36a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1136143015717838215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575981340513832702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab894d24f5b650d409badc408d75ee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5575981342555074657

@@ -121,6 +121,25 @@ using System.Reflection;
     либо улететь, там проапдейтить местную версию (возможно стоит добавить тут и гостинг на репликах )и исполнить мессагу,
     после чего новая будет уже с новыми требованиями по версиям. 
     В конце я просто вручную заканчиваю транзакцию.
+
+    Если синхронизировать время, и цеплять транзакции друг за друга на основании их тайм-стампа (они в рукопашную договариваются,
+    кто за кем, и цеплять за тех, кто уже за ними новеньких? На основании таймстампа и гуида будет решаться кто за кем встанет. И
+    освободит энтити в пользу (важно!) кого)
+    
+    --------------------------------------
+    Социальные центры и игра вокруг них.
+    Основные идеи:
+    Социальный центр - набор NPC, команд, приказов (комманда + назначенные исполнители), где NPC различаются по правам:
+    нет прав, могут отдавать команды, могут назначать исполнителей и могут отдавать приказы (и исполнители и команды).
+    Динамика отношения центр-NPC:
+    Центры по мере исполнения или провала их команд (где командой может быть как задача построить дом, так и "добродетель" или "не
+    нарушай закон", то есть такие задачи которые не имеют прямого способа окончания или исполненеия) издают сигналы,
+    положительные и отрицательные с контекстом (кто считается ответственным и тд, где эти данные могут докидывать участники,
+    например полицейский может назначить ответственного за сигнал).
+    Персонажи активно избегают негативных и преследуют позитивные сигналы. Если они могут, то будут формировать команды и приказы
+    для того, чтобы максимизировать позитивность сигналов, либо исполнять их.
+    Персонажи которые симпатизируют другим, будут стараться синхронизировать свои центры с их.
+    Персонажи вместе выполняющие задачи одного центра склонны симпатизировать друг другу (за счёт того что будут посылаться позитивные сигналы?)
      */
 namespace NetworkEngine
 {
@@ -390,7 +409,12 @@ namespace NetworkEngine
                 parentEntity.SubObjects[SyncId] = this;
             }
             ParentEntity = parentEntity;
+            SetDefsForComponents();
             SetParentEntityRecursive();
+        }
+        protected virtual void SetDefsForComponents()
+        {
+
         }
         public void FinishInit()
         {
@@ -415,6 +439,8 @@ namespace NetworkEngine
         {
             writer.Put(tag);
         }
+
+        public virtual void InitFromSceneDef(BaseDef def) { }
     }
     public interface ITicked
     {
@@ -506,7 +532,7 @@ namespace NetworkEngine
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
         ConcurrentQueue<NetworkNodeMessage> _internalMessages = new ConcurrentQueue<NetworkNodeMessage>();
         Entities<MasterStatus> _entities;
-        
+
         public NetworkNodeId Id { get; private set; }
         NetManager _netManager;
         long _entitiesCounter = 1;
@@ -813,6 +839,17 @@ namespace NetworkEngine
                 return (T)_entities.Get(id);
             return (T)_ghosting.Get(id);
         }
+        public EntityId AcquireId()
+        {
+            return new EntityId() { Id1 = Id, Id2 = Interlocked.Increment(ref _entitiesCounter) };
+        }
+        public void Create(EntityId id, Type t, Action<NetworkEntity> init = null)
+        {
+            var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(t));
+            OnEntityCreatedFirstInit(newEntity, id);
+            init?.Invoke(newEntity);
+            OnEntityCreated(newEntity);
+        }
         public EntityId Create(Type t, Action<NetworkEntity> init = null)
         {
             var newEntity = (NetworkEntity)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(t));
@@ -822,11 +859,14 @@ namespace NetworkEngine
             return newEntity.Id;
         }
 
-        private void OnEntityCreatedFirstInit(NetworkEntity newEntity)
+        private void OnEntityCreatedFirstInit(NetworkEntity newEntity, EntityId id = default)
         {
             newEntity.ServerId = Id;
             newEntity.CurrentServer = this;
-            newEntity.Id = new EntityId() { Id1 = Id, Id2 = _entitiesCounter++ };
+            if (id == default)
+                newEntity.Id = AcquireId();
+            else
+                newEntity.Id = id;
         }
 
         void OnEntityCreated(NetworkEntity newEntity)
@@ -975,12 +1015,6 @@ namespace NetworkEngine
                     break;
             }
         }
-        void DoTransaction(IEnumerable<GhostedEntity> ents, Func<GhostedEntity, Task> transaction)
-        {
-            //locally, being in one transaction means that all checks of "Current Entity" is true as long as it's
-            //inside transaction
-            //
-        }
         private Task SerializeAndSend()
         {
             List<Task> tasks = new List<Task>();
@@ -1033,7 +1067,7 @@ namespace NetworkEngine
                             }
                             else
                                 entityState.MessagesFallbackQueue.Enqueue(message);
-                            if(entityState.MessagesFallbackQueue.Count > 0)
+                            if (entityState.MessagesFallbackQueue.Count > 0)
                             {
                                 var swap = entityState.Messages;
                                 entityState.Messages = entityState.MessagesFallbackQueue;
@@ -1095,6 +1129,17 @@ namespace NetworkEngine
     class Persist : Attribute
     {
 
+    }
+    public class SceneDefAttribute : Attribute
+    {
+    }
+    public class DefAttribute : Attribute
+    {
+        public bool DefaultNew { get; set; }
+        public DefAttribute(bool defaultNew = false)
+        {
+            DefaultNew = defaultNew;
+        }
     }
     public class SyncAttribute : Attribute
     {
@@ -1233,13 +1278,19 @@ namespace NetworkEngine
                 return so;
             return null;
         }
+        protected virtual void SetDefsForComponents()
+        {
+
+        }
         public void Create()
         {
+            SetDefsForComponents();
             SetParentEntityRecursive();
             OnCreate();
         }
         public void Init()
         {
+            SetDefsForComponents();
             SetParentEntityRecursive();
             OnInit();
         }
@@ -1276,6 +1327,7 @@ namespace NetworkEngine
         public Task TransactionState;
 
     }
+
     public abstract class GhostedEntity : NetworkEntity, IEntityPropertyChanged
     {
         //Queue<Guid> _reservedForTransactions = new Queue<Guid>();
@@ -1310,7 +1362,7 @@ namespace NetworkEngine
             AddTransaction(t);
             var timestamp = DateTime.UtcNow.Ticks;
             foreach (var involvedEntity in entitiesInvolved)
-                CurrentServer.GetGhost<GhostedEntity>(involvedEntity, forceGhost:true).NotifyOfTransaction(timestamp, t.Id);
+                CurrentServer.GetGhost<GhostedEntity>(involvedEntity, forceGhost: true).NotifyOfTransaction(timestamp, t.Id);
             CurrentServer.GetGhost<GhostedEntity>(this.Id, forceGhost: true).NotifyOfTransaction(timestamp, t.Id);
         }
         protected void EndTransaction()
@@ -1325,11 +1377,11 @@ namespace NetworkEngine
         {
 
         }
-        List<(long,Guid)> _pendingTransactions = new List<(long,Guid)>();
+        List<(long, Guid)> _pendingTransactions = new List<(long, Guid)>();
         [Sync]
         public virtual void NotifyOfTransaction(long timestamp, Guid transactionId)
         {
-            if(CurrentTransactionId == Guid.Empty)
+            if (CurrentTransactionId == Guid.Empty)
             {
                 if (ReservedForTransaction == Guid.Empty)
                 {
@@ -1338,13 +1390,13 @@ namespace NetworkEngine
                 }
                 else
                 {
-                    if(timestamp > ReservedForTimestamp || (timestamp == ReservedForTimestamp && ReservedForTransaction.CompareTo(transactionId) < 0))
+                    if (timestamp < ReservedForTimestamp || (timestamp == ReservedForTimestamp && ReservedForTransaction.CompareTo(transactionId) < 0))
                     {
                         _pendingTransactions.Add((ReservedForTimestamp, ReservedForTransaction));
                         ReservedForTimestamp = timestamp;
                         ReservedForTransaction = transactionId;
                     }
-                    else if (timestamp < ReservedForTimestamp || (timestamp == ReservedForTimestamp && ReservedForTransaction.CompareTo(transactionId) > 0))
+                    else if (timestamp > ReservedForTimestamp || (timestamp == ReservedForTimestamp && ReservedForTransaction.CompareTo(transactionId) > 0))
                     {
                         _pendingTransactions.Add((timestamp, ReservedForTransaction));
                     }
@@ -1360,6 +1412,9 @@ namespace NetworkEngine
         {
             CurrentTransactionId = Guid.Empty;
         }
+
+        public virtual void InitFromSceneDef(BaseDef def) { }
+
     }
 
 
@@ -1760,7 +1815,7 @@ namespace NetworkEngine
             {
 
                 var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
-                return  (T)s.Deserialize(stream);
+                return (T)s.Deserialize(stream);
             }
 
         }

@@ -112,7 +112,7 @@ namespace Yogollag
         {
             string str = "";
             var statsEntity = character as IStatEntity;
-            foreach (var stat in statsEntity.StatsEngine.Stats)
+            foreach (var stat in statsEntity.StatsEngine.StatsSync)
             {
                 str += $"{stat.StatDef.____GetDebugShortName()} {stat.Value}\n";
             }

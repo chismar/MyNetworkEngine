@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &685076779311290490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5316552125234689213}
+  - component: {fileID: 2586535143797295331}
+  m_Layer: 0
+  m_Name: Spells
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5316552125234689213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685076779311290490}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 961479071862265827}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2586535143797295331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685076779311290490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f19b315d6d381c4cbecccf377348c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldPath: SpellsEngine.SyncedSpells
+  Visual: {fileID: 0}
+  Filter: 
+  ElementVisual: {fileID: 7722014448164416085, guid: 97328a8cddb238e4898a201e1338b11d,
+    type: 3}
 --- !u!114 &987828656121737165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +92,7 @@ Transform:
   m_Children:
   - {fileID: 5648736986345323220}
   - {fileID: 7975550565501320548}
+  - {fileID: 5316552125234689213}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970a000bc7ecf546b0c5db6abc4b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  VisualPrefab: {fileID: 0}
 --- !u!114 &5021754183966814665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e146ce3098bde614799420b4a2a83795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FieldPath: 
+  Visual: {fileID: 0}
 --- !u!114 &2126670400688543364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f598e8e43962de4ba22c49d037a8883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FieldPath: 
+  Visual: {fileID: 0}
   SpellFilter: Attack
   AnimatorFieldName: IsWalk
 --- !u!1001 &5702913370348434810

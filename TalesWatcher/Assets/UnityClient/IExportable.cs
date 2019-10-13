@@ -11,3 +11,9 @@ public interface IExportable
     BaseDef Export();
 }
 
+public interface ISceneExportable
+{
+    int Index { get; set; }
+    BaseDef Export();
+}
+

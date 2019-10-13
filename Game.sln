@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Definitions", "ResourcesSys
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server.Tests", "Server.Tests\Server.Tests.csproj", "{CA5A1AC8-6955-4DEE-BEF8-A8A285423F8A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModMetaGen", "ModMetaGen\ModMetaGen.csproj", "{CAB3604E-003D-41B5-9F45-010C125DAAC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Standalone|Any CPU = Debug Standalone|Any CPU
@@ -227,6 +229,30 @@ Global
 		{CA5A1AC8-6955-4DEE-BEF8-A8A285423F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA5A1AC8-6955-4DEE-BEF8-A8A285423F8A}.Release|x64.ActiveCfg = Release|Any CPU
 		{CA5A1AC8-6955-4DEE-BEF8-A8A285423F8A}.Release|x64.Build.0 = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Standalone|x64.ActiveCfg = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Standalone|x64.Build.0 = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Unity|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Unity|Any CPU.Build.0 = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Unity|x64.ActiveCfg = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug Unity|x64.Build.0 = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Debug|x64.Build.0 = Debug|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Standalone|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Standalone|Any CPU.Build.0 = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Standalone|x64.ActiveCfg = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Standalone|x64.Build.0 = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Unity|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Unity|Any CPU.Build.0 = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Unity|x64.ActiveCfg = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release Unity|x64.Build.0 = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release|x64.ActiveCfg = Release|Any CPU
+		{CAB3604E-003D-41B5-9F45-010C125DAAC0}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

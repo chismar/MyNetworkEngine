@@ -12,11 +12,8 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)\codegeneration.roslyn.buildtime\0.4.88\build\CodeGeneration.Roslyn.BuildTime.props" Condition="Exists('$(NuGetPackageRoot)\codegeneration.roslyn.buildtime\0.4.88\build\CodeGeneration.Roslyn.BuildTime.props')" />
-  </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgValidation Condition=" '$(PkgValidation)' == '' ">C:\Users\Виталий\Documents\MyNetworkEngine\packages\validation\2.4.13</PkgValidation>
-    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\Виталий\Documents\MyNetworkEngine\packages\microsoft.codeanalysis.analyzers\2.6.1</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgValidation Condition=" '$(PkgValidation)' == '' ">C:\Users\Виталий\Documents\MyNetworkEngine\packages\validation\2.4.22</PkgValidation>
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\Виталий\Documents\MyNetworkEngine\packages\microsoft.codeanalysis.analyzers\2.9.4</PkgMicrosoft_CodeAnalysis_Analyzers>
   </PropertyGroup>
 </Project>

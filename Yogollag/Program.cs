@@ -18,6 +18,8 @@ namespace Yogollag
     public class DEFS_SCHEMA_BOOTSTRAP
     {
 
+
+
     }
 
     class Program
@@ -110,7 +112,7 @@ namespace Yogollag
         public virtual void Join(string name)
         {
             var defaultJob = DefsHolder.Instance.LoadDef<RoleDef>("/Arhaeologist");
-            var charDef = DefsHolder.Instance.LoadDef<CharacterEntityDef>("/CharDef");
+            var charDef = DefsHolder.Instance.LoadDef<IEntityObjectDef>("/CharDef");
             var charId = CurrentServer.Create<CharacterEntity>((ent) =>
             {
                 ent.AuthorityServerId = CurrentServer.CurrentServerCallbackId.Value;
@@ -175,6 +177,14 @@ namespace Yogollag
                                 ((IPositionedEntity)e).Rotation = site.GlobalRot;
 
                             });
+                            if(site.Def.AttachedScene != null)
+                            {
+                                _node.Create<SceneEntity>(se => {
+                                    se.Position = site.GlobalPos;
+                                    se.Rotation = site.GlobalRot;
+                                    se.SceneDef = site.Def.AttachedScene;
+                                });
+                            }
                         }
                     }
                 }
@@ -460,7 +470,6 @@ namespace Yogollag
     }
     public interface IRenderable
     {
-        IRenderableDef RenDef { get; }
         string Name { get; }
         void Render(RenderTarget rt);
     }
@@ -472,14 +481,15 @@ namespace Yogollag
     {
         public DefRef<SpriteDef> Sprite { get; set; }
     }
-
-
-    public class CharacterEntityDef : BaseDef, IRenderableDef, IEntityObjectDef
+    public class SpriteRendererSceneDef : BaseDef, ISceneDef
     {
-        public DefRef<StatsEngineDef> StatsEngine { get; set; }
+
+    }
+    public class SpriteRendererDef : BaseDef, IEntityObjectDef, IRenderableDef 
+    {
         public DefRef<SpriteDef> Sprite { get; set; }
     }
-    class SpriteRenderer : IRenderable
+    public class SpriteRenderer : IRenderable, IEntityComponent
     {
         static Font _font;
         Sprite _sprite;
@@ -487,7 +497,7 @@ namespace Yogollag
         public Vec2 RendererPosition { get; set; }
         public string Name { get { return _ren.Name; } set { } }
 
-        public IRenderableDef RenDef { get; set; }
+        public IDef Def { get; set; }
 
         IRenderable _ren;
         public SpriteRenderer(IRenderable ren)
@@ -497,7 +507,7 @@ namespace Yogollag
         bool _toTheLeft = false;
         public void Render(RenderTarget rt)
         {
-            var _sprite = Sprites.GetSpriteHandle(_ren.RenDef.Sprite);
+            var _sprite = Sprites.GetSpriteHandle(((SpriteRendererDef)Def).Sprite);
             var pos = new Vector2f(RendererPosition.X, RendererPosition.Y);
             bool inverseToTheLeft = _lastRenderPosition.X > pos.X;
             bool moved = _lastRenderPosition != pos;
@@ -514,6 +524,10 @@ namespace Yogollag
             v.DrawSpriteAt(_sprite,
                 Vec2.New(_sprite.TextureRect.X / 2, _sprite.TextureRect.Y / 2),
                 Vec2.New(0.5f, 0.5f));
+        }
+
+        public void InitFromSceneDef(BaseDef sceneDef)
+        {
         }
     }
     class RandomSoundPlayer
@@ -681,7 +695,9 @@ namespace Yogollag
     }
     public interface IPositionedEntity
     {
+        [SceneDef]
         float Rotation { get; set; }
+        [SceneDef]
         Vec2 Position { get; set; }
     }
     interface IStatEntity
@@ -826,8 +842,9 @@ namespace Yogollag
         IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells
     {
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual float Rotation { get; set; }
-        SpriteRenderer _spriteRenderer;
+        public virtual SpriteRenderer _spriteRenderer { get; set; }
         CharacterLikeMovement _movementController;
         public CharacterEntity()
         {
@@ -837,13 +854,12 @@ namespace Yogollag
 
         public override void OnInit()
         {
-            _spriteRenderer.RenDef = CharDef;
         }
         public override void OnCreate()
         {
             Inventory.Owner = this;
             Inventory.Size = 10;
-            StatsEngine.Init(CharDef.StatsEngine);
+            StatsEngine.Init();
             if (SecretRole?.InitialQuest.Def != null)
                 Quests.Add(new QuestInstance() { QuestDef = SecretRole.InitialQuest });
             if (Job?.InitialQuest.Def != null)
@@ -865,6 +881,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual string Name { get; set; }
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual Vec2 Position { get; set; }
         [Sync(SyncType.Client)]
         public virtual float Speed { get; set; } = 5f;
@@ -875,10 +892,9 @@ namespace Yogollag
         public virtual List<QuestInstance> Quests { get; set; } = new List<QuestInstance>();
         [Sync(SyncType.AuthorityClient)]
         public virtual ItemsCollection Inventory { get; set; } = SyncObject.New<ItemsCollection>();
-        public IRenderableDef RenDef { get => _spriteRenderer.RenDef; set => _spriteRenderer.RenDef = value; }
+        //public IRenderableDef RenDef { get => _spriteRenderer.RenDef; set => _spriteRenderer.RenDef = value; }
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
-        CharacterEntityDef CharDef => (CharacterEntityDef)Def;
 
         public float SmoothRotation { get; set; }
 
@@ -962,7 +978,7 @@ namespace Yogollag
         }
         public void Tick()
         {
-            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
+            if (StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
         }
     }

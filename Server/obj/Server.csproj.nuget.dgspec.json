@@ -46,9 +46,9 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
-            "CodeGeneration.Roslyn": {
+            "Microsoft.CodeAnalysis": {
               "target": "Package",
-              "version": "[0.4.88, )"
+              "version": "[3.3.1, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
@@ -59,6 +59,10 @@
             "Scriban": {
               "target": "Package",
               "version": "[1.2.7, )"
+            },
+            "Validation": {
+              "target": "Package",
+              "version": "[2.4.22, )"
             }
           },
           "imports": [
@@ -175,10 +179,6 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
-            "CodeGeneration.Roslyn.BuildTime": {
-              "target": "Package",
-              "version": "[0.4.88, )"
-            },
             "Google.Protobuf": {
               "target": "Package",
               "version": "[3.6.1, )"

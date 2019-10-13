@@ -166,7 +166,10 @@ namespace Yogollag
     public class PrefabDef : BaseDef
     { }
 
-
+    public class SceneDef : BaseDef
+    {
+        public List<DefRef<BaseDef>> Entities { get; set; } = new List<DefRef<BaseDef>>();
+    }
     class MapDef : BaseDef
     {
         public List<Location> Locations { get; set; } = new List<Location>();
@@ -223,6 +226,7 @@ namespace Yogollag
         public List<SiteConnection> Connections { get; set; } = new List<SiteConnection>();
         public List<DefRef<MapSiteTagDef>> Tags { get; set; } = new List<DefRef<MapSiteTagDef>>();
 
+        public DefRef<SceneDef> AttachedScene { get; set; }
     }
     [KnownDefinitionsType]
     public class SiteConnection

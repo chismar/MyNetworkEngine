@@ -54,7 +54,7 @@ namespace Yogollag
     }
    
     [GenerateSync]
-    public abstract class SpellsEngine : SyncObject
+    public abstract class SpellsEngine : SyncObject, IEntityComponent
     {
         [Sync(SyncType.Client)]
         public virtual DeltaList<SpellInstance> SyncedSpells { get; set; } = SyncObject.New<DeltaList<SpellInstance>>();
@@ -63,6 +63,9 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual SyncEvent<SpellFailedToCast> SpellFailedEvent { get; set; } = SyncObject.New<SyncEvent<SpellFailedToCast>>();
         public virtual IEnumerable<SpellInstance> AllSpells => SyncedSpells;
+
+        public IDef Def { get; set; }
+
         List<SpellInstance> _predictedSpells = new List<SpellInstance>();
         public SpellsEngine()
         {
@@ -153,7 +156,7 @@ namespace Yogollag
         }
     }
 
-    public class SpellDef : BaseDef
+    public class SpellDef : BaseDef, IEntityObjectDef
     {
         public float Duration { get; set; } = 0f;
         public float Cooldown { get; set; } = 0f;
@@ -196,7 +199,7 @@ namespace Yogollag
         public SyncedTime TimeWhenStarted { get; set; }
     }
     [GenerateSync]
-    public abstract class SpellInstance : SyncObject
+    public abstract class SpellInstance : SyncObject, IEntityObject
     {
         [Sync(SyncType.Client)]
         public virtual SpellId Id { get; set; }
@@ -204,5 +207,6 @@ namespace Yogollag
         public virtual SpellCast Cast { get; set; }
         [Sync(SyncType.Client)]
         public virtual SyncedTime Time { get; set; }
+        public IEntityObjectDef Def { get { return Cast.Def; } set { throw new InvalidOperationException("Can't assign def to SpellInstance, it's get only"); } }
     }
 }

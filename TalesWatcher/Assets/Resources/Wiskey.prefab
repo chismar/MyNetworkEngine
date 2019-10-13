@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 8638069098114304212}
   - component: {fileID: 4521305550545814842}
   - component: {fileID: 2423578417037497964}
+  - component: {fileID: 6191997067623830788}
   m_Layer: 0
   m_Name: Wiskey
   m_TagString: Untagged
@@ -276,3 +277,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6191997067623830788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6668619395391831040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35876f07403057f4e8a14533119c2b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

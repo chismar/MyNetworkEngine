@@ -58,6 +58,9 @@ class MapSiteObject : MonoBehaviour, IExportable
             siteDef.AttachmentRotation = attachment.transform.rotation.eulerAngles.y;
             siteDef.AttachmentSize = Mathf.Abs(attachment.transform.lossyScale.x);
         }
+
+        var sceneDef = SceneDefGetter.ExportSceneFrom(gameObject.GetComponentsInChildren<ISceneExportable>());
+        siteDef.AttachedScene = sceneDef;
         return siteDef;
     }
 

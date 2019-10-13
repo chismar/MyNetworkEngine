@@ -29,7 +29,7 @@ namespace Definitions
 
         public JsonConverterCollection Converters => Serializer.Converters;
         private ILoader _loader;
-        public Defs(ILoader loader)
+        public Defs(ILoader loader, bool createNetIDs = true)
         {
             _loader = loader;
             Deserializer = new DeserializerImpl(loader);
@@ -40,7 +40,8 @@ namespace Definitions
             Converters.Add(NonResourcesWithVariables.Instance);
             Converters.Add(TemplateVariableConverter.Instance);
             Converters.Add(TypeConverter.Instance);
-            CreateNetIDs();
+            if (createNetIDs)
+                CreateNetIDs();
         }
 
         public Action<string> Reloaded;

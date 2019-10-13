@@ -76,12 +76,14 @@ namespace Yogollag
     }
 
     [GenerateSync]
-    public abstract class RitualSiteEntity : GhostedEntity, IStatEntity, IHasSpells
+    public abstract class RitualSiteEntity : GhostedEntity, IStatEntity, IHasSpells, IEntityObject
     {
         [Sync(SyncType.Client)]
         public virtual SpellsEngine SpellsEngine { get; set; } = SyncObject.New<SpellsEngine>();
         [Sync(SyncType.Client)]
         public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
+        [Sync]
+        public virtual IEntityObjectDef Def { get; set; }
     }
 
     public static class RitualEventCalcer

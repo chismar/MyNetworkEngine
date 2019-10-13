@@ -1,4 +1,4 @@
 {
     "$type": "BuildingEntity",
-    "PhysicalBodyDef": "./SimpleBuilding6PhysicalBody"
+    "PhysicalBody": "./SimpleBuilding6PhysicalBodyEngine"
 }

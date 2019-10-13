@@ -11,17 +11,17 @@ using Volatile;
 
 namespace Yogollag
 {
-    public class MobDef : BaseDef, IEntityObjectDef
-    {
-        public DefRef<StatsEngineDef> Stats { get; set; }
-        public DefRef<AIEngineDef> AIEngineDef { get; set; }
-        public DefRef<IRenderableDef> RenderableDef { get; set; }
-        public string Name { get; set; }
-    }
     [GenerateSync]
-    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity, IHasSpells
+    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity, IHasSpells, IHasLinksEngine
     {
+
+        [Sync]
+        public virtual LinksEngine Links { get; set; } = SyncObject.New<LinksEngine>();
+
+        [Def]
+        public virtual string Name { get; set; }
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual float Rotation { get; set; }
         [Sync(SyncType.Client)]
         public virtual AIEngine AI { get; set; } = SyncObject.New<AIEngine>();
@@ -33,25 +33,23 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
 
-        MobDef MobDef => (MobDef)Def;
 
-        public IRenderableDef RenDef => MobDef.RenderableDef.Def;
-        public string Name => MobDef.Name;
 
+        [SceneDef]
         public Vec2 Position { get => Locomotion.Position; set => Locomotion.Position = value; }
         [Sync(SyncType.Client)]
         public virtual StatsEngine StatsEngine { get; set; } = SyncObject.New<StatsEngine>();
         public VoltBody PhysicsBody { get; set; }
 
-        SpriteRenderer _spriteRenderer;
+        public virtual SpriteRenderer _spriteRenderer { get; set; }
         public Mob()
         {
             _spriteRenderer = new SpriteRenderer(this);
         }
         public override void OnCreate()
         {
-            AI.Init(MobDef.AIEngineDef, SpellsEngine, Locomotion);
-            StatsEngine.Init(MobDef.Stats);
+            AI.Init(SpellsEngine, Locomotion);
+            StatsEngine.Init();
         }
 
         public override void OnInit()
@@ -79,7 +77,7 @@ namespace Yogollag
         {
             AI.Update();
             Locomotion.Tick();
-            if (StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
+            if (StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
         }
 

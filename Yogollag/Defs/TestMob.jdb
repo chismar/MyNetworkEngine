@@ -1,8 +1,8 @@
 {
     "$type": "MobDef",
     "Name": "Test mob",
-    "RenderableDef": {
-        "$type": "SpriteRenderedDef",
+    "_spriteRenderer": {
+        "$type": "SpriteRendererDef",
         "Sprite":{
             "$type":"SpriteDef",
             "SpriteSheetName":"characters",
@@ -10,7 +10,7 @@
             "Y":0
         }
     },
-    "AIEngineDef": {
+    "AI": {
         "$type": "AIEngine",
         "Rules": {
             "$type": "AIRules",
@@ -25,12 +25,12 @@
                     "PointSelector": {
                         "$type": "RandomPointSelector",
                         "Radius": 100
-                    }
+                    },
                 }
             ]
         }
     },
-    "Stats":{
+    "StatsEngine":{
         "$type": "StatsEngine",
         "Stats": [
             {

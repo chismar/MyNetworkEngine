@@ -1,10 +1,13 @@
 {
     "$type":"CharacterEntityDef",
-    "Sprite":{
-        "$type":"SpriteDef",
-        "SpriteSheetName":"characters",
-        "X":0,
-        "Y":0
+    "_spriteRenderer":{
+        "$type":"SpriteRendererDef",
+        "Sprite":{
+            "$type":"SpriteDef",
+            "SpriteSheetName":"characters",
+            "X":0,
+            "Y":0
+        }
     },
     "StatsEngine": {
         "$type": "StatsEngine",

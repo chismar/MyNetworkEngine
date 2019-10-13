@@ -8,6 +8,8 @@ namespace Definitions
         public int Line { get; }
         public int Col { get; }
         public int ProtoIndex { get; }
+        public bool IsBase => Line == 0 && Col == 0 && ProtoIndex == 0;
+
         public ulong RootID() => Root == null? 0 : Crc64.Compute(Root);
         public DefIDFull(string root, int line, int col, int protoIndex)
         {

@@ -65,6 +65,16 @@
             "url": "./Yogollag/DEFS_SCHEMA.json"
         }
     ],
-    "sortJSON.orderOverride": ["$type", "$id", "$overrideVars", "$proto", "$vars"]
-
+    "sortJSON.orderOverride": ["$type", "$id", "$overrideVars", "$proto", "$vars"],
+    "runOnSave.statusMessageTimeout": 3000,
+        "runOnSave.commands": [
+            {
+                "match": ".*\\.csx$",
+                "notMatch": "[\\\\\\/]_[^\\\\\\/]*\\.csx$",
+                "command": "dotnet ./ModMetaGen/bin/Debug/netcoreapp2.2/ModMetaGen.dll ${fileBasenameNoExtension} ${file}",
+                "runIn": "terminal",
+                "runningStatusMessage": "Run on save ${fileBasename}",
+                "finishStatusMessage": "${fileBasename} runedd"
+            }
+        ]
 }

@@ -15,11 +15,12 @@ class Locator : VisualSetup
         return new LocatorVisual();
     }
     IEntityObject _eo;
+    VisualObject _subObj;
     private void Update()
     {
         if (_vc.Value is IEntityObject eobj)
         {
-            if (eobj.Def != null)
+            if (eobj.Def != null && eobj.Def.Address.IsBase)
                 if (eobj != _eo)
                 {
                     if (_go != null)
@@ -31,15 +32,19 @@ class Locator : VisualSetup
                     if (prefab != null)
                     {
                         _go = (GameObject)GameObject.Instantiate(prefab, transform);
-                        _go.GetComponent<Visual>().Init(eobj);
+                        _vc.AddChild(_subObj = _go.GetComponent<Visual>().Init(eobj));
                     }
                 }
         }
         else if (_eo != null)
         {
             if (_go != null)
+            {
+                _vc.RemoveChild(_subObj);
+                _subObj = null;
+                _eo = null;
                 Destroy(_go);
-            _eo = null;
+            }
         }
     }
 }

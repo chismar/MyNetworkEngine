@@ -1,0 +1,119 @@
+{
+  "$type": "PhysicalBodyEngineDef",
+  "CustomName": null,
+  "Shapes": [
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -0.68,
+        "Y": 8.870001
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 17.85,
+      "SizeY": 1.0
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -0.68,
+        "Y": -10.1
+      },
+      "Rotation": 0.0,
+      "HasBody": true,
+      "SizeX": 17.85,
+      "SizeY": 1.0
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -10.1500006,
+        "Y": -0.939999938
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 17.8500042,
+      "SizeY": 1.00000024
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 8.799999,
+        "Y": -6.44
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 7.100005,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": 8.799999,
+        "Y": 5.26
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 7.100005,
+      "SizeY": 1.00000072
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -9.650001,
+        "Y": 6.84
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 2.96000218,
+      "SizeY": 3.080002
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -0.68,
+        "Y": -7.6
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.15000081,
+      "SizeY": 0.9900007
+    },
+    {
+      "$type": "BoxPhysicalShapeDef",
+      "CustomName": null,
+      "SpriteDef": null,
+      "Offset": {
+        "$type": "Vec2",
+        "X": -0.68,
+        "Y": 6.5
+      },
+      "Rotation": -90.0,
+      "HasBody": true,
+      "SizeX": 1.15000081,
+      "SizeY": 0.9900007
+    }
+  ],
+  "IsStatic": true
+}

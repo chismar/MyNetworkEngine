@@ -1,2 +1,0 @@
-obj\Debug\netstandard2.0\DefFormatter.jQzuJylp.generated.cs
-obj\Debug\netstandard2.0\NetworkNode.bgiBrjlt.generated.cs

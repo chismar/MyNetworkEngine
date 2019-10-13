@@ -11,7 +11,7 @@ class PhysicalBodySource : MonoBehaviour, IExportable
 {
     public BaseDef Export()
     {
-        var bodyDef = new PhysicalBodyDef();
+        var bodyDef = new PhysicalBodyEngineDef();
         bodyDef.IsStatic = true;
         var boxes = GetComponentsInChildren<BoxCollider>();
         foreach(var box in boxes)

@@ -338,7 +338,7 @@ static class Scripting
         public bool Check(ScriptingContext ctx)
         {
             var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) as IStatEntity;
-            BaseStat stat = statEntity.StatsEngine.Stats.SingleOrDefault(x => x.StatDef == StatDef);
+            BaseStat stat = statEntity.StatsEngine.StatsSync.SingleOrDefault(x => x.StatDef == StatDef);
             if (stat != null)
                 return MoreThan < stat.Value && LessThan > stat.Value;
             else
@@ -393,7 +393,7 @@ static class Scripting
             var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) as IStatEntity;
             if (statEntity == null)
                 return;
-            BaseStat stat = statEntity.StatsEngine.Stats.SingleOrDefault(x => x.StatDef == StatDef);
+            BaseStat stat = statEntity.StatsEngine.StatsSync.SingleOrDefault(x => x.StatDef == StatDef);
             if (stat == null)
                 return;
             if (Set.HasValue)

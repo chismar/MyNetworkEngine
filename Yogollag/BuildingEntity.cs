@@ -19,18 +19,19 @@ namespace Yogollag
         public virtual IEntityObjectDef Def { get; set; }
         public IRenderableDef RenDef { get; }
         public string Name { get; }
+        [SceneDef]
         public float Rotation { get => PhysicalBody.Rotation; set => PhysicalBody.Rotation = value; }
+        [SceneDef]
         public Vec2 Position { get => PhysicalBody.PhysicalPos; set => PhysicalBody.PhysicalPos = value; }
 
         public override void OnInit()
         {
-            var physDef = (IHasPhysicalBodyDef)Def;
-            PhysicalBody.Init(physDef.PhysicalBodyDef);
+            PhysicalBody.Init();
         }
         public void Render(RenderTarget rt)
         {
             HierarchyTransform t = new HierarchyTransform(Position, Rotation, null);
-            foreach (var shape in ((IHasPhysicalBodyDef)Def).PhysicalBodyDef.Def.Shapes)
+            foreach (var shape in ((BuildingEntityDef)Def).PhysicalBody.Def.Shapes)
             {
                 if (shape.Def is BoxPhysicalShapeDef box)
                 {
@@ -45,8 +46,4 @@ namespace Yogollag
     }
 
 
-    public class BuildingEntityDef : BaseDef, IHasPhysicalBodyDef, IEntityObjectDef
-    {
-        public DefRef<PhysicalBodyDef> PhysicalBodyDef { get; set; }
-    }
 }

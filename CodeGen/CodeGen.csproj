@@ -12,12 +12,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.88" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.3.1" />
     <PackageReference Include="Scriban" Version="1.2.7" />
+    <PackageReference Include="Validation" Version="2.4.22" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ResourcesSystem\Definitions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CodeGeneration.Roslyn">
+      <HintPath>..\bin\CodeGeneration.Roslyn.Engine\Release\netstandard2.0\CodeGeneration.Roslyn.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeGeneration.Roslyn.Attributes">
+      <HintPath>..\bin\CodeGeneration.Roslyn.Engine\Release\netstandard2.0\CodeGeneration.Roslyn.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeGeneration.Roslyn.Engine">
+      <HintPath>..\bin\CodeGeneration.Roslyn.Engine\Release\netstandard2.0\CodeGeneration.Roslyn.Engine.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

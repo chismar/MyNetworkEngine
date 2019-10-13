@@ -88,8 +88,13 @@ namespace Yogollag
         HashSet<object> _objectsCache = new HashSet<object>();
         HashSet<object> _removeObjects = new HashSet<object>();
         Dictionary<object, VisualComponent> _perValueComponent = new Dictionary<object, VisualComponent>();
-        public VisualCollection(Func<object, VisualComponent> create, Action<VisualComponent> destroy)
+        string _filter;
+        public VisualCollection(string filter, Func<object, VisualComponent> create, Action<VisualComponent> destroy)
         {
+            if (!string.IsNullOrWhiteSpace(filter))
+                _filter = filter;
+            else
+                _filter = null;
             this._create = create;
             this._destroy = destroy;
         }
@@ -101,6 +106,13 @@ namespace Yogollag
             _objectsCache.Clear();
             foreach (var element in collection)
             {
+                if(element is IEntityObject eo)
+                {
+                    if (eo.Def == null)
+                        continue;
+                    else if (_filter != null && !eo.Def.Address.Root.Contains(_filter))
+                        continue;
+                }
                 _objectsCache.Add(element);
                 if (!_perValueComponent.TryGetValue(element, out var vc))
                 {

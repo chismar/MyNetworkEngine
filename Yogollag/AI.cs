@@ -9,9 +9,10 @@ using LiteNetLib.Utils;
 namespace Yogollag
 {
     [GenerateSync]
-    public abstract class AIEngine : SyncObject
+    public abstract class AIEngine : SyncObject, IEntityComponent
     {
-        AIEngineDef _def;
+        [Def]
+        public virtual AIRulesDef Rules { get; set; }
         SpellId _currentSpellId;
         AIRuleDef _currentRule;
         SpellsEngine _spellsEngine;
@@ -20,9 +21,11 @@ namespace Yogollag
         Vec2? _currentTargetPoint;
         EntityId? _currentTargetEntity;
         long _doUntil;
-        public void Init(AIEngineDef def, SpellsEngine spellsEngine, LocomotionEngine locoEngine)
+
+        public IDef Def { get; set; }
+
+        public void Init(SpellsEngine spellsEngine, LocomotionEngine locoEngine)
         {
-            _def = def;
             _spellsEngine = spellsEngine;
             _locoEngine = locoEngine;
         }
@@ -101,9 +104,9 @@ namespace Yogollag
         public void Update()
         {
             var ctx = new ScriptingContext() { ProcessingEntity = ParentEntity, Target = ParentEntity.Id };
-            foreach (var ruleRef in _def.Rules.Def.Rules)
+            foreach (var ruleRef in Rules.Rules)
             {
-                var rule = ruleRef.Def;
+                var rule = ruleRef;
                 if (!rule.Predicate.Def?.Check(ctx) ?? false)
                     continue;
 
@@ -114,14 +117,9 @@ namespace Yogollag
         }
     }
 
-    public class AIEngineDef : BaseDef
-    {
-        public DefRef<AIRulesDef> Rules { get; set; }
-    }
-
     public class AIRulesDef : BaseDef
     {
-        public List<DefRef<AIRuleDef>> Rules { get; set; } = new List<DefRef<AIRuleDef>>();
+        public List<AIRuleDef> Rules { get; set; } = new List<AIRuleDef>();
     }
     [CanBeCreatedFromAliasedPrimitive(typeof(float), "CreateFromAlias")]
     public abstract class CalcerDef : BaseDef

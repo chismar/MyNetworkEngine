@@ -15,4 +15,8 @@ namespace CodeGen
     public class GenerateSyncAttribute : Attribute
     {
     }
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false, AllowMultiple = true)]
+    public class GeneratedClassAttribute : Attribute
+    {
+    }
 }

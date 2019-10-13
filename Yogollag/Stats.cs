@@ -46,19 +46,23 @@ namespace Yogollag
         }
     }
     [GenerateSync]
-    public abstract class StatsEngine : SyncObject
+    public abstract class StatsEngine : SyncObject, IEntityComponent
     {
+        [Def(true)]
+        public virtual List<DefRef<StatInstanceDef>> Stats { get; set; }
         [Sync(SyncType.Client)]
-        public virtual DeltaList<BaseStat> Stats { get; set; } = SyncObject.New<DeltaList<BaseStat>>();
-        public void Init(StatsEngineDef def)
+        public virtual DeltaList<BaseStat> StatsSync { get; set; } = SyncObject.New<DeltaList<BaseStat>>();
+        public IDef Def { get; set; }
+
+        public void Init()
         {
-            foreach (var statInstDef in def.Stats)
+            foreach (var statInstDef in Stats)
             {
                 var stat = SyncObject.New<LinearStat>();
                 stat.StatDef = statInstDef.Def.Stat.Def;
                 stat.Set(statInstDef.Def.InitialValue);
                 stat.FinishInit();
-                Stats.Add(stat);
+                StatsSync.Add(stat);
             }
         }
     }
@@ -66,10 +70,6 @@ namespace Yogollag
     {
         public DefRef<StatDef> Stat { get; set; }
         public float InitialValue { get; set; }
-    }
-    public class StatsEngineDef : BaseDef
-    {
-        public List<DefRef<StatInstanceDef>> Stats { get; set; } = new List<DefRef<StatInstanceDef>>();
     }
     public class StatDef : BaseDef
     {

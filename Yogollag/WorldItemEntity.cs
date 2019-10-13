@@ -19,31 +19,45 @@ namespace Yogollag
     public abstract class WorldItemEntity : GhostedEntity,
         IPositionedEntity, IRenderable, IInteractive, IEntityObject
     {
+        [SceneDef]
+        public virtual ItemDef StartingItemDef { get; set; }
         [Sync(SyncType.Client)]
         public virtual Item Item { get; set; }
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual Vec2 Position { get; set; }
         public IRenderableDef RenDef { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Name { get; set; }
         public InteractiveDef InteractiveDef { get { return Item.ItemDef.Interactive; } set { } }
 
         [Sync(SyncType.Client)]
+        [SceneDef]
         public virtual float Rotation { get; set; }
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
         public override void OnCreate()
         {
             var wied = ((WorldItemEntityDef)Def);
-            if(Item == null && wied.ChooseFromDefaultItems.Count == 0)
+            if (Item == null && StartingItemDef == null && wied.ChooseFromDefaultItems.Count == 0)
             {
                 CurrentServer.Destroy(Id);
             }
             else if (Item == null)
             {
-                var item = SyncObject.New<Item>();
-                item.ItemDef = wied.ChooseFromDefaultItems[new Random().Next(wied.ChooseFromDefaultItems.Count)].Def;
-                item.FinishInit();
-                Item = item;
+                if(StartingItemDef != null)
+                {
+                    var item = SyncObject.New<Item>();
+                    item.ItemDef = StartingItemDef;
+                    item.FinishInit();
+                    Item = item;
+                }
+                else
+                {
+                    var item = SyncObject.New<Item>();
+                    item.ItemDef = wied.ChooseFromDefaultItems[new Random().Next(wied.ChooseFromDefaultItems.Count)].Def;
+                    item.FinishInit();
+                    Item = item;
+                }
             }
         }
 

@@ -23,9 +23,14 @@
     <ProjectReference Include="..\VolatilePhysics\VolatilePhysics.csproj" />
   </ItemGroup>
 
+  <Import Project="..\bin\CodeGeneration.Roslyn.BuildTime\Release\netstandard1.0\build\CodeGeneration.Roslyn.BuildTime.targets" />
+
+  <ItemDefinitionGroup>
+    <Compile>
+      <Generator>MSBuild:GenerateCodeFromAttributes</Generator>
+    </Compile>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.88" />
-    <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.88" />
     <PackageReference Include="UrhoSharp" Version="1.9.67" />
     <Reference Include="OpenTK">
       <HintPath>..\TestGame\extlibs\OpenTK.dll</HintPath>
