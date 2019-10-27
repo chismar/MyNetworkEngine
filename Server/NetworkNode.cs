@@ -388,14 +388,72 @@ namespace NetworkEngine
         public EntityId Id { get; set; }
         public override int NetId => 7;
     }
-    public abstract class SyncObject
+
+    public abstract class SyncBaseApi
     {
-        public NetworkNode CurrentServer => ParentEntity.CurrentServer;
-        public NetworkEntity ParentEntity;
+        public abstract EntityId Id { get; set; }
+        public abstract NetworkNode CurrentServer { get; set; }
+        public abstract NetworkEntity ParentEntity { get; set; }
+        public abstract bool IsMaster { get; }
+        public virtual void CallInitOnComponents() { }
+        public virtual void CallCreateOnComponents() { }
+        public virtual void CallDestroyOnComponents() { }
+        public virtual void SetParentEntityRecursive() { }
+        protected virtual void SetDefsForComponents()
+        {
+
+        }
+
+        protected void RunLater(Action run)
+        {
+            if (ParentEntity.RunLaterDelegates == null)
+                ParentEntity.RunLaterDelegates = new List<(SyncBaseApi, Action)>();
+            ParentEntity.RunLaterDelegates.Add((this, run));
+        }
+        public virtual void OnAfterDeserialize() { }
+
+        public void Create()
+        {
+            SetDefsForComponents();
+            SetParentEntityRecursive();
+            CallCreateOnComponents();
+            OnCreate();
+        }
+        public void Init()
+        {
+            SetDefsForComponents();
+            SetParentEntityRecursive();
+            CallInitOnComponents();
+            OnInit();
+        }
+        public void Destroy() { CallDestroyOnComponents(); OnDestroy(); }
+        public virtual void OnCreate() { }
+        public virtual void OnInit() { }
+        public virtual void OnDestroy() { }
+        public virtual void InitFromSceneDef(BaseDef def) { }
+    }
+    public abstract class SyncObject : SyncBaseApi
+    {
+        public override bool IsMaster => ParentEntity.IsMaster;
         [Sync(SyncType.Client)]
         public virtual int SyncId { get; set; }
-        public EntityId Id => new EntityId(ParentEntity.Id.Id1, ParentEntity.Id.Id2, SyncId);
-        public virtual void SetParentEntityRecursive() { }
+        public override NetworkNode CurrentServer { get => ParentEntity.CurrentServer; set => throw new InvalidOperationException(); }
+
+        public override EntityId Id { get => new EntityId(ParentEntity.Id.Id1, ParentEntity.Id.Id2, SyncId); set => throw new InvalidOperationException(); }
+        NetworkEntity _pe;
+        public override NetworkEntity ParentEntity { get => _pe; set => _pe = value; }
+        public void FinishInit()
+        {
+            ((IGhost)this).ClearSerialization();
+        }
+        public static T New<T>()
+        {
+            return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
+        }
+        public static T New<T>(Type type)
+        {
+            return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(type));
+        }
         public void SetParentEntity(NetworkEntity parentEntity)
         {
             if (ParentEntity != null && ParentEntity.IsMaster && parentEntity != ParentEntity)
@@ -412,22 +470,6 @@ namespace NetworkEngine
             SetDefsForComponents();
             SetParentEntityRecursive();
         }
-        protected virtual void SetDefsForComponents()
-        {
-
-        }
-        public void FinishInit()
-        {
-            ((IGhost)this).ClearSerialization();
-        }
-        public static T New<T>()
-        {
-            return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(typeof(T)));
-        }
-        public static T New<T>(Type type)
-        {
-            return (T)Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromDeclaredType(type));
-        }
 
         protected void CheckStream(NetDataReader reader, int tag)
         {
@@ -439,8 +481,6 @@ namespace NetworkEngine
         {
             writer.Put(tag);
         }
-
-        public virtual void InitFromSceneDef(BaseDef def) { }
     }
     public interface ITicked
     {
@@ -1043,6 +1083,16 @@ namespace NetworkEngine
         private Task ProcessMessages()
         {
             List<Task> tasks = new List<Task>();
+            foreach (var e in _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x=>x.Value.EntitiesReplicatedFromRemote.All)))
+                if (e.RunLaterDelegates != null && e.RunLaterDelegates.Count > 0)
+                    tasks.Add(Task.Run(() => {
+                        for (int i = 0; i < e.RunLaterDelegates.Count; i++)
+                            if (e.RunLaterDelegates[i].Item1.ParentEntity == e)
+                                e.RunLaterDelegates[i].Item2();
+                        e.RunLaterDelegates.Clear();
+                    }));
+            Task.WhenAll(tasks).Wait();
+            tasks.Clear();
             foreach (var e in _entities.Collection)
             {
                 var entityState = e.Value;
@@ -1255,22 +1305,21 @@ namespace NetworkEngine
             return _masterToId[type];
         }
     }
-    public abstract class NetworkEntity
+    public abstract class NetworkEntity : SyncBaseApi
     {
         public object UserData;
         public static AsyncLocal<EntityId> CurrentlyExecutingInContext = new AsyncLocal<EntityId>();
         public bool IsCurrentlyExecuting => CurrentlyExecutingInContext.Value == Id && IsMaster;
-        public bool IsMaster => CurrentServer.Id == ServerId;
-        public NetworkNode CurrentServer;
+        public override bool IsMaster => CurrentServer.Id == ServerId;
         public NetworkNodeId ServerId;
         public NetworkNodeId AuthorityServerId;
-        public EntityId Id;
+        public List<(SyncBaseApi, Action)> RunLaterDelegates;
+        public override EntityId Id { get; set; }
         [Sync(SyncType.Client)]
         public virtual int SyncObjectIdCounter { get; set; }
-        public NetworkEntity ParentEntity => this;
-        public virtual void SetParentEntityRecursive() { }
+        public override NetworkNode CurrentServer { get; set; }
+        public override NetworkEntity ParentEntity { get => this; set => throw new InvalidOperationException(); }
         public virtual bool HasAuthority { get; set; }
-        public virtual void OnCreate() { }
         public Dictionary<int, SyncObject> SubObjects = new Dictionary<int, SyncObject>();
         public SyncObject Resolve(int id)
         {
@@ -1278,24 +1327,6 @@ namespace NetworkEngine
                 return so;
             return null;
         }
-        protected virtual void SetDefsForComponents()
-        {
-
-        }
-        public void Create()
-        {
-            SetDefsForComponents();
-            SetParentEntityRecursive();
-            OnCreate();
-        }
-        public void Init()
-        {
-            SetDefsForComponents();
-            SetParentEntityRecursive();
-            OnInit();
-        }
-        public virtual void OnInit() { }
-        public virtual void OnDestroy() { }
         public virtual void Clear() { }
         protected void CheckStream(NetDataReader reader, int tag)
         {
@@ -1436,15 +1467,12 @@ namespace NetworkEngine
 
     public abstract class EntityMessage : ServerMessage
     {
-        EntityId[] VersionsEntities { get; set; }
-        int[] ProperVersionsOfEntities { get; set; }
         public Guid TransactionId { get; set; }
         public EntityId EntityId { get; set; }
         public abstract void Run(object entity);
 
 
     }
-
     public class RemoteConnectionToken
     {
         public string IP;
@@ -1520,6 +1548,8 @@ namespace NetworkEngine
     [GenerateSync]
     public abstract class DeltaList<T> : SyncObject, IHasCustomSerialization, IList<T>, ICollection
     {
+        public event Action<T> OnItemAdded;
+        public event Action<T> OnItemRemoved;
         public int Count => _internalList.Count;
         public bool IsReadOnly => ((ICollection<T>)_internalList).IsReadOnly;
         [Sync(SyncType.Master)]
@@ -1618,23 +1648,32 @@ namespace NetworkEngine
             {
                 case OperationType.Add:
                     _internalList.Add(DeserializeObject(stream));
+                    OnItemAdded?.Invoke(_internalList[_internalList.Count - 1]);
                     break;
                 case OperationType.Insert:
-                    _internalList.Insert(stream.GetInt(), DeserializeObject(stream));
+                    var insertAt = stream.GetInt();
+                    _internalList.Insert(insertAt, DeserializeObject(stream));
+                    OnItemAdded?.Invoke(_internalList[insertAt]);
                     break;
                 case OperationType.SetAt:
-                    _internalList[stream.GetInt()] = DeserializeObject(stream);
+                    var setAt = stream.GetInt();
+                    OnItemRemoved?.Invoke(_internalList[setAt]);
+                    _internalList[setAt] = DeserializeObject(stream);
+                    OnItemAdded?.Invoke(_internalList[setAt]);
                     break;
                 case OperationType.RemoveAt:
                     var remIndex = stream.GetInt();
                     var obj = _internalList[remIndex];
-                    _internalList.RemoveAt(remIndex);
                     if (IsSyncObjectList)
                         ((IGhost)obj).Deserialize(stream);
+                    OnItemRemoved?.Invoke(obj);
+                    _internalList.RemoveAt(remIndex);
                     break;
                 case OperationType.Clear:
                     if (IsSyncObjectList)
                         DeserializeAllChangesFromStream(stream);
+                    foreach (var ro in _internalList)
+                        OnItemRemoved?.Invoke(ro);
                     _internalList.Clear();
                     break;
             }
@@ -1841,16 +1880,21 @@ namespace NetworkEngine
 
         private void InternalSetAt(T t, int index)
         {
+            OnItemRemoved?.Invoke(_internalList[index]);
             _internalList[index] = t;
+            OnItemAdded?.Invoke(t);            
             _ops.Add(new DeltaOperation(OperationType.SetAt, index, t));
         }
         private void InternalInsert(T t, int index)
         {
             _internalList.Insert(index, t);
+            OnItemAdded?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.Insert, index, t));
         }
         private void InternalClear()
         {
+            foreach (var obj in _internalList)
+                OnItemRemoved?.Invoke(obj);
             if (IsSyncObjectList)
             {
                 var oldList = _internalList;
@@ -1866,12 +1910,14 @@ namespace NetworkEngine
         private void InternalAdd(T t)
         {
             _internalList.Add(t);
+            OnItemAdded?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.Add, 0, t));
         }
         private void InternalRemove(int index)
         {
             var t = _internalList[index];
             _internalList.RemoveAt(index);
+            OnItemRemoved?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.RemoveAt, index, t));
         }
         public T this[int index] { get { return _internalList[index]; } set { InternalSetAt(value, index); } }

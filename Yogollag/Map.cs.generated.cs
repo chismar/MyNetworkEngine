@@ -24,6 +24,18 @@ namespace Yogollag
         override protected void SetDefsForComponents()
         {
         }
+
+        override public void CallInitOnComponents()
+        {
+        }
+
+        override public void CallCreateOnComponents()
+        {
+        }
+
+        override public void CallDestroyOnComponents()
+        {
+        }
     }
 
     //obj ChunkEntity generic  hasCustomSerialization false
@@ -49,18 +61,18 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -1633368609);
+            CheckStream(stream, 552116342);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -329825587);
+            CheckStream(stream, -1321909823);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -329825587);
+                CheckStream(stream, -1321909823);
                 var has = stream.GetBool();
                 Tiles = !has ? default : (MapTile[, ])SyncTypesMap.GetSerializerForObjType(typeof(MapTile[, ])).Deserialize(stream);
-                CheckStream(stream, -329825587);
+                CheckStream(stream, -1321909823);
             }
         }
 
@@ -77,7 +89,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -1633368609);
+            SafeguardStream(stream, 552116342);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -92,10 +104,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -329825587);
+            SafeguardStream(stream, -1321909823);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -329825587);
+                SafeguardStream(stream, -1321909823);
                 hasAny = true;
                 if (Tiles != default)
                 {
@@ -107,7 +119,7 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, -329825587);
+                SafeguardStream(stream, -1321909823);
             }
 
             return hasAny;
@@ -143,7 +155,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityAddTileModMessage : EntityMessage
     {
-        public override int NetId => -252565067;
+        public override int NetId => 1704660330;
         public int x;
         public int y;
         public TileModDef modDef;
@@ -224,7 +236,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityRemoveTileModMessage : EntityMessage
     {
-        public override int NetId => 1072636213;
+        public override int NetId => 530092769;
         public int x;
         public int y;
         public TileModDef modDef;

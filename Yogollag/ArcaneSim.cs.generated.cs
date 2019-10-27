@@ -44,6 +44,24 @@ namespace Yogollag
             SpellsEngine.Def = (IDef)((RitualSiteEntityDef)Def)?.SpellsEngine.Def;
             StatsEngine.Def = (IDef)((RitualSiteEntityDef)Def)?.StatsEngine.Def;
         }
+
+        override public void CallInitOnComponents()
+        {
+            SpellsEngine.Init();
+            StatsEngine.Init();
+        }
+
+        override public void CallCreateOnComponents()
+        {
+            SpellsEngine.Create();
+            StatsEngine.Create();
+        }
+
+        override public void CallDestroyOnComponents()
+        {
+            SpellsEngine.Destroy();
+            StatsEngine.Destroy();
+        }
     }
 
     //obj RitualSiteEntity generic  hasCustomSerialization false
@@ -95,15 +113,15 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 409348401);
+            CheckStream(stream, 1985959189);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -2056676693);
+            CheckStream(stream, -573325288);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -2056676693);
+                CheckStream(stream, -573325288);
                 var nullOrNot = stream.GetByte();
                 if (nullOrNot == 0)
                 {
@@ -116,19 +134,19 @@ namespace Yogollag
                     SpellsEngine = (SpellsEngine)newVal;
                 }
 
-                CheckStream(stream, -2056676693);
+                CheckStream(stream, -573325288);
             }
             else
             {
-                CheckStream(stream, -2056676693);
+                CheckStream(stream, -573325288);
                 ((IGhost)SpellsEngine)?.Deserialize(stream);
-                CheckStream(stream, -2056676693);
+                CheckStream(stream, -573325288);
             }
 
-            CheckStream(stream, 139269288);
+            CheckStream(stream, 1723521002);
             if ((mask & (1 << 1)) != 0)
             {
-                CheckStream(stream, 139269288);
+                CheckStream(stream, 1723521002);
                 var nullOrNot = stream.GetByte();
                 if (nullOrNot == 0)
                 {
@@ -141,22 +159,22 @@ namespace Yogollag
                     StatsEngine = (StatsEngine)newVal;
                 }
 
-                CheckStream(stream, 139269288);
+                CheckStream(stream, 1723521002);
             }
             else
             {
-                CheckStream(stream, 139269288);
+                CheckStream(stream, 1723521002);
                 ((IGhost)StatsEngine)?.Deserialize(stream);
-                CheckStream(stream, 139269288);
+                CheckStream(stream, 1723521002);
             }
 
-            CheckStream(stream, -652744550);
+            CheckStream(stream, 1120680774);
             if ((mask & (1 << 2)) != 0)
             {
-                CheckStream(stream, -652744550);
+                CheckStream(stream, 1120680774);
                 var has = stream.GetBool();
                 Def = !has ? default : (IEntityObjectDef)SyncTypesMap.GetSerializerForObjType(typeof(IEntityObjectDef)).Deserialize(stream);
-                CheckStream(stream, -652744550);
+                CheckStream(stream, 1120680774);
             }
         }
 
@@ -175,7 +193,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 409348401);
+            SafeguardStream(stream, 1985959189);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -190,10 +208,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -2056676693);
+            SafeguardStream(stream, -573325288);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -2056676693);
+                SafeguardStream(stream, -573325288);
                 hasAny = true;
                 if (SpellsEngine == null)
                     stream.Put((byte)0);
@@ -204,19 +222,19 @@ namespace Yogollag
                     ((IGhost)SpellsEngine).Serialize(ref stream, true);
                 }
 
-                SafeguardStream(stream, -2056676693);
+                SafeguardStream(stream, -573325288);
             }
             else
             {
-                SafeguardStream(stream, -2056676693);
+                SafeguardStream(stream, -573325288);
                 hasAny |= ((IGhost)SpellsEngine)?.Serialize(ref stream, initial) ?? false;
-                SafeguardStream(stream, -2056676693);
+                SafeguardStream(stream, -573325288);
             }
 
-            SafeguardStream(stream, 139269288);
+            SafeguardStream(stream, 1723521002);
             if ((deltaMask & (1 << 1)) != 0)
             {
-                SafeguardStream(stream, 139269288);
+                SafeguardStream(stream, 1723521002);
                 hasAny = true;
                 if (StatsEngine == null)
                     stream.Put((byte)0);
@@ -227,19 +245,19 @@ namespace Yogollag
                     ((IGhost)StatsEngine).Serialize(ref stream, true);
                 }
 
-                SafeguardStream(stream, 139269288);
+                SafeguardStream(stream, 1723521002);
             }
             else
             {
-                SafeguardStream(stream, 139269288);
+                SafeguardStream(stream, 1723521002);
                 hasAny |= ((IGhost)StatsEngine)?.Serialize(ref stream, initial) ?? false;
-                SafeguardStream(stream, 139269288);
+                SafeguardStream(stream, 1723521002);
             }
 
-            SafeguardStream(stream, -652744550);
+            SafeguardStream(stream, 1120680774);
             if ((deltaMask & (1 << 2)) != 0)
             {
-                SafeguardStream(stream, -652744550);
+                SafeguardStream(stream, 1120680774);
                 hasAny = true;
                 if (Def != default)
                 {
@@ -251,7 +269,7 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, -652744550);
+                SafeguardStream(stream, 1120680774);
             }
 
             return hasAny;

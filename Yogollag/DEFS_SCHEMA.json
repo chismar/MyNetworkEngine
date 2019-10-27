@@ -3,6 +3,10 @@
     "$type": {
       "type": "string",
       "enum": [
+        "ActionEngineSceneDef",
+        "ActionEngineScene",
+        "ActionEngineDef",
+        "ActionEngine",
         "AIRulesDef",
         "AIRules",
         "CalcerDef",
@@ -154,6 +158,8 @@
         "TargetPointCast",
         "SpellDef",
         "Spell",
+        "ISpellEffectDef",
+        "ISpellEffect",
         "SpellsEngineSceneDef",
         "SpellsEngineScene",
         "SpellsEngineDef",
@@ -181,6 +187,148 @@
     }
   },
   "definitions": {
+    "ActionEngineSceneDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ActionEngineSceneDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ActionEngineSceneDef",
+            "ActionEngineScene"
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ActionEngineSceneDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ActionEngineSceneDef",
+            "ActionEngineScene"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineSceneDef"
+        }
+      ]
+    },
+    "ActionEngineDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ActionEngineDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ActionEngineDef",
+            "ActionEngine"
+          ]
+        },
+        "DefaultAvailableActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpellDefField"
+          }
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ActionEngineDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ActionEngineDef",
+            "ActionEngine"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
+        }
+      ]
+    },
     "AIRulesDef": {
       "type": "object",
       "additionalProperties": false,
@@ -1546,6 +1694,8 @@
         "$type": {
           "type": "string",
           "enum": [
+            "ActionEngineDef",
+            "ActionEngine",
             "AIEngineDef",
             "AIEngine",
             "RitualSiteEntityDef",
@@ -1592,6 +1742,9 @@
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
         },
         {
           "$ref": "#/definitions/AIEngineDef"
@@ -1686,6 +1839,8 @@
         "$type": {
           "type": "string",
           "enum": [
+            "ActionEngineSceneDef",
+            "ActionEngineScene",
             "AIEngineSceneDef",
             "AIEngineScene",
             "BuildingEntitySceneDef",
@@ -1724,6 +1879,9 @@
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineSceneDef"
         },
         {
           "$ref": "#/definitions/AIEngineSceneDef"
@@ -4692,6 +4850,12 @@
         "Spell": {
           "$ref": "#/definitions/SpellDefField"
         },
+        "BecameActiveBuff": {
+          "$ref": "#/definitions/SpellDefField"
+        },
+        "BecamePassiveBuff": {
+          "$ref": "#/definitions/SpellDefField"
+        },
         "CustomName": {
           "type": "string"
         }
@@ -6322,6 +6486,12 @@
         "ImpactOnStart": {
           "$ref": "#/definitions/IImpactDefField"
         },
+        "Effects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ISpellEffectDefField"
+          }
+        },
         "CustomName": {
           "type": "string"
         }
@@ -6354,6 +6524,71 @@
         },
         {
           "$ref": "#/definitions/SpellDef"
+        }
+      ]
+    },
+    "ISpellEffectDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ISpellEffectDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ISpellEffectDef",
+            "ISpellEffect"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ISpellEffectDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ISpellEffectDef",
+            "ISpellEffect"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ISpellEffectDef"
         }
       ]
     },
@@ -7079,6 +7314,10 @@
         "$type": {
           "type": "string",
           "enum": [
+            "ActionEngineSceneDef",
+            "ActionEngineScene",
+            "ActionEngineDef",
+            "ActionEngine",
             "AIRulesDef",
             "AIRules",
             "CalcerDef",
@@ -7256,6 +7495,12 @@
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
         },
         {
           "$ref": "#/definitions/AIRulesDef"
@@ -7573,6 +7818,10 @@
         "$type": {
           "type": "string",
           "enum": [
+            "ActionEngineSceneDef",
+            "ActionEngineScene",
+            "ActionEngineDef",
+            "ActionEngine",
             "AIRulesDef",
             "AIRules",
             "CalcerDef",
@@ -7724,6 +7973,8 @@
             "TargetPointCast",
             "SpellDef",
             "Spell",
+            "ISpellEffectDef",
+            "ISpellEffect",
             "SpellsEngineSceneDef",
             "SpellsEngineScene",
             "SpellsEngineDef",
@@ -7762,6 +8013,12 @@
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
         },
         {
           "$ref": "#/definitions/AIRulesDef"
@@ -7995,6 +8252,9 @@
           "$ref": "#/definitions/SpellDef"
         },
         {
+          "$ref": "#/definitions/ISpellEffectDef"
+        },
+        {
           "$ref": "#/definitions/SpellsEngineSceneDef"
         },
         {
@@ -8107,6 +8367,8 @@
     "TYPES_ENUM": {
       "type": "string",
       "enum": [
+        "ActionEngineSceneDef",
+        "ActionEngineDef",
         "AIRulesDef",
         "CalcerDef",
         "ConstantClacerDef",
@@ -8191,6 +8453,7 @@
         "InputCombo",
         "TargetPointCastDef",
         "SpellDef",
+        "ISpellEffectDef",
         "SpellsEngineSceneDef",
         "SpellsEngineDef",
         "SpriteDef",
@@ -8989,6 +9252,12 @@
     "ObjectField": {
       "oneOf": [
         {
+          "$ref": "#/definitions/ActionEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
+        },
+        {
           "$ref": "#/definitions/AIRulesDef"
         },
         {
@@ -9218,6 +9487,9 @@
         },
         {
           "$ref": "#/definitions/SpellDef"
+        },
+        {
+          "$ref": "#/definitions/ISpellEffectDef"
         },
         {
           "$ref": "#/definitions/SpellsEngineSceneDef"

@@ -353,6 +353,24 @@ namespace CodeGen
                         {{hasComp.name}}.Def = (IDef)(({{obj}}Def)Def)?.{{hasComp.name}}.Def;
                     {{end}}
                 }
+                override public void CallInitOnComponents()
+                {
+                    {{for hasComp in has}}
+                        {{hasComp.name}}.Init();
+                    {{end}}
+                }
+                override public void CallCreateOnComponents()
+                {
+                    {{for hasComp in has}}
+                        {{hasComp.name}}.Create();
+                    {{end}}
+                }
+                override public void CallDestroyOnComponents()
+                {
+                    {{for hasComp in has}}
+                        {{hasComp.name}}.Destroy();
+                    {{end}}
+                }
             }
             ";
         static Template _staticSyncClassTemplate = Scriban.Template.Parse(@"
@@ -455,7 +473,7 @@ namespace CodeGen
                     {{end}}
                     {{end}}
                     {{end}}
-                    
+                    OnAfterDeserialize();
                 }
                 public override void SetParentEntityRecursive()
                 {

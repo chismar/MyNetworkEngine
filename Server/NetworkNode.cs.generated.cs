@@ -420,6 +420,18 @@ namespace NetworkEngine
         override protected void SetDefsForComponents()
         {
         }
+
+        override public void CallInitOnComponents()
+        {
+        }
+
+        override public void CallCreateOnComponents()
+        {
+        }
+
+        override public void CallDestroyOnComponents()
+        {
+        }
     }
 
     //obj DeltaList generic <T >  hasCustomSerialization true
@@ -455,7 +467,7 @@ namespace NetworkEngine
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -1570543465);
+            CheckStream(stream, 283835935);
             CustomDeserialize(stream);
         }
 
@@ -472,7 +484,7 @@ namespace NetworkEngine
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -1570543465);
+            SafeguardStream(stream, 283835935);
             return CustomSerialize(ref stream, initial);
         }
     }
@@ -484,6 +496,18 @@ namespace NetworkEngine
     public partial class SyncEventSync<T>
     {
         override protected void SetDefsForComponents()
+        {
+        }
+
+        override public void CallInitOnComponents()
+        {
+        }
+
+        override public void CallCreateOnComponents()
+        {
+        }
+
+        override public void CallDestroyOnComponents()
         {
         }
     }
@@ -511,7 +535,7 @@ namespace NetworkEngine
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 160264915);
+            CheckStream(stream, -1391998940);
             CustomDeserialize(stream);
         }
 
@@ -528,7 +552,7 @@ namespace NetworkEngine
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 160264915);
+            SafeguardStream(stream, -1391998940);
             return CustomSerialize(ref stream, initial);
         }
     }

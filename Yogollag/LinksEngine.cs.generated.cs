@@ -47,6 +47,18 @@ namespace Yogollag
         override protected void SetDefsForComponents()
         {
         }
+
+        override public void CallInitOnComponents()
+        {
+        }
+
+        override public void CallCreateOnComponents()
+        {
+        }
+
+        override public void CallDestroyOnComponents()
+        {
+        }
     }
 
     //obj LinksEngine generic  hasCustomSerialization false
@@ -89,26 +101,26 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 1692492045);
+            CheckStream(stream, -37912309);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -512434836);
+            CheckStream(stream, 1507129787);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -512434836);
+                CheckStream(stream, 1507129787);
                 var has = stream.GetBool();
                 OwnerScene = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
-                CheckStream(stream, -512434836);
+                CheckStream(stream, 1507129787);
             }
 
-            CheckStream(stream, 216020498);
+            CheckStream(stream, -949503164);
             if ((mask & (1 << 1)) != 0)
             {
-                CheckStream(stream, 216020498);
+                CheckStream(stream, -949503164);
                 SyncId = stream.GetInt();
-                CheckStream(stream, 216020498);
+                CheckStream(stream, -949503164);
             }
         }
 
@@ -125,7 +137,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 1692492045);
+            SafeguardStream(stream, -37912309);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -140,10 +152,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -512434836);
+            SafeguardStream(stream, 1507129787);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -512434836);
+                SafeguardStream(stream, 1507129787);
                 hasAny = true;
                 if (OwnerScene != default)
                 {
@@ -155,16 +167,16 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, -512434836);
+                SafeguardStream(stream, 1507129787);
             }
 
-            SafeguardStream(stream, 216020498);
+            SafeguardStream(stream, -949503164);
             if ((deltaMask & (1 << 1)) != 0)
             {
-                SafeguardStream(stream, 216020498);
+                SafeguardStream(stream, -949503164);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, 216020498);
+                SafeguardStream(stream, -949503164);
             }
 
             return hasAny;

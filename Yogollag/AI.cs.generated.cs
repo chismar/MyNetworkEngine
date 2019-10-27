@@ -45,6 +45,18 @@ namespace Yogollag
         override protected void SetDefsForComponents()
         {
         }
+
+        override public void CallInitOnComponents()
+        {
+        }
+
+        override public void CallCreateOnComponents()
+        {
+        }
+
+        override public void CallDestroyOnComponents()
+        {
+        }
     }
 
     //obj AIEngine generic  hasCustomSerialization false
@@ -75,17 +87,17 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -841326566);
+            CheckStream(stream, 1810351205);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, 216020498);
+            CheckStream(stream, -949503164);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, 216020498);
+                CheckStream(stream, -949503164);
                 SyncId = stream.GetInt();
-                CheckStream(stream, 216020498);
+                CheckStream(stream, -949503164);
             }
         }
 
@@ -102,7 +114,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -841326566);
+            SafeguardStream(stream, 1810351205);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -117,13 +129,13 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, 216020498);
+            SafeguardStream(stream, -949503164);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, 216020498);
+                SafeguardStream(stream, -949503164);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, 216020498);
+                SafeguardStream(stream, -949503164);
             }
 
             return hasAny;

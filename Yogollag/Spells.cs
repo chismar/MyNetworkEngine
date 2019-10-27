@@ -71,6 +71,32 @@ namespace Yogollag
         {
             SpellFailedEvent.OnEvent += OnSpellEvent;
         }
+        public override void OnInit()
+        {
+            if (IsMaster)
+                return;
+            SyncedSpells.OnItemAdded += SyncedSpells_OnItemAdded;
+            SyncedSpells.OnItemRemoved += SyncedSpells_OnItemRemoved;
+        }
+
+        private void SyncedSpells_OnItemRemoved(SpellInstance obj)
+        {
+            RunLater(() =>
+            {
+                foreach (var effect in obj.Cast.Def.Effects)
+                    effect.Def.End(obj, true, obj.SuccesEnd);
+            });
+        }
+
+        private void SyncedSpells_OnItemAdded(SpellInstance obj)
+        {
+
+            RunLater(() =>
+            {
+                foreach (var effect in obj.Cast.Def.Effects)
+                    effect.Def.Begin(obj, true);
+            });
+        }
 
         private void OnSpellEvent(SpellFailedToCast obj)
         {
@@ -112,6 +138,8 @@ namespace Yogollag
             inst.Cast = cast;
             inst.FinishInit();
             SyncedSpells.Add(inst);
+            foreach (var effect in inst.Cast.Def.Effects)
+                effect.Def.Begin(inst, false);
             inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             Task.Run(async () =>
             {
@@ -134,14 +162,19 @@ namespace Yogollag
             if (spell == null)
                 return;
             var cast = spell.Cast;
+            bool success = false;
             if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? true)
             {
+                success = true;
+                spell.SuccesEnd = true;
                 spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             }
             else
             {
                 spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
             }
+            foreach (var effect in spell.Cast.Def.Effects)
+                effect.Def.End(spell, false, success);
             SyncedSpells.Remove(spell);
             if(spell.Cast.Def.Cooldown > 0)
             {
@@ -167,8 +200,44 @@ namespace Yogollag
         public DefRef<IImpactDef> ImpactOnSuccess { get; set; }
         public DefRef<IImpactDef> ImpactOnFail { get; set; }
         public DefRef<IImpactDef> ImpactOnStart { get; set; }
+        public List<DefRef<ISpellEffectDef>> Effects { get; set; } = new List<DefRef<ISpellEffectDef>>();
     }
 
+    [GenerateSync]
+    public struct EffectId : IEquatable<EffectId>
+    {
+        [Sync]
+        public ISpellEffectDef Effect { get; set; }
+        [Sync]
+        public long SpellId { get; set; }
+
+        public bool Equals(EffectId other)
+        {
+            return other.Effect == Effect && SpellId == other.SpellId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is EffectId))
+                return false;
+            return Equals((EffectId)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return ((Effect?.GetHashCode() ?? 346123512) * -1438523459) ^ (SpellId.GetHashCode() * 498051411);
+        }
+
+        public override string ToString()
+        {
+            return $"{SpellId}-{Effect.Address}";
+        }
+    }
+    public interface ISpellEffectDef : IDef
+    {
+        void Begin(SpellInstance spellInstance, bool onClient);
+        void End(SpellInstance spellInstance, bool onClient, bool isSucess);
+    }
 
     [GenerateSync]
     public struct SpellCast
@@ -187,6 +256,8 @@ namespace Yogollag
         public EntityId TargetEntity { get; set; }
         [Sync]
         public Vec2 TargetPoint { get; set; }
+        [Sync]
+        public EntityId OwnerObject { get; set; }
     }
     [GenerateSync]
     public class PastSpellCooldown
@@ -201,6 +272,8 @@ namespace Yogollag
     [GenerateSync]
     public abstract class SpellInstance : SyncObject, IEntityObject
     {
+        [Sync]
+        public virtual bool SuccesEnd { get; set; }
         [Sync(SyncType.Client)]
         public virtual SpellId Id { get; set; }
         [Sync(SyncType.Client)]

@@ -12,36 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HumanMalePF
       objectReference: {fileID: 0}
-    - target: {fileID: -8843521754051990734, guid: 8a6c90eb6887ad94a92e62cef6595f99,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.495
-      objectReference: {fileID: 0}
-    - target: {fileID: -8843521754051990734, guid: 8a6c90eb6887ad94a92e62cef6595f99,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.009
-      objectReference: {fileID: 0}
-    - target: {fileID: -8843521754051990734, guid: 8a6c90eb6887ad94a92e62cef6595f99,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -6095662572151509327, guid: 8a6c90eb6887ad94a92e62cef6595f99,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: dd19c7eabb45f294392601c841db595d, type: 2}
-    - target: {fileID: -6057140222963153312, guid: 8a6c90eb6887ad94a92e62cef6595f99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 8a6c90eb6887ad94a92e62cef6595f99,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: f0b15720d214c1540b23b730cfa6f314, type: 2}
     - target: {fileID: -4216859302048453862, guid: 8a6c90eb6887ad94a92e62cef6595f99,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -95,6 +65,51 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 8a6c90eb6887ad94a92e62cef6595f99,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f0b15720d214c1540b23b730cfa6f314, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: e3da47a122fee9d4e919a92f37043ddd, type: 3}
+    - target: {fileID: -6057140222963153312, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed by
+        Humanoid clips.\n\tTransform 'Clavicle_L'\n\tTransform 'Leg_R'\n\tTransform
+        'Chest'\n\tTransform 'Foot_L'\n\tTransform 'Foot_R'\n\tTransform 'Hips'\n\tTransform
+        'Chest1'\n\tTransform 'Spine2'\n\tTransform 'Clavicle_R'\n\tTransform 'Leg_L'\n\tand
+        more ...\n\tFrom animation clip 'Idle'"
+      objectReference: {fileID: 0}
+    - target: {fileID: -6095662572151509327, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd19c7eabb45f294392601c841db595d, type: 2}
+    - target: {fileID: -8843521754051990734, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.495
+      objectReference: {fileID: 0}
+    - target: {fileID: -8843521754051990734, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: -8843521754051990734, guid: 8a6c90eb6887ad94a92e62cef6595f99,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

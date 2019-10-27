@@ -177,9 +177,10 @@ namespace Yogollag
                                 ((IPositionedEntity)e).Rotation = site.GlobalRot;
 
                             });
-                            if(site.Def.AttachedScene != null)
+                            if (site.Def.AttachedScene != null)
                             {
-                                _node.Create<SceneEntity>(se => {
+                                _node.Create<SceneEntity>(se =>
+                                {
                                     se.Position = site.GlobalPos;
                                     se.Rotation = site.GlobalRot;
                                     se.SceneDef = site.Def.AttachedScene;
@@ -284,7 +285,7 @@ namespace Yogollag
         NetworkEntity character = null;
         public void Update(bool onlyDrawGUI)
         {
-            if(onlyDrawGUI && character != null)
+            if (onlyDrawGUI && character != null)
             {
                 CharGUI.Render(_node, _win, character as CharacterEntity, _charView);
                 return;
@@ -361,7 +362,7 @@ namespace Yogollag
                         charLikeMovement.InterpolationUpdate(deltaTime);
                     }
                 }
-                
+
             }
             DrawSite(SimpleServer._debugCreator._rootInstance);
             foreach (var ghost in _node.AllGhosts())
@@ -380,7 +381,7 @@ namespace Yogollag
             }
             lock (_physicsWorld)
             {
-                foreach(var body in _physicsWorld.Bodies)
+                foreach (var body in _physicsWorld.Bodies)
                 {
                     var aabb = body.AABB;
                     var _shape = new RectShapeHandle();
@@ -485,12 +486,15 @@ namespace Yogollag
     {
 
     }
-    public class SpriteRendererDef : BaseDef, IEntityObjectDef, IRenderableDef 
+    public class SpriteRendererDef : BaseDef, IEntityObjectDef, IRenderableDef
     {
         public DefRef<SpriteDef> Sprite { get; set; }
     }
     public class SpriteRenderer : IRenderable, IEntityComponent
     {
+        public void Create() { }
+        public void Init() { }
+        public void Destroy() { }
         static Font _font;
         Sprite _sprite;
         Vector2f _lastRenderPosition;
@@ -628,7 +632,7 @@ namespace Yogollag
             }
             if (distance > Speed * 10)
                 SmoothPosition = SyncPosition;
-           
+
             PhysicsBody.Set(new Vector2(SmoothPosition.X, SmoothPosition.Y), 1f);
         }
 
@@ -655,20 +659,23 @@ namespace Yogollag
                 _host.ReceivePosition(LocalPosition);
             }
             _sprint = EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.LShift);
-            //if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.A))
-            //    dir += Vec2.New(-1, 0);
-            //if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.D))
-            //    dir += Vec2.New(1, 0);
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.A))
+                dir += Vec2.New(-1, 0);
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.D))
+                dir += Vec2.New(1, 0);
             if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.W))
                 dir += Vec2.New(0, 1);
-            //if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.S))
-            //    dir += Vec2.New(0, -1);
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.S))
+                dir += Vec2.New(0, -1);
+            _currentDir = dir;
+            /*
             var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
             Transform t = Transform.Identity;
             var a = -Vec2.AngleBetween(mouseDir, new Vec2(0, 1));
             t.Rotate(a);
             var tv = t.TransformPoint(dir.X, dir.Y);
             _currentDir = new Vec2(tv.X, tv.Y);
+            */
         }
 
         DateTime _lastSendTime;
@@ -726,10 +733,16 @@ namespace Yogollag
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<IImpactDef> Impact { get; set; }
         public DefRef<SpellDef> Spell { get; set; }
+        public DefRef<SpellDef> BecameActiveBuff { get; set; }
+        public DefRef<SpellDef> BecamePassiveBuff { get; set; }
     }
     [GenerateSync]
     public abstract class Item : SyncObject, IEntityObject
     {
+        [Sync]
+        public virtual SpellId PassiveBuff { get; set; }
+        [Sync]
+        public virtual SpellId ActiveBuff { get; set; }
         [Sync(SyncType.AuthorityClient)]
         public virtual long ItemId { get; set; }
         [Sync(SyncType.AuthorityClient)]
@@ -746,7 +759,11 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual DeltaList<Item> Items { get; set; } = SyncObject.New<DeltaList<Item>>();
         public GhostedEntity Owner;
-
+        public SpellsEngine _spellsEngine;
+        public void Awake(SpellsEngine spellsEngine)
+        {
+            _spellsEngine = spellsEngine;
+        }
         int FirstFreeItem(DeltaList<Item> items)
         {
             for (int i = 0; i < items.Count; i++)
@@ -780,13 +797,32 @@ namespace Yogollag
         }
 
         [Sync(SyncType.AuthorityClient)]
+        public virtual void MakeActive(int itemId)
+        {
+            var item = Items.FirstOrDefault(x => x.ItemId == itemId);
+            if (item == null)
+                return;
+            if (item.ItemDef.BecameActiveBuff != null)
+                item.ActiveBuff = _spellsEngine.CastFromInsideEntity(new SpellCast() { TargetEntity = ParentEntity.Id, Def = item.ItemDef.BecameActiveBuff, OwnerObject = this.Id });
+        }
+
+        [Sync(SyncType.AuthorityClient)]
+        public virtual void MakeInactive(long itemId)
+        {
+            var item = Items.FirstOrDefault(x => x.ItemId == itemId);
+            if (item == null)
+                return;
+            if (item.ActiveBuff != default)
+                _spellsEngine.FinishSpell(item.ActiveBuff);
+        }
+        [Sync(SyncType.AuthorityClient)]
         public virtual void DropItem(Item item)
         {
+            CurrentServer.Create<WorldItemEntity>((wie) => { wie.Position = ((IPositionedEntity)Owner).Position; wie.Item = item; });
             int slot = Items.IndexOf(item);
             if (slot == -1)
                 return;
             Items[slot] = null;
-            CurrentServer.Create<WorldItemEntity>((wie) => { wie.Position = ((IPositionedEntity)Owner).Position; wie.Item = item; });
         }
 
         [Sync(SyncType.AuthorityClient)]
@@ -800,6 +836,8 @@ namespace Yogollag
             {
                 Items[freeIndex] = item;
                 item.ItemId = Counter++;
+                if (item.ItemDef.BecamePassiveBuff != null)
+                    item.PassiveBuff = _spellsEngine.CastFromInsideEntity(new SpellCast() { TargetEntity = ParentEntity.Id, Def = item.ItemDef.BecamePassiveBuff, OwnerObject = this.Id });
             }
         }
         public bool CanAddItem()
@@ -811,7 +849,11 @@ namespace Yogollag
         {
             InitItems();
             var item = Items.First(x => x.ItemId == itemId);
-            DropItem(item);
+            var index = Items.IndexOf(item);
+            if (item.PassiveBuff != default)
+                _spellsEngine.FinishSpell(item.PassiveBuff);
+            MakeInactive(itemId);
+            Items[index] = null;
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void MoveItem(long itemId, int slot)
@@ -859,6 +901,7 @@ namespace Yogollag
         {
             Inventory.Owner = this;
             Inventory.Size = 10;
+            Inventory.Awake(SpellsEngine);
             StatsEngine.Init();
             if (SecretRole?.InitialQuest.Def != null)
                 Quests.Add(new QuestInstance() { QuestDef = SecretRole.InitialQuest });
@@ -957,7 +1000,7 @@ namespace Yogollag
         {
             //if (EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))
             //    SpellsEngine.CastFromClientWithPrediction(
-             //       new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/TestAttackSpell") });
+            //       new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/TestAttackSpell") });
             _movementController.UpdateControls();
         }
 
