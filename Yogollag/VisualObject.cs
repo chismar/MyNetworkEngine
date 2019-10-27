@@ -147,7 +147,7 @@ namespace Yogollag
 
         protected override object ProcessValue(object curValue)
         {
-            return ((IHasSpells)curValue).SpellsEngine.AllSpells.Any(x => x.Cast.Def.CustomName.Contains(_spellFilter));
+            return ((IHasSpells)curValue).SpellsEngine.AllSpells.Any(x => x.Cast.Def.CustomName?.Contains(_spellFilter) ?? false);
         }
     }
 

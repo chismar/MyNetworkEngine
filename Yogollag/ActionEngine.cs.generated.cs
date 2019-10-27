@@ -90,18 +90,20 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -107956362);
+            CheckStream(stream, -750751791);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -538084974);
+            CheckStream(stream, 69607847);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -538084974);
+                CheckStream(stream, 69607847);
                 SyncId = stream.GetInt();
-                CheckStream(stream, -538084974);
+                CheckStream(stream, 69607847);
             }
+
+            OnAfterDeserialize();
         }
 
         public override void SetParentEntityRecursive()
@@ -117,7 +119,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -107956362);
+            SafeguardStream(stream, -750751791);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -132,13 +134,13 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -538084974);
+            SafeguardStream(stream, 69607847);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -538084974);
+                SafeguardStream(stream, 69607847);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, -538084974);
+                SafeguardStream(stream, 69607847);
             }
 
             return hasAny;

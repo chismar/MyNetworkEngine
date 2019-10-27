@@ -38,7 +38,7 @@ class UIVisual : MonoBehaviour
         var character = ui.Character;
         var targetCtx = new ScriptingContext() {
             ProcessingEntity = character,
-            Target = ((NetworkEntity)ui.Interactive).Id };
+            Host = ((NetworkEntity)ui.Interactive).Id };
         if (interaction.Predicate.Def == null || interaction.Predicate.Def.Check(targetCtx))
             ((IImpactedEntity)character).RunImpact(null, interaction.Impact.Def);
         

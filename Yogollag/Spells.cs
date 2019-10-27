@@ -43,6 +43,10 @@ namespace Yogollag
         {
             return x.Id != y.Id || x.FromClient != y.FromClient;
         }
+        public override string ToString()
+        {
+            return $"{FromClient}-{Id}";
+        }
     }
     public struct SpellFailedToCast
     {
@@ -52,7 +56,7 @@ namespace Yogollag
     {
         SpellsEngine SpellsEngine { get; set; }
     }
-   
+
     [GenerateSync]
     public abstract class SpellsEngine : SyncObject, IEntityComponent
     {
@@ -108,25 +112,32 @@ namespace Yogollag
         }
         public SpellId CastFromClientWithPrediction(SpellCast cast)
         {
-            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false))
+            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = true };
+            if (SyncedSpells.Any(x => x.Id == id))
+                throw new Exception("FUCK FUCK FUCK");
             CastSpell(id, cast);
             return id;
         }
 
         public virtual SpellId CastFromInsideEntity(SpellCast cast)
         {
-            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity)) ?? false))
+            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = false };
             CastSpell(id, cast);
             return id;
         }
+        [Sync(SyncType.Server)]
+        public virtual void FireAndForgetCast(SpellCast cast)
+        {
+            CastFromInsideEntity(cast);
+        }
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? false))
+            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
                 return;
@@ -140,7 +151,7 @@ namespace Yogollag
             SyncedSpells.Add(inst);
             foreach (var effect in inst.Cast.Def.Effects)
                 effect.Def.Begin(inst, false);
-            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
+            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
             Task.Run(async () =>
             {
                 NetworkEntity.CurrentlyExecutingInContext.Value = default;
@@ -158,25 +169,27 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void FinishSpell(SpellId id)
         {
-            var spell = SyncedSpells.SingleOrDefault(x => x.Id.Id == id.Id);
+            if (SyncedSpells.Sum(x => x.Id == id ? 1 : 0) > 1)
+                Logger.LogError($"Duplicate {id} {SyncedSpells.FirstOrDefault(x=>x.Id == id)}");
+            var spell = SyncedSpells.SingleOrDefault(x => x.Id == id);
             if (spell == null)
                 return;
             var cast = spell.Cast;
             bool success = false;
-            if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint }) ?? true)
+            if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? true)
             {
                 success = true;
                 spell.SuccesEnd = true;
-                spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
+                spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
             }
             else
             {
-                spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint });
+                spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
             }
             foreach (var effect in spell.Cast.Def.Effects)
                 effect.Def.End(spell, false, success);
             SyncedSpells.Remove(spell);
-            if(spell.Cast.Def.Cooldown > 0)
+            if (spell.Cast.Def.Cooldown > 0)
             {
                 Cooldowns.Add(new PastSpellCooldown() { Id = spell.Id, Def = spell.Cast.Def, TimeWhenStarted = spell.Time });
                 Task.Run(async () =>
@@ -206,16 +219,34 @@ namespace Yogollag
     [GenerateSync]
     public struct EffectId : IEquatable<EffectId>
     {
+        public EffectId(ISpellEffectDef effectDef, SpellInstance spell)
+        {
+            Effect = effectDef;
+            SpellId = spell.Id;
+        }
+        public EffectId(ISpellEffectDef effectDef, SpellId spellId)
+        {
+            Effect = effectDef;
+            SpellId = spellId;
+        }
         [Sync]
         public ISpellEffectDef Effect { get; set; }
         [Sync]
-        public long SpellId { get; set; }
+        public SpellId SpellId { get; set; }
 
         public bool Equals(EffectId other)
         {
             return other.Effect == Effect && SpellId == other.SpellId;
         }
 
+        public static bool operator ==(EffectId a, EffectId b)
+        {
+            return a.Equals(b);
+        }
+        public static bool operator !=(EffectId a, EffectId b)
+        {
+            return !a.Equals(b);
+        }
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is EffectId))

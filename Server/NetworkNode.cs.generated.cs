@@ -467,8 +467,9 @@ namespace NetworkEngine
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 283835935);
+            CheckStream(stream, -1595273710);
             CustomDeserialize(stream);
+            OnAfterDeserialize();
         }
 
         public override void SetParentEntityRecursive()
@@ -484,7 +485,7 @@ namespace NetworkEngine
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 283835935);
+            SafeguardStream(stream, -1595273710);
             return CustomSerialize(ref stream, initial);
         }
     }
@@ -535,8 +536,9 @@ namespace NetworkEngine
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -1391998940);
+            CheckStream(stream, 1114746109);
             CustomDeserialize(stream);
+            OnAfterDeserialize();
         }
 
         public override void SetParentEntityRecursive()
@@ -552,7 +554,7 @@ namespace NetworkEngine
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -1391998940);
+            SafeguardStream(stream, 1114746109);
             return CustomSerialize(ref stream, initial);
         }
     }

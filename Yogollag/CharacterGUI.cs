@@ -42,24 +42,19 @@ namespace Yogollag
                 DrawCurrentSpell(character);
             }
         }
+        Dictionary<SpellDef, (SpellDef, object)> _interactionStates = new Dictionary<SpellDef, (SpellDef, object)>();
         private void DrawCurrentSpell(CharacterEntity character)
         {
-            var i = character.GetActiveItem();
-            if (i == null)
-                return;
-            if (i.ItemDef.Spell == null)
+            var ae = character.ActionEngine;
+            foreach (var action in ae.DefaultAvailableActions)
             {
-                _interactionState = null;
-                return;
+                _interactionStates.TryGetValue(action.Def, out var state);
+                var spell = ae.GetSpell(action.Def);
+                if (spell == null || spell == action.Def || (state.Item1 != spell && state.Item1 != null))
+                    _interactionStates.Remove(action.Def);
+                else
+                    _interactionStates[action.Def] = (spell, action.Def.CastMode.Def.Update(spell, character, state.Item2));
             }
-            if (_curItem != i)
-            {
-                _interactionState = null;
-                _curItem = i;
-            }
-
-            _interactionState = i.ItemDef.Spell.Def.CastMode.Def.Update(i.ItemDef.Spell, character, _interactionState);
-            i.ItemDef.Spell.Def.CastMode.Def.Render(_win, _interactionState);
         }
         private void Reset()
         {
@@ -176,7 +171,7 @@ namespace Yogollag
             EnvironmentAPI.Draw.Text(new TextHandle() { Position = Vec2.New(EnvironmentAPI.Win.Size.X / 2, 10), Text = selectedInteractive.InteractiveDef?.Name });
             Vector2f btnPos = new Vector2f(0, EnvironmentAPI.Win.Size.Y - 30);
             float distanceBetweenButtons = 30;
-            var targetCtx = new ScriptingContext() { ProcessingEntity = character, Target = ((NetworkEntity)selectedInteractive).Id };
+            var targetCtx = new ScriptingContext() { ProcessingEntity = character, Host = ((NetworkEntity)selectedInteractive).Id };
             var allInteractions = ((IQuester)character).Quests.SelectMany(x => x.QuestDef.AddedInteractions).Where(x => x.Def.Predicate.Def.Check(targetCtx)).Concat(selectedInteractive.InteractiveDef?.Interactions ?? new List<DefRef<InteractionDef>>());
             foreach (var inter in allInteractions)
             {

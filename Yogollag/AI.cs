@@ -48,7 +48,13 @@ namespace Yogollag
                         return false;
                     target = targetE.HasValue ? targetE.Value : default;
                     point = targetPoint.HasValue ? targetPoint.Value : default;
-                    _currentTargetEntity = targetE;
+                    if (target != default && point == default)
+                    {
+                        var pe = CurrentServer.GetGhost(target) as IPositionedEntity;
+                        if (pe != null)
+                            point = pe.Position;
+                    }
+                        _currentTargetEntity = targetE;
                     _currentTargetPoint = targetPoint;
                 }
                 if (_currentRule != null)
@@ -82,7 +88,7 @@ namespace Yogollag
                 var point = _currentTargetEntity.HasValue ?
                     ((IPositionedEntity)ParentEntity.CurrentServer.GetGhost(_currentTargetEntity.Value))?.Position :
                     _currentTargetPoint;
-                
+
                 if (point.HasValue)
                 {
                     float maxMult = 1;
@@ -103,7 +109,7 @@ namespace Yogollag
         }
         public void Update()
         {
-            var ctx = new ScriptingContext() { ProcessingEntity = ParentEntity, Target = ParentEntity.Id };
+            var ctx = new ScriptingContext() { ProcessingEntity = ParentEntity, Host = ParentEntity.Id };
             foreach (var ruleRef in Rules.Rules)
             {
                 var rule = ruleRef;
@@ -160,6 +166,43 @@ namespace Yogollag
     {
         public abstract EntityId Select(ScriptingContext ctx);
     }
+
+    public class ClosestTargetSelector : TargetSelectorDef
+    {
+        public DefRef<CalcerDef> Size { get; set; }
+        public DefRef<IPredicateDef> Filter { get; set; }
+        public override EntityId Select(ScriptingContext ctx)
+        {
+            var size = Size.Def.Calc(ctx);
+            var bodies = AllInCircle.QuerySpaceInCircle(size, ctx);
+            float closest = float.MaxValue;
+            EntityId closestId = default;
+            var selfPos = ((IPositionedEntity)ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host)).Position;
+            foreach (var body in bodies)
+            {
+                if (body.UserData is EntityId eid)
+                {
+                    if (eid == ctx.Host)
+                        continue;
+                    var ghost = ctx.ProcessingEntity.CurrentServer.GetGhost(eid);
+                    bool canSelect = true;
+                    if (Filter.Def != null)
+                        canSelect = Filter.Def.Check(new ScriptingContext(ghost));
+                    if (canSelect)
+                        if (ghost is IPositionedEntity pe)
+                        {
+                            var dst = (selfPos - pe.Position).Length;
+                            if (dst < closest)
+                            {
+                                closest = dst;
+                                closestId = eid;
+                            }
+                        }
+                }
+            }
+            return closestId;
+        }
+    }
     public abstract class PointSelectorDef : BaseDef
     {
         public abstract Vec2 Select(ScriptingContext ctx);
@@ -176,7 +219,7 @@ namespace Yogollag
             var x = Math.Cos(angle) * radius;
             var y = Math.Sin(angle) * radius;
             var offset = new Vec2() { X = (float)x, Y = (float)y };
-            return (((IPositionedEntity)ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target)).Position + offset);
+            return (((IPositionedEntity)ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host)).Position + offset);
         }
     }
 }

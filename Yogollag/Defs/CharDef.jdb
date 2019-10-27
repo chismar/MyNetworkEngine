@@ -9,6 +9,16 @@
             "Y":0
         }
     },
+    "ActionEngine": {
+        "$type": "ActionEngine",
+        "DefaultAvailableActions": [
+            "./AttackSpell",
+            "./TestStaggerChar"
+        ]
+    },
+    "CombatEngine": {
+        "$type": "CombatEngine"
+    },
     "StatsEngine": {
         "$type": "StatsEngine",
         "Stats": [

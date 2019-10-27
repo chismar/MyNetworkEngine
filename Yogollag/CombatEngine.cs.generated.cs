@@ -75,18 +75,20 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -405527089);
+            CheckStream(stream, -867670231);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -949503164);
+            CheckStream(stream, 69607847);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -949503164);
+                CheckStream(stream, 69607847);
                 SyncId = stream.GetInt();
-                CheckStream(stream, -949503164);
+                CheckStream(stream, 69607847);
             }
+
+            OnAfterDeserialize();
         }
 
         public override void SetParentEntityRecursive()
@@ -102,7 +104,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -405527089);
+            SafeguardStream(stream, -867670231);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -117,28 +119,28 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -949503164);
+            SafeguardStream(stream, 69607847);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -949503164);
+                SafeguardStream(stream, 69607847);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, -949503164);
+                SafeguardStream(stream, 69607847);
             }
 
             return hasAny;
         }
 
-        public override void Strike(EntityId targetId)
+        public override void Strike(EffectId owner, EntityId targetId)
         {
             if (ParentEntity.IsCurrentlyExecuting)
             {
-                base.Strike(targetId);
+                base.Strike(owner, targetId);
             }
             else
             {
                 CurrentServer.HandleEntityMessage(new CombatEngineStrikeMessage()
-                {EntityId = Id, targetId = targetId});
+                {EntityId = Id, owner = owner, targetId = targetId});
             }
         }
     }
@@ -146,11 +148,12 @@ namespace Yogollag
     [GeneratedClass]
     public class CombatEngineStrikeMessage : EntityMessage
     {
-        public override int NetId => -1604566453;
+        public override int NetId => -759236448;
+        public EffectId owner;
         public EntityId targetId;
         public override void Run(object entity)
         {
-            ((CombatEngine)entity).Strike(targetId);
+            ((CombatEngine)entity).Strike(owner, targetId);
         }
     }
 
@@ -163,6 +166,11 @@ namespace Yogollag
             {
                 var has = stream.GetBool();
                 messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+            }
+
+            {
+                var has = stream.GetBool();
+                messageToSerialize.owner = !has ? default : (EffectId)SyncTypesMap.GetSerializerForObjType(typeof(EffectId)).Deserialize(stream);
             }
 
             {
@@ -183,6 +191,18 @@ namespace Yogollag
                 {
                     stream.Put(true);
                     SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
+            {
+                if (messageToSerialize.owner != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.GetSerializerForObjType(typeof(EffectId)).Serialize(messageToSerialize.owner, ref stream);
                 }
                 else
                 {

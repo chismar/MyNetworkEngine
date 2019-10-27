@@ -54,7 +54,7 @@ namespace Yogollag
         public virtual DeltaList<BaseStat> StatsSync { get; set; } = SyncObject.New<DeltaList<BaseStat>>();
         public IDef Def { get; set; }
 
-        public void Init()
+        public override void OnCreate()
         {
             foreach (var statInstDef in Stats)
             {

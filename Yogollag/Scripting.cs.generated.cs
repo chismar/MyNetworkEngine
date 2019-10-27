@@ -31,6 +31,11 @@ namespace Yogollag
 
             {
                 var has = stream.GetBool();
+                objToSerialize.Host = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+            }
+
+            {
+                var has = stream.GetBool();
                 objToSerialize.Target = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
             }
 
@@ -52,6 +57,18 @@ namespace Yogollag
                 {
                     stream.Put(true);
                     SyncTypesMap.GetSerializerForObjType(typeof(ScriptingContext)).Serialize(objToSerialize.Parent, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
+            {
+                if (objToSerialize.Host != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Host, ref stream);
                 }
                 else
                 {

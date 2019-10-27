@@ -1,5 +1,8 @@
 {
     "$type": "InteractiveWorldEntity",
+    "StatsEngine": {
+        "$type": "StatsEngine"
+    },
     "InteractiveDef":{
         "$type":"InteractiveDef",
         "Name": "Dark monument",

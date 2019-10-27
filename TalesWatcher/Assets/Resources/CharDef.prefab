@@ -48,6 +48,82 @@ MonoBehaviour:
   Filter: 
   ElementVisual: {fileID: 7722014448164416085, guid: 97328a8cddb238e4898a201e1338b11d,
     type: 3}
+--- !u!114 &3730081873294997396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839805187431276250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062de1648fbe89149b49c8486a3ed878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldPath: ActiveItem
+  Visual: {fileID: 0}
+--- !u!1 &4401925825686232727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7813810373629657444}
+  - component: {fileID: 2439947199469802292}
+  - component: {fileID: 5703899548978082926}
+  m_Layer: 10
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7813810373629657444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401925825686232727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 961479071862265827}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2439947199469802292
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401925825686232727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5703899548978082926
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401925825686232727}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &987828656121737165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +148,7 @@ GameObject:
   - component: {fileID: 5424863679509747223}
   - component: {fileID: 5021754183966814665}
   - component: {fileID: 2126670400688543364}
+  - component: {fileID: 4143931605412610671}
   m_Layer: 0
   m_Name: CharDef
   m_TagString: Untagged
@@ -93,6 +170,7 @@ Transform:
   - {fileID: 5648736986345323220}
   - {fileID: 7975550565501320548}
   - {fileID: 5316552125234689213}
+  - {fileID: 7813810373629657444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -140,6 +218,20 @@ MonoBehaviour:
   Visual: {fileID: 0}
   SpellFilter: Attack
   AnimatorFieldName: IsWalk
+--- !u!114 &4143931605412610671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281690419673664415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb51812f80b95c4abbdda86f0a3f7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldPath: CombatEngine
+  Visual: {fileID: 0}
 --- !u!1001 &5702913370348434810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,11 +239,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961479071862265827}
     m_Modifications:
-    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
-        type: 3}
-      propertyPath: m_Name
-      value: HumanMalePF
-      objectReference: {fileID: 0}
     - target: {fileID: 90222775507652526, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -207,11 +294,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
+        type: 3}
+      propertyPath: m_Name
+      value: HumanMalePF
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055403592323703508, guid: 60f9a48c44f972b489688924af8d17c3,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60f9a48c44f972b489688924af8d17c3, type: 3}
 --- !u!4 &5648736986345323220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 90222775507652526, guid: 60f9a48c44f972b489688924af8d17c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5702913370348434810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &839805187431276250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4936867823271979936, guid: 60f9a48c44f972b489688924af8d17c3,
     type: 3}
   m_PrefabInstance: {fileID: 5702913370348434810}
   m_PrefabAsset: {fileID: 0}

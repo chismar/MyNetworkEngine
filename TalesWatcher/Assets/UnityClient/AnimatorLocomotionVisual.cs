@@ -27,7 +27,7 @@ namespace Assets.UnityClient
         {
             this._visual = visual;
         }
-
+        float _assumedMaxVelocity = 5f;
         protected override object ProcessValue(object curValue)
         {
             Vec2 pos;
@@ -51,8 +51,8 @@ namespace Assets.UnityClient
             {
                 _lastPos = pos;
                 _lastRot = rot;
-                //api.SetAnimatorFloat("VelocityX", 0);
-                //api.SetAnimatorFloat("VelocityY", 0);
+                _visual._animator.SetFloat("dirX", 0);
+                _visual._animator.SetFloat("dirY", 0);
                 _visual.VisualPrefab.transform.rotation = Quaternion.identity;
                 _visual._animator.SetBool("IsRun", false);
             }
@@ -62,8 +62,16 @@ namespace Assets.UnityClient
                 if (!(curValue is ICharacterLikeMovement) && ((pos - _lastPos).Length > 0.001))
                     _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)), 0);
                 _lastPos = pos;
-                //api.SetAnimatorFloat("VelocityX", velocity.X);
-                //api.SetAnimatorFloat("VelocityY", velocity.Y);
+
+                var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
+                SFML.Graphics.Transform t = SFML.Graphics.Transform.Identity;
+                var a = Vec2.AngleBetween(mouseDir, new Vec2(0, 1));
+                t.Rotate(a);
+                var tv = t.TransformPoint(velocity.X, velocity.Y);
+                var currentDir = new Vec2(tv.X, tv.Y);
+
+                _visual._animator.SetFloat("dirX", currentDir.X / _assumedMaxVelocity);
+                _visual._animator.SetFloat("dirY", currentDir.Y / _assumedMaxVelocity);
                 _visual._animator.SetBool("IsRun", velocity.Length > 0);
             }
             return curValue;

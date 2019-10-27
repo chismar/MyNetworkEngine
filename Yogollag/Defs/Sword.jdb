@@ -1,0 +1,60 @@
+{
+    "$type": "Item",
+    "Name": "Sword",
+    "Sprite": {
+        "$type": "SpriteDef",
+        "SpriteSheetName": "tiles",
+        "X": 5,
+        "Y": 0
+    },
+    "Interactive": {
+        "$type": "InteractiveDef",
+    },
+    "BecameActiveBuff": {
+        "$type": "Spell",
+        "Duration":1000,
+        "Effects": [
+            {
+                "$type": "EffectActionsLayer",
+                "Overrides": [
+                    {
+                        "ActionSpell": "./AttackSpell",
+                        "NewActionSpell": {
+                            "$type": "Spell",
+                            "Duration": 1,
+                            "Effects": [
+                                {
+                                    "$type": "EffectStrike",
+                                    "AnimationName": "SwordAttack",
+                                    "StrikeDef": {
+                                        "$type": "Strike",
+                                        "SpellOnStrike": {
+                                            "$type": "Spell",
+                                            "ImpactOnStart": {
+                                                "$type": "Target",
+                                                "Do": {
+                                                    "$type": "ImpactsList",
+                                                    "Impacts": [
+                                                        {
+                                                            "$type": "ChangeEntityStat",
+                                                            "Change":-100,
+                                                            "StatDef": "/Stats/Health"
+                                                        },
+                                                        {
+                                                            "$type": "ImpactInvokeAction",
+                                                            "InvokedSpell": "/TestStagger"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

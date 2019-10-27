@@ -744,7 +744,7 @@ namespace Yogollag
         [Sync]
         public virtual SpellId ActiveBuff { get; set; }
         [Sync(SyncType.AuthorityClient)]
-        public virtual long ItemId { get; set; }
+        public virtual long ItemId { get; set; } = -1;
         [Sync(SyncType.AuthorityClient)]
         public virtual ItemDef ItemDef { get; set; }
         public IEntityObjectDef Def { get { return ItemDef; } set { ItemDef = (ItemDef)value; } }
@@ -797,12 +797,12 @@ namespace Yogollag
         }
 
         [Sync(SyncType.AuthorityClient)]
-        public virtual void MakeActive(int itemId)
+        public virtual void MakeActive(long itemId)
         {
             var item = Items.FirstOrDefault(x => x.ItemId == itemId);
             if (item == null)
                 return;
-            if (item.ItemDef.BecameActiveBuff != null)
+            if (item.ItemDef.BecameActiveBuff != null && item.ActiveBuff == default)
                 item.ActiveBuff = _spellsEngine.CastFromInsideEntity(new SpellCast() { TargetEntity = ParentEntity.Id, Def = item.ItemDef.BecameActiveBuff, OwnerObject = this.Id });
         }
 
@@ -813,7 +813,10 @@ namespace Yogollag
             if (item == null)
                 return;
             if (item.ActiveBuff != default)
+            {
+                item.ActiveBuff = default;
                 _spellsEngine.FinishSpell(item.ActiveBuff);
+            }
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void DropItem(Item item)
@@ -836,7 +839,7 @@ namespace Yogollag
             {
                 Items[freeIndex] = item;
                 item.ItemId = Counter++;
-                if (item.ItemDef.BecamePassiveBuff != null)
+                if (item.ItemDef.BecamePassiveBuff != null && item.PassiveBuff == default)
                     item.PassiveBuff = _spellsEngine.CastFromInsideEntity(new SpellCast() { TargetEntity = ParentEntity.Id, Def = item.ItemDef.BecamePassiveBuff, OwnerObject = this.Id });
             }
         }
@@ -851,7 +854,10 @@ namespace Yogollag
             var item = Items.First(x => x.ItemId == itemId);
             var index = Items.IndexOf(item);
             if (item.PassiveBuff != default)
+            {
+                item.PassiveBuff = default;
                 _spellsEngine.FinishSpell(item.PassiveBuff);
+            }
             MakeInactive(itemId);
             Items[index] = null;
         }
@@ -881,7 +887,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
-        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells
+        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine
     {
         [Sync(SyncType.Client)]
         [SceneDef]
@@ -911,8 +917,8 @@ namespace Yogollag
             Quests = Quests;
         }
         [Sync(SyncType.Client)]
-        public virtual long ActiveItemId { get; set; }
-        public Item ActiveItem => Inventory.Items.SingleOrDefault(x => x.ItemId == ActiveItemId);
+        public virtual long ActiveItemId { get; set; } = -1;
+        public Item ActiveItem => ActiveItemId == -1 ? null : Inventory.Items.SingleOrDefault(x => x.ItemId == ActiveItemId);
         [Sync(SyncType.AuthorityClient)]
         public virtual RoleDef SecretRole { get; set; }
         [Sync(SyncType.AuthorityClient)]
@@ -921,6 +927,10 @@ namespace Yogollag
         public virtual SpellsEngine SpellsEngine { get; set; } = SyncObject.New<SpellsEngine>();
         [Sync(SyncType.Client)]
         public virtual SampleComponent Cmp { get; set; } = SyncObject.New<SampleComponent>();
+        [Sync(SyncType.Client)]
+        public virtual CombatEngine CombatEngine { get; set; } = SyncObject.New<CombatEngine>();
+        [Sync(SyncType.Client)]
+        public virtual ActionEngine ActionEngine { get; set; } = SyncObject.New<ActionEngine>();
         [Sync(SyncType.Client)]
         public virtual string Name { get; set; }
         [Sync(SyncType.Client)]
@@ -946,7 +956,10 @@ namespace Yogollag
         {
             var item = Inventory.Items.FirstOrDefault(x => x.ItemId == itemId);
             if (item != null)
+            {
+                Inventory.MakeActive(itemId);
                 ActiveItemId = itemId;
+            }
         }
         [Sync(SyncType.AuthorityClient)]
         public virtual void ActivateItem()
@@ -957,7 +970,7 @@ namespace Yogollag
             bool canDo = true;
             if (item.ItemDef.Predicate.Def != null)
                 canDo = item.ItemDef.Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = this });
-            if (canDo)
+            if (canDo && item.ItemDef.Impact.Def != null)
                 item.ItemDef.Impact.Def.Apply(new ScriptingContext() { ProcessingEntity = this });
         }
         [Sync(SyncType.AuthorityClient)]
@@ -991,7 +1004,7 @@ namespace Yogollag
 
         public Item GetActiveItem()
         {
-            var item = Inventory.Items.FirstOrDefault(x => x.ItemId == ActiveItemId);
+            var item = ActiveItemId == -1 ? null : Inventory.Items.FirstOrDefault(x => x.ItemId == ActiveItemId);
             return item;
         }
 
@@ -1011,7 +1024,7 @@ namespace Yogollag
         [Sync(SyncType.Server)]
         public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
-            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext, Target = this.Id });
+            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext, Host = this.Id });
         }
 
         [Sync(SyncType.Server)]

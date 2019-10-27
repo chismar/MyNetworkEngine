@@ -1,0 +1,23 @@
+{
+    "$type": "Spell",
+    "CustomName": "Attack",
+    "CastMode": {
+        "$type": "TargetPointCastDef",
+        "Input": {
+            "$type": "InputTrigger",
+            "Combos": [
+                {
+                    "Mouse": "Left"
+                }
+            ]
+        },
+        "TargetPointSprite": {
+            "$type": "SpriteDef",
+            "SpriteSheetName": "tiles",
+            "X": 5,
+            "Y": 2,
+            "CustomName": "TestTargetPointSprite/TestTargetPointSprite_0"
+        }
+    },
+    "Duration": 1,
+}

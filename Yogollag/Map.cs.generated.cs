@@ -61,19 +61,21 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 552116342);
+            CheckStream(stream, 871824460);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -1321909823);
+            CheckStream(stream, 1130092385);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -1321909823);
+                CheckStream(stream, 1130092385);
                 var has = stream.GetBool();
                 Tiles = !has ? default : (MapTile[, ])SyncTypesMap.GetSerializerForObjType(typeof(MapTile[, ])).Deserialize(stream);
-                CheckStream(stream, -1321909823);
+                CheckStream(stream, 1130092385);
             }
+
+            OnAfterDeserialize();
         }
 
         public override void SetParentEntityRecursive()
@@ -89,7 +91,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 552116342);
+            SafeguardStream(stream, 871824460);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -104,10 +106,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -1321909823);
+            SafeguardStream(stream, 1130092385);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -1321909823);
+                SafeguardStream(stream, 1130092385);
                 hasAny = true;
                 if (Tiles != default)
                 {
@@ -119,7 +121,7 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, -1321909823);
+                SafeguardStream(stream, 1130092385);
             }
 
             return hasAny;
@@ -155,7 +157,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityAddTileModMessage : EntityMessage
     {
-        public override int NetId => 1704660330;
+        public override int NetId => -1298481801;
         public int x;
         public int y;
         public TileModDef modDef;
@@ -236,7 +238,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityRemoveTileModMessage : EntityMessage
     {
-        public override int NetId => 530092769;
+        public override int NetId => -550301554;
         public int x;
         public int y;
         public TileModDef modDef;

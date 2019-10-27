@@ -8,6 +8,7 @@
     <Platforms>AnyCPU;x64</Platforms>  
     <LangVersion>7.2</LangVersion>
     <BaseOutputPath>$(MSBuildProjectDirectory)\.bin\$(Configuration)\$(MSBuildProjectName)\</BaseOutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\.obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

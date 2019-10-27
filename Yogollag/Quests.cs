@@ -29,6 +29,15 @@ namespace Yogollag
         }
     }
 
+    public class ImpactsList : BaseDef, IImpactDef
+    {
+        public List<DefRef<IImpactDef>> Impacts { get; set; } = new List<DefRef<IImpactDef>>();
+        public void Apply(ScriptingContext ctx)
+        {
+            foreach (var impact in Impacts)
+                impact.Def.Apply(ctx);
+        }
+    }
     public class AllInCircle : BaseDef, IImpactDef, IPredicateDef
     {
         public Vec2 Offset { get; set; }
@@ -37,26 +46,15 @@ namespace Yogollag
         public DefRef<IPredicateDef> Predicate { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            var tgt = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target);
-            var world = (VoltWorld)ctx.ProcessingEntity.CurrentServer.CustomData;
-            VoltBody[] bodies = null;
-            lock (world)
-            {
-                var pos = ctx.TargetPoint.ToVolt();
-                var size = Size.Def.Calc(ctx);
-                var buffer = world.QueryCircle(pos, size);
-                if (buffer.Count != 0)
-                    bodies = new VoltBody[buffer.Count];
-                for (int i = 0; i < buffer.Count; i++)
-                    bodies[i] = buffer[i];
-            }
+            var size = Size.Def.Calc(ctx);
+            VoltBody[] bodies = QuerySpaceInCircle(size, ctx);
             if (bodies == null)
                 return;
             foreach (var body in bodies)
             {
                 if (body.UserData is EntityId eid)
                 {
-                    if (eid == ctx.Target)
+                    if (eid == ctx.Host)
                         continue;
                     var ghost = ctx.ProcessingEntity.CurrentServer.GetGhost(eid);
                     if (ghost is IImpactedEntity impe)
@@ -65,9 +63,27 @@ namespace Yogollag
             }
         }
 
+        public static VoltBody[] QuerySpaceInCircle(float size, ScriptingContext ctx)
+        {
+            var tgt = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host);
+            var world = (VoltWorld)ctx.ProcessingEntity.CurrentServer.CustomData;
+            VoltBody[] bodies = null;
+            lock (world)
+            {
+                var pos = ctx.TargetPoint.ToVolt();
+                var buffer = world.QueryCircle(pos, size);
+                if (buffer.Count != 0)
+                    bodies = new VoltBody[buffer.Count];
+                for (int i = 0; i < buffer.Count; i++)
+                    bodies[i] = buffer[i];
+            }
+
+            return bodies;
+        }
+
         public bool Check(ScriptingContext ctx)
         {
-            var tgt = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target);
+            var tgt = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host);
             var world = (VoltWorld)ctx.ProcessingEntity.CurrentServer.CustomData;
             VoltBody[] bodies = null;
             lock (world)
@@ -82,9 +98,9 @@ namespace Yogollag
             {
                 if (body.UserData is EntityId eid)
                 {
-                    if (eid == ctx.Target)
+                    if (eid == ctx.Host)
                         continue;
-                    if (!Predicate.Def.Check(new ScriptingContext() { Parent = ctx, ProcessingEntity = ctx.ProcessingEntity, Target = eid }))
+                    if (!Predicate.Def.Check(new ScriptingContext() { Parent = ctx, ProcessingEntity = ctx.ProcessingEntity, Host = eid }))
                         return false;
                 }
             }
@@ -106,7 +122,7 @@ namespace Yogollag
 
         public bool Check(ScriptingContext ctx)
         {
-            var target = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target);
+            var target = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host);
             if (target == null)
                 return false;
             return Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = target, Parent = ctx });
@@ -118,7 +134,7 @@ namespace Yogollag
         public DefRef<QuestDef> Quest { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) is IQuester quester)
+            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) is IQuester quester)
             {
                 quester.Quests.Add(new QuestInstance() { QuestDef = Quest.Def });
                 quester.Quests = quester.Quests;
@@ -130,7 +146,7 @@ namespace Yogollag
         public DefRef<QuestDef> Quest { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) is IQuester quester)
+            if (ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) is IQuester quester)
             {
                 var quest = quester.Quests.SingleOrDefault(x => x.QuestDef == Quest.Def);
                 if (quest == null)

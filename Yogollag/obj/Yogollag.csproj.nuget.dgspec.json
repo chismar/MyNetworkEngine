@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Yogollag\\Yogollag.csproj": {}
+    "D:\\Downloads\\test\\MyNetworkEngine\\Yogollag\\Yogollag.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
+    "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
+        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
         "projectName": ".CodeGen",
-        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
-        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
-        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\obj\\",
+        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
+        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
+        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,13 +26,13 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
-                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
+              "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
+                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
               }
             }
           }
@@ -66,28 +66,34 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
+    "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
+        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
         "projectName": "Definitions",
-        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
-        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
-        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\obj\\",
+        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
+        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
+        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,7 +101,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -127,28 +133,34 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj": {
+    "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj",
-        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
-        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\obj\\",
+        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj",
+        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
+        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -156,16 +168,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
-                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj"
+              "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
+                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj"
               },
-              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
-                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
+              "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
+                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
               }
             }
           }
@@ -195,28 +207,34 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj": {
+    "D:\\Downloads\\test\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj",
+        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj",
         "projectName": "VolatilePhysics",
-        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj",
-        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
-        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\VolatilePhysics\\obj\\",
+        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj",
+        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
+        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\VolatilePhysics\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -224,7 +242,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -248,28 +266,34 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Yogollag\\Yogollag.csproj": {
+    "D:\\Downloads\\test\\MyNetworkEngine\\Yogollag\\Yogollag.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Yogollag\\Yogollag.csproj",
+        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\Yogollag\\Yogollag.csproj",
         "projectName": "Yogollag",
-        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Yogollag\\Yogollag.csproj",
-        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
-        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Yogollag\\obj\\",
+        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\Yogollag\\Yogollag.csproj",
+        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
+        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\Yogollag\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -277,19 +301,19 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
-                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj"
+              "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
+                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj"
               },
-              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj": {
-                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj"
+              "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj": {
+                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj"
               },
-              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj": {
-                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj"
+              "D:\\Downloads\\test\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj": {
+                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\VolatilePhysics\\VolatilePhysics.csproj"
               }
             }
           }
@@ -315,10 +339,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

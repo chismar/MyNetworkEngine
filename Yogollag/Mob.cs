@@ -12,7 +12,7 @@ using Volatile;
 namespace Yogollag
 {
     [GenerateSync]
-    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity, IHasSpells, IHasLinksEngine
+    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine
     {
 
         [Sync]
@@ -42,6 +42,11 @@ namespace Yogollag
         public VoltBody PhysicsBody { get; set; }
 
         public virtual SpriteRenderer _spriteRenderer { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual CombatEngine CombatEngine { get; set; } = SyncObject.New<CombatEngine>();
+        [Sync(SyncType.Client)]
+        public virtual ActionEngine ActionEngine { get; set; } = SyncObject.New<ActionEngine>();
+
         public Mob()
         {
             _spriteRenderer = new SpriteRenderer(this);

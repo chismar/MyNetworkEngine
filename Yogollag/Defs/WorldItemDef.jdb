@@ -1,8 +1,6 @@
 {
     "$type": "WorldItemEntityDef",
     "ChooseFromDefaultItems":[
-        "/Wiskey",
-        "/OldTablet",
-        "/Journal"
+        "/Sword"
     ]
 }

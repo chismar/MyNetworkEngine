@@ -3,11 +3,11 @@
     "Name": "Test mob",
     "_spriteRenderer": {
         "$type": "SpriteRendererDef",
-        "Sprite":{
-            "$type":"SpriteDef",
-            "SpriteSheetName":"characters",
-            "X":0,
-            "Y":0
+        "Sprite": {
+            "$type": "SpriteDef",
+            "SpriteSheetName": "characters",
+            "X": 0,
+            "Y": 0
         }
     },
     "AI": {
@@ -19,7 +19,78 @@
                     "$type": "AIRule",
                     "Move": {
                         "$type": "AIMove",
-                        "DirectionRelativeToTarget": { "Y" : 1}
+                        "DirectionRelativeToTarget": {
+                            "Y": 1
+                        }
+                    },
+                    "FixedDuration": 3,
+                    "Cooldown": 14,
+                    "TargetSelector": {
+                        "$type": "ClosestTargetSelector",
+                        "Size": 10,
+                        "Filter": {
+                            "$type": "CheckEntityType",
+                            "AllowedTypes": [
+                                "/CharDef"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "$type": "AIRule",
+                    "FixedDuration": 1,
+                    "Cooldown": 14,
+                    "TargetSelector": {
+                        "$type": "ClosestTargetSelector",
+                        "Size": 10,
+                        "Filter": {
+                            "$type": "CheckEntityType",
+                            "AllowedTypes": [
+                                "/CharDef"
+                            ]
+                        }
+                    },
+                    "CastSpell": {
+                        "$type": "Spell",
+                        "Duration": 1,
+                        "Effects": [
+                            {
+                                "$type": "EffectStrike",
+                                "StrikeDef": {
+                                    "$type": "Strike",
+                                    "SpellOnStrike": {
+                                        "$type": "Spell",
+                                        "ImpactOnStart": {
+                                            "$type": "Target",
+                                            "Do": {
+                                                "$type": "ImpactsList",
+                                                "Impacts": [
+                                                    {
+                                                        "$type": "ChangeEntityStat",
+                                                        "Change": -10,
+                                                        "StatDef": "/Stats/Health"
+                                                    },
+                                                    {
+                                                        "$type": "ImpactInvokeAction",
+                                                        "InvokedSpell": "./TestStaggerChar"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "AnimationName": "IsAttack"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "$type": "AIRule",
+                    "Move": {
+                        "$type": "AIMove",
+                        "DirectionRelativeToTarget": {
+                            "Y": 1
+                        }
                     },
                     "FixedDuration": 5,
                     "PointSelector": {
@@ -30,14 +101,23 @@
             ]
         }
     },
-    "StatsEngine":{
+    "ActionEngine": {
+        "$type": "ActionEngine",
+        "DefaultAvailableActions": [
+            "/TestStagger"
+        ]
+    },
+    "CombatEngine": {
+        "$type": "CombatEngine"
+    },
+    "StatsEngine": {
         "$type": "StatsEngine",
         "Stats": [
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Health",
-                "InitialValue":300
+                "InitialValue": 300
             }
         ]
     }
-} 
+}

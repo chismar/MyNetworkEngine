@@ -1,0 +1,11 @@
+{
+    "$type": "Spell",
+    "CustomName": "Stagger",
+    "Duration":1,
+    "Effects": [
+        {
+            "$type": "EffectAnimate",
+            "AnimationName": "Stagger"
+        }
+    ]
+}

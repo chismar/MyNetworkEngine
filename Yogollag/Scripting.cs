@@ -310,13 +310,15 @@ static class Scripting
         public ScriptingContext(NetworkEntity ent)
         {
             ProcessingEntity = ent;
-            Target = ent.Id;
+            Host = ent.Id;
             if (ent is IPositionedEntity pe)
                 TargetPoint = pe.Position;
         }
         [Sync]
         public ScriptingContext Parent;
         public NetworkEntity ProcessingEntity;
+        [Sync]
+        public EntityId Host;
         [Sync]
         public EntityId Target;
         [Sync]
@@ -330,6 +332,20 @@ static class Scripting
     {
         bool Check(ScriptingContext ctx);
     }
+
+    public class CheckEntityType : BaseDef, IPredicateDef
+    {
+        public List<DefRef<IEntityObjectDef>> AllowedTypes { get; set; } = new List<DefRef<IEntityObjectDef>>();
+        public bool Check(ScriptingContext ctx)
+        {
+            var eo = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) as IEntityObject;
+            if (eo == null)
+                return false;
+            if (AllowedTypes.Any(x => x.Def == eo.Def))
+                return true;
+            return false;
+        }
+    }
     public class CheckEntityStatDef : BaseDef, IPredicateDef
     {
         public DefRef<StatDef> StatDef { get; set; }
@@ -337,7 +353,7 @@ static class Scripting
         public float LessThan { get; set; } = float.MaxValue;
         public bool Check(ScriptingContext ctx)
         {
-            var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) as IStatEntity;
+            var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) as IStatEntity;
             BaseStat stat = statEntity.StatsEngine.StatsSync.SingleOrDefault(x => x.StatDef == StatDef);
             if (stat != null)
                 return MoreThan < stat.Value && LessThan > stat.Value;
@@ -390,7 +406,7 @@ static class Scripting
         public float? Change { get; set; }
         public void Apply(ScriptingContext ctx)
         {
-            var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target) as IStatEntity;
+            var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) as IStatEntity;
             if (statEntity == null)
                 return;
             BaseStat stat = statEntity.StatsEngine.StatsSync.SingleOrDefault(x => x.StatDef == StatDef);

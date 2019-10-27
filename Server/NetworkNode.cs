@@ -1083,7 +1083,7 @@ namespace NetworkEngine
         private Task ProcessMessages()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var e in _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x=>x.Value.EntitiesReplicatedFromRemote.All)))
+            foreach (var e in _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x=>x.Value.EntitiesReplicatedFromRemote.All)).Distinct())
                 if (e.RunLaterDelegates != null && e.RunLaterDelegates.Count > 0)
                     tasks.Add(Task.Run(() => {
                         for (int i = 0; i < e.RunLaterDelegates.Count; i++)
@@ -1848,6 +1848,7 @@ namespace NetworkEngine
             {
                 var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
                 ((IGhost)newVal).Deserialize(stream);
+                ((SyncObject)newVal)?.SetParentEntity(ParentEntity);
                 return (T)newVal;
             }
             else
@@ -1880,6 +1881,8 @@ namespace NetworkEngine
 
         private void InternalSetAt(T t, int index)
         {
+            if (t is SyncObject so && so.ParentEntity == null)
+                so.SetParentEntity(ParentEntity);
             OnItemRemoved?.Invoke(_internalList[index]);
             _internalList[index] = t;
             OnItemAdded?.Invoke(t);            
@@ -1887,6 +1890,8 @@ namespace NetworkEngine
         }
         private void InternalInsert(T t, int index)
         {
+            if (t is SyncObject so && so.ParentEntity == null)
+                so.SetParentEntity(ParentEntity);
             _internalList.Insert(index, t);
             OnItemAdded?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.Insert, index, t));
@@ -1909,6 +1914,8 @@ namespace NetworkEngine
         }
         private void InternalAdd(T t)
         {
+            if (t is SyncObject so && so.ParentEntity == null)
+                so.SetParentEntity(ParentEntity);
             _internalList.Add(t);
             OnItemAdded?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.Add, 0, t));

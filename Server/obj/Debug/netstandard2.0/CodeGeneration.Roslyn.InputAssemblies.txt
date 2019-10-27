@@ -1,1 +1,0 @@
-C:\Users\Виталий\Documents\MyNetworkEngine\CodeGen\.bin\Debug\CodeGen\Debug\netstandard2.0\.CodeGen.dll
