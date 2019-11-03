@@ -46,7 +46,10 @@ public class Visual : MonoBehaviour
         var v2 = ((IPositionedEntity)Obj).Position;
         var r = ((IPositionedEntity)Obj).Rotation;
         transform.position = new Vector3(v2.X, 0, v2.Y);
-        transform.rotation = Quaternion.Euler(0, 360-r, 0);
+        if (VisualPrefab == null) 
+            transform.rotation = Quaternion.Euler(0, 360 - r, 0);
+        else if (Obj is ICharacterLikeMovement)
+            VisualPrefab.transform.rotation = Quaternion.Euler(0, r, 0);
     }
 
     public void Destroy()
@@ -54,7 +57,7 @@ public class Visual : MonoBehaviour
         Destroy(transform.gameObject);
     }
 
-    
+
 }
 
 public abstract class VisualSetup : MonoBehaviour

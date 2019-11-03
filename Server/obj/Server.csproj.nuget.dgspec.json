@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj": {}
+    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj": {}
   },
   "projects": {
-    "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
+    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
+        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
         "projectName": ".CodeGen",
-        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
-        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
-        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\obj\\",
+        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj",
+        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
+        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,13 +26,13 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2/": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
-                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
+              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
+                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
               }
             }
           }
@@ -66,34 +66,28 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     },
-    "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
+    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
+        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
         "projectName": "Definitions",
-        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
-        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
-        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\obj\\",
+        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj",
+        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
+        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -101,7 +95,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2/": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -133,34 +127,28 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     },
-    "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj": {
+    "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\Server.csproj",
-        "packagesPath": "D:\\Downloads\\test\\MyNetworkEngine\\packages",
-        "outputPath": "D:\\Downloads\\test\\MyNetworkEngine\\Server\\obj\\",
+        "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\Server.csproj",
+        "packagesPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\packages",
+        "outputPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "D:\\Downloads\\test\\MyNetworkEngine\\NuGet.Config",
-          "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\NuGet.Config",
+          "C:\\Users\\Виталий\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -168,16 +156,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2/": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
-                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\CodeGen\\CodeGen.csproj"
+              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj": {
+                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\CodeGen\\CodeGen.csproj"
               },
-              "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
-                "projectPath": "D:\\Downloads\\test\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
+              "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj": {
+                "projectPath": "C:\\Users\\Виталий\\Documents\\MyNetworkEngine\\ResourcesSystem\\Definitions.csproj"
               }
             }
           }
@@ -207,16 +195,10 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }

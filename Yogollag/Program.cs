@@ -461,7 +461,7 @@ namespace Yogollag
         Vec2 SmoothPosition { get; set; }
         float SmoothRotation { get; set; }
         //client->server
-        void ReceivePosition(Vec2 newPosition);
+        void ReceivePosition(Vec2 newPosition, float newRotation);
         //ghost (client and server)
         void InterpolationUpdate(float deltaTime);
         //ghost (authority client)
@@ -586,7 +586,7 @@ namespace Yogollag
                 _currentSound.Stop();
         }
     }
-    class CharacterLikeMovement : ICharacterLikeMovement
+    class CharacterLikeMovement : ICharacterLikeMovement, ILocoMovable
     {
         ICharacterLikeMovement _host;
         private readonly IPositionedEntity _posEnt;
@@ -600,11 +600,16 @@ namespace Yogollag
         public VoltBody PhysicsBody { get; set; }
         public float Speed => _host.Speed;
         bool _sprint = false;
-        Vec2 _currentDir;
+        public Vec2 _currentDir;
         Vec2 SyncPosition { get => _posEnt.Position; set => _posEnt.Position = value; }
         Vec2 LocalPosition { get; set; }
+        float _localRot;
+        float LocalRot { get => _localRot; set => _localRot = value % 360; }
+        public float SyncRot { get => _posEnt.Rotation; set => _posEnt.Rotation = value; }
         public Vec2 SmoothPosition { get => _host.SmoothPosition; set => _host.SmoothPosition = value; }
         public float SmoothRotation { get => _host.SmoothRotation; set => _host.SmoothRotation = value; }
+        public float CurrentRotation => LocalRot;
+        public Vec2 CurrentPos => LocalPosition;
 
         int properSendRateFromClientPerSecond = 10;
         DateTime _timeWhenReceivedPosition;
@@ -620,6 +625,7 @@ namespace Yogollag
             float speedComponent = 1 - rubberBanding;
             var interpolationSpeed = speedComponent * Speed + rubberBanding * (distance / averageDelta.TotalSeconds);
             var prevPos = SmoothPosition;
+            SmoothRotation = SyncRot;
             if (distance < Speed * deltaTime)
             {
                 SmoothPosition = SyncPosition;
@@ -636,9 +642,10 @@ namespace Yogollag
             PhysicsBody.Set(new Vector2(SmoothPosition.X, SmoothPosition.Y), 1f);
         }
 
-        public void ReceivePosition(Vec2 newPosition)
+        public void ReceivePosition(Vec2 newPosition, float rot)
         {
             SyncPosition = newPosition;
+            SyncRot = rot;
             var prevTime = _timeWhenReceivedPosition;
             _timeWhenReceivedPosition = DateTime.UtcNow;
             if (prevTime == default(DateTime))
@@ -656,7 +663,7 @@ namespace Yogollag
                 LocalPosition = new Vec2() { X = 0, Y = 0 };
                 SmoothPosition = LocalPosition;
                 PhysicsBody.Set(new Vector2(LocalPosition.X, LocalPosition.Y), 1);
-                _host.ReceivePosition(LocalPosition);
+                _host.ReceivePosition(LocalPosition, 0);
             }
             _sprint = EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.LShift);
             if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.A))
@@ -681,23 +688,34 @@ namespace Yogollag
         DateTime _lastSendTime;
         public void UpdateMovement()
         {
-            if (_currentDir != default)
+            if (_locoVel != default)
             {
                 _walk.Play();
             }
             else
                 _walk.Stop();
-            var velocity = _currentDir * (_sprint ? (Speed * 10) : Speed);
+            var velocity = _locoVel * (_sprint ? (Speed * 10) : Speed);
             PhysicsBody.LinearVelocity = new Vector2(velocity.X, velocity.Y);
             var prevPos = LocalPosition;
             LocalPosition = new Vec2() { X = PhysicsBody.Position.x, Y = PhysicsBody.Position.y };
             SmoothPosition = LocalPosition;
             var delta = DateTime.UtcNow - _lastSendTime;
+            LocalRot += (float)delta.TotalSeconds * _locoRot;
             if ((LocalPosition - prevPos).Length >= float.Epsilon && (_lastSendTime == default || delta.TotalSeconds > 0.025))
             {
+                _lastSendTime = DateTime.UtcNow;
                 _timeWhenReceivedPosition = DateTime.UtcNow;
-                _host.ReceivePosition(LocalPosition);
+                _host.ReceivePosition(LocalPosition, LocalRot);
             }
+            SmoothRotation = LocalRot;
+            EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 200), Text = $"{_localRot}"});
+        }
+        Vec2 _locoVel;
+        float _locoRot;
+        public void ApplyMovement(Vec2 vel, float angleRot)
+        {
+            _locoVel = vel;
+            _locoRot = angleRot;
         }
     }
     public interface IPositionedEntity
@@ -887,7 +905,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
-        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine
+        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine, IHasLocoMover
     {
         [Sync(SyncType.Client)]
         [SceneDef]
@@ -902,6 +920,7 @@ namespace Yogollag
 
         public override void OnInit()
         {
+            LocoMover = new LocoMover(new LocoMoverDef(), _movementController);
         }
         public override void OnCreate()
         {
@@ -950,6 +969,7 @@ namespace Yogollag
         public virtual IEntityObjectDef Def { get; set; }
 
         public float SmoothRotation { get; set; }
+        public LocoMover LocoMover { get; set; }
 
         [Sync(SyncType.AuthorityClient)]
         public virtual void SetActiveItem(long itemId)
@@ -974,9 +994,9 @@ namespace Yogollag
                 item.ItemDef.Impact.Def.Apply(new ScriptingContext() { ProcessingEntity = this });
         }
         [Sync(SyncType.AuthorityClient)]
-        public virtual void ReceivePosition(Vec2 newPosition)
+        public virtual void ReceivePosition(Vec2 newPosition, float newRotation)
         {
-            _movementController.ReceivePosition(newPosition);
+            _movementController.ReceivePosition(newPosition, newRotation);
         }
 
         //ghost
@@ -1015,6 +1035,9 @@ namespace Yogollag
             //    SpellsEngine.CastFromClientWithPrediction(
             //       new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/TestAttackSpell") });
             _movementController.UpdateControls();
+            LocoMover.ActionDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
+            LocoMover.MovementDir = _movementController._currentDir;
+            LocoMover.Tick();
         }
 
         public void UpdateMovement()
@@ -1037,5 +1060,6 @@ namespace Yogollag
             if (StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
         }
+
     }
 }

@@ -75,17 +75,17 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -867670231);
+            CheckStream(stream, 1243336337);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, 69607847);
+            CheckStream(stream, 1827015845);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, 69607847);
+                CheckStream(stream, 1827015845);
                 SyncId = stream.GetInt();
-                CheckStream(stream, 69607847);
+                CheckStream(stream, 1827015845);
             }
 
             OnAfterDeserialize();
@@ -104,7 +104,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -867670231);
+            SafeguardStream(stream, 1243336337);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -119,13 +119,13 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, 69607847);
+            SafeguardStream(stream, 1827015845);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, 69607847);
+                SafeguardStream(stream, 1827015845);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, 69607847);
+                SafeguardStream(stream, 1827015845);
             }
 
             return hasAny;
@@ -148,7 +148,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CombatEngineStrikeMessage : EntityMessage
     {
-        public override int NetId => -759236448;
+        public override int NetId => -2138587594;
         public EffectId owner;
         public EntityId targetId;
         public override void Run(object entity)

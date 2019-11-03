@@ -75,7 +75,7 @@ namespace Yogollag
             selfState.T = new HierarchyTransform(targetWorldPos, 0, null);
             if (Input.Def.IsActive(selfState.TriggerWasActive))
             {
-                ent.SpellsEngine.CastFromClientWithPrediction(new SpellCast() { Def = spell, TargetPoint = targetWorldPos });
+                ent.SpellsEngine.CastFromClientWithPrediction(new SpellCast() { Def = spell, TargetPoint = targetWorldPos, OwnerObject = ent.Id });
                 selfState.TriggerWasActive = true;
 
             }

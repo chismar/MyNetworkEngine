@@ -61,18 +61,18 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 871824460);
+            CheckStream(stream, 276662780);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, 1130092385);
+            CheckStream(stream, 1990492391);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, 1130092385);
+                CheckStream(stream, 1990492391);
                 var has = stream.GetBool();
                 Tiles = !has ? default : (MapTile[, ])SyncTypesMap.GetSerializerForObjType(typeof(MapTile[, ])).Deserialize(stream);
-                CheckStream(stream, 1130092385);
+                CheckStream(stream, 1990492391);
             }
 
             OnAfterDeserialize();
@@ -91,7 +91,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 871824460);
+            SafeguardStream(stream, 276662780);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -106,10 +106,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, 1130092385);
+            SafeguardStream(stream, 1990492391);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, 1130092385);
+                SafeguardStream(stream, 1990492391);
                 hasAny = true;
                 if (Tiles != default)
                 {
@@ -121,7 +121,7 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, 1130092385);
+                SafeguardStream(stream, 1990492391);
             }
 
             return hasAny;
@@ -157,7 +157,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityAddTileModMessage : EntityMessage
     {
-        public override int NetId => -1298481801;
+        public override int NetId => -1795033876;
         public int x;
         public int y;
         public TileModDef modDef;
@@ -238,7 +238,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityRemoveTileModMessage : EntityMessage
     {
-        public override int NetId => -550301554;
+        public override int NetId => -287679083;
         public int x;
         public int y;
         public TileModDef modDef;

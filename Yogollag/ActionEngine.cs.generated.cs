@@ -90,17 +90,17 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -750751791);
+            CheckStream(stream, 1551358644);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, 69607847);
+            CheckStream(stream, 1827015845);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, 69607847);
+                CheckStream(stream, 1827015845);
                 SyncId = stream.GetInt();
-                CheckStream(stream, 69607847);
+                CheckStream(stream, 1827015845);
             }
 
             OnAfterDeserialize();
@@ -119,7 +119,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -750751791);
+            SafeguardStream(stream, 1551358644);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -134,13 +134,13 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, 69607847);
+            SafeguardStream(stream, 1827015845);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, 69607847);
+                SafeguardStream(stream, 1827015845);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, 69607847);
+                SafeguardStream(stream, 1827015845);
             }
 
             return hasAny;

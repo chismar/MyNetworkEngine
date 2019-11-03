@@ -63,13 +63,15 @@ namespace Assets.UnityClient
                     _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)), 0);
                 _lastPos = pos;
 
-                var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
+                //var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
                 SFML.Graphics.Transform t = SFML.Graphics.Transform.Identity;
-                var a = Vec2.AngleBetween(mouseDir, new Vec2(0, 1));
-                t.Rotate(a);
-                var tv = t.TransformPoint(velocity.X, velocity.Y);
-                var currentDir = new Vec2(tv.X, tv.Y);
+                float rotation = rot;
 
+                t.Rotate(360 -rotation);
+                var tv = t.TransformPoint(-velocity.X, velocity.Y);
+                var currentDir = new Vec2(tv.X, tv.Y);
+                if (curValue is ICharacterLikeMovement)
+                    EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 400), Text = $"{currentDir} {rotation} {velocity}" });
                 _visual._animator.SetFloat("dirX", currentDir.X / _assumedMaxVelocity);
                 _visual._animator.SetFloat("dirY", currentDir.Y / _assumedMaxVelocity);
                 _visual._animator.SetBool("IsRun", velocity.Length > 0);

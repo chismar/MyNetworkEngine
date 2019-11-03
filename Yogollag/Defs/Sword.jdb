@@ -24,6 +24,21 @@
                             "Duration": 1,
                             "Effects": [
                                 {
+                                    "$type": "EffectMotion",
+                                    "State": {
+                                        "$type": "MovementState",
+                                        "Actions": [
+                                            {
+                                                "Time": 0.7,
+                                                "Velocity": {
+                                                    "X":0,
+                                                    "Y":3
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
                                     "$type": "EffectStrike",
                                     "AnimationName": "SwordAttack",
                                     "StrikeDef": {

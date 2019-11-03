@@ -467,7 +467,7 @@ namespace NetworkEngine
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -1595273710);
+            CheckStream(stream, 1905149954);
             CustomDeserialize(stream);
             OnAfterDeserialize();
         }
@@ -485,7 +485,7 @@ namespace NetworkEngine
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -1595273710);
+            SafeguardStream(stream, 1905149954);
             return CustomSerialize(ref stream, initial);
         }
     }
@@ -536,7 +536,7 @@ namespace NetworkEngine
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 1114746109);
+            CheckStream(stream, 1594623317);
             CustomDeserialize(stream);
             OnAfterDeserialize();
         }
@@ -554,7 +554,7 @@ namespace NetworkEngine
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 1114746109);
+            SafeguardStream(stream, 1594623317);
             return CustomSerialize(ref stream, initial);
         }
     }

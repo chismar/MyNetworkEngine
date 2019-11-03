@@ -48,7 +48,7 @@ namespace Yogollag
         }
         public static bool operator ==(Vec2 p, Vec2 p2)
         {
-            return p.X == p2.Y && p.Y == p2.Y;
+            return p.X == p2.X && p.Y == p2.Y;
         }
         public static bool operator !=(Vec2 p, Vec2 p2)
         {
