@@ -15,11 +15,6 @@ public class UnityCurveApi : CurveApi
     }
 
 }
-[CreateAssetMenu]
-public class MoveCurve : ScriptableObject
-{
-    public AnimationCurve Curve;
-}
 public class UnityWindowApi : WindowApi
 {
     public Vec2 Size => Vec2.New(Screen.width, Screen.height);
