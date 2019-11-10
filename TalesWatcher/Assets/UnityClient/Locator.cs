@@ -18,6 +18,8 @@ class Locator : VisualSetup
     VisualObject _subObj;
     private void Update()
     {
+        if (_vc == null)
+            return;
         if (_vc.Value is IEntityObject eobj)
         {
             if (eobj.Def != null && eobj.Def.Address.IsBase)

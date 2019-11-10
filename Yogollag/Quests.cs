@@ -67,7 +67,7 @@ namespace Yogollag
         {
             var tgt = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host);
             var world = (VoltWorld)ctx.ProcessingEntity.CurrentServer.CustomData;
-            VoltBody[] bodies = null;
+            VoltBody[] bodies = Array.Empty<VoltBody>();
             lock (world)
             {
                 var pos = ctx.TargetPoint.ToVolt();

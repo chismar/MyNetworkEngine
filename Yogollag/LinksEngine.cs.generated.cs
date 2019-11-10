@@ -20,6 +20,12 @@ namespace Yogollag
     [GeneratedClass]
     public class LinksEngineSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
+
         public Dictionary<BaseDef, List<Int32>> SceneRefs
         {
             get;

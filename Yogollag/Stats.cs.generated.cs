@@ -389,6 +389,11 @@ namespace Yogollag
     [GeneratedClass]
     public class StatsEngineSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
     }
 
     [GeneratedClass]

@@ -22,6 +22,12 @@ namespace Yogollag
     [GeneratedClass]
     public class InteractiveWorldEntitySceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
+
         public Single Rotation
         {
             get;
@@ -360,7 +366,7 @@ namespace Yogollag
     [GeneratedClass]
     public class InteractiveWorldEntityRunImpactMessage : EntityMessage
     {
-        public override int NetId => 1993767896;
+        public override int NetId => 105186296;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)

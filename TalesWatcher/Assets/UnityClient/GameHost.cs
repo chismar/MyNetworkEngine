@@ -23,9 +23,10 @@ public class GameHost : MonoBehaviour
     public Material SimpleDrawMaterial;
     void Start()
     {
-        EnvironmentAPI.Curve = new UnityCurveApi();
         Definitions.Logger.LogError += (s) => Debug.LogError(s);
         Definitions.Logger.Log += (s) => Debug.LogError(s);
+        SyncTypesMap.Init();
+        EnvironmentAPI.Curve = new UnityCurveApi();
         DefsHolder.Instance = new Defs(new FolderLoader(Application.dataPath + "/../../Yogollag/Defs"));
         Debug.LogError(DefsHolder.Instance.Deserializer.Loader.GetRoot());
         foreach (var root in DefsHolder.Instance.Deserializer.Loader.AllPossibleRoots)

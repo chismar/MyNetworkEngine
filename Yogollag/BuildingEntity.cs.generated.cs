@@ -22,6 +22,12 @@ namespace Yogollag
     [GeneratedClass]
     public class BuildingEntitySceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
+
         public Single Rotation
         {
             get;

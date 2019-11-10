@@ -22,6 +22,12 @@ namespace Yogollag
     [GeneratedClass]
     public class WorldItemEntitySceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
+
         public DefRef<ItemDef> StartingItemDef
         {
             get;
@@ -305,7 +311,7 @@ namespace Yogollag
     [GeneratedClass]
     public class WorldItemEntityBeTakenMessage : EntityMessage
     {
-        public override int NetId => -1593046731;
+        public override int NetId => -1193378830;
         public EntityId takerId;
         public override void Run(object entity)
         {

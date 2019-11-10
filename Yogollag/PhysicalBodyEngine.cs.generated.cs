@@ -22,6 +22,11 @@ namespace Yogollag
     [GeneratedClass]
     public class PhysicalBodyEngineSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
     }
 
     [GeneratedClass]

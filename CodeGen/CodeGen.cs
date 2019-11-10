@@ -312,6 +312,7 @@ namespace CodeGen
                 [GeneratedClass]
                 public class {{obj}}SceneDef : BaseDef, ISceneDef
                 {
+                    public DefRef<IEntityObjectDef> Object { get; set; }
                     {{for defProp in sceneprops}}
                         public {{GetDefPropType defProp.type}} {{defProp.name}} { get; set; } = {{defProp.init}};
                     {{end}}

@@ -5,6 +5,7 @@
     {
       "$type": "WorldItemEntitySceneDef",
       "CustomName": null,
+      "Object": "/WorldItemDef",
       "StartingItemDef": "/Wiskey",
       "Position": {
         "$type": "Vec2",
@@ -16,6 +17,7 @@
     {
       "$type": "WorldItemEntitySceneDef",
       "CustomName": null,
+      "Object": "/WorldItemDef",
       "StartingItemDef": "/Journal",
       "Position": {
         "$type": "Vec2",
@@ -27,6 +29,7 @@
     {
       "$type": "WorldItemEntitySceneDef",
       "CustomName": null,
+      "Object": "/WorldItemDef",
       "StartingItemDef": "/OldTablet",
       "Position": {
         "$type": "Vec2",
@@ -38,32 +41,50 @@
     {
       "$type": "InteractiveWorldEntitySceneDef",
       "CustomName": null,
+      "Object": "/DarkMonument",
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
         "X": 9.2,
         "Y": 0.0
-      }
+      },
+      "StatsEngine": null
     },
     {
       "$type": "MobSceneDef",
       "CustomName": null,
+      "Object": "/TestMob",
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
         "X": -22.9,
         "Y": 0.0
-      }
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
     },
     {
       "$type": "BuildingEntitySceneDef",
       "CustomName": null,
+      "Object": "/SimpleBuilding1",
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
         "X": 8.3,
         "Y": 0.0
-      }
+      },
+      "PhysicalBody": null
     }
   ]
 }

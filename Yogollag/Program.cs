@@ -192,6 +192,15 @@ namespace Yogollag
                             }
                         }
                     }
+                    if (_debugCreator._rootInstance.Def.AttachedScene != null)
+                    {
+                        _node.Create<SceneEntity>(se =>
+                        {
+                            se.Position = _debugCreator._rootInstance.GlobalPos;
+                            se.Rotation = _debugCreator._rootInstance.GlobalRot;
+                            se.SceneDef = _debugCreator._rootInstance.Def.AttachedScene;
+                        });
+                    }
                 }
                 var deltaTime = EnvironmentAPI.Time.DeltaTime;
                 foreach (var ghost in _node.AllGhosts())
@@ -488,6 +497,7 @@ namespace Yogollag
     }
     public class SpriteRendererSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object { get; set; }
 
     }
     public class SpriteRendererDef : BaseDef, IEntityObjectDef, IRenderableDef

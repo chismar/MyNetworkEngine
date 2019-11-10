@@ -20,6 +20,11 @@ namespace Yogollag
     [GeneratedClass]
     public class CombatEngineSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
     }
 
     [GeneratedClass]
@@ -148,7 +153,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CombatEngineStrikeMessage : EntityMessage
     {
-        public override int NetId => -90006695;
+        public override int NetId => 237544792;
         public EffectId owner;
         public EntityId targetId;
         public override void Run(object entity)

@@ -23,6 +23,12 @@ namespace Yogollag
     [GeneratedClass]
     public class MobSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
+
         public Single Rotation
         {
             get;
@@ -783,7 +789,7 @@ namespace Yogollag
     [GeneratedClass]
     public class MobRunImpactMessage : EntityMessage
     {
-        public override int NetId => -1479937135;
+        public override int NetId => 1223165771;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)

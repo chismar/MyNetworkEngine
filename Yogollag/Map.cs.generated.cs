@@ -157,7 +157,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityAddTileModMessage : EntityMessage
     {
-        public override int NetId => 1282045001;
+        public override int NetId => 2125181720;
         public int x;
         public int y;
         public TileModDef modDef;
@@ -238,7 +238,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ChunkEntityRemoveTileModMessage : EntityMessage
     {
-        public override int NetId => 1836106028;
+        public override int NetId => -1169947640;
         public int x;
         public int y;
         public TileModDef modDef;

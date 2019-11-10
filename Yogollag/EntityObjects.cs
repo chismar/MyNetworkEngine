@@ -22,7 +22,7 @@ namespace Yogollag
     }
     public interface ISceneDef : IDef
     {
-
+        DefRef<IEntityObjectDef> Object { get; set; }
     }
 
     public static class EntityObjectsMap

@@ -9,7 +9,16 @@ using Yogollag;
 
 class SpawnedItem : SpawnedObject
 {
-    protected override Type OverrideType => typeof(WorldItemEntitySceneDef);
+    protected override (Type, IEntityObjectDef) OverrideType
+    {
+        get
+        {
+            GameHost.NewDefs();
+            var ownDef = (IEntityObjectDef)DefsHolder.Instance.LoadDef<WorldItemEntityDef>("/WorldItemDef");
+            return (typeof(WorldItemEntitySceneDef), ownDef);
+
+        }
+    }
     public override BaseDef Export()
     {
         var obj = base.Export();

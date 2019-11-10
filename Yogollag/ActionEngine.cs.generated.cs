@@ -23,6 +23,11 @@ namespace Yogollag
     [GeneratedClass]
     public class ActionEngineSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
     }
 
     [GeneratedClass]

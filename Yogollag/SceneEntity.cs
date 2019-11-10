@@ -1,4 +1,5 @@
-﻿using CodeGen;
+﻿
+using CodeGen;
 using Definitions;
 using NetworkEngine;
 using System;
@@ -64,13 +65,14 @@ namespace Yogollag
             {
                 var spawnedEntitySceneDef = seRef.Loc;
                 var spawnedEntityDef = EntityObjectsMap.GetDefFromSceneDef(spawnedEntitySceneDef);
-                var scenePos = (Vec2)spawnedEntitySceneDef.GetType().GetProperty(nameof(IPositionedEntity.Position)).GetValue(spawnedEntityDef);
-                var sceneRot = (float)spawnedEntitySceneDef.GetType().GetProperty(nameof(IPositionedEntity.Rotation)).GetValue(spawnedEntityDef);
-                var itemDef = (ItemDef)spawnedEntitySceneDef.GetType().GetProperty(nameof(WorldItemEntity.StartingItemDef))?.GetValue(spawnedEntityDef);
+                var scenePos = (Vec2)spawnedEntitySceneDef.GetType().GetProperty(nameof(IPositionedEntity.Position)).GetValue(spawnedEntitySceneDef);
+                var sceneRot = (float)spawnedEntitySceneDef.GetType().GetProperty(nameof(IPositionedEntity.Rotation)).GetValue(spawnedEntitySceneDef);
+                var objItemDef = spawnedEntitySceneDef.GetType().GetProperty(nameof(WorldItemEntity.StartingItemDef));
+                var itemDef = objItemDef == null ? null : ((DefRef<ItemDef>)objItemDef.GetValue(spawnedEntitySceneDef)).Def;
                 var lT = new HierarchyTransform(scenePos, sceneRot, hT);
                 CurrentServer.Create(seRef.Id, EntityObjectsMap.GetTypeFromDef(spawnedEntityDef), e =>
                 {
-                    ((IEntityObject)e).Def = (IEntityObjectDef)spawnedEntityDef;
+                    ((IEntityObject)e).Def = (IEntityObjectDef)(((ISceneDef)spawnedEntitySceneDef).Object.Def);
                     ((IPositionedEntity)e).Position = lT.GlobalPos;
                     ((IPositionedEntity)e).Rotation = lT.GlobalRot;
                     if (e is WorldItemEntity wie)

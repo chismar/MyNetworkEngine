@@ -1299,6 +1299,7 @@ namespace NetworkEngine
             _serializers.Add(typeof(byte[]), new ByteArraySerliazer());
             _serializers.Add(typeof(string), new StringSerializer());
         }
+        public static void Init() { }
         static DefNetworkSerializer _defSerializer = new DefNetworkSerializer();
         public static IGhostLikeSerializer GetSerializerForObjNetId(int netId)
         {
@@ -1800,7 +1801,7 @@ namespace NetworkEngine
                 var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
                 foreach (var e in _internalList)
                 {
-                    stream.Put(SyncTypesMap.GetIdFromSyncType(e.GetType()));
+                    //stream.Put(SyncTypesMap.GetIdFromSyncType(SyncTypesMap.GetSyncTypeFromDeclaredType(e.GetType())));
                     s.Serialize(e, ref stream);
                 }
             }

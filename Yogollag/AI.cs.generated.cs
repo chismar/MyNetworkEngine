@@ -20,6 +20,11 @@ namespace Yogollag
     [GeneratedClass]
     public class AIEngineSceneDef : BaseDef, ISceneDef
     {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
     }
 
     [GeneratedClass]

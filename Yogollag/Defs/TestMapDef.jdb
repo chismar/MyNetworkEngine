@@ -35,6 +35,7 @@
                         ]
                     }
                 ],
+                "AttachedScene": "./TestSceneScene",
                 "SizeX":2000,
                 "SizeY":2000
             }
