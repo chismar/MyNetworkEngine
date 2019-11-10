@@ -20,6 +20,7 @@ namespace Yogollag
 
 
 
+
     }
 
     class Program
@@ -71,6 +72,9 @@ namespace Yogollag
             ChangeAmount 1
             Heal
          }             
+
+
+
              */
         static void Main(string[] args)
         {
@@ -907,6 +911,10 @@ namespace Yogollag
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
         IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine, IHasLocoMover
     {
+
+        [Def]
+        public virtual LocoMoverDef LocoMoverDef { get; set; }
+
         [Sync(SyncType.Client)]
         [SceneDef]
         public virtual float Rotation { get; set; }
@@ -920,7 +928,7 @@ namespace Yogollag
 
         public override void OnInit()
         {
-            LocoMover = new LocoMover(new LocoMoverDef(), _movementController);
+            LocoMover = new LocoMover(LocoMoverDef, _movementController);
         }
         public override void OnCreate()
         {

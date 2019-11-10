@@ -56,22 +56,26 @@ namespace Yogollag
         public Vec2 MovementDir { get; set; }
         ILocoMovable _movable;
         long _currentActionStartTime;
-        MovementStateDef _currentMovementState;
+        string _currentMovementState;
         EffectId _currentEffectId;
         LocoMoverDef _def;
         Vec2 _actionActionDir;
+        float _duration;
+        float _speed;
         public LocoMover(LocoMoverDef def, ILocoMovable movable)
         {
             _movable = movable;
             _def = def;
         }
 
-        public void Set(EffectId id, MovementStateDef state)
+        public void Set(EffectId id, string state, float duration, float speed)
         {
             _actionActionDir = ActionDir;
             _currentActionStartTime = SyncedTime.Now;
             _currentEffectId = id;
             _currentMovementState = state;
+            _duration = duration;
+            _speed = speed;
         }
         public void Unset(EffectId id)
         {
@@ -81,6 +85,8 @@ namespace Yogollag
             _currentMovementState = default;
             _currentActionStartTime = default;
             _actionActionDir = default;
+            _duration = default;
+            _speed = default;
         }
 
         public void Tick()
@@ -128,7 +134,7 @@ namespace Yogollag
             }
             else
             {
-                var cav = CurrentActionVelocity;
+                var cav = CurrentActionVelocity * _speed;
                 var angle = _movable.CurrentRotation - Vec2.AngleBetween(_actionActionDir, new Vec2(0, 1));
                 if (angle > 180)
                     angle = angle - 360;
@@ -144,8 +150,8 @@ namespace Yogollag
             }
 
         }
-        float ActionNormTime => SyncedTime.ToSeconds(SyncedTime.Now - _currentActionStartTime);
-        Vec2 CurrentActionVelocity => _currentMovementState.ActionFromTime(ActionNormTime).Velocity;
+        float ActionNormTime => SyncedTime.ToSeconds(SyncedTime.Now - _currentActionStartTime) / _duration;
+        Vec2 CurrentActionVelocity => new Vec2(0, EnvironmentAPI.Curve.GetCurveValue(_currentMovementState, ActionNormTime));
     }
 
     public class MovementStateDef : BaseDef
@@ -186,15 +192,28 @@ namespace Yogollag
         Vec2 CurrentPos { get; }
     }
 
+    public class EffectTimelineDef : BaseDef, ISpellEffectDef
+    {
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+
+        }
+    }
     public class EffectMotionDef : BaseDef, ISpellEffectDef
     {
-        public DefRef<MovementStateDef> State { get; set; }
+        public string CurveName { get; set; }
+        public float Speed { get; set; }
         public void Begin(SpellInstance spellInstance, bool onClient)
         {
             if (!onClient)
                 return;
             var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
-            lm.LocoMover.Set(new EffectId(this, spellInstance), State);
+            lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)

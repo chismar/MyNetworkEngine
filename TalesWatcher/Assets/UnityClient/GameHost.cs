@@ -16,12 +16,14 @@ public class GameHost : MonoBehaviour
         DefsHolder.Instance = new Defs(new FolderLoader(Application.dataPath + "/../../Yogollag/Defs"), false);
     }
     SimpleServer server;
+
     public SimpleClient client;
     // Start is called before the first frame update
     CancellationTokenSource _source;
     public Material SimpleDrawMaterial;
     void Start()
     {
+        EnvironmentAPI.Curve = new UnityCurveApi();
         Definitions.Logger.LogError += (s) => Debug.LogError(s);
         Definitions.Logger.Log += (s) => Debug.LogError(s);
         DefsHolder.Instance = new Defs(new FolderLoader(Application.dataPath + "/../../Yogollag/Defs"));

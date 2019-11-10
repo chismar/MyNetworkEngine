@@ -7,6 +7,19 @@ using SFML.Window;
 using UnityEngine;
 using Yogollag;
 
+public class UnityCurveApi : CurveApi
+{
+    public float GetCurveValue(string curveName, float value)
+    {
+        return Resources.Load<MoveCurve>(curveName).Curve.Evaluate(Mathf.Clamp(value, 0, 1));
+    }
+
+}
+[CreateAssetMenu]
+public class MoveCurve : ScriptableObject
+{
+    public AnimationCurve Curve;
+}
 public class UnityWindowApi : WindowApi
 {
     public Vec2 Size => Vec2.New(Screen.width, Screen.height);

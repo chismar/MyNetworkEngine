@@ -25,18 +25,8 @@
                             "Effects": [
                                 {
                                     "$type": "EffectMotion",
-                                    "State": {
-                                        "$type": "MovementState",
-                                        "Actions": [
-                                            {
-                                                "Time": 0.7,
-                                                "Velocity": {
-                                                    "X":0,
-                                                    "Y":3
-                                                }
-                                            }
-                                        ]
-                                    }
+                                    "CurveName": "AttackCurve",
+                                    "Speed":5
                                 },
                                 {
                                     "$type": "EffectStrike",

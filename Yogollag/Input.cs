@@ -15,8 +15,12 @@ namespace Yogollag
         public static DrawApi Draw;
         public static WindowApi Win;
         public static ImguiApi Imgui;
+        public static CurveApi Curve;
     }
-
+    public interface CurveApi
+    {
+        float GetCurveValue(string curveName, float value);
+    }
     public interface ImguiApi
     {
         bool Button(Vec2 position, Vec2 size, string text, SpriteHandle sprite, bool scaleToFit = false);

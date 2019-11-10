@@ -51,7 +51,6 @@ namespace Yogollag
     {
         public DefRef<SpellDef> SpellOnStrike { get; set; }
     }
-
     public class EffectStrike : BaseDef, ISpellEffectDef
     {
         public DefRef<StrikeDef> StrikeDef { get; set; }

@@ -129,15 +129,15 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, -993123899);
+            CheckStream(stream, 1298156261);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -1909547482);
+            CheckStream(stream, -121861913);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -1909547482);
+                CheckStream(stream, -121861913);
                 var nullOrNot = stream.GetByte();
                 if (nullOrNot == 0)
                 {
@@ -150,39 +150,39 @@ namespace Yogollag
                     Item = (Item)newVal;
                 }
 
-                CheckStream(stream, -1909547482);
+                CheckStream(stream, -121861913);
             }
             else
             {
-                CheckStream(stream, -1909547482);
+                CheckStream(stream, -121861913);
                 ((IGhost)Item)?.Deserialize(stream);
-                CheckStream(stream, -1909547482);
+                CheckStream(stream, -121861913);
             }
 
-            CheckStream(stream, 129343090);
+            CheckStream(stream, -303701508);
             if ((mask & (1 << 1)) != 0)
             {
-                CheckStream(stream, 129343090);
+                CheckStream(stream, -303701508);
                 var has = stream.GetBool();
                 Position = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
-                CheckStream(stream, 129343090);
+                CheckStream(stream, -303701508);
             }
 
-            CheckStream(stream, -1456363876);
+            CheckStream(stream, 1755029935);
             if ((mask & (1 << 2)) != 0)
             {
-                CheckStream(stream, -1456363876);
+                CheckStream(stream, 1755029935);
                 Rotation = stream.GetFloat();
-                CheckStream(stream, -1456363876);
+                CheckStream(stream, 1755029935);
             }
 
-            CheckStream(stream, 1164755213);
+            CheckStream(stream, -2027379732);
             if ((mask & (1 << 3)) != 0)
             {
-                CheckStream(stream, 1164755213);
+                CheckStream(stream, -2027379732);
                 var has = stream.GetBool();
                 Def = !has ? default : (IEntityObjectDef)SyncTypesMap.GetSerializerForObjType(typeof(IEntityObjectDef)).Deserialize(stream);
-                CheckStream(stream, 1164755213);
+                CheckStream(stream, -2027379732);
             }
 
             OnAfterDeserialize();
@@ -202,7 +202,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, -993123899);
+            SafeguardStream(stream, 1298156261);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -217,10 +217,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -1909547482);
+            SafeguardStream(stream, -121861913);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -1909547482);
+                SafeguardStream(stream, -121861913);
                 hasAny = true;
                 if (Item == null)
                     stream.Put((byte)0);
@@ -231,19 +231,19 @@ namespace Yogollag
                     ((IGhost)Item).Serialize(ref stream, true);
                 }
 
-                SafeguardStream(stream, -1909547482);
+                SafeguardStream(stream, -121861913);
             }
             else
             {
-                SafeguardStream(stream, -1909547482);
+                SafeguardStream(stream, -121861913);
                 hasAny |= ((IGhost)Item)?.Serialize(ref stream, initial) ?? false;
-                SafeguardStream(stream, -1909547482);
+                SafeguardStream(stream, -121861913);
             }
 
-            SafeguardStream(stream, 129343090);
+            SafeguardStream(stream, -303701508);
             if ((deltaMask & (1 << 1)) != 0)
             {
-                SafeguardStream(stream, 129343090);
+                SafeguardStream(stream, -303701508);
                 hasAny = true;
                 if (Position != default)
                 {
@@ -255,22 +255,22 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, 129343090);
+                SafeguardStream(stream, -303701508);
             }
 
-            SafeguardStream(stream, -1456363876);
+            SafeguardStream(stream, 1755029935);
             if ((deltaMask & (1 << 2)) != 0)
             {
-                SafeguardStream(stream, -1456363876);
+                SafeguardStream(stream, 1755029935);
                 hasAny = true;
                 stream.Put(Rotation);
-                SafeguardStream(stream, -1456363876);
+                SafeguardStream(stream, 1755029935);
             }
 
-            SafeguardStream(stream, 1164755213);
+            SafeguardStream(stream, -2027379732);
             if ((deltaMask & (1 << 3)) != 0)
             {
-                SafeguardStream(stream, 1164755213);
+                SafeguardStream(stream, -2027379732);
                 hasAny = true;
                 if (Def != default)
                 {
@@ -282,7 +282,7 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, 1164755213);
+                SafeguardStream(stream, -2027379732);
             }
 
             return hasAny;
@@ -305,7 +305,7 @@ namespace Yogollag
     [GeneratedClass]
     public class WorldItemEntityBeTakenMessage : EntityMessage
     {
-        public override int NetId => 427060393;
+        public override int NetId => -1978844271;
         public EntityId takerId;
         public override void Run(object entity)
         {

@@ -1,12 +1,12 @@
 {
-    "$type":"CharacterEntityDef",
-    "_spriteRenderer":{
-        "$type":"SpriteRendererDef",
-        "Sprite":{
-            "$type":"SpriteDef",
-            "SpriteSheetName":"characters",
-            "X":0,
-            "Y":0
+    "$type": "CharacterEntityDef",
+    "_spriteRenderer": {
+        "$type": "SpriteRendererDef",
+        "Sprite": {
+            "$type": "SpriteDef",
+            "SpriteSheetName": "characters",
+            "X": 0,
+            "Y": 0
         }
     },
     "ActionEngine": {
@@ -15,6 +15,9 @@
             "./AttackSpell",
             "./TestStaggerChar"
         ]
+    },
+    "LocoMoverDef": {
+        "$type": "LocoMover"
     },
     "CombatEngine": {
         "$type": "CombatEngine"
@@ -25,97 +28,97 @@
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Affinity",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Madness",
-                "InitialValue":0
+                "InitialValue": 0
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Insight",
-                "InitialValue":0
+                "InitialValue": 0
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Arcane",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Combat",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Health",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Intelligence",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Knowledge",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Melee",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Mental",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/MentalResist",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Phys",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Physique",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/PhysResist",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Ranged",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/SpellPower",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Stress",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/StressRecovery",
-                "InitialValue":300
+                "InitialValue": 300
             },
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Will",
-                "InitialValue":300
+                "InitialValue": 300
             }
         ]
     }
