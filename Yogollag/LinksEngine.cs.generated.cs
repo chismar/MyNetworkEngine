@@ -101,26 +101,26 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 519503545);
+            CheckStream(stream, 590128338);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, -1586540253);
+            CheckStream(stream, 1148337930);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, -1586540253);
+                CheckStream(stream, 1148337930);
                 var has = stream.GetBool();
                 OwnerScene = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
-                CheckStream(stream, -1586540253);
+                CheckStream(stream, 1148337930);
             }
 
-            CheckStream(stream, 994224734);
+            CheckStream(stream, 389782966);
             if ((mask & (1 << 1)) != 0)
             {
-                CheckStream(stream, 994224734);
+                CheckStream(stream, 389782966);
                 SyncId = stream.GetInt();
-                CheckStream(stream, 994224734);
+                CheckStream(stream, 389782966);
             }
 
             OnAfterDeserialize();
@@ -139,7 +139,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 519503545);
+            SafeguardStream(stream, 590128338);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -154,10 +154,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, -1586540253);
+            SafeguardStream(stream, 1148337930);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, -1586540253);
+                SafeguardStream(stream, 1148337930);
                 hasAny = true;
                 if (OwnerScene != default)
                 {
@@ -169,16 +169,16 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, -1586540253);
+                SafeguardStream(stream, 1148337930);
             }
 
-            SafeguardStream(stream, 994224734);
+            SafeguardStream(stream, 389782966);
             if ((deltaMask & (1 << 1)) != 0)
             {
-                SafeguardStream(stream, 994224734);
+                SafeguardStream(stream, 389782966);
                 hasAny = true;
                 stream.Put(SyncId);
-                SafeguardStream(stream, 994224734);
+                SafeguardStream(stream, 389782966);
             }
 
             return hasAny;

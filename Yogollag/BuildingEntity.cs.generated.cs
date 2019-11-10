@@ -125,15 +125,15 @@ namespace Yogollag
 
         public void Deserialize(NetDataReader stream)
         {
-            CheckStream(stream, 1741598761);
+            CheckStream(stream, 458548129);
             //var hasAny = stream.GetBool();
             //if(!hasAny)
             //    return;
             var mask = stream.GetInt();
-            CheckStream(stream, 428398316);
+            CheckStream(stream, 1718806628);
             if ((mask & (1 << 0)) != 0)
             {
-                CheckStream(stream, 428398316);
+                CheckStream(stream, 1718806628);
                 var nullOrNot = stream.GetByte();
                 if (nullOrNot == 0)
                 {
@@ -146,22 +146,22 @@ namespace Yogollag
                     PhysicalBody = (PhysicalBodyEngine)newVal;
                 }
 
-                CheckStream(stream, 428398316);
+                CheckStream(stream, 1718806628);
             }
             else
             {
-                CheckStream(stream, 428398316);
+                CheckStream(stream, 1718806628);
                 ((IGhost)PhysicalBody)?.Deserialize(stream);
-                CheckStream(stream, 428398316);
+                CheckStream(stream, 1718806628);
             }
 
-            CheckStream(stream, -2027379732);
+            CheckStream(stream, 142474984);
             if ((mask & (1 << 1)) != 0)
             {
-                CheckStream(stream, -2027379732);
+                CheckStream(stream, 142474984);
                 var has = stream.GetBool();
                 Def = !has ? default : (IEntityObjectDef)SyncTypesMap.GetSerializerForObjType(typeof(IEntityObjectDef)).Deserialize(stream);
-                CheckStream(stream, -2027379732);
+                CheckStream(stream, 142474984);
             }
 
             OnAfterDeserialize();
@@ -181,7 +181,7 @@ namespace Yogollag
         {
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
-            SafeguardStream(stream, 1741598761);
+            SafeguardStream(stream, 458548129);
             bool hasAny = false;
             int deltaMask = _deltaMask;
             if (initial)
@@ -196,10 +196,10 @@ namespace Yogollag
                 stream = new NetDataWriter(true, 5);
             //stream.Put(true);
             stream.Put(deltaMask);
-            SafeguardStream(stream, 428398316);
+            SafeguardStream(stream, 1718806628);
             if ((deltaMask & (1 << 0)) != 0)
             {
-                SafeguardStream(stream, 428398316);
+                SafeguardStream(stream, 1718806628);
                 hasAny = true;
                 if (PhysicalBody == null)
                     stream.Put((byte)0);
@@ -210,19 +210,19 @@ namespace Yogollag
                     ((IGhost)PhysicalBody).Serialize(ref stream, true);
                 }
 
-                SafeguardStream(stream, 428398316);
+                SafeguardStream(stream, 1718806628);
             }
             else
             {
-                SafeguardStream(stream, 428398316);
+                SafeguardStream(stream, 1718806628);
                 hasAny |= ((IGhost)PhysicalBody)?.Serialize(ref stream, initial) ?? false;
-                SafeguardStream(stream, 428398316);
+                SafeguardStream(stream, 1718806628);
             }
 
-            SafeguardStream(stream, -2027379732);
+            SafeguardStream(stream, 142474984);
             if ((deltaMask & (1 << 1)) != 0)
             {
-                SafeguardStream(stream, -2027379732);
+                SafeguardStream(stream, 142474984);
                 hasAny = true;
                 if (Def != default)
                 {
@@ -234,7 +234,7 @@ namespace Yogollag
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, -2027379732);
+                SafeguardStream(stream, 142474984);
             }
 
             return hasAny;

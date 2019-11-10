@@ -185,6 +185,8 @@ namespace Yogollag
                     if (eid == ctx.Host)
                         continue;
                     var ghost = ctx.ProcessingEntity.CurrentServer.GetGhost(eid);
+                    if (ghost == null)
+                        continue;
                     bool canSelect = true;
                     if (Filter.Def != null)
                         canSelect = Filter.Def.Check(new ScriptingContext(ghost));
