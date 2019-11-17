@@ -143,7 +143,7 @@ namespace Yogollag
             else
             {
                 var cav = CurrentActionVelocity * _speed;
-                var angle = _movable.CurrentRotation - Vec2.AngleBetween(_actionActionDir, new Vec2(0, 1));
+                var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
                 if (angle > 180)
                     angle = angle - 360;
                 if (angle < -180)
