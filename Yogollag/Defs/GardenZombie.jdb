@@ -41,7 +41,7 @@
                 },
                 {
                     "$type": "AIRule",
-                    "FixedDuration": 1,
+                    "FixedDuration": 1.2,
                     "Cooldown": 4,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
@@ -53,9 +53,10 @@
                             ]
                         }
                     },
+                    "AcceptedRange": 2,
                     "CastSpell": {
                         "$type": "Spell",
-                        "Duration": 1,
+                        "Duration": 1.2,
                         "Effects": [
                             {
                                 "$type": "EffectMotion",

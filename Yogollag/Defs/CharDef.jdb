@@ -20,7 +20,8 @@
     "LocoMoverDef": {
         "$type": "LocoMover",
         "MovementAngleSpeed":400,
-        "CruiserSpeed":7
+        "CruiserSpeed":7,
+        "IdleAngleSpeed":400
     },
     "CombatEngine": {
         "$type": "CombatEngine"

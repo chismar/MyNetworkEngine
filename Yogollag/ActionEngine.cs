@@ -98,7 +98,12 @@ namespace Yogollag
             {
                 var spell = ae.ActionEngine.GetSpell(InvokedSpell.Def);
                 if (spell != null)
-                    (ae as IHasSpells).SpellsEngine.FireAndForgetCast(new SpellCast() { Def = spell, TargetEntity = ctx.Host });
+                {
+                    var pe = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) as IPositionedEntity;
+
+                    (ae as IHasSpells).SpellsEngine.FireAndForgetCast(new SpellCast() { Def = spell, TargetEntity = ctx.Host, TargetPoint = pe?.Position ?? default});
+
+                }
             }
         }
     }

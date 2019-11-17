@@ -57,6 +57,7 @@ namespace Yogollag
 
     public class LocoMover
     {
+        public bool DontMove { get; set; }
         public Vec2 ActionDir { get; set; }
         public Vec2 MovementDir { get; set; }
         ILocoMovable _movable;
@@ -158,7 +159,7 @@ namespace Yogollag
 
         }
         float ActionNormTime => SyncedTime.ToSeconds(SyncedTime.Now - _currentActionStartTime) / _duration;
-        Vec2 CurrentActionVelocity => new Vec2(0, EnvironmentAPI.Curve.GetCurveValue(_eid, _currentMovementState, ActionNormTime));
+        Vec2 CurrentActionVelocity => DontMove ? default : new Vec2(0, EnvironmentAPI.Curve.GetCurveValue(_eid, _currentMovementState, ActionNormTime));
     }
 
     public class MovementStateDef : BaseDef

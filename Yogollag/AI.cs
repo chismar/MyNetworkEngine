@@ -106,13 +106,17 @@ namespace Yogollag
                     var dir = (point.Value - ((IPositionedEntity)ParentEntity).Position).Normal;
                     var mult = dst > maxMult ? maxMult : dst;
                     _locoMover.ActionDir = dir;
-                    if (_currentRule.Move && (_currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? float.MaxValue) < dst)
+                    var isWithinAcceptedRange = (_currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? 0) > dst;
+                    if (_currentRule.Move && !isWithinAcceptedRange)
                         _locoMover.MovementDir = dir;
                     else
                     {
                         near = _currentRule.Move;
                         _locoMover.MovementDir = default;
                     }
+                    _locoMover.DontMove = isWithinAcceptedRange;
+                       
+
                 }
                 else
                 {
