@@ -106,15 +106,23 @@ namespace Yogollag
                     var dir = (point.Value - ((IPositionedEntity)ParentEntity).Position).Normal;
                     var mult = dst > maxMult ? maxMult : dst;
                     _locoMover.ActionDir = dir;
-                    var isWithinAcceptedRange = (_currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? 0) > dst;
-                    if (_currentRule.Move && !isWithinAcceptedRange)
+                    var acceptedRange = _currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? 0;
+                    var isWithinAcceptedRange = acceptedRange > dst;
+                    if (isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) > 0.4)
+                    {
+                        dir = -dir;
+                    }
+                    else  if(isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) < 0.4)
+                        _locoMover.DontMove = true;
+                    else if(!_currentRule.KeepDistance)
+                        _locoMover.DontMove = isWithinAcceptedRange;
+                    if (_currentRule.Move && (!isWithinAcceptedRange ||_currentRule.KeepDistance ))
                         _locoMover.MovementDir = dir;
                     else
                     {
                         near = _currentRule.Move;
                         _locoMover.MovementDir = default;
                     }
-                    _locoMover.DontMove = isWithinAcceptedRange;
                        
 
                 }
@@ -178,6 +186,7 @@ namespace Yogollag
         public bool CancelSpellOnRuleSwitch { get; set; }
         public bool Move { get; set; }
         public bool FinishWhenNear { get; set; }
+        public bool KeepDistance { get; set; }
         public DefRef<CalcerDef> FixedDuration { get; set; }
         public DefRef<CalcerDef> AcceptedRange { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }

@@ -14,7 +14,7 @@
         "$type": "LocoMover",
         "CruiserSpeed": 1,
         "ActionRotationSpeed": 1080,
-        "IdleAngleSpeed":2000
+        "IdleAngleSpeed": 2000
     },
     "AI": {
         "$type": "AIEngine",
@@ -95,14 +95,22 @@
                 },
                 {
                     "$type": "AIRule",
-                    "FixedDuration": 5,
-                    "PointSelector": {
-                        "$type": "RandomPointSelector",
-                        "Radius": 100
+                    "FixedDuration": 3,
+                    "Cooldown": 5,
+                    "TargetSelector": {
+                        "$type": "ClosestTargetSelector",
+                        "Size": 10,
+                        "Filter": {
+                            "$type": "CheckEntityType",
+                            "AllowedTypes": [
+                                "/CharDef"
+                            ]
+                        }
                     },
+                    "KeepDistance": true,
                     "Move": true,
-                    "AcceptedRange": 0
-                }
+                    "AcceptedRange": 4
+                },
             ]
         }
     },

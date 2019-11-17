@@ -212,7 +212,7 @@ namespace Yogollag
                             var pos = ((IPositionedEntity)ghost).Position;
                             lock (_physicsWorld)
                             {
-                                var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10);
+                                var circleShape = _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 1);
                                 var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape);
                                 body.UserData = ghost.Id;
                                 charLikeMovement.PhysicsBody = body;
@@ -338,7 +338,7 @@ namespace Yogollag
                         var pos = ((IPositionedEntity)ghost).Position;
                         lock (_physicsWorld)
                         {
-                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 10));
+                            var body = _physicsWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, _physicsWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 1));
                             body.UserData = ghost.Id;
                             charLikeMovement.PhysicsBody = body;
 

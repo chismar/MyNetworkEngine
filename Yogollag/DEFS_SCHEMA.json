@@ -27,6 +27,7 @@
         "AIMove",
         "TargetSelectorDef",
         "TargetSelector",
+        "ClosestTargetSelector",
         "PointSelectorDef",
         "PointSelector",
         "RandomPointSelectorDef",
@@ -41,6 +42,8 @@
         "RitualEventPattern",
         "RitualTokenDef",
         "RitualToken",
+        "ConcludeRirutalDef",
+        "ConcludeRirutal",
         "RitualActionDef",
         "RitualAction",
         "RitualSiteEntityDef",
@@ -274,6 +277,7 @@
             "AIMove",
             "TargetSelectorDef",
             "TargetSelector",
+            "ClosestTargetSelector",
             "PointSelectorDef",
             "PointSelector",
             "RandomPointSelectorDef",
@@ -288,6 +292,8 @@
             "RitualEventPattern",
             "RitualTokenDef",
             "RitualToken",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
             "RitualActionDef",
             "RitualAction",
             "RitualSiteEntityDef",
@@ -490,6 +496,9 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
+          "$ref": "#/definitions/ClosestTargetSelector"
+        },
+        {
           "$ref": "#/definitions/PointSelectorDef"
         },
         {
@@ -509,6 +518,9 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -835,6 +847,7 @@
             "AIMove",
             "TargetSelectorDef",
             "TargetSelector",
+            "ClosestTargetSelector",
             "PointSelectorDef",
             "PointSelector",
             "RandomPointSelectorDef",
@@ -849,6 +862,8 @@
             "RitualEventPattern",
             "RitualTokenDef",
             "RitualToken",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
             "RitualActionDef",
             "RitualAction",
             "RitualSiteEntityDef",
@@ -1066,6 +1081,9 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
+          "$ref": "#/definitions/ClosestTargetSelector"
+        },
+        {
           "$ref": "#/definitions/PointSelectorDef"
         },
         {
@@ -1085,6 +1103,9 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -1989,6 +2010,16 @@
             }
           ]
         },
+        "KeepDistance": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
         "FixedDuration": {
           "$ref": "#/definitions/CalcerDefField"
         },
@@ -2160,7 +2191,8 @@
           "type": "string",
           "enum": [
             "TargetSelectorDef",
-            "TargetSelector"
+            "TargetSelector",
+            "ClosestTargetSelector"
           ]
         },
         "$vars": {
@@ -2178,6 +2210,78 @@
         },
         {
           "$ref": "#/definitions/TargetSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/ClosestTargetSelector"
+        }
+      ]
+    },
+    "ClosestTargetSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClosestTargetSelectorField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ClosestTargetSelector"
+          ]
+        },
+        "Size": {
+          "$ref": "#/definitions/CalcerDefField"
+        },
+        "Filter": {
+          "$ref": "#/definitions/IPredicateDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ClosestTargetSelectorField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ClosestTargetSelector"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ClosestTargetSelector"
         }
       ]
     },
@@ -2677,6 +2781,74 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
+        }
+      ]
+    },
+    "ConcludeRirutalDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConcludeRirutalDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ConcludeRirutalDef",
+            "ConcludeRirutal"
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ConcludeRirutalDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ConcludeRirutalDef",
+            "ConcludeRirutal"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
         }
       ]
     },
@@ -8019,6 +8191,8 @@
           "type": "string",
           "enum": [
             "ImpactInvokeAction",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
             "RitualActionDef",
             "RitualAction",
             "ImpactsList",
@@ -8050,6 +8224,9 @@
         },
         {
           "$ref": "#/definitions/ImpactInvokeAction"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -9551,6 +9728,7 @@
         "AIRuleDef",
         "AIMoveDef",
         "TargetSelectorDef",
+        "ClosestTargetSelector",
         "PointSelectorDef",
         "RandomPointSelectorDef",
         "AIEngineSceneDef",
@@ -9560,6 +9738,7 @@
         "RitualEventStat",
         "RitualEventPatternDef",
         "RitualTokenDef",
+        "ConcludeRirutalDef",
         "RitualActionDef",
         "RitualSiteEntityDef",
         "BuildingEntitySceneDef",
@@ -10552,6 +10731,9 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
+          "$ref": "#/definitions/ClosestTargetSelector"
+        },
+        {
           "$ref": "#/definitions/PointSelectorDef"
         },
         {
@@ -10571,6 +10753,9 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"

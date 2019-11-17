@@ -311,7 +311,7 @@ namespace Yogollag
     [GeneratedClass]
     public class WorldItemEntityBeTakenMessage : EntityMessage
     {
-        public override int NetId => -1617922887;
+        public override int NetId => 53057262;
         public EntityId takerId;
         public override void Run(object entity)
         {
