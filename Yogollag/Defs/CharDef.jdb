@@ -10,6 +10,7 @@
         }
     },
     "ActionEngine": {
+
         "$type": "ActionEngine",
         "DefaultAvailableActions": [
             "./AttackSpell",
@@ -17,7 +18,9 @@
         ]
     },
     "LocoMoverDef": {
-        "$type": "LocoMover"
+        "$type": "LocoMover",
+        "MovementAngleSpeed":400,
+        "CruiserSpeed":7
     },
     "CombatEngine": {
         "$type": "CombatEngine"

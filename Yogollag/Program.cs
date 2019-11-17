@@ -612,7 +612,7 @@ namespace Yogollag
             LocalPosition = _posEnt.Position;
         }
         public VoltBody PhysicsBody { get; set; }
-        public float Speed => _host.Speed;
+        public float Speed => 1;
         bool _sprint = false;
         public Vec2 _currentDir;
         Vec2 SyncPosition { get => _posEnt.Position; set => _posEnt.Position = value; }
@@ -938,7 +938,7 @@ namespace Yogollag
 
         public override void OnInit()
         {
-            LocoMover = new LocoMover(LocoMoverDef, _movementController);
+            LocoMover = new LocoMover(Id, LocoMoverDef, _movementController);
         }
         public override void OnCreate()
         {

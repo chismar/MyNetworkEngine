@@ -11,22 +11,17 @@ using SFML.Graphics;
 namespace Yogollag
 {
     [GenerateSync]
-    public abstract class LocomotionEngine : SyncObject, ITicked
+    public abstract class LocomotionEngine : SyncObject, ITicked, ILocoMovable
     {
         [Sync(SyncType.Client)]
         public virtual Vec2 Movement { get; set; }
         [Sync(SyncType.Client)]
         public virtual Vec2 Position { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual float Rotation { get; set; }
+        float _angleRot;
         long _lastTimeUpdated;
 
-        public void SetMovement(Vec2 movement)
-        {
-            Movement = movement;
-            if (_lastTimeUpdated == 0)
-                _lastTimeUpdated = SyncedTime.Now;
-            if (movement == default)
-                _lastTimeUpdated = 0;
-        }
 
         VoltBody _body;
         public void Init(VoltBody body)
@@ -41,8 +36,20 @@ namespace Yogollag
             {
                 _body.LinearVelocity = Movement;
                 Position = _body.Position;
+                Rotation += (float)EnvironmentAPI.Time.DeltaTime * _angleRot;
             }
         }
+        public void ApplyMovement(Vec2 vel, float angleRot)
+        {
+            if (vel.Length > 10)
+                Logger.Log($"{_body.LinearVelocity.x} {_body.LinearVelocity.y}");
+            Movement = vel;
+            _angleRot = angleRot;
+            if (_lastTimeUpdated == 0)
+                _lastTimeUpdated = SyncedTime.Now;
+        }
+        public float CurrentRotation => Rotation;
+        public Vec2 CurrentPos => Position;
     }
 
     public interface IHasLocoMover
@@ -62,10 +69,12 @@ namespace Yogollag
         Vec2 _actionActionDir;
         float _duration;
         float _speed;
-        public LocoMover(LocoMoverDef def, ILocoMovable movable)
+        EntityId _eid;
+        public LocoMover(EntityId eid, LocoMoverDef def, ILocoMovable movable)
         {
             _movable = movable;
             _def = def;
+            _eid = eid;
         }
 
         public void Set(EffectId id, string state, float duration, float speed)
@@ -113,7 +122,7 @@ namespace Yogollag
                     }
                     var sign = -Math.Sign(angle);
                     float lerp = Mathf.Clamp(Math.Abs(angle) / 180 * sign, -1, 1);
-                    EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
+                    //EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
                     Transform t = Transform.Identity;
                     t.Rotate(360 - _movable.CurrentRotation);
                     var forwardDir = t.TransformPoint(new Vec2(0, 1));
@@ -121,14 +130,14 @@ namespace Yogollag
                 }
                 else
                 {
-                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(MovementDir, new Vec2(0, 1));
+                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
                     if (angle > 180)
                         angle = angle - 360;
                     if (angle < -180)
                         angle = angle + 360;
                     var sign = -Math.Sign(angle);
                     float lerp = Mathf.Clamp(Math.Abs(angle) / 180 * sign, -1, 1);
-                    EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
+                    //EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
                     _movable.ApplyMovement(MovementDir * _def.CruiserSpeed, Math.Abs(angle) < 5 ? default : _def.MovementAngleSpeed * lerp);
                 }
             }
@@ -151,7 +160,7 @@ namespace Yogollag
 
         }
         float ActionNormTime => SyncedTime.ToSeconds(SyncedTime.Now - _currentActionStartTime) / _duration;
-        Vec2 CurrentActionVelocity => new Vec2(0, EnvironmentAPI.Curve.GetCurveValue(_currentMovementState, ActionNormTime));
+        Vec2 CurrentActionVelocity => new Vec2(0, EnvironmentAPI.Curve.GetCurveValue(_eid, _currentMovementState, ActionNormTime));
     }
 
     public class MovementStateDef : BaseDef
@@ -210,18 +219,30 @@ namespace Yogollag
         public float Speed { get; set; }
         public void Begin(SpellInstance spellInstance, bool onClient)
         {
-            if (!onClient)
-                return;
-            var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
-            lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
+            if (onClient && spellInstance.ParentEntity is CharacterEntity)
+            {
+                var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
+                lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
+            }
+            else if(!onClient && !(spellInstance.ParentEntity is CharacterEntity))
+            {
+                var lm = spellInstance.ParentEntity.CurrentServer.GetWriteEntity<GhostedEntity>(spellInstance.Cast.OwnerObject) as IHasLocoMover;
+                lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
+            }
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
         {
-            if (!onClient)
-                return;
-            var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
-            lm.LocoMover.Unset(new EffectId(this, spellInstance));
+            if (onClient && spellInstance.ParentEntity is CharacterEntity)
+            {
+                var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
+                lm.LocoMover.Unset(new EffectId(this, spellInstance));
+            }
+            else if (!onClient && !(spellInstance.ParentEntity is CharacterEntity))
+            {
+                var lm = spellInstance.ParentEntity.CurrentServer.GetWriteEntity<GhostedEntity>(spellInstance.Cast.OwnerObject) as IHasLocoMover;
+                lm.LocoMover.Unset(new EffectId(this, spellInstance));
+            }
         }
     }
 }

@@ -1,17 +1,35 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NetworkEngine;
 using SFML.Window;
 using UnityEngine;
 using Yogollag;
 
 public class UnityCurveApi : CurveApi
 {
-    public float GetCurveValue(string curveName, float value)
+    ConcurrentDictionary<(EntityId, string), (float, float)> _requests = new ConcurrentDictionary<(EntityId, string), (float, float)>();
+    public float GetCurveValue(EntityId eid, string curveName, float value)
     {
-        return Resources.Load<MoveCurve>(curveName).Curve.Evaluate(Mathf.Clamp(value, 0, 1));
+        if (_requests.TryGetValue((eid, curveName), out var res) && Mathf.Abs(res.Item1 - value) < 0.1f)
+        {
+            _requests[(eid, curveName)] = (value, 0f);
+            return res.Item2;
+        }
+        _requests[(eid, curveName)] = (value, 0f);
+        return 0f;
+            
+    }
+
+    public void UpdateCurves()
+    {
+        foreach (var request in _requests)
+        {
+            _requests[request.Key]= (request.Value.Item1, Resources.Load<MoveCurve>(request.Key.Item2).Curve.Evaluate(Mathf.Clamp(request.Value.Item1, 0, 1)));
+        }
     }
 
 }

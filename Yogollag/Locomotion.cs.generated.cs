@@ -40,7 +40,7 @@ namespace Yogollag
     }
 
     //obj LocomotionEngine generic  hasCustomSerialization false
-    //debug info ITicked 1
+    //debug info ITicked,ILocoMovable 2
     [GeneratedClass]
     public partial class LocomotionEngineSync : LocomotionEngine, IGhost
     {
@@ -64,13 +64,23 @@ namespace Yogollag
             }
         }
 
+        public override Single Rotation
+        {
+            get => base.Rotation;
+            set
+            {
+                base.Rotation = value;
+                OnPropChanged(2);
+            }
+        }
+
         public override Int32 SyncId
         {
             get => base.SyncId;
             set
             {
                 base.SyncId = value;
-                OnPropChanged(2);
+                OnPropChanged(3);
             }
         }
 
@@ -105,8 +115,16 @@ namespace Yogollag
                 CheckStream(stream, 137289609);
             }
 
-            CheckStream(stream, 389782966);
+            CheckStream(stream, 1463612130);
             if ((mask & (1 << 2)) != 0)
+            {
+                CheckStream(stream, 1463612130);
+                Rotation = stream.GetFloat();
+                CheckStream(stream, 1463612130);
+            }
+
+            CheckStream(stream, 389782966);
+            if ((mask & (1 << 3)) != 0)
             {
                 CheckStream(stream, 389782966);
                 SyncId = stream.GetInt();
@@ -180,8 +198,17 @@ namespace Yogollag
                 SafeguardStream(stream, 137289609);
             }
 
-            SafeguardStream(stream, 389782966);
+            SafeguardStream(stream, 1463612130);
             if ((deltaMask & (1 << 2)) != 0)
+            {
+                SafeguardStream(stream, 1463612130);
+                hasAny = true;
+                stream.Put(Rotation);
+                SafeguardStream(stream, 1463612130);
+            }
+
+            SafeguardStream(stream, 389782966);
+            if ((deltaMask & (1 << 3)) != 0)
             {
                 SafeguardStream(stream, 389782966);
                 hasAny = true;

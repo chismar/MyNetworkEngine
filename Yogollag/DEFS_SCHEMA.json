@@ -3,6 +3,11 @@
     "$type": {
       "type": "string",
       "enum": [
+        "BaseDef",
+        "Base",
+        "IDef",
+        "I",
+        "SaveableResource",
         "EffectActionsLayerDef",
         "EffectActionsLayer",
         "ImpactInvokeAction",
@@ -199,16 +204,1235 @@
         "WorldItemEntityDef",
         "WorldItemEntity",
         "WorldItemEntitySceneDef",
-        "WorldItemEntityScene",
-        "BaseDef",
-        "Base",
-        "IDef",
-        "I",
-        "SaveableResource"
+        "WorldItemEntityScene"
       ]
     }
   },
   "definitions": {
+    "BaseDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BaseDef",
+            "Base"
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "BaseDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BaseDef",
+            "Base",
+            "SaveableResource",
+            "EffectActionsLayerDef",
+            "EffectActionsLayer",
+            "ImpactInvokeAction",
+            "ActionEngineSceneDef",
+            "ActionEngineScene",
+            "ActionEngineDef",
+            "ActionEngine",
+            "AIRulesDef",
+            "AIRules",
+            "CalcerDef",
+            "Calcer",
+            "ConstantClacerDef",
+            "ConstantClacer",
+            "AIRuleDef",
+            "AIRule",
+            "AIMoveDef",
+            "AIMove",
+            "TargetSelectorDef",
+            "TargetSelector",
+            "ClosestTargetSelector",
+            "PointSelectorDef",
+            "PointSelector",
+            "RandomPointSelectorDef",
+            "RandomPointSelector",
+            "AIEngineSceneDef",
+            "AIEngineScene",
+            "AIEngineDef",
+            "AIEngine",
+            "RitualEventsDef",
+            "RitualEvents",
+            "RitualEventPatternDef",
+            "RitualEventPattern",
+            "RitualTokenDef",
+            "RitualToken",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
+            "RitualActionDef",
+            "RitualAction",
+            "RitualSiteEntityDef",
+            "RitualSiteEntity",
+            "BuildingEntitySceneDef",
+            "BuildingEntityScene",
+            "BuildingEntityDef",
+            "BuildingEntity",
+            "StrikeDef",
+            "Strike",
+            "EffectStrike",
+            "EffectAnimate",
+            "CombatEngineSceneDef",
+            "CombatEngineScene",
+            "CombatEngineDef",
+            "CombatEngine",
+            "InteractiveDef",
+            "Interactive",
+            "InteractionDef",
+            "Interaction",
+            "InteractiveWorldEntitySceneDef",
+            "InteractiveWorldEntityScene",
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity",
+            "LinksEngineSceneDef",
+            "LinksEngineScene",
+            "LinksEngineDef",
+            "LinksEngine",
+            "MovementStateDef",
+            "MovementState",
+            "LocoMoverDef",
+            "LocoMover",
+            "EffectTimelineDef",
+            "EffectTimeline",
+            "EffectMotionDef",
+            "EffectMotion",
+            "TileModDef",
+            "TileMod",
+            "TileDef",
+            "Tile",
+            "PrefabDef",
+            "Prefab",
+            "SceneDef",
+            "Scene",
+            "MapDef",
+            "Map",
+            "LocationCreatorDef",
+            "LocationCreator",
+            "MapSiteTypeDef",
+            "MapSiteType",
+            "MapSiteDef",
+            "MapSite",
+            "MapSiteTagDef",
+            "MapSiteTag",
+            "ScenarioDef",
+            "Scenario",
+            "PlaceDef",
+            "Place",
+            "IntGenParameterDef",
+            "IntGenParameter",
+            "MapPrefabDef",
+            "MapPrefab",
+            "SlotLinkTypeDef",
+            "SlotLinkType",
+            "SlotLinkDef",
+            "SlotLink",
+            "SlotGenDef",
+            "SlotGen",
+            "TilesGenDef",
+            "TilesGen",
+            "SlotCategoryDef",
+            "SlotCategory",
+            "TileCategoryDef",
+            "TileCategory",
+            "MobSceneDef",
+            "MobScene",
+            "MobDef",
+            "Mob",
+            "PhysicalShapeDef",
+            "PhysicalShape",
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape",
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape",
+            "PhysicalBodyEngineSceneDef",
+            "PhysicalBodyEngineScene",
+            "PhysicalBodyEngineDef",
+            "PhysicalBodyEngine",
+            "SpriteRenderedDef",
+            "SpriteRendered",
+            "SpriteRendererSceneDef",
+            "SpriteRendererScene",
+            "SpriteRendererDef",
+            "SpriteRenderer",
+            "ItemDef",
+            "Item",
+            "CharacterEntitySceneDef",
+            "CharacterEntityScene",
+            "CharacterEntityDef",
+            "CharacterEntity",
+            "QuestDef",
+            "Quest",
+            "TargetTypeDef",
+            "TargetType",
+            "ImpactsList",
+            "AllInCircle",
+            "TargetDef",
+            "Target",
+            "AddQuest",
+            "CompleteQuest",
+            "RoleDef",
+            "Role",
+            "CheckEntityType",
+            "CheckEntityStatDef",
+            "CheckEntityStat",
+            "AllInRangeDef",
+            "AllInRange",
+            "ChangeEntityStatDef",
+            "ChangeEntityStat",
+            "SimpleSpawnerDef",
+            "SimpleSpawner",
+            "SpellCastModeDef",
+            "SpellCastMode",
+            "InputTriggersMapDef",
+            "InputTriggersMap",
+            "InputTriggerDef",
+            "InputTrigger",
+            "TargetPointCastDef",
+            "TargetPointCast",
+            "SpellDef",
+            "Spell",
+            "SpellsEngineSceneDef",
+            "SpellsEngineScene",
+            "SpellsEngineDef",
+            "SpellsEngine",
+            "SpriteDef",
+            "Sprite",
+            "StatInstanceDef",
+            "StatInstance",
+            "StatDef",
+            "Stat",
+            "StatsEngineSceneDef",
+            "StatsEngineScene",
+            "StatsEngineDef",
+            "StatsEngine",
+            "WorldItemEntityDef",
+            "WorldItemEntity",
+            "WorldItemEntitySceneDef",
+            "WorldItemEntityScene",
+            "SlotLinkDef"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BaseDef"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        },
+        {
+          "$ref": "#/definitions/EffectActionsLayerDef"
+        },
+        {
+          "$ref": "#/definitions/ImpactInvokeAction"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
+        },
+        {
+          "$ref": "#/definitions/AIRulesDef"
+        },
+        {
+          "$ref": "#/definitions/CalcerDef"
+        },
+        {
+          "$ref": "#/definitions/ConstantClacerDef"
+        },
+        {
+          "$ref": "#/definitions/AIRuleDef"
+        },
+        {
+          "$ref": "#/definitions/AIMoveDef"
+        },
+        {
+          "$ref": "#/definitions/TargetSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/ClosestTargetSelector"
+        },
+        {
+          "$ref": "#/definitions/PointSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/RandomPointSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/AIEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/AIEngineDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventsDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventPatternDef"
+        },
+        {
+          "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
+        },
+        {
+          "$ref": "#/definitions/RitualSiteEntityDef"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
+          "$ref": "#/definitions/StrikeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectStrike"
+        },
+        {
+          "$ref": "#/definitions/EffectAnimate"
+        },
+        {
+          "$ref": "#/definitions/CombatEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/CombatEngineDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveDef"
+        },
+        {
+          "$ref": "#/definitions/InteractionDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
+        },
+        {
+          "$ref": "#/definitions/LinksEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/LinksEngineDef"
+        },
+        {
+          "$ref": "#/definitions/MovementStateDef"
+        },
+        {
+          "$ref": "#/definitions/LocoMoverDef"
+        },
+        {
+          "$ref": "#/definitions/EffectTimelineDef"
+        },
+        {
+          "$ref": "#/definitions/EffectMotionDef"
+        },
+        {
+          "$ref": "#/definitions/TileModDef"
+        },
+        {
+          "$ref": "#/definitions/TileDef"
+        },
+        {
+          "$ref": "#/definitions/PrefabDef"
+        },
+        {
+          "$ref": "#/definitions/SceneDef"
+        },
+        {
+          "$ref": "#/definitions/MapDef"
+        },
+        {
+          "$ref": "#/definitions/LocationCreatorDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTypeDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTagDef"
+        },
+        {
+          "$ref": "#/definitions/ScenarioDef"
+        },
+        {
+          "$ref": "#/definitions/PlaceDef"
+        },
+        {
+          "$ref": "#/definitions/IntGenParameterDef"
+        },
+        {
+          "$ref": "#/definitions/MapPrefabDef"
+        },
+        {
+          "$ref": "#/definitions/SlotLinkTypeDef"
+        },
+        {
+          "$ref": "#/definitions/SlotLinkDef"
+        },
+        {
+          "$ref": "#/definitions/SlotGenDef"
+        },
+        {
+          "$ref": "#/definitions/TilesGenDef"
+        },
+        {
+          "$ref": "#/definitions/SlotCategoryDef"
+        },
+        {
+          "$ref": "#/definitions/TileCategoryDef"
+        },
+        {
+          "$ref": "#/definitions/MobSceneDef"
+        },
+        {
+          "$ref": "#/definitions/MobDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyEngineDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRenderedDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRendererSceneDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRendererDef"
+        },
+        {
+          "$ref": "#/definitions/ItemDef"
+        },
+        {
+          "$ref": "#/definitions/CharacterEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/CharacterEntityDef"
+        },
+        {
+          "$ref": "#/definitions/QuestDef"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/ImpactsList"
+        },
+        {
+          "$ref": "#/definitions/AllInCircle"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityType"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/AllInRangeDef"
+        },
+        {
+          "$ref": "#/definitions/ChangeEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/SimpleSpawnerDef"
+        },
+        {
+          "$ref": "#/definitions/SpellCastModeDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggersMapDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggerDef"
+        },
+        {
+          "$ref": "#/definitions/TargetPointCastDef"
+        },
+        {
+          "$ref": "#/definitions/SpellDef"
+        },
+        {
+          "$ref": "#/definitions/SpellsEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/SpellsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
+        },
+        {
+          "$ref": "#/definitions/StatInstanceDef"
+        },
+        {
+          "$ref": "#/definitions/StatDef"
+        },
+        {
+          "$ref": "#/definitions/StatsEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/StatsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/WorldItemEntityDef"
+        },
+        {
+          "$ref": "#/definitions/WorldItemEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/SlotLinkDef"
+        }
+      ]
+    },
+    "IDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IDef",
+            "I"
+          ]
+        },
+        "IsRef": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "LocalId": {
+          "type": "string"
+        },
+        "Address": {
+          "$ref": "#/definitions/DefIDFullField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "IDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "BaseDef",
+            "Base",
+            "IDef",
+            "I",
+            "SaveableResource",
+            "EffectActionsLayerDef",
+            "EffectActionsLayer",
+            "ImpactInvokeAction",
+            "ActionEngineSceneDef",
+            "ActionEngineScene",
+            "ActionEngineDef",
+            "ActionEngine",
+            "AIRulesDef",
+            "AIRules",
+            "CalcerDef",
+            "Calcer",
+            "ConstantClacerDef",
+            "ConstantClacer",
+            "AIRuleDef",
+            "AIRule",
+            "AIMoveDef",
+            "AIMove",
+            "TargetSelectorDef",
+            "TargetSelector",
+            "ClosestTargetSelector",
+            "PointSelectorDef",
+            "PointSelector",
+            "RandomPointSelectorDef",
+            "RandomPointSelector",
+            "AIEngineSceneDef",
+            "AIEngineScene",
+            "AIEngineDef",
+            "AIEngine",
+            "RitualEventsDef",
+            "RitualEvents",
+            "RitualEventPatternDef",
+            "RitualEventPattern",
+            "RitualTokenDef",
+            "RitualToken",
+            "ConcludeRirutalDef",
+            "ConcludeRirutal",
+            "RitualActionDef",
+            "RitualAction",
+            "RitualSiteEntityDef",
+            "RitualSiteEntity",
+            "BuildingEntitySceneDef",
+            "BuildingEntityScene",
+            "BuildingEntityDef",
+            "BuildingEntity",
+            "StrikeDef",
+            "Strike",
+            "EffectStrike",
+            "EffectAnimate",
+            "CombatEngineSceneDef",
+            "CombatEngineScene",
+            "CombatEngineDef",
+            "CombatEngine",
+            "IEntityObjectDef",
+            "IEntityObject",
+            "ISceneDef",
+            "IScene",
+            "InteractiveDef",
+            "Interactive",
+            "InteractionDef",
+            "Interaction",
+            "InteractiveWorldEntitySceneDef",
+            "InteractiveWorldEntityScene",
+            "InteractiveWorldEntityDef",
+            "InteractiveWorldEntity",
+            "LinksEngineSceneDef",
+            "LinksEngineScene",
+            "LinksEngineDef",
+            "LinksEngine",
+            "MovementStateDef",
+            "MovementState",
+            "LocoMoverDef",
+            "LocoMover",
+            "EffectTimelineDef",
+            "EffectTimeline",
+            "EffectMotionDef",
+            "EffectMotion",
+            "TileModDef",
+            "TileMod",
+            "TileDef",
+            "Tile",
+            "PrefabDef",
+            "Prefab",
+            "SceneDef",
+            "Scene",
+            "MapDef",
+            "Map",
+            "LocationCreatorDef",
+            "LocationCreator",
+            "MapSiteTypeDef",
+            "MapSiteType",
+            "MapSiteDef",
+            "MapSite",
+            "MapSiteTagDef",
+            "MapSiteTag",
+            "ScenarioDef",
+            "Scenario",
+            "PlaceDef",
+            "Place",
+            "IntGenParameterDef",
+            "IntGenParameter",
+            "MapPrefabDef",
+            "MapPrefab",
+            "SlotLinkTypeDef",
+            "SlotLinkType",
+            "SlotLinkDef",
+            "SlotLink",
+            "SlotGenDef",
+            "SlotGen",
+            "TilesGenDef",
+            "TilesGen",
+            "SlotCategoryDef",
+            "SlotCategory",
+            "TileCategoryDef",
+            "TileCategory",
+            "MobSceneDef",
+            "MobScene",
+            "MobDef",
+            "Mob",
+            "PhysicalShapeDef",
+            "PhysicalShape",
+            "CirclePhysicalShapeDef",
+            "CirclePhysicalShape",
+            "BoxPhysicalShapeDef",
+            "BoxPhysicalShape",
+            "PhysicalBodyEngineSceneDef",
+            "PhysicalBodyEngineScene",
+            "PhysicalBodyEngineDef",
+            "PhysicalBodyEngine",
+            "IRenderableDef",
+            "IRenderable",
+            "SpriteRenderedDef",
+            "SpriteRendered",
+            "SpriteRendererSceneDef",
+            "SpriteRendererScene",
+            "SpriteRendererDef",
+            "SpriteRenderer",
+            "ItemDef",
+            "Item",
+            "CharacterEntitySceneDef",
+            "CharacterEntityScene",
+            "CharacterEntityDef",
+            "CharacterEntity",
+            "QuestDef",
+            "Quest",
+            "TargetTypeDef",
+            "TargetType",
+            "ImpactsList",
+            "AllInCircle",
+            "TargetDef",
+            "Target",
+            "AddQuest",
+            "CompleteQuest",
+            "RoleDef",
+            "Role",
+            "IPredicateDef",
+            "IPredicate",
+            "CheckEntityType",
+            "CheckEntityStatDef",
+            "CheckEntityStat",
+            "IImpactDef",
+            "IImpact",
+            "AllInRangeDef",
+            "AllInRange",
+            "ChangeEntityStatDef",
+            "ChangeEntityStat",
+            "SimpleSpawnerDef",
+            "SimpleSpawner",
+            "SpellCastModeDef",
+            "SpellCastMode",
+            "InputTriggersMapDef",
+            "InputTriggersMap",
+            "InputTriggerDef",
+            "InputTrigger",
+            "TargetPointCastDef",
+            "TargetPointCast",
+            "SpellDef",
+            "Spell",
+            "ISpellEffectDef",
+            "ISpellEffect",
+            "SpellsEngineSceneDef",
+            "SpellsEngineScene",
+            "SpellsEngineDef",
+            "SpellsEngine",
+            "SpriteDef",
+            "Sprite",
+            "StatInstanceDef",
+            "StatInstance",
+            "StatDef",
+            "Stat",
+            "StatsEngineSceneDef",
+            "StatsEngineScene",
+            "StatsEngineDef",
+            "StatsEngine",
+            "WorldItemEntityDef",
+            "WorldItemEntity",
+            "WorldItemEntitySceneDef",
+            "WorldItemEntityScene",
+            "SlotLinkDef"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/BaseDef"
+        },
+        {
+          "$ref": "#/definitions/IDef"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        },
+        {
+          "$ref": "#/definitions/EffectActionsLayerDef"
+        },
+        {
+          "$ref": "#/definitions/ImpactInvokeAction"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/ActionEngineDef"
+        },
+        {
+          "$ref": "#/definitions/AIRulesDef"
+        },
+        {
+          "$ref": "#/definitions/CalcerDef"
+        },
+        {
+          "$ref": "#/definitions/ConstantClacerDef"
+        },
+        {
+          "$ref": "#/definitions/AIRuleDef"
+        },
+        {
+          "$ref": "#/definitions/AIMoveDef"
+        },
+        {
+          "$ref": "#/definitions/TargetSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/ClosestTargetSelector"
+        },
+        {
+          "$ref": "#/definitions/PointSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/RandomPointSelectorDef"
+        },
+        {
+          "$ref": "#/definitions/AIEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/AIEngineDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventsDef"
+        },
+        {
+          "$ref": "#/definitions/RitualEventPatternDef"
+        },
+        {
+          "$ref": "#/definitions/RitualTokenDef"
+        },
+        {
+          "$ref": "#/definitions/ConcludeRirutalDef"
+        },
+        {
+          "$ref": "#/definitions/RitualActionDef"
+        },
+        {
+          "$ref": "#/definitions/RitualSiteEntityDef"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/BuildingEntityDef"
+        },
+        {
+          "$ref": "#/definitions/StrikeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectStrike"
+        },
+        {
+          "$ref": "#/definitions/EffectAnimate"
+        },
+        {
+          "$ref": "#/definitions/CombatEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/CombatEngineDef"
+        },
+        {
+          "$ref": "#/definitions/IEntityObjectDef"
+        },
+        {
+          "$ref": "#/definitions/ISceneDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveDef"
+        },
+        {
+          "$ref": "#/definitions/InteractionDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/InteractiveWorldEntityDef"
+        },
+        {
+          "$ref": "#/definitions/LinksEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/LinksEngineDef"
+        },
+        {
+          "$ref": "#/definitions/MovementStateDef"
+        },
+        {
+          "$ref": "#/definitions/LocoMoverDef"
+        },
+        {
+          "$ref": "#/definitions/EffectTimelineDef"
+        },
+        {
+          "$ref": "#/definitions/EffectMotionDef"
+        },
+        {
+          "$ref": "#/definitions/TileModDef"
+        },
+        {
+          "$ref": "#/definitions/TileDef"
+        },
+        {
+          "$ref": "#/definitions/PrefabDef"
+        },
+        {
+          "$ref": "#/definitions/SceneDef"
+        },
+        {
+          "$ref": "#/definitions/MapDef"
+        },
+        {
+          "$ref": "#/definitions/LocationCreatorDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTypeDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteDef"
+        },
+        {
+          "$ref": "#/definitions/MapSiteTagDef"
+        },
+        {
+          "$ref": "#/definitions/ScenarioDef"
+        },
+        {
+          "$ref": "#/definitions/PlaceDef"
+        },
+        {
+          "$ref": "#/definitions/IntGenParameterDef"
+        },
+        {
+          "$ref": "#/definitions/MapPrefabDef"
+        },
+        {
+          "$ref": "#/definitions/SlotLinkTypeDef"
+        },
+        {
+          "$ref": "#/definitions/SlotLinkDef"
+        },
+        {
+          "$ref": "#/definitions/SlotGenDef"
+        },
+        {
+          "$ref": "#/definitions/TilesGenDef"
+        },
+        {
+          "$ref": "#/definitions/SlotCategoryDef"
+        },
+        {
+          "$ref": "#/definitions/TileCategoryDef"
+        },
+        {
+          "$ref": "#/definitions/MobSceneDef"
+        },
+        {
+          "$ref": "#/definitions/MobDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/CirclePhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/BoxPhysicalShapeDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/PhysicalBodyEngineDef"
+        },
+        {
+          "$ref": "#/definitions/IRenderableDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRenderedDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRendererSceneDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRendererDef"
+        },
+        {
+          "$ref": "#/definitions/ItemDef"
+        },
+        {
+          "$ref": "#/definitions/CharacterEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/CharacterEntityDef"
+        },
+        {
+          "$ref": "#/definitions/QuestDef"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/ImpactsList"
+        },
+        {
+          "$ref": "#/definitions/AllInCircle"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
+          "$ref": "#/definitions/AddQuest"
+        },
+        {
+          "$ref": "#/definitions/CompleteQuest"
+        },
+        {
+          "$ref": "#/definitions/RoleDef"
+        },
+        {
+          "$ref": "#/definitions/IPredicateDef"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityType"
+        },
+        {
+          "$ref": "#/definitions/CheckEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/IImpactDef"
+        },
+        {
+          "$ref": "#/definitions/AllInRangeDef"
+        },
+        {
+          "$ref": "#/definitions/ChangeEntityStatDef"
+        },
+        {
+          "$ref": "#/definitions/SimpleSpawnerDef"
+        },
+        {
+          "$ref": "#/definitions/SpellCastModeDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggersMapDef"
+        },
+        {
+          "$ref": "#/definitions/InputTriggerDef"
+        },
+        {
+          "$ref": "#/definitions/TargetPointCastDef"
+        },
+        {
+          "$ref": "#/definitions/SpellDef"
+        },
+        {
+          "$ref": "#/definitions/ISpellEffectDef"
+        },
+        {
+          "$ref": "#/definitions/SpellsEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/SpellsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
+        },
+        {
+          "$ref": "#/definitions/StatInstanceDef"
+        },
+        {
+          "$ref": "#/definitions/StatDef"
+        },
+        {
+          "$ref": "#/definitions/StatsEngineSceneDef"
+        },
+        {
+          "$ref": "#/definitions/StatsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/WorldItemEntityDef"
+        },
+        {
+          "$ref": "#/definitions/WorldItemEntitySceneDef"
+        },
+        {
+          "$ref": "#/definitions/SlotLinkDef"
+        }
+      ]
+    },
+    "SaveableResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SaveableResourceField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SaveableResource"
+          ]
+        },
+        "Id": {
+          "$ref": "#/definitions/GuidField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "SaveableResourceField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SaveableResource"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        }
+      ]
+    },
     "EffectActionsLayerDef": {
       "type": "object",
       "additionalProperties": false,
@@ -766,7 +1990,30 @@
             }
           ]
         },
+        "Move": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "FinishWhenNear": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
         "FixedDuration": {
+          "$ref": "#/definitions/CalcerDefField"
+        },
+        "AcceptedRange": {
           "$ref": "#/definitions/CalcerDefField"
         },
         "Predicate": {
@@ -777,9 +2024,6 @@
         },
         "PointSelector": {
           "$ref": "#/definitions/PointSelectorDefField"
-        },
-        "Move": {
-          "$ref": "#/definitions/AIMoveDefField"
         },
         "CastSpell": {
           "$ref": "#/definitions/SpellDefField"
@@ -4957,6 +6201,9 @@
             "Mob"
           ]
         },
+        "LocoMoverDef": {
+          "$ref": "#/definitions/LocoMoverDefField"
+        },
         "Name": {
           "type": "string"
         },
@@ -8453,1233 +9700,13 @@
         }
       ]
     },
-    "BaseDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/BaseDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "BaseDef",
-            "Base"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "BaseDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "EffectActionsLayerDef",
-            "EffectActionsLayer",
-            "ImpactInvokeAction",
-            "ActionEngineSceneDef",
-            "ActionEngineScene",
-            "ActionEngineDef",
-            "ActionEngine",
-            "AIRulesDef",
-            "AIRules",
-            "CalcerDef",
-            "Calcer",
-            "ConstantClacerDef",
-            "ConstantClacer",
-            "AIRuleDef",
-            "AIRule",
-            "AIMoveDef",
-            "AIMove",
-            "TargetSelectorDef",
-            "TargetSelector",
-            "ClosestTargetSelector",
-            "PointSelectorDef",
-            "PointSelector",
-            "RandomPointSelectorDef",
-            "RandomPointSelector",
-            "AIEngineSceneDef",
-            "AIEngineScene",
-            "AIEngineDef",
-            "AIEngine",
-            "RitualEventsDef",
-            "RitualEvents",
-            "RitualEventPatternDef",
-            "RitualEventPattern",
-            "RitualTokenDef",
-            "RitualToken",
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
-            "RitualActionDef",
-            "RitualAction",
-            "RitualSiteEntityDef",
-            "RitualSiteEntity",
-            "BuildingEntitySceneDef",
-            "BuildingEntityScene",
-            "BuildingEntityDef",
-            "BuildingEntity",
-            "StrikeDef",
-            "Strike",
-            "EffectStrike",
-            "EffectAnimate",
-            "CombatEngineSceneDef",
-            "CombatEngineScene",
-            "CombatEngineDef",
-            "CombatEngine",
-            "InteractiveDef",
-            "Interactive",
-            "InteractionDef",
-            "Interaction",
-            "InteractiveWorldEntitySceneDef",
-            "InteractiveWorldEntityScene",
-            "InteractiveWorldEntityDef",
-            "InteractiveWorldEntity",
-            "LinksEngineSceneDef",
-            "LinksEngineScene",
-            "LinksEngineDef",
-            "LinksEngine",
-            "MovementStateDef",
-            "MovementState",
-            "LocoMoverDef",
-            "LocoMover",
-            "EffectTimelineDef",
-            "EffectTimeline",
-            "EffectMotionDef",
-            "EffectMotion",
-            "TileModDef",
-            "TileMod",
-            "TileDef",
-            "Tile",
-            "PrefabDef",
-            "Prefab",
-            "SceneDef",
-            "Scene",
-            "MapDef",
-            "Map",
-            "LocationCreatorDef",
-            "LocationCreator",
-            "MapSiteTypeDef",
-            "MapSiteType",
-            "MapSiteDef",
-            "MapSite",
-            "MapSiteTagDef",
-            "MapSiteTag",
-            "ScenarioDef",
-            "Scenario",
-            "PlaceDef",
-            "Place",
-            "IntGenParameterDef",
-            "IntGenParameter",
-            "MapPrefabDef",
-            "MapPrefab",
-            "SlotLinkTypeDef",
-            "SlotLinkType",
-            "SlotLinkDef",
-            "SlotLink",
-            "SlotGenDef",
-            "SlotGen",
-            "TilesGenDef",
-            "TilesGen",
-            "SlotCategoryDef",
-            "SlotCategory",
-            "TileCategoryDef",
-            "TileCategory",
-            "MobSceneDef",
-            "MobScene",
-            "MobDef",
-            "Mob",
-            "PhysicalShapeDef",
-            "PhysicalShape",
-            "CirclePhysicalShapeDef",
-            "CirclePhysicalShape",
-            "BoxPhysicalShapeDef",
-            "BoxPhysicalShape",
-            "PhysicalBodyEngineSceneDef",
-            "PhysicalBodyEngineScene",
-            "PhysicalBodyEngineDef",
-            "PhysicalBodyEngine",
-            "SpriteRenderedDef",
-            "SpriteRendered",
-            "SpriteRendererSceneDef",
-            "SpriteRendererScene",
-            "SpriteRendererDef",
-            "SpriteRenderer",
-            "ItemDef",
-            "Item",
-            "CharacterEntitySceneDef",
-            "CharacterEntityScene",
-            "CharacterEntityDef",
-            "CharacterEntity",
-            "QuestDef",
-            "Quest",
-            "TargetTypeDef",
-            "TargetType",
-            "ImpactsList",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "AddQuest",
-            "CompleteQuest",
-            "RoleDef",
-            "Role",
-            "CheckEntityType",
-            "CheckEntityStatDef",
-            "CheckEntityStat",
-            "AllInRangeDef",
-            "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat",
-            "SimpleSpawnerDef",
-            "SimpleSpawner",
-            "SpellCastModeDef",
-            "SpellCastMode",
-            "InputTriggersMapDef",
-            "InputTriggersMap",
-            "InputTriggerDef",
-            "InputTrigger",
-            "TargetPointCastDef",
-            "TargetPointCast",
-            "SpellDef",
-            "Spell",
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene",
-            "SpellsEngineDef",
-            "SpellsEngine",
-            "SpriteDef",
-            "Sprite",
-            "StatInstanceDef",
-            "StatInstance",
-            "StatDef",
-            "Stat",
-            "StatsEngineSceneDef",
-            "StatsEngineScene",
-            "StatsEngineDef",
-            "StatsEngine",
-            "WorldItemEntityDef",
-            "WorldItemEntity",
-            "WorldItemEntitySceneDef",
-            "WorldItemEntityScene",
-            "BaseDef",
-            "Base",
-            "SaveableResource",
-            "SlotLinkDef"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/EffectActionsLayerDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactInvokeAction"
-        },
-        {
-          "$ref": "#/definitions/ActionEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/ActionEngineDef"
-        },
-        {
-          "$ref": "#/definitions/AIRulesDef"
-        },
-        {
-          "$ref": "#/definitions/CalcerDef"
-        },
-        {
-          "$ref": "#/definitions/ConstantClacerDef"
-        },
-        {
-          "$ref": "#/definitions/AIRuleDef"
-        },
-        {
-          "$ref": "#/definitions/AIMoveDef"
-        },
-        {
-          "$ref": "#/definitions/TargetSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/ClosestTargetSelector"
-        },
-        {
-          "$ref": "#/definitions/PointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/AIEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/AIEngineDef"
-        },
-        {
-          "$ref": "#/definitions/RitualEventsDef"
-        },
-        {
-          "$ref": "#/definitions/RitualEventPatternDef"
-        },
-        {
-          "$ref": "#/definitions/RitualTokenDef"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
-        },
-        {
-          "$ref": "#/definitions/RitualActionDef"
-        },
-        {
-          "$ref": "#/definitions/RitualSiteEntityDef"
-        },
-        {
-          "$ref": "#/definitions/BuildingEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/BuildingEntityDef"
-        },
-        {
-          "$ref": "#/definitions/StrikeDef"
-        },
-        {
-          "$ref": "#/definitions/EffectStrike"
-        },
-        {
-          "$ref": "#/definitions/EffectAnimate"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveDef"
-        },
-        {
-          "$ref": "#/definitions/InteractionDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveWorldEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveWorldEntityDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineDef"
-        },
-        {
-          "$ref": "#/definitions/MovementStateDef"
-        },
-        {
-          "$ref": "#/definitions/LocoMoverDef"
-        },
-        {
-          "$ref": "#/definitions/EffectTimelineDef"
-        },
-        {
-          "$ref": "#/definitions/EffectMotionDef"
-        },
-        {
-          "$ref": "#/definitions/TileModDef"
-        },
-        {
-          "$ref": "#/definitions/TileDef"
-        },
-        {
-          "$ref": "#/definitions/PrefabDef"
-        },
-        {
-          "$ref": "#/definitions/SceneDef"
-        },
-        {
-          "$ref": "#/definitions/MapDef"
-        },
-        {
-          "$ref": "#/definitions/LocationCreatorDef"
-        },
-        {
-          "$ref": "#/definitions/MapSiteTypeDef"
-        },
-        {
-          "$ref": "#/definitions/MapSiteDef"
-        },
-        {
-          "$ref": "#/definitions/MapSiteTagDef"
-        },
-        {
-          "$ref": "#/definitions/ScenarioDef"
-        },
-        {
-          "$ref": "#/definitions/PlaceDef"
-        },
-        {
-          "$ref": "#/definitions/IntGenParameterDef"
-        },
-        {
-          "$ref": "#/definitions/MapPrefabDef"
-        },
-        {
-          "$ref": "#/definitions/SlotLinkTypeDef"
-        },
-        {
-          "$ref": "#/definitions/SlotLinkDef"
-        },
-        {
-          "$ref": "#/definitions/SlotGenDef"
-        },
-        {
-          "$ref": "#/definitions/TilesGenDef"
-        },
-        {
-          "$ref": "#/definitions/SlotCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/TileCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/MobSceneDef"
-        },
-        {
-          "$ref": "#/definitions/MobDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalShapeDef"
-        },
-        {
-          "$ref": "#/definitions/CirclePhysicalShapeDef"
-        },
-        {
-          "$ref": "#/definitions/BoxPhysicalShapeDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalBodyEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalBodyEngineDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRenderedDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererDef"
-        },
-        {
-          "$ref": "#/definitions/ItemDef"
-        },
-        {
-          "$ref": "#/definitions/CharacterEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/CharacterEntityDef"
-        },
-        {
-          "$ref": "#/definitions/QuestDef"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
-          "$ref": "#/definitions/CompleteQuest"
-        },
-        {
-          "$ref": "#/definitions/RoleDef"
-        },
-        {
-          "$ref": "#/definitions/CheckEntityType"
-        },
-        {
-          "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SimpleSpawnerDef"
-        },
-        {
-          "$ref": "#/definitions/SpellCastModeDef"
-        },
-        {
-          "$ref": "#/definitions/InputTriggersMapDef"
-        },
-        {
-          "$ref": "#/definitions/InputTriggerDef"
-        },
-        {
-          "$ref": "#/definitions/TargetPointCastDef"
-        },
-        {
-          "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
-          "$ref": "#/definitions/StatInstanceDef"
-        },
-        {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/WorldItemEntityDef"
-        },
-        {
-          "$ref": "#/definitions/WorldItemEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/BaseDef"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        },
-        {
-          "$ref": "#/definitions/SlotLinkDef"
-        }
-      ]
-    },
-    "IDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IDef",
-            "I"
-          ]
-        },
-        "IsRef": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
-        },
-        "LocalId": {
-          "type": "string"
-        },
-        "Address": {
-          "$ref": "#/definitions/DefIDFullField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "IDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "EffectActionsLayerDef",
-            "EffectActionsLayer",
-            "ImpactInvokeAction",
-            "ActionEngineSceneDef",
-            "ActionEngineScene",
-            "ActionEngineDef",
-            "ActionEngine",
-            "AIRulesDef",
-            "AIRules",
-            "CalcerDef",
-            "Calcer",
-            "ConstantClacerDef",
-            "ConstantClacer",
-            "AIRuleDef",
-            "AIRule",
-            "AIMoveDef",
-            "AIMove",
-            "TargetSelectorDef",
-            "TargetSelector",
-            "ClosestTargetSelector",
-            "PointSelectorDef",
-            "PointSelector",
-            "RandomPointSelectorDef",
-            "RandomPointSelector",
-            "AIEngineSceneDef",
-            "AIEngineScene",
-            "AIEngineDef",
-            "AIEngine",
-            "RitualEventsDef",
-            "RitualEvents",
-            "RitualEventPatternDef",
-            "RitualEventPattern",
-            "RitualTokenDef",
-            "RitualToken",
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
-            "RitualActionDef",
-            "RitualAction",
-            "RitualSiteEntityDef",
-            "RitualSiteEntity",
-            "BuildingEntitySceneDef",
-            "BuildingEntityScene",
-            "BuildingEntityDef",
-            "BuildingEntity",
-            "StrikeDef",
-            "Strike",
-            "EffectStrike",
-            "EffectAnimate",
-            "CombatEngineSceneDef",
-            "CombatEngineScene",
-            "CombatEngineDef",
-            "CombatEngine",
-            "IEntityObjectDef",
-            "IEntityObject",
-            "ISceneDef",
-            "IScene",
-            "InteractiveDef",
-            "Interactive",
-            "InteractionDef",
-            "Interaction",
-            "InteractiveWorldEntitySceneDef",
-            "InteractiveWorldEntityScene",
-            "InteractiveWorldEntityDef",
-            "InteractiveWorldEntity",
-            "LinksEngineSceneDef",
-            "LinksEngineScene",
-            "LinksEngineDef",
-            "LinksEngine",
-            "MovementStateDef",
-            "MovementState",
-            "LocoMoverDef",
-            "LocoMover",
-            "EffectTimelineDef",
-            "EffectTimeline",
-            "EffectMotionDef",
-            "EffectMotion",
-            "TileModDef",
-            "TileMod",
-            "TileDef",
-            "Tile",
-            "PrefabDef",
-            "Prefab",
-            "SceneDef",
-            "Scene",
-            "MapDef",
-            "Map",
-            "LocationCreatorDef",
-            "LocationCreator",
-            "MapSiteTypeDef",
-            "MapSiteType",
-            "MapSiteDef",
-            "MapSite",
-            "MapSiteTagDef",
-            "MapSiteTag",
-            "ScenarioDef",
-            "Scenario",
-            "PlaceDef",
-            "Place",
-            "IntGenParameterDef",
-            "IntGenParameter",
-            "MapPrefabDef",
-            "MapPrefab",
-            "SlotLinkTypeDef",
-            "SlotLinkType",
-            "SlotLinkDef",
-            "SlotLink",
-            "SlotGenDef",
-            "SlotGen",
-            "TilesGenDef",
-            "TilesGen",
-            "SlotCategoryDef",
-            "SlotCategory",
-            "TileCategoryDef",
-            "TileCategory",
-            "MobSceneDef",
-            "MobScene",
-            "MobDef",
-            "Mob",
-            "PhysicalShapeDef",
-            "PhysicalShape",
-            "CirclePhysicalShapeDef",
-            "CirclePhysicalShape",
-            "BoxPhysicalShapeDef",
-            "BoxPhysicalShape",
-            "PhysicalBodyEngineSceneDef",
-            "PhysicalBodyEngineScene",
-            "PhysicalBodyEngineDef",
-            "PhysicalBodyEngine",
-            "IRenderableDef",
-            "IRenderable",
-            "SpriteRenderedDef",
-            "SpriteRendered",
-            "SpriteRendererSceneDef",
-            "SpriteRendererScene",
-            "SpriteRendererDef",
-            "SpriteRenderer",
-            "ItemDef",
-            "Item",
-            "CharacterEntitySceneDef",
-            "CharacterEntityScene",
-            "CharacterEntityDef",
-            "CharacterEntity",
-            "QuestDef",
-            "Quest",
-            "TargetTypeDef",
-            "TargetType",
-            "ImpactsList",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "AddQuest",
-            "CompleteQuest",
-            "RoleDef",
-            "Role",
-            "IPredicateDef",
-            "IPredicate",
-            "CheckEntityType",
-            "CheckEntityStatDef",
-            "CheckEntityStat",
-            "IImpactDef",
-            "IImpact",
-            "AllInRangeDef",
-            "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat",
-            "SimpleSpawnerDef",
-            "SimpleSpawner",
-            "SpellCastModeDef",
-            "SpellCastMode",
-            "InputTriggersMapDef",
-            "InputTriggersMap",
-            "InputTriggerDef",
-            "InputTrigger",
-            "TargetPointCastDef",
-            "TargetPointCast",
-            "SpellDef",
-            "Spell",
-            "ISpellEffectDef",
-            "ISpellEffect",
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene",
-            "SpellsEngineDef",
-            "SpellsEngine",
-            "SpriteDef",
-            "Sprite",
-            "StatInstanceDef",
-            "StatInstance",
-            "StatDef",
-            "Stat",
-            "StatsEngineSceneDef",
-            "StatsEngineScene",
-            "StatsEngineDef",
-            "StatsEngine",
-            "WorldItemEntityDef",
-            "WorldItemEntity",
-            "WorldItemEntitySceneDef",
-            "WorldItemEntityScene",
-            "BaseDef",
-            "Base",
-            "IDef",
-            "I",
-            "SaveableResource",
-            "SlotLinkDef"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/EffectActionsLayerDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactInvokeAction"
-        },
-        {
-          "$ref": "#/definitions/ActionEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/ActionEngineDef"
-        },
-        {
-          "$ref": "#/definitions/AIRulesDef"
-        },
-        {
-          "$ref": "#/definitions/CalcerDef"
-        },
-        {
-          "$ref": "#/definitions/ConstantClacerDef"
-        },
-        {
-          "$ref": "#/definitions/AIRuleDef"
-        },
-        {
-          "$ref": "#/definitions/AIMoveDef"
-        },
-        {
-          "$ref": "#/definitions/TargetSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/ClosestTargetSelector"
-        },
-        {
-          "$ref": "#/definitions/PointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/RandomPointSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/AIEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/AIEngineDef"
-        },
-        {
-          "$ref": "#/definitions/RitualEventsDef"
-        },
-        {
-          "$ref": "#/definitions/RitualEventPatternDef"
-        },
-        {
-          "$ref": "#/definitions/RitualTokenDef"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
-        },
-        {
-          "$ref": "#/definitions/RitualActionDef"
-        },
-        {
-          "$ref": "#/definitions/RitualSiteEntityDef"
-        },
-        {
-          "$ref": "#/definitions/BuildingEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/BuildingEntityDef"
-        },
-        {
-          "$ref": "#/definitions/StrikeDef"
-        },
-        {
-          "$ref": "#/definitions/EffectStrike"
-        },
-        {
-          "$ref": "#/definitions/EffectAnimate"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineDef"
-        },
-        {
-          "$ref": "#/definitions/IEntityObjectDef"
-        },
-        {
-          "$ref": "#/definitions/ISceneDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveDef"
-        },
-        {
-          "$ref": "#/definitions/InteractionDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveWorldEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveWorldEntityDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineDef"
-        },
-        {
-          "$ref": "#/definitions/MovementStateDef"
-        },
-        {
-          "$ref": "#/definitions/LocoMoverDef"
-        },
-        {
-          "$ref": "#/definitions/EffectTimelineDef"
-        },
-        {
-          "$ref": "#/definitions/EffectMotionDef"
-        },
-        {
-          "$ref": "#/definitions/TileModDef"
-        },
-        {
-          "$ref": "#/definitions/TileDef"
-        },
-        {
-          "$ref": "#/definitions/PrefabDef"
-        },
-        {
-          "$ref": "#/definitions/SceneDef"
-        },
-        {
-          "$ref": "#/definitions/MapDef"
-        },
-        {
-          "$ref": "#/definitions/LocationCreatorDef"
-        },
-        {
-          "$ref": "#/definitions/MapSiteTypeDef"
-        },
-        {
-          "$ref": "#/definitions/MapSiteDef"
-        },
-        {
-          "$ref": "#/definitions/MapSiteTagDef"
-        },
-        {
-          "$ref": "#/definitions/ScenarioDef"
-        },
-        {
-          "$ref": "#/definitions/PlaceDef"
-        },
-        {
-          "$ref": "#/definitions/IntGenParameterDef"
-        },
-        {
-          "$ref": "#/definitions/MapPrefabDef"
-        },
-        {
-          "$ref": "#/definitions/SlotLinkTypeDef"
-        },
-        {
-          "$ref": "#/definitions/SlotLinkDef"
-        },
-        {
-          "$ref": "#/definitions/SlotGenDef"
-        },
-        {
-          "$ref": "#/definitions/TilesGenDef"
-        },
-        {
-          "$ref": "#/definitions/SlotCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/TileCategoryDef"
-        },
-        {
-          "$ref": "#/definitions/MobSceneDef"
-        },
-        {
-          "$ref": "#/definitions/MobDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalShapeDef"
-        },
-        {
-          "$ref": "#/definitions/CirclePhysicalShapeDef"
-        },
-        {
-          "$ref": "#/definitions/BoxPhysicalShapeDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalBodyEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalBodyEngineDef"
-        },
-        {
-          "$ref": "#/definitions/IRenderableDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRenderedDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererDef"
-        },
-        {
-          "$ref": "#/definitions/ItemDef"
-        },
-        {
-          "$ref": "#/definitions/CharacterEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/CharacterEntityDef"
-        },
-        {
-          "$ref": "#/definitions/QuestDef"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
-          "$ref": "#/definitions/CompleteQuest"
-        },
-        {
-          "$ref": "#/definitions/RoleDef"
-        },
-        {
-          "$ref": "#/definitions/IPredicateDef"
-        },
-        {
-          "$ref": "#/definitions/CheckEntityType"
-        },
-        {
-          "$ref": "#/definitions/CheckEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/IImpactDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
-        },
-        {
-          "$ref": "#/definitions/SimpleSpawnerDef"
-        },
-        {
-          "$ref": "#/definitions/SpellCastModeDef"
-        },
-        {
-          "$ref": "#/definitions/InputTriggersMapDef"
-        },
-        {
-          "$ref": "#/definitions/InputTriggerDef"
-        },
-        {
-          "$ref": "#/definitions/TargetPointCastDef"
-        },
-        {
-          "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/ISpellEffectDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
-          "$ref": "#/definitions/StatInstanceDef"
-        },
-        {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/WorldItemEntityDef"
-        },
-        {
-          "$ref": "#/definitions/WorldItemEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/BaseDef"
-        },
-        {
-          "$ref": "#/definitions/IDef"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        },
-        {
-          "$ref": "#/definitions/SlotLinkDef"
-        }
-      ]
-    },
-    "SaveableResource": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SaveableResourceField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SaveableResource"
-          ]
-        },
-        "Id": {
-          "$ref": "#/definitions/GuidField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SaveableResourceField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SaveableResource"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        }
-      ]
-    },
     "TYPES_ENUM": {
       "type": "string",
       "enum": [
+        "BaseDef",
+        "IDef",
+        "SaveableResource",
+        "TemplateVariable",
         "EffectActionPair",
         "EffectActionsLayerDef",
         "ImpactInvokeAction",
@@ -9778,7 +9805,6 @@
         "SpellCastModeDef",
         "InputTriggersMapDef",
         "InputTriggerDef",
-        "InputCombo",
         "TargetPointCastDef",
         "SpellDef",
         "ISpellEffectDef",
@@ -9791,14 +9817,46 @@
         "StatsEngineDef",
         "WorldItemEntityDef",
         "WorldItemEntitySceneDef",
-        "BaseDef",
-        "IDef",
-        "SaveableResource",
-        "TemplateVariable",
         "float",
         "int",
         "bool",
         "string"
+      ]
+    },
+    "TemplateVariable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TemplateVariable"
+          ]
+        },
+        "Type": {
+          "$ref": "#/definitions/TYPES_ENUM"
+        },
+        "Value": {
+          "$ref": "#/definitions/ObjectField"
+        }
+      }
+    },
+    "TemplateVariableField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TemplateVariable"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TemplateVariable"
+        }
       ]
     },
     "EffectActionPair": {
@@ -10172,6 +10230,185 @@
         }
       ]
     },
+    "DefIDFull": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "DefIDFull"
+          ]
+        },
+        "Root": {
+          "type": "string"
+        },
+        "Line": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "Col": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "ProtoIndex": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "IsBase": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    "DefIDFullField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "DefIDFull"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/DefIDFull"
+        }
+      ]
+    },
+    "Guid": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Guid"
+          ]
+        },
+        "Empty": {
+          "$ref": "#/definitions/GuidField"
+        }
+      }
+    },
+    "GuidField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Guid"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Guid"
+        }
+      ]
+    },
+    "Random": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Random"
+          ]
+        }
+      }
+    },
+    "RandomField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Random"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Random"
+        }
+      ]
+    },
+    "MovementAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MovementAction"
+          ]
+        },
+        "Velocity": {
+          "$ref": "#/definitions/Vec2Field"
+        },
+        "Time": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    "MovementActionField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MovementAction"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/MovementAction"
+        }
+      ]
+    },
     "InputCombo": {
       "type": "object",
       "additionalProperties": false,
@@ -10429,221 +10666,6 @@
         }
       ]
     },
-    "TemplateVariable": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TemplateVariable"
-          ]
-        },
-        "Type": {
-          "$ref": "#/definitions/TYPES_ENUM"
-        },
-        "Value": {
-          "$ref": "#/definitions/ObjectField"
-        }
-      }
-    },
-    "TemplateVariableField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TemplateVariable"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TemplateVariable"
-        }
-      ]
-    },
-    "Random": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Random"
-          ]
-        }
-      }
-    },
-    "RandomField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Random"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/Random"
-        }
-      ]
-    },
-    "MovementAction": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MovementAction"
-          ]
-        },
-        "Velocity": {
-          "$ref": "#/definitions/Vec2Field"
-        },
-        "Time": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        }
-      }
-    },
-    "MovementActionField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MovementAction"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/MovementAction"
-        }
-      ]
-    },
-    "DefIDFull": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "DefIDFull"
-          ]
-        },
-        "Root": {
-          "type": "string"
-        },
-        "Line": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "Col": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "ProtoIndex": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "IsBase": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
-        }
-      }
-    },
-    "DefIDFullField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "DefIDFull"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/DefIDFull"
-        }
-      ]
-    },
-    "Guid": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Guid"
-          ]
-        },
-        "Empty": {
-          "$ref": "#/definitions/GuidField"
-        }
-      }
-    },
-    "GuidField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Guid"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/Guid"
-        }
-      ]
-    },
     "Object": {
       "type": "object",
       "additionalProperties": false,
@@ -10658,6 +10680,15 @@
     },
     "ObjectField": {
       "oneOf": [
+        {
+          "$ref": "#/definitions/BaseDef"
+        },
+        {
+          "$ref": "#/definitions/IDef"
+        },
+        {
+          "$ref": "#/definitions/SaveableResource"
+        },
         {
           "$ref": "#/definitions/EffectActionsLayerDef"
         },
@@ -10968,16 +10999,10 @@
           "$ref": "#/definitions/WorldItemEntitySceneDef"
         },
         {
-          "$ref": "#/definitions/BaseDef"
-        },
-        {
-          "$ref": "#/definitions/IDef"
-        },
-        {
-          "$ref": "#/definitions/SaveableResource"
-        },
-        {
           "$ref": "#/definitions/TYPES_ENUM"
+        },
+        {
+          "$ref": "#/definitions/TemplateVariable"
         },
         {
           "$ref": "#/definitions/EffectActionPair"
@@ -11001,10 +11026,10 @@
           "$ref": "#/definitions/Vec2"
         },
         {
-          "$ref": "#/definitions/InputCombo"
+          "$ref": "#/definitions/DefIDFull"
         },
         {
-          "$ref": "#/definitions/TemplateVariable"
+          "$ref": "#/definitions/Guid"
         },
         {
           "$ref": "#/definitions/Random"
@@ -11013,10 +11038,7 @@
           "$ref": "#/definitions/MovementAction"
         },
         {
-          "$ref": "#/definitions/DefIDFull"
-        },
-        {
-          "$ref": "#/definitions/Guid"
+          "$ref": "#/definitions/InputCombo"
         },
         {
           "$ref": "#/definitions/Object"

@@ -232,6 +232,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldPath: CombatEngine
   Visual: {fileID: 0}
+--- !u!114 &7729118204465603769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8664645877537687751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff34facd18d25ea41ab349f4d21b3339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5702913370348434810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,6 +251,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961479071862265827}
     m_Modifications:
+    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
+        type: 3}
+      propertyPath: m_Name
+      value: HumanMalePF
+      objectReference: {fileID: 0}
     - target: {fileID: 90222775507652526, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,11 +311,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
-        type: 3}
-      propertyPath: m_Name
-      value: HumanMalePF
-      objectReference: {fileID: 0}
     - target: {fileID: 8055403592323703508, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}
       propertyPath: m_WarningMessage
@@ -306,6 +318,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60f9a48c44f972b489688924af8d17c3, type: 3}
+--- !u!1 &8664645877537687751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5702913370348434810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5648736986345323220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 90222775507652526, guid: 60f9a48c44f972b489688924af8d17c3,

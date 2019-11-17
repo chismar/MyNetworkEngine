@@ -95,6 +95,7 @@ public class GameHost : MonoBehaviour
         {
             ((UnityTimeImpl)EnvironmentAPI.Time).Update();
             client.Update(onlyDrawGUI: false);
+            EnvironmentAPI.Curve.UpdateCurves();
             foreach (var ent in client._node.AllGhosts())
             {
                 if (ent is IEntityObject eo && ent.UserData == null)

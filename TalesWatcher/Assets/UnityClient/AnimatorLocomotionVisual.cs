@@ -59,8 +59,8 @@ namespace Assets.UnityClient
             else
             {
                 var velocity = (pos - _lastPos) / Time.deltaTime;
-                if (!(curValue is ICharacterLikeMovement) && ((pos - _lastPos).Length > 0.001))
-                    _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)), 0);
+                //if (!(curValue is ICharacterLikeMovement) && ((pos - _lastPos).Length > 0.001))
+                //    _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)), 0);
                 _lastPos = pos;
 
                 //var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;

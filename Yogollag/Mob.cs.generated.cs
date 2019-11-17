@@ -97,6 +97,13 @@ namespace Yogollag
     [GeneratedClass]
     public class MobDef : BaseDef, IEntityObjectDef
     {
+        public DefRef<LocoMoverDef> LocoMoverDef
+        {
+            get;
+            set;
+        }
+
+        = default;
         public String Name
         {
             get;
@@ -158,6 +165,11 @@ namespace Yogollag
     [GeneratedClass]
     public partial class MobSync
     {
+        public override LocoMoverDef LocoMoverDef
+        {
+            get => ((MobDef)Def).LocoMoverDef.Def;
+        }
+
         public override String Name
         {
             get => ((MobDef)Def).Name;
@@ -209,7 +221,7 @@ namespace Yogollag
     }
 
     //obj Mob generic  hasCustomSerialization false
-    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine 12
+    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover 13
     [GeneratedClass]
     public partial class MobSync : Mob, IGhost
     {
@@ -789,7 +801,7 @@ namespace Yogollag
     [GeneratedClass]
     public class MobRunImpactMessage : EntityMessage
     {
-        public override int NetId => 1223165771;
+        public override int NetId => 342529109;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)

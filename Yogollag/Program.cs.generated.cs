@@ -192,7 +192,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SessionEntityJoinMessage : EntityMessage
     {
-        public override int NetId => 894869052;
+        public override int NetId => 883753077;
         public string name;
         public override void Run(object entity)
         {
@@ -436,7 +436,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SampleComponentHandlePosMessage : EntityMessage
     {
-        public override int NetId => 1722281354;
+        public override int NetId => 1913185856;
         public Vec2 newPos;
         public override void Run(object entity)
         {
@@ -1036,7 +1036,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionMakeActiveMessage : EntityMessage
     {
-        public override int NetId => 68329497;
+        public override int NetId => -1290899126;
         public long itemId;
         public override void Run(object entity)
         {
@@ -1090,7 +1090,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionMakeInactiveMessage : EntityMessage
     {
-        public override int NetId => 1780881184;
+        public override int NetId => 1749416539;
         public long itemId;
         public override void Run(object entity)
         {
@@ -1144,7 +1144,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionDropItemMessage : EntityMessage
     {
-        public override int NetId => 403381789;
+        public override int NetId => -590838565;
         public Item item;
         public override void Run(object entity)
         {
@@ -1215,7 +1215,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionAddItemMessage : EntityMessage
     {
-        public override int NetId => 934624220;
+        public override int NetId => 654742954;
         public Item item;
         public override void Run(object entity)
         {
@@ -1286,7 +1286,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionRemoveItemMessage : EntityMessage
     {
-        public override int NetId => -1329186488;
+        public override int NetId => -46381631;
         public long itemId;
         public override void Run(object entity)
         {
@@ -1340,7 +1340,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionMoveItemMessage : EntityMessage
     {
-        public override int NetId => -386757426;
+        public override int NetId => -1401848487;
         public long itemId;
         public int slot;
         public override void Run(object entity)
@@ -2316,7 +2316,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntitySetActiveItemMessage : EntityMessage
     {
-        public override int NetId => 1016215654;
+        public override int NetId => -712838052;
         public long itemId;
         public override void Run(object entity)
         {
@@ -2370,7 +2370,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityActivateItemMessage : EntityMessage
     {
-        public override int NetId => -1543503581;
+        public override int NetId => 1489751577;
         public override void Run(object entity)
         {
             ((CharacterEntity)entity).ActivateItem();
@@ -2415,7 +2415,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityReceivePositionMessage : EntityMessage
     {
-        public override int NetId => -564503336;
+        public override int NetId => -1711298346;
         public Vec2 newPosition;
         public float newRotation;
         public override void Run(object entity)
@@ -2487,7 +2487,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityRunImpactMessage : EntityMessage
     {
-        public override int NetId => 2125800738;
+        public override int NetId => 213612485;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)
@@ -2568,7 +2568,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityAddItemMessage : EntityMessage
     {
-        public override int NetId => 633513961;
+        public override int NetId => 884648346;
         public Item item;
         public override void Run(object entity)
         {

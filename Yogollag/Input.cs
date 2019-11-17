@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using NetworkEngine;
+using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Yogollag
     }
     public interface CurveApi
     {
-        float GetCurveValue(string curveName, float value);
+        float GetCurveValue(EntityId eid, string curveName, float value);
+        void UpdateCurves();
     }
     public interface ImguiApi
     {

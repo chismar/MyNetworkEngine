@@ -16,7 +16,7 @@ namespace Yogollag
         SpellId _currentSpellId;
         AIRuleDef _currentRule;
         SpellsEngine _spellsEngine;
-        LocomotionEngine _locoEngine;
+        LocoMover _locoMover;
         Dictionary<AIRuleDef, long> _lastTimeUsed = new Dictionary<AIRuleDef, long>();
         Vec2? _currentTargetPoint;
         EntityId? _currentTargetEntity;
@@ -24,10 +24,10 @@ namespace Yogollag
 
         public IDef Def { get; set; }
 
-        public void Init(SpellsEngine spellsEngine, LocomotionEngine locoEngine)
+        public void Init(SpellsEngine spellsEngine, LocoMover locoMover)
         {
             _spellsEngine = spellsEngine;
-            _locoEngine = locoEngine;
+            _locoMover = locoMover;
         }
         private bool DoRule(AIRuleDef rule)
         {
@@ -43,6 +43,8 @@ namespace Yogollag
                     if (_lastTimeUsed.TryGetValue(rule, out var lastTime) && (SyncedTime.ToSeconds(SyncedTime.Now - lastTime) < (rule.Cooldown.Def?.Calc(ctx) ?? 0)))
                         return false;
                     var targetE = rule.TargetSelector.Def?.Select(ctx);
+                    if (targetE.HasValue && targetE.Value == default)
+                        targetE = null;
                     var targetPoint = rule.PointSelector.Def?.Select(ctx);
                     if (!targetE.HasValue && !targetPoint.HasValue)
                         return false;
@@ -54,7 +56,7 @@ namespace Yogollag
                         if (pe != null)
                             point = pe.Position;
                     }
-                        _currentTargetEntity = targetE;
+                    _currentTargetEntity = targetE;
                     _currentTargetPoint = targetPoint;
                 }
                 if (_currentRule != null)
@@ -68,13 +70,20 @@ namespace Yogollag
                     if (rule.FixedDuration.Def != null)
                         _doUntil = SyncedTime.Now + SyncedTime.FromSeconds(rule.FixedDuration.Def.Calc(ctx));
                     _lastTimeUsed[rule] = SyncedTime.Now;
+
+
+                    var dst = (point - ((IPositionedEntity)ParentEntity).Position).Length;
+                    var dir = (point - ((IPositionedEntity)ParentEntity).Position).Normal;
+                    _locoMover.ActionDir = dir;
+
                     if (rule.CastSpell.Def != null)
                     {
                         _currentSpellId = _spellsEngine.CastFromInsideEntity(new SpellCast()
                         {
                             Def = rule.CastSpell,
                             TargetEntity = target,
-                            TargetPoint = point
+                            TargetPoint = point,
+                            OwnerObject = ParentEntity.Id,
                         });
                         if (_currentSpellId == default)
                             return false;
@@ -83,6 +92,7 @@ namespace Yogollag
             }
             if (rule == null)
                 return true;
+            bool near = false;
             if (_currentRule != null)
             {
                 var point = _currentTargetEntity.HasValue ?
@@ -95,15 +105,28 @@ namespace Yogollag
                     var dst = (point.Value - ((IPositionedEntity)ParentEntity).Position).Length;
                     var dir = (point.Value - ((IPositionedEntity)ParentEntity).Position).Normal;
                     var mult = dst > maxMult ? maxMult : dst;
-                    _locoEngine.SetMovement(dir * mult);
+                    _locoMover.ActionDir = dir;
+                    if (_currentRule.Move && (_currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? float.MaxValue) < dst)
+                        _locoMover.MovementDir = dir;
+                    else
+                    {
+                        near = _currentRule.Move;
+                        _locoMover.MovementDir = default;
+                    }
                 }
                 else
-                    _locoEngine.SetMovement(default);
+                {
+                    _locoMover.ActionDir = default;
+                    _locoMover.MovementDir = default;
+                }
             }
             else
-                _locoEngine.SetMovement(default);
+            {
+                _locoMover.ActionDir = default;
+                _locoMover.MovementDir = default;
+            }
 
-            if (_doUntil < SyncedTime.Now)
+            if (_doUntil < SyncedTime.Now || near && (_currentRule?.FinishWhenNear ?? false))
                 return DoRule(null);
             return true;
         }
@@ -149,11 +172,13 @@ namespace Yogollag
     {
         public DefRef<CalcerDef> Cooldown { get; set; }
         public bool CancelSpellOnRuleSwitch { get; set; }
+        public bool Move { get; set; }
+        public bool FinishWhenNear { get; set; }
         public DefRef<CalcerDef> FixedDuration { get; set; }
+        public DefRef<CalcerDef> AcceptedRange { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<TargetSelectorDef> TargetSelector { get; set; }
         public DefRef<PointSelectorDef> PointSelector { get; set; }
-        public DefRef<AIMoveDef> Move { get; set; }
         public DefRef<SpellDef> CastSpell { get; set; }
     }
 

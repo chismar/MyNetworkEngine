@@ -12,17 +12,21 @@ using Volatile;
 namespace Yogollag
 {
     [GenerateSync]
-    public abstract class Mob : GhostedEntity, IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine
+    public abstract class Mob : GhostedEntity, 
+        IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, 
+        IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover
     {
 
         [Sync]
         public virtual LinksEngine Links { get; set; } = SyncObject.New<LinksEngine>();
-
+        [Def]
+        public virtual LocoMoverDef LocoMoverDef { get; set; }
+        public LocoMover LocoMover { get; set; }
         [Def]
         public virtual string Name { get; set; }
         [Sync(SyncType.Client)]
         [SceneDef]
-        public virtual float Rotation { get; set; }
+        public virtual float Rotation { get => Locomotion.Rotation; set => Locomotion.Rotation = value; }
         [Sync(SyncType.Client)]
         public virtual AIEngine AI { get; set; } = SyncObject.New<AIEngine>();
         [Sync(SyncType.Client)]
@@ -32,8 +36,6 @@ namespace Yogollag
 
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
-
-
 
         [SceneDef]
         public Vec2 Position { get => Locomotion.Position; set => Locomotion.Position = value; }
@@ -53,7 +55,8 @@ namespace Yogollag
         }
         public override void OnCreate()
         {
-            AI.Init(SpellsEngine, Locomotion);
+            LocoMover = new LocoMover(Id, LocoMoverDef, Locomotion);
+            AI.Init(SpellsEngine, LocoMover);
             StatsEngine.Init();
         }
 
@@ -81,6 +84,7 @@ namespace Yogollag
         public void Tick()
         {
             AI.Update();
+            LocoMover.Tick();
             Locomotion.Tick();
             if (StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);

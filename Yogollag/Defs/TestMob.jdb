@@ -10,6 +10,12 @@
             "Y": 0
         }
     },
+    "LocoMoverDef": {
+        "$type": "LocoMover",
+        "CruiserSpeed": 1,
+        "ActionRotationSpeed": 1080,
+        "IdleAngleSpeed":2000
+    },
     "AI": {
         "$type": "AIEngine",
         "Rules": {
@@ -17,14 +23,8 @@
             "Rules": [
                 {
                     "$type": "AIRule",
-                    "Move": {
-                        "$type": "AIMove",
-                        "DirectionRelativeToTarget": {
-                            "Y": 1
-                        }
-                    },
                     "FixedDuration": 3,
-                    "Cooldown": 14,
+                    "Cooldown": 5,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
                         "Size": 10,
@@ -34,15 +34,18 @@
                                 "/CharDef"
                             ]
                         }
-                    }
+                    },
+                    "FinishWhenNear": true,
+                    "Move": true,
+                    "AcceptedRange": 2
                 },
                 {
                     "$type": "AIRule",
                     "FixedDuration": 1,
-                    "Cooldown": 14,
+                    "Cooldown": 4,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
-                        "Size": 10,
+                        "Size": 6,
                         "Filter": {
                             "$type": "CheckEntityType",
                             "AllowedTypes": [
@@ -54,6 +57,11 @@
                         "$type": "Spell",
                         "Duration": 1,
                         "Effects": [
+                            {
+                                "$type": "EffectMotion",
+                                "CurveName": "AttackCurve",
+                                "Speed": 10
+                            },
                             {
                                 "$type": "EffectStrike",
                                 "StrikeDef": {
@@ -86,17 +94,13 @@
                 },
                 {
                     "$type": "AIRule",
-                    "Move": {
-                        "$type": "AIMove",
-                        "DirectionRelativeToTarget": {
-                            "Y": 1
-                        }
-                    },
                     "FixedDuration": 5,
                     "PointSelector": {
                         "$type": "RandomPointSelector",
                         "Radius": 100
                     },
+                    "Move": true,
+                    "AcceptedRange": 0
                 }
             ]
         }
