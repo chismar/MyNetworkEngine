@@ -89,7 +89,7 @@ namespace Yogollag
             {
                 foreach (var effect in obj.Cast.Def.Effects)
                 {
-                    obj.ParentEntity = this;
+                    obj.ParentEntity = this.ParentEntity;
                     effect.Def.End(obj, true, obj.SuccesEnd);
                 }
             });
