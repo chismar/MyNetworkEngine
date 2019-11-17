@@ -27,7 +27,6 @@
         "AIMove",
         "TargetSelectorDef",
         "TargetSelector",
-        "ClosestTargetSelector",
         "PointSelectorDef",
         "PointSelector",
         "RandomPointSelectorDef",
@@ -42,8 +41,6 @@
         "RitualEventPattern",
         "RitualTokenDef",
         "RitualToken",
-        "ConcludeRirutalDef",
-        "ConcludeRirutal",
         "RitualActionDef",
         "RitualAction",
         "RitualSiteEntityDef",
@@ -277,7 +274,6 @@
             "AIMove",
             "TargetSelectorDef",
             "TargetSelector",
-            "ClosestTargetSelector",
             "PointSelectorDef",
             "PointSelector",
             "RandomPointSelectorDef",
@@ -292,8 +288,6 @@
             "RitualEventPattern",
             "RitualTokenDef",
             "RitualToken",
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
             "RitualActionDef",
             "RitualAction",
             "RitualSiteEntityDef",
@@ -496,9 +490,6 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
-          "$ref": "#/definitions/ClosestTargetSelector"
-        },
-        {
           "$ref": "#/definitions/PointSelectorDef"
         },
         {
@@ -518,9 +509,6 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -847,7 +835,6 @@
             "AIMove",
             "TargetSelectorDef",
             "TargetSelector",
-            "ClosestTargetSelector",
             "PointSelectorDef",
             "PointSelector",
             "RandomPointSelectorDef",
@@ -862,8 +849,6 @@
             "RitualEventPattern",
             "RitualTokenDef",
             "RitualToken",
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
             "RitualActionDef",
             "RitualAction",
             "RitualSiteEntityDef",
@@ -1081,9 +1066,6 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
-          "$ref": "#/definitions/ClosestTargetSelector"
-        },
-        {
           "$ref": "#/definitions/PointSelectorDef"
         },
         {
@@ -1103,9 +1085,6 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -2181,8 +2160,7 @@
           "type": "string",
           "enum": [
             "TargetSelectorDef",
-            "TargetSelector",
-            "ClosestTargetSelector"
+            "TargetSelector"
           ]
         },
         "$vars": {
@@ -2200,78 +2178,6 @@
         },
         {
           "$ref": "#/definitions/TargetSelectorDef"
-        },
-        {
-          "$ref": "#/definitions/ClosestTargetSelector"
-        }
-      ]
-    },
-    "ClosestTargetSelector": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ClosestTargetSelectorField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ClosestTargetSelector"
-          ]
-        },
-        "Size": {
-          "$ref": "#/definitions/CalcerDefField"
-        },
-        "Filter": {
-          "$ref": "#/definitions/IPredicateDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "ClosestTargetSelectorField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ClosestTargetSelector"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ClosestTargetSelector"
         }
       ]
     },
@@ -2771,74 +2677,6 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
-        }
-      ]
-    },
-    "ConcludeRirutalDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConcludeRirutalDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ConcludeRirutalDef",
-            "ConcludeRirutal"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "ConcludeRirutalDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ConcludeRirutalDef",
-            "ConcludeRirutal"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
         }
       ]
     },
@@ -8181,8 +8019,6 @@
           "type": "string",
           "enum": [
             "ImpactInvokeAction",
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
             "RitualActionDef",
             "RitualAction",
             "ImpactsList",
@@ -8214,9 +8050,6 @@
         },
         {
           "$ref": "#/definitions/ImpactInvokeAction"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -9718,7 +9551,6 @@
         "AIRuleDef",
         "AIMoveDef",
         "TargetSelectorDef",
-        "ClosestTargetSelector",
         "PointSelectorDef",
         "RandomPointSelectorDef",
         "AIEngineSceneDef",
@@ -9728,7 +9560,6 @@
         "RitualEventStat",
         "RitualEventPatternDef",
         "RitualTokenDef",
-        "ConcludeRirutalDef",
         "RitualActionDef",
         "RitualSiteEntityDef",
         "BuildingEntitySceneDef",
@@ -9805,6 +9636,7 @@
         "SpellCastModeDef",
         "InputTriggersMapDef",
         "InputTriggerDef",
+        "InputCombo",
         "TargetPointCastDef",
         "SpellDef",
         "ISpellEffectDef",
@@ -10230,185 +10062,6 @@
         }
       ]
     },
-    "DefIDFull": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "DefIDFull"
-          ]
-        },
-        "Root": {
-          "type": "string"
-        },
-        "Line": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "Col": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "ProtoIndex": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "IsBase": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
-        }
-      }
-    },
-    "DefIDFullField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "DefIDFull"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/DefIDFull"
-        }
-      ]
-    },
-    "Guid": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Guid"
-          ]
-        },
-        "Empty": {
-          "$ref": "#/definitions/GuidField"
-        }
-      }
-    },
-    "GuidField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Guid"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/Guid"
-        }
-      ]
-    },
-    "Random": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Random"
-          ]
-        }
-      }
-    },
-    "RandomField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "Random"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/Random"
-        }
-      ]
-    },
-    "MovementAction": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MovementAction"
-          ]
-        },
-        "Velocity": {
-          "$ref": "#/definitions/Vec2Field"
-        },
-        "Time": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        }
-      }
-    },
-    "MovementActionField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MovementAction"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/MovementAction"
-        }
-      ]
-    },
     "InputCombo": {
       "type": "object",
       "additionalProperties": false,
@@ -10666,6 +10319,185 @@
         }
       ]
     },
+    "DefIDFull": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "DefIDFull"
+          ]
+        },
+        "Root": {
+          "type": "string"
+        },
+        "Line": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "Col": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "ProtoIndex": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "IsBase": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    "DefIDFullField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "DefIDFull"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/DefIDFull"
+        }
+      ]
+    },
+    "Guid": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Guid"
+          ]
+        },
+        "Empty": {
+          "$ref": "#/definitions/GuidField"
+        }
+      }
+    },
+    "GuidField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Guid"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Guid"
+        }
+      ]
+    },
+    "Random": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Random"
+          ]
+        }
+      }
+    },
+    "RandomField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "Random"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Random"
+        }
+      ]
+    },
+    "MovementAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MovementAction"
+          ]
+        },
+        "Velocity": {
+          "$ref": "#/definitions/Vec2Field"
+        },
+        "Time": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    "MovementActionField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MovementAction"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/MovementAction"
+        }
+      ]
+    },
     "Object": {
       "type": "object",
       "additionalProperties": false,
@@ -10720,9 +10552,6 @@
           "$ref": "#/definitions/TargetSelectorDef"
         },
         {
-          "$ref": "#/definitions/ClosestTargetSelector"
-        },
-        {
           "$ref": "#/definitions/PointSelectorDef"
         },
         {
@@ -10742,9 +10571,6 @@
         },
         {
           "$ref": "#/definitions/RitualTokenDef"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
         },
         {
           "$ref": "#/definitions/RitualActionDef"
@@ -11026,6 +10852,9 @@
           "$ref": "#/definitions/Vec2"
         },
         {
+          "$ref": "#/definitions/InputCombo"
+        },
+        {
           "$ref": "#/definitions/DefIDFull"
         },
         {
@@ -11036,9 +10865,6 @@
         },
         {
           "$ref": "#/definitions/MovementAction"
-        },
-        {
-          "$ref": "#/definitions/InputCombo"
         },
         {
           "$ref": "#/definitions/Object"
