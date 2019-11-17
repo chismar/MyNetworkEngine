@@ -13,8 +13,8 @@
     "LocoMoverDef": {
         "$type": "LocoMover",
         "CruiserSpeed": 1,
-        "ActionRotationSpeed": 1080,
-        "IdleAngleSpeed": 2000
+        "ActionRotationSpeed": 270,
+        "IdleAngleSpeed": 3600
     },
     "AI": {
         "$type": "AIEngine",
@@ -23,11 +23,11 @@
             "Rules": [
                 {
                     "$type": "AIRule",
-                    "FixedDuration": 3,
-                    "Cooldown": 5,
+                    "FixedDuration": 1.5,
+                    "Cooldown": 3.60,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
-                        "Size": 10,
+                        "Size": 1.2,
                         "Filter": {
                             "$type": "CheckEntityType",
                             "AllowedTypes": [
@@ -35,33 +35,73 @@
                             ]
                         }
                     },
-                    "FinishWhenNear": true,
-                    "Move": true,
-                    "AcceptedRange": 2
-                },
-                {
-                    "$type": "AIRule",
-                    "FixedDuration": 1.2,
-                    "Cooldown": 4,
-                    "TargetSelector": {
-                        "$type": "ClosestTargetSelector",
-                        "Size": 6,
-                        "Filter": {
-                            "$type": "CheckEntityType",
-                            "AllowedTypes": [
-                                "/CharDef"
-                            ]
-                        }
-                    },
-                    "AcceptedRange": 2,
+                    "AcceptedRange": 1.6,
+                    "KeepDistance": true,
+                    "FinishWhenNear": false,
                     "CastSpell": {
                         "$type": "Spell",
-                        "Duration": 1.2,
+                        "Duration": 1.1,
                         "Effects": [
                             {
                                 "$type": "EffectMotion",
                                 "CurveName": "AttackCurveZombie",
-                                "Speed": 10
+                                "Speed": 0
+                            },
+                            {
+                                "$type": "EffectStrike",
+                                "StrikeDef": {
+                                    "$type": "Strike",
+                                    "SpellOnStrike": {
+                                        "$type": "Spell",
+                                        "ImpactOnStart": {
+                                            "$type": "Target",
+                                            "Do": {
+                                                "$type": "ImpactsList",
+                                                "Impacts": [
+                                                    {
+                                                        "$type": "ChangeEntityStat",
+                                                        "Change": -10,
+                                                        "StatDef": "/Stats/Health"
+                                                    },
+                                                    {
+                                                        "$type": "ImpactInvokeAction",
+                                                        "InvokedSpell": "./TestStaggerChar"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "AnimationName": "IsAttack01"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "$type": "AIRule",
+                    "FixedDuration": 1.5,
+                    "Cooldown": 1.20,
+                    "TargetSelector": {
+                        "$type": "ClosestTargetSelector",
+                        "Size": 1.2,
+                        "Filter": {
+                            "$type": "CheckEntityType",
+                            "AllowedTypes": [
+                                "/CharDef"
+                            ]
+                        }
+                    },
+                    "AcceptedRange": 1.1,
+                    "KeepDistance": true,
+                    "FinishWhenNear": false,
+                    "CastSpell": {
+                        "$type": "Spell",
+                        "Duration": 1.25,
+                        "Effects": [
+                            {
+                                "$type": "EffectMotion",
+                                "CurveName": "AttackCurveZombie",
+                                "Speed": 0
                             },
                             {
                                 "$type": "EffectStrike",
@@ -96,10 +136,10 @@
                 {
                     "$type": "AIRule",
                     "FixedDuration": 3,
-                    "Cooldown": 5,
+                    "Cooldown": 0,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
-                        "Size": 10,
+                        "Size": 12,
                         "Filter": {
                             "$type": "CheckEntityType",
                             "AllowedTypes": [
@@ -107,10 +147,20 @@
                             ]
                         }
                     },
-                    "KeepDistance": true,
+                    "FinishWhenNear": true,
                     "Move": true,
-                    "AcceptedRange": 4
+                    "AcceptedRange": 1.1
                 },
+                {
+                    "$type": "AIRule",
+                    "FixedDuration": 5,
+                    "PointSelector": {
+                        "$type": "RandomPointSelector",
+                        "Radius": 100
+                    },
+                    "Move": true,
+                    "AcceptedRange": 0
+                }
             ]
         }
     },

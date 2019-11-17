@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6908008555549123816}
   - component: {fileID: 2386812395168603401}
-  - component: {fileID: 1233969301108829285}
+  - component: {fileID: 351815732019370885}
   m_Layer: 9
-  m_Name: Collider
+  m_Name: WeaponCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7584712091995086775}
   m_LocalRotation: {x: 0.9999996, y: 1.9620769e-16, z: -0.0009879895, w: -6.108816e-17}
-  m_LocalPosition: {x: 0.061, y: -0.07, z: 0.13}
-  m_LocalScale: {x: 0.18125989, y: 0.22737224, z: 0.94843256}
+  m_LocalPosition: {x: 0.063, y: 0.023, z: 0.54}
+  m_LocalScale: {x: 0.18125989, y: 0.09308355, z: 0.65193975}
   m_Children: []
   m_Father: {fileID: 1607795404220728978}
   m_RootOrder: 1
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee350b9f4fbf9f24288ba168041a7c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1233969301108829285
-BoxCollider:
+--- !u!136 &351815732019370885
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -54,8 +54,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.39, y: 2.44, z: 2.25}
+  m_Radius: 1.4
+  m_Height: 2
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7746135728300703004
 GameObject:
@@ -297,7 +298,17 @@ PrefabInstance:
     - target: {fileID: 540810111278742649, guid: 3d6e455860645b741ba76346452d6a57,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.46954
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 540810111278742649, guid: 3d6e455860645b741ba76346452d6a57,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 540810111278742649, guid: 3d6e455860645b741ba76346452d6a57,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d6e455860645b741ba76346452d6a57, type: 3}
