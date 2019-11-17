@@ -41,8 +41,6 @@ namespace Yogollag
         }
         public void ApplyMovement(Vec2 vel, float angleRot)
         {
-            if (vel.Length > 10)
-                Logger.Log($"{_body.LinearVelocity.x} {_body.LinearVelocity.y}");
             Movement = vel;
             _angleRot = angleRot;
             if (_lastTimeUpdated == 0)
