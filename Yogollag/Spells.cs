@@ -48,6 +48,7 @@ namespace Yogollag
             return $"{FromClient}-{Id}";
         }
     }
+    [GenerateSync]
     public struct SpellFailedToCast
     {
         public SpellId Id { get; set; }
@@ -140,7 +141,8 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
+            if (SyncedSpells.Any(x => ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null) ||
+                OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
                 return;
@@ -155,6 +157,17 @@ namespace Yogollag
             foreach (var effect in inst.Cast.Def.Effects)
                 effect.Def.Begin(inst, false);
             inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
+
+            if (inst.Cast.Def.Cooldown > 0)
+            {
+                Cooldowns.Add(new PastSpellCooldown() { Id = inst.Id, Def = inst.Cast.Def, TimeWhenStarted = inst.Time });
+                Task.Run(async () =>
+                {
+                    NetworkEntity.CurrentlyExecutingInContext.Value = default;
+                    await Task.Delay(TimeSpan.FromSeconds(inst.Cast.Def.Cooldown));
+                    RemoveCooldown(id);
+                });
+            }
             Task.Run(async () =>
             {
                 NetworkEntity.CurrentlyExecutingInContext.Value = default;
@@ -173,7 +186,7 @@ namespace Yogollag
         public virtual void FinishSpell(SpellId id)
         {
             if (SyncedSpells.Sum(x => x.Id == id ? 1 : 0) > 1)
-                Logger.LogError($"Duplicate {id} {SyncedSpells.FirstOrDefault(x=>x.Id == id)}");
+                Logger.LogError($"Duplicate {id} {SyncedSpells.FirstOrDefault(x => x.Id == id)}");
             var spell = SyncedSpells.SingleOrDefault(x => x.Id == id);
             if (spell == null)
                 return;
@@ -192,24 +205,17 @@ namespace Yogollag
             foreach (var effect in spell.Cast.Def.Effects)
                 effect.Def.End(spell, false, success);
             SyncedSpells.Remove(spell);
-            if (spell.Cast.Def.Cooldown > 0)
-            {
-                Cooldowns.Add(new PastSpellCooldown() { Id = spell.Id, Def = spell.Cast.Def, TimeWhenStarted = spell.Time });
-                Task.Run(async () =>
-                {
-                    NetworkEntity.CurrentlyExecutingInContext.Value = default;
-                    await Task.Delay(TimeSpan.FromSeconds(spell.Cast.Def.Cooldown));
-                    RemoveCooldown(id);
-                });
-            }
         }
     }
+    public class SpellSlotDef : BaseDef
+    {
 
+    }
     public class SpellDef : BaseDef, IEntityObjectDef
     {
         public float Duration { get; set; } = 0f;
         public float Cooldown { get; set; } = 0f;
-        public bool OnlyOneAtATime { get; set; } = false;
+        public DefRef<SpellSlotDef> Slot { get; set; }
         public DefRef<SpellCastModeDef> CastMode { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<IPredicateDef> PredicateOnEnd { get; set; }
@@ -294,7 +300,7 @@ namespace Yogollag
         public EntityId OwnerObject { get; set; }
     }
     [GenerateSync]
-    public class PastSpellCooldown
+    public struct PastSpellCooldown
     {
         [Sync]
         public SpellId Id { get; set; }

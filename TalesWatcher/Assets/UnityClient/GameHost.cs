@@ -31,7 +31,7 @@ public class GameHost : MonoBehaviour
         Debug.LogError(DefsHolder.Instance.Deserializer.Loader.GetRoot());
         foreach (var root in DefsHolder.Instance.Deserializer.Loader.AllPossibleRoots)
         {
-            Debug.LogError(root);
+            //Debug.LogError(root);
             DefsHolder.Instance.LoadDef<BaseDef>(root);
         }
         server = new SimpleServer();

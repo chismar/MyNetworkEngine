@@ -22,6 +22,7 @@
                         "NewActionSpell": {
                             "$type": "Spell",
                             "Duration": 1,
+                            "Cooldown":0.6,
                             "Effects": [
                                 {
                                     "$type": "EffectMotion",

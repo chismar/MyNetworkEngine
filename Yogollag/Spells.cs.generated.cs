@@ -86,6 +86,27 @@ namespace Yogollag
 namespace Yogollag
 {
     [GeneratedClass]
+    public class SpellFailedToCastSync : IGhostLikeSerializer
+    {
+        public object Deserialize(NetDataReader stream)
+        {
+            var objToSerialize = new SpellFailedToCast();
+            return objToSerialize;
+        }
+
+        public bool Serialize(object obj, ref NetDataWriter stream)
+        {
+            var objToSerialize = (SpellFailedToCast)obj;
+            if (stream == null)
+                stream = new NetDataWriter(true, 5);
+            return true;
+        }
+    }
+}
+
+namespace Yogollag
+{
+    [GeneratedClass]
     public class SpellsEngineSceneDef : BaseDef, ISceneDef
     {
         public DefRef<IEntityObjectDef> Object
@@ -443,7 +464,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineFireAndForgetCastMessage : EntityMessage
     {
-        public override int NetId => 1099670753;
+        public override int NetId => -243321305;
         public SpellCast cast;
         public override void Run(object entity)
         {
@@ -506,7 +527,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineCastSpellMessage : EntityMessage
     {
-        public override int NetId => -2093608811;
+        public override int NetId => 1003179755;
         public SpellId id;
         public SpellCast cast;
         public override void Run(object entity)
@@ -587,7 +608,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineRemoveCooldownMessage : EntityMessage
     {
-        public override int NetId => -235599178;
+        public override int NetId => 380898096;
         public SpellId id;
         public override void Run(object entity)
         {
@@ -650,7 +671,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineFinishSpellMessage : EntityMessage
     {
-        public override int NetId => 200629360;
+        public override int NetId => 866997093;
         public SpellId id;
         public override void Run(object entity)
         {

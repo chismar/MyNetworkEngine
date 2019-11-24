@@ -15,7 +15,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CombatEngine : SyncObject, IEntityComponent
     {
-        public Action<EffectId, string> BeginAnimation;
+        public Action<EffectId, float, string> BeginAnimation;
         public Action<EffectId, string> EndAnimation;
         public IDef Def { get; set; }
         public EffectId CurrentStrikeOwner;
@@ -60,7 +60,7 @@ namespace Yogollag
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
 
             ce.PrepareStrike(new EffectId(this, spellInstance), StrikeDef);
-            ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
+            ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
 
         }
 
@@ -78,7 +78,7 @@ namespace Yogollag
         public void Begin(SpellInstance spellInstance, bool onClient)
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
-            ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
+            ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
 
         }
 

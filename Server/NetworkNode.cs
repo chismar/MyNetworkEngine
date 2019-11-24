@@ -1897,7 +1897,7 @@ namespace NetworkEngine
             else
             {
                 var s = SyncTypesMap.GetSerializerForObjType(typeof(T));
-                stream.Put(SyncTypesMap.GetIdFromSyncType(op.Object.GetType()));
+                //stream.Put(SyncTypesMap.GetIdFromSyncType(op.Object.GetType()));
                 s.Serialize(op.Object, ref stream);
             }
 

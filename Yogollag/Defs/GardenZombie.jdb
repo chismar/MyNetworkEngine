@@ -41,6 +41,10 @@
                     "CastSpell": {
                         "$type": "Spell",
                         "Duration": 1.1,
+                        "Slot":{
+                            "$type":"SpellSlotDef",
+                            "$id":"MobAttackSlot"
+                        },
                         "Effects": [
                             {
                                 "$type": "EffectMotion",
@@ -72,7 +76,7 @@
                                         }
                                     }
                                 },
-                                "AnimationName": "IsAttack01"
+                                "AnimationName": "Attack01"
                             }
                         ]
                     }
@@ -97,6 +101,7 @@
                     "CastSpell": {
                         "$type": "Spell",
                         "Duration": 1.25,
+                        "Slot":"$MobAttackSlot",
                         "Effects": [
                             {
                                 "$type": "EffectMotion",
@@ -128,7 +133,7 @@
                                         }
                                     }
                                 },
-                                "AnimationName": "IsAttack"
+                                "AnimationName": "Attack"
                             }
                         ]
                     }

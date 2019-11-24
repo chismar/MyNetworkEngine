@@ -24,7 +24,7 @@ class CombatAnimationsPlayerVisual : VisualComponent
         _anim = animator;
     }
     object _lock = new object();
-    Queue<(string, bool)> _actions = new Queue<(string, bool)>();
+    Queue<(string, float, bool)> _actions = new Queue<(string, float, bool)>();
     protected override object ProcessValue(object curValue)
     {
         if (_ce == null && curValue != _ce && curValue != null)
@@ -33,22 +33,37 @@ class CombatAnimationsPlayerVisual : VisualComponent
             _ce.BeginAnimation += BeginAnimation;
             _ce.EndAnimation += EndAnimation;
         }
-        lock(_lock)
+        lock (_lock)
         {
-            while(_actions.Count > 0)
+            while (_actions.Count > 0)
             {
-                var a = _actions.Dequeue();
-                _anim.SetBool(a.Item1, a.Item2);
+                var (aname, time, setTo) = _actions.Dequeue();
+
+
+                if (setTo)
+                {
+                    var clipInfo = _anim.runtimeAnimatorController.animationClips.SingleOrDefault(x => x.name == aname);
+                    if (clipInfo == null)
+                        continue;
+                    //_anim.Play($"Base Layer.{aname}");
+                    var animLength = clipInfo.length;
+                    var speedShouldBe = animLength / time ;
+
+                    _anim.SetFloat("ActionSpeed", speedShouldBe);
+                    _anim.SetTrigger(aname);
+                }
+                //else
+                    //_anim.SetBool(aname, setTo);
             }
         }
         return curValue;
     }
     Dictionary<string, EffectId> _launchedAnimations = new Dictionary<string, EffectId>();
-    void BeginAnimation(EffectId id, string str)
+    void BeginAnimation(EffectId id, float time, string str)
     {
         _launchedAnimations[str] = id;
         lock (_lock)
-            _actions.Enqueue((str, true));
+            _actions.Enqueue((str, time, true));
     }
     void EndAnimation(EffectId id, string str)
     {
@@ -56,7 +71,7 @@ class CombatAnimationsPlayerVisual : VisualComponent
         {
             _launchedAnimations.Remove(str);
             lock (_lock)
-                _actions.Enqueue((str, false));
+                _actions.Enqueue((str, 0f, false));
         }
     }
 }
