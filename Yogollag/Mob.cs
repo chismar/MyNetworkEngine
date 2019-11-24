@@ -12,7 +12,7 @@ using Volatile;
 namespace Yogollag
 {
     
-    [GenerateSync]
+    /*[GenerateSync]
     public abstract class MortalEngine : SyncObject
     {
         [Sync]
@@ -28,7 +28,7 @@ namespace Yogollag
 
     {
         MortalEngine Mortal { get; set; }
-    }
+    }*/
     [GenerateSync]
     public abstract class Mob : GhostedEntity, 
         IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, 
