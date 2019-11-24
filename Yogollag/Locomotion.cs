@@ -108,7 +108,7 @@ namespace Yogollag
                         _movable.ApplyMovement(default, default);
                         return;
                     }
-                    
+
                     var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
                     if (angle > 180)
                         angle = angle - 360;
@@ -129,8 +129,8 @@ namespace Yogollag
                 }
                 else
                 {
-                    var angle = ActionDir.Length < 0.01f ? 0 :_movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
-                    if (angle == float.NaN)
+                    var angle = ActionDir.Length < 0.01f ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
+                    if (float.IsNaN(angle))
                         angle = 0;
                     if (angle > 180)
                         angle = angle - 360;
@@ -154,7 +154,7 @@ namespace Yogollag
                 float lerp = Mathf.Clamp(Math.Abs(angle) / 180 * sign, -1, 1);
                 Transform t = Transform.Identity;
                 t.Rotate(360 - _movable.CurrentRotation);
-                var forwardDir = t.TransformPoint(cav); 
+                var forwardDir = t.TransformPoint(cav);
 
                 _movable.ApplyMovement(forwardDir, Math.Abs(angle) < 15 ? default : _def.ActionRotationSpeed * lerp);
             }
@@ -225,7 +225,7 @@ namespace Yogollag
                 var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
                 lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
             }
-            else if(!onClient && !(spellInstance.ParentEntity is CharacterEntity))
+            else if (!onClient && !(spellInstance.ParentEntity is CharacterEntity))
             {
                 var lm = spellInstance.ParentEntity.CurrentServer.GetWriteEntity<GhostedEntity>(spellInstance.Cast.OwnerObject) as IHasLocoMover;
                 lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
