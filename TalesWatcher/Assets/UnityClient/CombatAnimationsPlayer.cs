@@ -52,8 +52,8 @@ class CombatAnimationsPlayerVisual : VisualComponent
                     _anim.SetFloat("ActionSpeed", speedShouldBe);
                     _anim.SetTrigger(aname);
                 }
-                //else
-                    //_anim.SetBool(aname, setTo);
+                else
+                    _anim.SetBool(aname, setTo);
             }
         }
         return curValue;

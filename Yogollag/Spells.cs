@@ -159,6 +159,9 @@ namespace Yogollag
             inst.Id = id;
             inst.Cast = cast;
             inst.FinishInit();
+            if (cast.Def.ClearsSlot)
+                foreach (var spell in SyncedSpells.Where(x => ((SpellDef)x.Def).Slot == cast.Def.Slot).ToList())
+                    FinishSpell(spell.Id);
             SyncedSpells.Add(inst);
             foreach (var effect in inst.Cast.Def.Effects)
                 effect.Def.Begin(inst, false);
@@ -184,7 +187,7 @@ namespace Yogollag
 
         private bool SlotIsOccupied(SpellCast cast)
         {
-            return SyncedSpells.Any(x => ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null);
+            return SyncedSpells.Any(x => ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null) && !cast.Def.ClearsSlot;
         }
 
         [Sync(SyncType.Server)]
@@ -228,6 +231,7 @@ namespace Yogollag
         public float Duration { get; set; } = 0f;
         public float Cooldown { get; set; } = 0f;
         public DefRef<SpellSlotDef> Slot { get; set; }
+        public bool ClearsSlot { get; set; }
         public DefRef<SpellCastModeDef> CastMode { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<IPredicateDef> PredicateOnEnd { get; set; }

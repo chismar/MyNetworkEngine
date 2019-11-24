@@ -101,7 +101,7 @@ namespace Yogollag
                 {
                     var pe = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) as IPositionedEntity;
 
-                    (ae as IHasSpells).SpellsEngine.FireAndForgetCast(new SpellCast() { Def = spell, TargetEntity = ctx.Host, TargetPoint = pe?.Position ?? default});
+                    (ae as IHasSpells).SpellsEngine.FireAndForgetCast(new SpellCast() { Def = spell, OwnerObject = ctx.Host, TargetEntity = ctx.Host, TargetPoint = pe?.Position ?? default});
 
                 }
             }

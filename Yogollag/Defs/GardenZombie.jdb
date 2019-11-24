@@ -41,10 +41,7 @@
                     "CastSpell": {
                         "$type": "Spell",
                         "Duration": 2.45,
-                        "Slot":{
-                            "$type":"SpellSlotDef",
-                            "$id":"MobAttackSlot"
-                        },
+                        "Slot":"/AttackSlot",
                         "Effects": [
                             {
                                 "$type": "EffectMotion",
@@ -101,7 +98,7 @@
                     "CastSpell": {
                         "$type": "Spell",
                         "Duration": 2.45,
-                        "Slot":"$MobAttackSlot",
+                        "Slot": "/AttackSlot",
                         "Effects": [
                             {
                                 "$type": "EffectMotion",
@@ -184,7 +181,7 @@
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Health",
-                "InitialValue": 300
+                "InitialValue": 3000
             }
         ]
     }

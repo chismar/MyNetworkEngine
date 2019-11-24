@@ -64,8 +64,6 @@
         "IEntityObject",
         "ISceneDef",
         "IScene",
-        "InteractiveDef",
-        "Interactive",
         "InteractionDef",
         "Interaction",
         "InteractiveWorldEntitySceneDef",
@@ -78,8 +76,6 @@
         "LinksEngine",
         "MovementStateDef",
         "MovementState",
-        "LocoMoverDef",
-        "LocoMover",
         "EffectTimelineDef",
         "EffectTimeline",
         "EffectMotionDef",
@@ -183,10 +179,10 @@
         "InputTrigger",
         "TargetPointCastDef",
         "TargetPointCast",
-        "SpellSlotDef",
-        "SpellSlot",
         "SpellDef",
         "Spell",
+        "ISpellEffectDef",
+        "ISpellEffect",
         "SpellsEngineSceneDef",
         "SpellsEngineScene",
         "SpellsEngineDef",
@@ -310,8 +306,6 @@
             "CombatEngineScene",
             "CombatEngineDef",
             "CombatEngine",
-            "InteractiveDef",
-            "Interactive",
             "InteractionDef",
             "Interaction",
             "InteractiveWorldEntitySceneDef",
@@ -324,8 +318,6 @@
             "LinksEngine",
             "MovementStateDef",
             "MovementState",
-            "LocoMoverDef",
-            "LocoMover",
             "EffectTimelineDef",
             "EffectTimeline",
             "EffectMotionDef",
@@ -423,8 +415,6 @@
             "InputTrigger",
             "TargetPointCastDef",
             "TargetPointCast",
-            "SpellSlotDef",
-            "SpellSlot",
             "SpellDef",
             "Spell",
             "SpellsEngineSceneDef",
@@ -552,9 +542,6 @@
           "$ref": "#/definitions/CombatEngineDef"
         },
         {
-          "$ref": "#/definitions/InteractiveDef"
-        },
-        {
           "$ref": "#/definitions/InteractionDef"
         },
         {
@@ -571,9 +558,6 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
-        },
-        {
-          "$ref": "#/definitions/LocoMoverDef"
         },
         {
           "$ref": "#/definitions/EffectTimelineDef"
@@ -727,9 +711,6 @@
         },
         {
           "$ref": "#/definitions/TargetPointCastDef"
-        },
-        {
-          "$ref": "#/definitions/SpellSlotDef"
         },
         {
           "$ref": "#/definitions/SpellDef"
@@ -889,8 +870,6 @@
             "IEntityObject",
             "ISceneDef",
             "IScene",
-            "InteractiveDef",
-            "Interactive",
             "InteractionDef",
             "Interaction",
             "InteractiveWorldEntitySceneDef",
@@ -903,8 +882,6 @@
             "LinksEngine",
             "MovementStateDef",
             "MovementState",
-            "LocoMoverDef",
-            "LocoMover",
             "EffectTimelineDef",
             "EffectTimeline",
             "EffectMotionDef",
@@ -1008,10 +985,10 @@
             "InputTrigger",
             "TargetPointCastDef",
             "TargetPointCast",
-            "SpellSlotDef",
-            "SpellSlot",
             "SpellDef",
             "Spell",
+            "ISpellEffectDef",
+            "ISpellEffect",
             "SpellsEngineSceneDef",
             "SpellsEngineScene",
             "SpellsEngineDef",
@@ -1146,9 +1123,6 @@
           "$ref": "#/definitions/ISceneDef"
         },
         {
-          "$ref": "#/definitions/InteractiveDef"
-        },
-        {
           "$ref": "#/definitions/InteractionDef"
         },
         {
@@ -1165,9 +1139,6 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
-        },
-        {
-          "$ref": "#/definitions/LocoMoverDef"
         },
         {
           "$ref": "#/definitions/EffectTimelineDef"
@@ -1332,10 +1303,10 @@
           "$ref": "#/definitions/TargetPointCastDef"
         },
         {
-          "$ref": "#/definitions/SpellSlotDef"
+          "$ref": "#/definitions/SpellDef"
         },
         {
-          "$ref": "#/definitions/SpellDef"
+          "$ref": "#/definitions/ISpellEffectDef"
         },
         {
           "$ref": "#/definitions/SpellsEngineSceneDef"
@@ -3791,86 +3762,6 @@
         }
       ]
     },
-    "InteractiveDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/InteractiveDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "InteractiveDef",
-            "Interactive"
-          ]
-        },
-        "Name": {
-          "type": "string"
-        },
-        "Def": {
-          "$ref": "#/definitions/SpriteDefField"
-        },
-        "Interactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InteractionDefField"
-          }
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "InteractiveDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "InteractiveDef",
-            "Interactive"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/InteractiveDef"
-        }
-      ]
-    },
     "InteractionDef": {
       "type": "object",
       "additionalProperties": false,
@@ -4347,124 +4238,6 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
-        }
-      ]
-    },
-    "LocoMoverDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/LocoMoverDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "LocoMoverDef",
-            "LocoMover"
-          ]
-        },
-        "IdleAngleSpeed": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "IdleRotationSpeed": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "CruiserSpeed": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "MovementAngleSpeed": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "ActionRotationSpeed": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "LocoMoverDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "LocoMoverDef",
-            "LocoMover"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/LocoMoverDef"
         }
       ]
     },
@@ -8820,74 +8593,6 @@
         }
       ]
     },
-    "SpellSlotDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpellSlotDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpellSlotDef",
-            "SpellSlot"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SpellSlotDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpellSlotDef",
-            "SpellSlot"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SpellSlotDef"
-        }
-      ]
-    },
     "SpellDef": {
       "type": "object",
       "additionalProperties": false,
@@ -8943,6 +8648,16 @@
         },
         "Slot": {
           "$ref": "#/definitions/SpellSlotDefField"
+        },
+        "ClearsSlot": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
         },
         "CastMode": {
           "$ref": "#/definitions/SpellCastModeDefField"
@@ -9000,6 +8715,94 @@
         },
         {
           "$ref": "#/definitions/SpellDef"
+        }
+      ]
+    },
+    "ISpellEffectDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ISpellEffectDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "ISpellEffectDef",
+            "ISpellEffect"
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "ISpellEffectDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "EffectActionsLayerDef",
+            "EffectActionsLayer",
+            "EffectStrike",
+            "EffectAnimate",
+            "EffectTimelineDef",
+            "EffectTimeline",
+            "EffectMotionDef",
+            "EffectMotion",
+            "ISpellEffectDef",
+            "ISpellEffect"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/EffectActionsLayerDef"
+        },
+        {
+          "$ref": "#/definitions/EffectStrike"
+        },
+        {
+          "$ref": "#/definitions/EffectAnimate"
+        },
+        {
+          "$ref": "#/definitions/EffectTimelineDef"
+        },
+        {
+          "$ref": "#/definitions/EffectMotionDef"
+        },
+        {
+          "$ref": "#/definitions/ISpellEffectDef"
         }
       ]
     },
@@ -9728,14 +9531,12 @@
         "CombatEngineDef",
         "IEntityObjectDef",
         "ISceneDef",
-        "InteractiveDef",
         "InteractionDef",
         "InteractiveWorldEntitySceneDef",
         "InteractiveWorldEntityDef",
         "LinksEngineSceneDef",
         "LinksEngineDef",
         "MovementStateDef",
-        "LocoMoverDef",
         "EffectTimelineDef",
         "EffectMotionDef",
         "TileModDef",
@@ -9795,8 +9596,8 @@
         "InputTriggerDef",
         "InputCombo",
         "TargetPointCastDef",
-        "SpellSlotDef",
         "SpellDef",
+        "ISpellEffectDef",
         "SpellsEngineSceneDef",
         "SpellsEngineDef",
         "SpriteDef",
@@ -10769,9 +10570,6 @@
           "$ref": "#/definitions/ISceneDef"
         },
         {
-          "$ref": "#/definitions/InteractiveDef"
-        },
-        {
           "$ref": "#/definitions/InteractionDef"
         },
         {
@@ -10788,9 +10586,6 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
-        },
-        {
-          "$ref": "#/definitions/LocoMoverDef"
         },
         {
           "$ref": "#/definitions/EffectTimelineDef"
@@ -10955,10 +10750,10 @@
           "$ref": "#/definitions/TargetPointCastDef"
         },
         {
-          "$ref": "#/definitions/SpellSlotDef"
+          "$ref": "#/definitions/SpellDef"
         },
         {
-          "$ref": "#/definitions/SpellDef"
+          "$ref": "#/definitions/ISpellEffectDef"
         },
         {
           "$ref": "#/definitions/SpellsEngineSceneDef"
