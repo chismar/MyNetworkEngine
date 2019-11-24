@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 5021754183966814665}
   - component: {fileID: 2126670400688543364}
   - component: {fileID: 4143931605412610671}
+  - component: {fileID: 9186705518085980601}
   m_Layer: 0
   m_Name: CharDef
   m_TagString: Untagged
@@ -232,6 +233,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldPath: CombatEngine
   Visual: {fileID: 0}
+--- !u!114 &9186705518085980601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281690419673664415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee65a5d40b9b69949bd3715fe6d32f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldPath: Mortal.IsDead
+  Visual: {fileID: 0}
+  AnimatorFieldName: IsDead
 --- !u!114 &7729118204465603769
 MonoBehaviour:
   m_ObjectHideFlags: 0

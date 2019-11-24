@@ -12,27 +12,28 @@ using Volatile;
 namespace Yogollag
 {
 
-    /*[GenerateSync]
+    [GenerateSync]
     public abstract class MortalEngine : SyncObject
     {
         [Sync]
         public virtual bool IsDead { get; set; } = false;
         public void Update()
         {
-            if (((IStatEntity)ParentEntity).StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
-                CurrentServer.Destroy(Id);
-            
+            if (!IsDead)
+                if (((IStatEntity)ParentEntity).StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
+                    IsDead = true;
+
         }
     }
     public interface IHasMortalEngine
 
     {
         MortalEngine Mortal { get; set; }
-    }*/
+    }
     [GenerateSync]
     public abstract class Mob : GhostedEntity,
         IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject,
-        IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover
+        IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine
     {
 
         [Sync]
@@ -66,6 +67,8 @@ namespace Yogollag
         public virtual CombatEngine CombatEngine { get; set; } = SyncObject.New<CombatEngine>();
         [Sync(SyncType.Client)]
         public virtual ActionEngine ActionEngine { get; set; } = SyncObject.New<ActionEngine>();
+        [Sync(SyncType.Client)]
+        public virtual MortalEngine Mortal { get; set; } = SyncObject.New<MortalEngine>();
 
         public Mob()
         {
@@ -101,9 +104,12 @@ namespace Yogollag
 
         public void Tick()
         {
+            if (Mortal.IsDead)
+                return;
             AI.Update();
             LocoMover.Tick();
             Locomotion.Tick();
+            Mortal.Update();
         }
 
         [Sync(SyncType.Server)]

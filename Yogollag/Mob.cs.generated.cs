@@ -21,6 +21,136 @@ using Volatile;
 namespace Yogollag
 {
     [GeneratedClass]
+    public partial class MortalEngineSync
+    {
+        override protected void SetDefsForComponents()
+        {
+        }
+
+        override public void CallInitOnComponents()
+        {
+        }
+
+        override public void CallCreateOnComponents()
+        {
+        }
+
+        override public void CallDestroyOnComponents()
+        {
+        }
+    }
+
+    //obj MortalEngine generic  hasCustomSerialization false
+    //debug info  0
+    [GeneratedClass]
+    public partial class MortalEngineSync : MortalEngine, IGhost
+    {
+        public override Boolean IsDead
+        {
+            get => base.IsDead;
+            set
+            {
+                base.IsDead = value;
+                OnPropChanged(0);
+            }
+        }
+
+        public override Int32 SyncId
+        {
+            get => base.SyncId;
+            set
+            {
+                base.SyncId = value;
+                OnPropChanged(1);
+            }
+        }
+
+        int _deltaMask;
+        public void ClearSerialization()
+        {
+            _deltaMask = 0;
+        }
+
+        public void Deserialize(NetDataReader stream)
+        {
+            CheckStream(stream, 131251238);
+            //var hasAny = stream.GetBool();
+            //if(!hasAny)
+            //    return;
+            var mask = stream.GetInt();
+            CheckStream(stream, 1691767749);
+            if ((mask & (1 << 0)) != 0)
+            {
+                CheckStream(stream, 1691767749);
+                IsDead = stream.GetBool();
+                CheckStream(stream, 1691767749);
+            }
+
+            CheckStream(stream, 389782966);
+            if ((mask & (1 << 1)) != 0)
+            {
+                CheckStream(stream, 389782966);
+                SyncId = stream.GetInt();
+                CheckStream(stream, 389782966);
+            }
+
+            OnAfterDeserialize();
+        }
+
+        public override void SetParentEntityRecursive()
+        {
+        }
+
+        void OnPropChanged(int prop)
+        {
+            _deltaMask |= 1 << prop;
+        }
+
+        public bool Serialize(ref NetDataWriter stream, bool initial)
+        {
+            if (stream == null)
+                stream = new NetDataWriter(true, 5);
+            SafeguardStream(stream, 131251238);
+            bool hasAny = false;
+            int deltaMask = _deltaMask;
+            if (initial)
+                deltaMask = int.MaxValue;
+            /*if(deltaMask == 0)
+                    {
+                        if(stream != null)
+                            stream.Put(false);
+                        return false;
+                    }*/
+            if (stream == null)
+                stream = new NetDataWriter(true, 5);
+            //stream.Put(true);
+            stream.Put(deltaMask);
+            SafeguardStream(stream, 1691767749);
+            if ((deltaMask & (1 << 0)) != 0)
+            {
+                SafeguardStream(stream, 1691767749);
+                hasAny = true;
+                stream.Put(IsDead);
+                SafeguardStream(stream, 1691767749);
+            }
+
+            SafeguardStream(stream, 389782966);
+            if ((deltaMask & (1 << 1)) != 0)
+            {
+                SafeguardStream(stream, 389782966);
+                hasAny = true;
+                stream.Put(SyncId);
+                SafeguardStream(stream, 389782966);
+            }
+
+            return hasAny;
+        }
+    }
+}
+
+namespace Yogollag
+{
+    [GeneratedClass]
     public class MobSceneDef : BaseDef, ISceneDef
     {
         public DefRef<IEntityObjectDef> Object
@@ -221,7 +351,7 @@ namespace Yogollag
     }
 
     //obj Mob generic  hasCustomSerialization false
-    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover 13
+    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover,IHasMortalEngine 14
     [GeneratedClass]
     public partial class MobSync : Mob, IGhost
     {
@@ -329,6 +459,18 @@ namespace Yogollag
             }
         }
 
+        public override MortalEngine Mortal
+        {
+            get => base.Mortal;
+            set
+            {
+                ((SyncObject)base.Mortal)?.SetParentEntity(null);
+                base.Mortal = value;
+                OnPropChanged(9);
+                ((SyncObject)base.Mortal)?.SetParentEntity(ParentEntity);
+            }
+        }
+
         public override void InitFromSceneDef(BaseDef def)
         {
             var selfDef = (MobSceneDef)def;
@@ -354,6 +496,7 @@ namespace Yogollag
             ((IGhost)StatsEngine)?.ClearSerialization();
             ((IGhost)CombatEngine)?.ClearSerialization();
             ((IGhost)ActionEngine)?.ClearSerialization();
+            ((IGhost)Mortal)?.ClearSerialization();
         }
 
         public void Deserialize(NetDataReader stream)
@@ -555,6 +698,31 @@ namespace Yogollag
                 CheckStream(stream, 784278248);
             }
 
+            CheckStream(stream, 1485461930);
+            if ((mask & (1 << 9)) != 0)
+            {
+                CheckStream(stream, 1485461930);
+                var nullOrNot = stream.GetByte();
+                if (nullOrNot == 0)
+                {
+                    Mortal = null;
+                }
+                else
+                {
+                    var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
+                    ((IGhost)newVal).Deserialize(stream);
+                    Mortal = (MortalEngine)newVal;
+                }
+
+                CheckStream(stream, 1485461930);
+            }
+            else
+            {
+                CheckStream(stream, 1485461930);
+                ((IGhost)Mortal)?.Deserialize(stream);
+                CheckStream(stream, 1485461930);
+            }
+
             OnAfterDeserialize();
         }
 
@@ -567,6 +735,7 @@ namespace Yogollag
             ((SyncObject)StatsEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)CombatEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)ActionEngine)?.SetParentEntity(this.ParentEntity);
+            ((SyncObject)Mortal)?.SetParentEntity(this.ParentEntity);
         }
 
         void OnPropChanged(int prop)
@@ -781,6 +950,29 @@ namespace Yogollag
                 SafeguardStream(stream, 784278248);
             }
 
+            SafeguardStream(stream, 1485461930);
+            if ((deltaMask & (1 << 9)) != 0)
+            {
+                SafeguardStream(stream, 1485461930);
+                hasAny = true;
+                if (Mortal == null)
+                    stream.Put((byte)0);
+                else
+                {
+                    stream.Put((byte)1);
+                    stream.Put(SyncTypesMap.GetIdFromSyncType(Mortal.GetType()));
+                    ((IGhost)Mortal).Serialize(ref stream, true);
+                }
+
+                SafeguardStream(stream, 1485461930);
+            }
+            else
+            {
+                SafeguardStream(stream, 1485461930);
+                hasAny |= ((IGhost)Mortal)?.Serialize(ref stream, initial) ?? false;
+                SafeguardStream(stream, 1485461930);
+            }
+
             return hasAny;
         }
 
@@ -801,7 +993,7 @@ namespace Yogollag
     [GeneratedClass]
     public class MobRunImpactMessage : EntityMessage
     {
-        public override int NetId => -419102895;
+        public override int NetId => 289735387;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)

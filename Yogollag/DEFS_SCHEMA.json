@@ -116,6 +116,8 @@
         "SlotLink",
         "SlotGenDef",
         "SlotGen",
+        "TilesGenDef",
+        "TilesGen",
         "SlotCategoryDef",
         "SlotCategory",
         "TileCategoryDef",
@@ -185,8 +187,6 @@
         "SpellSlot",
         "SpellDef",
         "Spell",
-        "ISpellEffectDef",
-        "ISpellEffect",
         "SpellsEngineSceneDef",
         "SpellsEngineScene",
         "SpellsEngineDef",
@@ -362,6 +362,8 @@
             "SlotLink",
             "SlotGenDef",
             "SlotGen",
+            "TilesGenDef",
+            "TilesGen",
             "SlotCategoryDef",
             "SlotCategory",
             "TileCategoryDef",
@@ -626,6 +628,9 @@
         },
         {
           "$ref": "#/definitions/SlotGenDef"
+        },
+        {
+          "$ref": "#/definitions/TilesGenDef"
         },
         {
           "$ref": "#/definitions/SlotCategoryDef"
@@ -936,6 +941,8 @@
             "SlotLink",
             "SlotGenDef",
             "SlotGen",
+            "TilesGenDef",
+            "TilesGen",
             "SlotCategoryDef",
             "SlotCategory",
             "TileCategoryDef",
@@ -1005,8 +1012,6 @@
             "SpellSlot",
             "SpellDef",
             "Spell",
-            "ISpellEffectDef",
-            "ISpellEffect",
             "SpellsEngineSceneDef",
             "SpellsEngineScene",
             "SpellsEngineDef",
@@ -1219,6 +1224,9 @@
           "$ref": "#/definitions/SlotGenDef"
         },
         {
+          "$ref": "#/definitions/TilesGenDef"
+        },
+        {
           "$ref": "#/definitions/SlotCategoryDef"
         },
         {
@@ -1328,9 +1336,6 @@
         },
         {
           "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/ISpellEffectDef"
         },
         {
           "$ref": "#/definitions/SpellsEngineSceneDef"
@@ -5860,6 +5865,83 @@
         }
       ]
     },
+    "TilesGenDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TilesGenDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TilesGenDef",
+            "TilesGen"
+          ]
+        },
+        "SizeX": {
+          "$ref": "#/definitions/IntGenParameterDefField"
+        },
+        "SizeY": {
+          "$ref": "#/definitions/IntGenParameterDefField"
+        },
+        "TileCategory": {
+          "$ref": "#/definitions/TileCategoryDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "TilesGenDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TilesGenDef",
+            "TilesGen"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TilesGenDef"
+        }
+      ]
+    },
     "SlotCategoryDef": {
       "type": "object",
       "additionalProperties": false,
@@ -8921,94 +9003,6 @@
         }
       ]
     },
-    "ISpellEffectDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ISpellEffectDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ISpellEffectDef",
-            "ISpellEffect"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "ISpellEffectDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "EffectActionsLayerDef",
-            "EffectActionsLayer",
-            "EffectStrike",
-            "EffectAnimate",
-            "EffectTimelineDef",
-            "EffectTimeline",
-            "EffectMotionDef",
-            "EffectMotion",
-            "ISpellEffectDef",
-            "ISpellEffect"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/EffectActionsLayerDef"
-        },
-        {
-          "$ref": "#/definitions/EffectStrike"
-        },
-        {
-          "$ref": "#/definitions/EffectAnimate"
-        },
-        {
-          "$ref": "#/definitions/EffectTimelineDef"
-        },
-        {
-          "$ref": "#/definitions/EffectMotionDef"
-        },
-        {
-          "$ref": "#/definitions/ISpellEffectDef"
-        }
-      ]
-    },
     "SpellsEngineSceneDef": {
       "type": "object",
       "additionalProperties": false,
@@ -9763,6 +9757,7 @@
         "SlotLinkTypeDef",
         "SlotLinkDef",
         "SlotGenDef",
+        "TilesGenDef",
         "SlotCategoryDef",
         "TileCategoryDef",
         "Vec2",
@@ -9802,7 +9797,6 @@
         "TargetPointCastDef",
         "SpellSlotDef",
         "SpellDef",
-        "ISpellEffectDef",
         "SpellsEngineSceneDef",
         "SpellsEngineDef",
         "SpriteDef",
@@ -10853,6 +10847,9 @@
           "$ref": "#/definitions/SlotGenDef"
         },
         {
+          "$ref": "#/definitions/TilesGenDef"
+        },
+        {
           "$ref": "#/definitions/SlotCategoryDef"
         },
         {
@@ -10962,9 +10959,6 @@
         },
         {
           "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/ISpellEffectDef"
         },
         {
           "$ref": "#/definitions/SpellsEngineSceneDef"

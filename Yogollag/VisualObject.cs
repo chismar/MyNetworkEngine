@@ -150,6 +150,14 @@ namespace Yogollag
             return ((IHasSpells)curValue).SpellsEngine.AllSpells.Any(x => x.Cast.Def.CustomName?.Contains(_spellFilter) ?? false);
         }
     }
+    public class PropBinding : VisualComponent
+    {
+        protected override object ProcessValue(object curValue)
+        {
+            return curValue;
+        }
+    }
+
 
     public class LocatorVisual : VisualComponent
     {

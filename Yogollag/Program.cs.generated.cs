@@ -192,7 +192,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SessionEntityJoinMessage : EntityMessage
     {
-        public override int NetId => 1682459731;
+        public override int NetId => -369044984;
         public string name;
         public override void Run(object entity)
         {
@@ -436,7 +436,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SampleComponentHandlePosMessage : EntityMessage
     {
-        public override int NetId => -953321850;
+        public override int NetId => 1030215723;
         public Vec2 newPos;
         public override void Run(object entity)
         {
@@ -1036,7 +1036,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionMakeActiveMessage : EntityMessage
     {
-        public override int NetId => 750866629;
+        public override int NetId => -415153542;
         public long itemId;
         public override void Run(object entity)
         {
@@ -1090,7 +1090,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionMakeInactiveMessage : EntityMessage
     {
-        public override int NetId => 2039804442;
+        public override int NetId => -481694400;
         public long itemId;
         public override void Run(object entity)
         {
@@ -1144,7 +1144,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionDropItemMessage : EntityMessage
     {
-        public override int NetId => -1116050791;
+        public override int NetId => 1438398369;
         public Item item;
         public override void Run(object entity)
         {
@@ -1215,7 +1215,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionAddItemMessage : EntityMessage
     {
-        public override int NetId => 1135144571;
+        public override int NetId => -352074199;
         public Item item;
         public override void Run(object entity)
         {
@@ -1286,7 +1286,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionRemoveItemMessage : EntityMessage
     {
-        public override int NetId => 676396061;
+        public override int NetId => 1343347784;
         public long itemId;
         public override void Run(object entity)
         {
@@ -1340,7 +1340,7 @@ namespace Yogollag
     [GeneratedClass]
     public class ItemsCollectionMoveItemMessage : EntityMessage
     {
-        public override int NetId => 1264937070;
+        public override int NetId => -980108397;
         public long itemId;
         public int slot;
         public override void Run(object entity)
@@ -1556,7 +1556,7 @@ namespace Yogollag
     }
 
     //obj CharacterEntity generic  hasCustomSerialization false
-    //debug info IEntityPropertyChanged,ICharacterLikeMovement,IRenderable,IPositionedEntity,IStatEntity,IImpactedEntity,IQuester,IHasInventory,IEntityObject,ITicked,IHasSpells,IHasActionEngine,IHasCombatEngine,IHasLocoMover 14
+    //debug info IEntityPropertyChanged,ICharacterLikeMovement,IRenderable,IPositionedEntity,IStatEntity,IImpactedEntity,IQuester,IHasInventory,IEntityObject,ITicked,IHasSpells,IHasActionEngine,IHasCombatEngine,IHasLocoMover,IHasMortalEngine 15
     [GeneratedClass]
     public partial class CharacterEntitySync : CharacterEntity, IGhost
     {
@@ -1712,6 +1712,18 @@ namespace Yogollag
             }
         }
 
+        public override MortalEngine Mortal
+        {
+            get => base.Mortal;
+            set
+            {
+                ((SyncObject)base.Mortal)?.SetParentEntity(null);
+                base.Mortal = value;
+                OnPropChanged(14);
+                ((SyncObject)base.Mortal)?.SetParentEntity(ParentEntity);
+            }
+        }
+
         public override void InitFromSceneDef(BaseDef def)
         {
             var selfDef = (CharacterEntitySceneDef)def;
@@ -1734,6 +1746,7 @@ namespace Yogollag
             ((IGhost)ActionEngine)?.ClearSerialization();
             ((IGhost)StatsEngine)?.ClearSerialization();
             ((IGhost)Inventory)?.ClearSerialization();
+            ((IGhost)Mortal)?.ClearSerialization();
         }
 
         public void Deserialize(NetDataReader stream)
@@ -1961,6 +1974,31 @@ namespace Yogollag
                 CheckStream(stream, 142474984);
             }
 
+            CheckStream(stream, 1485461930);
+            if ((mask & (1 << 14)) != 0)
+            {
+                CheckStream(stream, 1485461930);
+                var nullOrNot = stream.GetByte();
+                if (nullOrNot == 0)
+                {
+                    Mortal = null;
+                }
+                else
+                {
+                    var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
+                    ((IGhost)newVal).Deserialize(stream);
+                    Mortal = (MortalEngine)newVal;
+                }
+
+                CheckStream(stream, 1485461930);
+            }
+            else
+            {
+                CheckStream(stream, 1485461930);
+                ((IGhost)Mortal)?.Deserialize(stream);
+                CheckStream(stream, 1485461930);
+            }
+
             OnAfterDeserialize();
         }
 
@@ -1972,6 +2010,7 @@ namespace Yogollag
             ((SyncObject)ActionEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)StatsEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)Inventory)?.SetParentEntity(this.ParentEntity);
+            ((SyncObject)Mortal)?.SetParentEntity(this.ParentEntity);
         }
 
         void OnPropChanged(int prop)
@@ -2244,6 +2283,29 @@ namespace Yogollag
                 SafeguardStream(stream, 142474984);
             }
 
+            SafeguardStream(stream, 1485461930);
+            if ((deltaMask & (1 << 14)) != 0)
+            {
+                SafeguardStream(stream, 1485461930);
+                hasAny = true;
+                if (Mortal == null)
+                    stream.Put((byte)0);
+                else
+                {
+                    stream.Put((byte)1);
+                    stream.Put(SyncTypesMap.GetIdFromSyncType(Mortal.GetType()));
+                    ((IGhost)Mortal).Serialize(ref stream, true);
+                }
+
+                SafeguardStream(stream, 1485461930);
+            }
+            else
+            {
+                SafeguardStream(stream, 1485461930);
+                hasAny |= ((IGhost)Mortal)?.Serialize(ref stream, initial) ?? false;
+                SafeguardStream(stream, 1485461930);
+            }
+
             return hasAny;
         }
 
@@ -2316,7 +2378,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntitySetActiveItemMessage : EntityMessage
     {
-        public override int NetId => 1821008742;
+        public override int NetId => -1924476541;
         public long itemId;
         public override void Run(object entity)
         {
@@ -2370,7 +2432,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityActivateItemMessage : EntityMessage
     {
-        public override int NetId => 229632940;
+        public override int NetId => -483166233;
         public override void Run(object entity)
         {
             ((CharacterEntity)entity).ActivateItem();
@@ -2415,7 +2477,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityReceivePositionMessage : EntityMessage
     {
-        public override int NetId => -1793041969;
+        public override int NetId => 1189935985;
         public Vec2 newPosition;
         public float newRotation;
         public override void Run(object entity)
@@ -2487,7 +2549,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityRunImpactMessage : EntityMessage
     {
-        public override int NetId => 285404028;
+        public override int NetId => 792242998;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)
@@ -2568,7 +2630,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityAddItemMessage : EntityMessage
     {
-        public override int NetId => 1692496953;
+        public override int NetId => -124544761;
         public Item item;
         public override void Run(object entity)
         {

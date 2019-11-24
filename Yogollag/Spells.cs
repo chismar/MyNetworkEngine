@@ -116,6 +116,8 @@ namespace Yogollag
         }
         public SpellId CastFromClientWithPrediction(SpellCast cast)
         {
+            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
+                return default;
             if (SlotIsOccupied(cast) ||  OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = true };
@@ -127,6 +129,8 @@ namespace Yogollag
 
         public virtual SpellId CastFromInsideEntity(SpellCast cast)
         {
+            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
+                return default;
             if (SlotIsOccupied(cast) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = false };
@@ -141,6 +145,8 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
+            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
+                return;
             if (SlotIsOccupied(cast) ||
                 OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(base.ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
             {

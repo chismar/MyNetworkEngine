@@ -464,7 +464,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineFireAndForgetCastMessage : EntityMessage
     {
-        public override int NetId => -243321305;
+        public override int NetId => -868863899;
         public SpellCast cast;
         public override void Run(object entity)
         {
@@ -527,7 +527,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineCastSpellMessage : EntityMessage
     {
-        public override int NetId => 1003179755;
+        public override int NetId => -1859859194;
         public SpellId id;
         public SpellCast cast;
         public override void Run(object entity)
@@ -608,7 +608,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineRemoveCooldownMessage : EntityMessage
     {
-        public override int NetId => 380898096;
+        public override int NetId => 1722066122;
         public SpellId id;
         public override void Run(object entity)
         {
@@ -671,7 +671,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineFinishSpellMessage : EntityMessage
     {
-        public override int NetId => 866997093;
+        public override int NetId => -1144375204;
         public SpellId id;
         public override void Run(object entity)
         {

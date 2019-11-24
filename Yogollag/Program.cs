@@ -919,7 +919,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
         ICharacterLikeMovement, IRenderable, IPositionedEntity,
-        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine, IHasLocoMover
+        IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine
     {
 
         [Def]
@@ -988,6 +988,8 @@ namespace Yogollag
 
         public float SmoothRotation { get; set; }
         public LocoMover LocoMover { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual MortalEngine Mortal { get; set; } = SyncObject.New<MortalEngine>();
 
         [Sync(SyncType.AuthorityClient)]
         public virtual void SetActiveItem(long itemId)
@@ -1049,6 +1051,8 @@ namespace Yogollag
 
         public void UpdateControls()
         {
+            if (Mortal.IsDead)
+                return;
             //if (EnvironmentAPI.Input.IsButtonPressed(Mouse.Button.Left))
             //    SpellsEngine.CastFromClientWithPrediction(
             //       new SpellCast() { Def = DefsHolder.Instance.LoadDef<SpellDef>("/TestAttackSpell") });
@@ -1075,8 +1079,7 @@ namespace Yogollag
         }
         public void Tick()
         {
-            if (StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
-                CurrentServer.Destroy(Id);
+            Mortal.Update();
         }
 
     }
