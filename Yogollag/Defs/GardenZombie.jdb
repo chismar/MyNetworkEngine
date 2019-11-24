@@ -23,7 +23,7 @@
             "Rules": [
                 {
                     "$type": "AIRule",
-                    "FixedDuration": 1.5,
+                    "FixedDuration": 2.5,
                     "Cooldown": 3.60,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
@@ -35,12 +35,12 @@
                             ]
                         }
                     },
-                    "AcceptedRange": 1.6,
+                    "AcceptedRange": 1.1,
                     "KeepDistance": true,
                     "FinishWhenNear": false,
                     "CastSpell": {
                         "$type": "Spell",
-                        "Duration": 1.1,
+                        "Duration": 2.45,
                         "Slot":{
                             "$type":"SpellSlotDef",
                             "$id":"MobAttackSlot"
@@ -83,8 +83,8 @@
                 },
                 {
                     "$type": "AIRule",
-                    "FixedDuration": 1.5,
-                    "Cooldown": 1.20,
+                    "FixedDuration": 2.5,
+                    "Cooldown": 0.0,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
                         "Size": 1.2,
@@ -100,7 +100,7 @@
                     "FinishWhenNear": false,
                     "CastSpell": {
                         "$type": "Spell",
-                        "Duration": 1.25,
+                        "Duration": 2.45,
                         "Slot":"$MobAttackSlot",
                         "Effects": [
                             {

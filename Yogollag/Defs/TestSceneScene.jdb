@@ -85,6 +85,582 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 5.4,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 3.0,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 1.79,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 6.89,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 5.4,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 1.79,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 4.36,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 3.0,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 6.89,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 1.79,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 3.0,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 5.4,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 6.89,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 4.36,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 1.79,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 3.0,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 6.89,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 5.4,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 4.36,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 5.4,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 3.0,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 6.89,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 4.36,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenZombie",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 1.79,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
     }
   ]
 }
