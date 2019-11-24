@@ -22,7 +22,7 @@ namespace Yogollag
         [SceneDef]
         public float Rotation { get => PhysicalBody.Rotation; set => PhysicalBody.Rotation = value; }
         [SceneDef]
-        public Vec2 Position { get => PhysicalBody.PhysicalPos; set => PhysicalBody.PhysicalPos = value; }
+        public Vec2 Position { get => PhysicalBody.PhysicalPos; set { if (float.IsNaN(value.X) || float.IsNaN(value.Y)) Logger.LogError("AAAAAAAAAAAAAAA"); PhysicalBody.PhysicalPos = value; } }
 
         public override void OnInit()
         {

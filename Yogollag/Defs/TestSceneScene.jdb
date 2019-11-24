@@ -69,7 +69,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 4.36,
+        "X": -7.08,
         "Y": 0.0
       },
       "Links": {
@@ -93,7 +93,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 5.4,
+        "X": -11.86,
         "Y": 0.0
       },
       "Links": {
@@ -117,7 +117,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 3.0,
+        "X": -16.86,
         "Y": 0.0
       },
       "Links": {
@@ -141,7 +141,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 1.79,
+        "X": -21.1,
         "Y": 0.0
       },
       "Links": {
@@ -165,7 +165,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 6.89,
+        "X": -24.94,
         "Y": 0.0
       },
       "Links": {
@@ -189,7 +189,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 5.4,
+        "X": -13.87,
         "Y": 0.0
       },
       "Links": {
@@ -213,7 +213,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 1.79,
+        "X": -23.11,
         "Y": 0.0
       },
       "Links": {
@@ -237,7 +237,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 4.36,
+        "X": -9.09,
         "Y": 0.0
       },
       "Links": {
@@ -261,7 +261,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 3.0,
+        "X": -18.87,
         "Y": 0.0
       },
       "Links": {
@@ -285,7 +285,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 6.89,
+        "X": -26.95,
         "Y": 0.0
       },
       "Links": {
@@ -309,7 +309,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 1.79,
+        "X": -20.1300011,
         "Y": 0.0
       },
       "Links": {
@@ -333,7 +333,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 3.0,
+        "X": -15.8900013,
         "Y": 0.0
       },
       "Links": {
@@ -357,7 +357,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 5.4,
+        "X": -10.89,
         "Y": 0.0
       },
       "Links": {
@@ -381,7 +381,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 6.89,
+        "X": -23.9700012,
         "Y": 0.0
       },
       "Links": {
@@ -405,7 +405,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 4.36,
+        "X": -6.11000061,
         "Y": 0.0
       },
       "Links": {
@@ -429,7 +429,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 1.79,
+        "X": -21.77,
         "Y": 0.0
       },
       "Links": {
@@ -453,7 +453,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 3.0,
+        "X": -17.53,
         "Y": 0.0
       },
       "Links": {
@@ -477,7 +477,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 6.89,
+        "X": -25.61,
         "Y": 0.0
       },
       "Links": {
@@ -501,7 +501,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 5.4,
+        "X": -12.53,
         "Y": 0.0
       },
       "Links": {
@@ -525,127 +525,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 4.36,
-        "Y": 0.0
-      },
-      "Links": {
-        "$type": "LinksEngineSceneDef",
-        "CustomName": null,
-        "Object": null,
-        "SceneRefs": null,
-        "Locators": null
-      },
-      "AI": null,
-      "SpellsEngine": null,
-      "StatsEngine": null,
-      "_spriteRenderer": null,
-      "CombatEngine": null,
-      "ActionEngine": null
-    },
-    {
-      "$type": "MobSceneDef",
-      "CustomName": null,
-      "Object": "/GardenZombie",
-      "Rotation": 0.0,
-      "Position": {
-        "$type": "Vec2",
-        "X": 5.4,
-        "Y": 0.0
-      },
-      "Links": {
-        "$type": "LinksEngineSceneDef",
-        "CustomName": null,
-        "Object": null,
-        "SceneRefs": null,
-        "Locators": null
-      },
-      "AI": null,
-      "SpellsEngine": null,
-      "StatsEngine": null,
-      "_spriteRenderer": null,
-      "CombatEngine": null,
-      "ActionEngine": null
-    },
-    {
-      "$type": "MobSceneDef",
-      "CustomName": null,
-      "Object": "/GardenZombie",
-      "Rotation": 0.0,
-      "Position": {
-        "$type": "Vec2",
-        "X": 3.0,
-        "Y": 0.0
-      },
-      "Links": {
-        "$type": "LinksEngineSceneDef",
-        "CustomName": null,
-        "Object": null,
-        "SceneRefs": null,
-        "Locators": null
-      },
-      "AI": null,
-      "SpellsEngine": null,
-      "StatsEngine": null,
-      "_spriteRenderer": null,
-      "CombatEngine": null,
-      "ActionEngine": null
-    },
-    {
-      "$type": "MobSceneDef",
-      "CustomName": null,
-      "Object": "/GardenZombie",
-      "Rotation": 0.0,
-      "Position": {
-        "$type": "Vec2",
-        "X": 6.89,
-        "Y": 0.0
-      },
-      "Links": {
-        "$type": "LinksEngineSceneDef",
-        "CustomName": null,
-        "Object": null,
-        "SceneRefs": null,
-        "Locators": null
-      },
-      "AI": null,
-      "SpellsEngine": null,
-      "StatsEngine": null,
-      "_spriteRenderer": null,
-      "CombatEngine": null,
-      "ActionEngine": null
-    },
-    {
-      "$type": "MobSceneDef",
-      "CustomName": null,
-      "Object": "/GardenZombie",
-      "Rotation": 0.0,
-      "Position": {
-        "$type": "Vec2",
-        "X": 4.36,
-        "Y": 0.0
-      },
-      "Links": {
-        "$type": "LinksEngineSceneDef",
-        "CustomName": null,
-        "Object": null,
-        "SceneRefs": null,
-        "Locators": null
-      },
-      "AI": null,
-      "SpellsEngine": null,
-      "StatsEngine": null,
-      "_spriteRenderer": null,
-      "CombatEngine": null,
-      "ActionEngine": null
-    },
-    {
-      "$type": "MobSceneDef",
-      "CustomName": null,
-      "Object": "/GardenZombie",
-      "Rotation": 0.0,
-      "Position": {
-        "$type": "Vec2",
-        "X": 1.79,
+        "X": -7.75,
         "Y": 0.0
       },
       "Links": {

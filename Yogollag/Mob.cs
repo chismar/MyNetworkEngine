@@ -84,7 +84,7 @@ namespace Yogollag
             lock (voltWorld)
             {
                 var pos = Position;
-                var circleShape = voltWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 1f, 30);
+                var circleShape = voltWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 0.5f, 30);
                 var body = IsMaster ? voltWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape) : voltWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
                 body.UserData = Id;
                 PhysicsBody = body;

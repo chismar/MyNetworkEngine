@@ -70,8 +70,9 @@ namespace Yogollag
 
         }
 
+        Vec2 _pp;
         [Sync(SyncType.Client)]
-        public virtual Vec2 PhysicalPos { get; set; }
+        public virtual Vec2 PhysicalPos { get => _pp; set { _pp = value; if (float.IsNaN(value.X) || float.IsNaN(value.Y)) Logger.LogError("AAAAAAAAAAAAAAA"); } }
         [Sync(SyncType.Client)]
         public virtual float Rotation { get; set; }
         public IDef Def { get; set; }

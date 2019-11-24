@@ -15,8 +15,9 @@ namespace Yogollag
     {
         [Sync(SyncType.Client)]
         public virtual Vec2 Movement { get; set; }
+        Vec2 _pp;
         [Sync(SyncType.Client)]
-        public virtual Vec2 Position { get; set; }
+        public virtual Vec2 Position { get => _pp; set { _pp = value; if (float.IsNaN(value.X) || float.IsNaN(value.Y)) Logger.LogError("AAAAAAAAAAAAAAA"); } }
         [Sync(SyncType.Client)]
         public virtual float Rotation { get; set; }
         float _angleRot;
