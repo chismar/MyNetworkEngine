@@ -116,7 +116,7 @@ namespace Yogollag
         }
         public SpellId CastFromClientWithPrediction(SpellCast cast)
         {
-            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
+            if (SlotIsOccupied(cast) ||  OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = true };
             if (SyncedSpells.Any(x => x.Id == id))
@@ -127,7 +127,7 @@ namespace Yogollag
 
         public virtual SpellId CastFromInsideEntity(SpellCast cast)
         {
-            if (OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
+            if (SlotIsOccupied(cast) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = false };
             CastSpell(id, cast);
@@ -141,8 +141,8 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (SyncedSpells.Any(x => ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null) ||
-                OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
+            if (SlotIsOccupied(cast) ||
+                OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(base.ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
                 return;
@@ -156,8 +156,8 @@ namespace Yogollag
             SyncedSpells.Add(inst);
             foreach (var effect in inst.Cast.Def.Effects)
                 effect.Def.Begin(inst, false);
-            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
 
+            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
             if (inst.Cast.Def.Cooldown > 0)
             {
                 Cooldowns.Add(new PastSpellCooldown() { Id = inst.Id, Def = inst.Cast.Def, TimeWhenStarted = inst.Time });
@@ -175,6 +175,12 @@ namespace Yogollag
                 FinishSpell(id);
             });
         }
+
+        private bool SlotIsOccupied(SpellCast cast)
+        {
+            return SyncedSpells.Any(x => ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null);
+        }
+
         [Sync(SyncType.Server)]
         public virtual void RemoveCooldown(SpellId id)
         {

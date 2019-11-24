@@ -51,30 +51,6 @@
       "StatsEngine": null
     },
     {
-      "$type": "MobSceneDef",
-      "CustomName": null,
-      "Object": "/TestMob",
-      "Rotation": 0.0,
-      "Position": {
-        "$type": "Vec2",
-        "X": -22.9,
-        "Y": 0.0
-      },
-      "Links": {
-        "$type": "LinksEngineSceneDef",
-        "CustomName": null,
-        "Object": null,
-        "SceneRefs": null,
-        "Locators": null
-      },
-      "AI": null,
-      "SpellsEngine": null,
-      "StatsEngine": null,
-      "_spriteRenderer": null,
-      "CombatEngine": null,
-      "ActionEngine": null
-    },
-    {
       "$type": "BuildingEntitySceneDef",
       "CustomName": null,
       "Object": "/SimpleBuilding1",

@@ -69,7 +69,6 @@ namespace Yogollag
                 {
                     if (rule.FixedDuration.Def != null)
                         _doUntil = SyncedTime.Now + SyncedTime.FromSeconds(rule.FixedDuration.Def.Calc(ctx));
-                    _lastTimeUsed[rule] = SyncedTime.Now;
 
 
                     var dst = (point - ((IPositionedEntity)ParentEntity).Position).Length;
@@ -87,6 +86,8 @@ namespace Yogollag
                         });
                         if (_currentSpellId == default)
                             return false;
+
+                        _lastTimeUsed[rule] = SyncedTime.Now;
                     }
                 }
             }
