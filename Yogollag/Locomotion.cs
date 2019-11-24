@@ -129,7 +129,7 @@ namespace Yogollag
                 }
                 else
                 {
-                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
+                    var angle = ActionDir.Length < 0.01f ? 0 :_movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
                     if (angle > 180)
                         angle = angle - 360;
                     if (angle < -180)
