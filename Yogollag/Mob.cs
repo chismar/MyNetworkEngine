@@ -19,7 +19,7 @@ namespace Yogollag
         public virtual bool IsDead { get; set; } = false;
         public void Update()
         {
-            if (((IStatEntity)ParentEntity).StatsEngine.Stats.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
+            if (((IStatEntity)ParentEntity).StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value <= 0)
                 CurrentServer.Destroy(Id);
             
         }
