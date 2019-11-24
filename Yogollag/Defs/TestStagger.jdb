@@ -1,19 +1,19 @@
 {
     "$type": "Spell",
     "CustomName": "Stagger",
-    "Duration":1,
-    "ClearsSlot":true,
-    "Slot":"/AttackSlot",
-    "Cooldown":1.5,
+    "Duration": 0.5,
+    "ClearsSlot": true,
+    "Slot": "/AttackSlot",
+    "Cooldown": 0.0,
     "Effects": [
         {
             "$type": "EffectAnimate",
             "AnimationName": "Stagger"
         },
         {
-            "$type":"EffectMotion",
+            "$type": "EffectMotion",
             "CurveName": "StaggerCurve",
-            "Speed":-10
+            "Speed": 0
         }
     ]
 }

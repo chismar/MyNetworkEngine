@@ -1,3 +1,7 @@
+// TO DO
+// rotation speed
+// strike effect offset + duration
+// stagger animation remake
 {
     "$type": "MobDef",
     "Name": "Test mob",
@@ -181,7 +185,7 @@
             {
                 "$type": "StatInstance",
                 "Stat": "/Stats/Health",
-                "InitialValue": 3000
+                "InitialValue": 300
             }
         ]
     }
