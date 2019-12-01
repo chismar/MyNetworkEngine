@@ -16,6 +16,7 @@ using System.Text;
 using LiteNetLib.Utils;
 using System.Threading.Tasks;
 using System.Linq;
+using SFML.Graphics;
 
 namespace Yogollag
 {
