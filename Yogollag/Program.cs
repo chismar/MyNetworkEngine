@@ -712,8 +712,9 @@ namespace Yogollag
             LocalPosition = new Vec2() { X = PhysicsBody.Position.x, Y = PhysicsBody.Position.y };
             SmoothPosition = LocalPosition;
             var delta = DateTime.UtcNow - _lastSendTime;
+            var prevRot = LocalRot;
             LocalRot += (float)delta.TotalSeconds * _locoRot;
-            if ((LocalPosition - prevPos).Length >= float.Epsilon && (_lastSendTime == default || delta.TotalSeconds > 0.025))
+            if (((LocalPosition - prevPos).Length >= float.Epsilon || Math.Abs(LocalRot - prevRot) > float.Epsilon) && (_lastSendTime == default || delta.TotalSeconds > 0.025))
             {
                 _lastSendTime = DateTime.UtcNow;
                 _timeWhenReceivedPosition = DateTime.UtcNow;
