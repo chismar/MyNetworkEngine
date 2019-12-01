@@ -97,7 +97,7 @@ namespace Yogollag
             _duration = default;
             _speed = default;
         }
-
+        float _lerpedSpeed = 0f;
         public void Tick()
         {
             if (_currentMovementState == null)
@@ -107,6 +107,7 @@ namespace Yogollag
                     if (ActionDir == default)
                     {
                         _movable.ApplyMovement(default, default);
+                        _lerpedSpeed = 0f;
                         return;
                     }
 
@@ -118,6 +119,7 @@ namespace Yogollag
                     if (Math.Abs(angle) < 15)
                     {
                         _movable.ApplyMovement(default, default);
+                        _lerpedSpeed = 0f;
                         return;
                     }
                     var sign = -Math.Sign(angle);
@@ -127,6 +129,7 @@ namespace Yogollag
                     t.Rotate(360 - _movable.CurrentRotation);
                     var forwardDir = t.TransformPoint(new Vec2(0, 1));
                     _movable.ApplyMovement(forwardDir * _def.IdleRotationSpeed, _def.IdleAngleSpeed * lerp);
+                    _lerpedSpeed = _def.IdleRotationSpeed;
                 }
                 else
                 {
@@ -140,7 +143,9 @@ namespace Yogollag
                     var sign = -Math.Sign(angle);
                     float lerp = Mathf.Clamp(Math.Abs(angle) / 180 * sign, -1, 1);
                     //EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
-                    _movable.ApplyMovement(MovementDir * _def.CruiserSpeed, Math.Abs(angle) < 5 ? default : _def.MovementAngleSpeed * lerp);
+                    _lerpedSpeed = Mathf.Clamp(_lerpedSpeed + 1f, 0f, _def.CruiserSpeed);
+                    _movable.ApplyMovement(MovementDir * _lerpedSpeed, Math.Abs(angle) < 5 ? default : _def.MovementAngleSpeed * lerp);
+                    
                 }
             }
             else
@@ -158,6 +163,7 @@ namespace Yogollag
                 var forwardDir = t.TransformPoint(cav);
 
                 _movable.ApplyMovement(forwardDir, Math.Abs(angle) < 15 ? default : _def.ActionRotationSpeed * lerp);
+                _lerpedSpeed = _speed;
             }
 
         }

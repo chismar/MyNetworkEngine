@@ -45,7 +45,7 @@
                     "CastSpell": {
                         "$type": "Spell",
                         "Duration": 2.45,
-                        "Slot":"/AttackSlot",
+                        "Slot": "/AttackSlot",
                         "Effects": [
                             {
                                 "$type": "EffectMotion",
@@ -53,31 +53,44 @@
                                 "Speed": 0
                             },
                             {
-                                "$type": "EffectStrike",
-                                "StrikeDef": {
-                                    "$type": "Strike",
-                                    "SpellOnStrike": {
-                                        "$type": "Spell",
-                                        "ImpactOnStart": {
-                                            "$type": "Target",
-                                            "Do": {
-                                                "$type": "ImpactsList",
-                                                "Impacts": [
-                                                    {
-                                                        "$type": "ChangeEntityStat",
-                                                        "Change": -10,
-                                                        "StatDef": "/Stats/Health"
-                                                    },
-                                                    {
-                                                        "$type": "ImpactInvokeAction",
-                                                        "InvokedSpell": "./TestStaggerChar"
-                                                    }
+                                "$type": "SubEffect",
+                                "StartOffset":0.5,
+                                "EndOffset":2,
+                                "Effects":[
+                                    {
+                                        "$type": "EffectStrike",
+                                        "StrikeDef": {
+                                            "$type": "Strike",
+                                            "PredicateOnTarget": {
+                                                "$type": "CheckEntityType",
+                                                "AllowedTypes": [
+                                                    "/CharDef"
                                                 ]
+                                            },
+                                            "SpellOnStrike": {
+                                                "$type": "Spell",
+                                                "ImpactOnStart": {
+                                                    "$type": "Target",
+                                                    "Do": {
+                                                        "$type": "ImpactsList",
+                                                        "Impacts": [
+                                                            {
+                                                                "$type": "ChangeEntityStat",
+                                                                "Change": -10,
+                                                                "StatDef": "/Stats/Health"
+                                                            },
+                                                            {
+                                                                "$type": "ImpactInvokeAction",
+                                                                "InvokedSpell": "./TestStaggerChar"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
                                             }
-                                        }
+                                        },
+                                        "AnimationName": "Attack01"
                                     }
-                                },
-                                "AnimationName": "Attack01"
+                                ]
                             }
                         ]
                     }
@@ -110,31 +123,44 @@
                                 "Speed": 0
                             },
                             {
-                                "$type": "EffectStrike",
-                                "StrikeDef": {
-                                    "$type": "Strike",
-                                    "SpellOnStrike": {
-                                        "$type": "Spell",
-                                        "ImpactOnStart": {
-                                            "$type": "Target",
-                                            "Do": {
-                                                "$type": "ImpactsList",
-                                                "Impacts": [
-                                                    {
-                                                        "$type": "ChangeEntityStat",
-                                                        "Change": -10,
-                                                        "StatDef": "/Stats/Health"
-                                                    },
-                                                    {
-                                                        "$type": "ImpactInvokeAction",
-                                                        "InvokedSpell": "./TestStaggerChar"
-                                                    }
+                                "$type": "SubEffect",
+                                "StartOffset": 0.4,
+                                "EndOffset": 2,
+                                "Effects": [
+                                    {
+                                        "$type": "EffectStrike",
+                                        "StrikeDef": {
+                                            "$type": "Strike",
+                                            "PredicateOnTarget": {
+                                                "$type": "CheckEntityType",
+                                                "AllowedTypes": [
+                                                    "/CharDef"
                                                 ]
+                                            },
+                                            "SpellOnStrike": {
+                                                "$type": "Spell",
+                                                "ImpactOnStart": {
+                                                    "$type": "Target",
+                                                    "Do": {
+                                                        "$type": "ImpactsList",
+                                                        "Impacts": [
+                                                            {
+                                                                "$type": "ChangeEntityStat",
+                                                                "Change": -10,
+                                                                "StatDef": "/Stats/Health"
+                                                            },
+                                                            {
+                                                                "$type": "ImpactInvokeAction",
+                                                                "InvokedSpell": "./TestStaggerChar"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
                                             }
-                                        }
+                                        },
+                                        "AnimationName": "Attack"
                                     }
-                                },
-                                "AnimationName": "Attack"
+                                ]
                             }
                         ]
                     }

@@ -5,6 +5,7 @@ using System.Text;
 using LiteNetLib.Utils;
 using Definitions;
 using CodeGen;
+using System.Threading.Tasks;
 
 namespace Yogollag
 {
@@ -15,6 +16,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class CombatEngine : SyncObject, IEntityComponent
     {
+        HashSet<EntityId> _struckEntities = new HashSet<EntityId>();
         public Action<EffectId, float, string> BeginAnimation;
         public Action<EffectId, string> EndAnimation;
         public IDef Def { get; set; }
@@ -24,6 +26,7 @@ namespace Yogollag
         {
             CurrentStrikeOwner = id;
             _currentStrike = def;
+            _struckEntities.Clear();
         }
 
         public void EndStrike(EffectId id)
@@ -43,12 +46,17 @@ namespace Yogollag
                 return;
             if (_currentStrike == null)
                 return;
-            ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = _currentStrike.SpellOnStrike.Def, OwnerObject = ParentEntity.Id, TargetEntity = targetId });
+            if (!_struckEntities.Add(targetId))
+                return;
+            if (_currentStrike.PredicateOnTarget == null ||
+                _currentStrike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId }))
+                ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = _currentStrike.SpellOnStrike.Def, OwnerObject = ParentEntity.Id, TargetEntity = targetId });
         }
     }
 
     public class StrikeDef : BaseDef
     {
+        public DefRef<IPredicateDef> PredicateOnTarget { get; set; }
         public DefRef<SpellDef> SpellOnStrike { get; set; }
     }
     public class EffectStrike : BaseDef, ISpellEffectDef
@@ -70,6 +78,59 @@ namespace Yogollag
             ce.EndStrike(new EffectId(this, spellInstance));
             ce.EndAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
 
+        }
+    }
+    public class SubEffect : BaseDef, ISpellEffectDef
+    {
+        public float StartOffset { get; set; } = 0f;
+        public float EndOffset { get; set; } = float.MaxValue;
+        public bool OfffsetIsBackward { get; set; } = false;
+        public List<DefRef<ISpellEffectDef>> Effects { get; set; } = new List<DefRef<ISpellEffectDef>>();
+
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+            var parentEntity = spellInstance.ParentEntity;
+            Task.Run(async () =>
+            {
+                NetworkEntity.CurrentlyExecutingInContext.Value = default;
+                var dur = ((SpellDef)spellInstance.Def).Duration;
+                var start = OfffsetIsBackward ? dur - StartOffset : StartOffset;
+                await Task.Delay(TimeSpan.FromSeconds(start));
+                if (spellInstance.ParentEntity == null)
+                    return;
+                spellInstance.RunLater(() =>
+                {
+                    if (spellInstance.ParentEntity == null)
+                        return;
+                    spellInstance.RunningEffects.Add(new EffectId(this, spellInstance));
+                    foreach (var effect in Effects)
+                        effect.Def.Begin(spellInstance, onClient);
+
+                    Task.Run(async () =>
+                    {
+                        NetworkEntity.CurrentlyExecutingInContext.Value = default;
+                        await Task.Delay(TimeSpan.FromSeconds(OfffsetIsBackward ? dur - EndOffset - start : EndOffset - start));
+                        if (spellInstance.ParentEntity == null)
+                            return;
+                        spellInstance.RunLater(() =>
+                        {
+                            if (spellInstance.ParentEntity == null)
+                                return;
+                            if (spellInstance.RunningEffects.Remove(new EffectId(this, spellInstance)))
+                                foreach (var effect in Effects)
+                                    effect.Def.End(spellInstance, onClient, true);
+                        });
+                    });
+
+                });
+            });
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+            if (spellInstance.RunningEffects.Remove(new EffectId(this, spellInstance)))
+                foreach (var effect in Effects)
+                    effect.Def.End(spellInstance, onClient, isSucess);
         }
     }
     public class EffectAnimate : BaseDef, ISpellEffectDef

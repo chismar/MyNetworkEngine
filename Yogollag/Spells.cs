@@ -92,6 +92,7 @@ namespace Yogollag
                 {
                     obj.ParentEntity = this.ParentEntity;
                     effect.Def.End(obj, true, obj.SuccesEnd);
+                    obj.ParentEntity = null;
                 }
             });
         }
@@ -118,7 +119,7 @@ namespace Yogollag
         {
             if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
                 return default;
-            if (SlotIsOccupied(cast) ||  OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
+            if (SlotIsOccupied(cast) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = true };
             if (SyncedSpells.Any(x => x.Id == id))
@@ -286,7 +287,7 @@ namespace Yogollag
 
         public override string ToString()
         {
-            return $"{SpellId}-{Effect.Address}";
+            return $"{SpellId}-{(Effect?.Address ?? default)}";
         }
     }
     public interface ISpellEffectDef : IDef
@@ -328,6 +329,7 @@ namespace Yogollag
     [GenerateSync]
     public abstract class SpellInstance : SyncObject, IEntityObject
     {
+        public HashSet<EffectId> RunningEffects = new HashSet<EffectId>();
         [Sync]
         public virtual bool SuccesEnd { get; set; }
         [Sync(SyncType.Client)]

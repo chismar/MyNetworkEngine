@@ -993,7 +993,7 @@ namespace Yogollag
     [GeneratedClass]
     public class MobRunImpactMessage : EntityMessage
     {
-        public override int NetId => -1204312260;
+        public override int NetId => 1377682983;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)

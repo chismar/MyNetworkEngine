@@ -14,6 +14,7 @@ using System.Text;
 using LiteNetLib.Utils;
 using Definitions;
 using CodeGen;
+using System.Threading.Tasks;
 
 namespace Yogollag
 {

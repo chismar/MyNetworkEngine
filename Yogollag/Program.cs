@@ -19,9 +19,6 @@ namespace Yogollag
     {
 
 
-
-
-
     }
 
     class Program
