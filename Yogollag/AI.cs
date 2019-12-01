@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using LiteNetLib.Utils;
+using System.Linq;
+
 namespace Yogollag
 {
     [GenerateSync]
@@ -107,7 +109,6 @@ namespace Yogollag
                 var point = _currentTargetEntity.HasValue ?
                     ((IPositionedEntity)ParentEntity.CurrentServer.GetGhost(_currentTargetEntity.Value))?.Position :
                     _currentTargetPoint;
-
                 if (point.HasValue)
                 {
                     float maxMult = 1;
@@ -148,6 +149,8 @@ namespace Yogollag
             }
 
             if (_doUntil < SyncedTime.Now || near && (_currentRule?.FinishWhenNear ?? false))
+                return DoRule(null);
+            if (_currentRule.StopOnSpell && !_spellsEngine.SyncedSpells.Any(x => x.Id == _currentSpellId))
                 return DoRule(null);
             return true;
         }
@@ -193,6 +196,7 @@ namespace Yogollag
     {
         public DefRef<CalcerDef> Cooldown { get; set; }
         public bool CancelSpellOnRuleSwitch { get; set; }
+        public bool StopOnSpell { get; set; }
         public bool Move { get; set; }
         public bool FinishWhenNear { get; set; }
         public bool KeepDistance { get; set; }
