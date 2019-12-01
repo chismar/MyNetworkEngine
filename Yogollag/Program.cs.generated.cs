@@ -192,7 +192,7 @@ namespace Yogollag
     [GeneratedClass]
     public class SessionEntityJoinMessage : EntityMessage
     {
-        public override int NetId => 2137580102;
+        public override int NetId => -1862147408;
         public string name;
         public override void Run(object entity)
         {
@@ -2378,7 +2378,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntitySetActiveItemMessage : EntityMessage
     {
-        public override int NetId => -364358374;
+        public override int NetId => 1943217675;
         public long itemId;
         public override void Run(object entity)
         {
@@ -2432,7 +2432,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityActivateItemMessage : EntityMessage
     {
-        public override int NetId => 1254913783;
+        public override int NetId => 156784015;
         public override void Run(object entity)
         {
             ((CharacterEntity)entity).ActivateItem();
@@ -2477,7 +2477,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityReceivePositionMessage : EntityMessage
     {
-        public override int NetId => -1327505626;
+        public override int NetId => -992774929;
         public Vec2 newPosition;
         public float newRotation;
         public override void Run(object entity)
@@ -2549,7 +2549,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityRunImpactMessage : EntityMessage
     {
-        public override int NetId => -1621548045;
+        public override int NetId => -437846284;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)
@@ -2630,7 +2630,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CharacterEntityAddItemMessage : EntityMessage
     {
-        public override int NetId => 743213403;
+        public override int NetId => -40536695;
         public Item item;
         public override void Run(object entity)
         {

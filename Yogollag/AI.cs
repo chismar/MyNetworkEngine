@@ -29,6 +29,7 @@ namespace Yogollag
             _spellsEngine = spellsEngine;
             _locoMover = locoMover;
         }
+        Random _rnd = new Random();
         private bool DoRule(AIRuleDef rule)
         {
             var ctx = new ScriptingContext(ParentEntity);
@@ -75,11 +76,18 @@ namespace Yogollag
                     var dir = (point - ((IPositionedEntity)ParentEntity).Position).Normal;
                     _locoMover.ActionDir = dir;
 
-                    if (rule.CastSpell.Def != null)
+                    if (rule.CastSpell.Def != null || rule.RandomSpells.Count > 0)
                     {
+                        var spell = rule.CastSpell.Def;
+                        if(rule.RandomSpells.Count > 0)
+                        {
+                            var rval = _rnd.Next(0, rule.RandomSpells.Count + 1);
+                            if (rval < rule.RandomSpells.Count)
+                                spell = rule.RandomSpells[rval];
+                        }
                         _currentSpellId = _spellsEngine.CastFromInsideEntity(new SpellCast()
                         {
-                            Def = rule.CastSpell,
+                            Def = spell,
                             TargetEntity = target,
                             TargetPoint = point,
                             OwnerObject = ParentEntity.Id,
@@ -194,6 +202,7 @@ namespace Yogollag
         public DefRef<TargetSelectorDef> TargetSelector { get; set; }
         public DefRef<PointSelectorDef> PointSelector { get; set; }
         public DefRef<SpellDef> CastSpell { get; set; }
+        public List<DefRef<SpellDef>> RandomSpells { get; set; } = new List<DefRef<SpellDef>>();
     }
 
     public class AIMoveDef : BaseDef
