@@ -28,7 +28,7 @@
                 {
                     "$type": "AIRule",
                     "FixedDuration": 2.5,
-                    "Cooldown": 3.60,
+                    "Cooldown": 0.0,
                     "TargetSelector": {
                         "$type": "ClosestTargetSelector",
                         "Size": 1.2,
@@ -54,9 +54,9 @@
                             },
                             {
                                 "$type": "SubEffect",
-                                "StartOffset":0.5,
-                                "EndOffset":2,
-                                "Effects":[
+                                "StartOffset": 1.1,
+                                "EndOffset": 1.4,
+                                "Effects": [
                                     {
                                         "$type": "EffectStrike",
                                         "StrikeDef": {
@@ -93,78 +93,81 @@
                                 ]
                             }
                         ]
-                    }
-                },
-                {
-                    "$type": "AIRule",
-                    "FixedDuration": 2.5,
-                    "Cooldown": 0.0,
-                    "TargetSelector": {
-                        "$type": "ClosestTargetSelector",
-                        "Size": 1.2,
-                        "Filter": {
-                            "$type": "CheckEntityType",
-                            "AllowedTypes": [
-                                "/CharDef"
-                            ]
-                        }
                     },
-                    "AcceptedRange": 1.1,
-                    "KeepDistance": true,
-                    "FinishWhenNear": false,
-                    "CastSpell": {
-                        "$type": "Spell",
-                        "Duration": 2.45,
-                        "Slot": "/AttackSlot",
-                        "Effects": [
-                            {
-                                "$type": "EffectMotion",
-                                "CurveName": "AttackCurveZombie",
-                                "Speed": 0
-                            },
-                            {
-                                "$type": "SubEffect",
-                                "StartOffset": 0.4,
-                                "EndOffset": 2,
-                                "Effects": [
-                                    {
-                                        "$type": "EffectStrike",
-                                        "StrikeDef": {
-                                            "$type": "Strike",
-                                            "PredicateOnTarget": {
-                                                "$type": "CheckEntityType",
-                                                "AllowedTypes": [
-                                                    "/CharDef"
-                                                ]
-                                            },
-                                            "SpellOnStrike": {
-                                                "$type": "Spell",
-                                                "ImpactOnStart": {
-                                                    "$type": "Target",
-                                                    "Do": {
-                                                        "$type": "ImpactsList",
-                                                        "Impacts": [
-                                                            {
-                                                                "$type": "ChangeEntityStat",
-                                                                "Change": -10,
-                                                                "StatDef": "/Stats/Health"
-                                                            },
-                                                            {
-                                                                "$type": "ImpactInvokeAction",
-                                                                "InvokedSpell": "./TestStaggerChar"
-                                                            }
-                                                        ]
+                    "RandomSpells": [
+                        {
+                            "$type": "Spell",
+                            "Duration": 2.45,
+                            "Slot": "/AttackSlot",
+                            "Effects": [
+                                {
+                                    "$type": "EffectMotion",
+                                    "CurveName": "AttackCurveZombie",
+                                    "Speed": 0
+                                },
+                                {
+                                    "$type": "SubEffect",
+                                    "StartOffset": 0.83,
+                                    "EndOffset": 1.2,
+                                    "Effects": [
+                                        {
+                                            "$type": "EffectStrike",
+                                            "StrikeDef": {
+                                                "$type": "Strike",
+                                                "PredicateOnTarget": {
+                                                    "$type": "CheckEntityType",
+                                                    "AllowedTypes": [
+                                                        "/CharDef"
+                                                    ]
+                                                },
+                                                "SpellOnStrike": {
+                                                    "$type": "Spell",
+                                                    "ImpactOnStart": {
+                                                        "$type": "Target",
+                                                        "Do": {
+                                                            "$type": "ImpactsList",
+                                                            "Impacts": [
+                                                                {
+                                                                    "$type": "ChangeEntityStat",
+                                                                    "Change": -10,
+                                                                    "StatDef": "/Stats/Health"
+                                                                },
+                                                                {
+                                                                    "$type": "ImpactInvokeAction",
+                                                                    "InvokedSpell": "./TestStaggerChar"
+                                                                }
+                                                            ]
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        },
-                                        "AnimationName": "Attack"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
+                                            },
+                                            "AnimationName": "Attack"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 },
+                // {
+                //     "$type": "AIRule",
+                //     "FixedDuration": 2.5,
+                //     "Cooldown": 0.0,
+                //     "TargetSelector": {
+                //         "$type": "ClosestTargetSelector",
+                //         "Size": 1.2,
+                //         "Filter": {
+                //             "$type": "CheckEntityType",
+                //             "AllowedTypes": [
+                //                 "/CharDef"
+                //             ]
+                //         }
+                //     },
+                //     "AcceptedRange": 1.1,
+                //     "KeepDistance": true,
+                //     "FinishWhenNear": false,
+                //     "CastSpell": 
+                // },
                 {
                     "$type": "AIRule",
                     "FixedDuration": 3,
