@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1587234521245999479}
   - component: {fileID: 13332723538835705}
   - component: {fileID: 3998968981606464946}
-  - component: {fileID: 967042494257967829}
+  - component: {fileID: 4695040943524517129}
   - component: {fileID: 5252906867288362977}
   m_Layer: 9
   m_Name: SwordMesh
@@ -182,8 +182,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6365201982258857260}
   m_Mesh: {fileID: 3752503171259686213, guid: 3e0051f17aca2a24b9f44ed4e8aef027, type: 3}
---- !u!65 &967042494257967829
-BoxCollider:
+--- !u!136 &4695040943524517129
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,9 +192,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4668832, y: 1.3631783, z: 5.5838246}
-  m_Center: {x: 0.0004944084, y: -0.011152479, z: 1.5597419}
+  m_Radius: 1.5
+  m_Height: 6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 2}
 --- !u!114 &5252906867288362977
 MonoBehaviour:
   m_ObjectHideFlags: 0

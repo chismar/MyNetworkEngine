@@ -12,7 +12,7 @@
     },
     "BecameActiveBuff": {
         "$type": "Spell",
-        "Duration":1000,
+        "Duration": 1000,
         "Effects": [
             {
                 "$type": "EffectActionsLayer",
@@ -21,41 +21,51 @@
                         "ActionSpell": "./AttackSpell",
                         "NewActionSpell": {
                             "$type": "Spell",
-                            "Duration": 1,
-                            "Cooldown":0.6,
+                            "Duration": 0.85,
+                            "Cooldown": 0.5,
                             "Effects": [
                                 {
                                     "$type": "EffectMotion",
                                     "CurveName": "AttackCurve",
-                                    "Speed":5
+                                    "Speed": 5
                                 },
                                 {
-                                    "$type": "EffectStrike",
-                                    "AnimationName": "SwordAttack01",
-                                    "StrikeDef": {
-                                        "$type": "Strike",
-                                        "SpellOnStrike": {
-                                            "$type": "Spell",
-                                            "ImpactOnStart": {
-                                                "$type": "Target",
-                                                "Do": {
-                                                    "$type": "ImpactsList",
-                                                    "Impacts": [
-                                                        {
-                                                            "$type": "ChangeEntityStat",
-                                                            "Change":-100,
-                                                            "StatDef": "/Stats/Health"
-                                                        },
-                                                        {
-                                                            "$type": "ImpactInvokeAction",
-                                                            "InvokedSpell": "/TestStagger"
+                                    "$type": "EffectAnimate",
+                                    "AnimationName": "SwordAttack01"
+                                },
+                                {
+                                    "$type": "SubEffect",
+                                    "StartOffset": 0.22,//0,26 x1
+                                    "EndOffset": 0.51,//0,60 x1
+                                    "Effects": [
+                                        {
+                                            "$type": "EffectStrike",
+                                            "StrikeDef": {
+                                                "$type": "Strike",
+                                                "SpellOnStrike": {
+                                                    "$type": "Spell",
+                                                    "ImpactOnStart": {
+                                                        "$type": "Target",
+                                                        "Do": {
+                                                            "$type": "ImpactsList",
+                                                            "Impacts": [
+                                                                {
+                                                                    "$type": "ChangeEntityStat",
+                                                                    "Change": -100,
+                                                                    "StatDef": "/Stats/Health"
+                                                                },
+                                                                {
+                                                                    "$type": "ImpactInvokeAction",
+                                                                    "InvokedSpell": "/TestStagger"
+                                                                }
+                                                            ]
                                                         }
-                                                    ]
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                }
+                                    ]
+                                },
                             ]
                         }
                     }
