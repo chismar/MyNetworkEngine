@@ -1,7 +1,7 @@
 {
     "$type": "Spell",
     "CustomName": "Stagger",
-    "Duration": 0.5,
+    "Duration": 0.5333,
     "ClearsSlot": true,
     "Slot": "/AttackSlot",
     "Cooldown": 0.0,
