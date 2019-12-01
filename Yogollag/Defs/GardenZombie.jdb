@@ -53,6 +53,10 @@
                                 "Speed": 0
                             },
                             {
+                                "$type": "EffectAnimate",
+                                "AnimationName": "Attack01"
+                            },
+                            {
                                 "$type": "SubEffect",
                                 "StartOffset": 1.1,
                                 "EndOffset": 1.4,
@@ -87,8 +91,7 @@
                                                     }
                                                 }
                                             }
-                                        },
-                                        "AnimationName": "Attack01"
+                                        }
                                     }
                                 ]
                             }
@@ -104,6 +107,10 @@
                                     "$type": "EffectMotion",
                                     "CurveName": "AttackCurveZombie",
                                     "Speed": 0
+                                },
+                                {
+                                    "$type": "EffectAnimate",
+                                    "AnimationName": "Attack"
                                 },
                                 {
                                     "$type": "SubEffect",
@@ -140,8 +147,7 @@
                                                         }
                                                     }
                                                 }
-                                            },
-                                            "AnimationName": "Attack"
+                                            }
                                         }
                                     ]
                                 }

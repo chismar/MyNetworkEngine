@@ -8,6 +8,7 @@ using System.Text;
 using LiteNetLib.Utils;
 using System.Threading.Tasks;
 using System.Linq;
+using SFML.Graphics;
 
 namespace Yogollag
 {
@@ -58,9 +59,25 @@ namespace Yogollag
         SpellsEngine SpellsEngine { get; set; }
     }
 
+    public struct DebugInfo
+    {
+        public Color Color;
+        public string Text;
+        public float StartTime;
+        public float EndTime;
+
+        public DebugInfo(Color color, string text, float startTime, float endTime)
+        {
+            Color = color;
+            Text = text;
+            StartTime = startTime;
+            EndTime = endTime;
+        }
+    }
     [GenerateSync]
     public abstract class SpellsEngine : SyncObject, IEntityComponent
     {
+        public Dictionary<EffectId, DebugInfo> Infos = new Dictionary<EffectId, DebugInfo>();
         [Sync(SyncType.Client)]
         public virtual DeltaList<SpellInstance> SyncedSpells { get; set; } = SyncObject.New<DeltaList<SpellInstance>>();
         [Sync(SyncType.Client)]

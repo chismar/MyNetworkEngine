@@ -118,11 +118,11 @@ namespace Yogollag
                     _locoMover.ActionDir = dir;
                     var acceptedRange = _currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? 0;
                     var isWithinAcceptedRange = acceptedRange > dst;
-                    if (isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) > 0.4)
+                    if (isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) > 0.5)
                     {
                         dir = -dir;
                     }
-                    else  if(isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) < 0.4)
+                    else  if(isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) < 0.3)
                         _locoMover.DontMove = true;
                     else if(!_currentRule.KeepDistance)
                         _locoMover.DontMove = isWithinAcceptedRange;

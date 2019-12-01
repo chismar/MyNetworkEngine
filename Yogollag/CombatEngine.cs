@@ -6,6 +6,7 @@ using LiteNetLib.Utils;
 using Definitions;
 using CodeGen;
 using System.Threading.Tasks;
+using SFML.Graphics;
 
 namespace Yogollag
 {
@@ -68,15 +69,18 @@ namespace Yogollag
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
 
             ce.PrepareStrike(new EffectId(this, spellInstance), StrikeDef);
-            ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
-
+            if (AnimationName != null)
+                ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
+            ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Add(new EffectId(this, spellInstance), new DebugInfo(Color.Red, "Strike", 1f, 1f));
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
             ce.EndStrike(new EffectId(this, spellInstance));
-            ce.EndAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
+            if (AnimationName != null)
+                ce.EndAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
+            ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Remove(new EffectId(this, spellInstance));
 
         }
     }
@@ -140,6 +144,7 @@ namespace Yogollag
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
             ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
+            ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Add(new EffectId(this, spellInstance), new DebugInfo(Color.Red, "Animate", 1f, 1f));
 
         }
 
@@ -147,6 +152,7 @@ namespace Yogollag
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
             ce.EndAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
+            ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Remove(new EffectId(this, spellInstance));
 
         }
     }

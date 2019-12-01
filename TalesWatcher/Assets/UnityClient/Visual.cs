@@ -51,7 +51,18 @@ public class Visual : MonoBehaviour
         else// if (Obj is ICharacterLikeMovement)
             VisualPrefab.transform.rotation = Quaternion.Euler(0, r, 0);
     }
-
+    private void OnGUI()
+    {
+        if (!(Obj is IHasSpells))
+            return;
+        int index = 0;
+        foreach(var info in ((IHasSpells)Obj).SpellsEngine.Infos)
+        {
+            var screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            GUI.Label(Rect.MinMaxRect(screenPos.x, Screen.height - screenPos.y + index * 100f, screenPos.x + 100, Screen.height -  screenPos.y + 100 + index * 100f), info.Value.Text);
+            index++;
+        }
+    }
     public void Destroy()
     {
         Destroy(transform.gameObject);

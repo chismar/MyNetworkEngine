@@ -12,6 +12,7 @@ using System.IO;
 using System.Collections;
 using System.Reflection;
 using System.Diagnostics;
+using SFML.Graphics;
 /* 
 Я думаю я случайно решил проблему перфоманской распределённой транзации к общем виде. Попробую записать опорные мысли и выводы из 
 последних нескольких дней. 
