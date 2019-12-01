@@ -35,7 +35,7 @@
                                 },
                                 {
                                     "$type": "SubEffect",
-                                    "StartOffset": 0.22,//0,26 x1
+                                    "StartOffset": 0.18,//0,26 x1
                                     "EndOffset": 0.51,//0,60 x1
                                     "Effects": [
                                         {
