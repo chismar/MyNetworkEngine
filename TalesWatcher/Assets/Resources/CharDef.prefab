@@ -48,7 +48,7 @@ MonoBehaviour:
   Filter: 
   ElementVisual: {fileID: 7722014448164416085, guid: 97328a8cddb238e4898a201e1338b11d,
     type: 3}
---- !u!114 &3730081873294997396
+--- !u!114 &5964532811711532415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,11 +267,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961479071862265827}
     m_Modifications:
-    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
-        type: 3}
-      propertyPath: m_Name
-      value: HumanMalePF
-      objectReference: {fileID: 0}
     - target: {fileID: 90222775507652526, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -326,6 +321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
+        type: 3}
+      propertyPath: m_Name
+      value: HumanMalePF
       objectReference: {fileID: 0}
     - target: {fileID: 8055403592323703508, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}
