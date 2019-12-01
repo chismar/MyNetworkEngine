@@ -144,8 +144,7 @@ namespace Yogollag
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
             ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
-            ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Add(new EffectId(this, spellInstance), new DebugInfo(Color.Red, "Animate", 1f, 1f));
-
+            ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Add(new EffectId(this, spellInstance), new DebugInfo(Color.Red, $"Animate {AnimationName}", 1f, 1f));
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)

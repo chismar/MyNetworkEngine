@@ -51,7 +51,7 @@
                                                             "Impacts": [
                                                                 {
                                                                     "$type": "ChangeEntityStat",
-                                                                    "Change": -100,
+                                                                    "Change": -30,
                                                                     "StatDef": "/Stats/Health"
                                                                 },
                                                                 {

@@ -53,15 +53,22 @@ public class Visual : MonoBehaviour
     }
     private void OnGUI()
     {
+        if(Obj  is IHasMortalEngine me)
+        {
+            var screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            GUI.Label(Rect.MinMaxRect(screenPos.x, Screen.height - screenPos.y - 200, screenPos.x + 100, Screen.height - screenPos.y), $"{me.Mortal.Health}");
+
+        }
         if (!(Obj is IHasSpells))
             return;
         int index = 0;
         foreach(var info in ((IHasSpells)Obj).SpellsEngine.Infos)
         {
             var screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            GUI.Label(Rect.MinMaxRect(screenPos.x, Screen.height - screenPos.y + index * 100f, screenPos.x + 100, Screen.height -  screenPos.y + 100 + index * 100f), info.Value.Text);
+            GUI.Label(Rect.MinMaxRect(screenPos.x, Screen.height - screenPos.y + index * 30f, screenPos.x + 100, Screen.height -  screenPos.y + 100 + index * 30f), info.Value.Text);
             index++;
         }
+        
     }
     public void Destroy()
     {

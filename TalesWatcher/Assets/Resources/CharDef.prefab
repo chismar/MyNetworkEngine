@@ -123,7 +123,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &987828656121737165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +267,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961479071862265827}
     m_Modifications:
+    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
+        type: 3}
+      propertyPath: m_Name
+      value: HumanMalePF
+      objectReference: {fileID: 0}
     - target: {fileID: 90222775507652526, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -321,11 +326,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3970997268808367549, guid: 60f9a48c44f972b489688924af8d17c3,
-        type: 3}
-      propertyPath: m_Name
-      value: HumanMalePF
       objectReference: {fileID: 0}
     - target: {fileID: 8055403592323703508, guid: 60f9a48c44f972b489688924af8d17c3,
         type: 3}

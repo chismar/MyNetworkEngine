@@ -63,8 +63,16 @@ namespace Assets.UnityClient
                 //    _visual.VisualPrefab.transform.rotation = Quaternion.Euler(0, Vec2.AngleBetween(pos - _lastPos, Vec2.New(0, 1)), 0);
                 _lastPos = pos;
 
-                //var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
-                SFML.Graphics.Transform t = SFML.Graphics.Transform.Identity;
+                if (curValue is ICharacterLikeMovement charMove)
+                {
+                    lock(charMove.PhysicsBody.World)
+                    {
+                        var lv = charMove.PhysicsBody.LinearVelocity;
+                        velocity = new Vec2(lv.x, lv.y);
+                    }
+                }
+                    //var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
+                    SFML.Graphics.Transform t = SFML.Graphics.Transform.Identity;
                 float rotation = rot;
 
                 t.Rotate(360 -rotation);

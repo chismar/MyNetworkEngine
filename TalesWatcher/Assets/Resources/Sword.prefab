@@ -92,6 +92,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 50c07cc3bdc4ea94490220856c1d7ea5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -115,6 +117,8 @@ GameObject:
   - component: {fileID: 3998968981606464946}
   - component: {fileID: 4695040943524517129}
   - component: {fileID: 5252906867288362977}
+  - component: {fileID: 2058978080142283517}
+  - component: {fileID: 6980755209174941413}
   m_Layer: 9
   m_Name: SwordMesh
   m_TagString: Untagged
@@ -195,7 +199,7 @@ CapsuleCollider:
   m_Radius: 1.5
   m_Height: 6
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: 3.02}
 --- !u!114 &5252906867288362977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +212,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee350b9f4fbf9f24288ba168041a7c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &2058978080142283517
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365201982258857260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.95
+  m_Height: 5.78
+  m_Direction: 2
+  m_Center: {x: 0, y: -3.76, z: 1.6}
+--- !u!136 &6980755209174941413
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365201982258857260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.96
+  m_Height: 5.25
+  m_Direction: 2
+  m_Center: {x: 0, y: -7.12, z: 1.2}
