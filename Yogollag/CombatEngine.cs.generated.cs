@@ -153,7 +153,7 @@ namespace Yogollag
     [GeneratedClass]
     public class CombatEngineStrikeMessage : EntityMessage
     {
-        public override int NetId => -87717550;
+        public override int NetId => 1320842269;
         public EffectId owner;
         public EntityId targetId;
         public override void Run(object entity)

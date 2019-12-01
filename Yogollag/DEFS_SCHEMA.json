@@ -64,6 +64,8 @@
         "IEntityObject",
         "ISceneDef",
         "IScene",
+        "InteractiveDef",
+        "Interactive",
         "InteractionDef",
         "Interaction",
         "InteractiveWorldEntitySceneDef",
@@ -76,6 +78,8 @@
         "LinksEngine",
         "MovementStateDef",
         "MovementState",
+        "LocoMoverDef",
+        "LocoMover",
         "EffectTimelineDef",
         "EffectTimeline",
         "EffectMotionDef",
@@ -173,24 +177,16 @@
         "SimpleSpawner",
         "SpellCastModeDef",
         "SpellCastMode",
-        "InputTriggersMapDef",
-        "InputTriggersMap",
-        "InputTriggerDef",
-        "InputTrigger",
-        "TargetPointCastDef",
-        "TargetPointCast",
-        "SpellDef",
-        "Spell",
-        "ISpellEffectDef",
-        "ISpellEffect",
-        "SpellsEngineSceneDef",
-        "SpellsEngineScene",
-        "SpellsEngineDef",
-        "SpellsEngine",
         "SpriteDef",
         "Sprite",
         "StatInstanceDef",
         "StatInstance",
+        "SpellSlotDef",
+        "SpellSlot",
+        "SpellDef",
+        "Spell",
+        "ISpellEffectDef",
+        "ISpellEffect",
         "StatDef",
         "Stat",
         "StatsEngineSceneDef",
@@ -306,6 +302,8 @@
             "CombatEngineScene",
             "CombatEngineDef",
             "CombatEngine",
+            "InteractiveDef",
+            "Interactive",
             "InteractionDef",
             "Interaction",
             "InteractiveWorldEntitySceneDef",
@@ -318,6 +316,8 @@
             "LinksEngine",
             "MovementStateDef",
             "MovementState",
+            "LocoMoverDef",
+            "LocoMover",
             "EffectTimelineDef",
             "EffectTimeline",
             "EffectMotionDef",
@@ -409,22 +409,14 @@
             "SimpleSpawner",
             "SpellCastModeDef",
             "SpellCastMode",
-            "InputTriggersMapDef",
-            "InputTriggersMap",
-            "InputTriggerDef",
-            "InputTrigger",
-            "TargetPointCastDef",
-            "TargetPointCast",
-            "SpellDef",
-            "Spell",
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene",
-            "SpellsEngineDef",
-            "SpellsEngine",
             "SpriteDef",
             "Sprite",
             "StatInstanceDef",
             "StatInstance",
+            "SpellSlotDef",
+            "SpellSlot",
+            "SpellDef",
+            "Spell",
             "StatDef",
             "Stat",
             "StatsEngineSceneDef",
@@ -542,6 +534,9 @@
           "$ref": "#/definitions/CombatEngineDef"
         },
         {
+          "$ref": "#/definitions/InteractiveDef"
+        },
+        {
           "$ref": "#/definitions/InteractionDef"
         },
         {
@@ -558,6 +553,9 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
+        },
+        {
+          "$ref": "#/definitions/LocoMoverDef"
         },
         {
           "$ref": "#/definitions/EffectTimelineDef"
@@ -704,28 +702,16 @@
           "$ref": "#/definitions/SpellCastModeDef"
         },
         {
-          "$ref": "#/definitions/InputTriggersMapDef"
-        },
-        {
-          "$ref": "#/definitions/InputTriggerDef"
-        },
-        {
-          "$ref": "#/definitions/TargetPointCastDef"
-        },
-        {
-          "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        },
-        {
           "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/StatInstanceDef"
+        },
+        {
+          "$ref": "#/definitions/SpellSlotDef"
+        },
+        {
+          "$ref": "#/definitions/SpellDef"
         },
         {
           "$ref": "#/definitions/StatDef"
@@ -870,6 +856,8 @@
             "IEntityObject",
             "ISceneDef",
             "IScene",
+            "InteractiveDef",
+            "Interactive",
             "InteractionDef",
             "Interaction",
             "InteractiveWorldEntitySceneDef",
@@ -882,6 +870,8 @@
             "LinksEngine",
             "MovementStateDef",
             "MovementState",
+            "LocoMoverDef",
+            "LocoMover",
             "EffectTimelineDef",
             "EffectTimeline",
             "EffectMotionDef",
@@ -979,24 +969,16 @@
             "SimpleSpawner",
             "SpellCastModeDef",
             "SpellCastMode",
-            "InputTriggersMapDef",
-            "InputTriggersMap",
-            "InputTriggerDef",
-            "InputTrigger",
-            "TargetPointCastDef",
-            "TargetPointCast",
-            "SpellDef",
-            "Spell",
-            "ISpellEffectDef",
-            "ISpellEffect",
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene",
-            "SpellsEngineDef",
-            "SpellsEngine",
             "SpriteDef",
             "Sprite",
             "StatInstanceDef",
             "StatInstance",
+            "SpellSlotDef",
+            "SpellSlot",
+            "SpellDef",
+            "Spell",
+            "ISpellEffectDef",
+            "ISpellEffect",
             "StatDef",
             "Stat",
             "StatsEngineSceneDef",
@@ -1123,6 +1105,9 @@
           "$ref": "#/definitions/ISceneDef"
         },
         {
+          "$ref": "#/definitions/InteractiveDef"
+        },
+        {
           "$ref": "#/definitions/InteractionDef"
         },
         {
@@ -1139,6 +1124,9 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
+        },
+        {
+          "$ref": "#/definitions/LocoMoverDef"
         },
         {
           "$ref": "#/definitions/EffectTimelineDef"
@@ -1294,31 +1282,19 @@
           "$ref": "#/definitions/SpellCastModeDef"
         },
         {
-          "$ref": "#/definitions/InputTriggersMapDef"
+          "$ref": "#/definitions/SpriteDef"
         },
         {
-          "$ref": "#/definitions/InputTriggerDef"
+          "$ref": "#/definitions/StatInstanceDef"
         },
         {
-          "$ref": "#/definitions/TargetPointCastDef"
+          "$ref": "#/definitions/SpellSlotDef"
         },
         {
           "$ref": "#/definitions/SpellDef"
         },
         {
           "$ref": "#/definitions/ISpellEffectDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
-          "$ref": "#/definitions/StatInstanceDef"
         },
         {
           "$ref": "#/definitions/StatDef"
@@ -3552,8 +3528,6 @@
             "SimpleSpawner",
             "SpellDef",
             "Spell",
-            "SpellsEngineDef",
-            "SpellsEngine",
             "StatsEngineDef",
             "StatsEngine",
             "WorldItemEntityDef",
@@ -3617,9 +3591,6 @@
         },
         {
           "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
         },
         {
           "$ref": "#/definitions/StatsEngineDef"
@@ -3697,8 +3668,6 @@
             "SpriteRendererScene",
             "CharacterEntitySceneDef",
             "CharacterEntityScene",
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene",
             "StatsEngineSceneDef",
             "StatsEngineScene",
             "WorldItemEntitySceneDef",
@@ -3752,13 +3721,90 @@
           "$ref": "#/definitions/CharacterEntitySceneDef"
         },
         {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
           "$ref": "#/definitions/StatsEngineSceneDef"
         },
         {
           "$ref": "#/definitions/WorldItemEntitySceneDef"
+        }
+      ]
+    },
+    "InteractiveDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/InteractiveDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InteractiveDef",
+            "Interactive"
+          ]
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Def": {
+          "$ref": "#/definitions/SpriteDefField"
+        },
+        "Interactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InteractionDefField"
+          }
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "InteractiveDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "InteractiveDef",
+            "Interactive"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/InteractiveDef"
         }
       ]
     },
@@ -4238,6 +4284,124 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
+        }
+      ]
+    },
+    "LocoMoverDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/LocoMoverDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "LocoMoverDef",
+            "LocoMover"
+          ]
+        },
+        "IdleAngleSpeed": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "IdleRotationSpeed": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "CruiserSpeed": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "MovementAngleSpeed": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "ActionRotationSpeed": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "LocoMoverDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "LocoMoverDef",
+            "LocoMover"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/LocoMoverDef"
         }
       ]
     },
@@ -8334,9 +8498,7 @@
           "type": "string",
           "enum": [
             "SpellCastModeDef",
-            "SpellCastMode",
-            "TargetPointCastDef",
-            "TargetPointCast"
+            "SpellCastMode"
           ]
         },
         "$vars": {
@@ -8354,13 +8516,10 @@
         },
         {
           "$ref": "#/definitions/SpellCastModeDef"
-        },
-        {
-          "$ref": "#/definitions/TargetPointCastDef"
         }
       ]
     },
-    "InputTriggersMapDef": {
+    "SpriteDef": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -8370,7 +8529,7 @@
         "$proto": {
           "allOf": [
             {
-              "$ref": "#/definitions/InputTriggersMapDefField"
+              "$ref": "#/definitions/SpriteDefField"
             }
           ],
           "dependecies": [
@@ -8389,101 +8548,30 @@
         "$type": {
           "type": "string",
           "enum": [
-            "InputTriggersMapDef",
-            "InputTriggersMap"
+            "SpriteDef",
+            "Sprite"
           ]
         },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "InputTriggersMapDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "InputTriggersMapDef",
-            "InputTriggersMap"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
+        "SpriteSheetName": {
           "type": "string"
         },
-        {
-          "$ref": "#/definitions/InputTriggersMapDef"
-        }
-      ]
-    },
-    "InputTriggerDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/InputTriggerDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "InputTriggerDef",
-            "InputTrigger"
-          ]
-        },
-        "Combos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InputComboField"
-          }
-        },
-        "IsContinious": {
+        "X": {
           "oneOf": [
             {
               "type": "string"
             },
             {
-              "type": "boolean"
+              "type": "integer"
             }
           ]
         },
-        "ActivationOnStart": {
+        "Y": {
           "oneOf": [
             {
               "type": "string"
             },
             {
-              "type": "boolean"
+              "type": "integer"
             }
           ]
         },
@@ -8495,13 +8583,13 @@
         "$type"
       ]
     },
-    "InputTriggerDefField": {
+    "SpriteDefField": {
       "properties": {
         "$type": {
           "type": "string",
           "enum": [
-            "InputTriggerDef",
-            "InputTrigger"
+            "SpriteDef",
+            "Sprite"
           ]
         },
         "$vars": {
@@ -8518,11 +8606,11 @@
           "type": "string"
         },
         {
-          "$ref": "#/definitions/InputTriggerDef"
+          "$ref": "#/definitions/SpriteDef"
         }
       ]
     },
-    "TargetPointCastDef": {
+    "StatInstanceDef": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -8532,7 +8620,7 @@
         "$proto": {
           "allOf": [
             {
-              "$ref": "#/definitions/TargetPointCastDefField"
+              "$ref": "#/definitions/StatInstanceDefField"
             }
           ],
           "dependecies": [
@@ -8551,28 +8639,38 @@
         "$type": {
           "type": "string",
           "enum": [
-            "TargetPointCastDef",
-            "TargetPointCast"
+            "StatInstanceDef",
+            "StatInstance"
           ]
         },
-        "Input": {
-          "$ref": "#/definitions/InputTriggerDefField"
+        "Stat": {
+          "$ref": "#/definitions/StatDefField"
         },
-        "TargetPointSprite": {
-          "$ref": "#/definitions/SpriteDefField"
+        "InitialValue": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
         "$type"
       ]
     },
-    "TargetPointCastDefField": {
+    "StatInstanceDefField": {
       "properties": {
         "$type": {
           "type": "string",
           "enum": [
-            "TargetPointCastDef",
-            "TargetPointCast"
+            "StatInstanceDef",
+            "StatInstance"
           ]
         },
         "$vars": {
@@ -8589,7 +8687,75 @@
           "type": "string"
         },
         {
-          "$ref": "#/definitions/TargetPointCastDef"
+          "$ref": "#/definitions/StatInstanceDef"
+        }
+      ]
+    },
+    "SpellSlotDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SpellSlotDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SpellSlotDef",
+            "SpellSlot"
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "SpellSlotDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SpellSlotDef",
+            "SpellSlot"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/SpellSlotDef"
         }
       ]
     },
@@ -8803,317 +8969,6 @@
         },
         {
           "$ref": "#/definitions/ISpellEffectDef"
-        }
-      ]
-    },
-    "SpellsEngineSceneDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpellsEngineSceneDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene"
-          ]
-        },
-        "Object": {
-          "$ref": "#/definitions/IEntityObjectDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SpellsEngineSceneDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        }
-      ]
-    },
-    "SpellsEngineDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpellsEngineDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpellsEngineDef",
-            "SpellsEngine"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SpellsEngineDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpellsEngineDef",
-            "SpellsEngine"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        }
-      ]
-    },
-    "SpriteDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpriteDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpriteDef",
-            "Sprite"
-          ]
-        },
-        "SpriteSheetName": {
-          "type": "string"
-        },
-        "X": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "Y": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SpriteDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpriteDef",
-            "Sprite"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        }
-      ]
-    },
-    "StatInstanceDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatInstanceDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatInstanceDef",
-            "StatInstance"
-          ]
-        },
-        "Stat": {
-          "$ref": "#/definitions/StatDefField"
-        },
-        "InitialValue": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "StatInstanceDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatInstanceDef",
-            "StatInstance"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/StatInstanceDef"
         }
       ]
     },
@@ -9531,12 +9386,14 @@
         "CombatEngineDef",
         "IEntityObjectDef",
         "ISceneDef",
+        "InteractiveDef",
         "InteractionDef",
         "InteractiveWorldEntitySceneDef",
         "InteractiveWorldEntityDef",
         "LinksEngineSceneDef",
         "LinksEngineDef",
         "MovementStateDef",
+        "LocoMoverDef",
         "EffectTimelineDef",
         "EffectMotionDef",
         "TileModDef",
@@ -9592,16 +9449,11 @@
         "ChangeEntityStatDef",
         "SimpleSpawnerDef",
         "SpellCastModeDef",
-        "InputTriggersMapDef",
-        "InputTriggerDef",
-        "InputCombo",
-        "TargetPointCastDef",
-        "SpellDef",
-        "ISpellEffectDef",
-        "SpellsEngineSceneDef",
-        "SpellsEngineDef",
         "SpriteDef",
         "StatInstanceDef",
+        "SpellSlotDef",
+        "SpellDef",
+        "ISpellEffectDef",
         "StatDef",
         "StatsEngineSceneDef",
         "StatsEngineDef",
@@ -10020,263 +9872,6 @@
         }
       ]
     },
-    "InputCombo": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "InputCombo"
-          ]
-        },
-        "Mouse": {
-          "type": "string",
-          "enum": [
-            "Left",
-            "Right",
-            "Middle",
-            "XButton1",
-            "XButton2",
-            "ButtonCount"
-          ]
-        },
-        "Keyboard": {
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z",
-            "Num0",
-            "Num1",
-            "Num2",
-            "Num3",
-            "Num4",
-            "Num5",
-            "Num6",
-            "Num7",
-            "Num8",
-            "Num9",
-            "Escape",
-            "LControl",
-            "LShift",
-            "LAlt",
-            "LSystem",
-            "RControl",
-            "RShift",
-            "RAlt",
-            "RSystem",
-            "Menu",
-            "LBracket",
-            "RBracket",
-            "SemiColon",
-            "Comma",
-            "Period",
-            "Quote",
-            "Slash",
-            "BackSlash",
-            "Tilde",
-            "Equal",
-            "Dash",
-            "Space",
-            "Return",
-            "BackSpace",
-            "Tab",
-            "PageUp",
-            "PageDown",
-            "End",
-            "Home",
-            "Insert",
-            "Delete",
-            "Add",
-            "Subtract",
-            "Multiply",
-            "Divide",
-            "Left",
-            "Right",
-            "Up",
-            "Down",
-            "Numpad0",
-            "Numpad1",
-            "Numpad2",
-            "Numpad3",
-            "Numpad4",
-            "Numpad5",
-            "Numpad6",
-            "Numpad7",
-            "Numpad8",
-            "Numpad9",
-            "F1",
-            "F2",
-            "F3",
-            "F4",
-            "F5",
-            "F6",
-            "F7",
-            "F8",
-            "F9",
-            "F10",
-            "F11",
-            "F12",
-            "F13",
-            "F14",
-            "F15",
-            "Pause",
-            "KeyCount"
-          ]
-        },
-        "Keyboard2": {
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z",
-            "Num0",
-            "Num1",
-            "Num2",
-            "Num3",
-            "Num4",
-            "Num5",
-            "Num6",
-            "Num7",
-            "Num8",
-            "Num9",
-            "Escape",
-            "LControl",
-            "LShift",
-            "LAlt",
-            "LSystem",
-            "RControl",
-            "RShift",
-            "RAlt",
-            "RSystem",
-            "Menu",
-            "LBracket",
-            "RBracket",
-            "SemiColon",
-            "Comma",
-            "Period",
-            "Quote",
-            "Slash",
-            "BackSlash",
-            "Tilde",
-            "Equal",
-            "Dash",
-            "Space",
-            "Return",
-            "BackSpace",
-            "Tab",
-            "PageUp",
-            "PageDown",
-            "End",
-            "Home",
-            "Insert",
-            "Delete",
-            "Add",
-            "Subtract",
-            "Multiply",
-            "Divide",
-            "Left",
-            "Right",
-            "Up",
-            "Down",
-            "Numpad0",
-            "Numpad1",
-            "Numpad2",
-            "Numpad3",
-            "Numpad4",
-            "Numpad5",
-            "Numpad6",
-            "Numpad7",
-            "Numpad8",
-            "Numpad9",
-            "F1",
-            "F2",
-            "F3",
-            "F4",
-            "F5",
-            "F6",
-            "F7",
-            "F8",
-            "F9",
-            "F10",
-            "F11",
-            "F12",
-            "F13",
-            "F14",
-            "F15",
-            "Pause",
-            "KeyCount"
-          ]
-        }
-      }
-    },
-    "InputComboField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "InputCombo"
-          ]
-        }
-      },
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/InputCombo"
-        }
-      ]
-    },
     "DefIDFull": {
       "type": "object",
       "additionalProperties": false,
@@ -10570,6 +10165,9 @@
           "$ref": "#/definitions/ISceneDef"
         },
         {
+          "$ref": "#/definitions/InteractiveDef"
+        },
+        {
           "$ref": "#/definitions/InteractionDef"
         },
         {
@@ -10586,6 +10184,9 @@
         },
         {
           "$ref": "#/definitions/MovementStateDef"
+        },
+        {
+          "$ref": "#/definitions/LocoMoverDef"
         },
         {
           "$ref": "#/definitions/EffectTimelineDef"
@@ -10741,31 +10342,19 @@
           "$ref": "#/definitions/SpellCastModeDef"
         },
         {
-          "$ref": "#/definitions/InputTriggersMapDef"
+          "$ref": "#/definitions/SpriteDef"
         },
         {
-          "$ref": "#/definitions/InputTriggerDef"
+          "$ref": "#/definitions/StatInstanceDef"
         },
         {
-          "$ref": "#/definitions/TargetPointCastDef"
+          "$ref": "#/definitions/SpellSlotDef"
         },
         {
           "$ref": "#/definitions/SpellDef"
         },
         {
           "$ref": "#/definitions/ISpellEffectDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
-          "$ref": "#/definitions/StatInstanceDef"
         },
         {
           "$ref": "#/definitions/StatDef"
@@ -10808,9 +10397,6 @@
         },
         {
           "$ref": "#/definitions/Vec2"
-        },
-        {
-          "$ref": "#/definitions/InputCombo"
         },
         {
           "$ref": "#/definitions/DefIDFull"

@@ -279,7 +279,7 @@ namespace CodeGen
                 args.Add(new MsgArg() { Name = param.Identifier.ValueText, Type = param.Type.ToString(), Ghost = InheritsFrom("NetworkEngine.SyncObject", model.GetTypeInfo(param.Type).Type) });
             }
             var scriptObject = new ScriptObject();
-            scriptObject.Import(new { Entity = className, Method = method.Identifier.ValueText, Class = className, Arguments = args, Id = (className + method.Identifier.ValueText).GetHashCode() });
+            scriptObject.Import(new { Entity = className, Method = method.Identifier.ValueText, Class = className, Arguments = args, Id = (int)Crc64CodeGen.Compute((className + method.Identifier.ValueText)) });
             scriptObject.Import(nameof(PutToStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => PutToStreamFromType(b, str, str2)));
             scriptObject.Import(nameof(GetFromStreamFromType), (Func<bool, string, string, string>)((b, str, str2) => GetFromStreamFromType(b, str, str2)));
             scriptObject.Import(nameof(GetTagForProp), (Func<string, int, string>)((str, i) => GetTagForProp(str, i)));

@@ -366,7 +366,7 @@ namespace Yogollag
     [GeneratedClass]
     public class InteractiveWorldEntityRunImpactMessage : EntityMessage
     {
-        public override int NetId => 892291027;
+        public override int NetId => 499929194;
         public ScriptingContext originalContext;
         public IImpactDef def;
         public override void Run(object entity)
