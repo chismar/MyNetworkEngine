@@ -7,20 +7,15 @@ using SFML.System;
 
 namespace Yogollag
 {
-    public class HierarchyTransform
+    public struct HierarchyTransform
     {
         Vec2 _pos;
-        Vec2 _attachmentOffset;
         float _rot;
-        HierarchyTransform _parent;
+        //HierarchyTransform _parent;
         public float GlobalRot
         {
-            get
-            {
-                float curRot = _parent == null ? 0 : _parent.GlobalRot;
-                curRot += _rot;
-                return curRot;
-            }
+            get;
+            private set;
         }
 
         public Vec2 GlobalPos
@@ -33,14 +28,8 @@ namespace Yogollag
         }
         Transform _transform
         {
-            get
-            {
-                Transform t = _parent == null ? Transform.Identity : _parent._transform;
-                t.Translate(_pos.X, _pos.Y);
-                t.Rotate(_rot);
-                //t.Translate(_attachmentOffset);
-                return t;
-            }
+            get;
+            set;
         }
         public Vec2 GetWorldPosInSpaceOf(Vec2 local)
         {
@@ -97,11 +86,18 @@ namespace Yogollag
             rectShape.OutlineColor = Color.Magenta;
             EnvironmentAPI.Draw.Rect(rectShape);
         }
-        public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform parent)
+        public HierarchyTransform(Vec2 pos, float rotation, HierarchyTransform? parent)
         {
             _pos = Vec2.New(pos.X, pos.Y);
             _rot = rotation;
-            _parent = parent;
+            float curRot = parent == null ? 0 : parent.Value.GlobalRot;
+            curRot += _rot;
+            GlobalRot =  curRot;
+            Transform t = parent == null ? Transform.Identity : parent.Value._transform;
+            t.Translate(_pos.X, _pos.Y);
+            t.Rotate(_rot);
+            //t.Translate(_attachmentOffset);
+            _transform =  t;
         }
     }
 

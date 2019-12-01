@@ -31,7 +31,7 @@
                                 },
                                 {
                                     "$type": "EffectStrike",
-                                    "AnimationName": "SwordAttack",
+                                    "AnimationName": "SwordAttack01",
                                     "StrikeDef": {
                                         "$type": "Strike",
                                         "SpellOnStrike": {

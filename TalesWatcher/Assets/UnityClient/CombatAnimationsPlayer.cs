@@ -61,17 +61,21 @@ class CombatAnimationsPlayerVisual : VisualComponent
     Dictionary<string, EffectId> _launchedAnimations = new Dictionary<string, EffectId>();
     void BeginAnimation(EffectId id, float time, string str)
     {
-        _launchedAnimations[str] = id;
         lock (_lock)
+        {
+            _launchedAnimations[str] = id;
             _actions.Enqueue((str, time, true));
+        }
     }
     void EndAnimation(EffectId id, string str)
     {
-        if (_launchedAnimations.TryGetValue(str, out var prevId) && prevId == id)
+        lock (_lock)
         {
-            _launchedAnimations.Remove(str);
-            lock (_lock)
+            if (_launchedAnimations.TryGetValue(str, out var prevId) && prevId == id)
+            {
+                _launchedAnimations.Remove(str);
                 _actions.Enqueue((str, 0f, false));
+            }
         }
     }
 }

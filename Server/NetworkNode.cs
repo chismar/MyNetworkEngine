@@ -1084,8 +1084,8 @@ namespace NetworkEngine
         }
         private Task SerializeAndSend()
         {
-            List<Task> tasks = new List<Task>();
-            foreach (var entity in _ghosting.Collection.Where(x => x.Value.Entity.ServerId == Id))
+            ConcurrentBag<Task> tasks = new ConcurrentBag<Task>();
+            Parallel.ForEach(_ghosting.Collection.Where(x => x.Value.Entity.ServerId == Id), (entity) =>
             {
                 tasks.Add(Task.Run(() =>
                 {
@@ -1102,25 +1102,29 @@ namespace NetworkEngine
                         ent.ClearSerialization();
                     }
                 }));
-            }
+            });
             return Task.WhenAll(tasks);
         }
         //
         public AsyncLocal<NetworkNodeId> CurrentServerCallbackId = new AsyncLocal<NetworkNodeId>();
-        private Task ProcessMessages()
+        private async Task ProcessMessages()
         {
-            List<Task> tasks = new List<Task>();
-            foreach (var e in _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x=>x.Value.EntitiesReplicatedFromRemote.All)).Distinct())
+            ConcurrentBag<Task> runLaterTasks = new ConcurrentBag<Task>();
+            var ghosts = _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x => x.Value.EntitiesReplicatedFromRemote.All)).Distinct();
+            Parallel.ForEach(ghosts, (e) =>
+            {
                 if (e.RunLaterDelegates != null && e.RunLaterDelegates.Count > 0)
-                    tasks.Add(Task.Run(() => {
+                    runLaterTasks.Add(Task.Run(() =>
+                    {
                         for (int i = 0; i < e.RunLaterDelegates.Count; i++)
                             if (e.RunLaterDelegates[i].Item1.ParentEntity == e)
                                 e.RunLaterDelegates[i].Item2();
                         e.RunLaterDelegates.Clear();
                     }));
-            Task.WhenAll(tasks).Wait();
-            tasks.Clear();
-            foreach (var e in _entities.Collection)
+            });
+            Task.WhenAll(runLaterTasks).Wait();
+            ConcurrentBag<Task> tasks = new ConcurrentBag<Task>();
+            Parallel.ForEach(_entities.Collection, (e) =>
             {
                 var entityState = e.Value;
                 var entity = (GhostedEntity)e.Value.Entity;
@@ -1153,9 +1157,8 @@ namespace NetworkEngine
                         }
                         NetworkEntity.CurrentlyExecutingInContext.Value = EntityId.Invalid;
                     }));
-
-            }
-            return Task.WhenAll(tasks);
+            });
+            await Task.WhenAll(tasks);
         }
 
         public T GetWriteEntity<T>(EntityId id) where T : GhostedEntity
@@ -1913,7 +1916,7 @@ namespace NetworkEngine
                 so.SetParentEntity(ParentEntity);
             OnItemRemoved?.Invoke(_internalList[index]);
             _internalList[index] = t;
-            OnItemAdded?.Invoke(t);            
+            OnItemAdded?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.SetAt, index, t));
         }
         private void InternalInsert(T t, int index)
