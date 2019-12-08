@@ -933,6 +933,7 @@ namespace Yogollag
         {
             _spriteRenderer = new SpriteRenderer(this);
             _movementController = new CharacterLikeMovement(this, this);
+            Debugged = true;
         }
 
         public override void OnInit()

@@ -12,23 +12,7 @@ using SFML.Graphics;
 
 namespace Yogollag
 {
-    [GenerateSync]
-    public struct SyncedTime
-    {
-        public static float ToSeconds(long time) => (float)new TimeSpan(time).TotalSeconds;
-        public static long Now => DateTime.UtcNow.Ticks;
-        [Sync]
-        public long Time { get; set; }
-        public static implicit operator long(SyncedTime time)
-        {
-            return time.Time;
-        }
-
-        internal static long FromSeconds(float v)
-        {
-            return TimeSpan.FromSeconds(v).Ticks;
-        }
-    }
+  
     [GenerateSync]
     public struct SpellId
     {
@@ -101,6 +85,16 @@ namespace Yogollag
             SyncedSpells.OnItemRemoved += SyncedSpells_OnItemRemoved;
         }
 
+        private void SyncedSpells_OnItemAdded(SpellInstance obj)
+        {
+
+            RunLater(() =>
+            {
+                ParentEntity.BeginDebugEvent($"{((SpellDef)obj.Def).____GetDebugShortName()}:{obj.Id}");
+                foreach (var effect in obj.Cast.Def.Effects)
+                    effect.Def.Begin(obj, true);
+            });
+        }
         private void SyncedSpells_OnItemRemoved(SpellInstance obj)
         {
             RunLater(() =>
@@ -111,18 +105,10 @@ namespace Yogollag
                     effect.Def.End(obj, true, obj.SuccesEnd);
                     obj.ParentEntity = null;
                 }
+                ParentEntity.EndDebugEvent($"{((SpellDef)obj.Def).____GetDebugShortName()}:{obj.Id}");
             });
         }
 
-        private void SyncedSpells_OnItemAdded(SpellInstance obj)
-        {
-
-            RunLater(() =>
-            {
-                foreach (var effect in obj.Cast.Def.Effects)
-                    effect.Def.Begin(obj, true);
-            });
-        }
 
         private void OnSpellEvent(SpellFailedToCast obj)
         {
@@ -134,15 +120,7 @@ namespace Yogollag
         }
         public SpellId CastFromClientWithPrediction(SpellCast cast)
         {
-            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
-                return default;
-            if (SlotIsOccupied(cast) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
-                return default;
-            var id = new SpellId() { Id = _localCounterId++, FromClient = true };
-            if (SyncedSpells.Any(x => x.Id == id))
-                throw new Exception("FUCK FUCK FUCK");
-            CastSpell(id, cast);
-            return id;
+            return CastFromInsideEntity(cast);
         }
 
         public virtual SpellId CastFromInsideEntity(SpellCast cast)
@@ -151,7 +129,7 @@ namespace Yogollag
                 return default;
             if (SlotIsOccupied(cast) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
-            var id = new SpellId() { Id = _localCounterId++, FromClient = false };
+            var id = new SpellId() { Id = _localCounterId++, FromClient = !IsMaster };
             CastSpell(id, cast);
             return id;
         }
@@ -181,6 +159,7 @@ namespace Yogollag
                 foreach (var spell in SyncedSpells.Where(x => ((SpellDef)x.Def).Slot == cast.Def.Slot).ToList())
                     FinishSpell(spell.Id);
             SyncedSpells.Add(inst);
+            ParentEntity.BeginDebugEvent($"{inst.Cast.Def.____GetDebugShortName()}:{inst.Id}");
             foreach (var effect in inst.Cast.Def.Effects)
                 effect.Def.Begin(inst, false);
 
@@ -237,6 +216,8 @@ namespace Yogollag
             }
             foreach (var effect in spell.Cast.Def.Effects)
                 effect.Def.End(spell, false, success);
+
+            ParentEntity.EndDebugEvent($"{spell.Cast.Def.____GetDebugShortName()}:{spell.Id}");
             SyncedSpells.Remove(spell);
         }
     }

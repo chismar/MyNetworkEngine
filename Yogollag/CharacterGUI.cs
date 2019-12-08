@@ -53,7 +53,7 @@ namespace Yogollag
                 if (spell == null || spell == action.Def || (state.Item1 != spell && state.Item1 != null))
                     _interactionStates.Remove(action.Def);
                 else
-                    _interactionStates[action.Def] = (spell, action.Def.CastMode.Def.Update(spell, character, state.Item2));
+                    _interactionStates[action.Def] = (spell, action.Def.CastMode.Def.Update(action.Def, spell, character, state.Item2));
             }
         }
         private void Reset()

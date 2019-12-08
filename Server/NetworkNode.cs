@@ -1111,7 +1111,7 @@ namespace NetworkEngine
         private async Task ProcessMessages()
         {
             ConcurrentBag<Task> runLaterTasks = new ConcurrentBag<Task>();
-            var ghosts = _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x => x.Value.EntitiesReplicatedFromRemote.All)).Concat(_entities.Collection.Select(x=>x.Value.Entity)).Distinct();
+            var ghosts = _ghosting.All.Concat(_remoteNetworkNodes.SelectMany(x => x.Value.EntitiesReplicatedFromRemote.All)).Concat(_entities.Collection.Select(x => x.Value.Entity)).Distinct();
             Parallel.ForEach(ghosts, (e) =>
             {
                 if (e.RunLaterDelegates != null && e.RunLaterDelegates.Count > 0)
@@ -1337,6 +1337,23 @@ namespace NetworkEngine
             return _masterToId[type];
         }
     }
+    [GenerateSync]
+    public struct SyncedTime
+    {
+        public static float ToSeconds(long time) => (float)new TimeSpan(time).TotalSeconds;
+        public static long Now => DateTime.UtcNow.Ticks;
+        [Sync]
+        public long Time { get; set; }
+        public static implicit operator long(SyncedTime time)
+        {
+            return time.Time;
+        }
+
+        public static long FromSeconds(float v)
+        {
+            return TimeSpan.FromSeconds(v).Ticks;
+        }
+    }
     public abstract class NetworkEntity : SyncBaseApi
     {
         public object UserData;
@@ -1351,6 +1368,29 @@ namespace NetworkEngine
         public virtual int SyncObjectIdCounter { get; set; }
         public override NetworkNode CurrentServer { get; set; }
         public override NetworkEntity ParentEntity { get => this; set => throw new InvalidOperationException(); }
+        public bool Debugged = false;
+        public Dictionary<string, (long begin, long end)> DebugEvents = new Dictionary<string, (long, long)>();
+        public void BeginDebugEvent(string @event)
+        {
+            if (Debugged)
+                DebugEvents[@event] = (SyncedTime.Now, long.MaxValue);
+        }
+        public void EndDebugEvent(string @event)
+        {
+            if (Debugged)
+                DebugEvents[@event] = (DebugEvents[@event].begin, SyncedTime.Now);
+            Task.Run(async () => { await Task.Delay(TimeSpan.FromSeconds(60)); RunLater(() => DebugEvents.Remove(@event)); });
+        }
+        public void BeginDebugEvent<T>(T @event)
+        {
+            if (Debugged)
+                BeginDebugEvent(@event.ToString());
+        }
+        public void EndDebugEvent<T>(T @event)
+        {
+            if (Debugged)
+                EndDebugEvent(@event.ToString());
+        }
         public virtual bool HasAuthority { get; set; }
         public Dictionary<int, SyncObject> SubObjects = new Dictionary<int, SyncObject>();
         public SyncObject Resolve(int id)

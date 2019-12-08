@@ -362,6 +362,35 @@ namespace NetworkEngine
 namespace NetworkEngine
 {
     [GeneratedClass]
+    public class SyncedTimeSync : IGhostLikeSerializer
+    {
+        public object Deserialize(NetDataReader stream)
+        {
+            var objToSerialize = new SyncedTime();
+            {
+                objToSerialize.Time = stream.GetLong();
+            }
+
+            return objToSerialize;
+        }
+
+        public bool Serialize(object obj, ref NetDataWriter stream)
+        {
+            var objToSerialize = (SyncedTime)obj;
+            if (stream == null)
+                stream = new NetDataWriter(true, 5);
+            {
+                stream.Put(objToSerialize.Time);
+            }
+
+            return true;
+        }
+    }
+}
+
+namespace NetworkEngine
+{
+    [GeneratedClass]
     public class EntityIdSync : IGhostLikeSerializer
     {
         public object Deserialize(NetDataReader stream)

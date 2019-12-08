@@ -51,6 +51,7 @@ public class Visual : MonoBehaviour
         else// if (Obj is ICharacterLikeMovement)
             VisualPrefab.transform.rotation = Quaternion.Euler(0, r, 0);
     }
+    public float TimeWindowSeconds = 10;
     private void OnGUI()
     {
         if(Obj  is IHasMortalEngine me)
@@ -67,6 +68,34 @@ public class Visual : MonoBehaviour
             var screenPos = Camera.main.WorldToScreenPoint(transform.position);
             GUI.Label(Rect.MinMaxRect(screenPos.x, Screen.height - screenPos.y + index * 30f, screenPos.x + 100, Screen.height -  screenPos.y + 100 + index * 30f), info.Value.Text);
             index++;
+        }
+        if(Obj is GhostedEntity ge && ge.Debugged)
+        {
+            int eventIndex = 0;
+            var timeWindowSize = SyncedTime.FromSeconds(TimeWindowSeconds);
+            var fromTime = SyncedTime.Now - timeWindowSize;
+            foreach (var e in ge.DebugEvents)
+            {
+                if (e.Value.end == long.MaxValue || e.Value.end > fromTime)
+                {
+                    var beginDelta = SyncedTime.ToSeconds(e.Value.begin - (SyncedTime.Now - timeWindowSize));
+                    var endDelta = e.Value.end == long.MaxValue ? TimeWindowSeconds : 
+                        SyncedTime.ToSeconds(e.Value.end - (SyncedTime.Now - timeWindowSize));
+
+                    GUI.Box(Rect.MinMaxRect(
+                        beginDelta < 0 ? 0f : Screen.width * beginDelta / TimeWindowSeconds,
+                        Screen.height - eventIndex * 40 - 40,
+                        endDelta > TimeWindowSeconds ? Screen.width : Screen.width * endDelta / TimeWindowSeconds,
+                        Screen.height - eventIndex * 40
+                        ), "");
+                    GUI.Label(Rect.MinMaxRect(
+                        beginDelta < 0 ? 0f : Screen.width * beginDelta / TimeWindowSeconds,
+                        Screen.height - eventIndex * 40 - 40,
+                        Screen.width,
+                        Screen.height - eventIndex * 40
+                        ), e.Key);
+                    eventIndex++;
+                } }
         }
         
     }

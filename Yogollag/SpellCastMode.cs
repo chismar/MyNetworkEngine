@@ -10,7 +10,7 @@ namespace Yogollag
 {
     public abstract class SpellCastModeDef : BaseDef
     {
-        public abstract object Update(SpellDef spell, CharacterEntity ent, object state);
+        public abstract object Update(SpellDef input, SpellDef spell, CharacterEntity ent, object state);
         public abstract void Render(RenderTarget rt, object state);
     }
 
@@ -66,7 +66,7 @@ namespace Yogollag
             selfState.T.DrawSpriteAt(s, Vec2.New(1, 1), Vec2.New(0.5f, 0.5f));
         }
 
-        public override object Update(SpellDef spell, CharacterEntity ent, object state)
+        public override object Update(SpellDef input, SpellDef spell, CharacterEntity ent, object state)
         {
             var selfState = (TargetPointCastState)state;
             if (selfState == null)
@@ -75,7 +75,7 @@ namespace Yogollag
             selfState.T = new HierarchyTransform(targetWorldPos, 0, null);
             if (Input.Def.IsActive(selfState.TriggerWasActive))
             {
-                ent.SpellsEngine.CastFromClientWithPrediction(new SpellCast() { Def = spell, TargetPoint = targetWorldPos, OwnerObject = ent.Id });
+                ent.ActionEngine.DoInput(input, new SpellCast() { Def = spell, TargetPoint = targetWorldPos, OwnerObject = ent.Id });
                 selfState.TriggerWasActive = true;
 
             }
