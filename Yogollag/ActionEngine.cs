@@ -68,13 +68,13 @@ namespace Yogollag
         {
             _inputMods.Add(id, (_inputMods.Max(x => x.Value.order) + 1, true, spellId, inputs));
         }
-        public (EffectId curEffect, bool allowed) CurrentInputMod(SpellDef inputSpell)
+        public (EffectId curEffect, SpellId breakSpell, bool allowed) CurrentInputMod(SpellDef inputSpell)
         {
             var modsOnSpell = _inputMods.Where(x => x.Value.inputs.Any(y => y == inputSpell));
             if (!modsOnSpell.Any())
-                return (default, true);
+                return (default, default, true);
             var currentInputModOnSpell = modsOnSpell.OrderBy(x => x.Value.order).Last();
-            return (currentInputModOnSpell.Key, currentInputModOnSpell.Value.allow);
+            return (currentInputModOnSpell.Key, currentInputModOnSpell.Value.breakOnInput, currentInputModOnSpell.Value.allow);
         }
         Dictionary<SpellDef, (SpellCast cast, long time, EffectId whileInEffect)> _inputs
             = new Dictionary<SpellDef, (SpellCast, long, EffectId)>();
@@ -82,7 +82,9 @@ namespace Yogollag
         {
             var cia = CurrentInputMod(input);
             if (cia.curEffect == default)
+            {
                 ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(cast);
+            }
             else if (cia.allowed)
                 _inputs[input] = (cast, SyncedTime.Now, cia.curEffect);
         }
@@ -93,7 +95,11 @@ namespace Yogollag
             {
                 if (!_inputs.TryGetValue(input, out var availableInput))
                     continue;
-                DoInput(input, availableInput.cast);
+                var cia = CurrentInputMod(input);
+                if (cia != default)
+                    if (((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(availableInput.cast) != default)
+                        if (cia.breakSpell != default)
+                            ((IHasSpells)ParentEntity).SpellsEngine.FinishSpell(cia.breakSpell);
                 break;
             }
         }
@@ -136,7 +142,7 @@ namespace Yogollag
     public class EffectBreakOnInput : BaseDef, ISpellEffectDef
     {
         public List<DefRef<SpellDef>> Inputs { get; set; } = new List<DefRef<SpellDef>>();
-        
+
         public void Begin(SpellInstance spellInstance, bool onClient)
         {
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
@@ -174,6 +180,22 @@ namespace Yogollag
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
             ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.
                 AllowInputs(new EffectId(this, spellInstance.Id), false, Inputs.Select(x => x.Def));
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+            spellInstance.ParentEntity.EndDebugEvent(new EffectId(this, spellInstance));
+            ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.UnSetInputMod(new EffectId(this, spellInstance));
+        }
+    }
+    public class EffectRunInput : BaseDef, ISpellEffectDef
+    {
+        public List<DefRef<SpellDef>> Inputs { get; set; } = new List<DefRef<SpellDef>>();
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+            spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
+            ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.
+                RunInput(new EffectId(this, spellInstance.Id), Inputs.Select(x => x.Def));
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
