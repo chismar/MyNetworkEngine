@@ -20,9 +20,14 @@ namespace Yogollag
         HashSet<EntityId> _struckEntities = new HashSet<EntityId>();
         public Action<EffectId, float, string> BeginAnimation;
         public Action<EffectId, string> EndAnimation;
+        public Action<float?, string, ProjectileDef> LaunchProjectile;
         public IDef Def { get; set; }
         public EffectId CurrentStrikeOwner;
         StrikeDef _currentStrike;
+        public void SpawnProjectile(float? globalRotation, string objectName, ProjectileDef def)
+        {
+            LaunchProjectile?.Invoke(globalRotation, objectName, def);
+        }
         public void PrepareStrike(EffectId id, StrikeDef def)
         {
             CurrentStrikeOwner = id;
@@ -39,6 +44,15 @@ namespace Yogollag
         }
 
         [Sync]
+        public virtual void ProjectileHit(StrikeDef strike, EntityId targetId)
+        {
+            if (targetId == this.ParentEntity.Id)
+                return;
+            if (strike.PredicateOnTarget == null ||
+                strike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId }))
+                ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = strike.SpellOnStrike.Def, OwnerObject = ParentEntity.Id, TargetEntity = targetId });
+        }
+        [Sync]
         public virtual void Strike(EffectId owner, EntityId targetId)
         {
             if (targetId == this.ParentEntity.Id)
@@ -53,6 +67,12 @@ namespace Yogollag
                 _currentStrike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId }))
                 ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = _currentStrike.SpellOnStrike.Def, OwnerObject = ParentEntity.Id, TargetEntity = targetId });
         }
+    }
+
+    public class ProjectileDef : BaseDef
+    {
+        public DefRef<StrikeDef> StrikeDef { get; set; }
+        public float Speed { get; set; }
     }
 
     public class StrikeDef : BaseDef
@@ -82,6 +102,21 @@ namespace Yogollag
                 ce.EndAnimation?.Invoke(new EffectId(this, spellInstance), AnimationName);
             ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Remove(new EffectId(this, spellInstance));
 
+        }
+    }
+    public class EffectProjectile : BaseDef, ISpellEffectDef
+    {
+        public DefRef<ProjectileDef> ProjectileDef { get; set; }
+        public string ObjectName { get; set; }
+        public bool Forward { get; set; } = false;
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+            var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
+            ce.SpawnProjectile(Forward ? (float?)null : ((IPositionedEntity)spellInstance.ParentEntity).Rotation, ObjectName, ProjectileDef);
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
         }
     }
     public class SubEffect : BaseDef, ISpellEffectDef

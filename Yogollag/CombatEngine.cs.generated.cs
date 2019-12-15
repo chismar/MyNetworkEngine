@@ -138,6 +138,19 @@ namespace Yogollag
             return hasAny;
         }
 
+        public override void ProjectileHit(StrikeDef strike, EntityId targetId)
+        {
+            if (ParentEntity.IsCurrentlyExecuting)
+            {
+                base.ProjectileHit(strike, targetId);
+            }
+            else
+            {
+                CurrentServer.HandleEntityMessage(new CombatEngineProjectileHitMessage()
+                {EntityId = Id, strike = strike, targetId = targetId});
+            }
+        }
+
         public override void Strike(EffectId owner, EntityId targetId)
         {
             if (ParentEntity.IsCurrentlyExecuting)
@@ -149,6 +162,87 @@ namespace Yogollag
                 CurrentServer.HandleEntityMessage(new CombatEngineStrikeMessage()
                 {EntityId = Id, owner = owner, targetId = targetId});
             }
+        }
+    }
+
+    [GeneratedClass]
+    public class CombatEngineProjectileHitMessage : EntityMessage
+    {
+        public override int NetId => 1358624126;
+        public StrikeDef strike;
+        public EntityId targetId;
+        public override void Run(object entity)
+        {
+            ((CombatEngine)entity).ProjectileHit(strike, targetId);
+        }
+    }
+
+    [GeneratedClass]
+    public class CombatEngineProjectileHitMessageSync : IGhostLikeSerializer
+    {
+        public object Deserialize(NetDataReader stream)
+        {
+            var messageToSerialize = new CombatEngineProjectileHitMessage();
+            {
+                var has = stream.GetBool();
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+            }
+
+            {
+                var has = stream.GetBool();
+                messageToSerialize.strike = !has ? default : (StrikeDef)SyncTypesMap.GetSerializerForObjType(typeof(StrikeDef)).Deserialize(stream);
+            }
+
+            {
+                var has = stream.GetBool();
+                messageToSerialize.targetId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+            }
+
+            return messageToSerialize;
+        }
+
+        public bool Serialize(object objToSerialize, ref NetDataWriter stream)
+        {
+            var messageToSerialize = (CombatEngineProjectileHitMessage)objToSerialize;
+            if (stream == null)
+                stream = new NetDataWriter(true, 5);
+            {
+                if (messageToSerialize.EntityId != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
+            {
+                if (messageToSerialize.strike != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.GetSerializerForObjType(typeof(StrikeDef)).Serialize(messageToSerialize.strike, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
+            {
+                if (messageToSerialize.targetId != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.targetId, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
+            return true;
         }
     }
 

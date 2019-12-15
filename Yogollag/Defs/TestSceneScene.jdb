@@ -81,7 +81,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 14.13,
+        "X": 28.91,
         "Y": 0.0
       },
       "Links": {
@@ -105,7 +105,7 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 1.49,
+        "X": -21.0,
         "Y": 0.0
       },
       "Links": {
@@ -129,7 +129,31 @@
       "Rotation": 0.0,
       "Position": {
         "$type": "Vec2",
-        "X": 4.44,
+        "X": -10.2,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/GardenRanger",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 13.27,
         "Y": 0.0
       },
       "Links": {
