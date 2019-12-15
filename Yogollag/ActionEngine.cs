@@ -43,7 +43,6 @@ namespace Yogollag
                     maxOverride = overrideSpell;
                 }
             }
-
             return maxOverride;
         }
         class Layer
@@ -66,7 +65,7 @@ namespace Yogollag
         Dictionary<EffectId, List<SpellDef>> RunInputs = new Dictionary<EffectId, List<SpellDef>>();
         public void BreakOnInputs(EffectId id, SpellId spellId, IEnumerable<SpellDef> inputs)
         {
-            _inputMods.Add(id, (_inputMods.Max(x => x.Value.order) + 1, true, spellId, inputs));
+            _inputMods.Add(id, (!_inputMods.Any() ? 0 : _inputMods.Max(x => x.Value.order) + 1, true, spellId, inputs));
         }
         public (EffectId curEffect, SpellId breakSpell, bool allowed) CurrentInputMod(SpellDef inputSpell)
         {
@@ -86,26 +85,33 @@ namespace Yogollag
                 ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(cast);
             }
             else if (cia.allowed)
+            {
                 _inputs[input] = (cast, SyncedTime.Now, cia.curEffect);
+                RunInput(default, new[] { input });
+            }
         }
         public void RunInput(EffectId id, IEnumerable<SpellDef> inputSpells)
         {
-            _inputMods.Add(id, (_inputMods.Max(x => x.Value.order) + 1, true, default, inputSpells));
+            if (id != default)
+                _inputMods.Add(id, (!_inputMods.Any() ? 0 : _inputMods.Max(x => x.Value.order) + 1, true, default, inputSpells));
             foreach (var input in inputSpells)
             {
                 if (!_inputs.TryGetValue(input, out var availableInput))
                     continue;
                 var cia = CurrentInputMod(input);
                 if (cia != default)
-                    if (((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(availableInput.cast) != default)
-                        if (cia.breakSpell != default)
-                            ((IHasSpells)ParentEntity).SpellsEngine.FinishSpell(cia.breakSpell);
+                {
+                    if (cia.breakSpell != default)
+                        ((IHasSpells)ParentEntity).SpellsEngine.FinishSpell(cia.breakSpell);
+                    var res = ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(availableInput.cast, cia.breakSpell);
+                    Logger.LogError($"Cast {availableInput.cast.Def.____GetDebugShortName()} {res} ");
+                }
                 break;
             }
         }
         public void AllowInputs(EffectId id, bool allow, IEnumerable<SpellDef> inputs)
         {
-            _inputMods.Add(id, (_inputMods.Max(x => x.Value.order) + 1, true, default, inputs));
+            _inputMods.Add(id, (!_inputMods.Any() ? 0 : _inputMods.Max(x => x.Value.order) + 1, true, default, inputs));
         }
 
         public void UnSetInputMod(EffectId id)

@@ -123,11 +123,11 @@ namespace Yogollag
             return CastFromInsideEntity(cast);
         }
 
-        public virtual SpellId CastFromInsideEntity(SpellCast cast)
+        public virtual SpellId CastFromInsideEntity(SpellCast cast, SpellId ignoreSpell = default)
         {
             if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
                 return default;
-            if (SlotIsOccupied(cast) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
+            if (SlotIsOccupied(cast, ignoreSpell) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = !IsMaster };
             CastSpell(id, cast);
@@ -182,9 +182,9 @@ namespace Yogollag
             });
         }
 
-        private bool SlotIsOccupied(SpellCast cast)
+        private bool SlotIsOccupied(SpellCast cast, SpellId ignoreSpell = default)
         {
-            return SyncedSpells.Any(x => ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null) && !cast.Def.ClearsSlot;
+            return SyncedSpells.Any(x => x.Id != ignoreSpell && ((SpellDef)x.Def).Slot == cast.Def.Slot && cast.Def.Slot != null) && !cast.Def.ClearsSlot;
         }
 
         [Sync(SyncType.Server)]

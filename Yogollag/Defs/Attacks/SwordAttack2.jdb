@@ -1,0 +1,84 @@
+{
+    "$type": "Spell",
+    "Duration": 0.85,
+    "Cooldown": 0.8,
+    "Slot": "/AttackSlot",
+    "Effects": [
+        {
+            "$type": "EffectMotion",
+            "CurveName": "AttackCurve",
+            "Speed": 5
+        },
+        {
+            "$type": "EffectAnimate",
+            "AnimationName": "SwordAttack01"
+        },
+        {
+            "$type": "EffectIgnoreInput",
+            "Inputs": [
+                "/AttackSlot"
+            ]
+        },
+        {
+            "$type": "SubEffect",
+            "StartOffset": 0.18,//0,26 x1
+            "EndOffset": 0.51,//0,60 x1
+            "Effects": [
+                {
+                    "$type": "EffectStrike",
+                    "StrikeDef": {
+                        "$type": "Strike",
+                        "SpellOnStrike": {
+                            "$type": "Spell",
+                            "ImpactOnStart": {
+                                "$type": "Target",
+                                "Do": {
+                                    "$type": "ImpactsList",
+                                    "Impacts": [
+                                        {
+                                            "$type": "ChangeEntityStat",
+                                            "Change": -30,
+                                            "StatDef": "/Stats/Health"
+                                        },
+                                        {
+                                            "$type": "ImpactInvokeAction",
+                                            "InvokedSpell": "/TestStagger"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "SubEffect",
+            "StartOffset":0.6,
+            "EndOffset": 0.8,
+            "Effects": [
+                {
+                    "$type": "EffectActionsLayer",
+                    "Overrides": [
+                        {
+                            "ActionSpell": "/AttackSpell",
+                            "NewActionSpell": "./SwordAttack3"
+                        }
+                    ]
+                },
+                {
+                    "$type": "EffectAllowInput",
+                    "Inputs": [
+                        "/AttackSpell"
+                    ]
+                },
+                {
+                    "$type": "EffectBreakOnInput",
+                    "Inputs": [
+                        "/AttackSpell"
+                    ]
+                }
+            ]
+        }
+    ]
+}

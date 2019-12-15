@@ -42,7 +42,7 @@ class CombatAnimationsPlayerVisual : VisualComponent
 
                 if (setTo)
                 {
-                    var clipInfo = _anim.runtimeAnimatorController.animationClips.SingleOrDefault(x => x.name == aname);
+                    var clipInfo = _anim.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == aname);
                     if (clipInfo == null)
                         continue;
                     //_anim.Play($"Base Layer.{aname}");
