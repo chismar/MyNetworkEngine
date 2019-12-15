@@ -54,7 +54,7 @@
         },
         {
             "$type": "SubEffect",
-            "StartOffset":0.6,
+            "StartOffset":0.5,
             "EndOffset": 0.8,
             "Effects": [
                 {
@@ -62,7 +62,7 @@
                     "Overrides": [
                         {
                             "ActionSpell": "/AttackSpell",
-                            "NewActionSpell": "./SwordAttack2"
+                            "NewActionSpell": "./SwordAttack3"
                         }
                     ]
                 },
