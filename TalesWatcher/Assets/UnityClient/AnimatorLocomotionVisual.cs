@@ -28,6 +28,7 @@ namespace Assets.UnityClient
             this._visual = visual;
         }
         float _assumedMaxVelocity = 5f;
+        float _hasRunLerp = 0;
         protected override object ProcessValue(object curValue)
         {
             Vec2 pos;
@@ -74,7 +75,8 @@ namespace Assets.UnityClient
                     //var mouseDir = EnvironmentAPI.Input.MouseDirFromCameraCenter;
                     SFML.Graphics.Transform t = SFML.Graphics.Transform.Identity;
                 float rotation = rot;
-
+                _hasRunLerp = Mathf.Clamp(Mathf.Lerp(_hasRunLerp, velocity.Length > 0 ? 1 : 0, 0.3f), 0, 1);
+                bool hasRun = _hasRunLerp > 0.5f;
                 t.Rotate(360 -rotation);
                 var tv = t.TransformPoint(-velocity.X, velocity.Y);
                 var currentDir = new Vec2(tv.X, tv.Y);
@@ -82,7 +84,7 @@ namespace Assets.UnityClient
                     EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 400), Text = $"{currentDir} {rotation} {velocity}" });
                 _visual._animator.SetFloat("dirX", currentDir.X / _assumedMaxVelocity);
                 _visual._animator.SetFloat("dirY", currentDir.Y / _assumedMaxVelocity);
-                _visual._animator.SetBool("IsRun", velocity.Length > 0);
+                _visual._animator.SetBool("IsRun", hasRun);
             }
             return curValue;
         }

@@ -431,12 +431,15 @@ namespace NetworkEngine
         {
 
         }
-
+        object _runLaterLock = new object();
         public void RunLater(Action run)
         {
-            if (ParentEntity.RunLaterDelegates == null)
-                ParentEntity.RunLaterDelegates = new List<(SyncBaseApi, Action)>();
-            ParentEntity.RunLaterDelegates.Add((this, run));
+            lock(_runLaterLock)
+            {
+                if (ParentEntity.RunLaterDelegates == null)
+                    ParentEntity.RunLaterDelegates = new List<(SyncBaseApi, Action)>();
+                ParentEntity.RunLaterDelegates.Add((this, run));
+            }
         }
         public virtual void OnAfterDeserialize() { }
 
@@ -1340,6 +1343,11 @@ namespace NetworkEngine
     [GenerateSync]
     public struct SyncedTime
     {
+        public SyncedTime(long now) : this()
+        {
+            Time = now;
+        }
+
         public static float ToSeconds(long time) => (float)new TimeSpan(time).TotalSeconds;
         public static long Now => DateTime.UtcNow.Ticks;
         [Sync]

@@ -977,12 +977,12 @@ namespace Yogollag
             }
         }
 
-        public override SyncedTime Time
+        public override SyncedTime StartTime
         {
-            get => base.Time;
+            get => base.StartTime;
             set
             {
-                base.Time = value;
+                base.StartTime = value;
                 OnPropChanged(3);
             }
         }
@@ -1036,13 +1036,13 @@ namespace Yogollag
                 CheckStream(stream, 895414548);
             }
 
-            CheckStream(stream, 2066460795);
+            CheckStream(stream, 2084183244);
             if ((mask & (1 << 3)) != 0)
             {
-                CheckStream(stream, 2066460795);
+                CheckStream(stream, 2084183244);
                 var has = stream.GetBool();
-                Time = !has ? default : (SyncedTime)SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Deserialize(stream);
-                CheckStream(stream, 2066460795);
+                StartTime = !has ? default : (SyncedTime)SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Deserialize(stream);
+                CheckStream(stream, 2084183244);
             }
 
             CheckStream(stream, 389782966);
@@ -1129,22 +1129,22 @@ namespace Yogollag
                 SafeguardStream(stream, 895414548);
             }
 
-            SafeguardStream(stream, 2066460795);
+            SafeguardStream(stream, 2084183244);
             if ((deltaMask & (1 << 3)) != 0)
             {
-                SafeguardStream(stream, 2066460795);
+                SafeguardStream(stream, 2084183244);
                 hasAny = true;
-                if (Time != default)
+                if (StartTime != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Serialize(Time, ref stream);
+                    SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Serialize(StartTime, ref stream);
                 }
                 else
                 {
                     stream.Put(false);
                 }
 
-                SafeguardStream(stream, 2066460795);
+                SafeguardStream(stream, 2084183244);
             }
 
             SafeguardStream(stream, 389782966);

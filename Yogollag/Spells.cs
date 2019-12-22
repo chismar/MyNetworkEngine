@@ -12,7 +12,7 @@ using SFML.Graphics;
 
 namespace Yogollag
 {
-  
+
     [GenerateSync]
     public struct SpellId
     {
@@ -57,6 +57,26 @@ namespace Yogollag
             StartTime = startTime;
             EndTime = endTime;
         }
+    }
+
+    public abstract class StatefullEffect<T> : BaseDef, ISpellEffectDef where T : class, new()
+    {
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+            if (spellInstance.EffectStates == null)
+                spellInstance.EffectStates = new Dictionary<EffectId, object>();
+            var state = new T();
+            spellInstance.EffectStates.Add(new EffectId(this, spellInstance), state);
+            Begin(spellInstance, state, onClient);
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+            var state = spellInstance.EffectStates[new EffectId(this, spellInstance)];
+            End(spellInstance, (T)state, onClient, isSucess);
+        }
+        public abstract void Begin(SpellInstance spellInstance, T state, bool onClient);
+        public abstract void End(SpellInstance spellInstance, T state, bool onClient, bool isSucess);
     }
     [GenerateSync]
     public abstract class SpellsEngine : SyncObject, IEntityComponent
@@ -155,6 +175,7 @@ namespace Yogollag
             inst.Id = id;
             inst.Cast = cast;
             inst.FinishInit();
+            inst.StartTime = new SyncedTime(SyncedTime.Now);
             if (cast.Def.ClearsSlot)
                 foreach (var spell in SyncedSpells.Where(x => ((SpellDef)x.Def).Slot == cast.Def.Slot).ToList())
                     FinishSpell(spell.Id);
@@ -166,7 +187,7 @@ namespace Yogollag
             inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
             if (inst.Cast.Def.Cooldown > 0)
             {
-                Cooldowns.Add(new PastSpellCooldown() { Id = inst.Id, Def = inst.Cast.Def, TimeWhenStarted = inst.Time });
+                Cooldowns.Add(new PastSpellCooldown() { Id = inst.Id, Def = inst.Cast.Def, TimeWhenStarted = inst.StartTime });
                 Task.Run(async () =>
                 {
                     NetworkEntity.CurrentlyExecutingInContext.Value = default;
@@ -174,12 +195,13 @@ namespace Yogollag
                     RemoveCooldown(id);
                 });
             }
-            Task.Run(async () =>
-            {
-                NetworkEntity.CurrentlyExecutingInContext.Value = default;
-                await Task.Delay(TimeSpan.FromSeconds(inst.Cast.Def.Duration));
-                FinishSpell(id);
-            });
+            if (!inst.Cast.Def.IsInfinite)
+                Task.Run(async () =>
+                {
+                    NetworkEntity.CurrentlyExecutingInContext.Value = default;
+                    await Task.Delay(TimeSpan.FromSeconds(inst.Cast.Def.Duration));
+                    FinishSpell(id);
+                });
         }
 
         private bool SlotIsOccupied(SpellCast cast, SpellId ignoreSpell = default)
@@ -227,6 +249,7 @@ namespace Yogollag
     }
     public class SpellDef : BaseDef, IEntityObjectDef
     {
+        public bool IsInfinite { get; set; }
         public float Duration { get; set; } = 0f;
         public float Cooldown { get; set; } = 0f;
         public DefRef<SpellSlotDef> Slot { get; set; }
@@ -327,6 +350,11 @@ namespace Yogollag
     [GenerateSync]
     public abstract class SpellInstance : SyncObject, IEntityObject
     {
+        public Dictionary<EffectId, object> EffectStates;
+        
+
+        public float CurrentProgress => ((SpellDef)Def).IsInfinite ? float.MaxValue :
+            SyncedTime.ToSeconds((SyncedTime.Now - StartTime)) / ((SpellDef) Def).Duration;
         public HashSet<EffectId> RunningEffects = new HashSet<EffectId>();
         [Sync]
         public virtual bool SuccesEnd { get; set; }
@@ -335,7 +363,7 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual SpellCast Cast { get; set; }
         [Sync(SyncType.Client)]
-        public virtual SyncedTime Time { get; set; }
+        public virtual SyncedTime StartTime { get; set; }
         public IEntityObjectDef Def { get { return Cast.Def; } set { throw new InvalidOperationException("Can't assign def to SpellInstance, it's get only"); } }
     }
 }

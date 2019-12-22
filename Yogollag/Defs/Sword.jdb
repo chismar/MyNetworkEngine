@@ -12,7 +12,7 @@
     },
     "BecameActiveBuff": {
         "$type": "Spell",
-        "Duration": 100000,
+        "IsInfinite":true,
         "Effects": [
             {
                 "$type": "EffectActionsLayer",

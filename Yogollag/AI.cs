@@ -7,6 +7,7 @@ using System.Text;
 
 using LiteNetLib.Utils;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Yogollag
 {
@@ -195,20 +196,123 @@ namespace Yogollag
     public class AIRuleDef : BaseDef
     {
         public DefRef<CalcerDef> Cooldown { get; set; }
-        public bool CancelSpellOnRuleSwitch { get; set; }
+        public bool CancelSpellOnRuleSwitch { get; set; } = true;
         public bool StopOnSpell { get; set; }
         public bool Move { get; set; }
         public bool FinishWhenNear { get; set; }
         public bool KeepDistance { get; set; }
-        public DefRef<CalcerDef> FixedDuration { get; set; }
         public DefRef<CalcerDef> AcceptedRange { get; set; }
+        public DefRef<CalcerDef> FixedDuration { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
         public DefRef<TargetSelectorDef> TargetSelector { get; set; }
         public DefRef<PointSelectorDef> PointSelector { get; set; }
         public DefRef<SpellDef> CastSpell { get; set; }
         public List<DefRef<SpellDef>> RandomSpells { get; set; } = new List<DefRef<SpellDef>>();
     }
+    
+    public class EffectRunAndRerunDef : StatefullEffect<EffectRunAndRerunDef.State>
+    {
+        public class State
+        {
+            public EffectRunAndRerunDef Def;
+            public SpellInstance Spell;
+            public EffectId Effect;
+            public SpellId CastedSpell;
+            public void OnSpellEnded(SpellInstance obj)
+            {
+                if (obj.Id == CastedSpell)
+                {
+                    CastedSpell = default;
+                    StartClock();
+                }
+            }
+            public void StartClock()
+            {
+                var ent = Spell.ParentEntity;
+                var delay = Def.TryAgainCooldown.Def.Calc(new ScriptingContext(ent) { Host = ent.Id, Target = ent.Id });
+                Task.Run(async () =>
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(delay));
+                    ent.RunLater(RestartSpell);
+                });
+            }
+            public void RestartSpell()
+            {
+                if (Spell.ParentEntity == null || !Spell.RunningEffects.Contains(Effect))
+                    return;
+                var ent = Spell.ParentEntity;
+                var hasSpells = ent as IHasSpells;
+                CastedSpell = hasSpells.SpellsEngine.CastFromInsideEntity(
+                    new SpellCast() { Def = Def.Spell, OwnerObject = ent.Id, TargetEntity = ent.Id });
 
+            }
+        }
+        public DefRef<SpellDef> Spell { get; set; }
+        public DefRef<CalcerDef> TryAgainCooldown { get; set; }
+
+        public override void Begin(SpellInstance spellInstance, State state, bool onClient)
+        {
+            var hasSpells = spellInstance.ParentEntity as IHasSpells;
+            state.RestartSpell();
+            hasSpells.SpellsEngine.SyncedSpells.OnItemRemoved += state.OnSpellEnded;
+            
+        }
+
+
+        public override void End(SpellInstance spellInstance, State state, bool onClient, bool isSucess)
+        {
+            var hasSpells = spellInstance.ParentEntity as IHasSpells;
+            hasSpells.SpellsEngine.SyncedSpells.OnItemRemoved -= state.OnSpellEnded;
+            hasSpells.SpellsEngine.FinishSpell(state.CastedSpell);
+        }
+    }
+    public class EffectScriptDef : BaseDef, ISpellEffectDef
+    {
+        public Dictionary<string, DefRef<TargetSelectorDef>> Selectors { get; set; } = new Dictionary<string, DefRef<TargetSelectorDef>>();
+        public DefRef<SpellDef> Spell { get; set; }
+
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+            
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+        
+        }
+    }
+    public class EffectMoveDef : BaseDef, ISpellEffectDef
+    {
+        public bool Move { get; set; }
+        public bool FinishWhenNear { get; set; }
+        public bool KeepDistance { get; set; }
+        public DefRef<TargetSelectorDef> Target { get; set; }
+        public DefRef<PointSelectorDef> TargetPoint { get; set; }
+        public DefRef<CalcerDef> AcceptedRange { get; set; }
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+
+        }
+    }
+    public class EffectChooseSpellDef : BaseDef, ISpellEffectDef
+    {
+        public DefRef<TargetSelectorDef> Target { get; set; }
+        public List<DefRef<SpellDef>> Spells { get; set; } = new List<DefRef<SpellDef>>();
+        public void Begin(SpellInstance spellInstance, bool onClient)
+        {
+
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+
+        }
+    }
     public class AIMoveDef : BaseDef
     {
         public Vec2 DirectionRelativeToTarget { get; set; }

@@ -1,63 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7584712091995086775
-GameObject:
+--- !u!95 &7889762416991028445
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6908008555549123816}
-  - component: {fileID: 2386812395168603401}
-  - component: {fileID: 351815732019370885}
-  m_Layer: 9
-  m_Name: WeaponCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6908008555549123816
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7584712091995086775}
-  m_LocalRotation: {x: 0.9999996, y: 1.9620769e-16, z: -0.0009879895, w: -6.108816e-17}
-  m_LocalPosition: {x: 0.063, y: 0.023, z: 0.54}
-  m_LocalScale: {x: 0.18125989, y: 0.09308355, z: 0.65193975}
-  m_Children: []
-  m_Father: {fileID: 1607795404220728978}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2386812395168603401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7584712091995086775}
+  m_GameObject: {fileID: 1899586106868793410}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee350b9f4fbf9f24288ba168041a7c83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!136 &351815732019370885
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7584712091995086775}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1.4
-  m_Height: 2
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16f44df8d3e74b044bd9bb87cff5c408, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7746135728300703004
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   VisualPrefab: {fileID: 0}
+  TimeWindowSeconds: 10
 --- !u!114 &8186031544140771720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,11 +213,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961479071862265827}
     m_Modifications:
-    - target: {fileID: 3592199280592653930, guid: 3d6e455860645b741ba76346452d6a57,
-        type: 3}
-      propertyPath: m_Name
-      value: GardenZombie01_PF
-      objectReference: {fileID: 0}
     - target: {fileID: 540810111278742649, guid: 3d6e455860645b741ba76346452d6a57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -326,17 +283,32 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 3592199280592653930, guid: 3d6e455860645b741ba76346452d6a57,
+        type: 3}
+      propertyPath: m_Name
+      value: GardenZombie01_PF
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671124175925273175, guid: 3d6e455860645b741ba76346452d6a57,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.012349412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671124175925273175, guid: 3d6e455860645b741ba76346452d6a57,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.05712133
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d6e455860645b741ba76346452d6a57, type: 3}
---- !u!4 &3172775660157956689 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 540810111278742649, guid: 3d6e455860645b741ba76346452d6a57,
+--- !u!1 &1899586106868793410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3592199280592653930, guid: 3d6e455860645b741ba76346452d6a57,
     type: 3}
   m_PrefabInstance: {fileID: 3136371526791401000}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1607795404220728978 stripped
+--- !u!4 &3172775660157956689 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4455933803396335802, guid: 3d6e455860645b741ba76346452d6a57,
+  m_CorrespondingSourceObject: {fileID: 540810111278742649, guid: 3d6e455860645b741ba76346452d6a57,
     type: 3}
   m_PrefabInstance: {fileID: 3136371526791401000}
   m_PrefabAsset: {fileID: 0}

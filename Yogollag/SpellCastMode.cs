@@ -75,7 +75,7 @@ namespace Yogollag
             selfState.T = new HierarchyTransform(targetWorldPos, 0, null);
             if (Input.Def.IsActive(selfState.TriggerWasActive))
             {
-                Logger.LogError($"{input.____GetDebugShortName()} {spell.____GetDebugShortName()}");
+                //Logger.LogError($"{input.____GetDebugShortName()} {spell.____GetDebugShortName()}");
                 ent.ActionEngine.DoInput(input, new SpellCast() { Def = spell, TargetPoint = targetWorldPos, OwnerObject = ent.Id });
                 selfState.TriggerWasActive = true;
 

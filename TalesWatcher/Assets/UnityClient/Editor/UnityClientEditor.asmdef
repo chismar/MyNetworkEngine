@@ -3,7 +3,8 @@
     "references": [
         "GUID:39b5fd8f38326d142b68272cb7ab0a4e",
         "GUID:3a5d96d5f76d8cb4ab5823408c164988",
-        "GUID:e3cf622af60e5334fb4a0ef8b1207092"
+        "GUID:e3cf622af60e5334fb4a0ef8b1207092",
+        "GUID:fe75542830ff7be4f943eb1192b0b082"
     ],
     "includePlatforms": [
         "Editor"
@@ -14,5 +15,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }
