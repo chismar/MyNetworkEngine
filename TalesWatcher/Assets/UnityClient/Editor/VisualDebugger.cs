@@ -30,7 +30,7 @@ namespace Assets.UnityClient.Editor
                 {
                     
                     var rect = GUILayoutUtility.GetRect(width, 30);
-                    EditorGUI.ProgressBar(rect, Mathf.Clamp(spell.CurrentProgress, 0, 1), $"{((BaseDef)spell.Def).____GetDebugShortName()}");
+                    EditorGUI.ProgressBar(rect, Mathf.Clamp(spell.CurrentProgress, 0, 1), $"{(((BaseDef)spell.Def).CustomName == null ? ((BaseDef)spell.Def).____GetDebugShortName() : ((BaseDef)spell.Def).CustomName)}");
                 }
             }
             GUILayout.EndVertical();

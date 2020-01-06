@@ -186,9 +186,11 @@ namespace Yogollag
     public static class ListShuffle
     {
         [ThreadStatic]
-        private static Random rng = new Random(0);
+        private static Random rng;
         public static List<T> Shuffle<T>(this List<T> list)
         {
+            if(rng == null)
+                rng = new Random(0);
             var shuffledList = new List<T>();
             shuffledList.AddRange(list);
             int n = shuffledList.Count;

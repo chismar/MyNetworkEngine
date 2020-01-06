@@ -118,6 +118,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)Modifiers)?.SetParentEntity(this.ParentEntity);
         }
 
@@ -308,6 +309,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -517,6 +519,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)StatsSync)?.SetParentEntity(this.ParentEntity);
         }
 

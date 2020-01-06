@@ -182,6 +182,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)SpellsEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)StatsEngine)?.SetParentEntity(this.ParentEntity);
         }

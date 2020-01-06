@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Text;
 using LiteNetLib.Utils;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Yogollag
 {
@@ -31,23 +32,11 @@ namespace Yogollag
     [GeneratedClass]
     public class AIEngineDef : BaseDef, IEntityObjectDef
     {
-        public DefRef<AIRulesDef> Rules
-        {
-            get;
-            set;
-        }
-
-        = default;
     }
 
     [GeneratedClass]
     public partial class AIEngineSync
     {
-        public override AIRulesDef Rules
-        {
-            get => ((AIEngineDef)Def).Rules.Def;
-        }
-
         override protected void SetDefsForComponents()
         {
         }
@@ -111,6 +100,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)

@@ -61,25 +61,27 @@ namespace Yogollag
 
     public abstract class StatefullEffect<T> : BaseDef, ISpellEffectDef where T : class, new()
     {
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             if (spellInstance.EffectStates == null)
                 spellInstance.EffectStates = new Dictionary<EffectId, object>();
             var state = new T();
             spellInstance.EffectStates.Add(new EffectId(this, spellInstance), state);
-            Begin(spellInstance, state, onClient);
+            return Begin(spellInstance, state, onClient);
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
         {
             var state = spellInstance.EffectStates[new EffectId(this, spellInstance)];
+            spellInstance.EffectStates.Remove(new EffectId(this, spellInstance));
             End(spellInstance, (T)state, onClient, isSucess);
         }
-        public abstract void Begin(SpellInstance spellInstance, T state, bool onClient);
+        public abstract bool Begin(SpellInstance spellInstance, T state, bool onClient);
         public abstract void End(SpellInstance spellInstance, T state, bool onClient, bool isSucess);
     }
     [GenerateSync]
     public abstract class SpellsEngine : SyncObject, IEntityComponent
+
     {
         public Dictionary<EffectId, DebugInfo> Infos = new Dictionary<EffectId, DebugInfo>();
         [Sync(SyncType.Client)]
@@ -89,7 +91,8 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual SyncEvent<SpellFailedToCast> SpellFailedEvent { get; set; } = SyncObject.New<SyncEvent<SpellFailedToCast>>();
         public virtual IEnumerable<SpellInstance> AllSpells => SyncedSpells;
-
+        [Def(true)]
+        public virtual List<DefRef<SpellDef>> SpellsOnStart { get; set; }
         public IDef Def { get; set; }
 
         List<SpellInstance> _predictedSpells = new List<SpellInstance>();
@@ -101,8 +104,23 @@ namespace Yogollag
         {
             if (IsMaster)
                 return;
-            SyncedSpells.OnItemAdded += SyncedSpells_OnItemAdded;
-            SyncedSpells.OnItemRemoved += SyncedSpells_OnItemRemoved;
+            RunLater(() =>
+            {
+                foreach (var spell in SyncedSpells)
+                    foreach (var effect in spell.Cast.Def.Effects)
+                        effect.Def.Begin(spell, true);
+                SyncedSpells.OnItemAdded += SyncedSpells_OnItemAdded;
+                SyncedSpells.OnItemRemoved += SyncedSpells_OnItemRemoved;
+            });
+        }
+        public override void OnCreate()
+        {
+            RunLater(() =>
+            {
+                foreach (var spell in SpellsOnStart)
+                    CastFromInsideEntity(new SpellCast() { Def = spell, OwnerObject = this.ParentEntity.Id, TargetEntity = this.ParentEntity.Id });
+
+            });
         }
 
         private void SyncedSpells_OnItemAdded(SpellInstance obj)
@@ -112,7 +130,9 @@ namespace Yogollag
             {
                 ParentEntity.BeginDebugEvent($"{((SpellDef)obj.Def).____GetDebugShortName()}:{obj.Id}");
                 foreach (var effect in obj.Cast.Def.Effects)
+                {
                     effect.Def.Begin(obj, true);
+                }
             });
         }
         private void SyncedSpells_OnItemRemoved(SpellInstance obj)
@@ -129,9 +149,11 @@ namespace Yogollag
             });
         }
 
-
+        SpellId _currentCast;
         private void OnSpellEvent(SpellFailedToCast obj)
         {
+            if (_currentCast == obj.Id)
+                _currentCast = default;
         }
         int _localCounterId = 1;
         bool OnCooldown(SpellCast cast)
@@ -150,7 +172,12 @@ namespace Yogollag
             if (SlotIsOccupied(cast, ignoreSpell) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
             var id = new SpellId() { Id = _localCounterId++, FromClient = !IsMaster };
+            var prevCast = _currentCast;
+            _currentCast = id;
             CastSpell(id, cast);
+            if (_currentCast == default)
+                return default;
+            _currentCast = prevCast;
             return id;
         }
         [Sync(SyncType.Server)]
@@ -161,10 +188,8 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
-                return;
-            if (SlotIsOccupied(cast) ||
-                OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(base.ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? false))
+            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead || SlotIsOccupied(cast) ||
+                OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(base.ParentEntity) { TargetPoint = cast.GetTargetPoint(ParentEntity.CurrentServer), Target = cast.TargetEntity }) ?? false))
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
                 return;
@@ -181,10 +206,18 @@ namespace Yogollag
                     FinishSpell(spell.Id);
             SyncedSpells.Add(inst);
             ParentEntity.BeginDebugEvent($"{inst.Cast.Def.____GetDebugShortName()}:{inst.Id}");
+            bool failedToStart = false;
             foreach (var effect in inst.Cast.Def.Effects)
-                effect.Def.Begin(inst, false);
+                if (!effect.Def.Begin(inst, false))
+                    failedToStart = true;
 
-            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
+            if (failedToStart)
+            {
+                SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
+                RunLater(() => FinishSpell(id));
+                return;
+            }
+            inst.Cast.Def.ImpactOnStart.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.GetTargetPoint(ParentEntity.CurrentServer), Target = cast.TargetEntity });
             if (inst.Cast.Def.Cooldown > 0)
             {
                 Cooldowns.Add(new PastSpellCooldown() { Id = inst.Id, Def = inst.Cast.Def, TimeWhenStarted = inst.StartTime });
@@ -226,15 +259,15 @@ namespace Yogollag
                 return;
             var cast = spell.Cast;
             bool success = false;
-            if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity }) ?? true)
+            if (spell.Cast.Def.PredicateOnEnd.Def?.Check(new ScriptingContext(ParentEntity) { TargetPoint = cast.GetTargetPoint(ParentEntity.CurrentServer), Target = cast.TargetEntity }) ?? true)
             {
                 success = true;
                 spell.SuccesEnd = true;
-                spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
+                spell.Cast.Def.ImpactOnSuccess.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.GetTargetPoint(ParentEntity.CurrentServer), Target = cast.TargetEntity });
             }
             else
             {
-                spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.TargetPoint, Target = cast.TargetEntity });
+                spell.Cast.Def.ImpactOnFail.Def?.Apply(new ScriptingContext(ParentEntity) { TargetPoint = cast.GetTargetPoint(ParentEntity.CurrentServer), Target = cast.TargetEntity });
             }
             foreach (var effect in spell.Cast.Def.Effects)
                 effect.Def.End(spell, false, success);
@@ -313,7 +346,7 @@ namespace Yogollag
     }
     public interface ISpellEffectDef : IDef
     {
-        void Begin(SpellInstance spellInstance, bool onClient);
+        bool Begin(SpellInstance spellInstance, bool onClient);
         void End(SpellInstance spellInstance, bool onClient, bool isSucess);
     }
 
@@ -322,7 +355,7 @@ namespace Yogollag
     {
         public static bool operator ==(SpellCast cast, SpellCast cast2)
         {
-            return cast.Def == cast2.Def && cast.TargetEntity == cast2.TargetEntity && cast.TargetPoint == cast2.TargetPoint;
+            return cast.Def == cast2.Def && cast.TargetEntity == cast2.TargetEntity && cast._targetPoint == cast2._targetPoint;
         }
         public static bool operator !=(SpellCast cast, SpellCast cast2)
         {
@@ -333,7 +366,16 @@ namespace Yogollag
         [Sync]
         public EntityId TargetEntity { get; set; }
         [Sync]
-        public Vec2 TargetPoint { get; set; }
+        public Vec2 TargetPoint { get => _targetPoint.HasValue ? _targetPoint.Value : default; set => _targetPoint = value; }
+
+        Vec2? _targetPoint;
+        public Vec2 GetTargetPoint(NetworkNode server)
+        {
+            var point = _targetPoint.HasValue ? _targetPoint.Value :
+                ((server.GetGhost(TargetEntity) as IPositionedEntity)?.Position ??
+                (server.GetGhost(OwnerObject) as IPositionedEntity)?.Position ?? default);
+            return point;
+        }
         [Sync]
         public EntityId OwnerObject { get; set; }
     }
@@ -351,10 +393,10 @@ namespace Yogollag
     public abstract class SpellInstance : SyncObject, IEntityObject
     {
         public Dictionary<EffectId, object> EffectStates;
-        
+
 
         public float CurrentProgress => ((SpellDef)Def).IsInfinite ? float.MaxValue :
-            SyncedTime.ToSeconds((SyncedTime.Now - StartTime)) / ((SpellDef) Def).Duration;
+            SyncedTime.ToSeconds((SyncedTime.Now - StartTime)) / ((SpellDef)Def).Duration;
         public HashSet<EffectId> RunningEffects = new HashSet<EffectId>();
         [Sync]
         public virtual bool SuccesEnd { get; set; }
@@ -365,5 +407,12 @@ namespace Yogollag
         [Sync(SyncType.Client)]
         public virtual SyncedTime StartTime { get; set; }
         public IEntityObjectDef Def { get { return Cast.Def; } set { throw new InvalidOperationException("Can't assign def to SpellInstance, it's get only"); } }
+
+        ScriptingContext _ctx;
+        internal ScriptingContext GetScriptingContext()
+        {
+            return _ctx == null ? _ctx = new ScriptingContext(ParentEntity) { Target = Cast.TargetEntity, TargetPoint = Cast.GetTargetPoint(ParentEntity.CurrentServer) } : _ctx;
+
+        }
     }
 }

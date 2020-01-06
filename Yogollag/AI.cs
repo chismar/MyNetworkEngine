@@ -14,102 +14,47 @@ namespace Yogollag
     [GenerateSync]
     public abstract class AIEngine : SyncObject, IEntityComponent
     {
-        [Def]
-        public virtual AIRulesDef Rules { get; set; }
-        SpellId _currentSpellId;
-        AIRuleDef _currentRule;
-        SpellsEngine _spellsEngine;
         LocoMover _locoMover;
-        Dictionary<AIRuleDef, long> _lastTimeUsed = new Dictionary<AIRuleDef, long>();
-        Vec2? _currentTargetPoint;
-        EntityId? _currentTargetEntity;
-        long _doUntil;
-
+        Vec2? _targetPoint;
+        EntityId? _targetEntity;
+        MovementPolicy _policy;
+        EffectId _currentId;
         public IDef Def { get; set; }
+        public event Action<EffectId> MovementIsFinished;
+        float _range;
 
         public void Init(SpellsEngine spellsEngine, LocoMover locoMover)
         {
-            _spellsEngine = spellsEngine;
             _locoMover = locoMover;
         }
         Random _rnd = new Random();
-        private bool DoRule(AIRuleDef rule)
+        public void BeginMovement(Vec2? targetPoint, EntityId? targetEntity, EffectId id, MovementPolicy policy, float range)
         {
-            var ctx = new ScriptingContext(ParentEntity);
-            if (rule?.CastSpell.Def != null && (!rule.CastSpell.Def.Predicate.Def?.Check(ctx) ?? false))
-                return false;
-            if (_currentRule != rule)
+            _currentId = id;
+            _targetPoint = targetPoint;
+            _targetEntity = targetEntity;
+            _policy = policy;
+            _range = range;
+        }
+        public void EndMovement(EffectId id)
+        {
+            if (_currentId == id)
             {
-                EntityId target = default;
-                Vec2 point = default;
-                if (rule != null)
-                {
-                    if (_lastTimeUsed.TryGetValue(rule, out var lastTime) && (SyncedTime.ToSeconds(SyncedTime.Now - lastTime) < (rule.Cooldown.Def?.Calc(ctx) ?? 0)))
-                        return false;
-                    var targetE = rule.TargetSelector.Def?.Select(ctx);
-                    if (targetE.HasValue && targetE.Value == default)
-                        targetE = null;
-                    var targetPoint = rule.PointSelector.Def?.Select(ctx);
-                    if (!targetE.HasValue && !targetPoint.HasValue)
-                        return false;
-                    target = targetE.HasValue ? targetE.Value : default;
-                    point = targetPoint.HasValue ? targetPoint.Value : default;
-                    if (target != default && point == default)
-                    {
-                        var pe = CurrentServer.GetGhost(target) as IPositionedEntity;
-                        if (pe != null)
-                            point = pe.Position;
-                    }
-                    _currentTargetEntity = targetE;
-                    _currentTargetPoint = targetPoint;
-                }
-                if (_currentRule != null)
-                    if (_currentRule.CancelSpellOnRuleSwitch && _currentSpellId != default)
-                        _spellsEngine.FinishSpell(_currentSpellId);
-                _currentRule = rule;
-                _currentSpellId = default;
-                _doUntil = long.MaxValue;
-                if (rule != null)
-                {
-                    if (rule.FixedDuration.Def != null)
-                        _doUntil = SyncedTime.Now + SyncedTime.FromSeconds(rule.FixedDuration.Def.Calc(ctx));
-
-
-                    var dst = (point - ((IPositionedEntity)ParentEntity).Position).Length;
-                    var dir = (point - ((IPositionedEntity)ParentEntity).Position).Normal;
-                    _locoMover.ActionDir = dir;
-
-                    if (rule.CastSpell.Def != null || rule.RandomSpells.Count > 0)
-                    {
-                        var spell = rule.CastSpell.Def;
-                        if(rule.RandomSpells.Count > 0)
-                        {
-                            var rval = _rnd.Next(0, rule.RandomSpells.Count + 1);
-                            if (rval < rule.RandomSpells.Count)
-                                spell = rule.RandomSpells[rval];
-                        }
-                        _currentSpellId = _spellsEngine.CastFromInsideEntity(new SpellCast()
-                        {
-                            Def = spell,
-                            TargetEntity = target,
-                            TargetPoint = point,
-                            OwnerObject = ParentEntity.Id,
-                        });
-                        if (_currentSpellId == default)
-                            return false;
-
-                        _lastTimeUsed[rule] = SyncedTime.Now;
-                    }
-                }
+                _targetEntity = null;
+                _targetPoint = null;
+                _policy = MovementPolicy.None;
+                _currentId = default;
             }
-            if (rule == null)
-                return true;
-            bool near = false;
-            if (_currentRule != null)
+
+        }
+        public void UpdateMovement()
+        {
+            if (_currentId != default && _policy != MovementPolicy.None)
             {
-                var point = _currentTargetEntity.HasValue ?
-                    ((IPositionedEntity)ParentEntity.CurrentServer.GetGhost(_currentTargetEntity.Value))?.Position :
-                    _currentTargetPoint;
+                bool near = false;
+                var point = _targetEntity.HasValue ?
+                    ((IPositionedEntity)ParentEntity.CurrentServer.GetGhost(_targetEntity.Value))?.Position :
+                    _targetPoint;
                 if (point.HasValue)
                 {
                     float maxMult = 1;
@@ -117,24 +62,24 @@ namespace Yogollag
                     var dir = (point.Value - ((IPositionedEntity)ParentEntity).Position).Normal;
                     var mult = dst > maxMult ? maxMult : dst;
                     _locoMover.ActionDir = dir;
-                    var acceptedRange = _currentRule.AcceptedRange.Def?.Calc(new ScriptingContext(ParentEntity) { Target = _currentTargetEntity.HasValue ? _currentTargetEntity.Value : default }) ?? 0;
+                    var acceptedRange = _range;
                     var isWithinAcceptedRange = acceptedRange > dst;
-                    if (isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) > 0.5)
+                    if (isWithinAcceptedRange && _policy == MovementPolicy.KeepDistance && (acceptedRange - dst) > 0.5)
                     {
                         dir = -dir;
                     }
-                    else  if(isWithinAcceptedRange && _currentRule.KeepDistance && (acceptedRange - dst) < 0.3)
+                    else if (isWithinAcceptedRange && _policy == MovementPolicy.KeepDistance && (acceptedRange - dst) < 0.3)
                         _locoMover.DontMove = true;
-                    else if(!_currentRule.KeepDistance)
+                    else if (_policy != MovementPolicy.KeepDistance)
                         _locoMover.DontMove = isWithinAcceptedRange;
-                    if (_currentRule.Move && (!isWithinAcceptedRange ||_currentRule.KeepDistance ))
+                    if (!isWithinAcceptedRange || _policy == MovementPolicy.KeepDistance)
                         _locoMover.MovementDir = dir;
                     else
                     {
-                        near = _currentRule.Move;
+                        near = true;
                         _locoMover.MovementDir = default;
                     }
-                       
+
 
                 }
                 else
@@ -142,32 +87,17 @@ namespace Yogollag
                     _locoMover.ActionDir = default;
                     _locoMover.MovementDir = default;
                 }
+                if (near && _policy == MovementPolicy.FinishWhenNear)
+                {
+                    MovementIsFinished?.Invoke(_currentId);
+                    EndMovement(_currentId);
+                }
             }
             else
             {
                 _locoMover.ActionDir = default;
                 _locoMover.MovementDir = default;
             }
-
-            if (_doUntil < SyncedTime.Now || near && (_currentRule?.FinishWhenNear ?? false))
-                return DoRule(null);
-            if (_currentRule.StopOnSpell && !_spellsEngine.SyncedSpells.Any(x => x.Id == _currentSpellId))
-                return DoRule(null);
-            return true;
-        }
-        public void Update()
-        {
-            var ctx = new ScriptingContext() { ProcessingEntity = ParentEntity, Host = ParentEntity.Id };
-            foreach (var ruleRef in Rules.Rules)
-            {
-                var rule = ruleRef;
-                if (!rule.Predicate.Def?.Check(ctx) ?? false)
-                    continue;
-
-                if (DoRule(rule))
-                    return;
-            }
-            DoRule(null);
         }
     }
 
@@ -209,15 +139,16 @@ namespace Yogollag
         public DefRef<SpellDef> CastSpell { get; set; }
         public List<DefRef<SpellDef>> RandomSpells { get; set; } = new List<DefRef<SpellDef>>();
     }
-    
+
     public class EffectRunAndRerunDef : StatefullEffect<EffectRunAndRerunDef.State>
     {
         public class State
         {
             public EffectRunAndRerunDef Def;
             public SpellInstance Spell;
-            public EffectId Effect;
+            public EffectId Effect => new EffectId(Def, Spell);
             public SpellId CastedSpell;
+            public bool Finished;
             public void OnSpellEnded(SpellInstance obj)
             {
                 if (obj.Id == CastedSpell)
@@ -238,32 +169,39 @@ namespace Yogollag
             }
             public void RestartSpell()
             {
-                if (Spell.ParentEntity == null || !Spell.RunningEffects.Contains(Effect))
+                if (Spell.ParentEntity == null || Finished)
                     return;
                 var ent = Spell.ParentEntity;
                 var hasSpells = ent as IHasSpells;
                 CastedSpell = hasSpells.SpellsEngine.CastFromInsideEntity(
                     new SpellCast() { Def = Def.Spell, OwnerObject = ent.Id, TargetEntity = ent.Id });
-
+                if (CastedSpell == default)
+                    StartClock();
             }
         }
         public DefRef<SpellDef> Spell { get; set; }
         public DefRef<CalcerDef> TryAgainCooldown { get; set; }
 
-        public override void Begin(SpellInstance spellInstance, State state, bool onClient)
+        public override bool Begin(SpellInstance spellInstance, State state, bool onClient)
         {
+            if (onClient)
+                return true;
             var hasSpells = spellInstance.ParentEntity as IHasSpells;
+            state.Spell = spellInstance;
+            state.Def = this;
             state.RestartSpell();
             hasSpells.SpellsEngine.SyncedSpells.OnItemRemoved += state.OnSpellEnded;
-            
+            return true;
         }
-
 
         public override void End(SpellInstance spellInstance, State state, bool onClient, bool isSucess)
         {
+            if (onClient)
+                return;
             var hasSpells = spellInstance.ParentEntity as IHasSpells;
             hasSpells.SpellsEngine.SyncedSpells.OnItemRemoved -= state.OnSpellEnded;
             hasSpells.SpellsEngine.FinishSpell(state.CastedSpell);
+            state.Finished = true;
         }
     }
     public class EffectScriptDef : BaseDef, ISpellEffectDef
@@ -271,46 +209,126 @@ namespace Yogollag
         public Dictionary<string, DefRef<TargetSelectorDef>> Selectors { get; set; } = new Dictionary<string, DefRef<TargetSelectorDef>>();
         public DefRef<SpellDef> Spell { get; set; }
 
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
+            return true;
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+
+        }
+    }
+    public enum MovementPolicy
+    {
+        None,
+        MoveTo,
+        KeepDistance,
+        FinishWhenNear
+
+    }
+    public class EffectMoveDef : StatefullEffect<EffectMoveDef.State>
+    {
+        public class State
+        {
+            public SpellInstance Instance;
+            public EffectId Id;
+            internal void OnMoveEffectFinished(EffectId id)
+            {
+                if (Id == id)
+                    if (Instance.ParentEntity != null)
+                    {
+                        (Instance.ParentEntity as IHasSpells).SpellsEngine.FinishSpell(Instance.Id);
+                    }
+            }
+        }
+        public MovementPolicy Policy { get; set; }
+        public DefRef<TargetSelectorDef> Target { get; set; } = new TargetTarget();
+        public DefRef<PointSelectorDef> TargetPoint { get; set; }
+        public DefRef<CalcerDef> AcceptedRange { get; set; }
+
+        public override bool Begin(SpellInstance spellInstance, State state, bool onClient)
+        {
+            if (onClient)
+                return true;
+            EntityId? targetEntity = Target.Def?.Select(spellInstance.GetScriptingContext());
+
+            Vec2? targetPoint = TargetPoint.Def?.Select(spellInstance.GetScriptingContext()) ?? (targetEntity.HasValue ?
+                (spellInstance.ParentEntity.CurrentServer.GetGhost(targetEntity.Value) as IPositionedEntity)?.Position : (Vec2?)null);
+            var ai = (spellInstance.ParentEntity as IHasAIEngine).AI;
+            ai.BeginMovement(targetPoint, targetEntity, new EffectId(this, spellInstance),
+                Policy, AcceptedRange.Def?.Calc(spellInstance.GetScriptingContext()) ?? 0);
+            ai.MovementIsFinished += state.OnMoveEffectFinished;
+            return true;
+        }
+
+        public override void End(SpellInstance spellInstance, State state, bool onClient, bool isSucess)
+        {
+            if (onClient)
+                return;
+            var ai = (spellInstance.ParentEntity as IHasAIEngine).AI;
+            ai.EndMovement(new EffectId(this, spellInstance));
+            ai.MovementIsFinished -= state.OnMoveEffectFinished;
+        }
+    }
+    public class EffectChooseSpellDef : StatefullEffect<EffectChooseSpellDef.State>
+    {
+        public DefRef<TargetSelectorDef> Target { get; set; }
+        public bool Random { get; set; }
+        public List<DefRef<SpellDef>> Spells { get; set; } = new List<DefRef<SpellDef>>();
+        public bool Wait { get; set; }
+        public class State
+        {
+            public SpellId CastedId { get; set; }
+            public SpellId OwnerId { get; set; }
+            internal void OnSpellFinished(SpellInstance spellInstance)
+            {
+                if (spellInstance.Id == CastedId)
+                {
+                    var spellEngine = (spellInstance.ParentEntity as IHasSpells).SpellsEngine;
+                    spellEngine.FinishSpell(OwnerId);
+                    spellEngine.SyncedSpells.OnItemRemoved -= OnSpellFinished;
+                }
+            }
+        }
+
+        public override bool Begin(SpellInstance spellInstance, State state, bool onClient)
+        {
+            if (onClient)
+                return true;
+            var spellEngine = (spellInstance.ParentEntity as IHasSpells).SpellsEngine;
+            EntityId? targetId = Target.Def?.Select(spellInstance.GetScriptingContext());
+            if(Target.Def != null && (!targetId.HasValue || targetId.Value == default))
+            {
+                spellInstance.RunLater(() =>
+                {
+                    spellEngine.FinishSpell(spellInstance.Id);
+                });
+                return false;
+            }
+            foreach (var spell in Random ? Spells.Shuffle() : Spells)
+            {
+                var sid = spellEngine.CastFromInsideEntity(new SpellCast() { Def = spell, TargetEntity = targetId ?? default, OwnerObject = spellInstance.ParentEntity.Id });
+                if (sid != default && Wait)
+                {
+                    state.CastedId = sid;
+                    state.OwnerId = spellInstance.Id;
+                    spellEngine.SyncedSpells.OnItemRemoved += state.OnSpellFinished;
+                    return true;
+                }
+            }
+            return false;
             
         }
 
-        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        public override void End(SpellInstance spellInstance, State state, bool onClient, bool isSucess)
         {
-        
-        }
-    }
-    public class EffectMoveDef : BaseDef, ISpellEffectDef
-    {
-        public bool Move { get; set; }
-        public bool FinishWhenNear { get; set; }
-        public bool KeepDistance { get; set; }
-        public DefRef<TargetSelectorDef> Target { get; set; }
-        public DefRef<PointSelectorDef> TargetPoint { get; set; }
-        public DefRef<CalcerDef> AcceptedRange { get; set; }
-        public void Begin(SpellInstance spellInstance, bool onClient)
-        {
-
-        }
-
-        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
-        {
-
-        }
-    }
-    public class EffectChooseSpellDef : BaseDef, ISpellEffectDef
-    {
-        public DefRef<TargetSelectorDef> Target { get; set; }
-        public List<DefRef<SpellDef>> Spells { get; set; } = new List<DefRef<SpellDef>>();
-        public void Begin(SpellInstance spellInstance, bool onClient)
-        {
-
-        }
-
-        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
-        {
-
+            if (onClient)
+                return;
+            var spellEngine = (spellInstance.ParentEntity as IHasSpells).SpellsEngine;
+            spellEngine.SyncedSpells.OnItemRemoved -= state.OnSpellFinished;
+            if (state.CastedId != default)
+                (spellInstance.ParentEntity as IHasSpells).SpellsEngine.FinishSpell(state.CastedId);
         }
     }
     public class AIMoveDef : BaseDef
@@ -322,7 +340,13 @@ namespace Yogollag
     {
         public abstract EntityId Select(ScriptingContext ctx);
     }
-
+    public class TargetTarget : TargetSelectorDef
+    {
+        public override EntityId Select(ScriptingContext ctx)
+        {
+            return ctx.Target;
+        }
+    }
     public class ClosestTargetSelector : TargetSelectorDef
     {
         public DefRef<CalcerDef> Size { get; set; }
@@ -364,6 +388,13 @@ namespace Yogollag
     public abstract class PointSelectorDef : BaseDef
     {
         public abstract Vec2 Select(ScriptingContext ctx);
+    }
+    public class TargetPoint : PointSelectorDef
+    {
+        public override Vec2 Select(ScriptingContext ctx)
+        {
+            return ctx.TargetPoint;
+        }
     }
 
     public class RandomPointSelectorDef : PointSelectorDef

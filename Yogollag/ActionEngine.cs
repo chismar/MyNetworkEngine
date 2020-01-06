@@ -104,7 +104,6 @@ namespace Yogollag
                     if (cia.breakSpell != default)
                         ((IHasSpells)ParentEntity).SpellsEngine.FinishSpell(cia.breakSpell);
                     var res = ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(availableInput.cast, cia.breakSpell);
-                    Logger.LogError($"Cast {availableInput.cast.Def.____GetDebugShortName()} {res} ");
                 }
                 break;
             }
@@ -132,11 +131,12 @@ namespace Yogollag
     public class EffectActionsLayerDef : BaseDef, ISpellEffectDef
     {
         public List<EffectActionPair> Overrides { get; set; } = new List<EffectActionPair>();
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
             ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine
                 .SetLayer(new EffectId(this, spellInstance.Id), Overrides.ToDictionary(x => x.ActionSpell.Def, x => x.NewActionSpell.Def));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -149,11 +149,12 @@ namespace Yogollag
     {
         public List<DefRef<SpellDef>> Inputs { get; set; } = new List<DefRef<SpellDef>>();
 
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
             ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.
                 BreakOnInputs(new EffectId(this, spellInstance.Id), spellInstance.Id, Inputs.Select(x => x.Def));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -165,11 +166,12 @@ namespace Yogollag
     public class EffectAllowInput : BaseDef, ISpellEffectDef
     {
         public List<DefRef<SpellDef>> Inputs { get; set; } = new List<DefRef<SpellDef>>();
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
             ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.
                 AllowInputs(new EffectId(this, spellInstance.Id), true, Inputs.Select(x => x.Def));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -181,11 +183,12 @@ namespace Yogollag
     public class EffectIgnoreInput : BaseDef, ISpellEffectDef
     {
         public List<DefRef<SpellDef>> Inputs { get; set; } = new List<DefRef<SpellDef>>();
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
             ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.
                 AllowInputs(new EffectId(this, spellInstance.Id), false, Inputs.Select(x => x.Def));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -197,11 +200,12 @@ namespace Yogollag
     public class EffectRunInput : BaseDef, ISpellEffectDef
     {
         public List<DefRef<SpellDef>> Inputs { get; set; } = new List<DefRef<SpellDef>>();
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             spellInstance.ParentEntity.BeginDebugEvent(new EffectId(this, spellInstance));
             ((IHasActionEngine)spellInstance.ParentEntity).ActionEngine.
                 RunInput(new EffectId(this, spellInstance.Id), Inputs.Select(x => x.Def));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)

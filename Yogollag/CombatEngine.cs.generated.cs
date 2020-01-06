@@ -100,6 +100,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)

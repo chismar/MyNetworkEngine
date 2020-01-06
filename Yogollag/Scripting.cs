@@ -42,7 +42,7 @@ namespace Yogollag
     public interface IHasStats { }
     public interface IHasSpells { }
     public interface IHasScripts { }*/ //Quest giver is also a script, as it would seem
-                                       /* Can a quest be a script be a spell be a state be a buff be an action be a group and contain stats? */
+    /* Can a quest be a script be a spell be a state be a buff be an action be a group and contain stats? */
 
     /*
      * Spell
@@ -321,8 +321,15 @@ static class Scripting
         public EntityId Host;
         [Sync]
         public EntityId Target;
+        Vec2? _targetPoint;
         [Sync]
-        public Vec2 TargetPoint;
+        public Vec2 TargetPoint
+        {
+            get => _targetPoint.HasValue ? _targetPoint.Value :
+                ((ProcessingEntity.CurrentServer.GetGhost(Target) as IPositionedEntity)?.Position ?? 
+                (ProcessingEntity.CurrentServer.GetGhost(Host) as IPositionedEntity)?.Position ?? default);
+            set => _targetPoint = value;
+        }
     }
     public interface IImpactedEntity
     {

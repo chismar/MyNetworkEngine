@@ -175,6 +175,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)PhysicalBody)?.SetParentEntity(this.ParentEntity);
         }
 

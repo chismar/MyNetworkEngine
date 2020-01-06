@@ -84,7 +84,7 @@ namespace Yogollag
     {
         public DefRef<StrikeDef> StrikeDef { get; set; }
         public string AnimationName { get; set; }
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
 
@@ -92,6 +92,7 @@ namespace Yogollag
             if (AnimationName != null)
                 ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
             ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Add(new EffectId(this, spellInstance), new DebugInfo(Color.Red, "Strike", 1f, 1f));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -109,10 +110,11 @@ namespace Yogollag
         public DefRef<ProjectileDef> ProjectileDef { get; set; }
         public string ObjectName { get; set; }
         public bool Forward { get; set; } = false;
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
             ce.SpawnProjectile(Forward ? (float?)null : ((IPositionedEntity)spellInstance.ParentEntity).Rotation, ObjectName, ProjectileDef);
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -126,7 +128,7 @@ namespace Yogollag
         public bool OfffsetIsBackward { get; set; } = false;
         public List<DefRef<ISpellEffectDef>> Effects { get; set; } = new List<DefRef<ISpellEffectDef>>();
 
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             var parentEntity = spellInstance.ParentEntity;
             Task.Run(async () =>
@@ -163,6 +165,7 @@ namespace Yogollag
 
                 });
             });
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -175,11 +178,12 @@ namespace Yogollag
     public class EffectAnimate : BaseDef, ISpellEffectDef
     {
         public string AnimationName { get; set; }
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             var ce = ((IHasCombatEngine)spellInstance.ParentEntity).CombatEngine;
             ce.BeginAnimation?.Invoke(new EffectId(this, spellInstance), ((SpellDef)spellInstance.Def).Duration, AnimationName);
             ((IHasSpells)spellInstance.ParentEntity).SpellsEngine.Infos.Add(new EffectId(this, spellInstance), new DebugInfo(Color.Red, $"Animate {AnimationName}", 1f, 1f));
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)

@@ -31,10 +31,14 @@ namespace Yogollag
     {
         MortalEngine Mortal { get; set; }
     }
+    public interface IHasAIEngine
+    {
+        AIEngine AI { get; set; }
+    }
     [GenerateSync]
     public abstract class Mob : GhostedEntity,
         IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject,
-        IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine
+        IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine, IHasAIEngine
     {
 
         [Sync]
@@ -107,7 +111,7 @@ namespace Yogollag
         {
             if (Mortal.IsDead)
                 return;
-            AI.Update();
+            AI.UpdateMovement();
             LocoMover.Tick();
             Locomotion.Tick();
             Mortal.Update();

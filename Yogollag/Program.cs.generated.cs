@@ -70,6 +70,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -146,6 +147,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -345,6 +347,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -635,6 +638,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -875,6 +879,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)Items)?.SetParentEntity(this.ParentEntity);
         }
 
@@ -2004,6 +2009,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)SpellsEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)Cmp)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)CombatEngine)?.SetParentEntity(this.ParentEntity);

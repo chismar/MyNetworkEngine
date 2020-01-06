@@ -432,9 +432,10 @@ namespace NetworkEngine
 
         }
         object _runLaterLock = new object();
+
         public void RunLater(Action run)
         {
-            lock(_runLaterLock)
+            lock (_runLaterLock)
             {
                 if (ParentEntity.RunLaterDelegates == null)
                     ParentEntity.RunLaterDelegates = new List<(SyncBaseApi, Action)>();
@@ -942,10 +943,13 @@ namespace NetworkEngine
 
         void OnEntityCreated(NetworkEntity newEntity)
         {
+            var prevId = NetworkEntity.CurrentlyExecutingInContext.Value;
+            NetworkEntity.CurrentlyExecutingInContext.Value = newEntity.Id;
             newEntity.Create();
             newEntity.Init();
             ((IGhost)newEntity).ClearSerialization();
             _entities.Add(newEntity);
+            NetworkEntity.CurrentlyExecutingInContext.Value = prevId;
 
         }
         public EntityId Create<T>(Action<T> init = null) where T : NetworkEntity
@@ -1122,7 +1126,7 @@ namespace NetworkEngine
                     {
                         for (int i = 0; i < e.RunLaterDelegates.Count; i++)
                             if (e.RunLaterDelegates[i].Item1.ParentEntity == e)
-                                e.RunLaterDelegates[i].Item2();
+                                e.RunRunLaterAction(e.RunLaterDelegates[i].Item2);
                         e.RunLaterDelegates.Clear();
                     }));
             });
@@ -1371,6 +1375,12 @@ namespace NetworkEngine
         public NetworkNodeId ServerId;
         public NetworkNodeId AuthorityServerId;
         public List<(SyncBaseApi, Action)> RunLaterDelegates;
+        public void RunRunLaterAction(Action act)
+        {
+            NetworkEntity.CurrentlyExecutingInContext.Value = Id;
+            act();
+            NetworkEntity.CurrentlyExecutingInContext.Value = default;
+        }
         public override EntityId Id { get; set; }
         [Sync(SyncType.Client)]
         public virtual int SyncObjectIdCounter { get; set; }
@@ -1665,6 +1675,12 @@ namespace NetworkEngine
                 ListBeforeClear = listBeforeClear;
 
             }
+        }
+        public override void SetParentEntityRecursive()
+        {
+            if (IsSyncObjectList)
+                foreach (var obj in _internalList)
+                    ((SyncObject)(object)obj)?.SetParentEntity(ParentEntity);
         }
 
         public void CustomClear()
@@ -2004,8 +2020,8 @@ namespace NetworkEngine
         {
             var t = _internalList[index];
             _internalList.RemoveAt(index);
-            OnItemRemoved?.Invoke(t);
             _ops.Add(new DeltaOperation(OperationType.RemoveAt, index, t));
+            OnItemRemoved?.Invoke(t);
         }
         public T this[int index] { get { return _internalList[index]; } set { InternalSetAt(value, index); } }
         public void Add(T item)
@@ -2074,6 +2090,11 @@ namespace NetworkEngine
     {
         DeltaList<T> _internalSyncList = SyncObject.New<DeltaList<T>>();
         public event Action<T> OnEvent;
+        public override void SetParentEntityRecursive()
+        {
+            base.SetParentEntityRecursive();
+            _internalSyncList.OnItemAdded += OnEvent;
+        }
         public void CustomClear()
         {
             ((IGhost)_internalSyncList).ClearSerialization();

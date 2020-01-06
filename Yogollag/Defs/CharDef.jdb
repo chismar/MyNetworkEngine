@@ -16,6 +16,9 @@
             "./TestStaggerChar"
         ]
     },
+    "SpellsEngine": {
+        "$type": "SpellsEngine"
+    },
     "LocoMoverDef": {
         "$type": "LocoMover",
         "MovementAngleSpeed": 1800,

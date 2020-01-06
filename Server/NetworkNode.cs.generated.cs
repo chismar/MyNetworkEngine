@@ -504,6 +504,7 @@ namespace NetworkEngine
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -573,6 +574,7 @@ namespace NetworkEngine
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)

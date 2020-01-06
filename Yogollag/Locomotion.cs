@@ -211,9 +211,9 @@ namespace Yogollag
 
     public class EffectTimelineDef : BaseDef, ISpellEffectDef
     {
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
-
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
@@ -225,7 +225,7 @@ namespace Yogollag
     {
         public string CurveName { get; set; }
         public float Speed { get; set; }
-        public void Begin(SpellInstance spellInstance, bool onClient)
+        public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             if (onClient && spellInstance.ParentEntity is CharacterEntity)
             {
@@ -237,6 +237,7 @@ namespace Yogollag
                 var lm = spellInstance.ParentEntity.CurrentServer.GetWriteEntity<GhostedEntity>(spellInstance.Cast.OwnerObject) as IHasLocoMover;
                 lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
             }
+            return true;
         }
 
         public void End(SpellInstance spellInstance, bool onClient, bool isSucess)

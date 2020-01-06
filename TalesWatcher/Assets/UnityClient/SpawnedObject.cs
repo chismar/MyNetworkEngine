@@ -13,7 +13,9 @@ public class SpawnedObject : MonoBehaviour, ISceneExportable
 
     {
 #if UNITY_EDITOR
-        var aPath = UnityEditor.PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
+        var aPath = go == UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage()?.prefabContentsRoot ?
+            UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage().prefabAssetPath :
+            UnityEditor.PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
         var assetsIndex = aPath.IndexOf("Resources") + "Resources".Length;
         var localPath = aPath.Substring(assetsIndex, aPath.Length - ".prefab".Length - assetsIndex);
         return localPath;

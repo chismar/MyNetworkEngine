@@ -99,6 +99,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)
@@ -351,7 +352,7 @@ namespace Yogollag
     }
 
     //obj Mob generic  hasCustomSerialization false
-    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover,IHasMortalEngine 14
+    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover,IHasMortalEngine,IHasAIEngine 15
     [GeneratedClass]
     public partial class MobSync : Mob, IGhost
     {
@@ -728,6 +729,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)Links)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)AI)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)Locomotion)?.SetParentEntity(this.ParentEntity);

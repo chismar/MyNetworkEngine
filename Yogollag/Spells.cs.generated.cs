@@ -91,11 +91,23 @@ namespace Yogollag
     [GeneratedClass]
     public class SpellsEngineDef : BaseDef, IEntityObjectDef
     {
+        public List<DefRef<SpellDef>> SpellsOnStart
+        {
+            get;
+            set;
+        }
+
+        = new List<DefRef<SpellDef>>();
     }
 
     [GeneratedClass]
     public partial class SpellsEngineSync
     {
+        public override List<DefRef<SpellDef>> SpellsOnStart
+        {
+            get => ((SpellsEngineDef)Def).SpellsOnStart;
+        }
+
         override protected void SetDefsForComponents()
         {
         }
@@ -273,6 +285,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
             ((SyncObject)SyncedSpells)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)Cooldowns)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)SpellFailedEvent)?.SetParentEntity(this.ParentEntity);
@@ -1058,6 +1071,7 @@ namespace Yogollag
 
         public override void SetParentEntityRecursive()
         {
+            base.SetParentEntityRecursive();
         }
 
         void OnPropChanged(int prop)

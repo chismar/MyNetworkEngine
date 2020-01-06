@@ -1,0 +1,12 @@
+{
+    "$type": "Spell",
+    "Duration": 2.45,
+    "Slot": "/AttackSlot",
+    "Effects": [
+        {
+            "$type": "EffectMove",
+            "Policy": "FinishWhenNear",
+            "AcceptedRange": 1
+        }
+    ]
+}

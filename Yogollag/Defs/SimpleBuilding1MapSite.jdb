@@ -35,5 +35,23 @@
   ],
   "Tags": [
     "/Tags/Root"
-  ]
+  ],
+  "AttachedScene": {
+    "$type": "SceneDef",
+    "CustomName": null,
+    "Entities": [
+      {
+        "$type": "BuildingEntitySceneDef",
+        "CustomName": null,
+        "Object": "/SimpleBuilding1",
+        "Rotation": 0.0,
+        "Position": {
+          "$type": "Vec2",
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "PhysicalBody": null
+      }
+    ]
+  }
 }

@@ -478,6 +478,7 @@ namespace CodeGen
                 }
                 public override void SetParentEntityRecursive()
                 {
+                    base.SetParentEntityRecursive();
                     {{for syncProp in sync}}
                     {{if syncProp.ghost }}
                         ((SyncObject){{syncProp.name}})?.SetParentEntity(this.ParentEntity);
