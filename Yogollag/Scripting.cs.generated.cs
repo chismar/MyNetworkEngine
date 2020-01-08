@@ -26,6 +26,11 @@ namespace Yogollag
             var objToSerialize = new ScriptingContext();
             {
                 var has = stream.GetBool();
+                objToSerialize.TargetPoint = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+            }
+
+            {
+                var has = stream.GetBool();
                 objToSerialize.Parent = !has ? default : (ScriptingContext)SyncTypesMap.GetSerializerForObjType(typeof(ScriptingContext)).Deserialize(stream);
             }
 
@@ -39,11 +44,6 @@ namespace Yogollag
                 objToSerialize.Target = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
             }
 
-            {
-                var has = stream.GetBool();
-                objToSerialize.TargetPoint = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
-            }
-
             return objToSerialize;
         }
 
@@ -52,6 +52,18 @@ namespace Yogollag
             var objToSerialize = (ScriptingContext)obj;
             if (stream == null)
                 stream = new NetDataWriter(true, 5);
+            {
+                if (objToSerialize.TargetPoint != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(objToSerialize.TargetPoint, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
             {
                 if (objToSerialize.Parent != default)
                 {
@@ -81,18 +93,6 @@ namespace Yogollag
                 {
                     stream.Put(true);
                     SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Target, ref stream);
-                }
-                else
-                {
-                    stream.Put(false);
-                }
-            }
-
-            {
-                if (objToSerialize.TargetPoint != default)
-                {
-                    stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(objToSerialize.TargetPoint, ref stream);
                 }
                 else
                 {

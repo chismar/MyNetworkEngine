@@ -24,7 +24,84 @@
         "$type": "AIEngine"
     },
     "SpellsEngine": {
-        "$type": "SpellsEngine"
+        "$type": "SpellsEngine",
+        "SpellsOnStart": [
+            {
+                "$type": "Spell",
+                "CustomName": "Attack brain",
+                "IsInfinite": true,
+                "Effects": [
+                    {
+                        "$type": "EffectRunAndRerun",
+                        "TryAgainCooldown": 1,
+                        "Spell": {
+                            "$type": "Spell",
+                            "CustomName": "Random action",
+                            "IsInfinite": true,
+                            "Effects": [
+                                {
+                                    "$type": "EffectChooseSpell",
+                                    "Spells": [
+                                        {
+                                            "$type": "Spell",
+                                            "CustomName": "Random attack",
+                                            "IsInfinite": true,
+                                            "Effects": [
+                                                {
+                                                    "$type": "EffectChooseSpell",
+                                                    "Target": {
+                                                        "$type": "ClosestTargetSelector",
+                                                        "Filter": {
+                                                            "$type": "CheckEntityType",
+                                                            "AllowedTypes": [
+                                                                "/CharDef"
+                                                            ]
+                                                        },
+                                                        "Size": 10
+                                                    },
+                                                    "Spells": [
+                                                        "./RangerAttack1",
+                                                        "./RangerAttack1"
+                                                    ],
+                                                    "Wait": true,
+                                                    "Random": true
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "$type": "Spell",
+                                            "IsInfinite": true,
+                                            "CustomName": "Random move",
+                                            "Effects": [
+                                                {
+                                                    "$type": "EffectChooseSpell",
+                                                    "Target": {
+                                                        "$type": "ClosestTargetSelector",
+                                                        "Filter": {
+                                                            "$type": "CheckEntityType",
+                                                            "AllowedTypes": [
+                                                                "/CharDef"
+                                                            ]
+                                                        },
+                                                        "Size": 13
+                                                    },
+                                                    "Spells": [
+                                                        "./ZombieGetCloser"
+                                                    ],
+                                                    "Wait": true,
+                                                    "Random": true
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "Wait": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
     },
     "ActionEngine": {
         "$type": "ActionEngine",

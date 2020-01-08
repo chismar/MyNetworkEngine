@@ -25,10 +25,10 @@
     },
     "SpellsEngine": {
         "$type": "SpellsEngine",
-        "CustomName": "Attack brain",
         "SpellsOnStart": [
             {
                 "$type": "Spell",
+                "CustomName": "Attack brain",
                 "IsInfinite": true,
                 "Effects": [
                     {

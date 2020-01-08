@@ -1,0 +1,68 @@
+{
+    "$type": "Spell",
+    "Duration": 2.45,
+    "Slot": "/AttackSlot",
+    "Effects": [
+        {
+            "$type": "EffectMove",
+            "Policy": "KeepDistance",
+            "AcceptedRange": 10,
+            "Target": {
+                "$type": "TargetTarget"
+            }
+        },
+        {
+            "$type": "EffectMotion",
+            "CurveName": "AttackCurveZombie",
+            "Speed": 0
+        },
+        {
+            "$type": "EffectAnimate",
+            "AnimationName": "Attack"
+        },
+        {
+            "$type": "SubEffect",
+            "StartOffset": 1.1,
+            "EndOffset": 1.4,
+            "Effects": [
+                {
+                    "$type": "EffectProjectile",
+                    "ObjectName": "Projectile",
+                    "ProjectileDef": {
+                        "$type": "Projectile",
+                        "Speed": 3,
+                        "StrikeDef": {
+                            "$type": "Strike",
+                            "PredicateOnTarget": {
+                                "$type": "CheckEntityType",
+                                "AllowedTypes": [
+                                    "/CharDef"
+                                ]
+                            },
+                            "SpellOnStrike": {
+                                "$type": "Spell",
+                                "ImpactOnStart": {
+                                    "$type": "Target",
+                                    "Do": {
+                                        "$type": "ImpactsList",
+                                        "Impacts": [
+                                            {
+                                                "$type": "ChangeEntityStat",
+                                                "Change": -10,
+                                                "StatDef": "/Stats/Health"
+                                            },
+                                            {
+                                                "$type": "ImpactInvokeAction",
+                                                "InvokedSpell": "/TestStaggerChar"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

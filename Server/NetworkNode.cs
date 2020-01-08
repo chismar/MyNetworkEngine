@@ -438,8 +438,8 @@ namespace NetworkEngine
             lock (_runLaterLock)
             {
                 if (ParentEntity.RunLaterDelegates == null)
-                    ParentEntity.RunLaterDelegates = new List<(SyncBaseApi, Action)>();
-                ParentEntity.RunLaterDelegates.Add((this, run));
+                    ParentEntity.RunLaterDelegates = new List<(SyncBaseApi, bool, Action)>();
+                ParentEntity.RunLaterDelegates.Add((this, NetworkEntity.CurrentlyExecutingInContext.Value != default, run));
             }
         }
         public virtual void OnAfterDeserialize() { }
@@ -1126,7 +1126,7 @@ namespace NetworkEngine
                     {
                         for (int i = 0; i < e.RunLaterDelegates.Count; i++)
                             if (e.RunLaterDelegates[i].Item1.ParentEntity == e)
-                                e.RunRunLaterAction(e.RunLaterDelegates[i].Item2);
+                                e.RunRunLaterAction(e.RunLaterDelegates[i].Item2, e.RunLaterDelegates[i].Item3);
                         e.RunLaterDelegates.Clear();
                     }));
             });
@@ -1374,12 +1374,14 @@ namespace NetworkEngine
         public override bool IsMaster => CurrentServer.Id == ServerId;
         public NetworkNodeId ServerId;
         public NetworkNodeId AuthorityServerId;
-        public List<(SyncBaseApi, Action)> RunLaterDelegates;
-        public void RunRunLaterAction(Action act)
+        public List<(SyncBaseApi, bool, Action)> RunLaterDelegates;
+        public void RunRunLaterAction(bool inContext, Action act)
         {
-            NetworkEntity.CurrentlyExecutingInContext.Value = Id;
+            if (inContext)
+                NetworkEntity.CurrentlyExecutingInContext.Value = Id;
             act();
-            NetworkEntity.CurrentlyExecutingInContext.Value = default;
+            if (inContext)
+                NetworkEntity.CurrentlyExecutingInContext.Value = default;
         }
         public override EntityId Id { get; set; }
         [Sync(SyncType.Client)]
