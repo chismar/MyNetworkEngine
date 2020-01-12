@@ -13,7 +13,10 @@
         "$type": "ActionEngine",
         "DefaultAvailableActions": [
             "./AttackSpell",
-            "./TestStaggerChar"
+            "./TestStaggerChar",
+            "/Abilities/QAbility",
+            "/Abilities/EAbility",
+            "/Abilities/RAbility"
         ]
     },
     "SpellsEngine": {

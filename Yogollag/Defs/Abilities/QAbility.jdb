@@ -1,0 +1,24 @@
+{
+    "$type": "Spell",
+    "IsAbility":true,
+    "CustomName": "EAbility",
+    "CastMode": {
+        "$type": "TargetPointCastDef",
+        "Input": {
+            "$type": "InputTrigger",
+            "Combos": [
+                {
+                    "Keyboard": "Q"
+                }
+            ]
+        },
+        "TargetPointSprite": {
+            "$type": "SpriteDef",
+            "SpriteSheetName": "tiles",
+            "X": 5,
+            "Y": 2,
+            "CustomName": "TestTargetPointSprite/TestTargetPointSprite_0"
+        }
+    },
+    "Duration": 1,
+}

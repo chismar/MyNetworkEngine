@@ -46,14 +46,14 @@ namespace Yogollag
         private void DrawCurrentSpell(CharacterEntity character)
         {
             var ae = character.ActionEngine;
-            foreach (var action in ae.DefaultAvailableActions)
+            foreach (var action in ae.DefaultAvailableActions.Select(x=>x.Def))
             {
-                _interactionStates.TryGetValue(action.Def, out var state);
-                var spell = ae.GetSpell(action.Def);
-                if (spell == null || spell == action.Def || (state.Item1 != spell && state.Item1 != null))
-                    _interactionStates.Remove(action.Def);
+                _interactionStates.TryGetValue(action, out var state);
+                var spell = ae.GetSpell(action);
+                if (spell == null || spell == action || (state.Item1 != spell && state.Item1 != null))
+                    _interactionStates.Remove(action);
                 else
-                    _interactionStates[action.Def] = (spell, action.Def.CastMode.Def.Update(action.Def, spell, character, state.Item2));
+                    _interactionStates[action] = (spell, action.CastMode.Def.Update(action, spell, character, state.Item2));
             }
         }
         private void Reset()

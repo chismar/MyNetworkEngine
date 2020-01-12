@@ -81,6 +81,12 @@ public class UnityInputImpl : InputApi
         var kCode = UnityEngine.KeyCode.None;
         if (key == Keyboard.Key.Unknown)
             return true;
+        kCode = TransformKey(key, kCode);
+        return UnityEngine.Input.GetKey(kCode);
+    }
+
+    private static KeyCode TransformKey(Keyboard.Key key, KeyCode kCode)
+    {
         switch (key)
         {
             case Keyboard.Key.Space:
@@ -98,11 +104,21 @@ public class UnityInputImpl : InputApi
             case Keyboard.Key.D:
                 kCode = UnityEngine.KeyCode.D;
                 break;
+            case Keyboard.Key.Q:
+                kCode = UnityEngine.KeyCode.Q;
+                break;
+            case Keyboard.Key.E:
+                kCode = UnityEngine.KeyCode.E;
+                break;
+            case Keyboard.Key.R:
+                kCode = UnityEngine.KeyCode.R;
+                break;
             case Keyboard.Key.LShift:
                 kCode = UnityEngine.KeyCode.LeftShift;
                 break;
         }
-        return UnityEngine.Input.GetKey(kCode);
+
+        return kCode;
     }
 
     public bool WasButtonPressed(Mouse.Button button)
@@ -123,28 +139,7 @@ public class UnityInputImpl : InputApi
         var kCode = UnityEngine.KeyCode.None;
         if (key == Keyboard.Key.Unknown)
             return false;
-        switch (key)
-        {
-
-            case Keyboard.Key.Space:
-                kCode = UnityEngine.KeyCode.Space;
-                break;
-            case Keyboard.Key.W:
-                kCode = UnityEngine.KeyCode.W;
-                break;
-            case Keyboard.Key.A:
-                kCode = UnityEngine.KeyCode.A;
-                break;
-            case Keyboard.Key.S:
-                kCode = UnityEngine.KeyCode.S;
-                break;
-            case Keyboard.Key.D:
-                kCode = UnityEngine.KeyCode.D;
-                break;
-            case Keyboard.Key.LShift:
-                kCode = UnityEngine.KeyCode.LeftShift;
-                break;
-        }
+        kCode = TransformKey(key, kCode);
         return UnityEngine.Input.GetKeyDown(kCode);
     }
 }

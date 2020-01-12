@@ -27,7 +27,7 @@ namespace Assets.UnityClient
         {
             this._visual = visual;
         }
-        float _assumedMaxVelocity = 5f;
+        float _assumedMaxVelocity = 2f;
         float _hasRunLerp = 0;
         protected override object ProcessValue(object curValue)
         {

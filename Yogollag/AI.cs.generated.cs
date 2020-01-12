@@ -32,11 +32,23 @@ namespace Yogollag
     [GeneratedClass]
     public class AIEngineDef : BaseDef, IEntityObjectDef
     {
+        public List<SelectorByType> DefaultSelectors
+        {
+            get;
+            set;
+        }
+
+        = new List<SelectorByType>();
     }
 
     [GeneratedClass]
     public partial class AIEngineSync
     {
+        public override List<SelectorByType> DefaultSelectors
+        {
+            get => ((AIEngineDef)Def).DefaultSelectors;
+        }
+
         override protected void SetDefsForComponents()
         {
         }

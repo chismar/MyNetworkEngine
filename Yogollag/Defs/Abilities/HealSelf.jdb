@@ -1,0 +1,28 @@
+{
+    "$type": "Spell",
+    "Duration": 0.85,
+    "Cooldown": 10,
+    "Slot": "/AttackSlot",
+    "Effects": [
+        {
+            "$type": "EffectMotion",
+            "CurveName": "AttackCurve",
+            "Speed": 5
+        },
+        {
+            "$type": "EffectAnimate",
+            "AnimationName": "SwordAttack"
+        },
+        {
+            "$type": "EffectIgnoreInput",
+            "Inputs": [
+                "/AttackSlot"
+            ]
+        }
+    ],
+    "ImpactOnSuccess": {
+        "$type": "ChangeEntityStat",
+        "StatDef": "/Stats/Health",
+        "Change":30
+    }
+}

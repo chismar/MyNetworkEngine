@@ -11,9 +11,20 @@ using System.Threading.Tasks;
 
 namespace Yogollag
 {
+    [KnownDefinitionsType]
+    public struct SelectorByType
+    {
+        public DefRef<LogicTypeDef> Type { get; set; }
+        public DefRef<IDef> Logic { get; set; }
+    }
     [GenerateSync]
     public abstract class AIEngine : SyncObject, IEntityComponent
     {
+        public Dictionary<EffectId, (int, Dictionary<LogicTypeDef, IDef>)> Overrides = 
+            new Dictionary<EffectId, (int, Dictionary<LogicTypeDef, IDef>)>();
+
+        [Def(true)]
+        public virtual List<SelectorByType> DefaultSelectors { get; set; }
         LocoMover _locoMover;
         Vec2? _targetPoint;
         EntityId? _targetEntity;
@@ -22,10 +33,21 @@ namespace Yogollag
         public IDef Def { get; set; }
         public event Action<EffectId> MovementIsFinished;
         float _range;
-
+       
         public void Init(SpellsEngine spellsEngine, LocoMover locoMover)
         {
             _locoMover = locoMover;
+            SetLogicOverrride(default, DefaultSelectors);
+        }
+       
+        public void SetLogicOverrride(EffectId id, List<SelectorByType> selectors)
+        {
+            Overrides.Add(id, (Overrides.Count == 0 ? 1 : 
+                Overrides.Max(x => x.Value.Item1) + 1, selectors.ToDictionary(x => x.Type.Def, x => x.Logic.Def)));
+        }
+        public void RemoveLogicOverride(EffectId id)
+        {
+            Overrides.Remove(id);
         }
         Random _rnd = new Random();
         public void BeginMovement(Vec2? targetPoint, EntityId? targetEntity, EffectId id, MovementPolicy policy, float range)
@@ -134,7 +156,7 @@ namespace Yogollag
         public DefRef<CalcerDef> AcceptedRange { get; set; }
         public DefRef<CalcerDef> FixedDuration { get; set; }
         public DefRef<IPredicateDef> Predicate { get; set; }
-        public DefRef<TargetSelectorDef> TargetSelector { get; set; }
+        public DefRef<ITargetSelectorDef> TargetSelector { get; set; }
         public DefRef<PointSelectorDef> PointSelector { get; set; }
         public DefRef<SpellDef> CastSpell { get; set; }
         public List<DefRef<SpellDef>> RandomSpells { get; set; } = new List<DefRef<SpellDef>>();
@@ -206,7 +228,7 @@ namespace Yogollag
     }
     public class EffectScriptDef : BaseDef, ISpellEffectDef
     {
-        public Dictionary<string, DefRef<TargetSelectorDef>> Selectors { get; set; } = new Dictionary<string, DefRef<TargetSelectorDef>>();
+        public Dictionary<string, DefRef<ITargetSelectorDef>> Selectors { get; set; } = new Dictionary<string, DefRef<ITargetSelectorDef>>();
         public DefRef<SpellDef> Spell { get; set; }
 
         public bool Begin(SpellInstance spellInstance, bool onClient)
@@ -243,7 +265,7 @@ namespace Yogollag
             }
         }
         public MovementPolicy Policy { get; set; }
-        public DefRef<TargetSelectorDef> Target { get; set; } = new TargetTarget();
+        public DefRef<ITargetSelectorDef> Target { get; set; } = new TargetTarget();
         public DefRef<PointSelectorDef> TargetPoint { get; set; }
         public DefRef<CalcerDef> AcceptedRange { get; set; }
 
@@ -273,7 +295,7 @@ namespace Yogollag
     }
     public class EffectChooseSpellDef : StatefullEffect<EffectChooseSpellDef.State>
     {
-        public DefRef<TargetSelectorDef> Target { get; set; }
+        public DefRef<ITargetSelectorDef> Target { get; set; }
         public bool Random { get; set; }
         public List<DefRef<SpellDef>> Spells { get; set; } = new List<DefRef<SpellDef>>();
         public bool Wait { get; set; }
@@ -335,23 +357,73 @@ namespace Yogollag
     {
         public Vec2 DirectionRelativeToTarget { get; set; }
     }
+    public class LogicTypeDef : BaseDef
+    {
 
-    public abstract class TargetSelectorDef : BaseDef
-    {
-        public abstract EntityId Select(ScriptingContext ctx);
     }
-    public class TargetTarget : TargetSelectorDef
+    public class ByType : CalcerDef, ITargetSelectorDef, IPredicateDef, IImpactDef, ISpellEffectDef
     {
-        public override EntityId Select(ScriptingContext ctx)
+        public DefRef<LogicTypeDef> Type { get; set; }
+
+        public void Apply(ScriptingContext ctx)
+        {
+            GetOverride<IImpactDef>(ctx.ProcessingEntity, ctx.Parent?.Host ?? ctx.Host)?.Apply(ctx);
+        }
+
+        public bool Begin(SpellInstance spellInstance, bool onClient)
+        {
+            return GetOverride<ISpellEffectDef>(spellInstance.ParentEntity, spellInstance.ParentEntity.Id)?.Begin(spellInstance, onClient) ?? true;
+        }
+
+        public override float Calc(ScriptingContext ctx)
+        {
+            return GetOverride<CalcerDef>(ctx.ProcessingEntity, ctx.Parent?.Host ?? ctx.Host)?.Calc(ctx) ?? default;
+        }
+        public bool Check(ScriptingContext ctx)
+        {
+            return GetOverride<IPredicateDef>(ctx.ProcessingEntity, ctx.Parent?.Host ?? ctx.Host)?.Check(ctx) ?? default;
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+            GetOverride<ISpellEffectDef>(spellInstance.ParentEntity, spellInstance.ParentEntity.Id)?.End(spellInstance,onClient, isSucess);
+        }
+        T GetOverride<T>(NetworkEntity ent, EntityId host) where T : class, IDef
+        {
+            var aiEngine = ent.CurrentServer.GetGhost(host) as IHasAIEngine;
+            if (aiEngine == null)
+                return default;
+            var all = aiEngine.AI.Overrides.Where(x => x.Value.Item2.ContainsKey(Type.Def));
+            if (!all.Any())
+                return default;
+            var max = all.Max(x => x.Value.Item1);
+            if (max != 0)
+            {
+                return aiEngine.AI.Overrides.Single(x => x.Value.Item1 == max).Value.Item2[Type.Def] as T;
+            }
+            return default;
+        }
+        public EntityId Select(ScriptingContext ctx)
+        {
+            return GetOverride<ITargetSelectorDef>(ctx.ProcessingEntity, ctx.Parent?.Host ?? ctx.Host)?.Select(ctx) ?? default;
+        }
+    }
+    public interface ITargetSelectorDef : IDef
+    {
+        EntityId Select(ScriptingContext ctx);
+    }
+    public class TargetTarget : BaseDef, ITargetSelectorDef
+    {
+        public EntityId Select(ScriptingContext ctx)
         {
             return ctx.Target;
         }
     }
-    public class ClosestTargetSelector : TargetSelectorDef
+    public class ClosestTargetSelector : BaseDef, ITargetSelectorDef
     {
         public DefRef<CalcerDef> Size { get; set; }
         public DefRef<IPredicateDef> Filter { get; set; }
-        public override EntityId Select(ScriptingContext ctx)
+        public EntityId Select(ScriptingContext ctx)
         {
             var size = Size.Def.Calc(ctx);
             var bodies = AllInCircle.QuerySpaceInCircle(size, ctx);
@@ -369,7 +441,7 @@ namespace Yogollag
                         continue;
                     bool canSelect = true;
                     if (Filter.Def != null)
-                        canSelect = Filter.Def.Check(new ScriptingContext(ghost));
+                        canSelect = Filter.Def.Check(new ScriptingContext(ghost) { Parent = ctx });
                     if (canSelect)
                         if (ghost is IPositionedEntity pe)
                         {

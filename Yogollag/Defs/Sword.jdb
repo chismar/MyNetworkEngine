@@ -20,6 +20,18 @@
                     {
                         "ActionSpell": "./AttackSpell",
                         "NewActionSpell": "/Attacks/SwordAttack"
+                    },
+                    {
+                        "ActionSpell": "/Abilities/QAbility",
+                        "NewActionSpell": "/Abilities/HealSelf"
+                    },
+                    {
+                        "ActionSpell": "/Abilities/RAbility",
+                        "NewActionSpell": "/Abilities/SummonCompanion"
+                    },
+                    {
+                        "ActionSpell": "/Abilities/EAbility",
+                        "NewActionSpell": "/Abilities/AOEDamage"
                     }
                 ]
             }

@@ -93,6 +93,7 @@ namespace Yogollag
         public virtual IEnumerable<SpellInstance> AllSpells => SyncedSpells;
         [Def(true)]
         public virtual List<DefRef<SpellDef>> SpellsOnStart { get; set; }
+        public List<SpellDef> DynamicBuffsOnStart { get; set; }
         public IDef Def { get; set; }
 
         List<SpellInstance> _predictedSpells = new List<SpellInstance>();
@@ -119,7 +120,12 @@ namespace Yogollag
             {
                 foreach (var spell in SpellsOnStart)
                     CastFromInsideEntity(new SpellCast() { Def = spell, OwnerObject = this.ParentEntity.Id, TargetEntity = this.ParentEntity.Id });
-
+                if (DynamicBuffsOnStart != null)
+                {
+                    foreach (var spell in DynamicBuffsOnStart)
+                        CastFromInsideEntity(new SpellCast() { Def = spell, OwnerObject = this.ParentEntity.Id, TargetEntity = this.ParentEntity.Id });
+                    DynamicBuffsOnStart = null;
+                }
             });
         }
 
@@ -282,6 +288,7 @@ namespace Yogollag
     }
     public class SpellDef : BaseDef, IEntityObjectDef
     {
+        public bool IsAbility { get; set; } = false;
         public bool IsInfinite { get; set; }
         public float Duration { get; set; } = 0f;
         public float Cooldown { get; set; } = 0f;

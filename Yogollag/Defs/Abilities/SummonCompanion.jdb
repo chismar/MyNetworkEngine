@@ -1,0 +1,85 @@
+{
+    "$type": "Spell",
+    "Duration": 0.85,
+    "Cooldown": 10,
+    "Slot": "/AttackSlot",
+    "Effects": [
+        {
+            "$type": "EffectMotion",
+            "CurveName": "AttackCurve",
+            "Speed": 5
+        },
+        {
+            "$type": "EffectAnimate",
+            "AnimationName": "SwordAttack"
+        },
+        {
+            "$type": "EffectIgnoreInput",
+            "Inputs": [
+                "/AttackSlot"
+            ]
+        }
+    ],
+    "ImpactOnSuccess": {
+        "$type": "SpawnObject",
+        "Object": "/Mobs/GardenZombie",
+        "Where": {
+            "$type": "RandomPointSelector",
+            "Radius": 10
+        },
+        "Buffed": {
+            "$type": "Spell",
+            "Duration":30,
+            "ImpactOnSuccess": 
+            {
+                "$type": "ChangeEntityStat",
+                "Set":-100,
+                "StatDef": "/Stats/Health"
+            },
+            "Effects": [
+                {
+                    "$type": "EffectOverrideAILogic",
+                    "Overrides": [
+                        {
+                            "Type": "/Mobs/EnemyFilter",
+                            "Logic": {
+                                "$type": "CheckEntityType",
+                                "AllowedTypes": [
+                                    "/Mobs/GardenZombie",
+                                    "/Mobs/GardenRanger"
+                                ]
+                            }
+                        }
+                    ],
+                },
+                {
+                    "$type": "EffectAOE",
+                    "Radius": 10,
+                    "Dot":true,
+                    "DotPeriod":1,
+                    "StrikeOnEnter": {
+                        "$type": "Strike",
+                        "PredicateOnTarget": {
+                            "$type": "CheckEntityType",
+                            "AllowedTypes": [
+                                "/Mobs/GardenZombie",
+                                "/Mobs/GardenRanger"
+                            ]
+                        },
+                        "SpellOnStrike": {
+                            "$type": "Spell",
+                            "ImpactOnSuccess": {
+                                "$type": "Target",
+                                "Do": {
+                                    "$type": "ChangeEntityStat",
+                                    "StatDef": "/Stats/Health",
+                                    "Change":-10    
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

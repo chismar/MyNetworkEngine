@@ -49,7 +49,7 @@ namespace Yogollag
             if (targetId == this.ParentEntity.Id)
                 return;
             if (strike.PredicateOnTarget == null ||
-                strike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId }))
+                strike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId, Parent = new ScriptingContext() { Host = ParentEntity.Id } }))
                 ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = strike.SpellOnStrike.Def, OwnerObject = ParentEntity.Id, TargetEntity = targetId });
         }
         [Sync]
@@ -64,7 +64,7 @@ namespace Yogollag
             if (!_struckEntities.Add(targetId))
                 return;
             if (_currentStrike.PredicateOnTarget == null ||
-                _currentStrike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId }))
+                _currentStrike.PredicateOnTarget.Def.Check(new ScriptingContext(ParentEntity) { Host = targetId, Target = targetId, Parent = new ScriptingContext() { Host = ParentEntity.Id } }))
                 ((IHasSpells)ParentEntity).SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = _currentStrike.SpellOnStrike.Def, OwnerObject = ParentEntity.Id, TargetEntity = targetId });
         }
     }

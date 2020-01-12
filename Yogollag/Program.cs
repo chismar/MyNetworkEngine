@@ -983,6 +983,7 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual ItemsCollection Inventory { get; set; } = SyncObject.New<ItemsCollection>();
         //public IRenderableDef RenDef { get => _spriteRenderer.RenDef; set => _spriteRenderer.RenDef = value; }
+        public IEnumerable<SpellDef> CurrentAbilities => ActionEngine.DefaultAvailableActions.Where(x=>x.Def.IsAbility).Select(x => ActionEngine.GetSpell(x));
         [Sync(SyncType.Client)]
         public virtual IEntityObjectDef Def { get; set; }
 

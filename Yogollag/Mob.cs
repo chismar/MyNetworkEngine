@@ -82,12 +82,12 @@ namespace Yogollag
         public override void OnCreate()
         {
             LocoMover = new LocoMover(Id, LocoMoverDef, Locomotion);
-            AI.Init(SpellsEngine, LocoMover);
             StatsEngine.Init();
         }
 
         public override void OnInit()
         {
+            AI.Init(SpellsEngine, LocoMover);
             var voltWorld = ((VoltWorld)CurrentServer.CustomData);
             lock (voltWorld)
             {

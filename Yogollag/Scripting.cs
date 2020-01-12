@@ -339,7 +339,7 @@ static class Scripting
     {
         bool Check(ScriptingContext ctx);
     }
-
+  
     public class CheckEntityType : BaseDef, IPredicateDef
     {
         public List<DefRef<IEntityObjectDef>> AllowedTypes { get; set; } = new List<DefRef<IEntityObjectDef>>();

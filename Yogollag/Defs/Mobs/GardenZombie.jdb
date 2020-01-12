@@ -21,7 +21,18 @@
         "IdleAngleSpeed": 3600
     },
     "AI": {
-        "$type": "AIEngine"
+        "$type": "AIEngine",
+        "DefaultSelectors": [
+            {
+                "Type": "./EnemyFilter",
+                "Logic":{
+                    "$type": "CheckEntityType",
+                    "AllowedTypes": [
+                        "/CharDef"
+                    ]
+                }
+            }
+        ]
     },
     "SpellsEngine": {
         "$type": "SpellsEngine",
@@ -52,10 +63,8 @@
                                                     "Target": {
                                                         "$type": "ClosestTargetSelector",
                                                         "Filter": {
-                                                            "$type": "CheckEntityType",
-                                                            "AllowedTypes": [
-                                                                "/CharDef"
-                                                            ]
+                                                            "$type": "ByType",
+                                                            "Type": "./EnemyFilter"
                                                         },
                                                         "Size": 3
                                                     },
@@ -78,10 +87,8 @@
                                                     "Target": {
                                                         "$type": "ClosestTargetSelector",
                                                         "Filter": {
-                                                            "$type": "CheckEntityType",
-                                                            "AllowedTypes": [
-                                                                "/CharDef"
-                                                            ]
+                                                            "$type": "ByType",
+                                                            "Type": "./EnemyFilter"
                                                         },
                                                         "Size": 10
                                                     },

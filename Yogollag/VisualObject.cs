@@ -100,7 +100,7 @@ namespace Yogollag
         }
         protected override object ProcessValue(object curValue)
         {
-            var collection = (ICollection)curValue;
+            var collection = (IEnumerable)curValue;
             if (collection == null)
                 return curValue;
             _objectsCache.Clear();
