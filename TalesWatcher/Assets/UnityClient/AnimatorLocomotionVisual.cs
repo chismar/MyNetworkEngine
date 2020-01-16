@@ -27,7 +27,7 @@ namespace Assets.UnityClient
         {
             this._visual = visual;
         }
-        float _assumedMaxVelocity = 2f;
+        float _assumedMaxVelocity = 5f;
         float _hasRunLerp = 0;
         protected override object ProcessValue(object curValue)
         {
@@ -82,7 +82,7 @@ namespace Assets.UnityClient
                 var currentDir = new Vec2(tv.X, tv.Y);
                 if (curValue is ICharacterLikeMovement)
                     EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 400), Text = $"{currentDir} {rotation} {velocity}" });
-                _visual._animator.SetFloat("dirX", currentDir.X / _assumedMaxVelocity);
+                _visual._animator.SetFloat("dirX", -currentDir.X / _assumedMaxVelocity);
                 _visual._animator.SetFloat("dirY", currentDir.Y / _assumedMaxVelocity);
                 _visual._animator.SetBool("IsRun", hasRun);
             }
