@@ -341,3 +341,8 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+
+!TalesWatcher/Packages/*
+!TalesWatcher/Packages/
+!TalesWatcher/
