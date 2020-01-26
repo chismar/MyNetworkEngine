@@ -25,6 +25,11 @@
             "EndOffset": 0.51,//0,60 x1
             "Effects": [
                 {
+                    "$type": "EffectFx",
+                    "FxLocation": "TrailLocation",
+                    "FxName": "Line"
+                },
+                {
                     "$type": "EffectStrike",
                     "StrikeDef": {
                         "$type": "Strike",

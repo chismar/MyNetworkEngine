@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7754718262595026231}
   - component: {fileID: 4777624282273459549}
   - component: {fileID: 6053255636327982887}
+  - component: {fileID: 3128940601513797812}
   m_Layer: 10
   m_Name: GardenZombie
   m_TagString: Untagged
@@ -231,6 +232,20 @@ MonoBehaviour:
   FieldPath: Mortal.IsDead
   Visual: {fileID: 0}
   AnimatorFieldName: IsDead
+--- !u!114 &3128940601513797812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281690419673664415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c8c44f55e35174aa965c308b38a72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldPath: FxEngine
+  Visual: {fileID: 0}
 --- !u!1001 &3136371526791401000
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 2126670400688543364}
   - component: {fileID: 4143931605412610671}
   - component: {fileID: 9186705518085980601}
+  - component: {fileID: 1370100826263682022}
   m_Layer: 0
   m_Name: CharDef
   m_TagString: Untagged
@@ -235,6 +236,20 @@ MonoBehaviour:
   FieldPath: Mortal.IsDead
   Visual: {fileID: 0}
   AnimatorFieldName: IsDead
+--- !u!114 &1370100826263682022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281690419673664415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c8c44f55e35174aa965c308b38a72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldPath: FxEngine
+  Visual: {fileID: 0}
 --- !u!114 &7729118204465603769
 MonoBehaviour:
   m_ObjectHideFlags: 0

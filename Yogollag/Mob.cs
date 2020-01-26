@@ -37,7 +37,7 @@ namespace Yogollag
     }
     [GenerateSync]
     public abstract class Mob : GhostedEntity,
-        IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject,
+        IEntityObject, ITicked, IRenderable, IPositionedEntity, IStatEntity, IVoltSimpleObject, IHasFxEngine,
         IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine, IHasAIEngine
     {
 
@@ -74,6 +74,8 @@ namespace Yogollag
         public virtual ActionEngine ActionEngine { get; set; } = SyncObject.New<ActionEngine>();
         [Sync(SyncType.Client)]
         public virtual MortalEngine Mortal { get; set; } = SyncObject.New<MortalEngine>();
+        [Sync(SyncType.Client)]
+        public virtual FxEngine FxEngine { get; set; } = SyncObject.New<FxEngine>();
 
         public Mob()
         {

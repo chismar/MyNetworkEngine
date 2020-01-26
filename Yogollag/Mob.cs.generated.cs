@@ -223,6 +223,13 @@ namespace Yogollag
         }
 
         = default;
+        public DefRef<FxEngineSceneDef> FxEngine
+        {
+            get;
+            set;
+        }
+
+        = default;
     }
 
     [GeneratedClass]
@@ -291,6 +298,13 @@ namespace Yogollag
         }
 
         = default;
+        public DefRef<FxEngineDef> FxEngine
+        {
+            get;
+            set;
+        }
+
+        = default;
     }
 
     [GeneratedClass]
@@ -315,6 +329,7 @@ namespace Yogollag
             _spriteRenderer.Def = (IDef)((MobDef)Def)?._spriteRenderer.Def;
             CombatEngine.Def = (IDef)((MobDef)Def)?.CombatEngine.Def;
             ActionEngine.Def = (IDef)((MobDef)Def)?.ActionEngine.Def;
+            FxEngine.Def = (IDef)((MobDef)Def)?.FxEngine.Def;
         }
 
         override public void CallInitOnComponents()
@@ -326,6 +341,7 @@ namespace Yogollag
             _spriteRenderer.Init();
             CombatEngine.Init();
             ActionEngine.Init();
+            FxEngine.Init();
         }
 
         override public void CallCreateOnComponents()
@@ -337,6 +353,7 @@ namespace Yogollag
             _spriteRenderer.Create();
             CombatEngine.Create();
             ActionEngine.Create();
+            FxEngine.Create();
         }
 
         override public void CallDestroyOnComponents()
@@ -348,11 +365,12 @@ namespace Yogollag
             _spriteRenderer.Destroy();
             CombatEngine.Destroy();
             ActionEngine.Destroy();
+            FxEngine.Destroy();
         }
     }
 
     //obj Mob generic  hasCustomSerialization false
-    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover,IHasMortalEngine,IHasAIEngine 15
+    //debug info IEntityPropertyChanged,IEntityObject,ITicked,IRenderable,IStatEntity,IVoltSimpleObject,IPositionedEntity,IHasFxEngine,IImpactedEntity,IHasSpells,IHasLinksEngine,IHasActionEngine,IHasCombatEngine,IHasLocoMover,IHasMortalEngine,IHasAIEngine 16
     [GeneratedClass]
     public partial class MobSync : Mob, IGhost
     {
@@ -472,6 +490,18 @@ namespace Yogollag
             }
         }
 
+        public override FxEngine FxEngine
+        {
+            get => base.FxEngine;
+            set
+            {
+                ((SyncObject)base.FxEngine)?.SetParentEntity(null);
+                base.FxEngine = value;
+                OnPropChanged(10);
+                ((SyncObject)base.FxEngine)?.SetParentEntity(ParentEntity);
+            }
+        }
+
         public override void InitFromSceneDef(BaseDef def)
         {
             var selfDef = (MobSceneDef)def;
@@ -482,6 +512,7 @@ namespace Yogollag
             _spriteRenderer.InitFromSceneDef(selfDef._spriteRenderer.Def);
             CombatEngine.InitFromSceneDef(selfDef.CombatEngine.Def);
             ActionEngine.InitFromSceneDef(selfDef.ActionEngine.Def);
+            FxEngine.InitFromSceneDef(selfDef.FxEngine.Def);
             Rotation = selfDef.Rotation;
             Position = selfDef.Position;
         }
@@ -498,6 +529,7 @@ namespace Yogollag
             ((IGhost)CombatEngine)?.ClearSerialization();
             ((IGhost)ActionEngine)?.ClearSerialization();
             ((IGhost)Mortal)?.ClearSerialization();
+            ((IGhost)FxEngine)?.ClearSerialization();
         }
 
         public void Deserialize(NetDataReader stream)
@@ -724,6 +756,31 @@ namespace Yogollag
                 CheckStream(stream, 1485461930);
             }
 
+            CheckStream(stream, 1277672612);
+            if ((mask & (1 << 10)) != 0)
+            {
+                CheckStream(stream, 1277672612);
+                var nullOrNot = stream.GetByte();
+                if (nullOrNot == 0)
+                {
+                    FxEngine = null;
+                }
+                else
+                {
+                    var newVal = Activator.CreateInstance(SyncTypesMap.GetSyncTypeFromId(stream.GetInt()));
+                    ((IGhost)newVal).Deserialize(stream);
+                    FxEngine = (FxEngine)newVal;
+                }
+
+                CheckStream(stream, 1277672612);
+            }
+            else
+            {
+                CheckStream(stream, 1277672612);
+                ((IGhost)FxEngine)?.Deserialize(stream);
+                CheckStream(stream, 1277672612);
+            }
+
             OnAfterDeserialize();
         }
 
@@ -738,6 +795,7 @@ namespace Yogollag
             ((SyncObject)CombatEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)ActionEngine)?.SetParentEntity(this.ParentEntity);
             ((SyncObject)Mortal)?.SetParentEntity(this.ParentEntity);
+            ((SyncObject)FxEngine)?.SetParentEntity(this.ParentEntity);
         }
 
         void OnPropChanged(int prop)
@@ -973,6 +1031,29 @@ namespace Yogollag
                 SafeguardStream(stream, 1485461930);
                 hasAny |= ((IGhost)Mortal)?.Serialize(ref stream, initial) ?? false;
                 SafeguardStream(stream, 1485461930);
+            }
+
+            SafeguardStream(stream, 1277672612);
+            if ((deltaMask & (1 << 10)) != 0)
+            {
+                SafeguardStream(stream, 1277672612);
+                hasAny = true;
+                if (FxEngine == null)
+                    stream.Put((byte)0);
+                else
+                {
+                    stream.Put((byte)1);
+                    stream.Put(SyncTypesMap.GetIdFromSyncType(FxEngine.GetType()));
+                    ((IGhost)FxEngine).Serialize(ref stream, true);
+                }
+
+                SafeguardStream(stream, 1277672612);
+            }
+            else
+            {
+                SafeguardStream(stream, 1277672612);
+                hasAny |= ((IGhost)FxEngine)?.Serialize(ref stream, initial) ?? false;
+                SafeguardStream(stream, 1277672612);
             }
 
             return hasAny;

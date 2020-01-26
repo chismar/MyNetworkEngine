@@ -917,7 +917,7 @@ namespace Yogollag
     //tick methods should be sync-methods
     [GenerateSync]
     public abstract class CharacterEntity : GhostedEntity,
-        ICharacterLikeMovement, IRenderable, IPositionedEntity,
+        ICharacterLikeMovement, IRenderable, IPositionedEntity, IHasFxEngine,
         IStatEntity, IImpactedEntity, IQuester, IHasInventory, IEntityObject, ITicked, IHasSpells, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine
     {
 
@@ -991,6 +991,8 @@ namespace Yogollag
         public LocoMover LocoMover { get; set; }
         [Sync(SyncType.Client)]
         public virtual MortalEngine Mortal { get; set; } = SyncObject.New<MortalEngine>();
+        [Sync(SyncType.Client)]
+        public virtual FxEngine FxEngine { get; set; } = SyncObject.New<FxEngine>();
 
         [Sync(SyncType.AuthorityClient)]
         public virtual void SetActiveItem(long itemId)

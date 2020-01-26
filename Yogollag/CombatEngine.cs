@@ -7,7 +7,7 @@ using Definitions;
 using CodeGen;
 using System.Threading.Tasks;
 using SFML.Graphics;
-
+using System.Linq;
 namespace Yogollag
 {
     public interface IHasCombatEngine
@@ -127,7 +127,7 @@ namespace Yogollag
         public float EndOffset { get; set; } = float.MaxValue;
         public bool OfffsetIsBackward { get; set; } = false;
         public List<DefRef<ISpellEffectDef>> Effects { get; set; } = new List<DefRef<ISpellEffectDef>>();
-
+        static float LagCompensation = 0.05f;
         public bool Begin(SpellInstance spellInstance, bool onClient)
         {
             var parentEntity = spellInstance.ParentEntity;
@@ -136,7 +136,9 @@ namespace Yogollag
                 NetworkEntity.CurrentlyExecutingInContext.Value = default;
                 var dur = ((SpellDef)spellInstance.Def).Duration;
                 var start = OfffsetIsBackward ? dur - StartOffset : StartOffset;
-                await Task.Delay(TimeSpan.FromSeconds(start));
+                start -= LagCompensation;
+                if (start > 0)
+                    await Task.Delay(TimeSpan.FromSeconds(start));
                 if (spellInstance.ParentEntity == null)
                     return;
                 spellInstance.RunLater(() =>
@@ -150,7 +152,10 @@ namespace Yogollag
                     Task.Run(async () =>
                     {
                         NetworkEntity.CurrentlyExecutingInContext.Value = default;
-                        await Task.Delay(TimeSpan.FromSeconds(OfffsetIsBackward ? dur - EndOffset - start : EndOffset - start));
+                        var endOffset = OfffsetIsBackward ? dur - EndOffset - start : EndOffset - start;
+                        endOffset -= LagCompensation;
+                        if (endOffset > 0)
+                            await Task.Delay(TimeSpan.FromSeconds(endOffset));
                         if (spellInstance.ParentEntity == null)
                             return;
                         spellInstance.RunLater(() =>
@@ -195,4 +200,75 @@ namespace Yogollag
         }
     }
 
+    [KnownDefinitionsType]
+    public class FxEventHandler
+    {
+        public string FxEvent { get; set; }
+        public string FxName { get; set; }
+        public string Location { get; set; }
+    }
+    public interface IHasFxEngine
+    {
+        FxEngine FxEngine { get; set; }
+    }
+    [GenerateSync]
+    public abstract class FxEngine : SyncObject, IEntityComponent
+    {
+        public IDef Def { get; set; }
+        public Action<string> FxEvent;
+        public Dictionary<EffectId, (string fx, string location)> ActiveFXs { get; set; } = new Dictionary<EffectId, (string fx, string location)>();
+        class Layer
+        {
+            public int Index { get; set; }
+            public Dictionary<string, (string, string)> Overrides { get; set; }
+        }
+        Dictionary<EffectId, Layer> _overrides = new Dictionary<EffectId, Layer>();
+        public void SetLayer(EffectId id, Dictionary<string, (string, string)> overriddes)
+        {
+            _overrides.Add(id, new Layer() { Index = _overrides.Count == 0 ? 0 : _overrides.Max(x => x.Value.Index) + 1, Overrides = overriddes });
+
+        }
+        public void RemoveLayer(EffectId id)
+        {
+            _overrides.Remove(id);
+        }
+        public (string, string) GetFx(string fxEvent)
+        {
+
+            int maxValue = -1;
+            (string, string) maxOverride = default;
+            foreach (var overrideLayer in _overrides)
+            {
+                if (overrideLayer.Value.Index > maxValue && overrideLayer.Value.Overrides.TryGetValue(fxEvent, out var overrideSpell))
+                {
+                    maxValue = overrideLayer.Value.Index;
+                    maxOverride = overrideSpell;
+                }
+            }
+            return maxOverride;
+        }
+    }
+    public class EffectFx : BaseDef, ISpellEffectDef
+    {
+        public string FxLocation { get; set; }
+        public string FxName { get; set; }
+        public List<FxEventHandler> FxHandlers { get; set; } = new List<FxEventHandler>();
+        public bool Begin(SpellInstance spellInstance, bool onClient)
+        {
+            if (!onClient)
+                return true;
+            ((IHasFxEngine)spellInstance.ParentEntity).FxEngine
+                .SetLayer(new EffectId(this, spellInstance.Id), FxHandlers.ToDictionary(x => x.FxEvent, x => (x.FxName, x.Location)));
+            ((IHasFxEngine)spellInstance.ParentEntity).FxEngine.ActiveFXs[new EffectId(this, spellInstance)] = (FxName, FxLocation);
+            return true;
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+            if (!onClient)
+                return;
+            ((IHasFxEngine)spellInstance.ParentEntity).FxEngine.RemoveLayer(new EffectId(this, spellInstance.Id));
+            ((IHasFxEngine)spellInstance.ParentEntity).FxEngine.ActiveFXs.Remove(new EffectId(this, spellInstance));
+        }
+    }
 }
