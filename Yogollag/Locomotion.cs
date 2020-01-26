@@ -116,7 +116,7 @@ namespace Yogollag
                         angle = angle - 360;
                     if (angle < -180)
                         angle = angle + 360;
-                    if (Math.Abs(angle) < 15)
+                    if (Math.Abs(angle) < 2)
                     {
                         _movable.ApplyMovement(default, default);
                         _lerpedSpeed = 0f;
@@ -143,7 +143,7 @@ namespace Yogollag
                     var sign = -Math.Sign(angle);
                     float lerp = Mathf.Clamp(Math.Abs(angle) / 180 * sign, -1, 1);
                     //EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
-                    _lerpedSpeed = Mathf.Clamp(_lerpedSpeed + 1f, 0f, _def.CruiserSpeed);
+                    _lerpedSpeed = Mathf.Clamp(_lerpedSpeed + 0.3f, 0f, _def.CruiserSpeed);
                     _movable.ApplyMovement(MovementDir * _lerpedSpeed, Math.Abs(angle) < 5 ? default : _def.MovementAngleSpeed * lerp);
                     
                 }

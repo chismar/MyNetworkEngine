@@ -29,6 +29,7 @@ namespace Assets.UnityClient
         }
         float _assumedMaxVelocity = 5f;
         float _hasRunLerp = 0;
+        Vec2 _lastDir;
         protected override object ProcessValue(object curValue)
         {
             Vec2 pos;
@@ -80,6 +81,16 @@ namespace Assets.UnityClient
                 t.Rotate(360 -rotation);
                 var tv = t.TransformPoint(-velocity.X, velocity.Y);
                 var currentDir = new Vec2(tv.X, tv.Y);
+                if (_lastDir == default)
+                    _lastDir = currentDir;
+                else
+                {//leeerp
+                    var newVec = System.Numerics.Vector2.Lerp(
+                        new System.Numerics.Vector2(_lastDir.X, _lastDir.Y),
+                        new System.Numerics.Vector2(currentDir.X, currentDir.Y), 0.1f);
+                    _lastDir = new Vec2(newVec.X, newVec.Y);
+                    currentDir = _lastDir;
+                }
                 if (curValue is ICharacterLikeMovement)
                     EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 400), Text = $"{currentDir} {rotation} {velocity}" });
                 _visual._animator.SetFloat("dirX", -currentDir.X / _assumedMaxVelocity);
