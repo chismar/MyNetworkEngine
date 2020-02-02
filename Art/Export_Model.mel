@@ -1,0 +1,204 @@
+// ======== Export Skin/Rig J1 Project =========
+// Для запуска, надо вставить весть этот текст скрипта в редатор скриптов Maya, выделить текст скрипта - Ctrl+A и запустить - Ctrl+Enter
+//
+// экспортится только текущий открытый файл независимо от расширени и только без референсов
+// скрипт ищет кость Global, бейкает и вынимает её из общего сетапа в корень сцены
+// удаляет экспрешшены и дисплей слои
+// затем ищет все меши со скином и если они без префикса "NE_" то выбирает их и кость Global, и экспортит выделенное в FBX с нужными для проекта настройками, независимо от ручных настроек в экспорте.
+// экспортит в подпапку "FBX" текущей папки
+
+// ==================================== функции ============================================
+
+global proc selectOnlyJoints() // select only joints in hierarchy of selected object
+{
+        
+    string $joints[] = `ls -sl -typ joint -dag`;
+    if(size($joints) == 0)
+        error("No joints in selected DAG");
+    select -r $joints;
+}
+
+proc string[] getSkinnedMeshesInScene()
+{	
+    $sceneMeshes = `ls -type mesh`;
+    string $skinedMeshes[] = {};
+    $i = 0;
+    for ($sm in $sceneMeshes) // $sm = $sceneMeshes[0];
+    {
+        $isSkined = `listConnections -type skinCluster $sm`;
+        if (size($isSkined) > 1) error ("Too much skin clusters - " + size($isSkined) + " on object " + $sm);
+        if ($isSkined[0] != "") // print $isSkined[0];
+        {
+            $parents = `listRelatives -parent $sm`;
+            if (size($parents) > 1) { error ("Too much parents! - " + size($parents) + " on object " + $sm);}
+            string $mmm = $parents[0];
+            $mt = `match "^NE_" $mmm`;
+            if ($mt != "NE_" ) 
+            {
+                $skinedMeshes[$i] = $parents[0];
+                $i++;
+            }
+        }
+    }   
+    
+ //   print $skinedMeshes;
+   $skinedMeshes = `stringArrayRemoveDuplicates $skinedMeshes`;
+   return $skinedMeshes;
+}
+
+proc string[] listAttachedAnimCurves(string $node) 
+{
+	// get the connections and connected nodes
+	$src_a = `listConnections -s true -d false -c true $node`;
+	$src_n = `listConnections -s true -d false $node`;
+    string $curves[] = {};
+    int $ic = 0;
+	for( $i=0; $i < size($src_n); $i++ ) 
+	{
+		$j = $i*2;
+
+		// query the node type of the connected node
+		$type = `nodeType $src_n[$i]`;
+		
+		// see if it's a 
+		//   time to angular curve
+		//   time to length curve  or a
+		//   time to unitless curve
+		if($type=="animCurveTA" || $type=="animCurveTL" || $type=="animCurveTU") 
+		{
+		   $curves[$ic] = $src_n[$i];
+//		   print("\t"+$src_a[$j+1]+"\n");
+		   $ic++;
+		} 
+	}
+	return $curves;
+}
+
+// ==================================== блок с переменными, начальные установки ==================================== 
+int $exportAllFilesInFolder = 1; // 1 - exportAllFilesInFolder, 0 - export only current opened file
+int $doFBXExport = 1;
+    int $exportAnimation = 0; //
+    int $exportShapes = 1;
+    int $exportCameras = 0;
+    int $exportLights = 0;
+string $fbxfold = "FBX/";
+string $excludeFileMask01 = "_RIG.";
+string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
+int $deleteLayers = 1;
+string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
+                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
+int $doExport = 1;
+int $i = 0;
+
+// ==================================== START SCRIPT ==================================== 
+string $path = `file -q -sn`; if ($path == "") error ("Save current scene, or open smething that exist!");
+string $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
+$Files[0] = `match "[^/\\]*$" $path`;
+string $c = $Files[0];
+string $nsps[] = `namespaceInfo -listOnlyNamespaces`;
+
+if ( size($nsps) > 2 ){ $doExport = 0; $message = ("Namespaces detected in scene - " + $nsps[0] + " | " + $c + "Scene should not contain References!"); print $message; $log = $log + $message; }
+if ( (`match $excludeFileMask01 $c`) != $excludeFileMask01 ) { print ("Warning! Scene Shoul have suffix " + $excludeFileMask01 + "\n" );}
+if ( `objExists $ssHips` ) {}
+   // { if ( `nodeType $ssHips` != "joint" ) {$doExport = 0; print ("Global is not a joint!");} }
+else 
+    {$doExport = 0; print ("No Global in scene");}
+    
+if ( size(getSkinnedMeshesInScene()) == 0) {$doExport = 0; print ("No skinned Meshes in scene"); }
+//print $doExport;
+
+if ( $doExport ) // if ( $doExport ) print "DO!";
+{
+    // =================== Bake keys for correct deleting controls/constraints etc =====================
+
+    select -r $ssHips;
+    selectOnlyJoints;
+    string $joints[] = `ls -sl`;
+    bakeResults -simulation true -t ("0:1") -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys true -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -controlPoints false -shape true $joints;
+
+    // ============================== DO Something ================================
+    if(size(`listRelatives -parent $ssHips`)>0) parent -w $ssHips;
+
+    select (`ls -type expression`); doDelete;
+
+    if ($deleteLayers){ $lrs = `ls -type  displayLayer`; select -r $lrs; select -tgl defaultLayer; delete (`ls -sl`); }
+    
+    // ========================== Delete Keys from Skeleton =======================
+    select -r $ssHips ;
+    selectOnlyJoints;
+    string $joints[] = `ls -sl`;
+    for ($j in $joints)
+    {
+    	string $ac[] = `listAttachedAnimCurves $j`;
+    	if (size ($ac) > 0 )delete $ac;
+    }
+
+    // ========================== Delete NonJoints from Hierarchy ====================
+    select -r $ssHips ;
+    select_hierarhy;
+    string $joints[] = `ls -sl`;
+    select -tgl $joints[0];
+    string $joints[] = `ls -sl`;
+    string $nonJoints[] = {};
+    for ($j in $joints)
+    {
+        if ( `nodeType $j` != "joint" ) 
+        {
+            $nonJoints[size($nonJoints)] = $j;
+        }
+    }
+    //    print $nonJoints;
+    delete $nonJoints;
+    
+    // ============================== Export to FBX ============================== 
+    if ($doFBXExport)
+    {
+        FBXProperty Export|IncludeGrp|Geometry|SmoothingGroups -v 1;
+        FBXProperty Export|IncludeGrp|Animation -v $exportAnimation;
+        FBXProperty Export|IncludeGrp|Animation|Deformation -v $exportShapes;
+        FBXExportAnimationOnly -v 0;
+        FBXExportSkeletonDefinitions -v 1;
+        FBXExportSmoothingGroups -v 1;
+        FBXExportSmoothMesh -v 0;
+        FBXExportTangents -v 1;
+        FBXExportUpAxis y;
+        FBXExportShapes -v $exportShapes;
+        FBXExportSkins -v $exportShapes;
+        FBXExportCameras -v 0;
+        FBXExportLights -v 0;
+    
+        FBXExportFileVersion -v FBX201600;
+        FBXExportColladaFrameRate 30;
+        FBXExportQuaternion -v resample;
+        FBXExportScaleFactor 1.0;
+        FBXExportConstraints -v 0;
+    
+        FBXProperty Export|IncludeGrp|Geometry|SelectionSet -v 0;
+        FBXExportBakeComplexAnimation -v 0;
+        FBXExportApplyConstantKeyReducer -v 0;
+        FBXExportAxisConversionMethod none;
+        FBXExportBakeResampleAnimation -v 0;
+        FBXExportCacheFile -v 0;
+        FBXExportEmbeddedTextures -v 0;
+        FBXExportGenerateLog -v 0;
+        FBXExportHardEdges -v 0;
+        FBXExportInAscii -v 0;
+        FBXExportInputConnections -v 0;
+        FBXExportInstances -v 0;
+        FBXExportSplitAnimationIntoTakes -c;
+        FBXExportTriangulate -v 0;
+        FBXExportUseSceneName -v 0;
+                       
+        select -r $ssHips;
+        if ($exportShapes) select -add `getSkinnedMeshesInScene`;
+        $path = `file -q -sn`;
+        $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
+        $fName = `match "[^/\\]*$" $path`;
+        $fNameNoExt = basenameEx( $fName );
+        if ( !`filetest -e ($fold + $fbxfold )` )
+            sysFile -makeDir ($fold + $fbxfold); 
+        FBXExport -f ($fold + $fbxfold + $fNameNoExt + ".fbx") -s;
+    }
+}
+print ($log + "\n");
+
