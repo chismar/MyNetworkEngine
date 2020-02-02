@@ -1,7 +1,9 @@
 // ======== Export Skin/Rig TW Project =========
 // Для запуска, надо вставить весть этот текст скрипта в редатор скриптов Maya, выделить текст скрипта - Ctrl+A и запустить - Ctrl+Enter
 //
-// экспортится только текущий открытый файл независимо от расширени и только без референсов
+// по умолчанию экспортится только текущий открытый файл независимо от расширения, обязательно без референсов, обязательно с постфиксом _RIG
+// если надо сэкспортить все файлы в папке где находится открытый файл, то надо поставить переменную $exportAllFilesInFolder в единицу, расширение можно выбрать переменной $fExt, 
+// массово обрабатываются только файлы имя которых содержит символы соответствующие маске_*H_ , например Sword_1H_Zombie
 // скрипт ищет кость Global, бейкает и вынимает её из общего сетапа в корень сцены
 // удаляет экспрешшены и дисплей слои
 // затем ищет все меши со скином и если они без префикса "NE_" то выбирает их и кость Global, и экспортит выделенное в FBX с нужными для проекта настройками, независимо от ручных настроек в экспорте.
@@ -15,7 +17,8 @@ int $doFBXExport = 1;
     int $exportCameras = 0;
     int $exportLights = 0;
 string $fbxfold = "FBX/";
-string $excludeFileMask01 = "_RIG.";
+string $fExt = "*.ma"; // расширение файлов для обработки
+string $includedFileMask = "_RIG.";
 string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
 int $deleteLayers = 1;
 string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
@@ -93,111 +96,130 @@ proc string[] listAttachedAnimCurves(string $node)
 // ==================================== START SCRIPT ==================================== 
 string $path = `file -q -sn`; if ($path == "") error ("Save current scene, or open smething that exist!");
 string $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
-$Files[0] = `match "[^/\\]*$" $path`;
-string $c = $Files[0];
-string $nsps[] = `namespaceInfo -listOnlyNamespaces`;
 
-if ( size($nsps) > 2 ){ $doExport = 0; $message = ("Namespaces detected in scene - " + $nsps[0] + " | " + $c + "Scene should not contain References!"); print $message; $log = $log + $message; }
-if ( (`match $excludeFileMask01 $c`) != $excludeFileMask01 ) { print ("Warning! Scene Shoul have suffix " + $excludeFileMask01 + "\n" );}
-if ( `objExists $ssHips` ) {}
-   // { if ( `nodeType $ssHips` != "joint" ) {$doExport = 0; print ("Global is not a joint!");} }
+
+if ($exportAllFilesInFolder)
+    $Files = `getFileList -folder $fold -filespec $fExt`; //тут список клипов в папке выбраной выше, только имена файлов с расширением
 else 
-    {$doExport = 0; print ("No Global in scene");}
-    
-if ( size(getSkinnedMeshesInScene()) == 0) {$doExport = 0; print ("No skinned Meshes in scene"); }
-//print $doExport;
+    $Files[0] = `match "[^/\\]*$" $path`;
+$c = $Files[0];
 
-if ( $doExport ) // if ( $doExport ) print "DO!";
-{
-    // =================== Bake keys for correct deleting controls/constraints etc =====================
 
-    select -r $ssHips;
-    selectOnlyJoints;
-    string $joints[] = `ls -sl`;
-    bakeResults -simulation true -t ("0:1") -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys true -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -controlPoints false -shape true $joints;
-
-    // ============================== DO Something ================================
-    if(size(`listRelatives -parent $ssHips`)>0) parent -w $ssHips;
-
-    select (`ls -type expression`); doDelete;
-
-    if ($deleteLayers){ $lrs = `ls -type  displayLayer`; select -r $lrs; select -tgl defaultLayer; delete (`ls -sl`); }
-    
-    // ========================== Delete Keys from Skeleton =======================
-    select -r $ssHips ;
-    selectOnlyJoints;
-    string $joints[] = `ls -sl`;
-    for ($j in $joints)
+for ($c in $Files)//$c = $Files[0];
+{   
+    if ( `match $includedFileMask $c` != "" ) // print "1";
     {
-    	string $ac[] = `listAttachedAnimCurves $j`;
-    	if (size ($ac) > 0 )delete $ac;
-    }
-
-    // ========================== Delete NonJoints from Hierarchy ====================
-    select -r $ssHips ;
-    select_hierarhy;
-    string $joints[] = `ls -sl`;
-    select -tgl $joints[0];
-    string $joints[] = `ls -sl`;
-    string $nonJoints[] = {};
-    for ($j in $joints)
-    {
-        if ( `nodeType $j` != "joint" ) 
+        if ($exportAllFilesInFolder)
         {
-            $nonJoints[size($nonJoints)] = $j;
+            string $fName = ($fold  + $c);
+            if ($fExt == "*.mb")
+                file -f -options "v=0"  -ignoreVersion  -typ "mayaBinary" -o $fName;
+            if ($fExt == "*.ma")
+                file -f -options "v=0"  -ignoreVersion  -typ "mayaAscii" -o $fName;
         }
-    }
-    //    print $nonJoints;
-    delete $nonJoints;
-    
-    // ============================== Export to FBX ============================== 
-    if ($doFBXExport)
-    {
-        FBXProperty Export|IncludeGrp|Geometry|SmoothingGroups -v 1;
-        FBXProperty Export|IncludeGrp|Animation -v $exportAnimation;
-        FBXProperty Export|IncludeGrp|Animation|Deformation -v $exportShapes;
-        FBXExportAnimationOnly -v 0;
-        FBXExportSkeletonDefinitions -v 1;
-        FBXExportSmoothingGroups -v 1;
-        FBXExportSmoothMesh -v 0;
-        FBXExportTangents -v 1;
-        FBXExportUpAxis y;
-        FBXExportShapes -v $exportShapes;
-        FBXExportSkins -v $exportShapes;
-        FBXExportCameras -v 0;
-        FBXExportLights -v 0;
-    
-        FBXExportFileVersion -v FBX201600;
-        FBXExportColladaFrameRate 30;
-        FBXExportQuaternion -v resample;
-        FBXExportScaleFactor 1.0;
-        FBXExportConstraints -v 0;
-    
-        FBXProperty Export|IncludeGrp|Geometry|SelectionSet -v 0;
-        FBXExportBakeComplexAnimation -v 0;
-        FBXExportApplyConstantKeyReducer -v 0;
-        FBXExportAxisConversionMethod none;
-        FBXExportBakeResampleAnimation -v 0;
-        FBXExportCacheFile -v 0;
-        FBXExportEmbeddedTextures -v 0;
-        FBXExportGenerateLog -v 0;
-        FBXExportHardEdges -v 0;
-        FBXExportInAscii -v 0;
-        FBXExportInputConnections -v 0;
-        FBXExportInstances -v 0;
-        FBXExportSplitAnimationIntoTakes -c;
-        FBXExportTriangulate -v 0;
-        FBXExportUseSceneName -v 0;
-                       
-        select -r $ssHips;
-        if ($exportShapes) select -add `getSkinnedMeshesInScene`;
-        $path = `file -q -sn`;
-        $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
-        $fName = `match "[^/\\]*$" $path`;
-        $fNameNoExt = basenameEx( $fName );
-        if ( !`filetest -e ($fold + $fbxfold )` )
-            sysFile -makeDir ($fold + $fbxfold); 
-        FBXExport -f ($fold + $fbxfold + $fNameNoExt + ".fbx") -s;
+        
+        string $nsps[] = `namespaceInfo -listOnlyNamespaces`;
+
+        if ( size($nsps) > 2 ){ $doExport = 0; $message = ("Namespaces detected in scene - " + $nsps[0] + " | " + $c + "Scene should contain no References!\n"); print $message; $log = $log + $message; continue; }
+        if ( !`objExists $ssHips` )
+            {$doExport = 0; $message = ("No " + $ssHips + " in scene!\n"); print $message; $log = $log + $message; continue; }
+            
+        if ( size(getSkinnedMeshesInScene()) == 0) {$doExport = 0; $message = ("No skinned Meshes in scene\n"); print $message; $log = $log + $message; continue; }
+        //print $doExport;
+
+        if ( $doExport ) // if ( $doExport ) print "DO!";
+        {
+            // =================== Bake keys for correct deleting controls/constraints etc =====================
+
+            select -r $ssHips;
+            selectOnlyJoints;
+            string $joints[] = `ls -sl`;
+            bakeResults -simulation true -t ("0:1") -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys true -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -controlPoints false -shape true $joints;
+
+            // ============================== DO Something ================================
+            if(size(`listRelatives -parent $ssHips`)>0) parent -w $ssHips;
+
+            select (`ls -type expression`); doDelete;
+
+            if ($deleteLayers){ $lrs = `ls -type  displayLayer`; select -r $lrs; select -tgl defaultLayer; delete (`ls -sl`); }
+            
+            // ========================== Delete Keys from Skeleton =======================
+            select -r $ssHips ;
+            selectOnlyJoints;
+            string $joints[] = `ls -sl`;
+            for ($j in $joints)
+            {
+                string $ac[] = `listAttachedAnimCurves $j`;
+                if (size ($ac) > 0 )delete $ac;
+            }
+
+            // ========================== Delete NonJoints from Hierarchy ====================
+            select -r $ssHips ;
+            select_hierarhy;
+            string $joints[] = `ls -sl`;
+            select -tgl $joints[0];
+            string $joints[] = `ls -sl`;
+            string $nonJoints[] = {};
+            for ($j in $joints)
+            {
+                if ( `nodeType $j` != "joint" ) 
+                {
+                    $nonJoints[size($nonJoints)] = $j;
+                }
+            }
+            //    print $nonJoints;
+            delete $nonJoints;
+            
+            // ============================== Export to FBX ============================== 
+            if ($doFBXExport)
+            {
+                FBXProperty Export|IncludeGrp|Geometry|SmoothingGroups -v 1;
+                FBXProperty Export|IncludeGrp|Animation -v $exportAnimation;
+                FBXProperty Export|IncludeGrp|Animation|Deformation -v $exportShapes;
+                FBXExportAnimationOnly -v 0;
+                FBXExportSkeletonDefinitions -v 1;
+                FBXExportSmoothingGroups -v 1;
+                FBXExportSmoothMesh -v 0;
+                FBXExportTangents -v 1;
+                FBXExportUpAxis y;
+                FBXExportShapes -v $exportShapes;
+                FBXExportSkins -v $exportShapes;
+                FBXExportCameras -v 0;
+                FBXExportLights -v 0;
+            
+                FBXExportFileVersion -v FBX201600;
+                FBXExportColladaFrameRate 30;
+                FBXExportQuaternion -v resample;
+                FBXExportScaleFactor 1.0;
+                FBXExportConstraints -v 0;
+            
+                FBXProperty Export|IncludeGrp|Geometry|SelectionSet -v 0;
+                FBXExportBakeComplexAnimation -v 0;
+                FBXExportApplyConstantKeyReducer -v 0;
+                FBXExportAxisConversionMethod none;
+                FBXExportBakeResampleAnimation -v 0;
+                FBXExportCacheFile -v 0;
+                FBXExportEmbeddedTextures -v 0;
+                FBXExportGenerateLog -v 0;
+                FBXExportHardEdges -v 0;
+                FBXExportInAscii -v 0;
+                FBXExportInputConnections -v 0;
+                FBXExportInstances -v 0;
+                FBXExportSplitAnimationIntoTakes -c;
+                FBXExportTriangulate -v 0;
+                FBXExportUseSceneName -v 0;
+                               
+                select -r $ssHips;
+                if ($exportShapes) select -add `getSkinnedMeshesInScene`;
+                $path = `file -q -sn`;
+                $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
+                $fName = `match "[^/\\]*$" $path`;
+                $fNameNoExt = basenameEx( $fName );
+                if ( !`filetest -e ($fold + $fbxfold )` )
+                    sysFile -makeDir ($fold + $fbxfold); 
+                FBXExport -f ($fold + $fbxfold + $fNameNoExt + ".fbx") -s;
+            }
+        }
     }
 }
 print ($log + "\n");

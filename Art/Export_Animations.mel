@@ -165,9 +165,14 @@ proc trySelect (string $obj)
             */
 
             string $nsps[] = `namespaceInfo -listOnlyNamespaces`;
-            if(size($nsps) != 3) 
+            if(size($nsps) > 3) 
             {
-                $message = ("More than ONE namespace in scene - " + $nsps[0] + " | " + $c); print $message; $log = $log + $message;
+                $message = ("More than ONE namespace in scene - " + $nsps[2] + " | " + $nsps[3] + " | " + $c + "\n"); print $message; $log = $log + $message;
+                continue;
+            }
+            if(size($nsps) < 3) 
+            {
+                $message = ("No namespaces found in scene - " + $c + "\n"); print $message; $log = $log + $message;
                 continue;
             }
             $NS = $nsps[0] + ":";
