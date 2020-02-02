@@ -1,4 +1,4 @@
-// ======== Export J1 Project Animations =========
+// ======== Export TW Project Animations =========
 // Для запуска, надо вставить весть этот текст скрипта в редатор скриптов Maya, выделить текст скрипта - Ctrl+A и запустить - Ctrl+Enter
 //
 // экспортятся сцены только с референсом и только с одним,  по умолчанию экспортится только текущий открытый файл независимо от расширения.
@@ -14,6 +14,33 @@
 // если в анимациях не нужны меши, то надо поставить переменную $exportShapes в ноль
 // 
 
+// ==================================== блок с переменными, начальные установки ==================================== 
+    int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
+    int $doFBXExport = 1;
+        int $exportAnimation = 1; //
+        int $exportShapes = 0;
+        int $exportCameras = 0;
+        int $exportLights = 0;
+    string $fbxfold = "FBX/";
+    string $excludeFileMask01 = "_Skin.";
+    string $excludeFileMask02 = "_RIG.";
+	string $fExt = "*.ma"; // расширение файлов для обработки
+	int $doBake = 1; // надо ли бейкать?
+	string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
+//    string $GlobalGroup = "Group"; // group to delete, without namespace!
+    
+    int $doImportRefs = 1; // импортить ли референсы?
+	int $doEulerFilter = 1; // надо ли фильтровать кривые?
+	int $doReplaceRef = 0; // надо ли заменять старый реф на новый?
+	    string $newRef = "HumanMale_RIG.mb"; // имя нового рефа - обязательно с расширением и формат MB!
+	int $doRename = 0; // надо ли переименовывать? - если да, то в блоке переименования надо собрать себе нужное имя и расширение
+	int $doSave = 0;
+    int $deleteLayers = 1;
+	
+string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
+                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
+	string $Files[] = {}; //тут список клипов в папке выбраной выше, только имена файлов с расширением
+	
 // ==================================== функции ============================================
 global proc selectOnlyJoints() // select only joints in hierarchy of selected object
 {
@@ -85,39 +112,15 @@ proc trySelect (string $obj)
     if (objExists($obj)) select -add $obj;
 }
 
-// ==================================== блок с переменными, начальные установки ==================================== 
-    int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
-    int $doFBXExport = 1;
-        int $exportAnimation = 0; //
-        int $exportShapes = 1;
-        int $exportCameras = 0;
-        int $exportLights = 0;
-    string $fbxfold = "FBX/";
-    string $excludeFileMask01 = "_Skin.";
-    string $excludeFileMask02 = "_RIG.";
-	string $fExt = "*.mb"; // расширение файлов для обработки
-	int $doBake = 1; // надо ли бейкать?
-	string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
-//    string $GlobalGroup = "Group"; // group to delete, without namespace!
-    
-    int $doImportRefs = 1; // импортить ли референсы?
-	int $doEulerFilter = 1; // надо ли фильтровать кривые?
-	int $doReplaceRef = 0; // надо ли заменять старый реф на новый?
-	    string $newRef = "Female_RIG.mb"; // имя нового рефа - обязательно с расширением и формат MB!
-	int $doRename = 0; // надо ли переименовывать? - если да, то в блоке переименования надо собрать себе нужное имя и расширение
-	int $doSave = 0;
-    int $deleteLayers = 1;
-	
-string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
-                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
-	string $Files[] = {}; //тут список клипов в папке выбраной выше, только имена файлов с расширением
-	
 // ==================================== START SCRIPT ==================================== 
     string $path = `file -q -sn`; if ($path == "") error ("Save current scene, or open smething that exist!");
 	string $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
 
     if ($exportAllFilesInFolder)
-    	$Files = `getFileList -folder $fold -filespec $fExt`; //тут список клипов в папке выбраной выше, только имена файлов с расширением
+    {
+        $Files = `getFileList -folder $fold -filespec $fExt`; //тут список клипов в папке выбраной выше, только имена файлов с расширением
+        if (size($Files) == 0) $message = ("No files found with " + $fExt + " extension in folder " + $fold + "\n"); print $message; $log = $log + $message;
+    }
     else 
         $Files[0] = `match "[^/\\]*$" $path`;
     string $c = $Files[0];
@@ -140,7 +143,7 @@ string $log = ""; // записываем сюда все успехи и оши
             int $start = `playbackOptions -q -min`;
 			int $end = `playbackOptions -q -max`;
 
-// ================================== Import References =================================
+            // ================================== Import References =================================
     	    if ($doImportRefs)
     	    {
                 string $Refs[] = `ls -references`;
@@ -153,13 +156,14 @@ string $log = ""; // записываем сюда все успехи и оши
                 }
 			}
 
-// ===========================================================  DO Something 1 ========================================================
+            // ===========================================================  DO Something 1 ========================================================
 
-/*
-			int $start = `playbackOptions -q -min`;
-			int $end = `playbackOptions -q -max`;
-			if ($start == -20)	playbackOptions -min ($start + 20) -max ($end - 20) ;
-*/
+            /*
+                        int $start = `playbackOptions -q -min`;
+                        int $end = `playbackOptions -q -max`;
+                        if ($start == -20)	playbackOptions -min ($start + 20) -max ($end - 20) ;
+            */
+
             string $nsps[] = `namespaceInfo -listOnlyNamespaces`;
             if(size($nsps) != 3) 
             {
@@ -175,7 +179,7 @@ string $log = ""; // записываем сюда все успехи и оши
                     animLayer -edit -lock true "GameMove";
                 }
 
-// ================================== Bake animation =================================
+            // ================================== Bake animation =================================
     	    if ($doBake)
     	    {
 				select -r ($NS + $ssHips);
@@ -185,7 +189,7 @@ string $log = ""; // записываем сюда все успехи и оши
 				bakeResults -simulation true -t ($start + ":" + $end) -sampleBy 1 -disableImplicitControl true -preserveOutsideKeys true -sparseAnimCurveBake false -removeBakedAttributeFromLayer false -bakeOnOverrideLayer false -controlPoints false -shape true $joints;
 			}
 
-// ============================== Euler filter ============================== 
+            // ============================== Euler filter ============================== 
     	    if ($doEulerFilter)
     	    {
 				currentTime $start;
@@ -198,7 +202,7 @@ string $log = ""; // записываем сюда все успехи и оши
 					filterCurve $ac;
                 }
 			}
-// ============================== Replace Reference file ============================== 
+            // ============================== Replace Reference file ============================== 
 			if ($doReplaceRef)
     	    {
 				string $refNodes[] = `ls -rf`;
@@ -208,14 +212,14 @@ string $log = ""; // записываем сюда все успехи и оши
 			}
 
 
-// ============================== Rename file (if needed) ============================== 
+            // ============================== Rename file (if needed) ============================== 
     	    if ($doRename)
     	    {
 				string $fNameNoExt = basenameEx( $c );
 				$c = `file -rename ($fold + $fNameNoExt + ".mb")`;
             }
 
-// ============================== Save file (undependent of extension) ============================== 
+            // ============================== Save file (undependent of extension) ============================== 
     	    if ($doSave)
     	    {
 				string $fType = `match "\.[^\.]*$" $c`;
@@ -225,7 +229,7 @@ string $log = ""; // записываем сюда все успехи и оши
 					file -save -type mayaAscii -defaultExtensions true;
 			}
 
-// ===========================================================  DO Something 2 ========================================================
+            // ===========================================================  DO Something 2 ========================================================
             if(size(`listRelatives -parent ($NS + $ssHips)`)>0)
                 parent -w ($NS + $ssHips);
 
@@ -259,7 +263,7 @@ string $log = ""; // записываем сюда все успехи и оши
     select_hierarhy;
     string $joints[] = `ls -sl`;
     select -tgl $joints[0];
-    string $joints[] = `ls -sl`;
+    $joints = `ls -sl`;
     string $nonJoints[] = {};
     for ($j in $joints)
     {

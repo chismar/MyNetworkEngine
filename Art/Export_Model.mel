@@ -1,4 +1,4 @@
-// ======== Export Skin/Rig J1 Project =========
+// ======== Export Skin/Rig TW Project =========
 // Для запуска, надо вставить весть этот текст скрипта в редатор скриптов Maya, выделить текст скрипта - Ctrl+A и запустить - Ctrl+Enter
 //
 // экспортится только текущий открытый файл независимо от расширени и только без референсов
@@ -6,6 +6,22 @@
 // удаляет экспрешшены и дисплей слои
 // затем ищет все меши со скином и если они без префикса "NE_" то выбирает их и кость Global, и экспортит выделенное в FBX с нужными для проекта настройками, независимо от ручных настроек в экспорте.
 // экспортит в подпапку "FBX" текущей папки
+
+// ==================================== блок с переменными, начальные установки ==================================== 
+int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
+int $doFBXExport = 1;
+    int $exportAnimation = 0; //
+    int $exportShapes = 1;
+    int $exportCameras = 0;
+    int $exportLights = 0;
+string $fbxfold = "FBX/";
+string $excludeFileMask01 = "_RIG.";
+string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
+int $deleteLayers = 1;
+string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
+                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
+int $doExport = 1;
+int $i = 0;
 
 // ==================================== функции ============================================
 
@@ -73,22 +89,6 @@ proc string[] listAttachedAnimCurves(string $node)
 	}
 	return $curves;
 }
-
-// ==================================== блок с переменными, начальные установки ==================================== 
-int $exportAllFilesInFolder = 1; // 1 - exportAllFilesInFolder, 0 - export only current opened file
-int $doFBXExport = 1;
-    int $exportAnimation = 0; //
-    int $exportShapes = 1;
-    int $exportCameras = 0;
-    int $exportLights = 0;
-string $fbxfold = "FBX/";
-string $excludeFileMask01 = "_RIG.";
-string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
-int $deleteLayers = 1;
-string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
-                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
-int $doExport = 1;
-int $i = 0;
 
 // ==================================== START SCRIPT ==================================== 
 string $path = `file -q -sn`; if ($path == "") error ("Save current scene, or open smething that exist!");

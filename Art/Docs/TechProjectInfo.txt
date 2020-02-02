@@ -28,6 +28,8 @@ https://docs.google.com/spreadsheets/d/1YplzHaegpGbNEe5JOWDi6xHGRKPdt_cam24-FRJ0
     ShieldKnight_Idle.ma - анимация персонажа ShieldKnight - для всех вариаций одинаковая
     ShieldKnightGarden.png - текстура вариации Garden
     Mace_1H_ShieldKnightGarden.ma - оружие вариации Garden
+    Concept/ShieldKnight_Concept.png - концепт всех вариаций персонажей в папке "Concept"
+    Concept/ShieldKnightBlack_Concept.png - концепт вариации Black персонажа ShieldKnight в папке "Concept"
 - риг в анимации анимации всегда должен быть добавлен референсом, это удобно, файлы анимаций занимают меньше места и риг всегда правится во всех анимациях если что
 - все вариации собраны в файлах RIGALL, он же подключен в качестве референса для анимаций
 - меш оружия всегда отделяем в отдельный объект чтобы его можно было скрыть если надо и вставить любое другое оружие
@@ -37,3 +39,4 @@ https://docs.google.com/spreadsheets/d/1YplzHaegpGbNEe5JOWDi6xHGRKPdt_cam24-FRJ0
 - надо разделять общий риг (_RIGALL) на отдельные риги для каждого моба (_RIG)
 - оружие экспортим в папках мобов и вручную кладем в транк в папку DarkWood\Weapons, для каждого оружия создаем свою отдельную папку
 - экспортим все скритпами в папке MyNetworkEngine\Art - Export_Animations.mel Export_Model.mel Export_Weapon.mel
+- если меш экспортить не надо, добавляем ему суффикс NE_ и теперь он никогда не попадет в FBX!
