@@ -599,6 +599,7 @@ namespace NetworkEngine
     }
     public class NetworkNode
     {
+        public static bool Pause = false;
         public object CustomData;
         Ghosting _ghosting;
         ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes> _remoteNetworkNodes = new ConcurrentDictionary<NetworkNodeId, RemoteNetworkNodes>();
@@ -1003,8 +1004,11 @@ namespace NetworkEngine
         {
             try
             {
-                await TickLogic();
-                await TickSync();
+                if (!Pause)
+                {
+                    await TickLogic();
+                    await TickSync();
+                }
             }
             catch (Exception e)
             {
@@ -2118,4 +2122,28 @@ namespace NetworkEngine
         }
     }
 
+    public static class SyncHelpers
+    {
+
+        public static void SetProp<T>(IGhost ghost, ref T prop, int index)
+        {
+
+        }
+        public static T GetProp<T>(IGhost ghost, ref T prop, int index)
+        {
+            return prop;
+        }
+        public static bool Serialize<T>(NetDataWriter writer, ref T prop)
+        {
+            return true;
+        }
+        public static void Deserialize<T>(NetDataReader reader, ref T prop)
+        {
+
+        }
+        public static void SwapProp<C, T>(ref T prop, ref T otherProp)
+        {
+
+        }
+    }
 }

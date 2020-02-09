@@ -23,6 +23,9 @@ public class GameHost : MonoBehaviour
     public Material SimpleDrawMaterial;
     void Start()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.pauseStateChanged += EditorApplication_pauseStateChanged;
+#endif
         Definitions.Logger.LogError += (s) => Debug.LogError(s);
         Definitions.Logger.Log += (s) => Debug.LogError(s);
         SyncTypesMap.Init();
@@ -54,6 +57,16 @@ public class GameHost : MonoBehaviour
         });
         client._node.LostEntity += _node_LostEntity;
     }
+#if UNITY_EDITOR
+    private void EditorApplication_pauseStateChanged(UnityEditor.PauseState obj)
+    {
+        if (obj == UnityEditor.PauseState.Paused)
+            NetworkNode.Pause = true;
+        else
+            NetworkNode.Pause = false;
+    }
+#endif
+
     ConcurrentQueue<GhostedEntity> _entitiesToRemove = new ConcurrentQueue<GhostedEntity>();
     private void _node_LostEntity(EntityId arg1, Type arg2, GhostedEntity arg3)
     {
