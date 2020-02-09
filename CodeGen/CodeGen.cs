@@ -777,7 +777,7 @@ namespace CodeGen
                     case "bool":
                         return $"{propName} = stream.GetBool();";
                     default:
-                        return $"var has = stream.GetBool(); {propName} = !has? default : ({type})SyncTypesMap.GetSerializerForObjType(typeof({type})).Deserialize(stream);";
+                        return $"var has = stream.GetBool(); {propName} = !has? default : ({type})SyncTypesMap.FastSerializerGetter<{type}>.Serializer.Deserialize(stream);";
                 }
         }
         public static string GetDefPropType(string propType)
@@ -816,7 +816,7 @@ namespace CodeGen
                     case "long":
                         return $"stream.Put({propName});";
                     default:
-                        return $"if({propName} != default ) {{ stream.Put(true); SyncTypesMap.GetSerializerForObjType(typeof({type})).Serialize({propName}, ref stream); }} else {{ stream.Put(false); }}";
+                        return $"if({propName} != default ) {{ stream.Put(true); SyncTypesMap.FastSerializerGetter<{type}>.Serializer.Serialize({propName}, ref stream); }} else {{ stream.Put(false); }}";
                 }
         }
     }

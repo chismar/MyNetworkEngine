@@ -11,9 +11,13 @@
             "AnimationName": "Stagger"
         },
         {
+            "$type": "EffectMove",
+            "Policy": "None",
+        },
+        {
             "$type": "EffectMotion",
             "CurveName": "StaggerCurve",
-            "Speed": 0
+            "Speed": -1
         }
     ]
 }

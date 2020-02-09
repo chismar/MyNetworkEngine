@@ -136,7 +136,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 121307031);
                 var has = stream.GetBool();
-                PhysicalPos = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+                PhysicalPos = !has ? default : (Vec2)SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Deserialize(stream);
                 CheckStream(stream, 121307031);
             }
 
@@ -196,7 +196,7 @@ namespace Yogollag
                 if (PhysicalPos != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(PhysicalPos, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Serialize(PhysicalPos, ref stream);
                 }
                 else
                 {

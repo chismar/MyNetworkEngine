@@ -1,6 +1,6 @@
 {
     "$type": "Spell",
-    "Duration": 2.45,
+    "Duration": 2.1,
     "Slot": "/AttackSlot",
     "Effects": [
         {

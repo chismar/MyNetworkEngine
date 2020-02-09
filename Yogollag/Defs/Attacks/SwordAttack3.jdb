@@ -56,6 +56,25 @@
                     }
                 }
             ]
+        },
+        {
+            "$type": "SubEffect",
+            "StartOffset":0.5,
+            "EndOffset": 0.8,
+            "Effects": [
+                {
+                    "$type": "EffectAllowInput",
+                    "Inputs": [
+                        "/AttackSpell"
+                    ]
+                },
+                {
+                    "$type": "EffectBreakOnInput",
+                    "Inputs": [
+                        "/AttackSpell"
+                    ]
+                }
+            ]
         }
     ]
 }

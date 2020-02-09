@@ -71,7 +71,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 563766275);
                 var has = stream.GetBool();
-                Tiles = !has ? default : (MapTile[, ])SyncTypesMap.GetSerializerForObjType(typeof(MapTile[, ])).Deserialize(stream);
+                Tiles = !has ? default : (MapTile[, ])SyncTypesMap.FastSerializerGetter<MapTile[, ]>.Serializer.Deserialize(stream);
                 CheckStream(stream, 563766275);
             }
 
@@ -115,7 +115,7 @@ namespace Yogollag
                 if (Tiles != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(MapTile[, ])).Serialize(Tiles, ref stream);
+                    SyncTypesMap.FastSerializerGetter<MapTile[, ]>.Serializer.Serialize(Tiles, ref stream);
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace Yogollag
             var messageToSerialize = new ChunkEntityAddTileModMessage();
             {
                 var has = stream.GetBool();
-                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
@@ -189,7 +189,7 @@ namespace Yogollag
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.modDef = !has ? default : (TileModDef)SyncTypesMap.GetSerializerForObjType(typeof(TileModDef)).Deserialize(stream);
+                messageToSerialize.modDef = !has ? default : (TileModDef)SyncTypesMap.FastSerializerGetter<TileModDef>.Serializer.Deserialize(stream);
             }
 
             return messageToSerialize;
@@ -204,7 +204,7 @@ namespace Yogollag
                 if (messageToSerialize.EntityId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(messageToSerialize.EntityId, ref stream);
                 }
                 else
                 {
@@ -224,7 +224,7 @@ namespace Yogollag
                 if (messageToSerialize.modDef != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(TileModDef)).Serialize(messageToSerialize.modDef, ref stream);
+                    SyncTypesMap.FastSerializerGetter<TileModDef>.Serializer.Serialize(messageToSerialize.modDef, ref stream);
                 }
                 else
                 {
@@ -257,7 +257,7 @@ namespace Yogollag
             var messageToSerialize = new ChunkEntityRemoveTileModMessage();
             {
                 var has = stream.GetBool();
-                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
@@ -270,7 +270,7 @@ namespace Yogollag
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.modDef = !has ? default : (TileModDef)SyncTypesMap.GetSerializerForObjType(typeof(TileModDef)).Deserialize(stream);
+                messageToSerialize.modDef = !has ? default : (TileModDef)SyncTypesMap.FastSerializerGetter<TileModDef>.Serializer.Deserialize(stream);
             }
 
             return messageToSerialize;
@@ -285,7 +285,7 @@ namespace Yogollag
                 if (messageToSerialize.EntityId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(messageToSerialize.EntityId, ref stream);
                 }
                 else
                 {
@@ -305,7 +305,7 @@ namespace Yogollag
                 if (messageToSerialize.modDef != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(TileModDef)).Serialize(messageToSerialize.modDef, ref stream);
+                    SyncTypesMap.FastSerializerGetter<TileModDef>.Serializer.Serialize(messageToSerialize.modDef, ref stream);
                 }
                 else
                 {

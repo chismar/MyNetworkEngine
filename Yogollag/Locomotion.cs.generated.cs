@@ -102,7 +102,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 1507366451);
                 var has = stream.GetBool();
-                Movement = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+                Movement = !has ? default : (Vec2)SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Deserialize(stream);
                 CheckStream(stream, 1507366451);
             }
 
@@ -111,7 +111,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 137289609);
                 var has = stream.GetBool();
-                Position = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+                Position = !has ? default : (Vec2)SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Deserialize(stream);
                 CheckStream(stream, 137289609);
             }
 
@@ -171,7 +171,7 @@ namespace Yogollag
                 if (Movement != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(Movement, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Serialize(Movement, ref stream);
                 }
                 else
                 {
@@ -189,7 +189,7 @@ namespace Yogollag
                 if (Position != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(Position, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Serialize(Position, ref stream);
                 }
                 else
                 {

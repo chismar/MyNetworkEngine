@@ -26,22 +26,22 @@ namespace Yogollag
             var objToSerialize = new ScriptingContext();
             {
                 var has = stream.GetBool();
-                objToSerialize.TargetPoint = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+                objToSerialize.TargetPoint = !has ? default : (Vec2)SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.Parent = !has ? default : (ScriptingContext)SyncTypesMap.GetSerializerForObjType(typeof(ScriptingContext)).Deserialize(stream);
+                objToSerialize.Parent = !has ? default : (ScriptingContext)SyncTypesMap.FastSerializerGetter<ScriptingContext>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.Host = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Host = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.Target = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Target = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -56,7 +56,7 @@ namespace Yogollag
                 if (objToSerialize.TargetPoint != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(objToSerialize.TargetPoint, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Serialize(objToSerialize.TargetPoint, ref stream);
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace Yogollag
                 if (objToSerialize.Parent != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(ScriptingContext)).Serialize(objToSerialize.Parent, ref stream);
+                    SyncTypesMap.FastSerializerGetter<ScriptingContext>.Serializer.Serialize(objToSerialize.Parent, ref stream);
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace Yogollag
                 if (objToSerialize.Host != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Host, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Host, ref stream);
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace Yogollag
                 if (objToSerialize.Target != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Target, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Target, ref stream);
                 }
                 else
                 {

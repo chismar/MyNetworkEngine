@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598e2d32e2c7b0c418e030c3236d663a, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
@@ -550,8 +550,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.23493975
-          value: 0.43870968
+          time: 0.24956064
+          value: 0.42700732
           inSlope: 2.1419356
           outSlope: 2.1419356
           tangentMode: 0
@@ -559,8 +559,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.6626506
-          value: 0.7548387
+          time: 0.6801406
+          value: 0.689781
           inSlope: 0.040413845
           outSlope: 0.040413845
           tangentMode: 0

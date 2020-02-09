@@ -7,7 +7,7 @@
         {
             "$type": "EffectMotion",
             "CurveName": "AttackCurve",
-            "Speed": 5
+            "Speed": 10
         },
         {
             "$type": "EffectAnimate",

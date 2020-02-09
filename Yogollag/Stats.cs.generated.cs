@@ -109,7 +109,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 104686348);
                 var has = stream.GetBool();
-                StatDef = !has ? default : (StatDef)SyncTypesMap.GetSerializerForObjType(typeof(StatDef)).Deserialize(stream);
+                StatDef = !has ? default : (StatDef)SyncTypesMap.FastSerializerGetter<StatDef>.Serializer.Deserialize(stream);
                 CheckStream(stream, 104686348);
             }
 
@@ -176,7 +176,7 @@ namespace Yogollag
                 if (StatDef != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(StatDef)).Serialize(StatDef, ref stream);
+                    SyncTypesMap.FastSerializerGetter<StatDef>.Serializer.Serialize(StatDef, ref stream);
                 }
                 else
                 {
@@ -300,7 +300,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 104686348);
                 var has = stream.GetBool();
-                StatDef = !has ? default : (StatDef)SyncTypesMap.GetSerializerForObjType(typeof(StatDef)).Deserialize(stream);
+                StatDef = !has ? default : (StatDef)SyncTypesMap.FastSerializerGetter<StatDef>.Serializer.Deserialize(stream);
                 CheckStream(stream, 104686348);
             }
 
@@ -371,7 +371,7 @@ namespace Yogollag
                 if (StatDef != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(StatDef)).Serialize(StatDef, ref stream);
+                    SyncTypesMap.FastSerializerGetter<StatDef>.Serializer.Serialize(StatDef, ref stream);
                 }
                 else
                 {

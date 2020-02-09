@@ -1243,6 +1243,14 @@ namespace NetworkEngine
     }
     public class SyncTypesMap
     {
+        public static class FastSerializerGetter<T>
+        {
+            public static IGhostLikeSerializer Serializer;
+            static FastSerializerGetter()
+            {
+                Serializer = SyncTypesMap.GetSerializerForObjType(typeof(T));
+            }
+        }
         static Dictionary<int, Type> _idToMaster = new Dictionary<int, Type>();
         static Dictionary<Type, int> _masterToId = new Dictionary<Type, int>();
         static Dictionary<Type, Type> _baseToMaster = new Dictionary<Type, Type>();
@@ -1620,7 +1628,11 @@ namespace NetworkEngine
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            var hashCode = -497580672;
+            hashCode = hashCode * -1521134295 + Id1.GetHashCode();
+            hashCode = hashCode * -1521134295 + Id2.GetHashCode();
+            hashCode = hashCode * -1521134295 + SubObjectId.GetHashCode();
+            return hashCode;
         }
     }
 
@@ -1976,7 +1988,12 @@ namespace NetworkEngine
             }
 
         }
-        bool IsSyncObjectList => typeof(T).BaseType == typeof(SyncObject);
+        bool IsSyncObjectList;
+
+        protected DeltaList()
+        {
+            IsSyncObjectList = typeof(T).BaseType == typeof(SyncObject);
+        }
 
         public bool IsSynchronized { get; }
         public object SyncRoot { get; }

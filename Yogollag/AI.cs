@@ -71,6 +71,7 @@ namespace Yogollag
         }
         public void UpdateMovement()
         {
+            _locoMover.DontMove = false;
             if (_currentId != default && _policy != MovementPolicy.None)
             {
                 bool near = false;
@@ -79,7 +80,7 @@ namespace Yogollag
                     _targetPoint;
                 if (point.HasValue)
                 {
-                    float maxMult = 1;
+                    float maxMult = 1; 
                     var dst = (point.Value - ((IPositionedEntity)ParentEntity).Position).Length;
                     var dir = (point.Value - ((IPositionedEntity)ParentEntity).Position).Normal;
                     var mult = dst > maxMult ? maxMult : dst;
@@ -106,7 +107,7 @@ namespace Yogollag
                 }
                 else
                 {
-                    _locoMover.ActionDir = default;
+                    _locoMover.ActionDir = null;
                     _locoMover.MovementDir = default;
                 }
                 if (near && _policy == MovementPolicy.FinishWhenNear)
@@ -117,7 +118,7 @@ namespace Yogollag
             }
             else
             {
-                _locoMover.ActionDir = default;
+                _locoMover.ActionDir = null;
                 _locoMover.MovementDir = default;
             }
         }
@@ -176,13 +177,15 @@ namespace Yogollag
                 if (obj.Id == CastedSpell)
                 {
                     CastedSpell = default;
-                    StartClock();
+                    StartClock(obj.SuccesEnd);
                 }
             }
-            public void StartClock()
+            public void StartClock(bool onSucess)
             {
                 var ent = Spell.ParentEntity;
-                var delay = Def.TryAgainCooldown.Def.Calc(new ScriptingContext(ent) { Host = ent.Id, Target = ent.Id });
+                var delay = onSucess?
+                    Def.OnSuccessCooldown.Def?.Calc(new ScriptingContext(ent) { Host = ent.Id, Target = ent.Id }) ?? 0 : 
+                Def.TryAgainCooldown.Def.Calc(new ScriptingContext(ent) { Host = ent.Id, Target = ent.Id });
                 Task.Run(async () =>
                 {
                     await Task.Delay(TimeSpan.FromSeconds(delay));
@@ -198,11 +201,12 @@ namespace Yogollag
                 CastedSpell = hasSpells.SpellsEngine.CastFromInsideEntity(
                     new SpellCast() { Def = Def.Spell, OwnerObject = ent.Id, TargetEntity = ent.Id });
                 if (CastedSpell == default)
-                    StartClock();
+                    StartClock(false);
             }
         }
         public DefRef<SpellDef> Spell { get; set; }
         public DefRef<CalcerDef> TryAgainCooldown { get; set; }
+        public DefRef<CalcerDef> OnSuccessCooldown { get; set; }
 
         public override bool Begin(SpellInstance spellInstance, State state, bool onClient)
         {
@@ -278,9 +282,11 @@ namespace Yogollag
             Vec2? targetPoint = TargetPoint.Def?.Select(spellInstance.GetScriptingContext()) ?? (targetEntity.HasValue ?
                 (spellInstance.ParentEntity.CurrentServer.GetGhost(targetEntity.Value) as IPositionedEntity)?.Position : (Vec2?)null);
             var ai = (spellInstance.ParentEntity as IHasAIEngine).AI;
+            state.Instance = spellInstance;
+            state.Id = new EffectId(this, spellInstance);
+            ai.MovementIsFinished += state.OnMoveEffectFinished;
             ai.BeginMovement(targetPoint, targetEntity, new EffectId(this, spellInstance),
                 Policy, AcceptedRange.Def?.Calc(spellInstance.GetScriptingContext()) ?? 0);
-            ai.MovementIsFinished += state.OnMoveEffectFinished;
             return true;
         }
 

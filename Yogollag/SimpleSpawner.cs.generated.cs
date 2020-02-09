@@ -108,7 +108,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 142474984);
                 var has = stream.GetBool();
-                Def = !has ? default : (IEntityObjectDef)SyncTypesMap.GetSerializerForObjType(typeof(IEntityObjectDef)).Deserialize(stream);
+                Def = !has ? default : (IEntityObjectDef)SyncTypesMap.FastSerializerGetter<IEntityObjectDef>.Serializer.Deserialize(stream);
                 CheckStream(stream, 142474984);
             }
 
@@ -117,7 +117,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 209008729);
                 var has = stream.GetBool();
-                SpawnedObjectId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                SpawnedObjectId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
                 CheckStream(stream, 209008729);
             }
 
@@ -126,7 +126,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 137289609);
                 var has = stream.GetBool();
-                Position = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+                Position = !has ? default : (Vec2)SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Deserialize(stream);
                 CheckStream(stream, 137289609);
             }
 
@@ -179,7 +179,7 @@ namespace Yogollag
                 if (Def != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(IEntityObjectDef)).Serialize(Def, ref stream);
+                    SyncTypesMap.FastSerializerGetter<IEntityObjectDef>.Serializer.Serialize(Def, ref stream);
                 }
                 else
                 {
@@ -197,7 +197,7 @@ namespace Yogollag
                 if (SpawnedObjectId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(SpawnedObjectId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(SpawnedObjectId, ref stream);
                 }
                 else
                 {
@@ -215,7 +215,7 @@ namespace Yogollag
                 if (Position != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(Position, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Serialize(Position, ref stream);
                 }
                 else
                 {

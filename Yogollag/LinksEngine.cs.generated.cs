@@ -117,7 +117,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 1148337930);
                 var has = stream.GetBool();
-                OwnerScene = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                OwnerScene = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
                 CheckStream(stream, 1148337930);
             }
 
@@ -169,7 +169,7 @@ namespace Yogollag
                 if (OwnerScene != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(OwnerScene, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(OwnerScene, ref stream);
                 }
                 else
                 {

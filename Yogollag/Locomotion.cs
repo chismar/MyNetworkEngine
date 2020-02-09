@@ -59,14 +59,14 @@ namespace Yogollag
     public class LocoMover
     {
         public bool DontMove { get; set; }
-        public Vec2 ActionDir { get; set; }
+        public Vec2? ActionDir { get; set; }
         public Vec2 MovementDir { get; set; }
         ILocoMovable _movable;
         long _currentActionStartTime;
         string _currentMovementState;
         EffectId _currentEffectId;
         LocoMoverDef _def;
-        Vec2 _actionActionDir;
+        Vec2? _actionActionDir;
         float _duration;
         float _speed;
         EntityId _eid;
@@ -104,14 +104,14 @@ namespace Yogollag
             {
                 if (MovementDir == default)
                 {
-                    if (ActionDir == default)
+                    if (ActionDir == null)
                     {
                         _movable.ApplyMovement(default, default);
                         _lerpedSpeed = 0f;
                         return;
                     }
 
-                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
+                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
                     if (angle > 180)
                         angle = angle - 360;
                     if (angle < -180)
@@ -133,7 +133,7 @@ namespace Yogollag
                 }
                 else
                 {
-                    var angle = ActionDir.Length < 0.01f ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
+                    var angle = (!ActionDir.HasValue || ActionDir.Value.Length < 0.01f) ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
                     if (float.IsNaN(angle))
                         angle = 0;
                     if (angle > 180)
@@ -151,7 +151,7 @@ namespace Yogollag
             else
             {
                 var cav = CurrentActionVelocity * _speed;
-                var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir, new Vec2(0, 1));
+                var angle = !ActionDir.HasValue ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
                 if (angle > 180)
                     angle = angle - 360;
                 if (angle < -180)

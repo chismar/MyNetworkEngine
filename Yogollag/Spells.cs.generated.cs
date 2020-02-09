@@ -465,12 +465,12 @@ namespace Yogollag
             var messageToSerialize = new SpellsEngineFireAndForgetCastMessage();
             {
                 var has = stream.GetBool();
-                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.cast = !has ? default : (SpellCast)SyncTypesMap.GetSerializerForObjType(typeof(SpellCast)).Deserialize(stream);
+                messageToSerialize.cast = !has ? default : (SpellCast)SyncTypesMap.FastSerializerGetter<SpellCast>.Serializer.Deserialize(stream);
             }
 
             return messageToSerialize;
@@ -485,7 +485,7 @@ namespace Yogollag
                 if (messageToSerialize.EntityId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(messageToSerialize.EntityId, ref stream);
                 }
                 else
                 {
@@ -497,7 +497,7 @@ namespace Yogollag
                 if (messageToSerialize.cast != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellCast)).Serialize(messageToSerialize.cast, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellCast>.Serializer.Serialize(messageToSerialize.cast, ref stream);
                 }
                 else
                 {
@@ -529,17 +529,17 @@ namespace Yogollag
             var messageToSerialize = new SpellsEngineCastSpellMessage();
             {
                 var has = stream.GetBool();
-                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.id = !has ? default : (SpellId)SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Deserialize(stream);
+                messageToSerialize.id = !has ? default : (SpellId)SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.cast = !has ? default : (SpellCast)SyncTypesMap.GetSerializerForObjType(typeof(SpellCast)).Deserialize(stream);
+                messageToSerialize.cast = !has ? default : (SpellCast)SyncTypesMap.FastSerializerGetter<SpellCast>.Serializer.Deserialize(stream);
             }
 
             return messageToSerialize;
@@ -554,7 +554,7 @@ namespace Yogollag
                 if (messageToSerialize.EntityId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(messageToSerialize.EntityId, ref stream);
                 }
                 else
                 {
@@ -566,7 +566,7 @@ namespace Yogollag
                 if (messageToSerialize.id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Serialize(messageToSerialize.id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Serialize(messageToSerialize.id, ref stream);
                 }
                 else
                 {
@@ -578,7 +578,7 @@ namespace Yogollag
                 if (messageToSerialize.cast != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellCast)).Serialize(messageToSerialize.cast, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellCast>.Serializer.Serialize(messageToSerialize.cast, ref stream);
                 }
                 else
                 {
@@ -609,12 +609,12 @@ namespace Yogollag
             var messageToSerialize = new SpellsEngineRemoveCooldownMessage();
             {
                 var has = stream.GetBool();
-                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.id = !has ? default : (SpellId)SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Deserialize(stream);
+                messageToSerialize.id = !has ? default : (SpellId)SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Deserialize(stream);
             }
 
             return messageToSerialize;
@@ -629,7 +629,7 @@ namespace Yogollag
                 if (messageToSerialize.EntityId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(messageToSerialize.EntityId, ref stream);
                 }
                 else
                 {
@@ -641,7 +641,7 @@ namespace Yogollag
                 if (messageToSerialize.id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Serialize(messageToSerialize.id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Serialize(messageToSerialize.id, ref stream);
                 }
                 else
                 {
@@ -672,12 +672,12 @@ namespace Yogollag
             var messageToSerialize = new SpellsEngineFinishSpellMessage();
             {
                 var has = stream.GetBool();
-                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                messageToSerialize.EntityId = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                messageToSerialize.id = !has ? default : (SpellId)SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Deserialize(stream);
+                messageToSerialize.id = !has ? default : (SpellId)SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Deserialize(stream);
             }
 
             return messageToSerialize;
@@ -692,7 +692,7 @@ namespace Yogollag
                 if (messageToSerialize.EntityId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(messageToSerialize.EntityId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(messageToSerialize.EntityId, ref stream);
                 }
                 else
                 {
@@ -704,7 +704,7 @@ namespace Yogollag
                 if (messageToSerialize.id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Serialize(messageToSerialize.id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Serialize(messageToSerialize.id, ref stream);
                 }
                 else
                 {
@@ -727,12 +727,12 @@ namespace Yogollag
             var objToSerialize = new EffectId();
             {
                 var has = stream.GetBool();
-                objToSerialize.Effect = !has ? default : (ISpellEffectDef)SyncTypesMap.GetSerializerForObjType(typeof(ISpellEffectDef)).Deserialize(stream);
+                objToSerialize.Effect = !has ? default : (ISpellEffectDef)SyncTypesMap.FastSerializerGetter<ISpellEffectDef>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.SpellId = !has ? default : (SpellId)SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Deserialize(stream);
+                objToSerialize.SpellId = !has ? default : (SpellId)SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -747,7 +747,7 @@ namespace Yogollag
                 if (objToSerialize.Effect != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(ISpellEffectDef)).Serialize(objToSerialize.Effect, ref stream);
+                    SyncTypesMap.FastSerializerGetter<ISpellEffectDef>.Serializer.Serialize(objToSerialize.Effect, ref stream);
                 }
                 else
                 {
@@ -759,7 +759,7 @@ namespace Yogollag
                 if (objToSerialize.SpellId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Serialize(objToSerialize.SpellId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Serialize(objToSerialize.SpellId, ref stream);
                 }
                 else
                 {
@@ -782,22 +782,22 @@ namespace Yogollag
             var objToSerialize = new SpellCast();
             {
                 var has = stream.GetBool();
-                objToSerialize.Def = !has ? default : (SpellDef)SyncTypesMap.GetSerializerForObjType(typeof(SpellDef)).Deserialize(stream);
+                objToSerialize.Def = !has ? default : (SpellDef)SyncTypesMap.FastSerializerGetter<SpellDef>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.TargetEntity = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.TargetEntity = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.TargetPoint = !has ? default : (Vec2)SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Deserialize(stream);
+                objToSerialize.TargetPoint = !has ? default : (Vec2)SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.OwnerObject = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.OwnerObject = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -812,7 +812,7 @@ namespace Yogollag
                 if (objToSerialize.Def != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellDef)).Serialize(objToSerialize.Def, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellDef>.Serializer.Serialize(objToSerialize.Def, ref stream);
                 }
                 else
                 {
@@ -824,7 +824,7 @@ namespace Yogollag
                 if (objToSerialize.TargetEntity != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.TargetEntity, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.TargetEntity, ref stream);
                 }
                 else
                 {
@@ -836,7 +836,7 @@ namespace Yogollag
                 if (objToSerialize.TargetPoint != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Vec2)).Serialize(objToSerialize.TargetPoint, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Vec2>.Serializer.Serialize(objToSerialize.TargetPoint, ref stream);
                 }
                 else
                 {
@@ -848,7 +848,7 @@ namespace Yogollag
                 if (objToSerialize.OwnerObject != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.OwnerObject, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.OwnerObject, ref stream);
                 }
                 else
                 {
@@ -871,17 +871,17 @@ namespace Yogollag
             var objToSerialize = new PastSpellCooldown();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id = !has ? default : (SpellId)SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Deserialize(stream);
+                objToSerialize.Id = !has ? default : (SpellId)SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.Def = !has ? default : (SpellDef)SyncTypesMap.GetSerializerForObjType(typeof(SpellDef)).Deserialize(stream);
+                objToSerialize.Def = !has ? default : (SpellDef)SyncTypesMap.FastSerializerGetter<SpellDef>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.TimeWhenStarted = !has ? default : (SyncedTime)SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Deserialize(stream);
+                objToSerialize.TimeWhenStarted = !has ? default : (SyncedTime)SyncTypesMap.FastSerializerGetter<SyncedTime>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -896,7 +896,7 @@ namespace Yogollag
                 if (objToSerialize.Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Serialize(objToSerialize.Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Serialize(objToSerialize.Id, ref stream);
                 }
                 else
                 {
@@ -908,7 +908,7 @@ namespace Yogollag
                 if (objToSerialize.Def != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellDef)).Serialize(objToSerialize.Def, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellDef>.Serializer.Serialize(objToSerialize.Def, ref stream);
                 }
                 else
                 {
@@ -920,7 +920,7 @@ namespace Yogollag
                 if (objToSerialize.TimeWhenStarted != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Serialize(objToSerialize.TimeWhenStarted, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SyncedTime>.Serializer.Serialize(objToSerialize.TimeWhenStarted, ref stream);
                 }
                 else
                 {
@@ -1036,7 +1036,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 155017823);
                 var has = stream.GetBool();
-                Id = !has ? default : (SpellId)SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Deserialize(stream);
+                Id = !has ? default : (SpellId)SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Deserialize(stream);
                 CheckStream(stream, 155017823);
             }
 
@@ -1045,7 +1045,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 895414548);
                 var has = stream.GetBool();
-                Cast = !has ? default : (SpellCast)SyncTypesMap.GetSerializerForObjType(typeof(SpellCast)).Deserialize(stream);
+                Cast = !has ? default : (SpellCast)SyncTypesMap.FastSerializerGetter<SpellCast>.Serializer.Deserialize(stream);
                 CheckStream(stream, 895414548);
             }
 
@@ -1054,7 +1054,7 @@ namespace Yogollag
             {
                 CheckStream(stream, 2084183244);
                 var has = stream.GetBool();
-                StartTime = !has ? default : (SyncedTime)SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Deserialize(stream);
+                StartTime = !has ? default : (SyncedTime)SyncTypesMap.FastSerializerGetter<SyncedTime>.Serializer.Deserialize(stream);
                 CheckStream(stream, 2084183244);
             }
 
@@ -1115,7 +1115,7 @@ namespace Yogollag
                 if (Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellId)).Serialize(Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellId>.Serializer.Serialize(Id, ref stream);
                 }
                 else
                 {
@@ -1133,7 +1133,7 @@ namespace Yogollag
                 if (Cast != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SpellCast)).Serialize(Cast, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SpellCast>.Serializer.Serialize(Cast, ref stream);
                 }
                 else
                 {
@@ -1151,7 +1151,7 @@ namespace Yogollag
                 if (StartTime != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(SyncedTime)).Serialize(StartTime, ref stream);
+                    SyncTypesMap.FastSerializerGetter<SyncedTime>.Serializer.Serialize(StartTime, ref stream);
                 }
                 else
                 {

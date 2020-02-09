@@ -32,7 +32,7 @@ namespace NetworkEngine
             var objToSerialize = new GrantAuthorityMessage();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -47,7 +47,7 @@ namespace NetworkEngine
                 if (objToSerialize.Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Id, ref stream);
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace NetworkEngine
             var objToSerialize = new RevokeAuthorityMessage();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -85,7 +85,7 @@ namespace NetworkEngine
                 if (objToSerialize.Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Id, ref stream);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace NetworkEngine
             var objToSerialize = new HelloPeer();
             {
                 var has = stream.GetBool();
-                objToSerialize.MyId = !has ? default : (NetworkNodeId)SyncTypesMap.GetSerializerForObjType(typeof(NetworkNodeId)).Deserialize(stream);
+                objToSerialize.MyId = !has ? default : (NetworkNodeId)SyncTypesMap.FastSerializerGetter<NetworkNodeId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -123,7 +123,7 @@ namespace NetworkEngine
                 if (objToSerialize.MyId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(NetworkNodeId)).Serialize(objToSerialize.MyId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<NetworkNodeId>.Serializer.Serialize(objToSerialize.MyId, ref stream);
                 }
                 else
                 {
@@ -146,7 +146,7 @@ namespace NetworkEngine
             var objToSerialize = new HelloAnswerPeer();
             {
                 var has = stream.GetBool();
-                objToSerialize.MyId = !has ? default : (NetworkNodeId)SyncTypesMap.GetSerializerForObjType(typeof(NetworkNodeId)).Deserialize(stream);
+                objToSerialize.MyId = !has ? default : (NetworkNodeId)SyncTypesMap.FastSerializerGetter<NetworkNodeId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -161,7 +161,7 @@ namespace NetworkEngine
                 if (objToSerialize.MyId != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(NetworkNodeId)).Serialize(objToSerialize.MyId, ref stream);
+                    SyncTypesMap.FastSerializerGetter<NetworkNodeId>.Serializer.Serialize(objToSerialize.MyId, ref stream);
                 }
                 else
                 {
@@ -184,7 +184,7 @@ namespace NetworkEngine
             var objToSerialize = new ReplicateEntity();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
@@ -193,7 +193,7 @@ namespace NetworkEngine
 
             {
                 var has = stream.GetBool();
-                objToSerialize.InitialState = !has ? default : (Byte[])SyncTypesMap.GetSerializerForObjType(typeof(Byte[])).Deserialize(stream);
+                objToSerialize.InitialState = !has ? default : (Byte[])SyncTypesMap.FastSerializerGetter<Byte[]>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -208,7 +208,7 @@ namespace NetworkEngine
                 if (objToSerialize.Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Id, ref stream);
                 }
                 else
                 {
@@ -224,7 +224,7 @@ namespace NetworkEngine
                 if (objToSerialize.InitialState != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Byte[])).Serialize(objToSerialize.InitialState, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Byte[]>.Serializer.Serialize(objToSerialize.InitialState, ref stream);
                 }
                 else
                 {
@@ -247,12 +247,12 @@ namespace NetworkEngine
             var objToSerialize = new UpdateEntity();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             {
                 var has = stream.GetBool();
-                objToSerialize.Delta = !has ? default : (Byte[])SyncTypesMap.GetSerializerForObjType(typeof(Byte[])).Deserialize(stream);
+                objToSerialize.Delta = !has ? default : (Byte[])SyncTypesMap.FastSerializerGetter<Byte[]>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -267,7 +267,7 @@ namespace NetworkEngine
                 if (objToSerialize.Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Id, ref stream);
                 }
                 else
                 {
@@ -279,7 +279,7 @@ namespace NetworkEngine
                 if (objToSerialize.Delta != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(Byte[])).Serialize(objToSerialize.Delta, ref stream);
+                    SyncTypesMap.FastSerializerGetter<Byte[]>.Serializer.Serialize(objToSerialize.Delta, ref stream);
                 }
                 else
                 {
@@ -302,7 +302,7 @@ namespace NetworkEngine
             var objToSerialize = new UnreplicateEntity();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Deserialize(stream);
+                objToSerialize.Id = !has ? default : (EntityId)SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Deserialize(stream);
             }
 
             return objToSerialize;
@@ -317,7 +317,7 @@ namespace NetworkEngine
                 if (objToSerialize.Id != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(EntityId)).Serialize(objToSerialize.Id, ref stream);
+                    SyncTypesMap.FastSerializerGetter<EntityId>.Serializer.Serialize(objToSerialize.Id, ref stream);
                 }
                 else
                 {
@@ -398,7 +398,7 @@ namespace NetworkEngine
             var objToSerialize = new EntityId();
             {
                 var has = stream.GetBool();
-                objToSerialize.Id1 = !has ? default : (NetworkNodeId)SyncTypesMap.GetSerializerForObjType(typeof(NetworkNodeId)).Deserialize(stream);
+                objToSerialize.Id1 = !has ? default : (NetworkNodeId)SyncTypesMap.FastSerializerGetter<NetworkNodeId>.Serializer.Deserialize(stream);
             }
 
             {
@@ -421,7 +421,7 @@ namespace NetworkEngine
                 if (objToSerialize.Id1 != default)
                 {
                     stream.Put(true);
-                    SyncTypesMap.GetSerializerForObjType(typeof(NetworkNodeId)).Serialize(objToSerialize.Id1, ref stream);
+                    SyncTypesMap.FastSerializerGetter<NetworkNodeId>.Serializer.Serialize(objToSerialize.Id1, ref stream);
                 }
                 else
                 {

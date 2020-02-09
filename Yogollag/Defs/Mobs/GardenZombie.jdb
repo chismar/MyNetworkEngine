@@ -44,7 +44,8 @@
                 "Effects": [
                     {
                         "$type": "EffectRunAndRerun",
-                        "TryAgainCooldown": 1,
+                        "TryAgainCooldown": 0.3,
+                        "OnSuccessCooldown": 0,
                         "Spell": {
                             "$type": "Spell",
                             "CustomName": "Random action",
