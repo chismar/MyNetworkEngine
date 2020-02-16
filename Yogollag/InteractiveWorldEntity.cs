@@ -35,7 +35,7 @@ namespace Yogollag
         InteractiveDef IInteractive.InteractiveDef { get { return InteractiveDef; } set { throw new NotImplementedException(); } }
 
         [Def]
-        public virtual bool HasPhysicsBody { get; set; }
+        public virtual bool HasNoPhysicsBody { get; set; }
 
         static RectangleShape shape = new RectangleShape(new SFML.System.Vector2f(5, 10));
         public override void OnCreate()

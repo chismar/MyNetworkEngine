@@ -61,7 +61,7 @@ namespace Yogollag
         }
 
         = default;
-        public Boolean HasPhysicsBody
+        public Boolean HasNoPhysicsBody
         {
             get;
             set;
@@ -85,9 +85,9 @@ namespace Yogollag
             get => ((InteractiveWorldEntityDef)Def).InteractiveDef.Def;
         }
 
-        public override Boolean HasPhysicsBody
+        public override Boolean HasNoPhysicsBody
         {
-            get => ((InteractiveWorldEntityDef)Def).HasPhysicsBody;
+            get => ((InteractiveWorldEntityDef)Def).HasNoPhysicsBody;
         }
 
         override protected void SetDefsForComponents()

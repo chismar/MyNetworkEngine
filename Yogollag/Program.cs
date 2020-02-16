@@ -237,7 +237,7 @@ namespace Yogollag
     public interface IVoltSimpleObject : IPositionedEntity
     {
         VoltBody PhysicsBody { get; set; }
-        bool HasPhysicsBody { get; set; }
+        bool HasNoPhysicsBody { get; set; }
     }
     public class SimpleClient
     {

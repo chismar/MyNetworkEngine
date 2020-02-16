@@ -42,7 +42,7 @@ namespace Yogollag
     {
 
         [Def]
-        public virtual bool HasPhysicsBody { get; set; }
+        public virtual bool HasNoPhysicsBody { get; set; }
         [Sync]
         public virtual LinksEngine Links { get; set; } = SyncObject.New<LinksEngine>();
         [Def]
@@ -93,7 +93,7 @@ namespace Yogollag
         {
             AI.Init(SpellsEngine, LocoMover);
             var voltWorld = ((VoltWorld)CurrentServer.CustomData);
-            if (HasPhysicsBody)
+            if (!HasNoPhysicsBody)
                 lock (voltWorld)
                 {
                     var pos = Position;

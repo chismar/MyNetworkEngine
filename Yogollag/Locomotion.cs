@@ -33,12 +33,13 @@ namespace Yogollag
         {
             if (_lastTimeUpdated == 0)
                 return;
-            lock (_body.World)
-            {
-                _body.LinearVelocity = Movement;
-                Position = _body.Position;
-                Rotation += (float)EnvironmentAPI.Time.DeltaTime * _angleRot;
-            }
+            if (_body != null)
+                lock (_body.World)
+                {
+                    _body.LinearVelocity = Movement;
+                    Position = _body.Position;
+                    Rotation += (float)EnvironmentAPI.Time.DeltaTime * _angleRot;
+                }
         }
         public void ApplyMovement(Vec2 vel, float angleRot)
         {
@@ -145,7 +146,7 @@ namespace Yogollag
                     //EnvironmentAPI.Draw.Text(new TextHandle() { Position = new Vec2(200, 300), Text = $"{_def.MovementAngleSpeed * sign * 0.1f} {_movable.CurrentRotation} {Vec2.AngleBetween(MovementDir, new Vec2(0, 1))} {angle}" });
                     _lerpedSpeed = Mathf.Clamp(_lerpedSpeed + 0.3f, 0f, _def.CruiserSpeed);
                     _movable.ApplyMovement(MovementDir * _lerpedSpeed, Math.Abs(angle) < 5 ? default : _def.MovementAngleSpeed * lerp);
-                    
+
                 }
             }
             else
