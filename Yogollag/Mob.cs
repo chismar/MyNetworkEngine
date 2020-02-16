@@ -41,6 +41,8 @@ namespace Yogollag
         IImpactedEntity, IHasSpells, IHasLinksEngine, IHasActionEngine, IHasCombatEngine, IHasLocoMover, IHasMortalEngine, IHasAIEngine
     {
 
+        [Def]
+        public virtual bool HasPhysicsBody { get; set; }
         [Sync]
         public virtual LinksEngine Links { get; set; } = SyncObject.New<LinksEngine>();
         [Def]
@@ -91,14 +93,15 @@ namespace Yogollag
         {
             AI.Init(SpellsEngine, LocoMover);
             var voltWorld = ((VoltWorld)CurrentServer.CustomData);
-            lock (voltWorld)
-            {
-                var pos = Position;
-                var circleShape = voltWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 0.5f, 30);
-                var body = IsMaster ? voltWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape) : voltWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
-                body.UserData = Id;
-                PhysicsBody = body;
-            }
+            if (HasPhysicsBody)
+                lock (voltWorld)
+                {
+                    var pos = Position;
+                    var circleShape = voltWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 0.5f, 30);
+                    var body = IsMaster ? voltWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape) : voltWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                    body.UserData = Id;
+                    PhysicsBody = body;
+                }
             if (IsMaster)
                 Locomotion.Init(PhysicsBody);
         }

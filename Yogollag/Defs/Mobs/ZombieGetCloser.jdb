@@ -6,7 +6,7 @@
         {
             "$type": "EffectMove",
             "Policy": "FinishWhenNear",
-            "AcceptedRange": 1
+            "AcceptedRange": 1.4
         }
     ]
 }

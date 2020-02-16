@@ -61,6 +61,13 @@ namespace Yogollag
         }
 
         = default;
+        public Boolean HasPhysicsBody
+        {
+            get;
+            set;
+        }
+
+        = default;
         public DefRef<StatsEngineDef> StatsEngine
         {
             get;
@@ -76,6 +83,11 @@ namespace Yogollag
         public override InteractiveDef InteractiveDef
         {
             get => ((InteractiveWorldEntityDef)Def).InteractiveDef.Def;
+        }
+
+        public override Boolean HasPhysicsBody
+        {
+            get => ((InteractiveWorldEntityDef)Def).HasPhysicsBody;
         }
 
         override protected void SetDefsForComponents()

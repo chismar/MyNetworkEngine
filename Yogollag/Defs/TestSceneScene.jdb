@@ -3,6 +3,106 @@
   "CustomName": null,
   "Entities": [
     {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/Mobs/GardenShield",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": -43.0,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null,
+      "FxEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/Mobs/GardenCannon",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 0.8,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null,
+      "FxEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/Mobs/GardenCrow",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": -28.64,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null,
+      "FxEngine": null
+    },
+    {
+      "$type": "MobSceneDef",
+      "CustomName": null,
+      "Object": "/Mobs/GardenKnight",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": 17.3,
+        "Y": 0.0
+      },
+      "Links": {
+        "$type": "LinksEngineSceneDef",
+        "CustomName": null,
+        "Object": null,
+        "SceneRefs": null,
+        "Locators": null
+      },
+      "AI": null,
+      "SpellsEngine": null,
+      "StatsEngine": null,
+      "_spriteRenderer": null,
+      "CombatEngine": null,
+      "ActionEngine": null,
+      "FxEngine": null
+    },
+    {
       "$type": "WorldItemEntitySceneDef",
       "CustomName": null,
       "Object": "/WorldItemDef",
@@ -96,7 +196,8 @@
       "StatsEngine": null,
       "_spriteRenderer": null,
       "CombatEngine": null,
-      "ActionEngine": null
+      "ActionEngine": null,
+      "FxEngine": null
     },
     {
       "$type": "MobSceneDef",
@@ -120,7 +221,8 @@
       "StatsEngine": null,
       "_spriteRenderer": null,
       "CombatEngine": null,
-      "ActionEngine": null
+      "ActionEngine": null,
+      "FxEngine": null
     },
     {
       "$type": "MobSceneDef",
@@ -144,7 +246,8 @@
       "StatsEngine": null,
       "_spriteRenderer": null,
       "CombatEngine": null,
-      "ActionEngine": null
+      "ActionEngine": null,
+      "FxEngine": null
     },
     {
       "$type": "MobSceneDef",
@@ -168,7 +271,8 @@
       "StatsEngine": null,
       "_spriteRenderer": null,
       "CombatEngine": null,
-      "ActionEngine": null
+      "ActionEngine": null,
+      "FxEngine": null
     }
   ]
 }

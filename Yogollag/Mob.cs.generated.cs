@@ -235,6 +235,13 @@ namespace Yogollag
     [GeneratedClass]
     public class MobDef : BaseDef, IEntityObjectDef
     {
+        public Boolean HasPhysicsBody
+        {
+            get;
+            set;
+        }
+
+        = default;
         public DefRef<LocoMoverDef> LocoMoverDef
         {
             get;
@@ -310,6 +317,11 @@ namespace Yogollag
     [GeneratedClass]
     public partial class MobSync
     {
+        public override Boolean HasPhysicsBody
+        {
+            get => ((MobDef)Def).HasPhysicsBody;
+        }
+
         public override LocoMoverDef LocoMoverDef
         {
             get => ((MobDef)Def).LocoMoverDef.Def;

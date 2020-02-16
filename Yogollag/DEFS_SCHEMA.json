@@ -4295,6 +4295,16 @@
         "InteractiveDef": {
           "$ref": "#/definitions/InteractiveDefField"
         },
+        "HasPhysicsBody": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
         "StatsEngine": {
           "$ref": "#/definitions/StatsEngineDefField"
         },
@@ -6438,6 +6448,16 @@
           "enum": [
             "MobDef",
             "Mob"
+          ]
+        },
+        "HasPhysicsBody": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
           ]
         },
         "LocoMoverDef": {
