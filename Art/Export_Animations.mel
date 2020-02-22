@@ -56,13 +56,13 @@ proc string[] getSkinnedMeshesInScene()
     $sceneMeshes = `ls -type mesh`;
     string $skinedMeshes[] = {};
     $i = 0;
-    for ($sm in $sceneMeshes) // $sm = $sceneMeshes[0];
+    for ($sm in $sceneMeshes) // $sm = $sceneMeshes[1];
     {
-        $isSkined = `listConnections -type skinCluster $sm`;
+        string $isSkined[] = `listConnections -type skinCluster $sm`;
         if (size($isSkined) > 1) error ("Too much skin clusters - " + size($isSkined) + " on object " + $sm);
         if ($isSkined[0] != "") // print $isSkined[0];
         {
-            $parents = `listRelatives -parent $sm`;
+            string $parents[] = `listRelatives -parent $sm`;
             if (size($parents) > 1) { error ("Too much parents! - " + size($parents) + " on object " + $sm);}
             string $mmm = $parents[0];
             $mt = `match "^NE_" $mmm`;
@@ -287,7 +287,7 @@ proc trySelect (string $obj)
                 FBXProperty Export|IncludeGrp|Geometry|SmoothingGroups -v 1;
                 FBXProperty Export|IncludeGrp|Animation -v $exportAnimation;
                 FBXProperty Export|IncludeGrp|Animation|Deformation -v $exportShapes;
-                FBXExportAnimationOnly -v $exportAnimation;
+                FBXExportAnimationOnly -v 0;
                 FBXExportSkeletonDefinitions -v 1;
                 FBXExportSmoothingGroups -v 1;
                 FBXExportSmoothMesh -v 0;

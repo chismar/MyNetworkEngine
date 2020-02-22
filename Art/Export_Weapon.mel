@@ -152,8 +152,10 @@ for ($c in $Files)//$c = $Files[0];
             $fName = `match "[^/\\]*$" $path`;
             $fNameNoExt = basenameEx( $fName );
             if ( !`filetest -e ($fold + $fbxfold )` )
-                sysFile -makeDir ($fold + $fbxfold); 
-            FBXExport -f ($fold + $fbxfold + $fNameNoExt + ".fbx") -s;
+                sysFile -makeDir ($fold + $fbxfold);
+            if ( !`filetest -e ($fold + $fbxfold + $fNameNoExt  + "/")` )
+                sysFile -makeDir ($fold + $fbxfold + $fNameNoExt  + "/");
+            FBXExport -f ($fold + $fbxfold + $fNameNoExt + "/" + $fNameNoExt + ".fbx") -s;
             
         }
     }
