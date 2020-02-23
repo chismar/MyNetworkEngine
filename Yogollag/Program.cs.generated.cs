@@ -1466,6 +1466,13 @@ namespace Yogollag
         }
 
         = default;
+        public DefRef<MortalEngineSceneDef> Mortal
+        {
+            get;
+            set;
+        }
+
+        = default;
         public DefRef<FxEngineSceneDef> FxEngine
         {
             get;
@@ -1520,6 +1527,13 @@ namespace Yogollag
         }
 
         = default;
+        public DefRef<MortalEngineDef> Mortal
+        {
+            get;
+            set;
+        }
+
+        = default;
         public DefRef<FxEngineDef> FxEngine
         {
             get;
@@ -1544,6 +1558,7 @@ namespace Yogollag
             CombatEngine.Def = (IDef)((CharacterEntityDef)Def)?.CombatEngine.Def;
             ActionEngine.Def = (IDef)((CharacterEntityDef)Def)?.ActionEngine.Def;
             StatsEngine.Def = (IDef)((CharacterEntityDef)Def)?.StatsEngine.Def;
+            Mortal.Def = (IDef)((CharacterEntityDef)Def)?.Mortal.Def;
             FxEngine.Def = (IDef)((CharacterEntityDef)Def)?.FxEngine.Def;
         }
 
@@ -1554,6 +1569,7 @@ namespace Yogollag
             CombatEngine.Init();
             ActionEngine.Init();
             StatsEngine.Init();
+            Mortal.Init();
             FxEngine.Init();
         }
 
@@ -1564,6 +1580,7 @@ namespace Yogollag
             CombatEngine.Create();
             ActionEngine.Create();
             StatsEngine.Create();
+            Mortal.Create();
             FxEngine.Create();
         }
 
@@ -1574,6 +1591,7 @@ namespace Yogollag
             CombatEngine.Destroy();
             ActionEngine.Destroy();
             StatsEngine.Destroy();
+            Mortal.Destroy();
             FxEngine.Destroy();
         }
     }
@@ -1767,6 +1785,7 @@ namespace Yogollag
             CombatEngine.InitFromSceneDef(selfDef.CombatEngine.Def);
             ActionEngine.InitFromSceneDef(selfDef.ActionEngine.Def);
             StatsEngine.InitFromSceneDef(selfDef.StatsEngine.Def);
+            Mortal.InitFromSceneDef(selfDef.Mortal.Def);
             FxEngine.InitFromSceneDef(selfDef.FxEngine.Def);
             Rotation = selfDef.Rotation;
             Position = selfDef.Position;

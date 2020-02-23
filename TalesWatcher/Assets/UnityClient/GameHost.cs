@@ -51,7 +51,9 @@ public class GameHost : MonoBehaviour
         {
             while (!_source.Token.IsCancellationRequested)
             {
+                UnityEngine.Profiling.Profiler.BeginSample("SERVER TICK");
                 server.Update();
+                UnityEngine.Profiling.Profiler.EndSample();
                 await Task.Delay(5);
             }
         });

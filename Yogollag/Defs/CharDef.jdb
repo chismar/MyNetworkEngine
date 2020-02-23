@@ -16,11 +16,29 @@
             "./TestStaggerChar",
             "/Abilities/QAbility",
             "/Abilities/EAbility",
-            "/Abilities/RAbility"
+            "/Abilities/RAbility",
+            "/Abilities/SpaceAbility"
         ]
     },
     "SpellsEngine": {
-        "$type": "SpellsEngine"
+        "$type": "SpellsEngine",
+        "SpellsOnStart": [
+            {
+                "$type": "Spell",
+                "IsInfinite":true,
+                "Effects": [
+                    {
+                        "$type": "EffectActionsLayer",
+                        "Overrides": [
+                            {
+                                "ActionSpell": "/Abilities/SpaceAbility",
+                                "NewActionSpell": "/Abilities/Dodge"
+                            },
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     "LocoMoverDef": {
         "$type": "LocoMover",
@@ -38,6 +56,11 @@
                 "$type": "StatInstance",
                 "Stat": "/Stats/Affinity",
                 "InitialValue": 300
+            },
+            {
+                "$type": "AccumulatedStatInstance",
+                "Stat": "/Stats/Dodge",
+                "InitialValue": 0
             },
             {
                 "$type": "StatInstance",

@@ -13,7 +13,8 @@ namespace Yogollag
 
     [GenerateSync]
     public abstract class InteractiveWorldEntity : GhostedEntity,
-        IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject, IEntityObject
+        IPositionedEntity, IStatEntity, IImpactedEntity, IInteractive, IRenderable, IVoltSimpleObject, IEntityObject, 
+        IHasMortalEngine, ITicked, IHasSpells, IHasFxEngine
     {
         [Def]
         public virtual InteractiveDef InteractiveDef { get; set; }
@@ -36,11 +37,27 @@ namespace Yogollag
 
         [Def]
         public virtual bool HasNoPhysicsBody { get; set; }
+        [Sync(SyncType.Client)]
+        public virtual MortalEngine Mortal { get; set; } = SyncObject.New<MortalEngine>();
+        [Sync(SyncType.Client)]
+        public virtual SpellsEngine SpellsEngine { get; set; } = SyncObject.New<SpellsEngine>();
+        [Sync(SyncType.Client)]
+        public virtual FxEngine FxEngine { get; set; } = SyncObject.New<FxEngine>();
 
         static RectangleShape shape = new RectangleShape(new SFML.System.Vector2f(5, 10));
-        public override void OnCreate()
+     
+        public override void OnInit()
         {
-
+            var voltWorld = ((VoltWorld)CurrentServer.CustomData);
+            if (!HasNoPhysicsBody)
+                lock (voltWorld)
+                {
+                    var pos = Position;
+                    var circleShape = voltWorld.CreateCircleWorldSpace(new Vector2(pos.X, pos.Y), 0.5f, 30);
+                    var body = IsMaster ? voltWorld.CreateDynamicBody(new Vector2(pos.X, pos.Y), 1, circleShape) : voltWorld.CreateStaticBody(new Vector2(pos.X, pos.Y), 1, circleShape);
+                    body.UserData = Id;
+                    PhysicsBody = body;
+                }
         }
         public void Render(RenderTarget rt)
         {
@@ -52,7 +69,21 @@ namespace Yogollag
         [Sync(SyncType.Server)]
         public virtual void RunImpact(ScriptingContext originalContext, IImpactDef def)
         {
-            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext });
+            def.Apply(new ScriptingContext() { ProcessingEntity = this, Parent = originalContext, Host = this.Id, Target = this.Id });
+        }
+
+        public void Tick()
+        {
+            Mortal.Update();
+        }
+        public override void Clear()
+        {
+            var voltWorld = ((VoltWorld)CurrentServer.CustomData);
+            if (!HasNoPhysicsBody)
+                lock (voltWorld)
+                {
+                    voltWorld.RemoveBody(PhysicsBody);
+                }
         }
     }
     public interface IInteractive

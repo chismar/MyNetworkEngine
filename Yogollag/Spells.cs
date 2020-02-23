@@ -173,7 +173,7 @@ namespace Yogollag
 
         public virtual SpellId CastFromInsideEntity(SpellCast cast, SpellId ignoreSpell = default)
         {
-            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead)
+            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead && !cast.Def.IgnoresDeath)
                 return default;
             if (SlotIsOccupied(cast, ignoreSpell) || OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(ParentEntity) { Target = cast.TargetEntity }) ?? false))
                 return default;
@@ -194,7 +194,7 @@ namespace Yogollag
         [Sync(SyncType.AuthorityClient)]
         public virtual void CastSpell(SpellId id, SpellCast cast)
         {
-            if (((IHasMortalEngine)ParentEntity).Mortal.IsDead || SlotIsOccupied(cast) ||
+            if ((((IHasMortalEngine)ParentEntity).Mortal.IsDead && !cast.Def.IgnoresDeath) || SlotIsOccupied(cast) ||
                 OnCooldown(cast) || (!cast.Def.Predicate.Def?.Check(new ScriptingContext(base.ParentEntity) { TargetPoint = cast.GetTargetPoint(ParentEntity.CurrentServer), Target = cast.TargetEntity }) ?? false))
             {
                 SpellFailedEvent.Post(new SpellFailedToCast() { Id = id });
@@ -301,6 +301,7 @@ namespace Yogollag
         public DefRef<IImpactDef> ImpactOnFail { get; set; }
         public DefRef<IImpactDef> ImpactOnStart { get; set; }
         public List<DefRef<ISpellEffectDef>> Effects { get; set; } = new List<DefRef<ISpellEffectDef>>();
+        public bool IgnoresDeath { get; set; } = false;
     }
 
     [GenerateSync]

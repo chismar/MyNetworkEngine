@@ -19,6 +19,52 @@ using LiteNetLib.Utils;
 namespace Yogollag
 {
     [GeneratedClass]
+    public class AccStatModifierSync : IGhostLikeSerializer
+    {
+        public object Deserialize(NetDataReader stream)
+        {
+            var objToSerialize = new AccStatModifier();
+            {
+                objToSerialize.AddMod = stream.GetFloat();
+            }
+
+            {
+                var has = stream.GetBool();
+                objToSerialize.ModKey = !has ? default : (EffectId)SyncTypesMap.FastSerializerGetter<EffectId>.Serializer.Deserialize(stream);
+            }
+
+            return objToSerialize;
+        }
+
+        public bool Serialize(object obj, ref NetDataWriter stream)
+        {
+            var objToSerialize = (AccStatModifier)obj;
+            if (stream == null)
+                stream = new NetDataWriter(true, 5);
+            {
+                stream.Put(objToSerialize.AddMod);
+            }
+
+            {
+                if (objToSerialize.ModKey != default)
+                {
+                    stream.Put(true);
+                    SyncTypesMap.FastSerializerGetter<EffectId>.Serializer.Serialize(objToSerialize.ModKey, ref stream);
+                }
+                else
+                {
+                    stream.Put(false);
+                }
+            }
+
+            return true;
+        }
+    }
+}
+
+namespace Yogollag
+{
+    [GeneratedClass]
     public partial class AccumulatedStatSync
     {
         override protected void SetDefsForComponents()

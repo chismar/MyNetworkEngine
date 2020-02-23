@@ -1,0 +1,47 @@
+{
+    "$type": "InteractiveWorldEntity",
+    "StatsEngine": {
+        "$type": "StatsEngine",
+        "Stats": [
+            {
+                "$type": "StatInstance",
+                "InitialValue":30,
+                "Stat": "/Stats/Health"
+            }
+        ]
+    },
+    "InteractiveDef":{
+        "$type":"InteractiveDef",
+        "Name": "Destructible barrel",
+        "Interactions":[
+        ]
+    },
+    "Mortal": {
+        "$type": "MortalEngine",
+        "SpellOnDeath": {
+            "$type": "Spell",
+            "IgnoresDeath":true,
+            "Duration": 1,
+            "Effects": [
+                {
+                    "$type": "SubEffect",
+                    "EndOffset": 1,
+                    "Effects": [
+                        {
+                            "$type": "EffectFx",
+                            "FxName": "BreakFx",
+                            "FxLocation": "ExplosionLocation"
+                        }
+                    ]
+                },
+              
+            ],
+            "ImpactOnSuccess": {
+                "$type": "DestroyObject"
+            }
+        }
+    },
+    "SpellsEngine": {
+        "$type": "SpellsEngine"
+    }
+}

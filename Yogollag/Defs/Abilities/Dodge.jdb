@@ -1,0 +1,29 @@
+{
+    "$type": "Spell",
+    "Duration": 0.85,
+    "Cooldown": 0.8,
+    "Slot": "/AttackSlot",
+    "Effects": [
+        {
+            "$type": "EffectMotion",
+            "CurveName": "DodgeCurve",
+            "Speed": 30,
+            "OverrideActionDirWithMotionDir":true,
+        },
+        {
+            "$type": "EffectAnimate",
+            "AnimationName": "SwordAttack"
+        },
+        {
+            "$type": "EffectChangeStat",
+            "Stat": "/Stats/Dodge",
+            "Add": 1
+        },
+        {
+            "$type": "EffectIgnoreInput",
+            "Inputs": [
+                "/AttackSlot"
+            ]
+        }
+    ]
+}

@@ -671,7 +671,7 @@ namespace Yogollag
         {
             Vec2 dir = Vec2.New(0, 0);
 
-            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.Space))
+            if (EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.Space) && EnvironmentAPI.Input.IsKeyPressed(Keyboard.Key.LShift))
             {
                 LocalPosition = new Vec2() { X = 0, Y = 0 };
                 SmoothPosition = LocalPosition;

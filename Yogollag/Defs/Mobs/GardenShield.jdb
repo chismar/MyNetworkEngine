@@ -20,6 +20,9 @@
         "ActionRotationSpeed": 270,
         "IdleAngleSpeed": 3600
     },
+    "Mortal": {
+        "$type": "MortalEngine"
+    },
     "AI": {
         "$type": "AIEngine",
         "DefaultSelectors": [

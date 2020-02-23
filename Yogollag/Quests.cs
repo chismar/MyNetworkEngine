@@ -46,6 +46,7 @@ namespace Yogollag
         public DefRef<CalcerDef> Radius { get; set; }
         public DefRef<StrikeDef> StrikeOnEnter { get; set; }
         public bool Dot { get; set; }
+        public bool Once { get; set; }
         public float DotPeriod { get; set; } = 0.1f;
         public class State
         {
@@ -70,8 +71,8 @@ namespace Yogollag
                                 if (eid == ctx.Host)
                                     continue;
                                 if (!state.Ids.Contains(eid) || Dot)
-                                    if (StrikeOnEnter.Def.PredicateOnTarget.Def.Check(new ScriptingContext(spellInstance.ParentEntity)
-                                    { Host = eid, Target = eid, Parent = new ScriptingContext(spellInstance.ParentEntity) }))
+                                    if (StrikeOnEnter.Def.PredicateOnTarget.Def?.Check(new ScriptingContext(spellInstance.ParentEntity)
+                                    { Host = eid, Target = eid, Parent = new ScriptingContext(spellInstance.ParentEntity) }) ?? true)
                                     {
                                         state.Ids.Add(eid);
                                         var g = spellInstance.CurrentServer.GetGhost(eid);
@@ -87,6 +88,8 @@ namespace Yogollag
                             }
                         }
                     });
+                    if (Once)
+                        break;
                     await Task.Delay(TimeSpan.FromSeconds(DotPeriod));
                 }
             });
@@ -184,12 +187,20 @@ namespace Yogollag
 
         public bool Check(ScriptingContext ctx)
         {
-            var target = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host);
+            var target = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Target);
             if (target == null)
                 return false;
-            return Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = target, Parent = ctx });
+            return Predicate.Def.Check(new ScriptingContext() { ProcessingEntity = ctx.ProcessingEntity, Parent = ctx, Host = ctx.Target, Target = ctx.Target });
         }
     }
+    public class DestroyObject : BaseDef, IImpactDef
+    {
+        public void Apply(ScriptingContext ctx)
+        {
+            ctx.ProcessingEntity.CurrentServer.Destroy(ctx.Host);
+        }
+    }
+
     public class SpawnObject : BaseDef, IImpactDef
     {
         public DefRef<IEntityObjectDef> Object { get; set; }
