@@ -21,8 +21,35 @@ using Volatile;
 namespace Yogollag
 {
     [GeneratedClass]
+    public class MortalEngineSceneDef : BaseDef, ISceneDef
+    {
+        public DefRef<IEntityObjectDef> Object
+        {
+            get;
+            set;
+        }
+    }
+
+    [GeneratedClass]
+    public class MortalEngineDef : BaseDef, IEntityObjectDef
+    {
+        public DefRef<SpellDef> SpellOnDeath
+        {
+            get;
+            set;
+        }
+
+        = default;
+    }
+
+    [GeneratedClass]
     public partial class MortalEngineSync
     {
+        public override SpellDef SpellOnDeath
+        {
+            get => ((MortalEngineDef)Def).SpellOnDeath.Def;
+        }
+
         override protected void SetDefsForComponents()
         {
         }
@@ -41,7 +68,7 @@ namespace Yogollag
     }
 
     //obj MortalEngine generic  hasCustomSerialization false
-    //debug info  0
+    //debug info IEntityComponent 1
     [GeneratedClass]
     public partial class MortalEngineSync : MortalEngine, IGhost
     {
@@ -55,14 +82,29 @@ namespace Yogollag
             }
         }
 
+        public override Boolean IsActive
+        {
+            get => base.IsActive;
+            set
+            {
+                base.IsActive = value;
+                OnPropChanged(1);
+            }
+        }
+
         public override Int32 SyncId
         {
             get => base.SyncId;
             set
             {
                 base.SyncId = value;
-                OnPropChanged(1);
+                OnPropChanged(2);
             }
+        }
+
+        public override void InitFromSceneDef(BaseDef def)
+        {
+            var selfDef = (MortalEngineSceneDef)def;
         }
 
         int _deltaMask;
@@ -86,8 +128,16 @@ namespace Yogollag
                 CheckStream(stream, 1691767749);
             }
 
-            CheckStream(stream, 389782966);
+            CheckStream(stream, 1875068523);
             if ((mask & (1 << 1)) != 0)
+            {
+                CheckStream(stream, 1875068523);
+                IsActive = stream.GetBool();
+                CheckStream(stream, 1875068523);
+            }
+
+            CheckStream(stream, 389782966);
+            if ((mask & (1 << 2)) != 0)
             {
                 CheckStream(stream, 389782966);
                 SyncId = stream.GetInt();
@@ -135,8 +185,17 @@ namespace Yogollag
                 SafeguardStream(stream, 1691767749);
             }
 
-            SafeguardStream(stream, 389782966);
+            SafeguardStream(stream, 1875068523);
             if ((deltaMask & (1 << 1)) != 0)
+            {
+                SafeguardStream(stream, 1875068523);
+                hasAny = true;
+                stream.Put(IsActive);
+                SafeguardStream(stream, 1875068523);
+            }
+
+            SafeguardStream(stream, 389782966);
+            if ((deltaMask & (1 << 2)) != 0)
             {
                 SafeguardStream(stream, 389782966);
                 hasAny = true;
@@ -217,6 +276,13 @@ namespace Yogollag
 
         = default;
         public DefRef<ActionEngineSceneDef> ActionEngine
+        {
+            get;
+            set;
+        }
+
+        = default;
+        public DefRef<MortalEngineSceneDef> Mortal
         {
             get;
             set;
@@ -305,6 +371,13 @@ namespace Yogollag
         }
 
         = default;
+        public DefRef<MortalEngineDef> Mortal
+        {
+            get;
+            set;
+        }
+
+        = default;
         public DefRef<FxEngineDef> FxEngine
         {
             get;
@@ -341,6 +414,7 @@ namespace Yogollag
             _spriteRenderer.Def = (IDef)((MobDef)Def)?._spriteRenderer.Def;
             CombatEngine.Def = (IDef)((MobDef)Def)?.CombatEngine.Def;
             ActionEngine.Def = (IDef)((MobDef)Def)?.ActionEngine.Def;
+            Mortal.Def = (IDef)((MobDef)Def)?.Mortal.Def;
             FxEngine.Def = (IDef)((MobDef)Def)?.FxEngine.Def;
         }
 
@@ -353,6 +427,7 @@ namespace Yogollag
             _spriteRenderer.Init();
             CombatEngine.Init();
             ActionEngine.Init();
+            Mortal.Init();
             FxEngine.Init();
         }
 
@@ -365,6 +440,7 @@ namespace Yogollag
             _spriteRenderer.Create();
             CombatEngine.Create();
             ActionEngine.Create();
+            Mortal.Create();
             FxEngine.Create();
         }
 
@@ -377,6 +453,7 @@ namespace Yogollag
             _spriteRenderer.Destroy();
             CombatEngine.Destroy();
             ActionEngine.Destroy();
+            Mortal.Destroy();
             FxEngine.Destroy();
         }
     }
@@ -524,6 +601,7 @@ namespace Yogollag
             _spriteRenderer.InitFromSceneDef(selfDef._spriteRenderer.Def);
             CombatEngine.InitFromSceneDef(selfDef.CombatEngine.Def);
             ActionEngine.InitFromSceneDef(selfDef.ActionEngine.Def);
+            Mortal.InitFromSceneDef(selfDef.Mortal.Def);
             FxEngine.InitFromSceneDef(selfDef.FxEngine.Def);
             Rotation = selfDef.Rotation;
             Position = selfDef.Position;

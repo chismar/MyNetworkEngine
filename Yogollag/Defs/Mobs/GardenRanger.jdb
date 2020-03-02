@@ -23,6 +23,9 @@
     "AI": {
         "$type": "AIEngine"
     },
+    "Mortal": {
+        "$type": "MortalEngine"
+    },
     "SpellsEngine": {
         "$type": "SpellsEngine",
         "SpellsOnStart": [

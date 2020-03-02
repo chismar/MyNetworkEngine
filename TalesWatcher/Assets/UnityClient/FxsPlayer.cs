@@ -37,7 +37,7 @@ class FxsPlayerVisual : VisualComponent
         }
         if (_fe == null)
             return curValue;
-        foreach(var fx in _fe.ActiveFXs)
+        foreach (var fx in _fe.ActiveFXs)
         {
             if (_currentFxs.ContainsKey(fx.Key))
                 continue;
@@ -49,12 +49,13 @@ class FxsPlayerVisual : VisualComponent
             }
         }
         var fxsToRemove = _currentFxs.Where(x => !_fe.ActiveFXs.ContainsKey(x.Key));
-        if(fxsToRemove.Any())
+        if (fxsToRemove.Any())
         {
-            foreach(var fxToRemove in fxsToRemove.ToList())
+            foreach (var fxToRemove in fxsToRemove.ToList())
             {
                 _currentFxs.Remove(fxToRemove.Key);
-                GameObject.Destroy(fxToRemove.Value.gameObject);
+                if (fxToRemove.Value.gameObject != null)
+                    GameObject.Destroy(fxToRemove.Value.gameObject);
             }
         }
         return curValue;

@@ -49,10 +49,10 @@
         "TargetPoint",
         "RandomPointSelectorDef",
         "RandomPointSelector",
-        "AIEngineSceneDef",
-        "AIEngineScene",
         "AIEngineDef",
         "AIEngine",
+        "AIEngineSceneDef",
+        "AIEngineScene",
         "RitualEventsDef",
         "RitualEvents",
         "RitualEventPatternDef",
@@ -80,16 +80,10 @@
         "EffectFx",
         "CombatEngineSceneDef",
         "CombatEngineScene",
-        "CombatEngineDef",
-        "CombatEngine",
         "FxEngineSceneDef",
         "FxEngineScene",
         "FxEngineDef",
         "FxEngine",
-        "IEntityObjectDef",
-        "IEntityObject",
-        "ISceneDef",
-        "IScene",
         "InteractiveDef",
         "Interactive",
         "InteractionDef",
@@ -100,8 +94,6 @@
         "InteractiveWorldEntity",
         "LinksEngineSceneDef",
         "LinksEngineScene",
-        "LinksEngineDef",
-        "LinksEngine",
         "MovementStateDef",
         "MovementState",
         "LocoMoverDef",
@@ -114,16 +106,12 @@
         "TileMod",
         "TileDef",
         "Tile",
-        "PrefabDef",
-        "Prefab",
         "SceneDef",
         "Scene",
-        "MapDef",
-        "Map",
         "LocationCreatorDef",
         "LocationCreator",
-        "MapSiteTypeDef",
-        "MapSiteType",
+        "PrefabDef",
+        "Prefab",
         "MapSiteDef",
         "MapSite",
         "MapSiteTagDef",
@@ -144,12 +132,14 @@
         "SlotGen",
         "TilesGenDef",
         "TilesGen",
+        "SlotCategoryDef",
+        "SlotCategory",
         "TileCategoryDef",
         "TileCategory",
-        "MobSceneDef",
-        "MobScene",
         "MobDef",
         "Mob",
+        "MortalEngineDef",
+        "MortalEngine",
         "PhysicalShapeDef",
         "PhysicalShape",
         "CirclePhysicalShapeDef",
@@ -160,44 +150,38 @@
         "PhysicalBodyEngineScene",
         "PhysicalBodyEngineDef",
         "PhysicalBodyEngine",
-        "IRenderableDef",
-        "IRenderable",
         "SpriteRenderedDef",
         "SpriteRendered",
         "SpriteRendererSceneDef",
         "SpriteRendererScene",
         "SpriteRendererDef",
         "SpriteRenderer",
+        "IRenderableDef",
+        "IRenderable",
         "ItemDef",
         "Item",
         "CharacterEntitySceneDef",
         "CharacterEntityScene",
         "CharacterEntityDef",
         "CharacterEntity",
-        "QuestDef",
-        "Quest",
-        "TargetTypeDef",
-        "TargetType",
-        "ImpactsList",
-        "EffectAOE",
-        "AllInCircle",
-        "TargetDef",
-        "Target",
-        "SpawnObject",
         "EffectOverrideAILogic",
-        "AddQuest",
         "CompleteQuest",
         "RoleDef",
         "Role",
+        "TargetTypeDef",
+        "TargetType",
+        "EffectAOE",
         "IPredicateDef",
         "IPredicate",
         "CheckEntityType",
+        "TargetDef",
+        "Target",
         "CheckEntityStatDef",
         "CheckEntityStat",
-        "IImpactDef",
-        "IImpact",
+        "SpawnObject",
         "AllInRangeDef",
         "AllInRange",
+        "EffectChangeStat",
         "ChangeEntityStatDef",
         "ChangeEntityStat",
         "SimpleSpawnerDef",
@@ -220,16 +204,14 @@
         "SpellsEngineScene",
         "SpellsEngineDef",
         "SpellsEngine",
-        "SpriteDef",
-        "Sprite",
         "StatInstanceDef",
         "StatInstance",
-        "StatDef",
-        "Stat",
-        "StatsEngineSceneDef",
-        "StatsEngineScene",
+        "AccumulatedStatInstanceDef",
+        "AccumulatedStatInstance",
         "StatsEngineDef",
         "StatsEngine",
+        "SpriteDef",
+        "Sprite",
         "WorldItemEntityDef",
         "WorldItemEntity",
         "WorldItemEntitySceneDef",
@@ -326,10 +308,10 @@
             "TargetPoint",
             "RandomPointSelectorDef",
             "RandomPointSelector",
-            "AIEngineSceneDef",
-            "AIEngineScene",
             "AIEngineDef",
             "AIEngine",
+            "AIEngineSceneDef",
+            "AIEngineScene",
             "RitualEventsDef",
             "RitualEvents",
             "RitualEventPatternDef",
@@ -357,8 +339,6 @@
             "EffectFx",
             "CombatEngineSceneDef",
             "CombatEngineScene",
-            "CombatEngineDef",
-            "CombatEngine",
             "FxEngineSceneDef",
             "FxEngineScene",
             "FxEngineDef",
@@ -373,8 +353,6 @@
             "InteractiveWorldEntity",
             "LinksEngineSceneDef",
             "LinksEngineScene",
-            "LinksEngineDef",
-            "LinksEngine",
             "MovementStateDef",
             "MovementState",
             "LocoMoverDef",
@@ -387,16 +365,12 @@
             "TileMod",
             "TileDef",
             "Tile",
-            "PrefabDef",
-            "Prefab",
             "SceneDef",
             "Scene",
-            "MapDef",
-            "Map",
             "LocationCreatorDef",
             "LocationCreator",
-            "MapSiteTypeDef",
-            "MapSiteType",
+            "PrefabDef",
+            "Prefab",
             "MapSiteDef",
             "MapSite",
             "MapSiteTagDef",
@@ -417,12 +391,14 @@
             "SlotGen",
             "TilesGenDef",
             "TilesGen",
+            "SlotCategoryDef",
+            "SlotCategory",
             "TileCategoryDef",
             "TileCategory",
-            "MobSceneDef",
-            "MobScene",
             "MobDef",
             "Mob",
+            "MortalEngineDef",
+            "MortalEngine",
             "PhysicalShapeDef",
             "PhysicalShape",
             "CirclePhysicalShapeDef",
@@ -445,26 +421,22 @@
             "CharacterEntityScene",
             "CharacterEntityDef",
             "CharacterEntity",
-            "QuestDef",
-            "Quest",
-            "TargetTypeDef",
-            "TargetType",
-            "ImpactsList",
-            "EffectAOE",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "SpawnObject",
             "EffectOverrideAILogic",
-            "AddQuest",
             "CompleteQuest",
             "RoleDef",
             "Role",
+            "TargetTypeDef",
+            "TargetType",
+            "EffectAOE",
             "CheckEntityType",
+            "TargetDef",
+            "Target",
             "CheckEntityStatDef",
             "CheckEntityStat",
+            "SpawnObject",
             "AllInRangeDef",
             "AllInRange",
+            "EffectChangeStat",
             "ChangeEntityStatDef",
             "ChangeEntityStat",
             "SimpleSpawnerDef",
@@ -485,16 +457,14 @@
             "SpellsEngineScene",
             "SpellsEngineDef",
             "SpellsEngine",
-            "SpriteDef",
-            "Sprite",
             "StatInstanceDef",
             "StatInstance",
-            "StatDef",
-            "Stat",
-            "StatsEngineSceneDef",
-            "StatsEngineScene",
+            "AccumulatedStatInstanceDef",
+            "AccumulatedStatInstance",
             "StatsEngineDef",
             "StatsEngine",
+            "SpriteDef",
+            "Sprite",
             "WorldItemEntityDef",
             "WorldItemEntity",
             "WorldItemEntitySceneDef",
@@ -594,10 +564,10 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
-          "$ref": "#/definitions/AIEngineSceneDef"
+          "$ref": "#/definitions/AIEngineDef"
         },
         {
-          "$ref": "#/definitions/AIEngineDef"
+          "$ref": "#/definitions/AIEngineSceneDef"
         },
         {
           "$ref": "#/definitions/RitualEventsDef"
@@ -648,9 +618,6 @@
           "$ref": "#/definitions/CombatEngineSceneDef"
         },
         {
-          "$ref": "#/definitions/CombatEngineDef"
-        },
-        {
           "$ref": "#/definitions/FxEngineSceneDef"
         },
         {
@@ -672,9 +639,6 @@
           "$ref": "#/definitions/LinksEngineSceneDef"
         },
         {
-          "$ref": "#/definitions/LinksEngineDef"
-        },
-        {
           "$ref": "#/definitions/MovementStateDef"
         },
         {
@@ -693,19 +657,13 @@
           "$ref": "#/definitions/TileDef"
         },
         {
-          "$ref": "#/definitions/PrefabDef"
-        },
-        {
           "$ref": "#/definitions/SceneDef"
-        },
-        {
-          "$ref": "#/definitions/MapDef"
         },
         {
           "$ref": "#/definitions/LocationCreatorDef"
         },
         {
-          "$ref": "#/definitions/MapSiteTypeDef"
+          "$ref": "#/definitions/PrefabDef"
         },
         {
           "$ref": "#/definitions/MapSiteDef"
@@ -738,13 +696,16 @@
           "$ref": "#/definitions/TilesGenDef"
         },
         {
+          "$ref": "#/definitions/SlotCategoryDef"
+        },
+        {
           "$ref": "#/definitions/TileCategoryDef"
         },
         {
-          "$ref": "#/definitions/MobSceneDef"
+          "$ref": "#/definitions/MobDef"
         },
         {
-          "$ref": "#/definitions/MobDef"
+          "$ref": "#/definitions/MortalEngineDef"
         },
         {
           "$ref": "#/definitions/PhysicalShapeDef"
@@ -780,31 +741,7 @@
           "$ref": "#/definitions/CharacterEntityDef"
         },
         {
-          "$ref": "#/definitions/QuestDef"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        },
-        {
-          "$ref": "#/definitions/EffectAOE"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/SpawnObject"
-        },
-        {
           "$ref": "#/definitions/EffectOverrideAILogic"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
         },
         {
           "$ref": "#/definitions/CompleteQuest"
@@ -813,13 +750,28 @@
           "$ref": "#/definitions/RoleDef"
         },
         {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectAOE"
+        },
+        {
           "$ref": "#/definitions/CheckEntityType"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
+          "$ref": "#/definitions/SpawnObject"
+        },
+        {
           "$ref": "#/definitions/AllInRangeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectChangeStat"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -852,19 +804,16 @@
           "$ref": "#/definitions/SpellsEngineDef"
         },
         {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
           "$ref": "#/definitions/StatInstanceDef"
         },
         {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
+          "$ref": "#/definitions/AccumulatedStatInstanceDef"
         },
         {
           "$ref": "#/definitions/StatsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/WorldItemEntityDef"
@@ -985,10 +934,10 @@
             "TargetPoint",
             "RandomPointSelectorDef",
             "RandomPointSelector",
-            "AIEngineSceneDef",
-            "AIEngineScene",
             "AIEngineDef",
             "AIEngine",
+            "AIEngineSceneDef",
+            "AIEngineScene",
             "RitualEventsDef",
             "RitualEvents",
             "RitualEventPatternDef",
@@ -1016,16 +965,10 @@
             "EffectFx",
             "CombatEngineSceneDef",
             "CombatEngineScene",
-            "CombatEngineDef",
-            "CombatEngine",
             "FxEngineSceneDef",
             "FxEngineScene",
             "FxEngineDef",
             "FxEngine",
-            "IEntityObjectDef",
-            "IEntityObject",
-            "ISceneDef",
-            "IScene",
             "InteractiveDef",
             "Interactive",
             "InteractionDef",
@@ -1036,8 +979,6 @@
             "InteractiveWorldEntity",
             "LinksEngineSceneDef",
             "LinksEngineScene",
-            "LinksEngineDef",
-            "LinksEngine",
             "MovementStateDef",
             "MovementState",
             "LocoMoverDef",
@@ -1050,16 +991,12 @@
             "TileMod",
             "TileDef",
             "Tile",
-            "PrefabDef",
-            "Prefab",
             "SceneDef",
             "Scene",
-            "MapDef",
-            "Map",
             "LocationCreatorDef",
             "LocationCreator",
-            "MapSiteTypeDef",
-            "MapSiteType",
+            "PrefabDef",
+            "Prefab",
             "MapSiteDef",
             "MapSite",
             "MapSiteTagDef",
@@ -1080,12 +1017,14 @@
             "SlotGen",
             "TilesGenDef",
             "TilesGen",
+            "SlotCategoryDef",
+            "SlotCategory",
             "TileCategoryDef",
             "TileCategory",
-            "MobSceneDef",
-            "MobScene",
             "MobDef",
             "Mob",
+            "MortalEngineDef",
+            "MortalEngine",
             "PhysicalShapeDef",
             "PhysicalShape",
             "CirclePhysicalShapeDef",
@@ -1096,44 +1035,38 @@
             "PhysicalBodyEngineScene",
             "PhysicalBodyEngineDef",
             "PhysicalBodyEngine",
-            "IRenderableDef",
-            "IRenderable",
             "SpriteRenderedDef",
             "SpriteRendered",
             "SpriteRendererSceneDef",
             "SpriteRendererScene",
             "SpriteRendererDef",
             "SpriteRenderer",
+            "IRenderableDef",
+            "IRenderable",
             "ItemDef",
             "Item",
             "CharacterEntitySceneDef",
             "CharacterEntityScene",
             "CharacterEntityDef",
             "CharacterEntity",
-            "QuestDef",
-            "Quest",
-            "TargetTypeDef",
-            "TargetType",
-            "ImpactsList",
-            "EffectAOE",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "SpawnObject",
             "EffectOverrideAILogic",
-            "AddQuest",
             "CompleteQuest",
             "RoleDef",
             "Role",
+            "TargetTypeDef",
+            "TargetType",
+            "EffectAOE",
             "IPredicateDef",
             "IPredicate",
             "CheckEntityType",
+            "TargetDef",
+            "Target",
             "CheckEntityStatDef",
             "CheckEntityStat",
-            "IImpactDef",
-            "IImpact",
+            "SpawnObject",
             "AllInRangeDef",
             "AllInRange",
+            "EffectChangeStat",
             "ChangeEntityStatDef",
             "ChangeEntityStat",
             "SimpleSpawnerDef",
@@ -1156,16 +1089,14 @@
             "SpellsEngineScene",
             "SpellsEngineDef",
             "SpellsEngine",
-            "SpriteDef",
-            "Sprite",
             "StatInstanceDef",
             "StatInstance",
-            "StatDef",
-            "Stat",
-            "StatsEngineSceneDef",
-            "StatsEngineScene",
+            "AccumulatedStatInstanceDef",
+            "AccumulatedStatInstance",
             "StatsEngineDef",
             "StatsEngine",
+            "SpriteDef",
+            "Sprite",
             "WorldItemEntityDef",
             "WorldItemEntity",
             "WorldItemEntitySceneDef",
@@ -1271,10 +1202,10 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
-          "$ref": "#/definitions/AIEngineSceneDef"
+          "$ref": "#/definitions/AIEngineDef"
         },
         {
-          "$ref": "#/definitions/AIEngineDef"
+          "$ref": "#/definitions/AIEngineSceneDef"
         },
         {
           "$ref": "#/definitions/RitualEventsDef"
@@ -1325,19 +1256,10 @@
           "$ref": "#/definitions/CombatEngineSceneDef"
         },
         {
-          "$ref": "#/definitions/CombatEngineDef"
-        },
-        {
           "$ref": "#/definitions/FxEngineSceneDef"
         },
         {
           "$ref": "#/definitions/FxEngineDef"
-        },
-        {
-          "$ref": "#/definitions/IEntityObjectDef"
-        },
-        {
-          "$ref": "#/definitions/ISceneDef"
         },
         {
           "$ref": "#/definitions/InteractiveDef"
@@ -1353,9 +1275,6 @@
         },
         {
           "$ref": "#/definitions/LinksEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineDef"
         },
         {
           "$ref": "#/definitions/MovementStateDef"
@@ -1376,19 +1295,13 @@
           "$ref": "#/definitions/TileDef"
         },
         {
-          "$ref": "#/definitions/PrefabDef"
-        },
-        {
           "$ref": "#/definitions/SceneDef"
-        },
-        {
-          "$ref": "#/definitions/MapDef"
         },
         {
           "$ref": "#/definitions/LocationCreatorDef"
         },
         {
-          "$ref": "#/definitions/MapSiteTypeDef"
+          "$ref": "#/definitions/PrefabDef"
         },
         {
           "$ref": "#/definitions/MapSiteDef"
@@ -1421,13 +1334,16 @@
           "$ref": "#/definitions/TilesGenDef"
         },
         {
+          "$ref": "#/definitions/SlotCategoryDef"
+        },
+        {
           "$ref": "#/definitions/TileCategoryDef"
         },
         {
-          "$ref": "#/definitions/MobSceneDef"
+          "$ref": "#/definitions/MobDef"
         },
         {
-          "$ref": "#/definitions/MobDef"
+          "$ref": "#/definitions/MortalEngineDef"
         },
         {
           "$ref": "#/definitions/PhysicalShapeDef"
@@ -1445,9 +1361,6 @@
           "$ref": "#/definitions/PhysicalBodyEngineDef"
         },
         {
-          "$ref": "#/definitions/IRenderableDef"
-        },
-        {
           "$ref": "#/definitions/SpriteRenderedDef"
         },
         {
@@ -1455,6 +1368,9 @@
         },
         {
           "$ref": "#/definitions/SpriteRendererDef"
+        },
+        {
+          "$ref": "#/definitions/IRenderableDef"
         },
         {
           "$ref": "#/definitions/ItemDef"
@@ -1466,31 +1382,7 @@
           "$ref": "#/definitions/CharacterEntityDef"
         },
         {
-          "$ref": "#/definitions/QuestDef"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        },
-        {
-          "$ref": "#/definitions/EffectAOE"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/SpawnObject"
-        },
-        {
           "$ref": "#/definitions/EffectOverrideAILogic"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
         },
         {
           "$ref": "#/definitions/CompleteQuest"
@@ -1499,19 +1391,31 @@
           "$ref": "#/definitions/RoleDef"
         },
         {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectAOE"
+        },
+        {
           "$ref": "#/definitions/IPredicateDef"
         },
         {
           "$ref": "#/definitions/CheckEntityType"
         },
         {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
           "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
-          "$ref": "#/definitions/IImpactDef"
+          "$ref": "#/definitions/SpawnObject"
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectChangeStat"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -1547,19 +1451,16 @@
           "$ref": "#/definitions/SpellsEngineDef"
         },
         {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
           "$ref": "#/definitions/StatInstanceDef"
         },
         {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
+          "$ref": "#/definitions/AccumulatedStatInstanceDef"
         },
         {
           "$ref": "#/definitions/StatsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/WorldItemEntityDef"
@@ -3548,77 +3449,6 @@
         }
       ]
     },
-    "AIEngineSceneDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AIEngineSceneDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AIEngineSceneDef",
-            "AIEngineScene"
-          ]
-        },
-        "Object": {
-          "$ref": "#/definitions/IEntityObjectDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "AIEngineSceneDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AIEngineSceneDef",
-            "AIEngineScene"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/AIEngineSceneDef"
-        }
-      ]
-    },
     "AIEngineDef": {
       "type": "object",
       "additionalProperties": false,
@@ -3690,6 +3520,77 @@
         },
         {
           "$ref": "#/definitions/AIEngineDef"
+        }
+      ]
+    },
+    "AIEngineSceneDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AIEngineSceneDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "AIEngineSceneDef",
+            "AIEngineScene"
+          ]
+        },
+        "Object": {
+          "$ref": "#/definitions/IEntityObjectDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "AIEngineSceneDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "AIEngineSceneDef",
+            "AIEngineScene"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/AIEngineSceneDef"
         }
       ]
     },
@@ -4913,74 +4814,6 @@
         }
       ]
     },
-    "CombatEngineDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CombatEngineDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "CombatEngineDef",
-            "CombatEngine"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "CombatEngineDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "CombatEngineDef",
-            "CombatEngine"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineDef"
-        }
-      ]
-    },
     "FxEngineSceneDef": {
       "type": "object",
       "additionalProperties": false,
@@ -5117,299 +4950,6 @@
         },
         {
           "$ref": "#/definitions/FxEngineDef"
-        }
-      ]
-    },
-    "IEntityObjectDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IEntityObjectDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IEntityObjectDef",
-            "IEntityObject"
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "IEntityObjectDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ActionEngineDef",
-            "ActionEngine",
-            "AIEngineDef",
-            "AIEngine",
-            "RitualSiteEntityDef",
-            "RitualSiteEntity",
-            "BuildingEntityDef",
-            "BuildingEntity",
-            "CombatEngineDef",
-            "CombatEngine",
-            "FxEngineDef",
-            "FxEngine",
-            "IEntityObjectDef",
-            "IEntityObject",
-            "InteractiveWorldEntityDef",
-            "InteractiveWorldEntity",
-            "LinksEngineDef",
-            "LinksEngine",
-            "MobDef",
-            "Mob",
-            "PhysicalBodyEngineDef",
-            "PhysicalBodyEngine",
-            "SpriteRendererDef",
-            "SpriteRenderer",
-            "ItemDef",
-            "Item",
-            "CharacterEntityDef",
-            "CharacterEntity",
-            "SimpleSpawnerDef",
-            "SimpleSpawner",
-            "SpellDef",
-            "Spell",
-            "SpellsEngineDef",
-            "SpellsEngine",
-            "StatsEngineDef",
-            "StatsEngine",
-            "WorldItemEntityDef",
-            "WorldItemEntity"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ActionEngineDef"
-        },
-        {
-          "$ref": "#/definitions/AIEngineDef"
-        },
-        {
-          "$ref": "#/definitions/RitualSiteEntityDef"
-        },
-        {
-          "$ref": "#/definitions/BuildingEntityDef"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineDef"
-        },
-        {
-          "$ref": "#/definitions/FxEngineDef"
-        },
-        {
-          "$ref": "#/definitions/IEntityObjectDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveWorldEntityDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineDef"
-        },
-        {
-          "$ref": "#/definitions/MobDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalBodyEngineDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererDef"
-        },
-        {
-          "$ref": "#/definitions/ItemDef"
-        },
-        {
-          "$ref": "#/definitions/CharacterEntityDef"
-        },
-        {
-          "$ref": "#/definitions/SimpleSpawnerDef"
-        },
-        {
-          "$ref": "#/definitions/SpellDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineDef"
-        },
-        {
-          "$ref": "#/definitions/WorldItemEntityDef"
-        }
-      ]
-    },
-    "ISceneDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ISceneDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ISceneDef",
-            "IScene"
-          ]
-        },
-        "Object": {
-          "$ref": "#/definitions/IEntityObjectDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "ISceneDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ActionEngineSceneDef",
-            "ActionEngineScene",
-            "AIEngineSceneDef",
-            "AIEngineScene",
-            "BuildingEntitySceneDef",
-            "BuildingEntityScene",
-            "CombatEngineSceneDef",
-            "CombatEngineScene",
-            "FxEngineSceneDef",
-            "FxEngineScene",
-            "ISceneDef",
-            "IScene",
-            "InteractiveWorldEntitySceneDef",
-            "InteractiveWorldEntityScene",
-            "LinksEngineSceneDef",
-            "LinksEngineScene",
-            "MobSceneDef",
-            "MobScene",
-            "PhysicalBodyEngineSceneDef",
-            "PhysicalBodyEngineScene",
-            "SpriteRendererSceneDef",
-            "SpriteRendererScene",
-            "CharacterEntitySceneDef",
-            "CharacterEntityScene",
-            "SpellsEngineSceneDef",
-            "SpellsEngineScene",
-            "StatsEngineSceneDef",
-            "StatsEngineScene",
-            "WorldItemEntitySceneDef",
-            "WorldItemEntityScene"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ActionEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/AIEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/BuildingEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/CombatEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/FxEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/ISceneDef"
-        },
-        {
-          "$ref": "#/definitions/InteractiveWorldEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/MobSceneDef"
-        },
-        {
-          "$ref": "#/definitions/PhysicalBodyEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererSceneDef"
-        },
-        {
-          "$ref": "#/definitions/CharacterEntitySceneDef"
-        },
-        {
-          "$ref": "#/definitions/SpellsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/WorldItemEntitySceneDef"
         }
       ]
     },
@@ -5625,6 +5165,12 @@
         "StatsEngine": {
           "$ref": "#/definitions/StatsEngineSceneDefField"
         },
+        "Mortal": {
+          "$ref": "#/definitions/MortalEngineSceneDefField"
+        },
+        "SpellsEngine": {
+          "$ref": "#/definitions/SpellsEngineSceneDefField"
+        },
         "CustomName": {
           "type": "string"
         }
@@ -5696,7 +5242,7 @@
         "InteractiveDef": {
           "$ref": "#/definitions/InteractiveDefField"
         },
-        "HasPhysicsBody": {
+        "HasNoPhysicsBody": {
           "oneOf": [
             {
               "type": "string"
@@ -5708,6 +5254,12 @@
         },
         "StatsEngine": {
           "$ref": "#/definitions/StatsEngineDefField"
+        },
+        "Mortal": {
+          "$ref": "#/definitions/MortalEngineDefField"
+        },
+        "SpellsEngine": {
+          "$ref": "#/definitions/SpellsEngineDefField"
         },
         "CustomName": {
           "type": "string"
@@ -5837,74 +5389,6 @@
         },
         {
           "$ref": "#/definitions/LinksEngineSceneDef"
-        }
-      ]
-    },
-    "LinksEngineDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/LinksEngineDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "LinksEngineDef",
-            "LinksEngine"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "LinksEngineDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "LinksEngineDef",
-            "LinksEngine"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineDef"
         }
       ]
     },
@@ -6201,6 +5685,26 @@
             "EffectMotion"
           ]
         },
+        "OverrideActionDirWithMotionDir": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "FaceActionDir": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
         "CurveName": {
           "type": "string"
         },
@@ -6385,74 +5889,6 @@
         }
       ]
     },
-    "PrefabDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PrefabDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "PrefabDef",
-            "Prefab"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "PrefabDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "PrefabDef",
-            "Prefab"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/PrefabDef"
-        }
-      ]
-    },
     "SceneDef": {
       "type": "object",
       "additionalProperties": false,
@@ -6524,80 +5960,6 @@
         },
         {
           "$ref": "#/definitions/SceneDef"
-        }
-      ]
-    },
-    "MapDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MapDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MapDef",
-            "Map"
-          ]
-        },
-        "Locations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LocationField"
-          }
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "MapDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MapDef",
-            "Map"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/MapDef"
         }
       ]
     },
@@ -6695,7 +6057,7 @@
         }
       ]
     },
-    "MapSiteTypeDef": {
+    "PrefabDef": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -6705,7 +6067,7 @@
         "$proto": {
           "allOf": [
             {
-              "$ref": "#/definitions/MapSiteTypeDefField"
+              "$ref": "#/definitions/PrefabDefField"
             }
           ],
           "dependecies": [
@@ -6724,15 +6086,9 @@
         "$type": {
           "type": "string",
           "enum": [
-            "MapSiteTypeDef",
-            "MapSiteType"
+            "PrefabDef",
+            "Prefab"
           ]
-        },
-        "EntitiesToSpawnOn": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IEntityObjectDefField"
-          }
         },
         "CustomName": {
           "type": "string"
@@ -6742,13 +6098,13 @@
         "$type"
       ]
     },
-    "MapSiteTypeDefField": {
+    "PrefabDefField": {
       "properties": {
         "$type": {
           "type": "string",
           "enum": [
-            "MapSiteTypeDef",
-            "MapSiteType"
+            "PrefabDef",
+            "Prefab"
           ]
         },
         "$vars": {
@@ -6765,7 +6121,7 @@
           "type": "string"
         },
         {
-          "$ref": "#/definitions/MapSiteTypeDef"
+          "$ref": "#/definitions/PrefabDef"
         }
       ]
     },
@@ -7574,6 +6930,74 @@
         }
       ]
     },
+    "SlotCategoryDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SlotCategoryDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SlotCategoryDef",
+            "SlotCategory"
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "SlotCategoryDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SlotCategoryDef",
+            "SlotCategory"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/SlotCategoryDef"
+        }
+      ]
+    },
     "TileCategoryDef": {
       "type": "object",
       "additionalProperties": false,
@@ -7642,114 +7066,6 @@
         }
       ]
     },
-    "MobSceneDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MobSceneDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MobSceneDef",
-            "MobScene"
-          ]
-        },
-        "Object": {
-          "$ref": "#/definitions/IEntityObjectDefField"
-        },
-        "Rotation": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "Position": {
-          "$ref": "#/definitions/Vec2Field"
-        },
-        "Links": {
-          "$ref": "#/definitions/LinksEngineSceneDefField"
-        },
-        "AI": {
-          "$ref": "#/definitions/AIEngineSceneDefField"
-        },
-        "SpellsEngine": {
-          "$ref": "#/definitions/SpellsEngineSceneDefField"
-        },
-        "StatsEngine": {
-          "$ref": "#/definitions/StatsEngineSceneDefField"
-        },
-        "_spriteRenderer": {
-          "$ref": "#/definitions/SpriteRendererSceneDefField"
-        },
-        "CombatEngine": {
-          "$ref": "#/definitions/CombatEngineSceneDefField"
-        },
-        "ActionEngine": {
-          "$ref": "#/definitions/ActionEngineSceneDefField"
-        },
-        "FxEngine": {
-          "$ref": "#/definitions/FxEngineSceneDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "MobSceneDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "MobSceneDef",
-            "MobScene"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/MobSceneDef"
-        }
-      ]
-    },
     "MobDef": {
       "type": "object",
       "additionalProperties": false,
@@ -7783,7 +7099,7 @@
             "Mob"
           ]
         },
-        "HasPhysicsBody": {
+        "HasNoPhysicsBody": {
           "oneOf": [
             {
               "type": "string"
@@ -7820,6 +7136,9 @@
         "ActionEngine": {
           "$ref": "#/definitions/ActionEngineDefField"
         },
+        "Mortal": {
+          "$ref": "#/definitions/MortalEngineDefField"
+        },
         "FxEngine": {
           "$ref": "#/definitions/FxEngineDefField"
         },
@@ -7855,6 +7174,77 @@
         },
         {
           "$ref": "#/definitions/MobDef"
+        }
+      ]
+    },
+    "MortalEngineDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MortalEngineDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MortalEngineDef",
+            "MortalEngine"
+          ]
+        },
+        "SpellOnDeath": {
+          "$ref": "#/definitions/SpellDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "MortalEngineDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "MortalEngineDef",
+            "MortalEngine"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/MortalEngineDef"
         }
       ]
     },
@@ -8329,84 +7719,6 @@
         }
       ]
     },
-    "IRenderableDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IRenderableDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IRenderableDef",
-            "IRenderable"
-          ]
-        },
-        "Sprite": {
-          "$ref": "#/definitions/SpriteDefField"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "IRenderableDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "IRenderableDef",
-            "IRenderable",
-            "SpriteRenderedDef",
-            "SpriteRendered",
-            "SpriteRendererDef",
-            "SpriteRenderer"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/IRenderableDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRenderedDef"
-        },
-        {
-          "$ref": "#/definitions/SpriteRendererDef"
-        }
-      ]
-    },
     "SpriteRenderedDef": {
       "type": "object",
       "additionalProperties": false,
@@ -8620,6 +7932,84 @@
         }
       ]
     },
+    "IRenderableDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IRenderableDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "IRenderableDef",
+            "IRenderable"
+          ]
+        },
+        "Sprite": {
+          "$ref": "#/definitions/SpriteDefField"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "IRenderableDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "SpriteRenderedDef",
+            "SpriteRendered",
+            "SpriteRendererDef",
+            "SpriteRenderer",
+            "IRenderableDef",
+            "IRenderable"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/SpriteRenderedDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteRendererDef"
+        },
+        {
+          "$ref": "#/definitions/IRenderableDef"
+        }
+      ]
+    },
     "ItemDef": {
       "type": "object",
       "additionalProperties": false,
@@ -8776,6 +8166,9 @@
         "StatsEngine": {
           "$ref": "#/definitions/StatsEngineSceneDefField"
         },
+        "Mortal": {
+          "$ref": "#/definitions/MortalEngineSceneDefField"
+        },
         "FxEngine": {
           "$ref": "#/definitions/FxEngineSceneDefField"
         },
@@ -8865,6 +8258,9 @@
         "StatsEngine": {
           "$ref": "#/definitions/StatsEngineDefField"
         },
+        "Mortal": {
+          "$ref": "#/definitions/MortalEngineDefField"
+        },
         "FxEngine": {
           "$ref": "#/definitions/FxEngineDefField"
         },
@@ -8900,545 +8296,6 @@
         },
         {
           "$ref": "#/definitions/CharacterEntityDef"
-        }
-      ]
-    },
-    "QuestDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/QuestDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "QuestDef",
-            "Quest"
-          ]
-        },
-        "Name": {
-          "type": "string"
-        },
-        "AddedInteractions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InteractionDefField"
-          }
-        },
-        "OnComplete": {
-          "$ref": "#/definitions/IImpactDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "QuestDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "QuestDef",
-            "Quest"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/QuestDef"
-        }
-      ]
-    },
-    "TargetTypeDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TargetTypeDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetTypeDef",
-            "TargetType"
-          ]
-        },
-        "Type": {
-          "$ref": "#/definitions/InteractiveDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "TargetTypeDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetTypeDef",
-            "TargetType"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        }
-      ]
-    },
-    "ImpactsList": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ImpactsListField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ImpactsList"
-          ]
-        },
-        "Impacts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IImpactDefField"
-          }
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "ImpactsListField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "ImpactsList"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        }
-      ]
-    },
-    "EffectAOE": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/EffectAOEField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "EffectAOE"
-          ]
-        },
-        "Radius": {
-          "$ref": "#/definitions/CalcerDefField"
-        },
-        "StrikeOnEnter": {
-          "$ref": "#/definitions/StrikeDefField"
-        },
-        "Dot": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
-        },
-        "DotPeriod": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "EffectAOEField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "EffectAOE"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/EffectAOE"
-        }
-      ]
-    },
-    "AllInCircle": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AllInCircleField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AllInCircle"
-          ]
-        },
-        "Offset": {
-          "$ref": "#/definitions/Vec2Field"
-        },
-        "Size": {
-          "$ref": "#/definitions/CalcerDefField"
-        },
-        "Impact": {
-          "$ref": "#/definitions/IImpactDefField"
-        },
-        "Predicate": {
-          "$ref": "#/definitions/IPredicateDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "AllInCircleField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AllInCircle"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        }
-      ]
-    },
-    "TargetDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TargetDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetDef",
-            "Target"
-          ]
-        },
-        "Predicate": {
-          "$ref": "#/definitions/IPredicateDefField"
-        },
-        "Do": {
-          "$ref": "#/definitions/IImpactDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "TargetDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "TargetDef",
-            "Target"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        }
-      ]
-    },
-    "SpawnObject": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpawnObjectField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpawnObject"
-          ]
-        },
-        "Object": {
-          "$ref": "#/definitions/IEntityObjectDefField"
-        },
-        "Buffed": {
-          "$ref": "#/definitions/SpellDefField"
-        },
-        "Where": {
-          "$ref": "#/definitions/PointSelectorDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "SpawnObjectField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "SpawnObject"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/SpawnObject"
         }
       ]
     },
@@ -9511,75 +8368,6 @@
         },
         {
           "$ref": "#/definitions/EffectOverrideAILogic"
-        }
-      ]
-    },
-    "AddQuest": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AddQuestField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AddQuest"
-          ]
-        },
-        "Quest": {
-          "$ref": "#/definitions/QuestDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "AddQuestField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "AddQuest"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
         }
       ]
     },
@@ -9723,6 +8511,166 @@
         }
       ]
     },
+    "TargetTypeDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TargetTypeDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetTypeDef",
+            "TargetType"
+          ]
+        },
+        "Type": {
+          "$ref": "#/definitions/InteractiveDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "TargetTypeDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetTypeDef",
+            "TargetType"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetTypeDef"
+        }
+      ]
+    },
+    "EffectAOE": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/EffectAOEField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "EffectAOE"
+          ]
+        },
+        "Radius": {
+          "$ref": "#/definitions/CalcerDefField"
+        },
+        "StrikeOnEnter": {
+          "$ref": "#/definitions/StrikeDefField"
+        },
+        "Dot": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "DotPeriod": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "EffectAOEField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "EffectAOE"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/EffectAOE"
+        }
+      ]
+    },
     "IPredicateDef": {
       "type": "object",
       "additionalProperties": false,
@@ -9769,12 +8717,11 @@
             "ByType",
             "TargetTypeDef",
             "TargetType",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
             "IPredicateDef",
             "IPredicate",
             "CheckEntityType",
+            "TargetDef",
+            "Target",
             "CheckEntityStatDef",
             "CheckEntityStat"
           ]
@@ -9799,16 +8746,13 @@
           "$ref": "#/definitions/TargetTypeDef"
         },
         {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
           "$ref": "#/definitions/IPredicateDef"
         },
         {
           "$ref": "#/definitions/CheckEntityType"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
         },
         {
           "$ref": "#/definitions/CheckEntityStatDef"
@@ -9884,6 +8828,80 @@
         },
         {
           "$ref": "#/definitions/CheckEntityType"
+        }
+      ]
+    },
+    "TargetDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TargetDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetDef",
+            "Target"
+          ]
+        },
+        "Predicate": {
+          "$ref": "#/definitions/IPredicateDefField"
+        },
+        "Do": {
+          "$ref": "#/definitions/IImpactDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "TargetDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "TargetDef",
+            "Target"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/TargetDef"
         }
       ]
     },
@@ -9978,7 +8996,7 @@
         }
       ]
     },
-    "IImpactDef": {
+    "SpawnObject": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -9988,7 +9006,7 @@
         "$proto": {
           "allOf": [
             {
-              "$ref": "#/definitions/IImpactDefField"
+              "$ref": "#/definitions/SpawnObjectField"
             }
           ],
           "dependecies": [
@@ -10007,39 +9025,32 @@
         "$type": {
           "type": "string",
           "enum": [
-            "IImpactDef",
-            "IImpact"
+            "SpawnObject"
           ]
+        },
+        "Object": {
+          "$ref": "#/definitions/IEntityObjectDefField"
+        },
+        "Buffed": {
+          "$ref": "#/definitions/SpellDefField"
+        },
+        "Where": {
+          "$ref": "#/definitions/PointSelectorDefField"
+        },
+        "CustomName": {
+          "type": "string"
         }
       },
       "required": [
         "$type"
       ]
     },
-    "IImpactDefField": {
+    "SpawnObjectField": {
       "properties": {
         "$type": {
           "type": "string",
           "enum": [
-            "ImpactInvokeAction",
-            "ByType",
-            "ConcludeRirutalDef",
-            "ConcludeRirutal",
-            "RitualActionDef",
-            "RitualAction",
-            "ImpactsList",
-            "AllInCircle",
-            "TargetDef",
-            "Target",
-            "SpawnObject",
-            "AddQuest",
-            "CompleteQuest",
-            "IImpactDef",
-            "IImpact",
-            "AllInRangeDef",
-            "AllInRange",
-            "ChangeEntityStatDef",
-            "ChangeEntityStat"
+            "SpawnObject"
           ]
         },
         "$vars": {
@@ -10056,43 +9067,7 @@
           "type": "string"
         },
         {
-          "$ref": "#/definitions/ImpactInvokeAction"
-        },
-        {
-          "$ref": "#/definitions/ByType"
-        },
-        {
-          "$ref": "#/definitions/ConcludeRirutalDef"
-        },
-        {
-          "$ref": "#/definitions/RitualActionDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
           "$ref": "#/definitions/SpawnObject"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
-        },
-        {
-          "$ref": "#/definitions/CompleteQuest"
-        },
-        {
-          "$ref": "#/definitions/IImpactDef"
-        },
-        {
-          "$ref": "#/definitions/AllInRangeDef"
-        },
-        {
-          "$ref": "#/definitions/ChangeEntityStatDef"
         }
       ]
     },
@@ -10177,6 +9152,78 @@
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
+        }
+      ]
+    },
+    "EffectChangeStat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/EffectChangeStatField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "EffectChangeStat"
+          ]
+        },
+        "Stat": {
+          "$ref": "#/definitions/StatDefField"
+        },
+        "Add": {
+          "$ref": "#/definitions/CalcerDefField"
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "EffectChangeStatField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "EffectChangeStat"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/EffectChangeStat"
         }
       ]
     },
@@ -10934,8 +9981,9 @@
             "EffectTimeline",
             "EffectMotionDef",
             "EffectMotion",
-            "EffectAOE",
             "EffectOverrideAILogic",
+            "EffectAOE",
+            "EffectChangeStat",
             "ISpellEffectDef",
             "ISpellEffect"
           ]
@@ -11005,10 +10053,13 @@
           "$ref": "#/definitions/EffectMotionDef"
         },
         {
+          "$ref": "#/definitions/EffectOverrideAILogic"
+        },
+        {
           "$ref": "#/definitions/EffectAOE"
         },
         {
-          "$ref": "#/definitions/EffectOverrideAILogic"
+          "$ref": "#/definitions/EffectChangeStat"
         },
         {
           "$ref": "#/definitions/ISpellEffectDef"
@@ -11160,6 +10211,244 @@
         }
       ]
     },
+    "StatInstanceDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/StatInstanceDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "StatInstanceDef",
+            "StatInstance"
+          ]
+        },
+        "Stat": {
+          "$ref": "#/definitions/StatDefField"
+        },
+        "InitialValue": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "StatInstanceDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "StatInstanceDef",
+            "StatInstance",
+            "AccumulatedStatInstanceDef",
+            "AccumulatedStatInstance"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/StatInstanceDef"
+        },
+        {
+          "$ref": "#/definitions/AccumulatedStatInstanceDef"
+        }
+      ]
+    },
+    "AccumulatedStatInstanceDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccumulatedStatInstanceDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "AccumulatedStatInstanceDef",
+            "AccumulatedStatInstance"
+          ]
+        },
+        "Stat": {
+          "$ref": "#/definitions/StatDefField"
+        },
+        "InitialValue": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "AccumulatedStatInstanceDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "AccumulatedStatInstanceDef",
+            "AccumulatedStatInstance"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/AccumulatedStatInstanceDef"
+        }
+      ]
+    },
+    "StatsEngineDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$proto": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/StatsEngineDefField"
+            }
+          ],
+          "dependecies": [
+            "$overrideVars"
+          ]
+        },
+        "$overrideVars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ObjectField"
+          }
+        },
+        "$vars": {
+          "type": "object"
+        },
+        "$type": {
+          "type": "string",
+          "enum": [
+            "StatsEngineDef",
+            "StatsEngine"
+          ]
+        },
+        "Stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatInstanceDefField"
+          }
+        },
+        "CustomName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type"
+      ]
+    },
+    "StatsEngineDefField": {
+      "properties": {
+        "$type": {
+          "type": "string",
+          "enum": [
+            "StatsEngineDef",
+            "StatsEngine"
+          ]
+        },
+        "$vars": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateVariableField"
+          }
+        }
+      },
+      "required": [
+        "$type"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/StatsEngineDef"
+        }
+      ]
+    },
     "SpriteDef": {
       "type": "object",
       "additionalProperties": false,
@@ -11248,300 +10537,6 @@
         },
         {
           "$ref": "#/definitions/SpriteDef"
-        }
-      ]
-    },
-    "StatInstanceDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatInstanceDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatInstanceDef",
-            "StatInstance"
-          ]
-        },
-        "Stat": {
-          "$ref": "#/definitions/StatDefField"
-        },
-        "InitialValue": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "StatInstanceDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatInstanceDef",
-            "StatInstance"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/StatInstanceDef"
-        }
-      ]
-    },
-    "StatDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatDef",
-            "Stat"
-          ]
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "StatDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatDef",
-            "Stat"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/StatDef"
-        }
-      ]
-    },
-    "StatsEngineSceneDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatsEngineSceneDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatsEngineSceneDef",
-            "StatsEngineScene"
-          ]
-        },
-        "Object": {
-          "$ref": "#/definitions/IEntityObjectDefField"
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "StatsEngineSceneDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatsEngineSceneDef",
-            "StatsEngineScene"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
-        }
-      ]
-    },
-    "StatsEngineDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$id": {
-          "type": "string"
-        },
-        "$proto": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatsEngineDefField"
-            }
-          ],
-          "dependecies": [
-            "$overrideVars"
-          ]
-        },
-        "$overrideVars": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ObjectField"
-          }
-        },
-        "$vars": {
-          "type": "object"
-        },
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatsEngineDef",
-            "StatsEngine"
-          ]
-        },
-        "Stats": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StatInstanceDefField"
-          }
-        },
-        "CustomName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "$type"
-      ]
-    },
-    "StatsEngineDefField": {
-      "properties": {
-        "$type": {
-          "type": "string",
-          "enum": [
-            "StatsEngineDef",
-            "StatsEngine"
-          ]
-        },
-        "$vars": {
-          "additionalProperties": {
-            "$ref": "#/definitions/TemplateVariableField"
-          }
-        }
-      },
-      "required": [
-        "$type"
-      ],
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineDef"
         }
       ]
     },
@@ -11740,8 +10735,8 @@
         "PointSelectorDef",
         "TargetPoint",
         "RandomPointSelectorDef",
-        "AIEngineSceneDef",
         "AIEngineDef",
+        "AIEngineSceneDef",
         "RitualEventsDef",
         "RitualEventKind",
         "RitualEventStat",
@@ -11758,32 +10753,26 @@
         "EffectProjectile",
         "SubEffect",
         "EffectAnimate",
-        "FxEventHandler",
         "EffectFx",
+        "FxEventHandler",
         "CombatEngineSceneDef",
-        "CombatEngineDef",
         "FxEngineSceneDef",
         "FxEngineDef",
-        "IEntityObjectDef",
-        "ISceneDef",
         "InteractiveDef",
         "InteractionDef",
         "InteractiveWorldEntitySceneDef",
         "InteractiveWorldEntityDef",
         "LinksEngineSceneDef",
-        "LinksEngineDef",
         "MovementStateDef",
         "LocoMoverDef",
         "EffectTimelineDef",
         "EffectMotionDef",
         "TileModDef",
         "TileDef",
-        "PrefabDef",
         "SceneDef",
-        "MapDef",
         "Location",
         "LocationCreatorDef",
-        "MapSiteTypeDef",
+        "PrefabDef",
         "MapSiteDef",
         "SiteConnection",
         "SubSite",
@@ -11796,38 +10785,35 @@
         "SlotLinkDef",
         "SlotGenDef",
         "TilesGenDef",
+        "SlotCategoryDef",
         "TileCategoryDef",
         "Vec2",
-        "MobSceneDef",
         "MobDef",
+        "MortalEngineDef",
         "PhysicalShapeDef",
         "CirclePhysicalShapeDef",
         "BoxPhysicalShapeDef",
         "PhysicalBodyEngineSceneDef",
         "PhysicalBodyEngineDef",
-        "IRenderableDef",
         "SpriteRenderedDef",
         "SpriteRendererSceneDef",
         "SpriteRendererDef",
+        "IRenderableDef",
         "ItemDef",
         "CharacterEntitySceneDef",
         "CharacterEntityDef",
-        "QuestDef",
-        "TargetTypeDef",
-        "ImpactsList",
-        "EffectAOE",
-        "AllInCircle",
-        "TargetDef",
-        "SpawnObject",
         "EffectOverrideAILogic",
-        "AddQuest",
         "CompleteQuest",
         "RoleDef",
+        "TargetTypeDef",
+        "EffectAOE",
         "IPredicateDef",
         "CheckEntityType",
+        "TargetDef",
         "CheckEntityStatDef",
-        "IImpactDef",
+        "SpawnObject",
         "AllInRangeDef",
+        "EffectChangeStat",
         "ChangeEntityStatDef",
         "SimpleSpawnerDef",
         "SpellCastModeDef",
@@ -11840,11 +10826,10 @@
         "ISpellEffectDef",
         "SpellsEngineSceneDef",
         "SpellsEngineDef",
-        "SpriteDef",
         "StatInstanceDef",
-        "StatDef",
-        "StatsEngineSceneDef",
+        "AccumulatedStatInstanceDef",
         "StatsEngineDef",
+        "SpriteDef",
         "WorldItemEntityDef",
         "WorldItemEntitySceneDef",
         "float",
@@ -12870,10 +11855,10 @@
           "$ref": "#/definitions/RandomPointSelectorDef"
         },
         {
-          "$ref": "#/definitions/AIEngineSceneDef"
+          "$ref": "#/definitions/AIEngineDef"
         },
         {
-          "$ref": "#/definitions/AIEngineDef"
+          "$ref": "#/definitions/AIEngineSceneDef"
         },
         {
           "$ref": "#/definitions/RitualEventsDef"
@@ -12924,19 +11909,10 @@
           "$ref": "#/definitions/CombatEngineSceneDef"
         },
         {
-          "$ref": "#/definitions/CombatEngineDef"
-        },
-        {
           "$ref": "#/definitions/FxEngineSceneDef"
         },
         {
           "$ref": "#/definitions/FxEngineDef"
-        },
-        {
-          "$ref": "#/definitions/IEntityObjectDef"
-        },
-        {
-          "$ref": "#/definitions/ISceneDef"
         },
         {
           "$ref": "#/definitions/InteractiveDef"
@@ -12952,9 +11928,6 @@
         },
         {
           "$ref": "#/definitions/LinksEngineSceneDef"
-        },
-        {
-          "$ref": "#/definitions/LinksEngineDef"
         },
         {
           "$ref": "#/definitions/MovementStateDef"
@@ -12975,19 +11948,13 @@
           "$ref": "#/definitions/TileDef"
         },
         {
-          "$ref": "#/definitions/PrefabDef"
-        },
-        {
           "$ref": "#/definitions/SceneDef"
-        },
-        {
-          "$ref": "#/definitions/MapDef"
         },
         {
           "$ref": "#/definitions/LocationCreatorDef"
         },
         {
-          "$ref": "#/definitions/MapSiteTypeDef"
+          "$ref": "#/definitions/PrefabDef"
         },
         {
           "$ref": "#/definitions/MapSiteDef"
@@ -13020,13 +11987,16 @@
           "$ref": "#/definitions/TilesGenDef"
         },
         {
+          "$ref": "#/definitions/SlotCategoryDef"
+        },
+        {
           "$ref": "#/definitions/TileCategoryDef"
         },
         {
-          "$ref": "#/definitions/MobSceneDef"
+          "$ref": "#/definitions/MobDef"
         },
         {
-          "$ref": "#/definitions/MobDef"
+          "$ref": "#/definitions/MortalEngineDef"
         },
         {
           "$ref": "#/definitions/PhysicalShapeDef"
@@ -13044,9 +12014,6 @@
           "$ref": "#/definitions/PhysicalBodyEngineDef"
         },
         {
-          "$ref": "#/definitions/IRenderableDef"
-        },
-        {
           "$ref": "#/definitions/SpriteRenderedDef"
         },
         {
@@ -13054,6 +12021,9 @@
         },
         {
           "$ref": "#/definitions/SpriteRendererDef"
+        },
+        {
+          "$ref": "#/definitions/IRenderableDef"
         },
         {
           "$ref": "#/definitions/ItemDef"
@@ -13065,31 +12035,7 @@
           "$ref": "#/definitions/CharacterEntityDef"
         },
         {
-          "$ref": "#/definitions/QuestDef"
-        },
-        {
-          "$ref": "#/definitions/TargetTypeDef"
-        },
-        {
-          "$ref": "#/definitions/ImpactsList"
-        },
-        {
-          "$ref": "#/definitions/EffectAOE"
-        },
-        {
-          "$ref": "#/definitions/AllInCircle"
-        },
-        {
-          "$ref": "#/definitions/TargetDef"
-        },
-        {
-          "$ref": "#/definitions/SpawnObject"
-        },
-        {
           "$ref": "#/definitions/EffectOverrideAILogic"
-        },
-        {
-          "$ref": "#/definitions/AddQuest"
         },
         {
           "$ref": "#/definitions/CompleteQuest"
@@ -13098,19 +12044,31 @@
           "$ref": "#/definitions/RoleDef"
         },
         {
+          "$ref": "#/definitions/TargetTypeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectAOE"
+        },
+        {
           "$ref": "#/definitions/IPredicateDef"
         },
         {
           "$ref": "#/definitions/CheckEntityType"
         },
         {
+          "$ref": "#/definitions/TargetDef"
+        },
+        {
           "$ref": "#/definitions/CheckEntityStatDef"
         },
         {
-          "$ref": "#/definitions/IImpactDef"
+          "$ref": "#/definitions/SpawnObject"
         },
         {
           "$ref": "#/definitions/AllInRangeDef"
+        },
+        {
+          "$ref": "#/definitions/EffectChangeStat"
         },
         {
           "$ref": "#/definitions/ChangeEntityStatDef"
@@ -13146,19 +12104,16 @@
           "$ref": "#/definitions/SpellsEngineDef"
         },
         {
-          "$ref": "#/definitions/SpriteDef"
-        },
-        {
           "$ref": "#/definitions/StatInstanceDef"
         },
         {
-          "$ref": "#/definitions/StatDef"
-        },
-        {
-          "$ref": "#/definitions/StatsEngineSceneDef"
+          "$ref": "#/definitions/AccumulatedStatInstanceDef"
         },
         {
           "$ref": "#/definitions/StatsEngineDef"
+        },
+        {
+          "$ref": "#/definitions/SpriteDef"
         },
         {
           "$ref": "#/definitions/WorldItemEntityDef"

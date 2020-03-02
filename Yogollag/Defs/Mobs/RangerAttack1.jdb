@@ -41,6 +41,14 @@
                             },
                             "SpellOnStrike": {
                                 "$type": "Spell",
+                                "Predicate": {
+                                    "$type": "Target",
+                                    "Predicate": {
+                                        "$type": "CheckEntityStat",
+                                        "LessThan":0.5, 
+                                        "StatDef": "/Stats/Dodge"
+                                    }
+                                },
                                 "ImpactOnStart": {
                                     "$type": "Target",
                                     "Do": {

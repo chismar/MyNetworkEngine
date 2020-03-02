@@ -25,6 +25,7 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
     },
     {
@@ -50,7 +51,22 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
+    },
+    {
+      "$type": "InteractiveWorldEntitySceneDef",
+      "CustomName": null,
+      "Object": "/DestructibleBarrel",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": -8.776962,
+        "Y": 0.0
+      },
+      "StatsEngine": null,
+      "Mortal": null,
+      "SpellsEngine": null
     },
     {
       "$type": "MobSceneDef",
@@ -75,7 +91,22 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
+    },
+    {
+      "$type": "InteractiveWorldEntitySceneDef",
+      "CustomName": null,
+      "Object": "/ExplosiveBarrel",
+      "Rotation": 0.0,
+      "Position": {
+        "$type": "Vec2",
+        "X": -6.03,
+        "Y": 0.0
+      },
+      "StatsEngine": null,
+      "Mortal": null,
+      "SpellsEngine": null
     },
     {
       "$type": "MobSceneDef",
@@ -100,6 +131,7 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
     },
     {
@@ -160,7 +192,9 @@
         "X": 9.2,
         "Y": 0.0
       },
-      "StatsEngine": null
+      "StatsEngine": null,
+      "Mortal": null,
+      "SpellsEngine": null
     },
     {
       "$type": "BuildingEntitySceneDef",
@@ -197,6 +231,7 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
     },
     {
@@ -222,6 +257,7 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
     },
     {
@@ -247,6 +283,7 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
     },
     {
@@ -272,6 +309,7 @@
       "_spriteRenderer": null,
       "CombatEngine": null,
       "ActionEngine": null,
+      "Mortal": null,
       "FxEngine": null
     }
   ]

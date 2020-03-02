@@ -1,0 +1,90 @@
+{
+    "$type": "InteractiveWorldEntity",
+    "StatsEngine": {
+        "$type": "StatsEngine",
+        "Stats": [
+            {
+                "$type": "StatInstance",
+                "InitialValue": 30,
+                "Stat": "/Stats/Health"
+            }
+        ]
+    },
+    "InteractiveDef": {
+        "$type": "InteractiveDef",
+        "Name": "Explosive barrel",
+        "Interactions": []
+    },
+    "Mortal": {
+        "$type": "MortalEngine",
+        "SpellOnDeath": {
+            "$type": "Spell",
+            "IgnoresDeath":true,
+            "Duration": 10,
+            "Effects": [
+                {
+                    "$type": "SubEffect",
+                    "EndOffset": 7,
+                    "Effects": [
+                        {
+                            "$type": "EffectFx",
+                            "FxName": "PreExplosionFx",
+                            "FxLocation": "ExplosionLocation"
+                        }
+                    ]
+                },
+                {
+                    "$type": "SubEffect",
+                    "StartOffset":7,
+                    "EndOffset": 10,
+                    "Effects": [
+                        {
+                            "$type": "EffectFx",
+                            "FxName": "ExplosionFx",
+                            "FxLocation": "ExplosionLocation"
+                        },
+                        {
+                            "$type": "EffectAOE",
+                            "Radius": 10,
+                            "Once":true,
+                            "StrikeOnEnter": {
+                                "$type": "Strike",
+                                "SpellOnStrike": {
+                                    "$type": "Spell",
+                                    "IgnoresDeath":true,
+                                    "ImpactOnStart": {
+                                        "$type": "Target",
+                                        "Do": {
+                                            "$type": "ImpactsList",
+                                            "Impacts": [
+                                                {
+                                                    "$type": "ChangeEntityStat",
+                                                    "Change": -10,
+                                                    "StatDef": "/Stats/Health"
+                                                },
+                                                {
+                                                    "$type": "ImpactInvokeAction",
+                                                    "InvokedSpell": "/TestStaggerChar"
+                                                },
+                                                {
+                                                    "$type": "ImpactInvokeAction",
+                                                    "InvokedSpell": "/TestStagger"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+            ],
+            "ImpactOnSuccess": {
+                "$type": "DestroyObject"
+            }
+        }
+    },
+    "SpellsEngine": {
+        "$type": "SpellsEngine"
+    }
+}

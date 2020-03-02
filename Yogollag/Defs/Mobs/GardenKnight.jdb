@@ -14,6 +14,9 @@
             "Y": 0
         }
     },
+    "Mortal": {
+        "$type": "MortalEngine"
+    },
     "LocoMoverDef": {
         "$type": "LocoMover",
         "CruiserSpeed": 1,

@@ -4,17 +4,18 @@
         {
             "CreatorDef": {
                 "$type": "LocationCreator",
-                "SitesCount":30,
-                "TicksCount":1000,
+                "SitesCount": 30,
+                "TicksCount": 1000,
                 "Palette": [
-                   "/SimpleBuilding1MapSite",
-                   "/SimpleBuilding2MapSite",
-                   "/SimpleBuilding3MapSite",
-                   "/SimpleBuilding4MapSite",
-                   "/SimpleBuilding5MapSite",
-                   "/SimpleBuilding6MapSite",
-                   "/WorldItemDefMapSite",
-                   "/DarkMonumentMapSite"
+                    "/SimpleBuilding1MapSite",
+                    "/SimpleBuilding2MapSite",
+                    "/SimpleBuilding3MapSite",
+                    "/SimpleBuilding4MapSite",
+                    "/SimpleBuilding5MapSite",
+                    "/SimpleBuilding6MapSite",
+                    "/WorldItemDefMapSite",
+                    //"/ExplosiveBarrelMapSite",
+                    //"/DestructibleBarrelMapSite",
                 ]
             },
             "RootSite": {
@@ -22,12 +23,12 @@
                 "SubSites": [
                     {
                         "$type": "SubSite",
-                        "SizeX":500,
-                        "SizeY":500,
+                        "SizeX": 500,
+                        "SizeY": 500,
                         //"Rot":30,
                         "Pos": {
-                            "X":0,
-                            "Y":0
+                            "X": 0,
+                            "Y": 0
                         },
                         "Tags": [
                             "/Tags/Root"
@@ -35,8 +36,8 @@
                     }
                 ],
                 "AttachedScene": "./TestSceneScene",
-                "SizeX":2000,
-                "SizeY":2000
+                "SizeX": 2000,
+                "SizeY": 2000
             }
         }
     ]

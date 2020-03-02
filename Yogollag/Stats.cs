@@ -15,16 +15,19 @@ namespace Yogollag
         public virtual StatDef StatDef { get; set; }
         public abstract float Value { get; }
     }
+    [GenerateSync]
     public struct AccStatModifier
     {
+        [Sync(SyncType.Client)]
         public float AddMod { get; set; }
-        public BaseDef ModKey { get; set; }
+        [Sync(SyncType.Client)]
+        public EffectId ModKey { get; set; }
     }
     [GenerateSync]
     public abstract class AccumulatedStat : BaseStat
     {
         [Sync(SyncType.Client)]
-        public virtual DeltaList<AccStatModifier> Modifiers { get; set; }
+        public virtual DeltaList<AccStatModifier> Modifiers { get; set; } = SyncObject.New<DeltaList<AccStatModifier>>();
         public override float Value => Modifiers.Sum(x => x.AddMod);
     }
     [GenerateSync]
@@ -58,11 +61,23 @@ namespace Yogollag
         {
             foreach (var statInstDef in Stats)
             {
-                var stat = SyncObject.New<LinearStat>();
-                stat.StatDef = statInstDef.Def.Stat.Def;
-                stat.Set(statInstDef.Def.InitialValue);
-                stat.FinishInit();
-                StatsSync.Add(stat);
+                if(statInstDef.Def is AccumulatedStatInstanceDef)
+                {
+                    var stat = SyncObject.New<AccumulatedStat>();
+                    stat.StatDef = statInstDef.Def.Stat.Def;
+                    stat.Modifiers.Add(new AccStatModifier() { AddMod = statInstDef.Def.InitialValue, ModKey = new EffectId() { SpellId = new SpellId() { Id = 0 } } });
+                    stat.FinishInit();
+                    StatsSync.Add(stat);
+                }
+                else
+                {
+
+                    var stat = SyncObject.New<LinearStat>();
+                    stat.StatDef = statInstDef.Def.Stat.Def;
+                    stat.Set(statInstDef.Def.InitialValue);
+                    stat.FinishInit();
+                    StatsSync.Add(stat);
+                }
             }
         }
     }
@@ -70,6 +85,9 @@ namespace Yogollag
     {
         public DefRef<StatDef> Stat { get; set; }
         public float InitialValue { get; set; }
+    }
+    public class AccumulatedStatInstanceDef : StatInstanceDef
+    {
     }
     public class StatDef : BaseDef
     {

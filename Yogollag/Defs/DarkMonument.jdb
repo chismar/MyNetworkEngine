@@ -50,5 +50,8 @@
                 }
             }
         ]
+    },
+    "SpellsEngine": {
+        "$type": "SpellsEngine"
     }
 }

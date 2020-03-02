@@ -326,7 +326,7 @@ static class Scripting
         public Vec2 TargetPoint
         {
             get => _targetPoint.HasValue ? _targetPoint.Value :
-                ((ProcessingEntity.CurrentServer.GetGhost(Target) as IPositionedEntity)?.Position ?? 
+                ((ProcessingEntity.CurrentServer.GetGhost(Target) as IPositionedEntity)?.Position ??
                 (ProcessingEntity.CurrentServer.GetGhost(Host) as IPositionedEntity)?.Position ?? default);
             set => _targetPoint = value;
         }
@@ -339,7 +339,7 @@ static class Scripting
     {
         bool Check(ScriptingContext ctx);
     }
-  
+
     public class CheckEntityType : BaseDef, IPredicateDef
     {
         public List<DefRef<IEntityObjectDef>> AllowedTypes { get; set; } = new List<DefRef<IEntityObjectDef>>();
@@ -362,10 +362,8 @@ static class Scripting
         {
             var statEntity = ctx.ProcessingEntity.CurrentServer.GetGhost(ctx.Host) as IStatEntity;
             BaseStat stat = statEntity.StatsEngine.StatsSync.SingleOrDefault(x => x.StatDef == StatDef);
-            if (stat != null)
-                return MoreThan < stat.Value && LessThan > stat.Value;
-            else
-                return false;
+            var value = stat?.Value ?? 0; 
+            return MoreThan < value && LessThan > value;
         }
     }
 
@@ -406,6 +404,40 @@ static class Scripting
         }
     }
 
+    public class EffectChangeStat : BaseDef, ISpellEffectDef
+    {
+        public DefRef<StatDef> Stat { get; set; }
+        public DefRef<CalcerDef> Add { get; set; }
+        public bool Begin(SpellInstance spellInstance, bool onClient)
+        {
+            if (onClient)
+                return true;
+            var addVal = Add.Def.Calc(spellInstance.GetScriptingContext());
+            var tStat = (spellInstance.ParentEntity as IStatEntity)?.StatsEngine.StatsSync.FirstOrDefault(x => x.StatDef == Stat);
+            if (tStat is AccumulatedStat ast)
+            {
+                ast.Modifiers.Add(new AccStatModifier() { AddMod = addVal, ModKey = new EffectId(this, spellInstance.Id) });
+            }
+
+            return true;
+        }
+
+        public void End(SpellInstance spellInstance, bool onClient, bool isSucess)
+        {
+            if (onClient)
+                return;
+            var tStat = (spellInstance.ParentEntity as IStatEntity)?.StatsEngine.StatsSync.FirstOrDefault(x => x.StatDef == Stat);
+            if (tStat is AccumulatedStat ast)
+            {
+                for (int i = 0; i < ast.Modifiers.Count; i++)
+                    if (ast.Modifiers[i].ModKey == new EffectId(this, spellInstance.Id))
+                    {
+                        ast.Modifiers.RemoveAt(i);
+                        break;
+                    }
+            }
+        }
+    }
     public class ChangeEntityStatDef : BaseDef, IImpactDef
     {
         public DefRef<StatDef> StatDef { get; set; }

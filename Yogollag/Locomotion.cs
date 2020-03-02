@@ -60,7 +60,9 @@ namespace Yogollag
     public class LocoMover
     {
         public bool DontMove { get; set; }
-        public Vec2? ActionDir { get; set; }
+        Vec2? _actionDir;
+        public Vec2? ActionDir { get => _useMotionDirInsteadOfAction ? (MovementDir == default ? (Vec2?)null : MovementDir) : _actionDir; set => _actionDir = value; }
+        public Vec2? RotateToDir => _faceActionDir ? _actionDir : ActionDir; 
         public Vec2 MovementDir { get; set; }
         ILocoMovable _movable;
         long _currentActionStartTime;
@@ -70,7 +72,10 @@ namespace Yogollag
         Vec2? _actionActionDir;
         float _duration;
         float _speed;
+        bool _useMotionDirInsteadOfAction;
+        bool _faceActionDir;
         EntityId _eid;
+        Vec2? _lastActionDir;
         public LocoMover(EntityId eid, LocoMoverDef def, ILocoMovable movable)
         {
             _movable = movable;
@@ -78,7 +83,7 @@ namespace Yogollag
             _eid = eid;
         }
 
-        public void Set(EffectId id, string state, float duration, float speed)
+        public void Set(EffectId id, string state, float duration, float speed, bool useMotionDirInsteadofAction, bool faceActionDir)
         {
             _actionActionDir = ActionDir;
             _currentActionStartTime = SyncedTime.Now;
@@ -86,6 +91,8 @@ namespace Yogollag
             _currentMovementState = state;
             _duration = duration;
             _speed = speed;
+            _useMotionDirInsteadOfAction = useMotionDirInsteadofAction;
+            _faceActionDir = faceActionDir;
         }
         public void Unset(EffectId id)
         {
@@ -97,12 +104,15 @@ namespace Yogollag
             _actionActionDir = default;
             _duration = default;
             _speed = default;
+            _useMotionDirInsteadOfAction = default;
+            _faceActionDir = default;
         }
         float _lerpedSpeed = 0f;
         public void Tick()
         {
             if (_currentMovementState == null)
             {
+                _lastActionDir = null;
                 if (MovementDir == default)
                 {
                     if (ActionDir == null)
@@ -112,7 +122,7 @@ namespace Yogollag
                         return;
                     }
 
-                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
+                    var angle = _movable.CurrentRotation - Vec2.AngleBetween(RotateToDir.Value, new Vec2(0, 1));
                     if (angle > 180)
                         angle = angle - 360;
                     if (angle < -180)
@@ -134,7 +144,7 @@ namespace Yogollag
                 }
                 else
                 {
-                    var angle = (!ActionDir.HasValue || ActionDir.Value.Length < 0.01f) ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
+                    var angle = (!RotateToDir.HasValue || RotateToDir.Value.Length < 0.01f) ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(RotateToDir.Value, new Vec2(0, 1));
                     if (float.IsNaN(angle))
                         angle = 0;
                     if (angle > 180)
@@ -152,19 +162,27 @@ namespace Yogollag
             else
             {
                 var cav = CurrentActionVelocity * _speed;
-                var angle = !ActionDir.HasValue ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
+                var angle = !ActionDir.HasValue ? (_lastActionDir.HasValue ? _movable.CurrentRotation - Vec2.AngleBetween(_lastActionDir.Value, new Vec2(0, 1)) : 0) : _movable.CurrentRotation - Vec2.AngleBetween(ActionDir.Value, new Vec2(0, 1));
+                var faceAngle = !RotateToDir.HasValue ? 0 : _movable.CurrentRotation - Vec2.AngleBetween(RotateToDir.Value, new Vec2(0, 1));
                 if (angle > 180)
                     angle = angle - 360;
                 if (angle < -180)
                     angle = angle + 360;
-                var sign = -Math.Sign(angle);
-                float lerp = Mathf.Clamp(Math.Abs(angle) / 180 * sign, -1, 1);
+                if (faceAngle > 180)
+                    faceAngle = faceAngle - 360;
+                if (faceAngle < -180)
+                    faceAngle = faceAngle + 360;
+                var sign = -Math.Sign(faceAngle);
+                float lerp = Mathf.Clamp(Math.Abs(faceAngle) / 180 * sign, -1, 1);
                 Transform t = Transform.Identity;
-                t.Rotate(360 - _movable.CurrentRotation);
+                t.Rotate(360 - _movable.CurrentRotation + angle);
                 var forwardDir = t.TransformPoint(cav);
 
-                _movable.ApplyMovement(forwardDir, Math.Abs(angle) < 15 ? default : _def.ActionRotationSpeed * lerp);
+                _movable.ApplyMovement(forwardDir, Math.Abs(faceAngle) < 15 ? default : _def.ActionRotationSpeed * lerp);
                 _lerpedSpeed = _speed;
+                if(ActionDir.HasValue)
+                    _lastActionDir = ActionDir.Value;
+                
             }
 
         }
@@ -224,6 +242,8 @@ namespace Yogollag
     }
     public class EffectMotionDef : BaseDef, ISpellEffectDef
     {
+        public bool OverrideActionDirWithMotionDir { get; set; } = false;
+        public bool FaceActionDir { get; set; } = true;
         public string CurveName { get; set; }
         public float Speed { get; set; }
         public bool Begin(SpellInstance spellInstance, bool onClient)
@@ -231,12 +251,12 @@ namespace Yogollag
             if (onClient && spellInstance.ParentEntity is CharacterEntity)
             {
                 var lm = spellInstance.ParentEntity.CurrentServer.GetGhost(spellInstance.Cast.OwnerObject) as IHasLocoMover;
-                lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
+                lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed, OverrideActionDirWithMotionDir,  FaceActionDir);
             }
             else if (!onClient && !(spellInstance.ParentEntity is CharacterEntity))
             {
                 var lm = spellInstance.ParentEntity.CurrentServer.GetWriteEntity<GhostedEntity>(spellInstance.Cast.OwnerObject) as IHasLocoMover;
-                lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed);
+                lm.LocoMover.Set(new EffectId(this, spellInstance), CurveName, spellInstance.Cast.Def.Duration, Speed, OverrideActionDirWithMotionDir, FaceActionDir);
             }
             return true;
         }

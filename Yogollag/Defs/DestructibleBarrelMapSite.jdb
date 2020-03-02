@@ -1,0 +1,45 @@
+{
+  "$type": "MapSiteDef",
+  "CustomName": null,
+  "AttachmentPoint": {
+    "$type": "Vec2",
+    "X": 0.0,
+    "Y": 0.0
+  },
+  "AttachmentRotation": 0.0,
+  "AttachmentSize": 0.0,
+  "Type": {
+    "$type": "MapSiteTypeDef",
+    "CustomName": null,
+    "EntitiesToSpawnOn": [
+      "/DestructibleBarrel"
+    ]
+  },
+  "SizeX": 1.0,
+  "SizeY": 1.0,
+  "SubSites": [],
+  "Connections": [],
+  "Tags": [
+    "/Tags/Loot"
+  ],
+  "AttachedScene": {
+    "$type": "SceneDef",
+    "CustomName": null,
+    "Entities": [
+      {
+        "$type": "InteractiveWorldEntitySceneDef",
+        "CustomName": null,
+        "Object": "/DestructibleBarrel",
+        "Rotation": 0.0,
+        "Position": {
+          "$type": "Vec2",
+          "X": 433.514282,
+          "Y": -179.1947
+        },
+        "StatsEngine": null,
+        "Mortal": null,
+        "SpellsEngine": null
+      }
+    ]
+  }
+}

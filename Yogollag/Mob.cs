@@ -13,16 +13,33 @@ namespace Yogollag
 {
 
     [GenerateSync]
-    public abstract class MortalEngine : SyncObject
+    public abstract class MortalEngine : SyncObject, IEntityComponent
     {
-        public virtual float Health => ((IStatEntity)ParentEntity).StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value;
+        [Def]
+        public virtual SpellDef SpellOnDeath { get; set; }
+        public virtual float Health => !IsActive? 0 : ((IStatEntity)ParentEntity).StatsEngine.StatsSync.Single(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health")).Value;
         [Sync]
         public virtual bool IsDead { get; set; } = false;
+        [Sync]
+        public virtual bool IsActive { get; set; } = true;
+        public IDef Def { get; set; }
+
+        public override void OnCreate()
+        {
+            IsActive = ((IStatEntity)ParentEntity).StatsEngine.StatsSync.Any(x => x.StatDef == DefsHolder.Instance.LoadDef<StatDef>("/Stats/Health"));
+            
+        }
         public void Update()
         {
+            if (!IsActive)
+                return;
             if (!IsDead)
                 if (Health <= 0)
+                {
                     IsDead = true;
+                    if (ParentEntity is IHasSpells hs && SpellOnDeath != null)
+                        hs.SpellsEngine.CastFromInsideEntity(new SpellCast() { Def = SpellOnDeath, TargetEntity = ParentEntity.Id, OwnerObject = ParentEntity.Id });
+                }
 
         }
     }
