@@ -102,7 +102,7 @@ if ($exportAllFilesInFolder)
     $Files = `getFileList -folder $fold -filespec $fExt`; //тут список клипов в папке выбраной выше, только имена файлов с расширением
 else 
     $Files[0] = `match "[^/\\]*$" $path`;
-$c = $Files[0];
+string $c = $Files[0];
 
 
 for ($c in $Files)//$c = $Files[0];
