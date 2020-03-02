@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 835274c1294349441855d76b0e462d28
+guid: 3dea2b54043083b439b5a1deee9c152d
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
@@ -37,9 +37,9 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Take 001
-      internalID: 1827226128182048838
+      internalID: 0
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -66,7 +66,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.8
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -112,7 +112,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.008
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
