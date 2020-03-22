@@ -1,6 +1,6 @@
 //Maya ASCII 2018ff09 scene
 //Name: HumanMale_RunFront.ma
-//Last modified: Fri, Nov 29, 2019 04:09:17 AM
+//Last modified: Sun, Mar 22, 2020 12:55:32 PM
 //Codeset: 1251
 file -rdi 1 -ns "R" -rfn "HumanMale_RIGRN" -op "v=0;" -typ "mayaAscii" "HumanMale_RIG.ma";
 file -r -ns "R" -dr 1 -rfn "HumanMale_RIGRN" -op "v=0;" -typ "mayaAscii" "HumanMale_RIG.ma";
@@ -16,18 +16,18 @@ fileInfo "cutIdentifier" "201903222215-65bada0e52";
 fileInfo "osv" "Microsoft Windows 7 Ultimate Edition, 64-bit Windows 7 Service Pack 1 (Build 7601)\n";
 createNode transform -s -n "persp";
 	rename -uid "B098B057-4EC2-55C7-85EC-2EAE47AB1EC3";
-	setAttr ".t" -type "double3" 30.405502216500508 575.05094155517486 -1156.9335790666039 ;
-	setAttr ".r" -type "double3" -20.121848213646814 -28980.600000067956 0 ;
+	setAttr ".t" -type "double3" 576.25923056779493 154.74584288568826 78.316577869926832 ;
+	setAttr ".r" -type "double3" -6.921848218338317 -29440.999999936717 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "6CEF548C-4515-AD0A-9FDD-8BB77E52147C";
 	setAttr -k off ".v";
 	setAttr ".fl" 34.999999999999993;
 	setAttr ".ncp" 10;
-	setAttr ".coi" 1710.0975972443562;
+	setAttr ".coi" 1092.4063287430895;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
-	setAttr ".tp" -type "double3" -8.1302619875271986 145.86532648896278 14.728673019166928 ;
+	setAttr ".tp" -type "double3" -9.8662099736567175 12.857495248260834 48.086277952837413 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
 	rename -uid "94458994-41E6-BE13-CFBB-F38D7CA5FB6B";
@@ -42,7 +42,7 @@ createNode camera -s -n "topShape" -p "top";
 	setAttr ".imn" -type "string" "top";
 	setAttr ".den" -type "string" "top_depth";
 	setAttr ".man" -type "string" "top_mask";
-	setAttr ".tp" -type "double3" -8.1302619875271986 145.86532648896278 14.728673019166928 ;
+	setAttr ".tp" -type "double3" -9.8662099736567175 12.857495248260834 48.086277952837413 ;
 	setAttr ".hc" -type "string" "viewSet -t %camera";
 	setAttr ".o" yes;
 createNode transform -s -n "front";
@@ -57,7 +57,7 @@ createNode camera -s -n "frontShape" -p "front";
 	setAttr ".imn" -type "string" "front";
 	setAttr ".den" -type "string" "front_depth";
 	setAttr ".man" -type "string" "front_mask";
-	setAttr ".tp" -type "double3" -8.1302619875271986 145.86532648896278 14.728673019166928 ;
+	setAttr ".tp" -type "double3" -9.8662099736567175 12.857495248260834 48.086277952837413 ;
 	setAttr ".hc" -type "string" "viewSet -f %camera";
 	setAttr ".o" yes;
 createNode transform -s -n "side";
@@ -73,7 +73,7 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".imn" -type "string" "side";
 	setAttr ".den" -type "string" "side_depth";
 	setAttr ".man" -type "string" "side_mask";
-	setAttr ".tp" -type "double3" -8.1302619875271986 145.86532648896278 14.728673019166928 ;
+	setAttr ".tp" -type "double3" -9.8662099736567175 12.857495248260834 48.086277952837413 ;
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
 createNode transform -n "Cmera_locator";
@@ -94,18 +94,18 @@ createNode camera -n "cameraShape1" -p "camera1";
 	setAttr ".imn" -type "string" "camera1";
 	setAttr ".den" -type "string" "camera1_depth";
 	setAttr ".man" -type "string" "camera1_mask";
-	setAttr ".tp" -type "double3" -8.1302619875271986 145.86532648896278 14.728673019166928 ;
+	setAttr ".tp" -type "double3" -9.8662099736567175 12.857495248260834 48.086277952837413 ;
 	setAttr ".lls" 30.200000000000003;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "0E0A0BA7-4C02-5F42-DCAD-1CA43D984019";
+	rename -uid "936ECB07-43D1-6E57-C686-6BBDD82DD6C2";
 	setAttr -s 5 ".lnk";
 	setAttr -s 5 ".slnk";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "6611E82C-4F90-39A0-E388-69A5AE767F3D";
+	rename -uid "A4C8CA36-4BBE-3470-8549-4EA6282C9328";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "0CF0FE95-4869-024E-4FC0-CBB43F9E0DF6";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "46F0BB55-4F75-0F5F-828F-5499783B6138";
+	rename -uid "25C489E2-4CAE-3C2A-94AA-E7A23B711ABF";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "3FC8907A-4765-103F-77A9-3EB5E987FDF9";
 	setAttr ".g" yes;
@@ -149,8 +149,8 @@ createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
 	setAttr ".tgi[0].ni[4].nvs" 1923;
 createNode reference -n "HumanMale_RIGRN";
 	rename -uid "F103503D-43C8-3069-CFBD-E08958F7EC96";
-	setAttr ".fn[0]" -type "string" "C:/Users/Ira/Dropbox/TW/HumanMale//HumanMale_RIG.ma";
-	setAttr -s 2002 ".phl";
+	setAttr ".fn[0]" -type "string" "F:/Work/MEGAsync/TW/Art/Characters/HumanMale//HumanMale_RIG.ma";
+	setAttr -s 2009 ".phl";
 	setAttr ".phl[1]" 0;
 	setAttr ".phl[2]" 0;
 	setAttr ".phl[3]" 0;
@@ -2153,15 +2153,22 @@ createNode reference -n "HumanMale_RIGRN";
 	setAttr ".phl[2000]" 0;
 	setAttr ".phl[2001]" 0;
 	setAttr ".phl[2002]" 0;
+	setAttr ".phl[2003]" 0;
+	setAttr ".phl[2004]" 0;
+	setAttr ".phl[2005]" 0;
+	setAttr ".phl[2006]" 0;
+	setAttr ".phl[2007]" 0;
+	setAttr ".phl[2008]" 0;
+	setAttr ".phl[2009]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"HumanMale_RIGRN"
 		"HumanMale_RIGRN" 2
 		2 "|R:Global" "Action" " -av -k 1 0"
 		2 "|R:pCylinder2" "visibility" " 0"
-		"HumanMale_RIGRN" 2964
+		"HumanMale_RIGRN" 2977
 		1 |R:Global_grp|R:Chest_control_group|R:Chest_control|R:Chest_controlShape 
 		"lockLength" "ll" " -ci 1 -k 1 -min 0 -max 1 -at \"bool\""
-		2 "|R:left|R:leftShape" "tumblePivot" " -type \"double3\" -8.13026198752719864 145.86532648896277919 14.72867301916692817"
+		2 "|R:left|R:leftShape" "tumblePivot" " -type \"double3\" -9.86620997365671748 12.85749524826083423 48.08627795283741335"
 		
 		2 "|R:Global_grp|R:Global_TR" "visibility" " -k 0 1"
 		2 "|R:Global_grp|R:Global_TR" "translate" " -type \"double3\" 0 0 0"
@@ -2175,7 +2182,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control" "translate" 
-		" -type \"double3\" -3.17571451789191794 -1.98622788873163003 -0.36836043560369269"
+		" -type \"double3\" -2.37838500095808625 -1.9915961711810497 -0.023568311784370688"
 		
 		2 "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control" "translateX" 
 		" -av"
@@ -2184,7 +2191,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control" "rotate" 
-		" -type \"double3\" 29.65604050679353065 -15.07336190369194462 -7.92143949466143482"
+		" -type \"double3\" 29.78818479678559328 -14.13696101557214746 -9.5356616003257777"
 		
 		2 "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control" "rotateX" 
 		" -av"
@@ -2197,7 +2204,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "visibility" " -k 0 1"
 		
-		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "translate" " -type \"double3\" 0.017394380213510155 -1.99884339514488341 -0.28670510021644069"
+		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "translate" " -type \"double3\" 0 0 0"
 		
 		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "translateX" " -av"
 		
@@ -2205,7 +2212,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "rotate" " -type \"double3\" 0.59379196667445655 -6.95141110004294038 0.78461088648423682"
+		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "rotate" " -type \"double3\" -0.74530123229621781 22.06574606171664854 3.56245445168174868"
 		
 		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "rotateX" " -av"
 		2 "|R:Global_grp|R:Hips_control_group|R:Hips_control" "rotateY" " -av"
@@ -2256,7 +2263,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "visibility" " -k 0 1"
 		
-		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "translate" " -type \"double3\" 1.56711221298518399 -2.70614776413016056 1.94861282088744159"
+		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "translate" " -type \"double3\" 0.86371067466019924 0.060317230765998486 0.32559387274677931"
 		
 		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "translateX" " -av"
 		
@@ -2264,7 +2271,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "rotate" " -type \"double3\" 29.70888786230596068 -12.62546331149055767 -17.12539620413426178"
+		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "rotate" " -type \"double3\" 15.04532263000152348 -26.18677485311404496 -20.20950089177743081"
 		
 		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "rotateX" " -av"
 		2 "|R:Global_grp|R:Chest_control_group|R:Chest_control" "rotateY" " -av"
@@ -2316,7 +2323,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Head_control_group|R:Head_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Head_control_group|R:Head_control" "rotate" " -type \"double3\" 6.34631719323435561 1.60633718648743717 0.38218544364949519"
+		2 "|R:Global_grp|R:Head_control_group|R:Head_control" "rotate" " -type \"double3\" 3.5692222684200714 1.60633718648743717 0.38218544364949519"
 		
 		2 "|R:Global_grp|R:Head_control_group|R:Head_control" "rotateX" " -av"
 		2 "|R:Global_grp|R:Head_control_group|R:Head_control" "rotateY" " -av"
@@ -2325,7 +2332,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control" "visibility" 
 		" -k 0 1"
-		2 "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control" "rotate" " -type \"double3\" 11.91463702981799599 -6.13015753693043752 5.84970893699579442"
+		2 "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control" "rotate" " -type \"double3\" 9.08935999878081446 -13.95070615453303198 8.54898021703274402"
 		
 		2 "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control" "rotateX" " -av"
 		
@@ -2337,7 +2344,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control" "visibility" " -k 0 1"
 		
-		2 "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control" "translate" " -type \"double3\" -35.86848587333765437 -38.75375674499660761 4.77915508014293877"
+		2 "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control" "translate" " -type \"double3\" -51.75867269753520361 -18.3954409557792502 22.80218952659257781"
 		
 		2 "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control" "translateX" " -av"
 		
@@ -2361,7 +2368,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control" "rotate" 
-		" -type \"double3\" -11.9303040959472586 22.66843496664512969 -3.77125844822391132"
+		" -type \"double3\" -20.64221128511894321 11.22367948817516314 7.05073534218327147"
 		
 		2 "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control" "rotateX" 
 		" -av"
@@ -2372,7 +2379,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator" "translate" 
-		" -type \"double3\" 2.43089221601054817 -30.80471030603885652 3.57587773502801021"
+		" -type \"double3\" 16.59483347410269616 -29.28828680499450243 -8.4098324936174329"
 		
 		2 "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator" "translateX" 
 		" -av"
@@ -2406,7 +2413,7 @@ createNode reference -n "HumanMale_RIGRN";
 		"rotateZ" " -av"
 		2 "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control" "visibility" 
 		" -k 0 1"
-		2 "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control" "rotate" " -type \"double3\" -14.24109345525064541 60.04454993834583121 -31.94538253341859146"
+		2 "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control" "rotate" " -type \"double3\" -15.05501577222912246 63.82868777830917395 -28.94849335098391663"
 		
 		2 "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control" "rotateX" " -av"
 		
@@ -2420,7 +2427,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control" "visibility" " -k 0 1"
 		
-		2 "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control" "translate" " -type \"double3\" 33.09588028620831324 -26.77133774020546753 -37.10435145302702864"
+		2 "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control" "translate" " -type \"double3\" 31.88380738613997778 -23.83528948614980436 -36.28816464557559129"
 		
 		2 "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control" "translateX" " -av"
 		
@@ -2444,7 +2451,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control" "rotate" 
-		" -type \"double3\" -6.3123397615975696 0.20678664959437393 -7.83962612286172522"
+		" -type \"double3\" -6.31233976159757049 0.20678664959437393 -7.83962612286172522"
 		
 		2 "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control" "rotateX" 
 		" -av"
@@ -2489,7 +2496,7 @@ createNode reference -n "HumanMale_RIGRN";
 		"rotateZ" " -av"
 		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "visibility" " -k 0 1"
 		
-		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "translate" " -type \"double3\" 3.29224086921579984 52.73072612037940132 -34.95457276196620455"
+		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "translate" " -type \"double3\" -0.72870177225555299 60.47757908044560082 -59.46332658516679004"
 		
 		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "translateX" " -av"
 		
@@ -2497,7 +2504,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "rotate" " -type \"double3\" 101.85333600757493855 5.33766220819098081 0"
+		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "rotate" " -type \"double3\" 120.61951308992844645 5.33766220819098436 0"
 		
 		2 "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control" "rotateX" " -av"
 		
@@ -2552,7 +2559,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control" 
 		"visibility" " -k 0 1"
 		2 "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control" 
-		"translate" " -type \"double3\" -0.018905271635723864 -0.058185485768746048 0.64915420349642261"
+		"translate" " -type \"double3\" 0.032113172249797817 -0.057557501168383672 0.88192248889486158"
 		
 		2 "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control" 
 		"translateX" " -av"
@@ -2582,7 +2589,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control" 
 		"rotateZ" " -av"
 		2 "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control" 
-		"translate" " -type \"double3\" 0.2364826887711704 -0.51635116680577653 0.18842844421547511"
+		"translate" " -type \"double3\" -0.22528453558343681 -0.38703472556865348 -0.26767874966745486"
 		
 		2 "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control" 
 		"translateX" " -av"
@@ -2591,7 +2598,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control" 
 		"translateZ" " -av"
 		2 "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control" 
-		"rotate" " -type \"double3\" 8.84345082570761143 15.53333188446007185 16.59767358814215754"
+		"rotate" " -type \"double3\" 16.43294930649384256 15.81127651853470439 0.88474905248350688"
 		
 		2 "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control" 
 		"rotateX" " -av"
@@ -2602,7 +2609,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control" 
 		"Orient" " -av -k 1 0"
 		2 "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control" 
-		"rotate" " -type \"double3\" -6.18036294896371174 -6.83349678557089302 11.65533207387443149"
+		"rotate" " -type \"double3\" 13.8499156586337584 -4.96707401994834985 2.78842080533337189"
 		
 		2 "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control" 
 		"rotateX" " -av"
@@ -2613,7 +2620,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control" "translate" 
-		" -type \"double3\" 3.75499610208165091 0.96349611362461374 -2.91310538847361178"
+		" -type \"double3\" 3.74392975528750682 1.22279162004414732 -2.81650622931825456"
 		
 		2 "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control" "translateX" 
 		" -av"
@@ -2622,7 +2629,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control" "rotate" 
-		" -type \"double3\" 49.74491785646207376 -27.91658212359676838 -20.67369050182082546"
+		" -type \"double3\" 46.40834879172949456 -42.4254712110484391 -30.81899559720344683"
 		
 		2 "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control" "rotateX" 
 		" -av"
@@ -2635,7 +2642,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control" "rotate" 
-		" -type \"double3\" 4.50145840785884044 3.1654157648353789 6.47390681718871441"
+		" -type \"double3\" 7.47606606635241366 1.07640872427645773 -4.674653115109483"
 		2 "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control" "rotateX" 
 		" -av"
 		2 "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control" "rotateY" 
@@ -2645,7 +2652,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control" "translate" 
-		" -type \"double3\" -2.97685909462269738 -2.05294535594751348 2.01947099429353871"
+		" -type \"double3\" -0.2615906097401246 -2.23516878981502121 2.30301953467578047"
 		
 		2 "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control" "translateX" 
 		" -av"
@@ -2654,7 +2661,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control" "rotate" 
-		" -type \"double3\" 58.00230700318643784 16.64245881851427811 7.44165415624969029"
+		" -type \"double3\" 69.66498282936588282 26.09836427328392006 20.89012015092335162"
 		
 		2 "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control" "rotateX" 
 		" -av"
@@ -2667,8 +2674,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control" "rotate" 
-		" -type \"double3\" 12.79947912209816074 3.20351239923367626 -12.66706083511073366"
-		
+		" -type \"double3\" 8.69708291441376957 8.5280734713376507 -0.40091150068676867"
 		2 "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control" "rotateX" 
 		" -av"
 		2 "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control" "rotateY" 
@@ -2685,7 +2691,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control" 
 		"translateZ" " -av"
 		2 "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control" 
-		"rotate" " -type \"double3\" 66.90375874054294059 19.03557817636554361 7.95221762202810556"
+		"rotate" " -type \"double3\" 68.95553325240300069 11.32608702445589444 11.42853181364273318"
 		
 		2 "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control" 
 		"rotateX" " -av"
@@ -2696,7 +2702,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control" 
 		"Orient" " -av -k 1 1"
 		2 "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control" 
-		"rotate" " -type \"double3\" 16.88583364602489212 8.1630563607122042 -5.2607891872129855"
+		"rotate" " -type \"double3\" 37.85746968623551112 10.10097562680178562 -4.56976921887318355"
 		
 		2 "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control" 
 		"rotateX" " -av"
@@ -2748,7 +2754,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control" "rotate" 
-		" -type \"double3\" -3.76395868912302278 -3.13025915400255172 -5.48948982166733934"
+		" -type \"double3\" -3.76395868912302278 -3.13025915400255217 -5.48948982166733934"
 		
 		2 "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control" "rotateX" 
 		" -av"
@@ -2759,8 +2765,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "translate" 
-		" -type \"double3\" -0.021196432945192828 2.41055667962885867 0.66115931083381818"
-		
+		" -type \"double3\" 0.46044627345191569 3.08633779182595536 0.63738098199962434"
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "translateX" 
 		" -av"
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "translateY" 
@@ -2768,7 +2773,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "rotate" 
-		" -type \"double3\" -4.8083719302528376 -4.85613297005465583 1.92327146959029571"
+		" -type \"double3\" -4.57430518209255244 -4.44034234650596282 3.98282311326312755"
 		
 		2 "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control" "rotateX" 
 		" -av"
@@ -2779,7 +2784,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control" "visibility" 
 		" -k 0 1"
 		2 "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control" "translate" 
-		" -type \"double3\" -0.0019149255128106217 0.035715865102961375 -0.0053334901182315111"
+		" -type \"double3\" -0.015691464441313193 0.2926663327375898 -0.043704191102752435"
 		
 		2 "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control" "translateX" 
 		" -av"
@@ -2788,7 +2793,7 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control" "translateZ" 
 		" -av"
 		2 "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control" "rotate" 
-		" -type \"double3\" -12.52777427497232132 14.7327853676738485 2.94399726108217763"
+		" -type \"double3\" -18.59873349759823924 17.41304475513894801 20.65054948073646202"
 		
 		2 "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control" "rotateX" 
 		" -av"
@@ -2854,7 +2859,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "visibility" 
 		" -k 0 1"
-		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "translate" " -type \"double3\" 0 0.054268205645661816 0"
+		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "translate" " -type \"double3\" 0 3.9193432637771517 0"
 		
 		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "translateX" 
 		" -av"
@@ -2862,7 +2867,7 @@ createNode reference -n "HumanMale_RIGRN";
 		" -av"
 		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "translateZ" 
 		" -av"
-		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "rotate" " -type \"double3\" -0.71997359203245559 0 0"
+		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "rotate" " -type \"double3\" -7.84869475873192446 0 0"
 		
 		2 "|R:Global_grp|R:HatSide_control_group|R:HatSide_control" "rotateX" " -av"
 		
@@ -2892,7 +2897,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hat1_control_group|R:Hat1_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Hat1_control_group|R:Hat1_control" "rotate" " -type \"double3\" 0 0 3.46783725024846001"
+		2 "|R:Global_grp|R:Hat1_control_group|R:Hat1_control" "rotate" " -type \"double3\" 12.72603756578612177 0.57713043676132747 -4.53777311174859399"
 		
 		2 "|R:Global_grp|R:Hat1_control_group|R:Hat1_control" "rotateX" " -av"
 		2 "|R:Global_grp|R:Hat1_control_group|R:Hat1_control" "rotateY" " -av"
@@ -2907,7 +2912,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Hat2_control_group|R:Hat2_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Hat2_control_group|R:Hat2_control" "rotate" " -type \"double3\" 0 0 3.46783725024846001"
+		2 "|R:Global_grp|R:Hat2_control_group|R:Hat2_control" "rotate" " -type \"double3\" 12.72603756578612177 0.57713043676132747 -4.53777311174859399"
 		
 		2 "|R:Global_grp|R:Hat2_control_group|R:Hat2_control" "rotateX" " -av"
 		2 "|R:Global_grp|R:Hat2_control_group|R:Hat2_control" "rotateY" " -av"
@@ -2922,7 +2927,7 @@ createNode reference -n "HumanMale_RIGRN";
 		" -av"
 		2 "|R:Global_grp|R:Feather_control_group|R:Feather_control" "translateZ" 
 		" -av"
-		2 "|R:Global_grp|R:Feather_control_group|R:Feather_control" "rotate" " -type \"double3\" 11.42519948915610506 0.0065646249111042526 -1.05869959634219724"
+		2 "|R:Global_grp|R:Feather_control_group|R:Feather_control" "rotate" " -type \"double3\" 8.84796068052923346 -1.0175323956018909 5.13735802581996648"
 		
 		2 "|R:Global_grp|R:Feather_control_group|R:Feather_control" "rotateX" " -av"
 		
@@ -2940,7 +2945,7 @@ createNode reference -n "HumanMale_RIGRN";
 		" -av"
 		2 "|R:Global_grp|R:Feather1_control_group|R:Feather1_control" "translateZ" 
 		" -av"
-		2 "|R:Global_grp|R:Feather1_control_group|R:Feather1_control" "rotate" " -type \"double3\" 13.4156511907596645 -2.07448502508528021 8.64904428586772234"
+		2 "|R:Global_grp|R:Feather1_control_group|R:Feather1_control" "rotate" " -type \"double3\" -1.12084355225429855 -0.51094953562117273 -0.67545342670675745"
 		
 		2 "|R:Global_grp|R:Feather1_control_group|R:Feather1_control" "rotateX" " -av"
 		
@@ -3239,7 +3244,7 @@ createNode reference -n "HumanMale_RIGRN";
 		" -av"
 		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "visibility" " -k 0 1"
 		
-		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "translate" " -type \"double3\" 1.55696156102446182 0 -36.70633469611811961"
+		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "translate" " -type \"double3\" 0.32639782100631876 8.17768719512627307 38.63382809318048317"
 		
 		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "translateX" " -av"
 		
@@ -3247,7 +3252,7 @@ createNode reference -n "HumanMale_RIGRN";
 		
 		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "translateZ" " -av"
 		
-		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "rotate" " -type \"double3\" 0 -5.33766220819098436 0"
+		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "rotate" " -type \"double3\" -12.71253168677501932 -5.33766220819098347 0"
 		
 		2 "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control" "rotateX" " -av"
 		
@@ -3929,20 +3934,20 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "R:HumanMale" "unitlessValues[41]" " -av"
 		2 "R:HumanMale" "unitlessValues[42]" " -av"
 		2 "R:HumanMale" "linearValues" " -s 318"
-		2 "R:HumanMale" "lv[1:60]" " 0 0 0 -3.17571451789191794 -1.98622788873163003 -0.36836043560369269 0.017394380213510155 -1.99884339514488341 -0.28670510021644069 0 0 0 0 0 0 0.961062738670035 -2.51478121015663447 1.81286188833311712 0 0 0 -0.32363632527153285 -1.0610709417992723 -1.53988005512660742 0.88213444942518926 -0.01992858864392133 -0.083083196925651137 -35.86848587333765437 -38.75375674499660761 4.77915508014293877 -0.010469231378634314 0.081444312537911401 -0.62657708300908821 2.43089221601054817 -30.80471030603885652 3.57587773502801021 0 0 0 33.09588028620831324 -34.30255585544763619 -34.35345933049345035 0.010469231378634314 -0.081444312537911401 0.62657708300908821 29.65798598457229218 -13.21178223563570953 -25.76885643189523734 0 0 0 3.29224086921579984 52.73072612037940132 -34.95457276196620455 -2.8198698759294345 2.00011117315074927 8.87046618663009667 0 0 0"
+		2 "R:HumanMale" "lv[1:60]" " 0 0 0 -2.37838500095808625 -1.9915961711810497 -0.023568311784370688 0 0 0 0 0 0 0 0 0 0.25766120034505025 0.25168378473952457 0.18984294019245485 0 0 0 -0.32363632527153285 -1.0610709417992723 -1.53988005512660742 0.88213444942518926 -0.01992858864392133 -0.083083196925651137 -51.75867269753520361 -18.3954409557792502 22.80218952659257781 -0.010469231378634314 0.081444312537911401 -0.62657708300908821 16.59483347410269616 -29.28828680499450243 -8.4098324936174329 0 0 0 31.88380738613997778 -31.36650760139197303 -33.53727252304201301 0.010469231378634314 -0.081444312537911401 0.62657708300908821 29.65798598457229218 -13.21178223563570953 -25.76885643189523734 0 0 0 -0.72870177225555299 60.47757908044560082 -59.46332658516679004 -2.8198698759294345 2.00011117315074927 8.87046618663009667 0 0 0"
 		
-		2 "R:HumanMale" "lv[70:141]" " -0.018905271635723864 -0.058185485768746048 0.64915420349642261 0.2364826887711704 -0.51635116680577653 0.18842844421547511 3.75499610208165091 0.96349611362461374 -2.91310538847361178 -2.97685909462269738 -2.05294535594751348 2.01947099429353871 0.091165585945116534 -1.72685509535125647 1.33114918778071312 0.059597643629285844 0.18342597303348909 -2.04641655649838095 -0.14013272485610537 -1.01709620521670163 0.77149649936394937 -0.021196432945192828 2.41055667962885867 0.66115931083381818 -0.0019149255128106217 0.035715865102961375 -0.0053334901182315111 0.0019149255128106217 -0.035715865102961375 0.0053334901182315111 0 0 0 0 0 0 0 0.054268205645661816 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+		2 "R:HumanMale" "lv[70:141]" " 0.032113172249797817 -0.057557501168383672 0.88192248889486158 -0.22528453558343681 -0.38703472556865348 -0.26767874966745486 3.74392975528750682 1.22279162004414732 -2.81650622931825456 -0.2615906097401246 -2.23516878981502121 2.30301953467578047 0.091165585945116534 -1.72685509535125647 1.33114918778071312 0.059597643629285844 0.18342597303348909 -2.04641655649838095 -0.14013272485610537 -1.01709620521670163 0.77149649936394937 0.46044627345191569 3.08633779182595536 0.63738098199962434 -0.015691464441313193 0.2926663327375898 -0.043704191102752435 0.0019149255128106217 -0.035715865102961375 0.0053334901182315111 0 0 0 0 0 0 0 3.9193432637771517 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
 		
-		2 "R:HumanMale" "lv[157:297]" " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.12953876449738955 0.79577838677831947 -0.49812103663580881 1.61222383699999994 1.71815431200000002 -0.46037806031833561 0 0 0 0 0 0 1.55696156102446182 0 -36.70633469611811961 -2.51298365161403936 0.37788171559251538 8.62942638819156826 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+		2 "R:HumanMale" "lv[157:297]" " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.12953876449738955 0.79577838677831947 -0.49812103663580881 1.61222383699999994 1.71815431200000002 -0.46037806031833561 0 0 0 0 0 0 0.32639782100631876 8.17768719512627307 38.63382809318048317 -2.51298365161403936 0.37788171559251538 8.62942638819156826 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
 		
 		2 "R:HumanMale" "angularValues" " -s 336"
-		2 "R:HumanMale" "av[1:60]" " 0 0 0 29.65604050679353065 -15.07336190369194462 -7.92143949466143482 0.59379196667445655 -6.95141110004294038 0.78461088648423682 0 0 0 0 0 0 29.70888786230596068 -12.62546331149055767 -17.12539620413426178 0 0 0 20.90594960153663706 4.05059035665350819 -0.71917904234706131 6.34631719323435561 1.60633718648743717 0.38218544364949519 11.91463702981799599 -6.13015753693043752 5.84970893699579442 -11.9303040959472586 22.66843496664512969 -3.77125844822391132 0 0 0 0 0 0 -14.24109345525064541 60.04454993834583121 -31.94538253341859146 -6.3123397615975696 0.20678664959437393 -7.83962612286172522 0 0 0 0 0 0 101.85333600757493855 5.33766220819098081 0 0 0 0 0 0 0"
+		2 "R:HumanMale" "av[1:60]" " 0 0 0 29.78818479678559328 -14.13696101557214746 -9.5356616003257777 -0.074872151005036899 11.83888979709876033 -1.25801544574210489 0 0 0 0 0 0 15.04532263000152348 -26.18677485311404496 -20.20950089177743081 0 0 0 20.90594960153663706 4.05059035665350819 -0.71917904234706131 3.5692222684200714 1.60633718648743717 0.38218544364949519 9.08935999878081446 -13.95070615453303198 8.54898021703274402 -20.64221128511894321 11.22367948817516314 7.05073534218327147 0 0 0 0 0 0 -15.05501577222912246 63.82868777830917395 -28.94849335098391663 -6.31233976159757049 0.20678664959437393 -7.83962612286172522 0 0 0 0 0 0 120.61951308992844645 5.33766220819098436 0 0 0 0 0 0 0"
 		
-		2 "R:HumanMale" "av[70:117]" " 0.089071472027053858 12.36325747198669589 1.12121956747970408 0 0 0 8.84345082570761143 15.53333188446007185 16.59767358814215754 -6.18036294896371174 -6.83349678557089302 11.65533207387443149 49.74491785646207376 -27.91658212359676838 -20.67369050182082546 4.50145840785884044 3.1654157648353789 6.47390681718871441 58.00230700318643784 16.64245881851427811 7.44165415624969029 12.79947912209816074 3.20351239923367626 -12.66706083511073366 66.90375874054294059 19.03557817636554361 7.95221762202810556 16.88583364602489212 8.1630563607122042 -5.2607891872129855 0.090184529143126455 15.25725509042577777 1.12588093397350097 0 0 0 -3.76395868912302278 -3.13025915400255172 -5.48948982166733934 -4.8083719302528376 -4.85613297005465583 1.92327146959029571 -12.52777427497232132 14.7327853676738485 2.94399726108217763 -17.64905507338525581 0.81662146100044175 -7.492961431944277"
+		2 "R:HumanMale" "av[70:117]" " 0.089071472027053858 12.36325747198669589 1.12121956747970408 0 0 0 16.43294930649384256 15.81127651853470439 0.88474905248350688 13.8499156586337584 -4.96707401994834985 2.78842080533337189 46.40834879172949456 -42.4254712110484391 -30.81899559720344683 7.47606606635241366 1.07640872427645773 -4.674653115109483 69.66498282936588282 26.09836427328392006 20.89012015092335162 8.69708291441376957 8.5280734713376507 -0.40091150068676867 68.95553325240300069 11.32608702445589444 11.42853181364273318 37.85746968623551112 10.10097562680178562 -4.56976921887318355 0.090184529143126455 15.25725509042577777 1.12588093397350097 0 0 0 -3.76395868912302278 -3.13025915400255217 -5.48948982166733934 -4.57430518209255244 -4.44034234650596282 3.98282311326312755 -18.59873349759823924 17.41304475513894801 20.65054948073646202 -17.64905507338525581 0.81662146100044175 -7.492961431944277"
 		
-		2 "R:HumanMale" "av[208:249]" " 0 0 0 0 0 0 -0.71997359203245559 0 0 0 0 0 0 0 3.46783725024846001 0 0 3.46783725024846001 11.42519948915610506 0.0065646249111042526 -1.05869959634219724 13.4156511907596645 -2.07448502508528021 8.64904428586772234 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+		2 "R:HumanMale" "av[208:249]" " 0 0 0 0 0 0 -7.84869475873192446 0 0 0 0 0 12.72603756578612177 0.57713043676132747 -4.53777311174859399 12.72603756578612177 0.57713043676132747 -4.53777311174859399 8.84796068052923346 -1.0175323956018909 5.13735802581996648 -1.12084355225429855 -0.51094953562117273 -0.67545342670675745 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
 		
-		2 "R:HumanMale" "av[265:405]" " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40.08136949897281909 -5.67041057448839414 -89.93976567980230641 0 15.00000000000000178 90.00000000000002842 0 0 0 0 0 0 0 -5.33766220819098436 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.92906551873202403 2.75701129621122965 -64.62309942098204374 0 0 -72.91076510014045198 0 0 -61.71640373353125142 -10.70278527466164675 0.9362928444174794 -89.68545403980212427 0 0 -79.94193653135377531 0 0 -36.38119251129904796 -12.25516393101135471 -3.76369647411329566 -105.90834438110744031 0 0 -60.10779137622709811 0 0 -38.70253744140983088 -12.97745356566215236 -4.63216064305185959 -115.75492495919689873 0 0 -39.84896018367778936 0 0 -38.70253744140983088 -0.74549526240747344 -4.75242998104768333 -8.59242386095899668 0 0 -10.46952528875286426 0 0 -15.28417674935124815"
+		2 "R:HumanMale" "av[265:405]" " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40.08136949897281909 -5.67041057448839414 -89.93976567980230641 0 15.00000000000000178 90.00000000000002842 0 0 0 0 0 0 -12.71253168677501932 -5.33766220819098347 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.92906551873202403 2.75701129621122965 -64.62309942098204374 0 0 -72.91076510014045198 0 0 -61.71640373353125142 -10.70278527466164675 0.9362928444174794 -89.68545403980212427 0 0 -79.94193653135377531 0 0 -36.38119251129904796 -12.25516393101135471 -3.76369647411329566 -105.90834438110744031 0 0 -60.10779137622709811 0 0 -38.70253744140983088 -12.97745356566215236 -4.63216064305185959 -115.75492495919689873 0 0 -39.84896018367778936 0 0 -38.70253744140983088 -0.74549526240747344 -4.75242998104768333 -8.59242386095899668 0 0 -10.46952528875286426 0 0 -15.28417674935124815"
 		
 		2 "R:HumanMale" "referenceMapping" (" -type \"characterMapping\" 601 \"R:Global_grp.Action\" 0 1 \"R:Global_TR.translateX\" 1 1 \"R:Global_TR.translateY\" 1 2 \"R:Global_TR.translateZ\" 1 3 \"R:Global_TR.rotateX\" 2 1 \"R:Global_TR.rotateY\" 2 2 \"R:Global_TR.rotateZ\" 2 3 \"R:Hips_Overall_control.translateX\" 1 4 \"R:Hips_Overall_control.translateY\" 1 5 \"R:Hips_Overall_control.translateZ\" 1 6 \"R:Hips_Overall_control.rotateX\" 2 4 \"R:Hips_Overall_control.rotateY\" 2 5 \"R:Hips_Overall_control.rotateZ\" 2 6 \"R:Hips_control.translateX\" 1 7 \"R:Hips_control.translateY\" 1 8 \"R:Hips_control.translateZ\" 1 9 \"R:Hips_control.rotateX\" 2 7 \"R:Hips_control.rotateY\" 2 8 \"R:Hips_control.rotateZ\" 2 9 \"R:Spine1_control.translateX\" 1 10 \"R:Spine1_control.translateY\" 1 11 \"R:Spine1_control.translateZ\" 1 12 \"R:Spine1_control.rotateX\" 2 10 \"R:Spine1_control.rotateY\" 2 11 \"R:Spine1_control.rotateZ\" 2 12 \"R:Spine1_control.Orient\" 0 2 \"R:Spine2_control.translateX\" 1 13 \"R:Spine2_control.translateY\" 1 14 \"R:Spine2_control.translateZ\" 1 15 \"R:Spine2_control.rotateX\" 2 13 \"R:Spine2_control.rot"
 		+ "ateY\" 2 14 \"R:Spine2_control.rotateZ\" 2 15 \"R:Chest_control.translateX\" 1 16 \"R:Chest_control.translateY\" 1 17 \"R:Chest_control.translateZ\" 1 18 \"R:Chest_control.rotateX\" 2 16 \"R:Chest_control.rotateY\" 2 17 \"R:Chest_control.rotateZ\" 2 18 \"R:Chest1_control.translateX\" 1 19 \"R:Chest1_control.translateY\" 1 20 \"R:Chest1_control.translateZ\" 1 21 \"R:Chest1_control.rotateX\" 2 19 \"R:Chest1_control.rotateY\" 2 20 \"R:Chest1_control.rotateZ\" 2 21 \"R:Neck_control.translateX\" 1 22 \"R:Neck_control.translateY\" 1 23 \"R:Neck_control.translateZ\" 1 24 \"R:Neck_control.rotateX\" 2 22 \"R:Neck_control.rotateY\" 2 23 \"R:Neck_control.rotateZ\" 2 24 \"R:Neck_control.Orient\" 0 3 \"R:Head_control.translateX\" 1 25 \"R:Head_control.translateY\" 1 26 \"R:Head_control.translateZ\" 1 27 \"R:Head_control.rotateX\" 2 25 \"R:Head_control.rotateY\" 2 26 \"R:Head_control.rotateZ\" 2 27 \"R:Head_control.Orient\" 0 4 \"R:Hand_L_R_control.rotateX\" 2 28 \"R:Hand_L_R_control.rotateY\" 2 29 \"R:Hand_L_R_control.rotateZ\" 2 30 \"R:Hand_L_control.translateX\" 1 28 \"R:Hand_L_cont"
@@ -3974,20 +3979,30 @@ createNode reference -n "HumanMale_RIGRN";
 		2 "R:i__i__file1" "fileTextureName" " -type \"string\" \"C:/Users/Ira/Dropbox/TW/ShieldKnight/ShieldKnight.png\""
 		
 		2 "R:i__i__file1" "colorSpace" " -type \"string\" \"sRGB\""
-		2 "R:file1" "fileTextureName" " -type \"string\" \"C:/Users/Ira/Dropbox/TW/HumanMale//HumanMale.png\""
+		2 "R:file1" "fileTextureName" " -type \"string\" \"F:/Work/MEGAsync/TW/Art/Characters/HumanMale//HumanMale.png\""
 		
 		2 "R:file1" "colorSpace" " -type \"string\" \"sRGB\""
-		3 "R:HumanMale.linearValues[262]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateX" 
+		3 "R:HumanMale.linearValues[52]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[263]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateY" 
+		3 "R:HumanMale.linearValues[53]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[264]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateZ" 
+		3 "R:HumanMale.linearValues[54]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[370]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateX" 
+		3 "R:HumanMale.angularValues[52]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[371]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateY" 
+		3 "R:HumanMale.angularValues[53]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[372]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateZ" 
+		3 "R:HumanMale.angularValues[54]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[11]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.FKBlend" 
+		""
+		3 "R:HumanMale.unitlessValues[12]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.ParentOnHips" 
+		""
+		3 "R:HumanMale.unitlessValues[13]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.Stretch" 
+		""
+		3 "R:HumanMale.unitlessValues[14]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.StretchMin" 
+		""
+		3 "R:HumanMale.unitlessValues[15]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.StretchMax" 
 		""
 		3 "R:HumanMale.linearValues[10]" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateX" 
 		""
@@ -4003,35 +4018,420 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.unitlessValues[2]" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.Orient" 
 		""
-		3 "R:HumanMale.linearValues[94]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateX" 
+		3 "R:HumanMale.linearValues[106]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[95]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateY" 
+		3 "R:HumanMale.linearValues[107]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[96]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateZ" 
+		3 "R:HumanMale.linearValues[108]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[112]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateX" 
+		3 "R:HumanMale.angularValues[214]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[113]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateY" 
+		3 "R:HumanMale.angularValues[215]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[114]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateZ" 
+		3 "R:HumanMale.angularValues[216]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[73]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateX" 
+		3 "R:HumanMale.linearValues[283]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[74]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateY" 
+		3 "R:HumanMale.linearValues[284]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[75]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateZ" 
+		3 "R:HumanMale.linearValues[285]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[259]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateX" 
+		3 "R:HumanMale.angularValues[391]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[260]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateY" 
+		3 "R:HumanMale.angularValues[392]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[261]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateZ" 
+		3 "R:HumanMale.angularValues[393]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[367]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateX" 
+		3 "R:HumanMale.linearValues[301]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[368]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateY" 
+		3 "R:HumanMale.linearValues[302]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[369]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateZ" 
+		3 "R:HumanMale.linearValues[303]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[409]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[410]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[411]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[256]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[257]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[258]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[364]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[365]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[366]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[76]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[77]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[78]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[82]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[83]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[84]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[23]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.Orient" 
+		""
+		3 "R:HumanMale.linearValues[115]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[116]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[117]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[223]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[224]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[225]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[22]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[23]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[24]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[22]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[23]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[24]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[3]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.Orient" 
+		""
+		3 "R:HumanMale.linearValues[271]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[272]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[273]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[379]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[380]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[381]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.angularValues[28]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[29]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[30]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[5]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.Orient" 
+		""
+		3 "R:HumanMale.linearValues[133]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[134]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[135]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[241]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[242]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[243]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[28]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[29]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[30]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[6]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.ParentOnClavicle" 
+		""
+		3 "R:HumanMale.unitlessValues[7]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.ParentOnSpine" 
+		""
+		3 "R:HumanMale.linearValues[307]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[308]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[309]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[415]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[416]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[417]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[127]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[128]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[129]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[235]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[236]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[237]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[199]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[200]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[201]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[307]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[308]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[309]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[49]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateX" 
+		""
+		3 "R:HumanMale.linearValues[50]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateY" 
+		""
+		3 "R:HumanMale.linearValues[51]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[46]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[47]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[48]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateZ" 
+		""
+		3 "R:HumanMale.angularValues[37]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[38]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[39]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[268]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[269]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[270]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[376]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[377]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[378]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[1]" "|R:Global_grp|R:Global_TR.translateX" ""
+		
+		3 "R:HumanMale.linearValues[2]" "|R:Global_grp|R:Global_TR.translateY" ""
+		
+		3 "R:HumanMale.linearValues[3]" "|R:Global_grp|R:Global_TR.translateZ" ""
+		
+		3 "R:HumanMale.angularValues[1]" "|R:Global_grp|R:Global_TR.rotateX" ""
+		3 "R:HumanMale.angularValues[2]" "|R:Global_grp|R:Global_TR.rotateY" ""
+		3 "R:HumanMale.angularValues[3]" "|R:Global_grp|R:Global_TR.rotateZ" ""
+		3 "R:HumanMale.linearValues[274]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[275]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[276]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[382]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[383]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[384]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[118]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[119]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[120]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[226]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[227]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[228]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[40]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[41]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[42]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[9]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnClavicle" 
+		""
+		3 "R:HumanMale.unitlessValues[10]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnSpine" 
+		""
+		3 "R:HumanMale.linearValues[55]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateX" 
+		""
+		3 "R:HumanMale.linearValues[56]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateY" 
+		""
+		3 "R:HumanMale.linearValues[57]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateZ" 
+		""
+		3 "R:HumanMale.linearValues[331]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[332]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[333]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[439]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[440]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[441]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[112]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[113]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[114]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[220]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[221]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[222]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[322]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[323]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[324]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[430]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[431]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[432]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.angularValues[298]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[299]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[300]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[304]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[305]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[306]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[412]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[413]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[414]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[172]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[173]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[174]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[280]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[281]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[282]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[36]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.ParentSpace" 
+		""
+		3 "R:HumanMale.linearValues[4]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[5]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[6]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[4]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[5]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[6]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[183]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateX" 
+		""
+		3 "R:HumanMale.linearValues[182]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateY" 
+		""
+		3 "R:HumanMale.linearValues[181]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[291]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[290]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[289]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[35]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleX" 
+		""
+		3 "R:HumanMale.unitlessValues[34]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleY" 
+		""
+		3 "R:HumanMale.unitlessValues[33]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleZ" 
+		""
+		3 "R:HumanMale.linearValues[160]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[161]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[162]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[268]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[269]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[270]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[91]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[92]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[93]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[109]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[110]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[111]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[100]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[101]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[102]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[208]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[209]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[210]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[43]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[44]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[45]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[43]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[44]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[45]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[157]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[158]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[159]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[265]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[266]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[267]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[193]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[194]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[195]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[301]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[302]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[303]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[184]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.translateX" 
 		""
@@ -4055,17 +4455,151 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.unitlessValues[42]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.StretchMax" 
 		""
-		3 "R:HumanMale.linearValues[118]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateX" 
+		3 "R:HumanMale.linearValues[103]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[119]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateY" 
+		3 "R:HumanMale.linearValues[104]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[120]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateZ" 
+		3 "R:HumanMale.linearValues[105]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[226]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateX" 
+		3 "R:HumanMale.angularValues[211]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[227]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateY" 
+		3 "R:HumanMale.angularValues[212]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[228]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateZ" 
+		3 "R:HumanMale.angularValues[213]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[340]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[341]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[342]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[448]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[449]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[450]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[253]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[254]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[255]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[361]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[362]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[363]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[319]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[320]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[321]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[427]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[428]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[429]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[289]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[290]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[291]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[397]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[398]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[399]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[292]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[293]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[294]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[400]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[401]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[402]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[280]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[281]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[282]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[388]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[389]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[390]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[19]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[20]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[21]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[19]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[20]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[21]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateZ" 
+		""
+		3 "R:HumanMale.angularValues[91]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[92]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[93]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.angularValues[97]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[98]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[99]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[58]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateX" 
+		""
+		3 "R:HumanMale.linearValues[59]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateY" 
+		""
+		3 "R:HumanMale.linearValues[60]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[55]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[56]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[57]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[79]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[80]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[81]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[88]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[89]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[90]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[24]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.Orient" 
+		""
+		3 "R:HumanMale.linearValues[13]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[14]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[15]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[13]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[14]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[15]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[175]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.translateX" 
 		""
@@ -4081,77 +4615,81 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.unitlessValues[37]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.ParentSpace" 
 		""
-		3 "R:HumanMale.linearValues[304]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateX" 
+		3 "R:HumanMale.linearValues[136]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateX" 
 		""
-		3 "R:HumanMale.linearValues[305]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateY" 
+		3 "R:HumanMale.linearValues[137]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateY" 
 		""
-		3 "R:HumanMale.linearValues[306]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateZ" 
+		3 "R:HumanMale.linearValues[138]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[412]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateX" 
+		3 "R:HumanMale.angularValues[244]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[413]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateY" 
+		3 "R:HumanMale.angularValues[245]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[414]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateZ" 
+		3 "R:HumanMale.angularValues[246]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[58]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateX" 
+		3 "R:HumanMale.angularValues[73]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[59]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateY" 
+		3 "R:HumanMale.angularValues[74]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[60]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateZ" 
+		3 "R:HumanMale.angularValues[75]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[100]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateX" 
+		3 "R:HumanMale.linearValues[190]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateX" 
 		""
-		3 "R:HumanMale.linearValues[101]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateY" 
+		3 "R:HumanMale.linearValues[191]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateY" 
 		""
-		3 "R:HumanMale.linearValues[102]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateZ" 
+		3 "R:HumanMale.linearValues[192]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[208]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateX" 
+		3 "R:HumanMale.angularValues[295]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[209]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateY" 
+		3 "R:HumanMale.angularValues[296]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[210]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateZ" 
+		3 "R:HumanMale.angularValues[297]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[322]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateX" 
+		3 "R:HumanMale.angularValues[40]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[323]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateY" 
+		3 "R:HumanMale.angularValues[41]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[324]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateZ" 
+		3 "R:HumanMale.angularValues[42]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[430]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateX" 
+		3 "R:HumanMale.unitlessValues[8]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.Orient" 
 		""
-		3 "R:HumanMale.angularValues[431]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateY" 
+		3 "R:HumanMale.linearValues[310]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[432]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateZ" 
+		3 "R:HumanMale.linearValues[311]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[307]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateX" 
+		3 "R:HumanMale.linearValues[312]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[308]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateY" 
+		3 "R:HumanMale.angularValues[418]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[309]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateZ" 
+		3 "R:HumanMale.angularValues[419]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[415]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateX" 
+		3 "R:HumanMale.angularValues[420]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[416]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateY" 
+		3 "R:HumanMale.linearValues[265]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[417]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateZ" 
+		3 "R:HumanMale.linearValues[266]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[298]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateX" 
+		3 "R:HumanMale.linearValues[267]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[299]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateY" 
+		3 "R:HumanMale.angularValues[373]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[300]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateZ" 
+		3 "R:HumanMale.angularValues[374]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[139]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateX" 
+		3 "R:HumanMale.angularValues[375]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[140]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateY" 
+		3 "R:HumanMale.linearValues[82]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[141]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateZ" 
+		3 "R:HumanMale.linearValues[83]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[247]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateX" 
+		3 "R:HumanMale.linearValues[84]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[248]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateY" 
+		3 "R:HumanMale.angularValues[94]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[249]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateZ" 
+		3 "R:HumanMale.angularValues[95]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[96]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[25]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.Orient" 
 		""
 		3 "R:HumanMale.linearValues[31]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.translateX" 
 		""
@@ -4165,73 +4703,23 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.angularValues[33]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[55]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateX" 
+		3 "R:HumanMale.angularValues[49]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[56]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateY" 
+		3 "R:HumanMale.angularValues[50]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[57]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateZ" 
+		3 "R:HumanMale.angularValues[51]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[25]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateX" 
+		3 "R:HumanMale.linearValues[259]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[26]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateY" 
+		3 "R:HumanMale.linearValues[260]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[27]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateZ" 
+		3 "R:HumanMale.linearValues[261]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[25]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateX" 
+		3 "R:HumanMale.angularValues[367]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[26]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateY" 
+		3 "R:HumanMale.angularValues[368]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[27]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[4]" "|R:Global_grp|R:Head_control_group|R:Head_control.Orient" 
-		""
-		3 "R:HumanMale.angularValues[103]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[104]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[105]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[16]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[17]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[18]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[16]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[17]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[18]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[19]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[20]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[21]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[19]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[20]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[21]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[97]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[98]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[99]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[115]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[116]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[117]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.angularValues[37]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[38]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[39]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateZ" 
+		3 "R:HumanMale.angularValues[369]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[169]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.translateX" 
 		""
@@ -4245,24 +4733,29 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.angularValues[279]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[1]" "|R:Global_grp|R:Global_TR.translateX" ""
-		
-		3 "R:HumanMale.linearValues[2]" "|R:Global_grp|R:Global_TR.translateY" ""
-		
-		3 "R:HumanMale.linearValues[3]" "|R:Global_grp|R:Global_TR.translateZ" ""
-		
-		3 "R:HumanMale.angularValues[1]" "|R:Global_grp|R:Global_TR.rotateX" ""
-		3 "R:HumanMale.angularValues[2]" "|R:Global_grp|R:Global_TR.rotateY" ""
-		3 "R:HumanMale.angularValues[3]" "|R:Global_grp|R:Global_TR.rotateZ" ""
-		3 "R:HumanMale.linearValues[40]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateX" 
+		3 "R:HumanMale.linearValues[205]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[41]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateY" 
+		3 "R:HumanMale.linearValues[206]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[42]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateZ" 
+		3 "R:HumanMale.linearValues[207]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateZ" 
 		""
-		3 "R:HumanMale.unitlessValues[9]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnClavicle" 
+		3 "R:HumanMale.angularValues[313]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateX" 
 		""
-		3 "R:HumanMale.unitlessValues[10]" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnSpine" 
+		3 "R:HumanMale.angularValues[314]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[315]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[325]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[326]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[327]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[433]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[434]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[435]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[163]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.translateX" 
 		""
@@ -4276,45 +4769,71 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.angularValues[273]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[160]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateX" 
+		3 "R:HumanMale.linearValues[88]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[161]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateY" 
+		3 "R:HumanMale.linearValues[89]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[162]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateZ" 
+		3 "R:HumanMale.linearValues[90]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[268]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateX" 
+		3 "R:HumanMale.angularValues[106]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[269]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateY" 
+		3 "R:HumanMale.angularValues[107]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[270]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateZ" 
+		3 "R:HumanMale.angularValues[108]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[73]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateX" 
+		3 "R:HumanMale.linearValues[316]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[74]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateY" 
+		3 "R:HumanMale.linearValues[317]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[75]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateZ" 
+		3 "R:HumanMale.linearValues[318]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[76]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateX" 
+		3 "R:HumanMale.angularValues[424]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[77]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateY" 
+		3 "R:HumanMale.angularValues[425]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[78]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateZ" 
+		3 "R:HumanMale.angularValues[426]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.unitlessValues[22]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.Orient" 
+		3 "R:HumanMale.linearValues[46]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateX" 
 		""
-		3 "R:HumanMale.linearValues[22]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateX" 
+		3 "R:HumanMale.linearValues[47]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateY" 
 		""
-		3 "R:HumanMale.linearValues[23]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateY" 
+		3 "R:HumanMale.linearValues[48]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[24]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateZ" 
+		3 "R:HumanMale.linearValues[295]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[22]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateX" 
+		3 "R:HumanMale.linearValues[296]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[23]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateY" 
+		3 "R:HumanMale.linearValues[297]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[24]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateZ" 
+		3 "R:HumanMale.angularValues[403]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateX" 
 		""
-		3 "R:HumanMale.unitlessValues[3]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.Orient" 
+		3 "R:HumanMale.angularValues[404]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[405]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[277]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[278]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[279]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[385]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[386]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[387]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[130]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[131]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[132]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[238]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[239]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[240]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[124]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.translateX" 
 		""
@@ -4334,167 +4853,61 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.unitlessValues[29]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.scaleZ" 
 		""
-		3 "R:HumanMale.linearValues[91]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[92]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[93]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[109]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[110]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[111]" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[190]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateX" 
-		""
-		3 "R:HumanMale.linearValues[191]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateY" 
-		""
-		3 "R:HumanMale.linearValues[192]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[295]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[296]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[297]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[295]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[296]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[297]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[403]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[404]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[405]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[183]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateX" 
-		""
-		3 "R:HumanMale.linearValues[182]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateY" 
-		""
-		3 "R:HumanMale.linearValues[181]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[291]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[290]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[289]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[35]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleX" 
-		""
-		3 "R:HumanMale.unitlessValues[34]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleY" 
-		""
-		3 "R:HumanMale.unitlessValues[33]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleZ" 
-		""
-		3 "R:HumanMale.linearValues[46]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateX" 
-		""
-		3 "R:HumanMale.linearValues[47]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateY" 
-		""
-		3 "R:HumanMale.linearValues[48]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateZ" 
-		""
-		3 "R:HumanMale.linearValues[265]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[266]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[267]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[373]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[374]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[375]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[292]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[293]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[294]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[400]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[401]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[402]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[286]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[287]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[288]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[394]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[395]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[396]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[58]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateX" 
-		""
-		3 "R:HumanMale.linearValues[59]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateY" 
-		""
-		3 "R:HumanMale.linearValues[60]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[55]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[56]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[57]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateZ" 
-		""
 		3 "R:HumanMale.angularValues[85]" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.rotateX" 
 		""
 		3 "R:HumanMale.angularValues[86]" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.rotateY" 
 		""
 		3 "R:HumanMale.angularValues[87]" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[34]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateX" 
+		3 "R:HumanMale.linearValues[337]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[35]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateY" 
+		3 "R:HumanMale.linearValues[338]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[36]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateZ" 
+		3 "R:HumanMale.linearValues[339]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[310]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateX" 
+		3 "R:HumanMale.angularValues[445]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[311]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateY" 
+		3 "R:HumanMale.angularValues[446]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[312]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateZ" 
+		3 "R:HumanMale.angularValues[447]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[418]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateX" 
+		3 "R:HumanMale.linearValues[73]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[419]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateY" 
+		3 "R:HumanMale.linearValues[74]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[420]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateZ" 
+		3 "R:HumanMale.linearValues[75]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[40]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateX" 
+		3 "R:HumanMale.angularValues[76]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[41]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateY" 
+		3 "R:HumanMale.angularValues[77]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[42]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateZ" 
+		3 "R:HumanMale.angularValues[78]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.unitlessValues[8]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.Orient" 
+		3 "R:HumanMale.unitlessValues[22]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.Orient" 
 		""
-		3 "R:HumanMale.linearValues[52]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateX" 
+		3 "R:HumanMale.linearValues[328]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[53]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateY" 
+		3 "R:HumanMale.linearValues[329]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[54]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateZ" 
+		3 "R:HumanMale.linearValues[330]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[52]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateX" 
+		3 "R:HumanMale.angularValues[436]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[53]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateY" 
+		3 "R:HumanMale.angularValues[437]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[54]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateZ" 
+		3 "R:HumanMale.angularValues[438]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.unitlessValues[11]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.FKBlend" 
+		3 "R:HumanMale.linearValues[298]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateX" 
 		""
-		3 "R:HumanMale.unitlessValues[12]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.ParentOnHips" 
+		3 "R:HumanMale.linearValues[299]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateY" 
 		""
-		3 "R:HumanMale.unitlessValues[13]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.Stretch" 
+		3 "R:HumanMale.linearValues[300]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateZ" 
 		""
-		3 "R:HumanMale.unitlessValues[14]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.StretchMin" 
+		3 "R:HumanMale.angularValues[406]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateX" 
 		""
-		3 "R:HumanMale.unitlessValues[15]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.StretchMax" 
+		3 "R:HumanMale.angularValues[407]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[408]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[109]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.translateX" 
 		""
@@ -4508,6 +4921,44 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.angularValues[219]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.rotateZ" 
 		""
+		3 "R:HumanMale.angularValues[58]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[59]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[60]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[202]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateX" 
+		""
+		3 "R:HumanMale.linearValues[203]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateY" 
+		""
+		3 "R:HumanMale.linearValues[204]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[310]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[311]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[312]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[34]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateX" 
+		""
+		3 "R:HumanMale.linearValues[35]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateY" 
+		""
+		3 "R:HumanMale.linearValues[36]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateZ" 
+		""
+		3 "R:HumanMale.linearValues[25]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[26]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[27]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[25]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[26]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[27]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateZ" 
+		""
+		3 "R:HumanMale.unitlessValues[4]" "|R:Global_grp|R:Head_control_group|R:Head_control.Orient" 
+		""
 		3 "R:HumanMale.linearValues[313]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.translateX" 
 		""
 		3 "R:HumanMale.linearValues[314]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.translateY" 
@@ -4520,43 +4971,115 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.angularValues[423]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[172]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateX" 
+		3 "R:HumanMale.linearValues[70]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[173]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateY" 
+		3 "R:HumanMale.linearValues[71]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[174]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateZ" 
+		3 "R:HumanMale.linearValues[72]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[280]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateX" 
+		3 "R:HumanMale.angularValues[70]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[281]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateY" 
+		3 "R:HumanMale.angularValues[71]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[282]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateZ" 
+		3 "R:HumanMale.angularValues[72]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.unitlessValues[36]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.ParentSpace" 
+		3 "R:HumanMale.unitlessValues[21]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.Orient" 
 		""
-		3 "R:HumanMale.linearValues[274]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateX" 
+		3 "R:HumanMale.linearValues[94]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[275]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateY" 
+		3 "R:HumanMale.linearValues[95]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[276]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateZ" 
+		3 "R:HumanMale.linearValues[96]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[382]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateX" 
+		3 "R:HumanMale.angularValues[112]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[383]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateY" 
+		3 "R:HumanMale.angularValues[113]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[384]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateZ" 
+		3 "R:HumanMale.angularValues[114]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[283]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateX" 
+		3 "R:HumanMale.angularValues[79]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[284]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateY" 
+		3 "R:HumanMale.angularValues[80]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[285]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateZ" 
+		3 "R:HumanMale.angularValues[81]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[391]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateX" 
+		3 "R:HumanMale.linearValues[286]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[392]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateY" 
+		3 "R:HumanMale.linearValues[287]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[393]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateZ" 
+		3 "R:HumanMale.linearValues[288]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[394]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[395]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[396]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[196]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[197]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[198]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[304]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[305]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[306]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[121]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[122]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[123]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[229]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[230]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[231]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[187]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateX" 
+		""
+		3 "R:HumanMale.linearValues[188]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateY" 
+		""
+		3 "R:HumanMale.linearValues[189]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateZ" 
+		""
+		3 "R:HumanMale.linearValues[7]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[8]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[9]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[7]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[8]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[9]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[166]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[167]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[168]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[274]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[275]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[276]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateZ" 
+		""
+		3 "R:HumanMale.linearValues[16]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateX" 
+		""
+		3 "R:HumanMale.linearValues[17]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateY" 
+		""
+		3 "R:HumanMale.linearValues[18]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateZ" 
+		""
+		3 "R:HumanMale.angularValues[16]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateX" 
+		""
+		3 "R:HumanMale.angularValues[17]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateY" 
+		""
+		3 "R:HumanMale.angularValues[18]" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[37]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.translateX" 
 		""
@@ -4570,47 +5093,43 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.angularValues[36]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.rotateZ" 
 		""
-		3 "R:HumanMale.linearValues[4]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.translateX" 
+		3 "R:HumanMale.linearValues[85]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateX" 
 		""
-		3 "R:HumanMale.linearValues[5]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.translateY" 
+		3 "R:HumanMale.linearValues[86]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[6]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.translateZ" 
+		3 "R:HumanMale.linearValues[87]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateZ" 
 		""
-		3 "R:HumanMale.angularValues[4]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.rotateX" 
+		3 "R:HumanMale.angularValues[100]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateX" 
 		""
-		3 "R:HumanMale.angularValues[5]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.rotateY" 
+		3 "R:HumanMale.angularValues[101]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[6]" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.rotateZ" 
+		3 "R:HumanMale.angularValues[102]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[79]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateX" 
+		3 "R:HumanMale.unitlessValues[26]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.Orient" 
 		""
-		3 "R:HumanMale.angularValues[80]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateY" 
+		3 "R:HumanMale.linearValues[139]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[81]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateZ" 
+		3 "R:HumanMale.linearValues[140]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[289]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateX" 
+		3 "R:HumanMale.linearValues[141]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[290]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateY" 
+		3 "R:HumanMale.angularValues[247]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[291]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateZ" 
+		3 "R:HumanMale.angularValues[248]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[397]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateX" 
+		3 "R:HumanMale.angularValues[249]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[398]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateY" 
+		3 "R:HumanMale.linearValues[97]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[399]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateZ" 
+		3 "R:HumanMale.linearValues[98]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateY" 
 		""
-		3 "R:HumanMale.linearValues[325]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateX" 
+		3 "R:HumanMale.linearValues[99]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[326]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateY" 
+		3 "R:HumanMale.angularValues[115]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[327]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateZ" 
+		3 "R:HumanMale.angularValues[116]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateY" 
 		""
-		3 "R:HumanMale.angularValues[433]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[434]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[435]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateZ" 
+		3 "R:HumanMale.angularValues[117]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[180]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.translateX" 
 		""
@@ -4630,277 +5149,23 @@ createNode reference -n "HumanMale_RIGRN";
 		""
 		3 "R:HumanMale.unitlessValues[30]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.scaleZ" 
 		""
-		3 "R:HumanMale.linearValues[115]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateX" 
+		3 "R:HumanMale.angularValues[103]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[116]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateY" 
+		3 "R:HumanMale.angularValues[104]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[117]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateZ" 
+		3 "R:HumanMale.angularValues[105]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateZ" 
 		""
-		3 "R:HumanMale.angularValues[223]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateX" 
+		3 "R:HumanMale.linearValues[262]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateX" 
 		""
-		3 "R:HumanMale.angularValues[224]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateY" 
+		3 "R:HumanMale.linearValues[263]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateY" 
 		""
-		3 "R:HumanMale.angularValues[225]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateZ" 
+		3 "R:HumanMale.linearValues[264]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateZ" 
 		""
-		3 "R:HumanMale.linearValues[196]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateX" 
+		3 "R:HumanMale.angularValues[370]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateX" 
 		""
-		3 "R:HumanMale.linearValues[197]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateY" 
+		3 "R:HumanMale.angularValues[371]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateY" 
 		""
-		3 "R:HumanMale.linearValues[198]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[304]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[305]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[306]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[280]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[281]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[282]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[388]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[389]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[390]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[277]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[278]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[279]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[385]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[386]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[387]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.angularValues[28]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[29]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[30]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[5]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.Orient" 
-		""
-		3 "R:HumanMale.linearValues[82]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[83]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[84]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[94]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[95]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[96]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[25]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.Orient" 
-		""
-		3 "R:HumanMale.angularValues[91]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[92]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[93]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[136]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateX" 
-		""
-		3 "R:HumanMale.linearValues[137]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateY" 
-		""
-		3 "R:HumanMale.linearValues[138]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[244]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[245]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[246]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[271]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[272]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[273]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[379]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[380]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[381]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[328]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[329]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[330]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[436]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[437]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[438]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[133]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[134]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[135]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[241]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[242]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[243]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[202]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateX" 
-		""
-		3 "R:HumanMale.linearValues[203]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateY" 
-		""
-		3 "R:HumanMale.linearValues[204]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[310]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[311]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[312]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[340]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[341]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[342]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[448]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[449]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[450]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[103]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[104]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[105]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[211]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[212]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[213]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[199]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[200]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[201]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[307]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[308]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[309]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[7]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[8]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[9]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[7]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[8]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[9]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[130]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[131]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[132]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[238]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[239]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[240]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[121]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[122]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[123]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[229]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[230]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[231]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[13]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[14]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[15]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[13]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[14]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[15]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[157]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[158]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[159]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[265]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[266]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[267]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[337]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[338]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[339]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[445]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[446]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[447]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[85]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[86]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[87]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[100]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[101]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[102]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[26]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.Orient" 
-		""
-		3 "R:HumanMale.linearValues[76]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[77]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[78]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[82]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[83]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[84]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[23]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.Orient" 
+		3 "R:HumanMale.angularValues[372]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateZ" 
 		""
 		3 "R:HumanMale.linearValues[334]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.translateX" 
 		""
@@ -4913,266 +5178,6 @@ createNode reference -n "HumanMale_RIGRN";
 		3 "R:HumanMale.angularValues[443]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.rotateY" 
 		""
 		3 "R:HumanMale.angularValues[444]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[49]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateX" 
-		""
-		3 "R:HumanMale.linearValues[50]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateY" 
-		""
-		3 "R:HumanMale.linearValues[51]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[46]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[47]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[48]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[112]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[113]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[114]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[220]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[221]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[222]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[106]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[107]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[108]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[214]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[215]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[216]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[316]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[317]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[318]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[424]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[425]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[426]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[166]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[167]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[168]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[274]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[275]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[276]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[127]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[128]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[129]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[235]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[236]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[237]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[301]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[302]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[303]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[409]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[410]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[411]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[79]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[80]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[81]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[88]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[89]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[90]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[24]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.Orient" 
-		""
-		3 "R:HumanMale.linearValues[193]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[194]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[195]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[301]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[302]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[303]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.angularValues[49]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[50]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[51]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[88]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[89]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[90]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[106]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[107]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[108]" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[298]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[299]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[300]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[406]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[407]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[408]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.angularValues[97]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[98]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[99]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[256]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[257]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[258]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[364]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[365]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[366]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[70]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[71]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[72]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[70]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[71]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[72]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[21]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.Orient" 
-		""
-		3 "R:HumanMale.linearValues[331]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[332]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[333]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[439]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[440]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[441]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[205]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[206]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[207]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[313]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[314]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[315]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[43]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[44]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[45]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[43]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[44]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[45]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[268]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[269]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[270]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[376]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[377]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[378]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[28]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[29]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[30]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateZ" 
-		""
-		3 "R:HumanMale.unitlessValues[6]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.ParentOnClavicle" 
-		""
-		3 "R:HumanMale.unitlessValues[7]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.ParentOnSpine" 
-		""
-		3 "R:HumanMale.linearValues[319]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[320]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[321]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[427]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[428]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[429]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateZ" 
-		""
-		3 "R:HumanMale.linearValues[187]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateX" 
-		""
-		3 "R:HumanMale.linearValues[188]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateY" 
-		""
-		3 "R:HumanMale.linearValues[189]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateZ" 
-		""
-		3 "R:HumanMale.linearValues[253]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateX" 
-		""
-		3 "R:HumanMale.linearValues[254]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateY" 
-		""
-		3 "R:HumanMale.linearValues[255]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateZ" 
-		""
-		3 "R:HumanMale.angularValues[361]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateX" 
-		""
-		3 "R:HumanMale.angularValues[362]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateY" 
-		""
-		3 "R:HumanMale.angularValues[363]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateZ" 
 		""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[1]" "|R:Global_grp|R:Global_TR.translateX" 
 		"HumanMale_RIGRN.placeHolderList[1]" "HumanMale_RIGRN.placeHolderList[2]" "R:Global_TR.tx"
@@ -5216,3397 +5221,3417 @@ createNode reference -n "HumanMale_RIGRN";
 		"HumanMale_RIGRN.placeHolderList[26]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_Overall_control_group|R:Hips_Overall_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[27]" ""
-		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[7]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[28]" "HumanMale_RIGRN.placeHolderList[29]" "R:Hips_control.tx"
-		
-		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[8]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[30]" "HumanMale_RIGRN.placeHolderList[31]" "R:Hips_control.ty"
-		
-		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[9]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[32]" "HumanMale_RIGRN.placeHolderList[33]" "R:Hips_control.tz"
-		
-		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[7]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[34]" "HumanMale_RIGRN.placeHolderList[35]" "R:Hips_control.rx"
-		
-		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[8]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[36]" "HumanMale_RIGRN.placeHolderList[37]" "R:Hips_control.ry"
-		
-		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[9]" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[38]" "HumanMale_RIGRN.placeHolderList[39]" "R:Hips_control.rz"
-		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.instObjGroups" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateX" 
+		"HumanMale_RIGRN.placeHolderList[28]" ""
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateX" 
+		"HumanMale_RIGRN.placeHolderList[29]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateY" 
+		"HumanMale_RIGRN.placeHolderList[30]" ""
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateY" 
+		"HumanMale_RIGRN.placeHolderList[31]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateZ" 
+		"HumanMale_RIGRN.placeHolderList[32]" ""
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.translateZ" 
+		"HumanMale_RIGRN.placeHolderList[33]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateX" 
+		"HumanMale_RIGRN.placeHolderList[34]" ""
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateX" 
+		"HumanMale_RIGRN.placeHolderList[35]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateY" 
+		"HumanMale_RIGRN.placeHolderList[36]" ""
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateY" 
+		"HumanMale_RIGRN.placeHolderList[37]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateZ" 
+		"HumanMale_RIGRN.placeHolderList[38]" ""
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateZ" 
+		"HumanMale_RIGRN.placeHolderList[39]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.rotateOrder" 
 		"HumanMale_RIGRN.placeHolderList[40]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[41]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hips_control_group|R:Hips_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[42]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[43]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[44]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[45]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[46]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[47]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateX" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[48]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[49]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[50]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[51]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[52]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[53]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.Orient" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[54]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.Orient" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.Orient" 
 		"HumanMale_RIGRN.placeHolderList[55]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateOrder" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.Orient" 
 		"HumanMale_RIGRN.placeHolderList[56]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.instObjGroups" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.rotateOrder" 
 		"HumanMale_RIGRN.placeHolderList[57]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[58]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine1_control_group|R:Spine1_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[59]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[13]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[59]" "HumanMale_RIGRN.placeHolderList[60]" "R:Spine2_control.tx"
+		"HumanMale_RIGRN.placeHolderList[60]" "HumanMale_RIGRN.placeHolderList[61]" "R:Spine2_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[14]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[61]" "HumanMale_RIGRN.placeHolderList[62]" "R:Spine2_control.ty"
+		"HumanMale_RIGRN.placeHolderList[62]" "HumanMale_RIGRN.placeHolderList[63]" "R:Spine2_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[15]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[63]" "HumanMale_RIGRN.placeHolderList[64]" "R:Spine2_control.tz"
+		"HumanMale_RIGRN.placeHolderList[64]" "HumanMale_RIGRN.placeHolderList[65]" "R:Spine2_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[13]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[65]" "HumanMale_RIGRN.placeHolderList[66]" "R:Spine2_control.rx"
+		"HumanMale_RIGRN.placeHolderList[66]" "HumanMale_RIGRN.placeHolderList[67]" "R:Spine2_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[14]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[67]" "HumanMale_RIGRN.placeHolderList[68]" "R:Spine2_control.ry"
+		"HumanMale_RIGRN.placeHolderList[68]" "HumanMale_RIGRN.placeHolderList[69]" "R:Spine2_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[15]" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[69]" "HumanMale_RIGRN.placeHolderList[70]" "R:Spine2_control.rz"
+		"HumanMale_RIGRN.placeHolderList[70]" "HumanMale_RIGRN.placeHolderList[71]" "R:Spine2_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[71]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[72]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Spine2_control_group|R:Spine2_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[73]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[74]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[75]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[76]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[77]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[78]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateX" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[79]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[80]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[81]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[82]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[83]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[84]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateOrder" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[85]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.instObjGroups" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.rotateOrder" 
 		"HumanMale_RIGRN.placeHolderList[86]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[87]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest_control_group|R:Chest_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[88]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[19]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[88]" "HumanMale_RIGRN.placeHolderList[89]" "R:Chest1_control.tx"
+		"HumanMale_RIGRN.placeHolderList[89]" "HumanMale_RIGRN.placeHolderList[90]" "R:Chest1_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[20]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[90]" "HumanMale_RIGRN.placeHolderList[91]" "R:Chest1_control.ty"
+		"HumanMale_RIGRN.placeHolderList[91]" "HumanMale_RIGRN.placeHolderList[92]" "R:Chest1_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[21]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[92]" "HumanMale_RIGRN.placeHolderList[93]" "R:Chest1_control.tz"
+		"HumanMale_RIGRN.placeHolderList[93]" "HumanMale_RIGRN.placeHolderList[94]" "R:Chest1_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[19]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[94]" "HumanMale_RIGRN.placeHolderList[95]" "R:Chest1_control.rx"
+		"HumanMale_RIGRN.placeHolderList[95]" "HumanMale_RIGRN.placeHolderList[96]" "R:Chest1_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[20]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[96]" "HumanMale_RIGRN.placeHolderList[97]" "R:Chest1_control.ry"
+		"HumanMale_RIGRN.placeHolderList[97]" "HumanMale_RIGRN.placeHolderList[98]" "R:Chest1_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[21]" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[98]" "HumanMale_RIGRN.placeHolderList[99]" "R:Chest1_control.rz"
+		"HumanMale_RIGRN.placeHolderList[99]" "HumanMale_RIGRN.placeHolderList[100]" "R:Chest1_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[100]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[101]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Chest1_control_group|R:Chest1_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[102]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[22]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[102]" "HumanMale_RIGRN.placeHolderList[103]" "R:Neck_control.tx"
+		"HumanMale_RIGRN.placeHolderList[103]" "HumanMale_RIGRN.placeHolderList[104]" "R:Neck_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[23]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[104]" "HumanMale_RIGRN.placeHolderList[105]" "R:Neck_control.ty"
+		"HumanMale_RIGRN.placeHolderList[105]" "HumanMale_RIGRN.placeHolderList[106]" "R:Neck_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[24]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[106]" "HumanMale_RIGRN.placeHolderList[107]" "R:Neck_control.tz"
+		"HumanMale_RIGRN.placeHolderList[107]" "HumanMale_RIGRN.placeHolderList[108]" "R:Neck_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[22]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[108]" "HumanMale_RIGRN.placeHolderList[109]" "R:Neck_control.rx"
+		"HumanMale_RIGRN.placeHolderList[109]" "HumanMale_RIGRN.placeHolderList[110]" "R:Neck_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[23]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[110]" "HumanMale_RIGRN.placeHolderList[111]" "R:Neck_control.ry"
+		"HumanMale_RIGRN.placeHolderList[111]" "HumanMale_RIGRN.placeHolderList[112]" "R:Neck_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[24]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[112]" "HumanMale_RIGRN.placeHolderList[113]" "R:Neck_control.rz"
+		"HumanMale_RIGRN.placeHolderList[113]" "HumanMale_RIGRN.placeHolderList[114]" "R:Neck_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[3]" "|R:Global_grp|R:Neck_control_group|R:Neck_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[114]" "HumanMale_RIGRN.placeHolderList[115]" "R:Neck_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[115]" "HumanMale_RIGRN.placeHolderList[116]" "R:Neck_control.Orient"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Neck_control_group|R:Neck_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[116]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Neck_control_group|R:Neck_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[117]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Neck_control_group|R:Neck_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[118]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Neck_control_group|R:Neck_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[119]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[25]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[119]" "HumanMale_RIGRN.placeHolderList[120]" "R:Head_control.tx"
+		"HumanMale_RIGRN.placeHolderList[120]" "HumanMale_RIGRN.placeHolderList[121]" "R:Head_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[26]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[121]" "HumanMale_RIGRN.placeHolderList[122]" "R:Head_control.ty"
+		"HumanMale_RIGRN.placeHolderList[122]" "HumanMale_RIGRN.placeHolderList[123]" "R:Head_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[27]" "|R:Global_grp|R:Head_control_group|R:Head_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[123]" "HumanMale_RIGRN.placeHolderList[124]" "R:Head_control.tz"
+		"HumanMale_RIGRN.placeHolderList[124]" "HumanMale_RIGRN.placeHolderList[125]" "R:Head_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[25]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[125]" "HumanMale_RIGRN.placeHolderList[126]" "R:Head_control.rx"
+		"HumanMale_RIGRN.placeHolderList[126]" "HumanMale_RIGRN.placeHolderList[127]" "R:Head_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[26]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[127]" "HumanMale_RIGRN.placeHolderList[128]" "R:Head_control.ry"
+		"HumanMale_RIGRN.placeHolderList[128]" "HumanMale_RIGRN.placeHolderList[129]" "R:Head_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[27]" "|R:Global_grp|R:Head_control_group|R:Head_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[129]" "HumanMale_RIGRN.placeHolderList[130]" "R:Head_control.rz"
+		"HumanMale_RIGRN.placeHolderList[130]" "HumanMale_RIGRN.placeHolderList[131]" "R:Head_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[4]" "|R:Global_grp|R:Head_control_group|R:Head_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[131]" "HumanMale_RIGRN.placeHolderList[132]" "R:Head_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[132]" "HumanMale_RIGRN.placeHolderList[133]" "R:Head_control.Orient"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Head_control_group|R:Head_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[133]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Head_control_group|R:Head_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[134]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Head_control_group|R:Head_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[135]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Head_control_group|R:Head_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[136]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[28]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[136]" "HumanMale_RIGRN.placeHolderList[137]" "R:Hand_L_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[137]" "HumanMale_RIGRN.placeHolderList[138]" "R:Hand_L_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[29]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[138]" "HumanMale_RIGRN.placeHolderList[139]" "R:Hand_L_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[139]" "HumanMale_RIGRN.placeHolderList[140]" "R:Hand_L_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[30]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[140]" "HumanMale_RIGRN.placeHolderList[141]" "R:Hand_L_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[141]" "HumanMale_RIGRN.placeHolderList[142]" "R:Hand_L_R_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[5]" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[142]" "HumanMale_RIGRN.placeHolderList[143]" "R:Hand_L_R_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[143]" "HumanMale_RIGRN.placeHolderList[144]" "R:Hand_L_R_control.Orient"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[144]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[145]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[146]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_R_control_group|R:Hand_L_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[147]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[28]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[147]" "HumanMale_RIGRN.placeHolderList[148]" "R:Hand_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[148]" "HumanMale_RIGRN.placeHolderList[149]" "R:Hand_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[29]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[149]" "HumanMale_RIGRN.placeHolderList[150]" "R:Hand_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[150]" "HumanMale_RIGRN.placeHolderList[151]" "R:Hand_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[30]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[151]" "HumanMale_RIGRN.placeHolderList[152]" "R:Hand_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[152]" "HumanMale_RIGRN.placeHolderList[153]" "R:Hand_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[6]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.ParentOnClavicle" 
-		"HumanMale_RIGRN.placeHolderList[153]" "HumanMale_RIGRN.placeHolderList[154]" "R:Hand_L_control.ParentOnClavicle"
+		"HumanMale_RIGRN.placeHolderList[154]" "HumanMale_RIGRN.placeHolderList[155]" "R:Hand_L_control.ParentOnClavicle"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[7]" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.ParentOnSpine" 
-		"HumanMale_RIGRN.placeHolderList[155]" "HumanMale_RIGRN.placeHolderList[156]" "R:Hand_L_control.ParentOnSpine"
+		"HumanMale_RIGRN.placeHolderList[156]" "HumanMale_RIGRN.placeHolderList[157]" "R:Hand_L_control.ParentOnSpine"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[157]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[158]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[159]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_control_group|R:Hand_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[160]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[31]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[160]" "HumanMale_RIGRN.placeHolderList[161]" "R:Clavicle_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[161]" "HumanMale_RIGRN.placeHolderList[162]" "R:Clavicle_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[32]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[162]" "HumanMale_RIGRN.placeHolderList[163]" "R:Clavicle_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[163]" "HumanMale_RIGRN.placeHolderList[164]" "R:Clavicle_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[33]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[164]" "HumanMale_RIGRN.placeHolderList[165]" "R:Clavicle_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[165]" "HumanMale_RIGRN.placeHolderList[166]" "R:Clavicle_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[31]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[166]" "HumanMale_RIGRN.placeHolderList[167]" "R:Clavicle_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[167]" "HumanMale_RIGRN.placeHolderList[168]" "R:Clavicle_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[32]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[168]" "HumanMale_RIGRN.placeHolderList[169]" "R:Clavicle_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[169]" "HumanMale_RIGRN.placeHolderList[170]" "R:Clavicle_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[33]" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[170]" "HumanMale_RIGRN.placeHolderList[171]" "R:Clavicle_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[171]" "HumanMale_RIGRN.placeHolderList[172]" "R:Clavicle_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[172]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[173]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Clavicle_L_control_group|R:Clavicle_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[174]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[34]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[174]" "HumanMale_RIGRN.placeHolderList[175]" "R:Hand_L_Elbow_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[175]" "HumanMale_RIGRN.placeHolderList[176]" "R:Hand_L_Elbow_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[35]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[176]" "HumanMale_RIGRN.placeHolderList[177]" "R:Hand_L_Elbow_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[177]" "HumanMale_RIGRN.placeHolderList[178]" "R:Hand_L_Elbow_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[36]" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[178]" "HumanMale_RIGRN.placeHolderList[179]" "R:Hand_L_Elbow_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[179]" "HumanMale_RIGRN.placeHolderList[180]" "R:Hand_L_Elbow_locator.tz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[180]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[181]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_Elbow_locator_group|R:Hand_L_Elbow_locator.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[182]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[37]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[182]" "HumanMale_RIGRN.placeHolderList[183]" "R:Arm_L_FK_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[183]" "HumanMale_RIGRN.placeHolderList[184]" "R:Arm_L_FK_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[38]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[184]" "HumanMale_RIGRN.placeHolderList[185]" "R:Arm_L_FK_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[185]" "HumanMale_RIGRN.placeHolderList[186]" "R:Arm_L_FK_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[39]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[186]" "HumanMale_RIGRN.placeHolderList[187]" "R:Arm_L_FK_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[187]" "HumanMale_RIGRN.placeHolderList[188]" "R:Arm_L_FK_locator.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[34]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[188]" "HumanMale_RIGRN.placeHolderList[189]" "R:Arm_L_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[189]" "HumanMale_RIGRN.placeHolderList[190]" "R:Arm_L_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[35]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[190]" "HumanMale_RIGRN.placeHolderList[191]" "R:Arm_L_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[191]" "HumanMale_RIGRN.placeHolderList[192]" "R:Arm_L_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[36]" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[192]" "HumanMale_RIGRN.placeHolderList[193]" "R:Arm_L_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[193]" "HumanMale_RIGRN.placeHolderList[194]" "R:Arm_L_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Arm_L_FK_locator_group|R:Arm_L_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[194]" ""
+		"HumanMale_RIGRN.placeHolderList[195]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[37]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[195]" "HumanMale_RIGRN.placeHolderList[196]" "R:Hand_L_Elbow_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[196]" "HumanMale_RIGRN.placeHolderList[197]" "R:Hand_L_Elbow_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[38]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[197]" "HumanMale_RIGRN.placeHolderList[198]" "R:Hand_L_Elbow_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[198]" "HumanMale_RIGRN.placeHolderList[199]" "R:Hand_L_Elbow_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[39]" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[199]" "HumanMale_RIGRN.placeHolderList[200]" "R:Hand_L_Elbow_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[200]" "HumanMale_RIGRN.placeHolderList[201]" "R:Hand_L_Elbow_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_L_Elbow_FK_locator_group|R:Hand_L_Elbow_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[201]" ""
+		"HumanMale_RIGRN.placeHolderList[202]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[40]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[202]" "HumanMale_RIGRN.placeHolderList[203]" "R:Hand_R_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[203]" "HumanMale_RIGRN.placeHolderList[204]" "R:Hand_R_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[41]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[204]" "HumanMale_RIGRN.placeHolderList[205]" "R:Hand_R_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[205]" "HumanMale_RIGRN.placeHolderList[206]" "R:Hand_R_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[42]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[206]" "HumanMale_RIGRN.placeHolderList[207]" "R:Hand_R_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[207]" "HumanMale_RIGRN.placeHolderList[208]" "R:Hand_R_R_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[8]" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[208]" "HumanMale_RIGRN.placeHolderList[209]" "R:Hand_R_R_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[209]" "HumanMale_RIGRN.placeHolderList[210]" "R:Hand_R_R_control.Orient"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[210]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[211]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[212]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_R_control_group|R:Hand_R_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[213]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[214]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[215]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[216]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[217]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[218]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnClavicle" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[219]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnClavicle" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnClavicle" 
 		"HumanMale_RIGRN.placeHolderList[220]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnSpine" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnClavicle" 
 		"HumanMale_RIGRN.placeHolderList[221]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnSpine" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnSpine" 
 		"HumanMale_RIGRN.placeHolderList[222]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.instObjGroups" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.ParentOnSpine" 
 		"HumanMale_RIGRN.placeHolderList[223]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[224]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[225]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_control_group|R:Hand_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[226]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[43]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[226]" "HumanMale_RIGRN.placeHolderList[227]" "R:Clavicle_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[227]" "HumanMale_RIGRN.placeHolderList[228]" "R:Clavicle_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[44]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[228]" "HumanMale_RIGRN.placeHolderList[229]" "R:Clavicle_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[229]" "HumanMale_RIGRN.placeHolderList[230]" "R:Clavicle_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[45]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[230]" "HumanMale_RIGRN.placeHolderList[231]" "R:Clavicle_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[231]" "HumanMale_RIGRN.placeHolderList[232]" "R:Clavicle_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[43]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[232]" "HumanMale_RIGRN.placeHolderList[233]" "R:Clavicle_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[233]" "HumanMale_RIGRN.placeHolderList[234]" "R:Clavicle_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[44]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[234]" "HumanMale_RIGRN.placeHolderList[235]" "R:Clavicle_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[235]" "HumanMale_RIGRN.placeHolderList[236]" "R:Clavicle_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[45]" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[236]" "HumanMale_RIGRN.placeHolderList[237]" "R:Clavicle_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[237]" "HumanMale_RIGRN.placeHolderList[238]" "R:Clavicle_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[238]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[239]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Clavicle_R_control_group|R:Clavicle_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[240]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[46]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[240]" "HumanMale_RIGRN.placeHolderList[241]" "R:Hand_R_Elbow_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[241]" "HumanMale_RIGRN.placeHolderList[242]" "R:Hand_R_Elbow_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[47]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[242]" "HumanMale_RIGRN.placeHolderList[243]" "R:Hand_R_Elbow_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[243]" "HumanMale_RIGRN.placeHolderList[244]" "R:Hand_R_Elbow_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[48]" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[244]" "HumanMale_RIGRN.placeHolderList[245]" "R:Hand_R_Elbow_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[245]" "HumanMale_RIGRN.placeHolderList[246]" "R:Hand_R_Elbow_locator.tz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[246]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[247]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_Elbow_locator_group|R:Hand_R_Elbow_locator.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[248]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[49]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[248]" "HumanMale_RIGRN.placeHolderList[249]" "R:Arm_R_FK_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[249]" "HumanMale_RIGRN.placeHolderList[250]" "R:Arm_R_FK_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[50]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[250]" "HumanMale_RIGRN.placeHolderList[251]" "R:Arm_R_FK_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[251]" "HumanMale_RIGRN.placeHolderList[252]" "R:Arm_R_FK_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[51]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[252]" "HumanMale_RIGRN.placeHolderList[253]" "R:Arm_R_FK_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[253]" "HumanMale_RIGRN.placeHolderList[254]" "R:Arm_R_FK_locator.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[46]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[254]" "HumanMale_RIGRN.placeHolderList[255]" "R:Arm_R_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[255]" "HumanMale_RIGRN.placeHolderList[256]" "R:Arm_R_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[47]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[256]" "HumanMale_RIGRN.placeHolderList[257]" "R:Arm_R_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[257]" "HumanMale_RIGRN.placeHolderList[258]" "R:Arm_R_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[48]" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[258]" "HumanMale_RIGRN.placeHolderList[259]" "R:Arm_R_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[259]" "HumanMale_RIGRN.placeHolderList[260]" "R:Arm_R_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Arm_R_FK_locator_group|R:Arm_R_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[260]" ""
+		"HumanMale_RIGRN.placeHolderList[261]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[49]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[261]" "HumanMale_RIGRN.placeHolderList[262]" "R:Hand_R_Elbow_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[262]" "HumanMale_RIGRN.placeHolderList[263]" "R:Hand_R_Elbow_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[50]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[263]" "HumanMale_RIGRN.placeHolderList[264]" "R:Hand_R_Elbow_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[264]" "HumanMale_RIGRN.placeHolderList[265]" "R:Hand_R_Elbow_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[51]" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[265]" "HumanMale_RIGRN.placeHolderList[266]" "R:Hand_R_Elbow_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[266]" "HumanMale_RIGRN.placeHolderList[267]" "R:Hand_R_Elbow_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hand_R_Elbow_FK_locator_group|R:Hand_R_Elbow_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[267]" ""
+		"HumanMale_RIGRN.placeHolderList[268]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[52]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[268]" "HumanMale_RIGRN.placeHolderList[269]" "R:Foot_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[269]" "HumanMale_RIGRN.placeHolderList[270]" "R:Foot_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[53]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[270]" "HumanMale_RIGRN.placeHolderList[271]" "R:Foot_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[271]" "HumanMale_RIGRN.placeHolderList[272]" "R:Foot_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[54]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[272]" "HumanMale_RIGRN.placeHolderList[273]" "R:Foot_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[273]" "HumanMale_RIGRN.placeHolderList[274]" "R:Foot_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[52]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[274]" "HumanMale_RIGRN.placeHolderList[275]" "R:Foot_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[275]" "HumanMale_RIGRN.placeHolderList[276]" "R:Foot_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[53]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[276]" "HumanMale_RIGRN.placeHolderList[277]" "R:Foot_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[277]" "HumanMale_RIGRN.placeHolderList[278]" "R:Foot_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[54]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[278]" "HumanMale_RIGRN.placeHolderList[279]" "R:Foot_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[279]" "HumanMale_RIGRN.placeHolderList[280]" "R:Foot_L_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[11]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.FKBlend" 
-		"HumanMale_RIGRN.placeHolderList[280]" "HumanMale_RIGRN.placeHolderList[281]" "R:Foot_L_control.FKBlend"
+		"HumanMale_RIGRN.placeHolderList[281]" "HumanMale_RIGRN.placeHolderList[282]" "R:Foot_L_control.FKBlend"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[12]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.ParentOnHips" 
-		"HumanMale_RIGRN.placeHolderList[282]" "HumanMale_RIGRN.placeHolderList[283]" "R:Foot_L_control.ParentOnHips"
+		"HumanMale_RIGRN.placeHolderList[283]" "HumanMale_RIGRN.placeHolderList[284]" "R:Foot_L_control.ParentOnHips"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[13]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.Stretch" 
-		"HumanMale_RIGRN.placeHolderList[284]" "HumanMale_RIGRN.placeHolderList[285]" "R:Foot_L_control.Stretch"
+		"HumanMale_RIGRN.placeHolderList[285]" "HumanMale_RIGRN.placeHolderList[286]" "R:Foot_L_control.Stretch"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[14]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.StretchMin" 
-		"HumanMale_RIGRN.placeHolderList[286]" "HumanMale_RIGRN.placeHolderList[287]" "R:Foot_L_control.StretchMin"
+		"HumanMale_RIGRN.placeHolderList[287]" "HumanMale_RIGRN.placeHolderList[288]" "R:Foot_L_control.StretchMin"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[15]" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.StretchMax" 
-		"HumanMale_RIGRN.placeHolderList[288]" "HumanMale_RIGRN.placeHolderList[289]" "R:Foot_L_control.StretchMax"
+		"HumanMale_RIGRN.placeHolderList[289]" "HumanMale_RIGRN.placeHolderList[290]" "R:Foot_L_control.StretchMax"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[290]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[291]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Foot_L_control_group|R:Foot_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[292]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[55]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[292]" "HumanMale_RIGRN.placeHolderList[293]" "R:Leg_L_Knee_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[293]" "HumanMale_RIGRN.placeHolderList[294]" "R:Leg_L_Knee_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[56]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[294]" "HumanMale_RIGRN.placeHolderList[295]" "R:Leg_L_Knee_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[295]" "HumanMale_RIGRN.placeHolderList[296]" "R:Leg_L_Knee_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[57]" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[296]" "HumanMale_RIGRN.placeHolderList[297]" "R:Leg_L_Knee_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[297]" "HumanMale_RIGRN.placeHolderList[298]" "R:Leg_L_Knee_locator.tz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[298]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[299]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_L_Knee_locator_group|R:Leg_L_Knee_locator.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[300]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[58]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[300]" "HumanMale_RIGRN.placeHolderList[301]" "R:LegUpper_L_FK_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[301]" "HumanMale_RIGRN.placeHolderList[302]" "R:LegUpper_L_FK_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[59]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[302]" "HumanMale_RIGRN.placeHolderList[303]" "R:LegUpper_L_FK_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[303]" "HumanMale_RIGRN.placeHolderList[304]" "R:LegUpper_L_FK_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[60]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[304]" "HumanMale_RIGRN.placeHolderList[305]" "R:LegUpper_L_FK_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[305]" "HumanMale_RIGRN.placeHolderList[306]" "R:LegUpper_L_FK_locator.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[55]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[306]" "HumanMale_RIGRN.placeHolderList[307]" "R:LegUpper_L_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[307]" "HumanMale_RIGRN.placeHolderList[308]" "R:LegUpper_L_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[56]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[308]" "HumanMale_RIGRN.placeHolderList[309]" "R:LegUpper_L_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[309]" "HumanMale_RIGRN.placeHolderList[310]" "R:LegUpper_L_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[57]" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[310]" "HumanMale_RIGRN.placeHolderList[311]" "R:LegUpper_L_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[311]" "HumanMale_RIGRN.placeHolderList[312]" "R:LegUpper_L_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:LegUpper_L_FK_locator_group|R:LegUpper_L_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[312]" ""
+		"HumanMale_RIGRN.placeHolderList[313]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[58]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[313]" "HumanMale_RIGRN.placeHolderList[314]" "R:Leg_L_Knee_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[314]" "HumanMale_RIGRN.placeHolderList[315]" "R:Leg_L_Knee_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[59]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[315]" "HumanMale_RIGRN.placeHolderList[316]" "R:Leg_L_Knee_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[316]" "HumanMale_RIGRN.placeHolderList[317]" "R:Leg_L_Knee_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[60]" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[317]" "HumanMale_RIGRN.placeHolderList[318]" "R:Leg_L_Knee_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[318]" "HumanMale_RIGRN.placeHolderList[319]" "R:Leg_L_Knee_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_L_Knee_FK_locator_group|R:Leg_L_Knee_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[319]" ""
+		"HumanMale_RIGRN.placeHolderList[320]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[70]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[320]" "HumanMale_RIGRN.placeHolderList[321]" "R:CloackFrontHand_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[321]" "HumanMale_RIGRN.placeHolderList[322]" "R:CloackFrontHand_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[71]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[322]" "HumanMale_RIGRN.placeHolderList[323]" "R:CloackFrontHand_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[323]" "HumanMale_RIGRN.placeHolderList[324]" "R:CloackFrontHand_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[72]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[324]" "HumanMale_RIGRN.placeHolderList[325]" "R:CloackFrontHand_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[325]" "HumanMale_RIGRN.placeHolderList[326]" "R:CloackFrontHand_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[70]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[326]" "HumanMale_RIGRN.placeHolderList[327]" "R:CloackFrontHand_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[327]" "HumanMale_RIGRN.placeHolderList[328]" "R:CloackFrontHand_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[71]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[328]" "HumanMale_RIGRN.placeHolderList[329]" "R:CloackFrontHand_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[329]" "HumanMale_RIGRN.placeHolderList[330]" "R:CloackFrontHand_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[72]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[330]" "HumanMale_RIGRN.placeHolderList[331]" "R:CloackFrontHand_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[331]" "HumanMale_RIGRN.placeHolderList[332]" "R:CloackFrontHand_L_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[21]" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[332]" "HumanMale_RIGRN.placeHolderList[333]" "R:CloackFrontHand_L_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[333]" "HumanMale_RIGRN.placeHolderList[334]" "R:CloackFrontHand_L_control.Orient"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackFrontHand_L_control_group|R:CloackFrontHand_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[334]" ""
+		"HumanMale_RIGRN.placeHolderList[335]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[73]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[335]" "HumanMale_RIGRN.placeHolderList[336]" "R:CloackFrontHand1_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[336]" "HumanMale_RIGRN.placeHolderList[337]" "R:CloackFrontHand1_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[74]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[337]" "HumanMale_RIGRN.placeHolderList[338]" "R:CloackFrontHand1_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[338]" "HumanMale_RIGRN.placeHolderList[339]" "R:CloackFrontHand1_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[75]" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[339]" "HumanMale_RIGRN.placeHolderList[340]" "R:CloackFrontHand1_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[340]" "HumanMale_RIGRN.placeHolderList[341]" "R:CloackFrontHand1_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackFrontHand1_L_control_group|R:CloackFrontHand1_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[341]" ""
+		"HumanMale_RIGRN.placeHolderList[342]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[73]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[342]" "HumanMale_RIGRN.placeHolderList[343]" "R:CloackBackHand_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[343]" "HumanMale_RIGRN.placeHolderList[344]" "R:CloackBackHand_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[74]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[344]" "HumanMale_RIGRN.placeHolderList[345]" "R:CloackBackHand_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[345]" "HumanMale_RIGRN.placeHolderList[346]" "R:CloackBackHand_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[75]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[346]" "HumanMale_RIGRN.placeHolderList[347]" "R:CloackBackHand_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[347]" "HumanMale_RIGRN.placeHolderList[348]" "R:CloackBackHand_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[76]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[348]" "HumanMale_RIGRN.placeHolderList[349]" "R:CloackBackHand_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[349]" "HumanMale_RIGRN.placeHolderList[350]" "R:CloackBackHand_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[77]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[350]" "HumanMale_RIGRN.placeHolderList[351]" "R:CloackBackHand_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[351]" "HumanMale_RIGRN.placeHolderList[352]" "R:CloackBackHand_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[78]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[352]" "HumanMale_RIGRN.placeHolderList[353]" "R:CloackBackHand_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[353]" "HumanMale_RIGRN.placeHolderList[354]" "R:CloackBackHand_L_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[22]" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[354]" "HumanMale_RIGRN.placeHolderList[355]" "R:CloackBackHand_L_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[355]" "HumanMale_RIGRN.placeHolderList[356]" "R:CloackBackHand_L_control.Orient"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBackHand_L_control_group|R:CloackBackHand_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[356]" ""
+		"HumanMale_RIGRN.placeHolderList[357]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[79]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[357]" "HumanMale_RIGRN.placeHolderList[358]" "R:CloackBackHand1_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[358]" "HumanMale_RIGRN.placeHolderList[359]" "R:CloackBackHand1_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[80]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[359]" "HumanMale_RIGRN.placeHolderList[360]" "R:CloackBackHand1_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[360]" "HumanMale_RIGRN.placeHolderList[361]" "R:CloackBackHand1_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[81]" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[361]" "HumanMale_RIGRN.placeHolderList[362]" "R:CloackBackHand1_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[362]" "HumanMale_RIGRN.placeHolderList[363]" "R:CloackBackHand1_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBackHand1_L_control_group|R:CloackBackHand1_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[363]" ""
+		"HumanMale_RIGRN.placeHolderList[364]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[76]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[364]" "HumanMale_RIGRN.placeHolderList[365]" "R:CloackBack_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[365]" "HumanMale_RIGRN.placeHolderList[366]" "R:CloackBack_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[77]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[366]" "HumanMale_RIGRN.placeHolderList[367]" "R:CloackBack_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[367]" "HumanMale_RIGRN.placeHolderList[368]" "R:CloackBack_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[78]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[368]" "HumanMale_RIGRN.placeHolderList[369]" "R:CloackBack_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[369]" "HumanMale_RIGRN.placeHolderList[370]" "R:CloackBack_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[82]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[370]" "HumanMale_RIGRN.placeHolderList[371]" "R:CloackBack_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[371]" "HumanMale_RIGRN.placeHolderList[372]" "R:CloackBack_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[83]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[372]" "HumanMale_RIGRN.placeHolderList[373]" "R:CloackBack_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[373]" "HumanMale_RIGRN.placeHolderList[374]" "R:CloackBack_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[84]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[374]" "HumanMale_RIGRN.placeHolderList[375]" "R:CloackBack_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[375]" "HumanMale_RIGRN.placeHolderList[376]" "R:CloackBack_L_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[23]" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[376]" "HumanMale_RIGRN.placeHolderList[377]" "R:CloackBack_L_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[377]" "HumanMale_RIGRN.placeHolderList[378]" "R:CloackBack_L_control.Orient"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBack_L_control_group|R:CloackBack_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[378]" ""
+		"HumanMale_RIGRN.placeHolderList[379]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[85]" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[379]" "HumanMale_RIGRN.placeHolderList[380]" "R:CloackBack1_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[380]" "HumanMale_RIGRN.placeHolderList[381]" "R:CloackBack1_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[86]" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[381]" "HumanMale_RIGRN.placeHolderList[382]" "R:CloackBack1_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[382]" "HumanMale_RIGRN.placeHolderList[383]" "R:CloackBack1_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[87]" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[383]" "HumanMale_RIGRN.placeHolderList[384]" "R:CloackBack1_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[384]" "HumanMale_RIGRN.placeHolderList[385]" "R:CloackBack1_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBack1_L_control_group|R:CloackBack1_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[385]" ""
+		"HumanMale_RIGRN.placeHolderList[386]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[79]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[386]" "HumanMale_RIGRN.placeHolderList[387]" "R:CloackBack_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[387]" "HumanMale_RIGRN.placeHolderList[388]" "R:CloackBack_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[80]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[388]" "HumanMale_RIGRN.placeHolderList[389]" "R:CloackBack_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[389]" "HumanMale_RIGRN.placeHolderList[390]" "R:CloackBack_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[81]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[390]" "HumanMale_RIGRN.placeHolderList[391]" "R:CloackBack_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[391]" "HumanMale_RIGRN.placeHolderList[392]" "R:CloackBack_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[88]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[392]" "HumanMale_RIGRN.placeHolderList[393]" "R:CloackBack_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[393]" "HumanMale_RIGRN.placeHolderList[394]" "R:CloackBack_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[89]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[394]" "HumanMale_RIGRN.placeHolderList[395]" "R:CloackBack_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[395]" "HumanMale_RIGRN.placeHolderList[396]" "R:CloackBack_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[90]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[396]" "HumanMale_RIGRN.placeHolderList[397]" "R:CloackBack_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[397]" "HumanMale_RIGRN.placeHolderList[398]" "R:CloackBack_R_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[24]" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[398]" "HumanMale_RIGRN.placeHolderList[399]" "R:CloackBack_R_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[399]" "HumanMale_RIGRN.placeHolderList[400]" "R:CloackBack_R_control.Orient"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBack_R_control_group|R:CloackBack_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[400]" ""
+		"HumanMale_RIGRN.placeHolderList[401]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[91]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[401]" "HumanMale_RIGRN.placeHolderList[402]" "R:CloackBack1_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[402]" "HumanMale_RIGRN.placeHolderList[403]" "R:CloackBack1_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[92]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[403]" "HumanMale_RIGRN.placeHolderList[404]" "R:CloackBack1_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[404]" "HumanMale_RIGRN.placeHolderList[405]" "R:CloackBack1_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[93]" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[405]" "HumanMale_RIGRN.placeHolderList[406]" "R:CloackBack1_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[406]" "HumanMale_RIGRN.placeHolderList[407]" "R:CloackBack1_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBack1_R_control_group|R:CloackBack1_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[407]" ""
+		"HumanMale_RIGRN.placeHolderList[408]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[82]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[408]" "HumanMale_RIGRN.placeHolderList[409]" "R:CloackBackHand_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[409]" "HumanMale_RIGRN.placeHolderList[410]" "R:CloackBackHand_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[83]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[410]" "HumanMale_RIGRN.placeHolderList[411]" "R:CloackBackHand_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[411]" "HumanMale_RIGRN.placeHolderList[412]" "R:CloackBackHand_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[84]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[412]" "HumanMale_RIGRN.placeHolderList[413]" "R:CloackBackHand_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[413]" "HumanMale_RIGRN.placeHolderList[414]" "R:CloackBackHand_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[94]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[414]" "HumanMale_RIGRN.placeHolderList[415]" "R:CloackBackHand_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[415]" "HumanMale_RIGRN.placeHolderList[416]" "R:CloackBackHand_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[95]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[416]" "HumanMale_RIGRN.placeHolderList[417]" "R:CloackBackHand_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[417]" "HumanMale_RIGRN.placeHolderList[418]" "R:CloackBackHand_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[96]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[418]" "HumanMale_RIGRN.placeHolderList[419]" "R:CloackBackHand_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[419]" "HumanMale_RIGRN.placeHolderList[420]" "R:CloackBackHand_R_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[25]" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[420]" "HumanMale_RIGRN.placeHolderList[421]" "R:CloackBackHand_R_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[421]" "HumanMale_RIGRN.placeHolderList[422]" "R:CloackBackHand_R_control.Orient"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBackHand_R_control_group|R:CloackBackHand_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[422]" ""
+		"HumanMale_RIGRN.placeHolderList[423]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[97]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[423]" "HumanMale_RIGRN.placeHolderList[424]" "R:CloackBackHand1_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[424]" "HumanMale_RIGRN.placeHolderList[425]" "R:CloackBackHand1_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[98]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[425]" "HumanMale_RIGRN.placeHolderList[426]" "R:CloackBackHand1_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[426]" "HumanMale_RIGRN.placeHolderList[427]" "R:CloackBackHand1_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[99]" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[427]" "HumanMale_RIGRN.placeHolderList[428]" "R:CloackBackHand1_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[428]" "HumanMale_RIGRN.placeHolderList[429]" "R:CloackBackHand1_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackBackHand1_R_control_group|R:CloackBackHand1_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[429]" ""
+		"HumanMale_RIGRN.placeHolderList[430]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[85]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[430]" "HumanMale_RIGRN.placeHolderList[431]" "R:CloackFrontHand_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[431]" "HumanMale_RIGRN.placeHolderList[432]" "R:CloackFrontHand_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[86]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[432]" "HumanMale_RIGRN.placeHolderList[433]" "R:CloackFrontHand_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[433]" "HumanMale_RIGRN.placeHolderList[434]" "R:CloackFrontHand_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[87]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[434]" "HumanMale_RIGRN.placeHolderList[435]" "R:CloackFrontHand_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[435]" "HumanMale_RIGRN.placeHolderList[436]" "R:CloackFrontHand_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[100]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[436]" "HumanMale_RIGRN.placeHolderList[437]" "R:CloackFrontHand_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[437]" "HumanMale_RIGRN.placeHolderList[438]" "R:CloackFrontHand_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[101]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[438]" "HumanMale_RIGRN.placeHolderList[439]" "R:CloackFrontHand_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[439]" "HumanMale_RIGRN.placeHolderList[440]" "R:CloackFrontHand_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[102]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[440]" "HumanMale_RIGRN.placeHolderList[441]" "R:CloackFrontHand_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[441]" "HumanMale_RIGRN.placeHolderList[442]" "R:CloackFrontHand_R_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[26]" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.Orient" 
-		"HumanMale_RIGRN.placeHolderList[442]" "HumanMale_RIGRN.placeHolderList[443]" "R:CloackFrontHand_R_control.Orient"
+		"HumanMale_RIGRN.placeHolderList[443]" "HumanMale_RIGRN.placeHolderList[444]" "R:CloackFrontHand_R_control.Orient"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackFrontHand_R_control_group|R:CloackFrontHand_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[444]" ""
+		"HumanMale_RIGRN.placeHolderList[445]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[103]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[445]" "HumanMale_RIGRN.placeHolderList[446]" "R:CloackFrontHand1_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[446]" "HumanMale_RIGRN.placeHolderList[447]" "R:CloackFrontHand1_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[104]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[447]" "HumanMale_RIGRN.placeHolderList[448]" "R:CloackFrontHand1_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[448]" "HumanMale_RIGRN.placeHolderList[449]" "R:CloackFrontHand1_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[105]" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[449]" "HumanMale_RIGRN.placeHolderList[450]" "R:CloackFrontHand1_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[450]" "HumanMale_RIGRN.placeHolderList[451]" "R:CloackFrontHand1_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:CloackFrontHand1_R_control_group|R:CloackFrontHand1_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[451]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[452]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[453]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[454]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[455]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[456]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[457]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateX" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[458]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[459]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[460]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[461]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[462]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[463]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateOrder" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[464]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.instObjGroups" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.rotateOrder" 
 		"HumanMale_RIGRN.placeHolderList[465]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_R_control_group|R:Shoulders_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[466]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[467]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateX" 
 		"HumanMale_RIGRN.placeHolderList[468]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[469]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateY" 
 		"HumanMale_RIGRN.placeHolderList[470]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[471]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateX" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.translateZ" 
 		"HumanMale_RIGRN.placeHolderList[472]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateX" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[473]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateY" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateX" 
 		"HumanMale_RIGRN.placeHolderList[474]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateY" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[475]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateZ" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateY" 
 		"HumanMale_RIGRN.placeHolderList[476]" ""
-		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateZ" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[477]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateOrder" 
+		5 4 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateZ" 
 		"HumanMale_RIGRN.placeHolderList[478]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.instObjGroups" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.rotateOrder" 
 		"HumanMale_RIGRN.placeHolderList[479]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders_L_control_group|R:Shoulders_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[480]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[94]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[480]" "HumanMale_RIGRN.placeHolderList[481]" "R:Shoulders1_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[481]" "HumanMale_RIGRN.placeHolderList[482]" "R:Shoulders1_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[95]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[482]" "HumanMale_RIGRN.placeHolderList[483]" "R:Shoulders1_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[483]" "HumanMale_RIGRN.placeHolderList[484]" "R:Shoulders1_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[96]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[484]" "HumanMale_RIGRN.placeHolderList[485]" "R:Shoulders1_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[485]" "HumanMale_RIGRN.placeHolderList[486]" "R:Shoulders1_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[112]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[486]" "HumanMale_RIGRN.placeHolderList[487]" "R:Shoulders1_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[487]" "HumanMale_RIGRN.placeHolderList[488]" "R:Shoulders1_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[113]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[488]" "HumanMale_RIGRN.placeHolderList[489]" "R:Shoulders1_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[489]" "HumanMale_RIGRN.placeHolderList[490]" "R:Shoulders1_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[114]" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[490]" "HumanMale_RIGRN.placeHolderList[491]" "R:Shoulders1_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[491]" "HumanMale_RIGRN.placeHolderList[492]" "R:Shoulders1_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders1_L_control_group|R:Shoulders1_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[492]" ""
+		"HumanMale_RIGRN.placeHolderList[493]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[97]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[493]" "HumanMale_RIGRN.placeHolderList[494]" "R:Shoulders1_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[494]" "HumanMale_RIGRN.placeHolderList[495]" "R:Shoulders1_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[98]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[495]" "HumanMale_RIGRN.placeHolderList[496]" "R:Shoulders1_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[496]" "HumanMale_RIGRN.placeHolderList[497]" "R:Shoulders1_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[99]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[497]" "HumanMale_RIGRN.placeHolderList[498]" "R:Shoulders1_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[498]" "HumanMale_RIGRN.placeHolderList[499]" "R:Shoulders1_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[115]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[499]" "HumanMale_RIGRN.placeHolderList[500]" "R:Shoulders1_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[500]" "HumanMale_RIGRN.placeHolderList[501]" "R:Shoulders1_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[116]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[501]" "HumanMale_RIGRN.placeHolderList[502]" "R:Shoulders1_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[502]" "HumanMale_RIGRN.placeHolderList[503]" "R:Shoulders1_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[117]" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[503]" "HumanMale_RIGRN.placeHolderList[504]" "R:Shoulders1_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[504]" "HumanMale_RIGRN.placeHolderList[505]" "R:Shoulders1_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Shoulders1_R_control_group|R:Shoulders1_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[505]" ""
+		"HumanMale_RIGRN.placeHolderList[506]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[100]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[506]" "HumanMale_RIGRN.placeHolderList[507]" "R:Collar_control.tx"
+		"HumanMale_RIGRN.placeHolderList[507]" "HumanMale_RIGRN.placeHolderList[508]" "R:Collar_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[101]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[508]" "HumanMale_RIGRN.placeHolderList[509]" "R:Collar_control.ty"
+		"HumanMale_RIGRN.placeHolderList[509]" "HumanMale_RIGRN.placeHolderList[510]" "R:Collar_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[102]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[510]" "HumanMale_RIGRN.placeHolderList[511]" "R:Collar_control.tz"
+		"HumanMale_RIGRN.placeHolderList[511]" "HumanMale_RIGRN.placeHolderList[512]" "R:Collar_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[208]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[512]" "HumanMale_RIGRN.placeHolderList[513]" "R:Collar_control.rx"
+		"HumanMale_RIGRN.placeHolderList[513]" "HumanMale_RIGRN.placeHolderList[514]" "R:Collar_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[209]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[514]" "HumanMale_RIGRN.placeHolderList[515]" "R:Collar_control.ry"
+		"HumanMale_RIGRN.placeHolderList[515]" "HumanMale_RIGRN.placeHolderList[516]" "R:Collar_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[210]" "|R:Global_grp|R:Collar_control_group|R:Collar_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[516]" "HumanMale_RIGRN.placeHolderList[517]" "R:Collar_control.rz"
+		"HumanMale_RIGRN.placeHolderList[517]" "HumanMale_RIGRN.placeHolderList[518]" "R:Collar_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Collar_control_group|R:Collar_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[518]" ""
+		"HumanMale_RIGRN.placeHolderList[519]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[103]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[519]" "HumanMale_RIGRN.placeHolderList[520]" "R:Collar1_control.tx"
+		"HumanMale_RIGRN.placeHolderList[520]" "HumanMale_RIGRN.placeHolderList[521]" "R:Collar1_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[104]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[521]" "HumanMale_RIGRN.placeHolderList[522]" "R:Collar1_control.ty"
+		"HumanMale_RIGRN.placeHolderList[522]" "HumanMale_RIGRN.placeHolderList[523]" "R:Collar1_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[105]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[523]" "HumanMale_RIGRN.placeHolderList[524]" "R:Collar1_control.tz"
+		"HumanMale_RIGRN.placeHolderList[524]" "HumanMale_RIGRN.placeHolderList[525]" "R:Collar1_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[211]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[525]" "HumanMale_RIGRN.placeHolderList[526]" "R:Collar1_control.rx"
+		"HumanMale_RIGRN.placeHolderList[526]" "HumanMale_RIGRN.placeHolderList[527]" "R:Collar1_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[212]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[527]" "HumanMale_RIGRN.placeHolderList[528]" "R:Collar1_control.ry"
+		"HumanMale_RIGRN.placeHolderList[528]" "HumanMale_RIGRN.placeHolderList[529]" "R:Collar1_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[213]" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[529]" "HumanMale_RIGRN.placeHolderList[530]" "R:Collar1_control.rz"
+		"HumanMale_RIGRN.placeHolderList[530]" "HumanMale_RIGRN.placeHolderList[531]" "R:Collar1_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Collar1_control_group|R:Collar1_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[531]" ""
+		"HumanMale_RIGRN.placeHolderList[532]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[106]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[532]" "HumanMale_RIGRN.placeHolderList[533]" "R:HatSide_control.tx"
+		"HumanMale_RIGRN.placeHolderList[533]" "HumanMale_RIGRN.placeHolderList[534]" "R:HatSide_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[107]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[534]" "HumanMale_RIGRN.placeHolderList[535]" "R:HatSide_control.ty"
+		"HumanMale_RIGRN.placeHolderList[535]" "HumanMale_RIGRN.placeHolderList[536]" "R:HatSide_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[108]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[536]" "HumanMale_RIGRN.placeHolderList[537]" "R:HatSide_control.tz"
+		"HumanMale_RIGRN.placeHolderList[537]" "HumanMale_RIGRN.placeHolderList[538]" "R:HatSide_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[214]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[538]" "HumanMale_RIGRN.placeHolderList[539]" "R:HatSide_control.rx"
+		"HumanMale_RIGRN.placeHolderList[539]" "HumanMale_RIGRN.placeHolderList[540]" "R:HatSide_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[215]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[540]" "HumanMale_RIGRN.placeHolderList[541]" "R:HatSide_control.ry"
+		"HumanMale_RIGRN.placeHolderList[541]" "HumanMale_RIGRN.placeHolderList[542]" "R:HatSide_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[216]" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[542]" "HumanMale_RIGRN.placeHolderList[543]" "R:HatSide_control.rz"
+		"HumanMale_RIGRN.placeHolderList[543]" "HumanMale_RIGRN.placeHolderList[544]" "R:HatSide_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:HatSide_control_group|R:HatSide_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[544]" ""
+		"HumanMale_RIGRN.placeHolderList[545]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[109]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[545]" "HumanMale_RIGRN.placeHolderList[546]" "R:Hat_control.tx"
+		"HumanMale_RIGRN.placeHolderList[546]" "HumanMale_RIGRN.placeHolderList[547]" "R:Hat_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[110]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[547]" "HumanMale_RIGRN.placeHolderList[548]" "R:Hat_control.ty"
+		"HumanMale_RIGRN.placeHolderList[548]" "HumanMale_RIGRN.placeHolderList[549]" "R:Hat_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[111]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[549]" "HumanMale_RIGRN.placeHolderList[550]" "R:Hat_control.tz"
+		"HumanMale_RIGRN.placeHolderList[550]" "HumanMale_RIGRN.placeHolderList[551]" "R:Hat_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[217]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[551]" "HumanMale_RIGRN.placeHolderList[552]" "R:Hat_control.rx"
+		"HumanMale_RIGRN.placeHolderList[552]" "HumanMale_RIGRN.placeHolderList[553]" "R:Hat_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[218]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[553]" "HumanMale_RIGRN.placeHolderList[554]" "R:Hat_control.ry"
+		"HumanMale_RIGRN.placeHolderList[554]" "HumanMale_RIGRN.placeHolderList[555]" "R:Hat_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[219]" "|R:Global_grp|R:Hat_control_group|R:Hat_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[555]" "HumanMale_RIGRN.placeHolderList[556]" "R:Hat_control.rz"
+		"HumanMale_RIGRN.placeHolderList[556]" "HumanMale_RIGRN.placeHolderList[557]" "R:Hat_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hat_control_group|R:Hat_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[557]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hat_control_group|R:Hat_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[558]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hat_control_group|R:Hat_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[559]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[112]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[559]" "HumanMale_RIGRN.placeHolderList[560]" "R:Hat1_control.tx"
+		"HumanMale_RIGRN.placeHolderList[560]" "HumanMale_RIGRN.placeHolderList[561]" "R:Hat1_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[113]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[561]" "HumanMale_RIGRN.placeHolderList[562]" "R:Hat1_control.ty"
+		"HumanMale_RIGRN.placeHolderList[562]" "HumanMale_RIGRN.placeHolderList[563]" "R:Hat1_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[114]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[563]" "HumanMale_RIGRN.placeHolderList[564]" "R:Hat1_control.tz"
+		"HumanMale_RIGRN.placeHolderList[564]" "HumanMale_RIGRN.placeHolderList[565]" "R:Hat1_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[220]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[565]" "HumanMale_RIGRN.placeHolderList[566]" "R:Hat1_control.rx"
+		"HumanMale_RIGRN.placeHolderList[566]" "HumanMale_RIGRN.placeHolderList[567]" "R:Hat1_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[221]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[567]" "HumanMale_RIGRN.placeHolderList[568]" "R:Hat1_control.ry"
+		"HumanMale_RIGRN.placeHolderList[568]" "HumanMale_RIGRN.placeHolderList[569]" "R:Hat1_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[222]" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[569]" "HumanMale_RIGRN.placeHolderList[570]" "R:Hat1_control.rz"
+		"HumanMale_RIGRN.placeHolderList[570]" "HumanMale_RIGRN.placeHolderList[571]" "R:Hat1_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hat1_control_group|R:Hat1_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[571]" ""
+		"HumanMale_RIGRN.placeHolderList[572]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[115]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[572]" "HumanMale_RIGRN.placeHolderList[573]" "R:Hat2_control.tx"
+		"HumanMale_RIGRN.placeHolderList[573]" "HumanMale_RIGRN.placeHolderList[574]" "R:Hat2_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[116]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[574]" "HumanMale_RIGRN.placeHolderList[575]" "R:Hat2_control.ty"
+		"HumanMale_RIGRN.placeHolderList[575]" "HumanMale_RIGRN.placeHolderList[576]" "R:Hat2_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[117]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[576]" "HumanMale_RIGRN.placeHolderList[577]" "R:Hat2_control.tz"
+		"HumanMale_RIGRN.placeHolderList[577]" "HumanMale_RIGRN.placeHolderList[578]" "R:Hat2_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[223]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[578]" "HumanMale_RIGRN.placeHolderList[579]" "R:Hat2_control.rx"
+		"HumanMale_RIGRN.placeHolderList[579]" "HumanMale_RIGRN.placeHolderList[580]" "R:Hat2_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[224]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[580]" "HumanMale_RIGRN.placeHolderList[581]" "R:Hat2_control.ry"
+		"HumanMale_RIGRN.placeHolderList[581]" "HumanMale_RIGRN.placeHolderList[582]" "R:Hat2_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[225]" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[582]" "HumanMale_RIGRN.placeHolderList[583]" "R:Hat2_control.rz"
+		"HumanMale_RIGRN.placeHolderList[583]" "HumanMale_RIGRN.placeHolderList[584]" "R:Hat2_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Hat2_control_group|R:Hat2_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[584]" ""
+		"HumanMale_RIGRN.placeHolderList[585]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[118]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[585]" "HumanMale_RIGRN.placeHolderList[586]" "R:Feather_control.tx"
+		"HumanMale_RIGRN.placeHolderList[586]" "HumanMale_RIGRN.placeHolderList[587]" "R:Feather_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[119]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[587]" "HumanMale_RIGRN.placeHolderList[588]" "R:Feather_control.ty"
+		"HumanMale_RIGRN.placeHolderList[588]" "HumanMale_RIGRN.placeHolderList[589]" "R:Feather_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[120]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[589]" "HumanMale_RIGRN.placeHolderList[590]" "R:Feather_control.tz"
+		"HumanMale_RIGRN.placeHolderList[590]" "HumanMale_RIGRN.placeHolderList[591]" "R:Feather_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[226]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[591]" "HumanMale_RIGRN.placeHolderList[592]" "R:Feather_control.rx"
+		"HumanMale_RIGRN.placeHolderList[592]" "HumanMale_RIGRN.placeHolderList[593]" "R:Feather_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[227]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[593]" "HumanMale_RIGRN.placeHolderList[594]" "R:Feather_control.ry"
+		"HumanMale_RIGRN.placeHolderList[594]" "HumanMale_RIGRN.placeHolderList[595]" "R:Feather_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[228]" "|R:Global_grp|R:Feather_control_group|R:Feather_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[595]" "HumanMale_RIGRN.placeHolderList[596]" "R:Feather_control.rz"
+		"HumanMale_RIGRN.placeHolderList[596]" "HumanMale_RIGRN.placeHolderList[597]" "R:Feather_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Feather_control_group|R:Feather_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[597]" ""
+		"HumanMale_RIGRN.placeHolderList[598]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[121]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[598]" "HumanMale_RIGRN.placeHolderList[599]" "R:Feather1_control.tx"
+		"HumanMale_RIGRN.placeHolderList[599]" "HumanMale_RIGRN.placeHolderList[600]" "R:Feather1_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[122]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[600]" "HumanMale_RIGRN.placeHolderList[601]" "R:Feather1_control.ty"
+		"HumanMale_RIGRN.placeHolderList[601]" "HumanMale_RIGRN.placeHolderList[602]" "R:Feather1_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[123]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[602]" "HumanMale_RIGRN.placeHolderList[603]" "R:Feather1_control.tz"
+		"HumanMale_RIGRN.placeHolderList[603]" "HumanMale_RIGRN.placeHolderList[604]" "R:Feather1_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[229]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[604]" "HumanMale_RIGRN.placeHolderList[605]" "R:Feather1_control.rx"
+		"HumanMale_RIGRN.placeHolderList[605]" "HumanMale_RIGRN.placeHolderList[606]" "R:Feather1_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[230]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[606]" "HumanMale_RIGRN.placeHolderList[607]" "R:Feather1_control.ry"
+		"HumanMale_RIGRN.placeHolderList[607]" "HumanMale_RIGRN.placeHolderList[608]" "R:Feather1_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[231]" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[608]" "HumanMale_RIGRN.placeHolderList[609]" "R:Feather1_control.rz"
+		"HumanMale_RIGRN.placeHolderList[609]" "HumanMale_RIGRN.placeHolderList[610]" "R:Feather1_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Feather1_control_group|R:Feather1_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[610]" ""
+		"HumanMale_RIGRN.placeHolderList[611]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[124]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[611]" "HumanMale_RIGRN.placeHolderList[612]" "R:Breath_control.tx"
+		"HumanMale_RIGRN.placeHolderList[612]" "HumanMale_RIGRN.placeHolderList[613]" "R:Breath_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[125]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[613]" "HumanMale_RIGRN.placeHolderList[614]" "R:Breath_control.ty"
+		"HumanMale_RIGRN.placeHolderList[614]" "HumanMale_RIGRN.placeHolderList[615]" "R:Breath_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[126]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[615]" "HumanMale_RIGRN.placeHolderList[616]" "R:Breath_control.tz"
+		"HumanMale_RIGRN.placeHolderList[616]" "HumanMale_RIGRN.placeHolderList[617]" "R:Breath_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[232]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[617]" "HumanMale_RIGRN.placeHolderList[618]" "R:Breath_control.rx"
+		"HumanMale_RIGRN.placeHolderList[618]" "HumanMale_RIGRN.placeHolderList[619]" "R:Breath_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[233]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[619]" "HumanMale_RIGRN.placeHolderList[620]" "R:Breath_control.ry"
+		"HumanMale_RIGRN.placeHolderList[620]" "HumanMale_RIGRN.placeHolderList[621]" "R:Breath_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[234]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[621]" "HumanMale_RIGRN.placeHolderList[622]" "R:Breath_control.rz"
+		"HumanMale_RIGRN.placeHolderList[622]" "HumanMale_RIGRN.placeHolderList[623]" "R:Breath_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[27]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.scaleX" 
-		"HumanMale_RIGRN.placeHolderList[623]" "HumanMale_RIGRN.placeHolderList[624]" "R:Breath_control.sx"
+		"HumanMale_RIGRN.placeHolderList[624]" "HumanMale_RIGRN.placeHolderList[625]" "R:Breath_control.sx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[28]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.scaleY" 
-		"HumanMale_RIGRN.placeHolderList[625]" "HumanMale_RIGRN.placeHolderList[626]" "R:Breath_control.sy"
+		"HumanMale_RIGRN.placeHolderList[626]" "HumanMale_RIGRN.placeHolderList[627]" "R:Breath_control.sy"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[29]" "|R:Global_grp|R:Breath_control_group|R:Breath_control.scaleZ" 
-		"HumanMale_RIGRN.placeHolderList[627]" "HumanMale_RIGRN.placeHolderList[628]" "R:Breath_control.sz"
+		"HumanMale_RIGRN.placeHolderList[628]" "HumanMale_RIGRN.placeHolderList[629]" "R:Breath_control.sz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Breath_control_group|R:Breath_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[629]" ""
+		"HumanMale_RIGRN.placeHolderList[630]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[127]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[630]" "HumanMale_RIGRN.placeHolderList[631]" "R:Heel_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[631]" "HumanMale_RIGRN.placeHolderList[632]" "R:Heel_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[128]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[632]" "HumanMale_RIGRN.placeHolderList[633]" "R:Heel_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[633]" "HumanMale_RIGRN.placeHolderList[634]" "R:Heel_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[129]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[634]" "HumanMale_RIGRN.placeHolderList[635]" "R:Heel_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[635]" "HumanMale_RIGRN.placeHolderList[636]" "R:Heel_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[235]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[636]" "HumanMale_RIGRN.placeHolderList[637]" "R:Heel_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[637]" "HumanMale_RIGRN.placeHolderList[638]" "R:Heel_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[236]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[638]" "HumanMale_RIGRN.placeHolderList[639]" "R:Heel_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[639]" "HumanMale_RIGRN.placeHolderList[640]" "R:Heel_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[237]" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[640]" "HumanMale_RIGRN.placeHolderList[641]" "R:Heel_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[641]" "HumanMale_RIGRN.placeHolderList[642]" "R:Heel_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[642]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[643]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Heel_L_control_group|R:Heel_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[644]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[130]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[644]" "HumanMale_RIGRN.placeHolderList[645]" "R:ToeEnd_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[645]" "HumanMale_RIGRN.placeHolderList[646]" "R:ToeEnd_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[131]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[646]" "HumanMale_RIGRN.placeHolderList[647]" "R:ToeEnd_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[647]" "HumanMale_RIGRN.placeHolderList[648]" "R:ToeEnd_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[132]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[648]" "HumanMale_RIGRN.placeHolderList[649]" "R:ToeEnd_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[649]" "HumanMale_RIGRN.placeHolderList[650]" "R:ToeEnd_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[238]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[650]" "HumanMale_RIGRN.placeHolderList[651]" "R:ToeEnd_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[651]" "HumanMale_RIGRN.placeHolderList[652]" "R:ToeEnd_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[239]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[652]" "HumanMale_RIGRN.placeHolderList[653]" "R:ToeEnd_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[653]" "HumanMale_RIGRN.placeHolderList[654]" "R:ToeEnd_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[240]" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[654]" "HumanMale_RIGRN.placeHolderList[655]" "R:ToeEnd_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[655]" "HumanMale_RIGRN.placeHolderList[656]" "R:ToeEnd_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[656]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[657]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:ToeEnd_L_control_group|R:ToeEnd_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[658]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[133]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[658]" "HumanMale_RIGRN.placeHolderList[659]" "R:Toe1_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[659]" "HumanMale_RIGRN.placeHolderList[660]" "R:Toe1_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[134]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[660]" "HumanMale_RIGRN.placeHolderList[661]" "R:Toe1_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[661]" "HumanMale_RIGRN.placeHolderList[662]" "R:Toe1_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[135]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[662]" "HumanMale_RIGRN.placeHolderList[663]" "R:Toe1_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[663]" "HumanMale_RIGRN.placeHolderList[664]" "R:Toe1_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[241]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[664]" "HumanMale_RIGRN.placeHolderList[665]" "R:Toe1_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[665]" "HumanMale_RIGRN.placeHolderList[666]" "R:Toe1_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[242]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[666]" "HumanMale_RIGRN.placeHolderList[667]" "R:Toe1_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[667]" "HumanMale_RIGRN.placeHolderList[668]" "R:Toe1_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[243]" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[668]" "HumanMale_RIGRN.placeHolderList[669]" "R:Toe1_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[669]" "HumanMale_RIGRN.placeHolderList[670]" "R:Toe1_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Toe1_L_control_group|R:Toe1_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[670]" ""
+		"HumanMale_RIGRN.placeHolderList[671]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[136]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateX" 
-		"HumanMale_RIGRN.placeHolderList[671]" "HumanMale_RIGRN.placeHolderList[672]" "R:Ball_L.tx"
+		"HumanMale_RIGRN.placeHolderList[672]" "HumanMale_RIGRN.placeHolderList[673]" "R:Ball_L.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[137]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateY" 
-		"HumanMale_RIGRN.placeHolderList[673]" "HumanMale_RIGRN.placeHolderList[674]" "R:Ball_L.ty"
+		"HumanMale_RIGRN.placeHolderList[674]" "HumanMale_RIGRN.placeHolderList[675]" "R:Ball_L.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[138]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[675]" "HumanMale_RIGRN.placeHolderList[676]" "R:Ball_L.tz"
+		"HumanMale_RIGRN.placeHolderList[676]" "HumanMale_RIGRN.placeHolderList[677]" "R:Ball_L.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[244]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[677]" "HumanMale_RIGRN.placeHolderList[678]" "R:Ball_L.rx"
+		"HumanMale_RIGRN.placeHolderList[678]" "HumanMale_RIGRN.placeHolderList[679]" "R:Ball_L.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[245]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[679]" "HumanMale_RIGRN.placeHolderList[680]" "R:Ball_L.ry"
+		"HumanMale_RIGRN.placeHolderList[680]" "HumanMale_RIGRN.placeHolderList[681]" "R:Ball_L.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[246]" "|R:Global_grp|R:Ball_L_group|R:Ball_L.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[681]" "HumanMale_RIGRN.placeHolderList[682]" "R:Ball_L.rz"
+		"HumanMale_RIGRN.placeHolderList[682]" "HumanMale_RIGRN.placeHolderList[683]" "R:Ball_L.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Ball_L_group|R:Ball_L.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[683]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Ball_L_group|R:Ball_L.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[684]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Ball_L_group|R:Ball_L.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[685]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[139]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[685]" "HumanMale_RIGRN.placeHolderList[686]" "R:Swivel_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[686]" "HumanMale_RIGRN.placeHolderList[687]" "R:Swivel_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[140]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[687]" "HumanMale_RIGRN.placeHolderList[688]" "R:Swivel_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[688]" "HumanMale_RIGRN.placeHolderList[689]" "R:Swivel_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[141]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[689]" "HumanMale_RIGRN.placeHolderList[690]" "R:Swivel_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[690]" "HumanMale_RIGRN.placeHolderList[691]" "R:Swivel_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[247]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[691]" "HumanMale_RIGRN.placeHolderList[692]" "R:Swivel_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[692]" "HumanMale_RIGRN.placeHolderList[693]" "R:Swivel_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[248]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[693]" "HumanMale_RIGRN.placeHolderList[694]" "R:Swivel_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[694]" "HumanMale_RIGRN.placeHolderList[695]" "R:Swivel_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[249]" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[695]" "HumanMale_RIGRN.placeHolderList[696]" "R:Swivel_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[696]" "HumanMale_RIGRN.placeHolderList[697]" "R:Swivel_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[697]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[698]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Swivel_L_control_group|R:Swivel_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[699]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[157]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[699]" "HumanMale_RIGRN.placeHolderList[700]" "R:EyeLids_control.tx"
+		"HumanMale_RIGRN.placeHolderList[700]" "HumanMale_RIGRN.placeHolderList[701]" "R:EyeLids_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[158]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[701]" "HumanMale_RIGRN.placeHolderList[702]" "R:EyeLids_control.ty"
+		"HumanMale_RIGRN.placeHolderList[702]" "HumanMale_RIGRN.placeHolderList[703]" "R:EyeLids_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[159]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[703]" "HumanMale_RIGRN.placeHolderList[704]" "R:EyeLids_control.tz"
+		"HumanMale_RIGRN.placeHolderList[704]" "HumanMale_RIGRN.placeHolderList[705]" "R:EyeLids_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[265]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[705]" "HumanMale_RIGRN.placeHolderList[706]" "R:EyeLids_control.rx"
+		"HumanMale_RIGRN.placeHolderList[706]" "HumanMale_RIGRN.placeHolderList[707]" "R:EyeLids_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[266]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[707]" "HumanMale_RIGRN.placeHolderList[708]" "R:EyeLids_control.ry"
+		"HumanMale_RIGRN.placeHolderList[708]" "HumanMale_RIGRN.placeHolderList[709]" "R:EyeLids_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[267]" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[709]" "HumanMale_RIGRN.placeHolderList[710]" "R:EyeLids_control.rz"
+		"HumanMale_RIGRN.placeHolderList[710]" "HumanMale_RIGRN.placeHolderList[711]" "R:EyeLids_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:EyeLids_control_group|R:EyeLids_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[711]" ""
+		"HumanMale_RIGRN.placeHolderList[712]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[160]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[712]" "HumanMale_RIGRN.placeHolderList[713]" "R:Eye_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[713]" "HumanMale_RIGRN.placeHolderList[714]" "R:Eye_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[161]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[714]" "HumanMale_RIGRN.placeHolderList[715]" "R:Eye_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[715]" "HumanMale_RIGRN.placeHolderList[716]" "R:Eye_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[162]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[716]" "HumanMale_RIGRN.placeHolderList[717]" "R:Eye_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[717]" "HumanMale_RIGRN.placeHolderList[718]" "R:Eye_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[268]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[718]" "HumanMale_RIGRN.placeHolderList[719]" "R:Eye_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[719]" "HumanMale_RIGRN.placeHolderList[720]" "R:Eye_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[269]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[720]" "HumanMale_RIGRN.placeHolderList[721]" "R:Eye_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[721]" "HumanMale_RIGRN.placeHolderList[722]" "R:Eye_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[270]" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[722]" "HumanMale_RIGRN.placeHolderList[723]" "R:Eye_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[723]" "HumanMale_RIGRN.placeHolderList[724]" "R:Eye_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Eye_R_control_group|R:Eye_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[724]" ""
+		"HumanMale_RIGRN.placeHolderList[725]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[163]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[725]" "HumanMale_RIGRN.placeHolderList[726]" "R:Eye_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[726]" "HumanMale_RIGRN.placeHolderList[727]" "R:Eye_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[164]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[727]" "HumanMale_RIGRN.placeHolderList[728]" "R:Eye_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[728]" "HumanMale_RIGRN.placeHolderList[729]" "R:Eye_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[165]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[729]" "HumanMale_RIGRN.placeHolderList[730]" "R:Eye_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[730]" "HumanMale_RIGRN.placeHolderList[731]" "R:Eye_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[271]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[731]" "HumanMale_RIGRN.placeHolderList[732]" "R:Eye_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[732]" "HumanMale_RIGRN.placeHolderList[733]" "R:Eye_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[272]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[733]" "HumanMale_RIGRN.placeHolderList[734]" "R:Eye_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[734]" "HumanMale_RIGRN.placeHolderList[735]" "R:Eye_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[273]" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[735]" "HumanMale_RIGRN.placeHolderList[736]" "R:Eye_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[736]" "HumanMale_RIGRN.placeHolderList[737]" "R:Eye_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Eye_L_control_group|R:Eye_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[737]" ""
+		"HumanMale_RIGRN.placeHolderList[738]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[166]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[738]" "HumanMale_RIGRN.placeHolderList[739]" "R:WeaponWorld_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[739]" "HumanMale_RIGRN.placeHolderList[740]" "R:WeaponWorld_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[167]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[740]" "HumanMale_RIGRN.placeHolderList[741]" "R:WeaponWorld_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[741]" "HumanMale_RIGRN.placeHolderList[742]" "R:WeaponWorld_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[168]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[742]" "HumanMale_RIGRN.placeHolderList[743]" "R:WeaponWorld_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[743]" "HumanMale_RIGRN.placeHolderList[744]" "R:WeaponWorld_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[274]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[744]" "HumanMale_RIGRN.placeHolderList[745]" "R:WeaponWorld_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[745]" "HumanMale_RIGRN.placeHolderList[746]" "R:WeaponWorld_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[275]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[746]" "HumanMale_RIGRN.placeHolderList[747]" "R:WeaponWorld_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[747]" "HumanMale_RIGRN.placeHolderList[748]" "R:WeaponWorld_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[276]" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[748]" "HumanMale_RIGRN.placeHolderList[749]" "R:WeaponWorld_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[749]" "HumanMale_RIGRN.placeHolderList[750]" "R:WeaponWorld_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:WeaponWorld_L_control_group|R:WeaponWorld_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[750]" ""
+		"HumanMale_RIGRN.placeHolderList[751]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[169]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[751]" "HumanMale_RIGRN.placeHolderList[752]" "R:WeaponWorld_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[752]" "HumanMale_RIGRN.placeHolderList[753]" "R:WeaponWorld_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[170]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[753]" "HumanMale_RIGRN.placeHolderList[754]" "R:WeaponWorld_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[754]" "HumanMale_RIGRN.placeHolderList[755]" "R:WeaponWorld_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[171]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[755]" "HumanMale_RIGRN.placeHolderList[756]" "R:WeaponWorld_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[756]" "HumanMale_RIGRN.placeHolderList[757]" "R:WeaponWorld_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[277]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[757]" "HumanMale_RIGRN.placeHolderList[758]" "R:WeaponWorld_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[758]" "HumanMale_RIGRN.placeHolderList[759]" "R:WeaponWorld_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[278]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[759]" "HumanMale_RIGRN.placeHolderList[760]" "R:WeaponWorld_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[760]" "HumanMale_RIGRN.placeHolderList[761]" "R:WeaponWorld_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[279]" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[761]" "HumanMale_RIGRN.placeHolderList[762]" "R:WeaponWorld_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[762]" "HumanMale_RIGRN.placeHolderList[763]" "R:WeaponWorld_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:WeaponWorld_R_control_group|R:WeaponWorld_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[763]" ""
+		"HumanMale_RIGRN.placeHolderList[764]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[36]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.ParentSpace" 
-		"HumanMale_RIGRN.placeHolderList[764]" "HumanMale_RIGRN.placeHolderList[765]" "R:Slot_Hand_R_control.ParentSpace"
+		"HumanMale_RIGRN.placeHolderList[765]" "HumanMale_RIGRN.placeHolderList[766]" "R:Slot_Hand_R_control.ParentSpace"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[172]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[766]" "HumanMale_RIGRN.placeHolderList[767]" "R:Slot_Hand_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[767]" "HumanMale_RIGRN.placeHolderList[768]" "R:Slot_Hand_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[173]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[768]" "HumanMale_RIGRN.placeHolderList[769]" "R:Slot_Hand_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[769]" "HumanMale_RIGRN.placeHolderList[770]" "R:Slot_Hand_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[174]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[770]" "HumanMale_RIGRN.placeHolderList[771]" "R:Slot_Hand_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[771]" "HumanMale_RIGRN.placeHolderList[772]" "R:Slot_Hand_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[280]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[772]" "HumanMale_RIGRN.placeHolderList[773]" "R:Slot_Hand_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[773]" "HumanMale_RIGRN.placeHolderList[774]" "R:Slot_Hand_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[281]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[774]" "HumanMale_RIGRN.placeHolderList[775]" "R:Slot_Hand_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[775]" "HumanMale_RIGRN.placeHolderList[776]" "R:Slot_Hand_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[282]" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[776]" "HumanMale_RIGRN.placeHolderList[777]" "R:Slot_Hand_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[777]" "HumanMale_RIGRN.placeHolderList[778]" "R:Slot_Hand_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Slot_Hand_R_control_group|R:Slot_Hand_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[778]" ""
+		"HumanMale_RIGRN.placeHolderList[779]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[37]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.ParentSpace" 
-		"HumanMale_RIGRN.placeHolderList[779]" "HumanMale_RIGRN.placeHolderList[780]" "R:Slot_Hand_L_control.ParentSpace"
+		"HumanMale_RIGRN.placeHolderList[780]" "HumanMale_RIGRN.placeHolderList[781]" "R:Slot_Hand_L_control.ParentSpace"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[175]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[781]" "HumanMale_RIGRN.placeHolderList[782]" "R:Slot_Hand_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[782]" "HumanMale_RIGRN.placeHolderList[783]" "R:Slot_Hand_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[176]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[783]" "HumanMale_RIGRN.placeHolderList[784]" "R:Slot_Hand_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[784]" "HumanMale_RIGRN.placeHolderList[785]" "R:Slot_Hand_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[177]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[785]" "HumanMale_RIGRN.placeHolderList[786]" "R:Slot_Hand_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[786]" "HumanMale_RIGRN.placeHolderList[787]" "R:Slot_Hand_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[283]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[787]" "HumanMale_RIGRN.placeHolderList[788]" "R:Slot_Hand_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[788]" "HumanMale_RIGRN.placeHolderList[789]" "R:Slot_Hand_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[284]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[789]" "HumanMale_RIGRN.placeHolderList[790]" "R:Slot_Hand_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[790]" "HumanMale_RIGRN.placeHolderList[791]" "R:Slot_Hand_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[285]" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[791]" "HumanMale_RIGRN.placeHolderList[792]" "R:Slot_Hand_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[792]" "HumanMale_RIGRN.placeHolderList[793]" "R:Slot_Hand_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Slot_Hand_L_control_group|R:Slot_Hand_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[793]" ""
+		"HumanMale_RIGRN.placeHolderList[794]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[178]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[794]" "HumanMale_RIGRN.placeHolderList[795]" "R:Slot_Hand_R_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[795]" "HumanMale_RIGRN.placeHolderList[796]" "R:Slot_Hand_R_locator.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[179]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[796]" "HumanMale_RIGRN.placeHolderList[797]" "R:Slot_Hand_R_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[797]" "HumanMale_RIGRN.placeHolderList[798]" "R:Slot_Hand_R_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[180]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[798]" "HumanMale_RIGRN.placeHolderList[799]" "R:Slot_Hand_R_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[799]" "HumanMale_RIGRN.placeHolderList[800]" "R:Slot_Hand_R_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[286]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[800]" "HumanMale_RIGRN.placeHolderList[801]" "R:Slot_Hand_R_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[801]" "HumanMale_RIGRN.placeHolderList[802]" "R:Slot_Hand_R_locator.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[287]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[802]" "HumanMale_RIGRN.placeHolderList[803]" "R:Slot_Hand_R_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[803]" "HumanMale_RIGRN.placeHolderList[804]" "R:Slot_Hand_R_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[288]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[804]" "HumanMale_RIGRN.placeHolderList[805]" "R:Slot_Hand_R_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[805]" "HumanMale_RIGRN.placeHolderList[806]" "R:Slot_Hand_R_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[30]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.scaleZ" 
-		"HumanMale_RIGRN.placeHolderList[806]" "HumanMale_RIGRN.placeHolderList[807]" "R:Slot_Hand_R_locator.sz"
+		"HumanMale_RIGRN.placeHolderList[807]" "HumanMale_RIGRN.placeHolderList[808]" "R:Slot_Hand_R_locator.sz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[31]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.scaleY" 
-		"HumanMale_RIGRN.placeHolderList[808]" "HumanMale_RIGRN.placeHolderList[809]" "R:Slot_Hand_R_locator.sy"
+		"HumanMale_RIGRN.placeHolderList[809]" "HumanMale_RIGRN.placeHolderList[810]" "R:Slot_Hand_R_locator.sy"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[32]" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.scaleX" 
-		"HumanMale_RIGRN.placeHolderList[810]" "HumanMale_RIGRN.placeHolderList[811]" "R:Slot_Hand_R_locator.sx"
+		"HumanMale_RIGRN.placeHolderList[811]" "HumanMale_RIGRN.placeHolderList[812]" "R:Slot_Hand_R_locator.sx"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Slot_Hand_R_locator_group|R:Slot_Hand_R_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[812]" ""
+		"HumanMale_RIGRN.placeHolderList[813]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[181]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[813]" "HumanMale_RIGRN.placeHolderList[814]" "R:Slot_Hand_L_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[814]" "HumanMale_RIGRN.placeHolderList[815]" "R:Slot_Hand_L_locator.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[182]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[815]" "HumanMale_RIGRN.placeHolderList[816]" "R:Slot_Hand_L_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[816]" "HumanMale_RIGRN.placeHolderList[817]" "R:Slot_Hand_L_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[183]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[817]" "HumanMale_RIGRN.placeHolderList[818]" "R:Slot_Hand_L_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[818]" "HumanMale_RIGRN.placeHolderList[819]" "R:Slot_Hand_L_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[289]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[819]" "HumanMale_RIGRN.placeHolderList[820]" "R:Slot_Hand_L_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[820]" "HumanMale_RIGRN.placeHolderList[821]" "R:Slot_Hand_L_locator.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[290]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[821]" "HumanMale_RIGRN.placeHolderList[822]" "R:Slot_Hand_L_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[822]" "HumanMale_RIGRN.placeHolderList[823]" "R:Slot_Hand_L_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[291]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[823]" "HumanMale_RIGRN.placeHolderList[824]" "R:Slot_Hand_L_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[824]" "HumanMale_RIGRN.placeHolderList[825]" "R:Slot_Hand_L_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[33]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleZ" 
-		"HumanMale_RIGRN.placeHolderList[825]" "HumanMale_RIGRN.placeHolderList[826]" "R:Slot_Hand_L_locator.sz"
+		"HumanMale_RIGRN.placeHolderList[826]" "HumanMale_RIGRN.placeHolderList[827]" "R:Slot_Hand_L_locator.sz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[34]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleY" 
-		"HumanMale_RIGRN.placeHolderList[827]" "HumanMale_RIGRN.placeHolderList[828]" "R:Slot_Hand_L_locator.sy"
+		"HumanMale_RIGRN.placeHolderList[828]" "HumanMale_RIGRN.placeHolderList[829]" "R:Slot_Hand_L_locator.sy"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[35]" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.scaleX" 
-		"HumanMale_RIGRN.placeHolderList[829]" "HumanMale_RIGRN.placeHolderList[830]" "R:Slot_Hand_L_locator.sx"
+		"HumanMale_RIGRN.placeHolderList[830]" "HumanMale_RIGRN.placeHolderList[831]" "R:Slot_Hand_L_locator.sx"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Slot_Hand_L_locator_group|R:Slot_Hand_L_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[831]" ""
+		"HumanMale_RIGRN.placeHolderList[832]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[184]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[832]" "HumanMale_RIGRN.placeHolderList[833]" "R:Foot_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[833]" "HumanMale_RIGRN.placeHolderList[834]" "R:Foot_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[185]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[834]" "HumanMale_RIGRN.placeHolderList[835]" "R:Foot_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[835]" "HumanMale_RIGRN.placeHolderList[836]" "R:Foot_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[186]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[836]" "HumanMale_RIGRN.placeHolderList[837]" "R:Foot_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[837]" "HumanMale_RIGRN.placeHolderList[838]" "R:Foot_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[292]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[838]" "HumanMale_RIGRN.placeHolderList[839]" "R:Foot_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[839]" "HumanMale_RIGRN.placeHolderList[840]" "R:Foot_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[293]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[840]" "HumanMale_RIGRN.placeHolderList[841]" "R:Foot_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[841]" "HumanMale_RIGRN.placeHolderList[842]" "R:Foot_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[294]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[842]" "HumanMale_RIGRN.placeHolderList[843]" "R:Foot_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[843]" "HumanMale_RIGRN.placeHolderList[844]" "R:Foot_R_control.rz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[38]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.FKBlend" 
-		"HumanMale_RIGRN.placeHolderList[844]" "HumanMale_RIGRN.placeHolderList[845]" "R:Foot_R_control.FKBlend"
+		"HumanMale_RIGRN.placeHolderList[845]" "HumanMale_RIGRN.placeHolderList[846]" "R:Foot_R_control.FKBlend"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[39]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.ParentOnHips" 
-		"HumanMale_RIGRN.placeHolderList[846]" "HumanMale_RIGRN.placeHolderList[847]" "R:Foot_R_control.ParentOnHips"
+		"HumanMale_RIGRN.placeHolderList[847]" "HumanMale_RIGRN.placeHolderList[848]" "R:Foot_R_control.ParentOnHips"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[40]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.Stretch" 
-		"HumanMale_RIGRN.placeHolderList[848]" "HumanMale_RIGRN.placeHolderList[849]" "R:Foot_R_control.Stretch"
+		"HumanMale_RIGRN.placeHolderList[849]" "HumanMale_RIGRN.placeHolderList[850]" "R:Foot_R_control.Stretch"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[41]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.StretchMin" 
-		"HumanMale_RIGRN.placeHolderList[850]" "HumanMale_RIGRN.placeHolderList[851]" "R:Foot_R_control.StretchMin"
+		"HumanMale_RIGRN.placeHolderList[851]" "HumanMale_RIGRN.placeHolderList[852]" "R:Foot_R_control.StretchMin"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[42]" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.StretchMax" 
-		"HumanMale_RIGRN.placeHolderList[852]" "HumanMale_RIGRN.placeHolderList[853]" "R:Foot_R_control.StretchMax"
+		"HumanMale_RIGRN.placeHolderList[853]" "HumanMale_RIGRN.placeHolderList[854]" "R:Foot_R_control.StretchMax"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[854]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[855]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Foot_R_control_group|R:Foot_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[856]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[187]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[856]" "HumanMale_RIGRN.placeHolderList[857]" "R:Leg_R_Knee_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[857]" "HumanMale_RIGRN.placeHolderList[858]" "R:Leg_R_Knee_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[188]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[858]" "HumanMale_RIGRN.placeHolderList[859]" "R:Leg_R_Knee_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[859]" "HumanMale_RIGRN.placeHolderList[860]" "R:Leg_R_Knee_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[189]" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[860]" "HumanMale_RIGRN.placeHolderList[861]" "R:Leg_R_Knee_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[861]" "HumanMale_RIGRN.placeHolderList[862]" "R:Leg_R_Knee_locator.tz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[862]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[863]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_R_Knee_locator_group|R:Leg_R_Knee_locator.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[864]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[190]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateX" 
-		"HumanMale_RIGRN.placeHolderList[864]" "HumanMale_RIGRN.placeHolderList[865]" "R:LegUpper_R_FK_locator.tx"
+		"HumanMale_RIGRN.placeHolderList[865]" "HumanMale_RIGRN.placeHolderList[866]" "R:LegUpper_R_FK_locator.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[191]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateY" 
-		"HumanMale_RIGRN.placeHolderList[866]" "HumanMale_RIGRN.placeHolderList[867]" "R:LegUpper_R_FK_locator.ty"
+		"HumanMale_RIGRN.placeHolderList[867]" "HumanMale_RIGRN.placeHolderList[868]" "R:LegUpper_R_FK_locator.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[192]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[868]" "HumanMale_RIGRN.placeHolderList[869]" "R:LegUpper_R_FK_locator.tz"
+		"HumanMale_RIGRN.placeHolderList[869]" "HumanMale_RIGRN.placeHolderList[870]" "R:LegUpper_R_FK_locator.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[295]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[870]" "HumanMale_RIGRN.placeHolderList[871]" "R:LegUpper_R_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[871]" "HumanMale_RIGRN.placeHolderList[872]" "R:LegUpper_R_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[296]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[872]" "HumanMale_RIGRN.placeHolderList[873]" "R:LegUpper_R_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[873]" "HumanMale_RIGRN.placeHolderList[874]" "R:LegUpper_R_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[297]" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[874]" "HumanMale_RIGRN.placeHolderList[875]" "R:LegUpper_R_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[875]" "HumanMale_RIGRN.placeHolderList[876]" "R:LegUpper_R_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:LegUpper_R_FK_locator_group|R:LegUpper_R_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[876]" ""
+		"HumanMale_RIGRN.placeHolderList[877]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[298]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[877]" "HumanMale_RIGRN.placeHolderList[878]" "R:Leg_R_Knee_FK_locator.rx"
+		"HumanMale_RIGRN.placeHolderList[878]" "HumanMale_RIGRN.placeHolderList[879]" "R:Leg_R_Knee_FK_locator.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[299]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[879]" "HumanMale_RIGRN.placeHolderList[880]" "R:Leg_R_Knee_FK_locator.ry"
+		"HumanMale_RIGRN.placeHolderList[880]" "HumanMale_RIGRN.placeHolderList[881]" "R:Leg_R_Knee_FK_locator.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[300]" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[881]" "HumanMale_RIGRN.placeHolderList[882]" "R:Leg_R_Knee_FK_locator.rz"
+		"HumanMale_RIGRN.placeHolderList[882]" "HumanMale_RIGRN.placeHolderList[883]" "R:Leg_R_Knee_FK_locator.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Leg_R_Knee_FK_locator_group|R:Leg_R_Knee_FK_locator.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[883]" ""
+		"HumanMale_RIGRN.placeHolderList[884]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[193]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[884]" "HumanMale_RIGRN.placeHolderList[885]" "R:Heel_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[885]" "HumanMale_RIGRN.placeHolderList[886]" "R:Heel_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[194]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[886]" "HumanMale_RIGRN.placeHolderList[887]" "R:Heel_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[887]" "HumanMale_RIGRN.placeHolderList[888]" "R:Heel_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[195]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[888]" "HumanMale_RIGRN.placeHolderList[889]" "R:Heel_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[889]" "HumanMale_RIGRN.placeHolderList[890]" "R:Heel_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[301]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[890]" "HumanMale_RIGRN.placeHolderList[891]" "R:Heel_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[891]" "HumanMale_RIGRN.placeHolderList[892]" "R:Heel_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[302]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[892]" "HumanMale_RIGRN.placeHolderList[893]" "R:Heel_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[893]" "HumanMale_RIGRN.placeHolderList[894]" "R:Heel_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[303]" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[894]" "HumanMale_RIGRN.placeHolderList[895]" "R:Heel_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[895]" "HumanMale_RIGRN.placeHolderList[896]" "R:Heel_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[896]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[897]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Heel_R_control_group|R:Heel_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[898]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[196]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[898]" "HumanMale_RIGRN.placeHolderList[899]" "R:ToeEnd_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[899]" "HumanMale_RIGRN.placeHolderList[900]" "R:ToeEnd_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[197]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[900]" "HumanMale_RIGRN.placeHolderList[901]" "R:ToeEnd_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[901]" "HumanMale_RIGRN.placeHolderList[902]" "R:ToeEnd_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[198]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[902]" "HumanMale_RIGRN.placeHolderList[903]" "R:ToeEnd_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[903]" "HumanMale_RIGRN.placeHolderList[904]" "R:ToeEnd_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[304]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[904]" "HumanMale_RIGRN.placeHolderList[905]" "R:ToeEnd_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[905]" "HumanMale_RIGRN.placeHolderList[906]" "R:ToeEnd_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[305]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[906]" "HumanMale_RIGRN.placeHolderList[907]" "R:ToeEnd_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[907]" "HumanMale_RIGRN.placeHolderList[908]" "R:ToeEnd_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[306]" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[908]" "HumanMale_RIGRN.placeHolderList[909]" "R:ToeEnd_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[909]" "HumanMale_RIGRN.placeHolderList[910]" "R:ToeEnd_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[910]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[911]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:ToeEnd_R_control_group|R:ToeEnd_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[912]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[199]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[912]" "HumanMale_RIGRN.placeHolderList[913]" "R:Toe1_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[913]" "HumanMale_RIGRN.placeHolderList[914]" "R:Toe1_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[200]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[914]" "HumanMale_RIGRN.placeHolderList[915]" "R:Toe1_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[915]" "HumanMale_RIGRN.placeHolderList[916]" "R:Toe1_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[201]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[916]" "HumanMale_RIGRN.placeHolderList[917]" "R:Toe1_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[917]" "HumanMale_RIGRN.placeHolderList[918]" "R:Toe1_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[307]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[918]" "HumanMale_RIGRN.placeHolderList[919]" "R:Toe1_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[919]" "HumanMale_RIGRN.placeHolderList[920]" "R:Toe1_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[308]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[920]" "HumanMale_RIGRN.placeHolderList[921]" "R:Toe1_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[921]" "HumanMale_RIGRN.placeHolderList[922]" "R:Toe1_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[309]" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[922]" "HumanMale_RIGRN.placeHolderList[923]" "R:Toe1_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[923]" "HumanMale_RIGRN.placeHolderList[924]" "R:Toe1_R_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Toe1_R_control_group|R:Toe1_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[924]" ""
+		"HumanMale_RIGRN.placeHolderList[925]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[202]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateX" 
-		"HumanMale_RIGRN.placeHolderList[925]" "HumanMale_RIGRN.placeHolderList[926]" "R:Ball_R.tx"
+		"HumanMale_RIGRN.placeHolderList[926]" "HumanMale_RIGRN.placeHolderList[927]" "R:Ball_R.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[203]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateY" 
-		"HumanMale_RIGRN.placeHolderList[927]" "HumanMale_RIGRN.placeHolderList[928]" "R:Ball_R.ty"
+		"HumanMale_RIGRN.placeHolderList[928]" "HumanMale_RIGRN.placeHolderList[929]" "R:Ball_R.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[204]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[929]" "HumanMale_RIGRN.placeHolderList[930]" "R:Ball_R.tz"
+		"HumanMale_RIGRN.placeHolderList[930]" "HumanMale_RIGRN.placeHolderList[931]" "R:Ball_R.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[310]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[931]" "HumanMale_RIGRN.placeHolderList[932]" "R:Ball_R.rx"
+		"HumanMale_RIGRN.placeHolderList[932]" "HumanMale_RIGRN.placeHolderList[933]" "R:Ball_R.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[311]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[933]" "HumanMale_RIGRN.placeHolderList[934]" "R:Ball_R.ry"
+		"HumanMale_RIGRN.placeHolderList[934]" "HumanMale_RIGRN.placeHolderList[935]" "R:Ball_R.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[312]" "|R:Global_grp|R:Ball_R_group|R:Ball_R.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[935]" "HumanMale_RIGRN.placeHolderList[936]" "R:Ball_R.rz"
+		"HumanMale_RIGRN.placeHolderList[936]" "HumanMale_RIGRN.placeHolderList[937]" "R:Ball_R.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Ball_R_group|R:Ball_R.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[937]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Ball_R_group|R:Ball_R.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[938]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Ball_R_group|R:Ball_R.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[939]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[205]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[939]" "HumanMale_RIGRN.placeHolderList[940]" "R:Swivel_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[940]" "HumanMale_RIGRN.placeHolderList[941]" "R:Swivel_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[206]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[941]" "HumanMale_RIGRN.placeHolderList[942]" "R:Swivel_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[942]" "HumanMale_RIGRN.placeHolderList[943]" "R:Swivel_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[207]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[943]" "HumanMale_RIGRN.placeHolderList[944]" "R:Swivel_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[944]" "HumanMale_RIGRN.placeHolderList[945]" "R:Swivel_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[313]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[945]" "HumanMale_RIGRN.placeHolderList[946]" "R:Swivel_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[946]" "HumanMale_RIGRN.placeHolderList[947]" "R:Swivel_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[314]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[947]" "HumanMale_RIGRN.placeHolderList[948]" "R:Swivel_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[948]" "HumanMale_RIGRN.placeHolderList[949]" "R:Swivel_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[315]" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[949]" "HumanMale_RIGRN.placeHolderList[950]" "R:Swivel_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[950]" "HumanMale_RIGRN.placeHolderList[951]" "R:Swivel_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[951]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[952]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Swivel_R_control_group|R:Swivel_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[953]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[253]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[953]" "HumanMale_RIGRN.placeHolderList[954]" "R:Finger21_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[954]" "HumanMale_RIGRN.placeHolderList[955]" "R:Finger21_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[254]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[955]" "HumanMale_RIGRN.placeHolderList[956]" "R:Finger21_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[956]" "HumanMale_RIGRN.placeHolderList[957]" "R:Finger21_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[255]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[957]" "HumanMale_RIGRN.placeHolderList[958]" "R:Finger21_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[958]" "HumanMale_RIGRN.placeHolderList[959]" "R:Finger21_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[361]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[959]" "HumanMale_RIGRN.placeHolderList[960]" "R:Finger21_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[960]" "HumanMale_RIGRN.placeHolderList[961]" "R:Finger21_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[362]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[961]" "HumanMale_RIGRN.placeHolderList[962]" "R:Finger21_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[962]" "HumanMale_RIGRN.placeHolderList[963]" "R:Finger21_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[363]" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[963]" "HumanMale_RIGRN.placeHolderList[964]" "R:Finger21_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[964]" "HumanMale_RIGRN.placeHolderList[965]" "R:Finger21_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[965]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[966]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger21_R_control_group|R:Finger21_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[967]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[256]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[967]" "HumanMale_RIGRN.placeHolderList[968]" "R:Finger22_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[968]" "HumanMale_RIGRN.placeHolderList[969]" "R:Finger22_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[257]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[969]" "HumanMale_RIGRN.placeHolderList[970]" "R:Finger22_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[970]" "HumanMale_RIGRN.placeHolderList[971]" "R:Finger22_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[258]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[971]" "HumanMale_RIGRN.placeHolderList[972]" "R:Finger22_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[972]" "HumanMale_RIGRN.placeHolderList[973]" "R:Finger22_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[364]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[973]" "HumanMale_RIGRN.placeHolderList[974]" "R:Finger22_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[974]" "HumanMale_RIGRN.placeHolderList[975]" "R:Finger22_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[365]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[975]" "HumanMale_RIGRN.placeHolderList[976]" "R:Finger22_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[976]" "HumanMale_RIGRN.placeHolderList[977]" "R:Finger22_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[366]" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[977]" "HumanMale_RIGRN.placeHolderList[978]" "R:Finger22_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[978]" "HumanMale_RIGRN.placeHolderList[979]" "R:Finger22_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[979]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[980]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger22_R_control_group|R:Finger22_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[981]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[259]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[981]" "HumanMale_RIGRN.placeHolderList[982]" "R:Finger23_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[982]" "HumanMale_RIGRN.placeHolderList[983]" "R:Finger23_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[260]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[983]" "HumanMale_RIGRN.placeHolderList[984]" "R:Finger23_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[984]" "HumanMale_RIGRN.placeHolderList[985]" "R:Finger23_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[261]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[985]" "HumanMale_RIGRN.placeHolderList[986]" "R:Finger23_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[986]" "HumanMale_RIGRN.placeHolderList[987]" "R:Finger23_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[367]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[987]" "HumanMale_RIGRN.placeHolderList[988]" "R:Finger23_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[988]" "HumanMale_RIGRN.placeHolderList[989]" "R:Finger23_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[368]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[989]" "HumanMale_RIGRN.placeHolderList[990]" "R:Finger23_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[990]" "HumanMale_RIGRN.placeHolderList[991]" "R:Finger23_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[369]" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[991]" "HumanMale_RIGRN.placeHolderList[992]" "R:Finger23_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[992]" "HumanMale_RIGRN.placeHolderList[993]" "R:Finger23_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[993]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[994]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger23_R_control_group|R:Finger23_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[995]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[262]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[995]" "HumanMale_RIGRN.placeHolderList[996]" "R:Finger31_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[996]" "HumanMale_RIGRN.placeHolderList[997]" "R:Finger31_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[263]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[997]" "HumanMale_RIGRN.placeHolderList[998]" "R:Finger31_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[998]" "HumanMale_RIGRN.placeHolderList[999]" "R:Finger31_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[264]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[999]" "HumanMale_RIGRN.placeHolderList[1000]" "R:Finger31_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1000]" "HumanMale_RIGRN.placeHolderList[1001]" "R:Finger31_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[370]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1001]" "HumanMale_RIGRN.placeHolderList[1002]" "R:Finger31_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1002]" "HumanMale_RIGRN.placeHolderList[1003]" "R:Finger31_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[371]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1003]" "HumanMale_RIGRN.placeHolderList[1004]" "R:Finger31_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1004]" "HumanMale_RIGRN.placeHolderList[1005]" "R:Finger31_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[372]" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1005]" "HumanMale_RIGRN.placeHolderList[1006]" "R:Finger31_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1006]" "HumanMale_RIGRN.placeHolderList[1007]" "R:Finger31_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1007]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1008]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger31_R_control_group|R:Finger31_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1009]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[265]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1009]" "HumanMale_RIGRN.placeHolderList[1010]" "R:Finger32_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1010]" "HumanMale_RIGRN.placeHolderList[1011]" "R:Finger32_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[266]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1011]" "HumanMale_RIGRN.placeHolderList[1012]" "R:Finger32_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1012]" "HumanMale_RIGRN.placeHolderList[1013]" "R:Finger32_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[267]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1013]" "HumanMale_RIGRN.placeHolderList[1014]" "R:Finger32_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1014]" "HumanMale_RIGRN.placeHolderList[1015]" "R:Finger32_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[373]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1015]" "HumanMale_RIGRN.placeHolderList[1016]" "R:Finger32_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1016]" "HumanMale_RIGRN.placeHolderList[1017]" "R:Finger32_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[374]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1017]" "HumanMale_RIGRN.placeHolderList[1018]" "R:Finger32_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1018]" "HumanMale_RIGRN.placeHolderList[1019]" "R:Finger32_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[375]" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1019]" "HumanMale_RIGRN.placeHolderList[1020]" "R:Finger32_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1020]" "HumanMale_RIGRN.placeHolderList[1021]" "R:Finger32_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1021]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1022]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger32_R_control_group|R:Finger32_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1023]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[268]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1023]" "HumanMale_RIGRN.placeHolderList[1024]" "R:Finger33_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1024]" "HumanMale_RIGRN.placeHolderList[1025]" "R:Finger33_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[269]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1025]" "HumanMale_RIGRN.placeHolderList[1026]" "R:Finger33_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1026]" "HumanMale_RIGRN.placeHolderList[1027]" "R:Finger33_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[270]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1027]" "HumanMale_RIGRN.placeHolderList[1028]" "R:Finger33_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1028]" "HumanMale_RIGRN.placeHolderList[1029]" "R:Finger33_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[376]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1029]" "HumanMale_RIGRN.placeHolderList[1030]" "R:Finger33_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1030]" "HumanMale_RIGRN.placeHolderList[1031]" "R:Finger33_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[377]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1031]" "HumanMale_RIGRN.placeHolderList[1032]" "R:Finger33_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1032]" "HumanMale_RIGRN.placeHolderList[1033]" "R:Finger33_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[378]" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1033]" "HumanMale_RIGRN.placeHolderList[1034]" "R:Finger33_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1034]" "HumanMale_RIGRN.placeHolderList[1035]" "R:Finger33_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1035]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1036]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger33_R_control_group|R:Finger33_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1037]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[271]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1037]" "HumanMale_RIGRN.placeHolderList[1038]" "R:Finger41_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1038]" "HumanMale_RIGRN.placeHolderList[1039]" "R:Finger41_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[272]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1039]" "HumanMale_RIGRN.placeHolderList[1040]" "R:Finger41_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1040]" "HumanMale_RIGRN.placeHolderList[1041]" "R:Finger41_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[273]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1041]" "HumanMale_RIGRN.placeHolderList[1042]" "R:Finger41_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1042]" "HumanMale_RIGRN.placeHolderList[1043]" "R:Finger41_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[379]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1043]" "HumanMale_RIGRN.placeHolderList[1044]" "R:Finger41_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1044]" "HumanMale_RIGRN.placeHolderList[1045]" "R:Finger41_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[380]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1045]" "HumanMale_RIGRN.placeHolderList[1046]" "R:Finger41_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1046]" "HumanMale_RIGRN.placeHolderList[1047]" "R:Finger41_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[381]" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1047]" "HumanMale_RIGRN.placeHolderList[1048]" "R:Finger41_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1048]" "HumanMale_RIGRN.placeHolderList[1049]" "R:Finger41_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1049]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1050]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger41_R_control_group|R:Finger41_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1051]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[274]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1051]" "HumanMale_RIGRN.placeHolderList[1052]" "R:Finger42_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1052]" "HumanMale_RIGRN.placeHolderList[1053]" "R:Finger42_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[275]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1053]" "HumanMale_RIGRN.placeHolderList[1054]" "R:Finger42_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1054]" "HumanMale_RIGRN.placeHolderList[1055]" "R:Finger42_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[276]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1055]" "HumanMale_RIGRN.placeHolderList[1056]" "R:Finger42_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1056]" "HumanMale_RIGRN.placeHolderList[1057]" "R:Finger42_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[382]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1057]" "HumanMale_RIGRN.placeHolderList[1058]" "R:Finger42_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1058]" "HumanMale_RIGRN.placeHolderList[1059]" "R:Finger42_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[383]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1059]" "HumanMale_RIGRN.placeHolderList[1060]" "R:Finger42_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1060]" "HumanMale_RIGRN.placeHolderList[1061]" "R:Finger42_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[384]" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1061]" "HumanMale_RIGRN.placeHolderList[1062]" "R:Finger42_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1062]" "HumanMale_RIGRN.placeHolderList[1063]" "R:Finger42_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1063]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1064]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger42_R_control_group|R:Finger42_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1065]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[277]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1065]" "HumanMale_RIGRN.placeHolderList[1066]" "R:Finger43_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1066]" "HumanMale_RIGRN.placeHolderList[1067]" "R:Finger43_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[278]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1067]" "HumanMale_RIGRN.placeHolderList[1068]" "R:Finger43_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1068]" "HumanMale_RIGRN.placeHolderList[1069]" "R:Finger43_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[279]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1069]" "HumanMale_RIGRN.placeHolderList[1070]" "R:Finger43_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1070]" "HumanMale_RIGRN.placeHolderList[1071]" "R:Finger43_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[385]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1071]" "HumanMale_RIGRN.placeHolderList[1072]" "R:Finger43_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1072]" "HumanMale_RIGRN.placeHolderList[1073]" "R:Finger43_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[386]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1073]" "HumanMale_RIGRN.placeHolderList[1074]" "R:Finger43_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1074]" "HumanMale_RIGRN.placeHolderList[1075]" "R:Finger43_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[387]" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1075]" "HumanMale_RIGRN.placeHolderList[1076]" "R:Finger43_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1076]" "HumanMale_RIGRN.placeHolderList[1077]" "R:Finger43_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1077]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1078]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger43_R_control_group|R:Finger43_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1079]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[280]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1079]" "HumanMale_RIGRN.placeHolderList[1080]" "R:Finger51_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1080]" "HumanMale_RIGRN.placeHolderList[1081]" "R:Finger51_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[281]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1081]" "HumanMale_RIGRN.placeHolderList[1082]" "R:Finger51_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1082]" "HumanMale_RIGRN.placeHolderList[1083]" "R:Finger51_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[282]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1083]" "HumanMale_RIGRN.placeHolderList[1084]" "R:Finger51_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1084]" "HumanMale_RIGRN.placeHolderList[1085]" "R:Finger51_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[388]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1085]" "HumanMale_RIGRN.placeHolderList[1086]" "R:Finger51_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1086]" "HumanMale_RIGRN.placeHolderList[1087]" "R:Finger51_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[389]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1087]" "HumanMale_RIGRN.placeHolderList[1088]" "R:Finger51_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1088]" "HumanMale_RIGRN.placeHolderList[1089]" "R:Finger51_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[390]" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1089]" "HumanMale_RIGRN.placeHolderList[1090]" "R:Finger51_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1090]" "HumanMale_RIGRN.placeHolderList[1091]" "R:Finger51_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1091]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1092]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger51_R_control_group|R:Finger51_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1093]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[283]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1093]" "HumanMale_RIGRN.placeHolderList[1094]" "R:Finger52_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1094]" "HumanMale_RIGRN.placeHolderList[1095]" "R:Finger52_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[284]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1095]" "HumanMale_RIGRN.placeHolderList[1096]" "R:Finger52_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1096]" "HumanMale_RIGRN.placeHolderList[1097]" "R:Finger52_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[285]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1097]" "HumanMale_RIGRN.placeHolderList[1098]" "R:Finger52_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1098]" "HumanMale_RIGRN.placeHolderList[1099]" "R:Finger52_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[391]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1099]" "HumanMale_RIGRN.placeHolderList[1100]" "R:Finger52_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1100]" "HumanMale_RIGRN.placeHolderList[1101]" "R:Finger52_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[392]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1101]" "HumanMale_RIGRN.placeHolderList[1102]" "R:Finger52_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1102]" "HumanMale_RIGRN.placeHolderList[1103]" "R:Finger52_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[393]" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1103]" "HumanMale_RIGRN.placeHolderList[1104]" "R:Finger52_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1104]" "HumanMale_RIGRN.placeHolderList[1105]" "R:Finger52_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1105]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1106]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger52_R_control_group|R:Finger52_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1107]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[286]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1107]" "HumanMale_RIGRN.placeHolderList[1108]" "R:Finger53_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1108]" "HumanMale_RIGRN.placeHolderList[1109]" "R:Finger53_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[287]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1109]" "HumanMale_RIGRN.placeHolderList[1110]" "R:Finger53_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1110]" "HumanMale_RIGRN.placeHolderList[1111]" "R:Finger53_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[288]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1111]" "HumanMale_RIGRN.placeHolderList[1112]" "R:Finger53_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1112]" "HumanMale_RIGRN.placeHolderList[1113]" "R:Finger53_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[394]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1113]" "HumanMale_RIGRN.placeHolderList[1114]" "R:Finger53_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1114]" "HumanMale_RIGRN.placeHolderList[1115]" "R:Finger53_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[395]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1115]" "HumanMale_RIGRN.placeHolderList[1116]" "R:Finger53_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1116]" "HumanMale_RIGRN.placeHolderList[1117]" "R:Finger53_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[396]" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1117]" "HumanMale_RIGRN.placeHolderList[1118]" "R:Finger53_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1118]" "HumanMale_RIGRN.placeHolderList[1119]" "R:Finger53_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1119]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1120]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger53_R_control_group|R:Finger53_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1121]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[289]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1121]" "HumanMale_RIGRN.placeHolderList[1122]" "R:Finger11_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1122]" "HumanMale_RIGRN.placeHolderList[1123]" "R:Finger11_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[290]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1123]" "HumanMale_RIGRN.placeHolderList[1124]" "R:Finger11_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1124]" "HumanMale_RIGRN.placeHolderList[1125]" "R:Finger11_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[291]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1125]" "HumanMale_RIGRN.placeHolderList[1126]" "R:Finger11_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1126]" "HumanMale_RIGRN.placeHolderList[1127]" "R:Finger11_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[397]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1127]" "HumanMale_RIGRN.placeHolderList[1128]" "R:Finger11_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1128]" "HumanMale_RIGRN.placeHolderList[1129]" "R:Finger11_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[398]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1129]" "HumanMale_RIGRN.placeHolderList[1130]" "R:Finger11_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1130]" "HumanMale_RIGRN.placeHolderList[1131]" "R:Finger11_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[399]" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1131]" "HumanMale_RIGRN.placeHolderList[1132]" "R:Finger11_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1132]" "HumanMale_RIGRN.placeHolderList[1133]" "R:Finger11_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1133]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1134]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger11_R_control_group|R:Finger11_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1135]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[292]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1135]" "HumanMale_RIGRN.placeHolderList[1136]" "R:Finger12_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1136]" "HumanMale_RIGRN.placeHolderList[1137]" "R:Finger12_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[293]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1137]" "HumanMale_RIGRN.placeHolderList[1138]" "R:Finger12_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1138]" "HumanMale_RIGRN.placeHolderList[1139]" "R:Finger12_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[294]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1139]" "HumanMale_RIGRN.placeHolderList[1140]" "R:Finger12_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1140]" "HumanMale_RIGRN.placeHolderList[1141]" "R:Finger12_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[400]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1141]" "HumanMale_RIGRN.placeHolderList[1142]" "R:Finger12_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1142]" "HumanMale_RIGRN.placeHolderList[1143]" "R:Finger12_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[401]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1143]" "HumanMale_RIGRN.placeHolderList[1144]" "R:Finger12_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1144]" "HumanMale_RIGRN.placeHolderList[1145]" "R:Finger12_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[402]" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1145]" "HumanMale_RIGRN.placeHolderList[1146]" "R:Finger12_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1146]" "HumanMale_RIGRN.placeHolderList[1147]" "R:Finger12_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1147]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1148]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger12_R_control_group|R:Finger12_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1149]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[295]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1149]" "HumanMale_RIGRN.placeHolderList[1150]" "R:Finger13_R_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1150]" "HumanMale_RIGRN.placeHolderList[1151]" "R:Finger13_R_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[296]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1151]" "HumanMale_RIGRN.placeHolderList[1152]" "R:Finger13_R_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1152]" "HumanMale_RIGRN.placeHolderList[1153]" "R:Finger13_R_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[297]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1153]" "HumanMale_RIGRN.placeHolderList[1154]" "R:Finger13_R_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1154]" "HumanMale_RIGRN.placeHolderList[1155]" "R:Finger13_R_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[403]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1155]" "HumanMale_RIGRN.placeHolderList[1156]" "R:Finger13_R_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1156]" "HumanMale_RIGRN.placeHolderList[1157]" "R:Finger13_R_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[404]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1157]" "HumanMale_RIGRN.placeHolderList[1158]" "R:Finger13_R_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1158]" "HumanMale_RIGRN.placeHolderList[1159]" "R:Finger13_R_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[405]" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1159]" "HumanMale_RIGRN.placeHolderList[1160]" "R:Finger13_R_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1160]" "HumanMale_RIGRN.placeHolderList[1161]" "R:Finger13_R_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1161]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1162]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger13_R_control_group|R:Finger13_R_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1163]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[298]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1163]" "HumanMale_RIGRN.placeHolderList[1164]" "R:Finger51_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1164]" "HumanMale_RIGRN.placeHolderList[1165]" "R:Finger51_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[299]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1165]" "HumanMale_RIGRN.placeHolderList[1166]" "R:Finger51_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1166]" "HumanMale_RIGRN.placeHolderList[1167]" "R:Finger51_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[300]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1167]" "HumanMale_RIGRN.placeHolderList[1168]" "R:Finger51_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1168]" "HumanMale_RIGRN.placeHolderList[1169]" "R:Finger51_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[406]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1169]" "HumanMale_RIGRN.placeHolderList[1170]" "R:Finger51_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1170]" "HumanMale_RIGRN.placeHolderList[1171]" "R:Finger51_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[407]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1171]" "HumanMale_RIGRN.placeHolderList[1172]" "R:Finger51_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1172]" "HumanMale_RIGRN.placeHolderList[1173]" "R:Finger51_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[408]" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1173]" "HumanMale_RIGRN.placeHolderList[1174]" "R:Finger51_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1174]" "HumanMale_RIGRN.placeHolderList[1175]" "R:Finger51_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1175]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1176]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger51_L_control_group|R:Finger51_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1177]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[301]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1177]" "HumanMale_RIGRN.placeHolderList[1178]" "R:Finger52_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1178]" "HumanMale_RIGRN.placeHolderList[1179]" "R:Finger52_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[302]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1179]" "HumanMale_RIGRN.placeHolderList[1180]" "R:Finger52_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1180]" "HumanMale_RIGRN.placeHolderList[1181]" "R:Finger52_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[303]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1181]" "HumanMale_RIGRN.placeHolderList[1182]" "R:Finger52_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1182]" "HumanMale_RIGRN.placeHolderList[1183]" "R:Finger52_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[409]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1183]" "HumanMale_RIGRN.placeHolderList[1184]" "R:Finger52_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1184]" "HumanMale_RIGRN.placeHolderList[1185]" "R:Finger52_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[410]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1185]" "HumanMale_RIGRN.placeHolderList[1186]" "R:Finger52_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1186]" "HumanMale_RIGRN.placeHolderList[1187]" "R:Finger52_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[411]" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1187]" "HumanMale_RIGRN.placeHolderList[1188]" "R:Finger52_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1188]" "HumanMale_RIGRN.placeHolderList[1189]" "R:Finger52_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1189]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1190]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger52_L_control_group|R:Finger52_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1191]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[304]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1191]" "HumanMale_RIGRN.placeHolderList[1192]" "R:Finger53_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1192]" "HumanMale_RIGRN.placeHolderList[1193]" "R:Finger53_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[305]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1193]" "HumanMale_RIGRN.placeHolderList[1194]" "R:Finger53_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1194]" "HumanMale_RIGRN.placeHolderList[1195]" "R:Finger53_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[306]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1195]" "HumanMale_RIGRN.placeHolderList[1196]" "R:Finger53_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1196]" "HumanMale_RIGRN.placeHolderList[1197]" "R:Finger53_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[412]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1197]" "HumanMale_RIGRN.placeHolderList[1198]" "R:Finger53_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1198]" "HumanMale_RIGRN.placeHolderList[1199]" "R:Finger53_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[413]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1199]" "HumanMale_RIGRN.placeHolderList[1200]" "R:Finger53_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1200]" "HumanMale_RIGRN.placeHolderList[1201]" "R:Finger53_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[414]" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1201]" "HumanMale_RIGRN.placeHolderList[1202]" "R:Finger53_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1202]" "HumanMale_RIGRN.placeHolderList[1203]" "R:Finger53_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1203]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1204]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger53_L_control_group|R:Finger53_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1205]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[307]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1205]" "HumanMale_RIGRN.placeHolderList[1206]" "R:Finger41_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1206]" "HumanMale_RIGRN.placeHolderList[1207]" "R:Finger41_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[308]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1207]" "HumanMale_RIGRN.placeHolderList[1208]" "R:Finger41_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1208]" "HumanMale_RIGRN.placeHolderList[1209]" "R:Finger41_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[309]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1209]" "HumanMale_RIGRN.placeHolderList[1210]" "R:Finger41_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1210]" "HumanMale_RIGRN.placeHolderList[1211]" "R:Finger41_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[415]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1211]" "HumanMale_RIGRN.placeHolderList[1212]" "R:Finger41_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1212]" "HumanMale_RIGRN.placeHolderList[1213]" "R:Finger41_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[416]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1213]" "HumanMale_RIGRN.placeHolderList[1214]" "R:Finger41_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1214]" "HumanMale_RIGRN.placeHolderList[1215]" "R:Finger41_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[417]" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1215]" "HumanMale_RIGRN.placeHolderList[1216]" "R:Finger41_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1216]" "HumanMale_RIGRN.placeHolderList[1217]" "R:Finger41_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1217]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1218]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger41_L_control_group|R:Finger41_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1219]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[310]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1219]" "HumanMale_RIGRN.placeHolderList[1220]" "R:Finger42_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1220]" "HumanMale_RIGRN.placeHolderList[1221]" "R:Finger42_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[311]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1221]" "HumanMale_RIGRN.placeHolderList[1222]" "R:Finger42_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1222]" "HumanMale_RIGRN.placeHolderList[1223]" "R:Finger42_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[312]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1223]" "HumanMale_RIGRN.placeHolderList[1224]" "R:Finger42_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1224]" "HumanMale_RIGRN.placeHolderList[1225]" "R:Finger42_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[418]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1225]" "HumanMale_RIGRN.placeHolderList[1226]" "R:Finger42_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1226]" "HumanMale_RIGRN.placeHolderList[1227]" "R:Finger42_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[419]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1227]" "HumanMale_RIGRN.placeHolderList[1228]" "R:Finger42_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1228]" "HumanMale_RIGRN.placeHolderList[1229]" "R:Finger42_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[420]" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1229]" "HumanMale_RIGRN.placeHolderList[1230]" "R:Finger42_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1230]" "HumanMale_RIGRN.placeHolderList[1231]" "R:Finger42_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1231]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1232]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger42_L_control_group|R:Finger42_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1233]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[313]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1233]" "HumanMale_RIGRN.placeHolderList[1234]" "R:Finger43_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1234]" "HumanMale_RIGRN.placeHolderList[1235]" "R:Finger43_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[314]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1235]" "HumanMale_RIGRN.placeHolderList[1236]" "R:Finger43_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1236]" "HumanMale_RIGRN.placeHolderList[1237]" "R:Finger43_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[315]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1237]" "HumanMale_RIGRN.placeHolderList[1238]" "R:Finger43_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1238]" "HumanMale_RIGRN.placeHolderList[1239]" "R:Finger43_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[421]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1239]" "HumanMale_RIGRN.placeHolderList[1240]" "R:Finger43_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1240]" "HumanMale_RIGRN.placeHolderList[1241]" "R:Finger43_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[422]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1241]" "HumanMale_RIGRN.placeHolderList[1242]" "R:Finger43_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1242]" "HumanMale_RIGRN.placeHolderList[1243]" "R:Finger43_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[423]" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1243]" "HumanMale_RIGRN.placeHolderList[1244]" "R:Finger43_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1244]" "HumanMale_RIGRN.placeHolderList[1245]" "R:Finger43_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1245]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1246]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger43_L_control_group|R:Finger43_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1247]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[316]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1247]" "HumanMale_RIGRN.placeHolderList[1248]" "R:Finger31_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1248]" "HumanMale_RIGRN.placeHolderList[1249]" "R:Finger31_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[317]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1249]" "HumanMale_RIGRN.placeHolderList[1250]" "R:Finger31_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1250]" "HumanMale_RIGRN.placeHolderList[1251]" "R:Finger31_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[318]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1251]" "HumanMale_RIGRN.placeHolderList[1252]" "R:Finger31_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1252]" "HumanMale_RIGRN.placeHolderList[1253]" "R:Finger31_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[424]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1253]" "HumanMale_RIGRN.placeHolderList[1254]" "R:Finger31_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1254]" "HumanMale_RIGRN.placeHolderList[1255]" "R:Finger31_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[425]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1255]" "HumanMale_RIGRN.placeHolderList[1256]" "R:Finger31_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1256]" "HumanMale_RIGRN.placeHolderList[1257]" "R:Finger31_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[426]" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1257]" "HumanMale_RIGRN.placeHolderList[1258]" "R:Finger31_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1258]" "HumanMale_RIGRN.placeHolderList[1259]" "R:Finger31_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1259]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1260]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger31_L_control_group|R:Finger31_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1261]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[319]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1261]" "HumanMale_RIGRN.placeHolderList[1262]" "R:Finger32_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1262]" "HumanMale_RIGRN.placeHolderList[1263]" "R:Finger32_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[320]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1263]" "HumanMale_RIGRN.placeHolderList[1264]" "R:Finger32_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1264]" "HumanMale_RIGRN.placeHolderList[1265]" "R:Finger32_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[321]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1265]" "HumanMale_RIGRN.placeHolderList[1266]" "R:Finger32_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1266]" "HumanMale_RIGRN.placeHolderList[1267]" "R:Finger32_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[427]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1267]" "HumanMale_RIGRN.placeHolderList[1268]" "R:Finger32_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1268]" "HumanMale_RIGRN.placeHolderList[1269]" "R:Finger32_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[428]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1269]" "HumanMale_RIGRN.placeHolderList[1270]" "R:Finger32_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1270]" "HumanMale_RIGRN.placeHolderList[1271]" "R:Finger32_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[429]" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1271]" "HumanMale_RIGRN.placeHolderList[1272]" "R:Finger32_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1272]" "HumanMale_RIGRN.placeHolderList[1273]" "R:Finger32_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1273]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1274]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger32_L_control_group|R:Finger32_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1275]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[322]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1275]" "HumanMale_RIGRN.placeHolderList[1276]" "R:Finger33_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1276]" "HumanMale_RIGRN.placeHolderList[1277]" "R:Finger33_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[323]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1277]" "HumanMale_RIGRN.placeHolderList[1278]" "R:Finger33_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1278]" "HumanMale_RIGRN.placeHolderList[1279]" "R:Finger33_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[324]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1279]" "HumanMale_RIGRN.placeHolderList[1280]" "R:Finger33_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1280]" "HumanMale_RIGRN.placeHolderList[1281]" "R:Finger33_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[430]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1281]" "HumanMale_RIGRN.placeHolderList[1282]" "R:Finger33_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1282]" "HumanMale_RIGRN.placeHolderList[1283]" "R:Finger33_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[431]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1283]" "HumanMale_RIGRN.placeHolderList[1284]" "R:Finger33_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1284]" "HumanMale_RIGRN.placeHolderList[1285]" "R:Finger33_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[432]" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1285]" "HumanMale_RIGRN.placeHolderList[1286]" "R:Finger33_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1286]" "HumanMale_RIGRN.placeHolderList[1287]" "R:Finger33_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1287]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1288]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger33_L_control_group|R:Finger33_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1289]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[325]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1289]" "HumanMale_RIGRN.placeHolderList[1290]" "R:Finger21_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1290]" "HumanMale_RIGRN.placeHolderList[1291]" "R:Finger21_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[326]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1291]" "HumanMale_RIGRN.placeHolderList[1292]" "R:Finger21_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1292]" "HumanMale_RIGRN.placeHolderList[1293]" "R:Finger21_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[327]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1293]" "HumanMale_RIGRN.placeHolderList[1294]" "R:Finger21_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1294]" "HumanMale_RIGRN.placeHolderList[1295]" "R:Finger21_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[433]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1295]" "HumanMale_RIGRN.placeHolderList[1296]" "R:Finger21_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1296]" "HumanMale_RIGRN.placeHolderList[1297]" "R:Finger21_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[434]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1297]" "HumanMale_RIGRN.placeHolderList[1298]" "R:Finger21_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1298]" "HumanMale_RIGRN.placeHolderList[1299]" "R:Finger21_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[435]" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1299]" "HumanMale_RIGRN.placeHolderList[1300]" "R:Finger21_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1300]" "HumanMale_RIGRN.placeHolderList[1301]" "R:Finger21_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1301]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1302]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger21_L_control_group|R:Finger21_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1303]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[328]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1303]" "HumanMale_RIGRN.placeHolderList[1304]" "R:Finger22_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1304]" "HumanMale_RIGRN.placeHolderList[1305]" "R:Finger22_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[329]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1305]" "HumanMale_RIGRN.placeHolderList[1306]" "R:Finger22_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1306]" "HumanMale_RIGRN.placeHolderList[1307]" "R:Finger22_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[330]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1307]" "HumanMale_RIGRN.placeHolderList[1308]" "R:Finger22_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1308]" "HumanMale_RIGRN.placeHolderList[1309]" "R:Finger22_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[436]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1309]" "HumanMale_RIGRN.placeHolderList[1310]" "R:Finger22_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1310]" "HumanMale_RIGRN.placeHolderList[1311]" "R:Finger22_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[437]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1311]" "HumanMale_RIGRN.placeHolderList[1312]" "R:Finger22_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1312]" "HumanMale_RIGRN.placeHolderList[1313]" "R:Finger22_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[438]" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1313]" "HumanMale_RIGRN.placeHolderList[1314]" "R:Finger22_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1314]" "HumanMale_RIGRN.placeHolderList[1315]" "R:Finger22_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1315]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1316]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger22_L_control_group|R:Finger22_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1317]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[331]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1317]" "HumanMale_RIGRN.placeHolderList[1318]" "R:Finger23_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1318]" "HumanMale_RIGRN.placeHolderList[1319]" "R:Finger23_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[332]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1319]" "HumanMale_RIGRN.placeHolderList[1320]" "R:Finger23_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1320]" "HumanMale_RIGRN.placeHolderList[1321]" "R:Finger23_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[333]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1321]" "HumanMale_RIGRN.placeHolderList[1322]" "R:Finger23_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1322]" "HumanMale_RIGRN.placeHolderList[1323]" "R:Finger23_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[439]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1323]" "HumanMale_RIGRN.placeHolderList[1324]" "R:Finger23_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1324]" "HumanMale_RIGRN.placeHolderList[1325]" "R:Finger23_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[440]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1325]" "HumanMale_RIGRN.placeHolderList[1326]" "R:Finger23_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1326]" "HumanMale_RIGRN.placeHolderList[1327]" "R:Finger23_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[441]" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1327]" "HumanMale_RIGRN.placeHolderList[1328]" "R:Finger23_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1328]" "HumanMale_RIGRN.placeHolderList[1329]" "R:Finger23_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1329]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1330]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger23_L_control_group|R:Finger23_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1331]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[334]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1331]" "HumanMale_RIGRN.placeHolderList[1332]" "R:Finger11_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1332]" "HumanMale_RIGRN.placeHolderList[1333]" "R:Finger11_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[335]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1333]" "HumanMale_RIGRN.placeHolderList[1334]" "R:Finger11_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1334]" "HumanMale_RIGRN.placeHolderList[1335]" "R:Finger11_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[336]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1335]" "HumanMale_RIGRN.placeHolderList[1336]" "R:Finger11_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1336]" "HumanMale_RIGRN.placeHolderList[1337]" "R:Finger11_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[442]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1337]" "HumanMale_RIGRN.placeHolderList[1338]" "R:Finger11_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1338]" "HumanMale_RIGRN.placeHolderList[1339]" "R:Finger11_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[443]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1339]" "HumanMale_RIGRN.placeHolderList[1340]" "R:Finger11_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1340]" "HumanMale_RIGRN.placeHolderList[1341]" "R:Finger11_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[444]" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1341]" "HumanMale_RIGRN.placeHolderList[1342]" "R:Finger11_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1342]" "HumanMale_RIGRN.placeHolderList[1343]" "R:Finger11_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1343]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1344]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger11_L_control_group|R:Finger11_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1345]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[337]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1345]" "HumanMale_RIGRN.placeHolderList[1346]" "R:Finger12_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1346]" "HumanMale_RIGRN.placeHolderList[1347]" "R:Finger12_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[338]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1347]" "HumanMale_RIGRN.placeHolderList[1348]" "R:Finger12_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1348]" "HumanMale_RIGRN.placeHolderList[1349]" "R:Finger12_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[339]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1349]" "HumanMale_RIGRN.placeHolderList[1350]" "R:Finger12_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1350]" "HumanMale_RIGRN.placeHolderList[1351]" "R:Finger12_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[445]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1351]" "HumanMale_RIGRN.placeHolderList[1352]" "R:Finger12_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1352]" "HumanMale_RIGRN.placeHolderList[1353]" "R:Finger12_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[446]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1353]" "HumanMale_RIGRN.placeHolderList[1354]" "R:Finger12_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1354]" "HumanMale_RIGRN.placeHolderList[1355]" "R:Finger12_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[447]" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1355]" "HumanMale_RIGRN.placeHolderList[1356]" "R:Finger12_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1356]" "HumanMale_RIGRN.placeHolderList[1357]" "R:Finger12_L_control.rz"
 		
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1357]" ""
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1358]" ""
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger12_L_control_group|R:Finger12_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1359]" ""
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[340]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateX" 
-		"HumanMale_RIGRN.placeHolderList[1359]" "HumanMale_RIGRN.placeHolderList[1360]" "R:Finger13_L_control.tx"
+		"HumanMale_RIGRN.placeHolderList[1360]" "HumanMale_RIGRN.placeHolderList[1361]" "R:Finger13_L_control.tx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[341]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateY" 
-		"HumanMale_RIGRN.placeHolderList[1361]" "HumanMale_RIGRN.placeHolderList[1362]" "R:Finger13_L_control.ty"
+		"HumanMale_RIGRN.placeHolderList[1362]" "HumanMale_RIGRN.placeHolderList[1363]" "R:Finger13_L_control.ty"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.linearValues[342]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.translateZ" 
-		"HumanMale_RIGRN.placeHolderList[1363]" "HumanMale_RIGRN.placeHolderList[1364]" "R:Finger13_L_control.tz"
+		"HumanMale_RIGRN.placeHolderList[1364]" "HumanMale_RIGRN.placeHolderList[1365]" "R:Finger13_L_control.tz"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[448]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateX" 
-		"HumanMale_RIGRN.placeHolderList[1365]" "HumanMale_RIGRN.placeHolderList[1366]" "R:Finger13_L_control.rx"
+		"HumanMale_RIGRN.placeHolderList[1366]" "HumanMale_RIGRN.placeHolderList[1367]" "R:Finger13_L_control.rx"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[449]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateY" 
-		"HumanMale_RIGRN.placeHolderList[1367]" "HumanMale_RIGRN.placeHolderList[1368]" "R:Finger13_L_control.ry"
+		"HumanMale_RIGRN.placeHolderList[1368]" "HumanMale_RIGRN.placeHolderList[1369]" "R:Finger13_L_control.ry"
 		
 		5 0 "HumanMale_RIGRN" "R:HumanMale.angularValues[450]" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.rotateZ" 
-		"HumanMale_RIGRN.placeHolderList[1369]" "HumanMale_RIGRN.placeHolderList[1370]" "R:Finger13_L_control.rz"
+		"HumanMale_RIGRN.placeHolderList[1370]" "HumanMale_RIGRN.placeHolderList[1371]" "R:Finger13_L_control.rz"
 		
 		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.instObjGroups" 
-		"HumanMale_RIGRN.placeHolderList[1371]" ""
-		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.instObjGroups" 
 		"HumanMale_RIGRN.placeHolderList[1372]" ""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[2]" "HumanMale_RIGRN.placeHolderList[1373]" 
+		5 3 "HumanMale_RIGRN" "|R:Global_grp|R:Finger13_L_control_group|R:Finger13_L_control.instObjGroups" 
+		"HumanMale_RIGRN.placeHolderList[1373]" ""
+		5 3 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[2]" "HumanMale_RIGRN.placeHolderList[1374]" 
 		"R:Spine1_control.Orient"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[2]" "HumanMale_RIGRN.placeHolderList[1374]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[2]" "HumanMale_RIGRN.placeHolderList[1375]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[3]" "HumanMale_RIGRN.placeHolderList[1375]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[3]" "HumanMale_RIGRN.placeHolderList[1376]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[4]" "HumanMale_RIGRN.placeHolderList[1376]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[4]" "HumanMale_RIGRN.placeHolderList[1377]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[5]" "HumanMale_RIGRN.placeHolderList[1377]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[5]" "HumanMale_RIGRN.placeHolderList[1378]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[6]" "HumanMale_RIGRN.placeHolderList[1378]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[6]" "HumanMale_RIGRN.placeHolderList[1379]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[7]" "HumanMale_RIGRN.placeHolderList[1379]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[7]" "HumanMale_RIGRN.placeHolderList[1380]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[8]" "HumanMale_RIGRN.placeHolderList[1380]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[8]" "HumanMale_RIGRN.placeHolderList[1381]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[9]" "HumanMale_RIGRN.placeHolderList[1381]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[9]" "HumanMale_RIGRN.placeHolderList[1382]" 
 		"R:Hand_R_control.ParentOnClavicle"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[9]" "HumanMale_RIGRN.placeHolderList[1382]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[9]" "HumanMale_RIGRN.placeHolderList[1383]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[10]" "HumanMale_RIGRN.placeHolderList[1383]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[10]" "HumanMale_RIGRN.placeHolderList[1384]" 
 		"R:Hand_R_control.ParentOnSpine"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[10]" "HumanMale_RIGRN.placeHolderList[1384]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[10]" "HumanMale_RIGRN.placeHolderList[1385]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[11]" "HumanMale_RIGRN.placeHolderList[1385]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[11]" "HumanMale_RIGRN.placeHolderList[1386]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[12]" "HumanMale_RIGRN.placeHolderList[1386]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[12]" "HumanMale_RIGRN.placeHolderList[1387]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[13]" "HumanMale_RIGRN.placeHolderList[1387]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[13]" "HumanMale_RIGRN.placeHolderList[1388]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[14]" "HumanMale_RIGRN.placeHolderList[1388]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[14]" "HumanMale_RIGRN.placeHolderList[1389]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[15]" "HumanMale_RIGRN.placeHolderList[1389]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[15]" "HumanMale_RIGRN.placeHolderList[1390]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[21]" "HumanMale_RIGRN.placeHolderList[1390]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[21]" "HumanMale_RIGRN.placeHolderList[1391]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[22]" "HumanMale_RIGRN.placeHolderList[1391]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[22]" "HumanMale_RIGRN.placeHolderList[1392]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[23]" "HumanMale_RIGRN.placeHolderList[1392]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[23]" "HumanMale_RIGRN.placeHolderList[1393]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[24]" "HumanMale_RIGRN.placeHolderList[1393]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[24]" "HumanMale_RIGRN.placeHolderList[1394]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[25]" "HumanMale_RIGRN.placeHolderList[1394]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[25]" "HumanMale_RIGRN.placeHolderList[1395]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[26]" "HumanMale_RIGRN.placeHolderList[1395]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[26]" "HumanMale_RIGRN.placeHolderList[1396]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[27]" "HumanMale_RIGRN.placeHolderList[1396]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[27]" "HumanMale_RIGRN.placeHolderList[1397]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[28]" "HumanMale_RIGRN.placeHolderList[1397]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[28]" "HumanMale_RIGRN.placeHolderList[1398]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[29]" "HumanMale_RIGRN.placeHolderList[1398]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[29]" "HumanMale_RIGRN.placeHolderList[1399]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[30]" "HumanMale_RIGRN.placeHolderList[1399]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[30]" "HumanMale_RIGRN.placeHolderList[1400]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[31]" "HumanMale_RIGRN.placeHolderList[1400]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[31]" "HumanMale_RIGRN.placeHolderList[1401]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[32]" "HumanMale_RIGRN.placeHolderList[1401]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[32]" "HumanMale_RIGRN.placeHolderList[1402]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[33]" "HumanMale_RIGRN.placeHolderList[1402]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[33]" "HumanMale_RIGRN.placeHolderList[1403]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[34]" "HumanMale_RIGRN.placeHolderList[1403]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[34]" "HumanMale_RIGRN.placeHolderList[1404]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[35]" "HumanMale_RIGRN.placeHolderList[1404]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[35]" "HumanMale_RIGRN.placeHolderList[1405]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[36]" "HumanMale_RIGRN.placeHolderList[1405]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[36]" "HumanMale_RIGRN.placeHolderList[1406]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[37]" "HumanMale_RIGRN.placeHolderList[1406]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[37]" "HumanMale_RIGRN.placeHolderList[1407]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[38]" "HumanMale_RIGRN.placeHolderList[1407]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[38]" "HumanMale_RIGRN.placeHolderList[1408]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[39]" "HumanMale_RIGRN.placeHolderList[1408]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[39]" "HumanMale_RIGRN.placeHolderList[1409]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[40]" "HumanMale_RIGRN.placeHolderList[1409]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[40]" "HumanMale_RIGRN.placeHolderList[1410]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[41]" "HumanMale_RIGRN.placeHolderList[1410]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[41]" "HumanMale_RIGRN.placeHolderList[1411]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[42]" "HumanMale_RIGRN.placeHolderList[1411]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.unitlessValues[42]" "HumanMale_RIGRN.placeHolderList[1412]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[1]" "HumanMale_RIGRN.placeHolderList[1412]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[1]" "HumanMale_RIGRN.placeHolderList[1413]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[2]" "HumanMale_RIGRN.placeHolderList[1413]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[2]" "HumanMale_RIGRN.placeHolderList[1414]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[3]" "HumanMale_RIGRN.placeHolderList[1414]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[3]" "HumanMale_RIGRN.placeHolderList[1415]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[4]" "HumanMale_RIGRN.placeHolderList[1415]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[4]" "HumanMale_RIGRN.placeHolderList[1416]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[5]" "HumanMale_RIGRN.placeHolderList[1416]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[5]" "HumanMale_RIGRN.placeHolderList[1417]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[6]" "HumanMale_RIGRN.placeHolderList[1417]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[6]" "HumanMale_RIGRN.placeHolderList[1418]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[7]" "HumanMale_RIGRN.placeHolderList[1418]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[7]" "HumanMale_RIGRN.placeHolderList[1419]" 
+		"R:Hips_control.tx"
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[7]" "HumanMale_RIGRN.placeHolderList[1420]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[8]" "HumanMale_RIGRN.placeHolderList[1419]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[8]" "HumanMale_RIGRN.placeHolderList[1421]" 
+		"R:Hips_control.ty"
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[8]" "HumanMale_RIGRN.placeHolderList[1422]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[9]" "HumanMale_RIGRN.placeHolderList[1420]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[9]" "HumanMale_RIGRN.placeHolderList[1423]" 
+		"R:Hips_control.tz"
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[9]" "HumanMale_RIGRN.placeHolderList[1424]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[10]" "HumanMale_RIGRN.placeHolderList[1421]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[10]" "HumanMale_RIGRN.placeHolderList[1425]" 
 		"R:Spine1_control.tx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[10]" "HumanMale_RIGRN.placeHolderList[1422]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[10]" "HumanMale_RIGRN.placeHolderList[1426]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[11]" "HumanMale_RIGRN.placeHolderList[1423]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[11]" "HumanMale_RIGRN.placeHolderList[1427]" 
 		"R:Spine1_control.ty"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[11]" "HumanMale_RIGRN.placeHolderList[1424]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[11]" "HumanMale_RIGRN.placeHolderList[1428]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[12]" "HumanMale_RIGRN.placeHolderList[1425]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[12]" "HumanMale_RIGRN.placeHolderList[1429]" 
 		"R:Spine1_control.tz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[12]" "HumanMale_RIGRN.placeHolderList[1426]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[12]" "HumanMale_RIGRN.placeHolderList[1430]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[13]" "HumanMale_RIGRN.placeHolderList[1427]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[13]" "HumanMale_RIGRN.placeHolderList[1431]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[14]" "HumanMale_RIGRN.placeHolderList[1428]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[14]" "HumanMale_RIGRN.placeHolderList[1432]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[15]" "HumanMale_RIGRN.placeHolderList[1429]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[15]" "HumanMale_RIGRN.placeHolderList[1433]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[16]" "HumanMale_RIGRN.placeHolderList[1430]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[16]" "HumanMale_RIGRN.placeHolderList[1434]" 
 		"R:Chest_control.tx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[16]" "HumanMale_RIGRN.placeHolderList[1431]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[16]" "HumanMale_RIGRN.placeHolderList[1435]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[17]" "HumanMale_RIGRN.placeHolderList[1432]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[17]" "HumanMale_RIGRN.placeHolderList[1436]" 
 		"R:Chest_control.ty"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[17]" "HumanMale_RIGRN.placeHolderList[1433]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[17]" "HumanMale_RIGRN.placeHolderList[1437]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[18]" "HumanMale_RIGRN.placeHolderList[1434]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[18]" "HumanMale_RIGRN.placeHolderList[1438]" 
 		"R:Chest_control.tz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[18]" "HumanMale_RIGRN.placeHolderList[1435]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[18]" "HumanMale_RIGRN.placeHolderList[1439]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[19]" "HumanMale_RIGRN.placeHolderList[1436]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[19]" "HumanMale_RIGRN.placeHolderList[1440]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[20]" "HumanMale_RIGRN.placeHolderList[1437]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[20]" "HumanMale_RIGRN.placeHolderList[1441]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[21]" "HumanMale_RIGRN.placeHolderList[1438]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[21]" "HumanMale_RIGRN.placeHolderList[1442]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[22]" "HumanMale_RIGRN.placeHolderList[1439]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[22]" "HumanMale_RIGRN.placeHolderList[1443]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[23]" "HumanMale_RIGRN.placeHolderList[1440]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[23]" "HumanMale_RIGRN.placeHolderList[1444]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[24]" "HumanMale_RIGRN.placeHolderList[1441]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[24]" "HumanMale_RIGRN.placeHolderList[1445]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[25]" "HumanMale_RIGRN.placeHolderList[1442]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[25]" "HumanMale_RIGRN.placeHolderList[1446]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[26]" "HumanMale_RIGRN.placeHolderList[1443]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[26]" "HumanMale_RIGRN.placeHolderList[1447]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[27]" "HumanMale_RIGRN.placeHolderList[1444]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[27]" "HumanMale_RIGRN.placeHolderList[1448]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[28]" "HumanMale_RIGRN.placeHolderList[1445]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[28]" "HumanMale_RIGRN.placeHolderList[1449]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[29]" "HumanMale_RIGRN.placeHolderList[1446]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[29]" "HumanMale_RIGRN.placeHolderList[1450]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[30]" "HumanMale_RIGRN.placeHolderList[1447]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[30]" "HumanMale_RIGRN.placeHolderList[1451]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[31]" "HumanMale_RIGRN.placeHolderList[1448]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[31]" "HumanMale_RIGRN.placeHolderList[1452]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[32]" "HumanMale_RIGRN.placeHolderList[1449]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[32]" "HumanMale_RIGRN.placeHolderList[1453]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[33]" "HumanMale_RIGRN.placeHolderList[1450]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[33]" "HumanMale_RIGRN.placeHolderList[1454]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[34]" "HumanMale_RIGRN.placeHolderList[1451]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[34]" "HumanMale_RIGRN.placeHolderList[1455]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[35]" "HumanMale_RIGRN.placeHolderList[1452]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[35]" "HumanMale_RIGRN.placeHolderList[1456]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[36]" "HumanMale_RIGRN.placeHolderList[1453]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[36]" "HumanMale_RIGRN.placeHolderList[1457]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[37]" "HumanMale_RIGRN.placeHolderList[1454]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[37]" "HumanMale_RIGRN.placeHolderList[1458]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[38]" "HumanMale_RIGRN.placeHolderList[1455]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[38]" "HumanMale_RIGRN.placeHolderList[1459]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[39]" "HumanMale_RIGRN.placeHolderList[1456]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[39]" "HumanMale_RIGRN.placeHolderList[1460]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[40]" "HumanMale_RIGRN.placeHolderList[1457]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[40]" "HumanMale_RIGRN.placeHolderList[1461]" 
 		"R:Hand_R_control.tx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[40]" "HumanMale_RIGRN.placeHolderList[1458]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[40]" "HumanMale_RIGRN.placeHolderList[1462]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[41]" "HumanMale_RIGRN.placeHolderList[1459]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[41]" "HumanMale_RIGRN.placeHolderList[1463]" 
 		"R:Hand_R_control.ty"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[41]" "HumanMale_RIGRN.placeHolderList[1460]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[41]" "HumanMale_RIGRN.placeHolderList[1464]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[42]" "HumanMale_RIGRN.placeHolderList[1461]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[42]" "HumanMale_RIGRN.placeHolderList[1465]" 
 		"R:Hand_R_control.tz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[42]" "HumanMale_RIGRN.placeHolderList[1462]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[42]" "HumanMale_RIGRN.placeHolderList[1466]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[43]" "HumanMale_RIGRN.placeHolderList[1463]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[43]" "HumanMale_RIGRN.placeHolderList[1467]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[44]" "HumanMale_RIGRN.placeHolderList[1464]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[44]" "HumanMale_RIGRN.placeHolderList[1468]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[45]" "HumanMale_RIGRN.placeHolderList[1465]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[45]" "HumanMale_RIGRN.placeHolderList[1469]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[46]" "HumanMale_RIGRN.placeHolderList[1466]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[46]" "HumanMale_RIGRN.placeHolderList[1470]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[47]" "HumanMale_RIGRN.placeHolderList[1467]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[47]" "HumanMale_RIGRN.placeHolderList[1471]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[48]" "HumanMale_RIGRN.placeHolderList[1468]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[48]" "HumanMale_RIGRN.placeHolderList[1472]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[49]" "HumanMale_RIGRN.placeHolderList[1469]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[49]" "HumanMale_RIGRN.placeHolderList[1473]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[50]" "HumanMale_RIGRN.placeHolderList[1470]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[50]" "HumanMale_RIGRN.placeHolderList[1474]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[51]" "HumanMale_RIGRN.placeHolderList[1471]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[51]" "HumanMale_RIGRN.placeHolderList[1475]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[52]" "HumanMale_RIGRN.placeHolderList[1472]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[52]" "HumanMale_RIGRN.placeHolderList[1476]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[53]" "HumanMale_RIGRN.placeHolderList[1473]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[53]" "HumanMale_RIGRN.placeHolderList[1477]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[54]" "HumanMale_RIGRN.placeHolderList[1474]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[54]" "HumanMale_RIGRN.placeHolderList[1478]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[55]" "HumanMale_RIGRN.placeHolderList[1475]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[55]" "HumanMale_RIGRN.placeHolderList[1479]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[56]" "HumanMale_RIGRN.placeHolderList[1476]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[56]" "HumanMale_RIGRN.placeHolderList[1480]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[57]" "HumanMale_RIGRN.placeHolderList[1477]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[57]" "HumanMale_RIGRN.placeHolderList[1481]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[58]" "HumanMale_RIGRN.placeHolderList[1478]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[58]" "HumanMale_RIGRN.placeHolderList[1482]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[59]" "HumanMale_RIGRN.placeHolderList[1479]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[59]" "HumanMale_RIGRN.placeHolderList[1483]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[60]" "HumanMale_RIGRN.placeHolderList[1480]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[60]" "HumanMale_RIGRN.placeHolderList[1484]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[70]" "HumanMale_RIGRN.placeHolderList[1481]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[70]" "HumanMale_RIGRN.placeHolderList[1485]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[71]" "HumanMale_RIGRN.placeHolderList[1482]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[71]" "HumanMale_RIGRN.placeHolderList[1486]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[72]" "HumanMale_RIGRN.placeHolderList[1483]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[72]" "HumanMale_RIGRN.placeHolderList[1487]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[73]" "HumanMale_RIGRN.placeHolderList[1484]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[73]" "HumanMale_RIGRN.placeHolderList[1488]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[74]" "HumanMale_RIGRN.placeHolderList[1485]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[74]" "HumanMale_RIGRN.placeHolderList[1489]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[75]" "HumanMale_RIGRN.placeHolderList[1486]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[75]" "HumanMale_RIGRN.placeHolderList[1490]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[76]" "HumanMale_RIGRN.placeHolderList[1487]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[76]" "HumanMale_RIGRN.placeHolderList[1491]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[77]" "HumanMale_RIGRN.placeHolderList[1488]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[77]" "HumanMale_RIGRN.placeHolderList[1492]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[78]" "HumanMale_RIGRN.placeHolderList[1489]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[78]" "HumanMale_RIGRN.placeHolderList[1493]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[79]" "HumanMale_RIGRN.placeHolderList[1490]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[79]" "HumanMale_RIGRN.placeHolderList[1494]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[80]" "HumanMale_RIGRN.placeHolderList[1491]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[80]" "HumanMale_RIGRN.placeHolderList[1495]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[81]" "HumanMale_RIGRN.placeHolderList[1492]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[81]" "HumanMale_RIGRN.placeHolderList[1496]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[82]" "HumanMale_RIGRN.placeHolderList[1493]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[82]" "HumanMale_RIGRN.placeHolderList[1497]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[83]" "HumanMale_RIGRN.placeHolderList[1494]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[83]" "HumanMale_RIGRN.placeHolderList[1498]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[84]" "HumanMale_RIGRN.placeHolderList[1495]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[84]" "HumanMale_RIGRN.placeHolderList[1499]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[85]" "HumanMale_RIGRN.placeHolderList[1496]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[85]" "HumanMale_RIGRN.placeHolderList[1500]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[86]" "HumanMale_RIGRN.placeHolderList[1497]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[86]" "HumanMale_RIGRN.placeHolderList[1501]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[87]" "HumanMale_RIGRN.placeHolderList[1498]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[87]" "HumanMale_RIGRN.placeHolderList[1502]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[88]" "HumanMale_RIGRN.placeHolderList[1499]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[88]" "HumanMale_RIGRN.placeHolderList[1503]" 
 		"R:Shoulders_R_control.tx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[88]" "HumanMale_RIGRN.placeHolderList[1500]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[88]" "HumanMale_RIGRN.placeHolderList[1504]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[89]" "HumanMale_RIGRN.placeHolderList[1501]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[89]" "HumanMale_RIGRN.placeHolderList[1505]" 
 		"R:Shoulders_R_control.ty"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[89]" "HumanMale_RIGRN.placeHolderList[1502]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[89]" "HumanMale_RIGRN.placeHolderList[1506]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[90]" "HumanMale_RIGRN.placeHolderList[1503]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[90]" "HumanMale_RIGRN.placeHolderList[1507]" 
 		"R:Shoulders_R_control.tz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[90]" "HumanMale_RIGRN.placeHolderList[1504]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[90]" "HumanMale_RIGRN.placeHolderList[1508]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[91]" "HumanMale_RIGRN.placeHolderList[1505]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[91]" "HumanMale_RIGRN.placeHolderList[1509]" 
 		"R:Shoulders_L_control.tx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[91]" "HumanMale_RIGRN.placeHolderList[1506]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[91]" "HumanMale_RIGRN.placeHolderList[1510]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[92]" "HumanMale_RIGRN.placeHolderList[1507]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[92]" "HumanMale_RIGRN.placeHolderList[1511]" 
 		"R:Shoulders_L_control.ty"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[92]" "HumanMale_RIGRN.placeHolderList[1508]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[92]" "HumanMale_RIGRN.placeHolderList[1512]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[93]" "HumanMale_RIGRN.placeHolderList[1509]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.linearValues[93]" "HumanMale_RIGRN.placeHolderList[1513]" 
 		"R:Shoulders_L_control.tz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[93]" "HumanMale_RIGRN.placeHolderList[1510]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[93]" "HumanMale_RIGRN.placeHolderList[1514]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[94]" "HumanMale_RIGRN.placeHolderList[1511]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[94]" "HumanMale_RIGRN.placeHolderList[1515]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[95]" "HumanMale_RIGRN.placeHolderList[1512]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[95]" "HumanMale_RIGRN.placeHolderList[1516]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[96]" "HumanMale_RIGRN.placeHolderList[1513]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[96]" "HumanMale_RIGRN.placeHolderList[1517]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[97]" "HumanMale_RIGRN.placeHolderList[1514]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[97]" "HumanMale_RIGRN.placeHolderList[1518]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[98]" "HumanMale_RIGRN.placeHolderList[1515]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[98]" "HumanMale_RIGRN.placeHolderList[1519]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[99]" "HumanMale_RIGRN.placeHolderList[1516]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[99]" "HumanMale_RIGRN.placeHolderList[1520]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[100]" "HumanMale_RIGRN.placeHolderList[1517]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[100]" "HumanMale_RIGRN.placeHolderList[1521]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[101]" "HumanMale_RIGRN.placeHolderList[1518]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[101]" "HumanMale_RIGRN.placeHolderList[1522]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[102]" "HumanMale_RIGRN.placeHolderList[1519]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[102]" "HumanMale_RIGRN.placeHolderList[1523]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[103]" "HumanMale_RIGRN.placeHolderList[1520]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[103]" "HumanMale_RIGRN.placeHolderList[1524]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[104]" "HumanMale_RIGRN.placeHolderList[1521]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[104]" "HumanMale_RIGRN.placeHolderList[1525]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[105]" "HumanMale_RIGRN.placeHolderList[1522]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[105]" "HumanMale_RIGRN.placeHolderList[1526]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[106]" "HumanMale_RIGRN.placeHolderList[1523]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[106]" "HumanMale_RIGRN.placeHolderList[1527]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[107]" "HumanMale_RIGRN.placeHolderList[1524]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[107]" "HumanMale_RIGRN.placeHolderList[1528]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[108]" "HumanMale_RIGRN.placeHolderList[1525]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[108]" "HumanMale_RIGRN.placeHolderList[1529]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[109]" "HumanMale_RIGRN.placeHolderList[1526]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[109]" "HumanMale_RIGRN.placeHolderList[1530]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[110]" "HumanMale_RIGRN.placeHolderList[1527]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[110]" "HumanMale_RIGRN.placeHolderList[1531]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[111]" "HumanMale_RIGRN.placeHolderList[1528]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[111]" "HumanMale_RIGRN.placeHolderList[1532]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[112]" "HumanMale_RIGRN.placeHolderList[1529]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[112]" "HumanMale_RIGRN.placeHolderList[1533]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[113]" "HumanMale_RIGRN.placeHolderList[1530]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[113]" "HumanMale_RIGRN.placeHolderList[1534]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[114]" "HumanMale_RIGRN.placeHolderList[1531]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[114]" "HumanMale_RIGRN.placeHolderList[1535]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[115]" "HumanMale_RIGRN.placeHolderList[1532]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[115]" "HumanMale_RIGRN.placeHolderList[1536]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[116]" "HumanMale_RIGRN.placeHolderList[1533]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[116]" "HumanMale_RIGRN.placeHolderList[1537]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[117]" "HumanMale_RIGRN.placeHolderList[1534]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[117]" "HumanMale_RIGRN.placeHolderList[1538]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[118]" "HumanMale_RIGRN.placeHolderList[1535]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[118]" "HumanMale_RIGRN.placeHolderList[1539]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[119]" "HumanMale_RIGRN.placeHolderList[1536]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[119]" "HumanMale_RIGRN.placeHolderList[1540]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[120]" "HumanMale_RIGRN.placeHolderList[1537]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[120]" "HumanMale_RIGRN.placeHolderList[1541]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[121]" "HumanMale_RIGRN.placeHolderList[1538]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[121]" "HumanMale_RIGRN.placeHolderList[1542]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[122]" "HumanMale_RIGRN.placeHolderList[1539]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[122]" "HumanMale_RIGRN.placeHolderList[1543]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[123]" "HumanMale_RIGRN.placeHolderList[1540]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[123]" "HumanMale_RIGRN.placeHolderList[1544]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[124]" "HumanMale_RIGRN.placeHolderList[1541]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[124]" "HumanMale_RIGRN.placeHolderList[1545]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[125]" "HumanMale_RIGRN.placeHolderList[1542]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[125]" "HumanMale_RIGRN.placeHolderList[1546]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[126]" "HumanMale_RIGRN.placeHolderList[1543]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[126]" "HumanMale_RIGRN.placeHolderList[1547]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[127]" "HumanMale_RIGRN.placeHolderList[1544]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[127]" "HumanMale_RIGRN.placeHolderList[1548]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[128]" "HumanMale_RIGRN.placeHolderList[1545]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[128]" "HumanMale_RIGRN.placeHolderList[1549]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[129]" "HumanMale_RIGRN.placeHolderList[1546]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[129]" "HumanMale_RIGRN.placeHolderList[1550]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[130]" "HumanMale_RIGRN.placeHolderList[1547]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[130]" "HumanMale_RIGRN.placeHolderList[1551]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[131]" "HumanMale_RIGRN.placeHolderList[1548]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[131]" "HumanMale_RIGRN.placeHolderList[1552]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[132]" "HumanMale_RIGRN.placeHolderList[1549]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[132]" "HumanMale_RIGRN.placeHolderList[1553]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[133]" "HumanMale_RIGRN.placeHolderList[1550]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[133]" "HumanMale_RIGRN.placeHolderList[1554]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[134]" "HumanMale_RIGRN.placeHolderList[1551]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[134]" "HumanMale_RIGRN.placeHolderList[1555]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[135]" "HumanMale_RIGRN.placeHolderList[1552]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[135]" "HumanMale_RIGRN.placeHolderList[1556]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[136]" "HumanMale_RIGRN.placeHolderList[1553]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[136]" "HumanMale_RIGRN.placeHolderList[1557]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[137]" "HumanMale_RIGRN.placeHolderList[1554]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[137]" "HumanMale_RIGRN.placeHolderList[1558]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[138]" "HumanMale_RIGRN.placeHolderList[1555]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[138]" "HumanMale_RIGRN.placeHolderList[1559]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[139]" "HumanMale_RIGRN.placeHolderList[1556]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[139]" "HumanMale_RIGRN.placeHolderList[1560]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[140]" "HumanMale_RIGRN.placeHolderList[1557]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[140]" "HumanMale_RIGRN.placeHolderList[1561]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[141]" "HumanMale_RIGRN.placeHolderList[1558]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[141]" "HumanMale_RIGRN.placeHolderList[1562]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[157]" "HumanMale_RIGRN.placeHolderList[1559]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[157]" "HumanMale_RIGRN.placeHolderList[1563]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[158]" "HumanMale_RIGRN.placeHolderList[1560]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[158]" "HumanMale_RIGRN.placeHolderList[1564]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[159]" "HumanMale_RIGRN.placeHolderList[1561]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[159]" "HumanMale_RIGRN.placeHolderList[1565]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[160]" "HumanMale_RIGRN.placeHolderList[1562]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[160]" "HumanMale_RIGRN.placeHolderList[1566]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[161]" "HumanMale_RIGRN.placeHolderList[1563]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[161]" "HumanMale_RIGRN.placeHolderList[1567]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[162]" "HumanMale_RIGRN.placeHolderList[1564]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[162]" "HumanMale_RIGRN.placeHolderList[1568]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[163]" "HumanMale_RIGRN.placeHolderList[1565]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[163]" "HumanMale_RIGRN.placeHolderList[1569]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[164]" "HumanMale_RIGRN.placeHolderList[1566]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[164]" "HumanMale_RIGRN.placeHolderList[1570]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[165]" "HumanMale_RIGRN.placeHolderList[1567]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[165]" "HumanMale_RIGRN.placeHolderList[1571]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[166]" "HumanMale_RIGRN.placeHolderList[1568]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[166]" "HumanMale_RIGRN.placeHolderList[1572]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[167]" "HumanMale_RIGRN.placeHolderList[1569]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[167]" "HumanMale_RIGRN.placeHolderList[1573]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[168]" "HumanMale_RIGRN.placeHolderList[1570]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[168]" "HumanMale_RIGRN.placeHolderList[1574]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[169]" "HumanMale_RIGRN.placeHolderList[1571]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[169]" "HumanMale_RIGRN.placeHolderList[1575]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[170]" "HumanMale_RIGRN.placeHolderList[1572]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[170]" "HumanMale_RIGRN.placeHolderList[1576]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[171]" "HumanMale_RIGRN.placeHolderList[1573]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[171]" "HumanMale_RIGRN.placeHolderList[1577]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[172]" "HumanMale_RIGRN.placeHolderList[1574]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[172]" "HumanMale_RIGRN.placeHolderList[1578]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[173]" "HumanMale_RIGRN.placeHolderList[1575]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[173]" "HumanMale_RIGRN.placeHolderList[1579]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[174]" "HumanMale_RIGRN.placeHolderList[1576]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[174]" "HumanMale_RIGRN.placeHolderList[1580]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[175]" "HumanMale_RIGRN.placeHolderList[1577]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[175]" "HumanMale_RIGRN.placeHolderList[1581]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[176]" "HumanMale_RIGRN.placeHolderList[1578]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[176]" "HumanMale_RIGRN.placeHolderList[1582]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[177]" "HumanMale_RIGRN.placeHolderList[1579]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[177]" "HumanMale_RIGRN.placeHolderList[1583]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[178]" "HumanMale_RIGRN.placeHolderList[1580]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[178]" "HumanMale_RIGRN.placeHolderList[1584]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[179]" "HumanMale_RIGRN.placeHolderList[1581]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[179]" "HumanMale_RIGRN.placeHolderList[1585]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[180]" "HumanMale_RIGRN.placeHolderList[1582]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[180]" "HumanMale_RIGRN.placeHolderList[1586]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[181]" "HumanMale_RIGRN.placeHolderList[1583]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[181]" "HumanMale_RIGRN.placeHolderList[1587]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[182]" "HumanMale_RIGRN.placeHolderList[1584]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[182]" "HumanMale_RIGRN.placeHolderList[1588]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[183]" "HumanMale_RIGRN.placeHolderList[1585]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[183]" "HumanMale_RIGRN.placeHolderList[1589]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[184]" "HumanMale_RIGRN.placeHolderList[1586]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[184]" "HumanMale_RIGRN.placeHolderList[1590]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[185]" "HumanMale_RIGRN.placeHolderList[1587]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[185]" "HumanMale_RIGRN.placeHolderList[1591]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[186]" "HumanMale_RIGRN.placeHolderList[1588]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[186]" "HumanMale_RIGRN.placeHolderList[1592]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[187]" "HumanMale_RIGRN.placeHolderList[1589]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[187]" "HumanMale_RIGRN.placeHolderList[1593]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[188]" "HumanMale_RIGRN.placeHolderList[1590]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[188]" "HumanMale_RIGRN.placeHolderList[1594]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[189]" "HumanMale_RIGRN.placeHolderList[1591]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[189]" "HumanMale_RIGRN.placeHolderList[1595]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[190]" "HumanMale_RIGRN.placeHolderList[1592]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[190]" "HumanMale_RIGRN.placeHolderList[1596]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[191]" "HumanMale_RIGRN.placeHolderList[1593]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[191]" "HumanMale_RIGRN.placeHolderList[1597]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[192]" "HumanMale_RIGRN.placeHolderList[1594]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[192]" "HumanMale_RIGRN.placeHolderList[1598]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[193]" "HumanMale_RIGRN.placeHolderList[1595]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[193]" "HumanMale_RIGRN.placeHolderList[1599]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[194]" "HumanMale_RIGRN.placeHolderList[1596]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[194]" "HumanMale_RIGRN.placeHolderList[1600]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[195]" "HumanMale_RIGRN.placeHolderList[1597]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[195]" "HumanMale_RIGRN.placeHolderList[1601]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[196]" "HumanMale_RIGRN.placeHolderList[1598]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[196]" "HumanMale_RIGRN.placeHolderList[1602]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[197]" "HumanMale_RIGRN.placeHolderList[1599]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[197]" "HumanMale_RIGRN.placeHolderList[1603]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[198]" "HumanMale_RIGRN.placeHolderList[1600]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[198]" "HumanMale_RIGRN.placeHolderList[1604]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[199]" "HumanMale_RIGRN.placeHolderList[1601]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[199]" "HumanMale_RIGRN.placeHolderList[1605]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[200]" "HumanMale_RIGRN.placeHolderList[1602]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[200]" "HumanMale_RIGRN.placeHolderList[1606]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[201]" "HumanMale_RIGRN.placeHolderList[1603]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[201]" "HumanMale_RIGRN.placeHolderList[1607]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[202]" "HumanMale_RIGRN.placeHolderList[1604]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[202]" "HumanMale_RIGRN.placeHolderList[1608]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[203]" "HumanMale_RIGRN.placeHolderList[1605]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[203]" "HumanMale_RIGRN.placeHolderList[1609]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[204]" "HumanMale_RIGRN.placeHolderList[1606]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[204]" "HumanMale_RIGRN.placeHolderList[1610]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[205]" "HumanMale_RIGRN.placeHolderList[1607]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[205]" "HumanMale_RIGRN.placeHolderList[1611]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[206]" "HumanMale_RIGRN.placeHolderList[1608]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[206]" "HumanMale_RIGRN.placeHolderList[1612]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[207]" "HumanMale_RIGRN.placeHolderList[1609]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[207]" "HumanMale_RIGRN.placeHolderList[1613]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[253]" "HumanMale_RIGRN.placeHolderList[1610]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[253]" "HumanMale_RIGRN.placeHolderList[1614]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[254]" "HumanMale_RIGRN.placeHolderList[1611]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[254]" "HumanMale_RIGRN.placeHolderList[1615]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[255]" "HumanMale_RIGRN.placeHolderList[1612]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[255]" "HumanMale_RIGRN.placeHolderList[1616]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[256]" "HumanMale_RIGRN.placeHolderList[1613]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[256]" "HumanMale_RIGRN.placeHolderList[1617]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[257]" "HumanMale_RIGRN.placeHolderList[1614]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[257]" "HumanMale_RIGRN.placeHolderList[1618]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[258]" "HumanMale_RIGRN.placeHolderList[1615]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[258]" "HumanMale_RIGRN.placeHolderList[1619]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[259]" "HumanMale_RIGRN.placeHolderList[1616]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[259]" "HumanMale_RIGRN.placeHolderList[1620]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[260]" "HumanMale_RIGRN.placeHolderList[1617]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[260]" "HumanMale_RIGRN.placeHolderList[1621]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[261]" "HumanMale_RIGRN.placeHolderList[1618]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[261]" "HumanMale_RIGRN.placeHolderList[1622]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[262]" "HumanMale_RIGRN.placeHolderList[1619]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[262]" "HumanMale_RIGRN.placeHolderList[1623]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[263]" "HumanMale_RIGRN.placeHolderList[1620]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[263]" "HumanMale_RIGRN.placeHolderList[1624]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[264]" "HumanMale_RIGRN.placeHolderList[1621]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[264]" "HumanMale_RIGRN.placeHolderList[1625]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[265]" "HumanMale_RIGRN.placeHolderList[1622]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[265]" "HumanMale_RIGRN.placeHolderList[1626]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[266]" "HumanMale_RIGRN.placeHolderList[1623]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[266]" "HumanMale_RIGRN.placeHolderList[1627]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[267]" "HumanMale_RIGRN.placeHolderList[1624]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[267]" "HumanMale_RIGRN.placeHolderList[1628]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[268]" "HumanMale_RIGRN.placeHolderList[1625]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[268]" "HumanMale_RIGRN.placeHolderList[1629]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[269]" "HumanMale_RIGRN.placeHolderList[1626]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[269]" "HumanMale_RIGRN.placeHolderList[1630]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[270]" "HumanMale_RIGRN.placeHolderList[1627]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[270]" "HumanMale_RIGRN.placeHolderList[1631]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[271]" "HumanMale_RIGRN.placeHolderList[1628]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[271]" "HumanMale_RIGRN.placeHolderList[1632]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[272]" "HumanMale_RIGRN.placeHolderList[1629]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[272]" "HumanMale_RIGRN.placeHolderList[1633]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[273]" "HumanMale_RIGRN.placeHolderList[1630]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[273]" "HumanMale_RIGRN.placeHolderList[1634]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[274]" "HumanMale_RIGRN.placeHolderList[1631]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[274]" "HumanMale_RIGRN.placeHolderList[1635]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[275]" "HumanMale_RIGRN.placeHolderList[1632]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[275]" "HumanMale_RIGRN.placeHolderList[1636]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[276]" "HumanMale_RIGRN.placeHolderList[1633]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[276]" "HumanMale_RIGRN.placeHolderList[1637]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[277]" "HumanMale_RIGRN.placeHolderList[1634]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[277]" "HumanMale_RIGRN.placeHolderList[1638]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[278]" "HumanMale_RIGRN.placeHolderList[1635]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[278]" "HumanMale_RIGRN.placeHolderList[1639]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[279]" "HumanMale_RIGRN.placeHolderList[1636]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[279]" "HumanMale_RIGRN.placeHolderList[1640]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[280]" "HumanMale_RIGRN.placeHolderList[1637]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[280]" "HumanMale_RIGRN.placeHolderList[1641]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[281]" "HumanMale_RIGRN.placeHolderList[1638]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[281]" "HumanMale_RIGRN.placeHolderList[1642]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[282]" "HumanMale_RIGRN.placeHolderList[1639]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[282]" "HumanMale_RIGRN.placeHolderList[1643]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[283]" "HumanMale_RIGRN.placeHolderList[1640]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[283]" "HumanMale_RIGRN.placeHolderList[1644]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[284]" "HumanMale_RIGRN.placeHolderList[1641]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[284]" "HumanMale_RIGRN.placeHolderList[1645]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[285]" "HumanMale_RIGRN.placeHolderList[1642]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[285]" "HumanMale_RIGRN.placeHolderList[1646]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[286]" "HumanMale_RIGRN.placeHolderList[1643]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[286]" "HumanMale_RIGRN.placeHolderList[1647]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[287]" "HumanMale_RIGRN.placeHolderList[1644]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[287]" "HumanMale_RIGRN.placeHolderList[1648]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[288]" "HumanMale_RIGRN.placeHolderList[1645]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[288]" "HumanMale_RIGRN.placeHolderList[1649]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[289]" "HumanMale_RIGRN.placeHolderList[1646]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[289]" "HumanMale_RIGRN.placeHolderList[1650]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[290]" "HumanMale_RIGRN.placeHolderList[1647]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[290]" "HumanMale_RIGRN.placeHolderList[1651]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[291]" "HumanMale_RIGRN.placeHolderList[1648]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[291]" "HumanMale_RIGRN.placeHolderList[1652]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[292]" "HumanMale_RIGRN.placeHolderList[1649]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[292]" "HumanMale_RIGRN.placeHolderList[1653]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[293]" "HumanMale_RIGRN.placeHolderList[1650]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[293]" "HumanMale_RIGRN.placeHolderList[1654]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[294]" "HumanMale_RIGRN.placeHolderList[1651]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[294]" "HumanMale_RIGRN.placeHolderList[1655]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[295]" "HumanMale_RIGRN.placeHolderList[1652]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[295]" "HumanMale_RIGRN.placeHolderList[1656]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[296]" "HumanMale_RIGRN.placeHolderList[1653]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[296]" "HumanMale_RIGRN.placeHolderList[1657]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[297]" "HumanMale_RIGRN.placeHolderList[1654]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[297]" "HumanMale_RIGRN.placeHolderList[1658]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[298]" "HumanMale_RIGRN.placeHolderList[1655]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[298]" "HumanMale_RIGRN.placeHolderList[1659]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[299]" "HumanMale_RIGRN.placeHolderList[1656]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[299]" "HumanMale_RIGRN.placeHolderList[1660]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[300]" "HumanMale_RIGRN.placeHolderList[1657]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[300]" "HumanMale_RIGRN.placeHolderList[1661]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[301]" "HumanMale_RIGRN.placeHolderList[1658]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[301]" "HumanMale_RIGRN.placeHolderList[1662]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[302]" "HumanMale_RIGRN.placeHolderList[1659]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[302]" "HumanMale_RIGRN.placeHolderList[1663]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[303]" "HumanMale_RIGRN.placeHolderList[1660]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[303]" "HumanMale_RIGRN.placeHolderList[1664]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[304]" "HumanMale_RIGRN.placeHolderList[1661]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[304]" "HumanMale_RIGRN.placeHolderList[1665]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[305]" "HumanMale_RIGRN.placeHolderList[1662]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[305]" "HumanMale_RIGRN.placeHolderList[1666]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[306]" "HumanMale_RIGRN.placeHolderList[1663]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[306]" "HumanMale_RIGRN.placeHolderList[1667]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[307]" "HumanMale_RIGRN.placeHolderList[1664]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[307]" "HumanMale_RIGRN.placeHolderList[1668]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[308]" "HumanMale_RIGRN.placeHolderList[1665]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[308]" "HumanMale_RIGRN.placeHolderList[1669]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[309]" "HumanMale_RIGRN.placeHolderList[1666]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[309]" "HumanMale_RIGRN.placeHolderList[1670]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[310]" "HumanMale_RIGRN.placeHolderList[1667]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[310]" "HumanMale_RIGRN.placeHolderList[1671]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[311]" "HumanMale_RIGRN.placeHolderList[1668]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[311]" "HumanMale_RIGRN.placeHolderList[1672]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[312]" "HumanMale_RIGRN.placeHolderList[1669]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[312]" "HumanMale_RIGRN.placeHolderList[1673]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[313]" "HumanMale_RIGRN.placeHolderList[1670]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[313]" "HumanMale_RIGRN.placeHolderList[1674]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[314]" "HumanMale_RIGRN.placeHolderList[1671]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[314]" "HumanMale_RIGRN.placeHolderList[1675]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[315]" "HumanMale_RIGRN.placeHolderList[1672]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[315]" "HumanMale_RIGRN.placeHolderList[1676]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[316]" "HumanMale_RIGRN.placeHolderList[1673]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[316]" "HumanMale_RIGRN.placeHolderList[1677]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[317]" "HumanMale_RIGRN.placeHolderList[1674]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[317]" "HumanMale_RIGRN.placeHolderList[1678]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[318]" "HumanMale_RIGRN.placeHolderList[1675]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[318]" "HumanMale_RIGRN.placeHolderList[1679]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[319]" "HumanMale_RIGRN.placeHolderList[1676]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[319]" "HumanMale_RIGRN.placeHolderList[1680]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[320]" "HumanMale_RIGRN.placeHolderList[1677]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[320]" "HumanMale_RIGRN.placeHolderList[1681]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[321]" "HumanMale_RIGRN.placeHolderList[1678]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[321]" "HumanMale_RIGRN.placeHolderList[1682]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[322]" "HumanMale_RIGRN.placeHolderList[1679]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[322]" "HumanMale_RIGRN.placeHolderList[1683]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[323]" "HumanMale_RIGRN.placeHolderList[1680]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[323]" "HumanMale_RIGRN.placeHolderList[1684]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[324]" "HumanMale_RIGRN.placeHolderList[1681]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[324]" "HumanMale_RIGRN.placeHolderList[1685]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[325]" "HumanMale_RIGRN.placeHolderList[1682]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[325]" "HumanMale_RIGRN.placeHolderList[1686]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[326]" "HumanMale_RIGRN.placeHolderList[1683]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[326]" "HumanMale_RIGRN.placeHolderList[1687]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[327]" "HumanMale_RIGRN.placeHolderList[1684]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[327]" "HumanMale_RIGRN.placeHolderList[1688]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[328]" "HumanMale_RIGRN.placeHolderList[1685]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[328]" "HumanMale_RIGRN.placeHolderList[1689]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[329]" "HumanMale_RIGRN.placeHolderList[1686]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[329]" "HumanMale_RIGRN.placeHolderList[1690]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[330]" "HumanMale_RIGRN.placeHolderList[1687]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[330]" "HumanMale_RIGRN.placeHolderList[1691]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[331]" "HumanMale_RIGRN.placeHolderList[1688]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[331]" "HumanMale_RIGRN.placeHolderList[1692]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[332]" "HumanMale_RIGRN.placeHolderList[1689]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[332]" "HumanMale_RIGRN.placeHolderList[1693]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[333]" "HumanMale_RIGRN.placeHolderList[1690]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[333]" "HumanMale_RIGRN.placeHolderList[1694]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[334]" "HumanMale_RIGRN.placeHolderList[1691]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[334]" "HumanMale_RIGRN.placeHolderList[1695]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[335]" "HumanMale_RIGRN.placeHolderList[1692]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[335]" "HumanMale_RIGRN.placeHolderList[1696]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[336]" "HumanMale_RIGRN.placeHolderList[1693]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[336]" "HumanMale_RIGRN.placeHolderList[1697]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[337]" "HumanMale_RIGRN.placeHolderList[1694]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[337]" "HumanMale_RIGRN.placeHolderList[1698]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[338]" "HumanMale_RIGRN.placeHolderList[1695]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[338]" "HumanMale_RIGRN.placeHolderList[1699]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[339]" "HumanMale_RIGRN.placeHolderList[1696]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[339]" "HumanMale_RIGRN.placeHolderList[1700]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[340]" "HumanMale_RIGRN.placeHolderList[1697]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[340]" "HumanMale_RIGRN.placeHolderList[1701]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[341]" "HumanMale_RIGRN.placeHolderList[1698]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[341]" "HumanMale_RIGRN.placeHolderList[1702]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[342]" "HumanMale_RIGRN.placeHolderList[1699]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.linearValues[342]" "HumanMale_RIGRN.placeHolderList[1703]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[1]" "HumanMale_RIGRN.placeHolderList[1700]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[1]" "HumanMale_RIGRN.placeHolderList[1704]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[2]" "HumanMale_RIGRN.placeHolderList[1701]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[2]" "HumanMale_RIGRN.placeHolderList[1705]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[3]" "HumanMale_RIGRN.placeHolderList[1702]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[3]" "HumanMale_RIGRN.placeHolderList[1706]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[4]" "HumanMale_RIGRN.placeHolderList[1703]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[4]" "HumanMale_RIGRN.placeHolderList[1707]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[5]" "HumanMale_RIGRN.placeHolderList[1704]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[5]" "HumanMale_RIGRN.placeHolderList[1708]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[6]" "HumanMale_RIGRN.placeHolderList[1705]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[6]" "HumanMale_RIGRN.placeHolderList[1709]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[7]" "HumanMale_RIGRN.placeHolderList[1706]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[7]" "HumanMale_RIGRN.placeHolderList[1710]" 
+		"R:Hips_control.rx"
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[7]" "HumanMale_RIGRN.placeHolderList[1711]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[8]" "HumanMale_RIGRN.placeHolderList[1707]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[8]" "HumanMale_RIGRN.placeHolderList[1712]" 
+		"R:Hips_control.ry"
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[8]" "HumanMale_RIGRN.placeHolderList[1713]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[9]" "HumanMale_RIGRN.placeHolderList[1708]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[9]" "HumanMale_RIGRN.placeHolderList[1714]" 
+		"R:Hips_control.rz"
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[9]" "HumanMale_RIGRN.placeHolderList[1715]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[10]" "HumanMale_RIGRN.placeHolderList[1709]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[10]" "HumanMale_RIGRN.placeHolderList[1716]" 
 		"R:Spine1_control.rx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[10]" "HumanMale_RIGRN.placeHolderList[1710]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[10]" "HumanMale_RIGRN.placeHolderList[1717]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[11]" "HumanMale_RIGRN.placeHolderList[1711]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[11]" "HumanMale_RIGRN.placeHolderList[1718]" 
 		"R:Spine1_control.ry"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[11]" "HumanMale_RIGRN.placeHolderList[1712]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[11]" "HumanMale_RIGRN.placeHolderList[1719]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[12]" "HumanMale_RIGRN.placeHolderList[1713]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[12]" "HumanMale_RIGRN.placeHolderList[1720]" 
 		"R:Spine1_control.rz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[12]" "HumanMale_RIGRN.placeHolderList[1714]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[12]" "HumanMale_RIGRN.placeHolderList[1721]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[13]" "HumanMale_RIGRN.placeHolderList[1715]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[13]" "HumanMale_RIGRN.placeHolderList[1722]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[14]" "HumanMale_RIGRN.placeHolderList[1716]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[14]" "HumanMale_RIGRN.placeHolderList[1723]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[15]" "HumanMale_RIGRN.placeHolderList[1717]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[15]" "HumanMale_RIGRN.placeHolderList[1724]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[16]" "HumanMale_RIGRN.placeHolderList[1718]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[16]" "HumanMale_RIGRN.placeHolderList[1725]" 
 		"R:Chest_control.rx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[16]" "HumanMale_RIGRN.placeHolderList[1719]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[16]" "HumanMale_RIGRN.placeHolderList[1726]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[17]" "HumanMale_RIGRN.placeHolderList[1720]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[17]" "HumanMale_RIGRN.placeHolderList[1727]" 
 		"R:Chest_control.ry"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[17]" "HumanMale_RIGRN.placeHolderList[1721]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[17]" "HumanMale_RIGRN.placeHolderList[1728]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[18]" "HumanMale_RIGRN.placeHolderList[1722]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[18]" "HumanMale_RIGRN.placeHolderList[1729]" 
 		"R:Chest_control.rz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[18]" "HumanMale_RIGRN.placeHolderList[1723]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[18]" "HumanMale_RIGRN.placeHolderList[1730]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[19]" "HumanMale_RIGRN.placeHolderList[1724]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[19]" "HumanMale_RIGRN.placeHolderList[1731]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[20]" "HumanMale_RIGRN.placeHolderList[1725]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[20]" "HumanMale_RIGRN.placeHolderList[1732]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[21]" "HumanMale_RIGRN.placeHolderList[1726]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[21]" "HumanMale_RIGRN.placeHolderList[1733]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[22]" "HumanMale_RIGRN.placeHolderList[1727]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[22]" "HumanMale_RIGRN.placeHolderList[1734]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[23]" "HumanMale_RIGRN.placeHolderList[1728]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[23]" "HumanMale_RIGRN.placeHolderList[1735]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[24]" "HumanMale_RIGRN.placeHolderList[1729]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[24]" "HumanMale_RIGRN.placeHolderList[1736]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[25]" "HumanMale_RIGRN.placeHolderList[1730]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[25]" "HumanMale_RIGRN.placeHolderList[1737]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[26]" "HumanMale_RIGRN.placeHolderList[1731]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[26]" "HumanMale_RIGRN.placeHolderList[1738]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[27]" "HumanMale_RIGRN.placeHolderList[1732]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[27]" "HumanMale_RIGRN.placeHolderList[1739]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[28]" "HumanMale_RIGRN.placeHolderList[1733]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[28]" "HumanMale_RIGRN.placeHolderList[1740]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[29]" "HumanMale_RIGRN.placeHolderList[1734]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[29]" "HumanMale_RIGRN.placeHolderList[1741]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[30]" "HumanMale_RIGRN.placeHolderList[1735]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[30]" "HumanMale_RIGRN.placeHolderList[1742]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[31]" "HumanMale_RIGRN.placeHolderList[1736]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[31]" "HumanMale_RIGRN.placeHolderList[1743]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[32]" "HumanMale_RIGRN.placeHolderList[1737]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[32]" "HumanMale_RIGRN.placeHolderList[1744]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[33]" "HumanMale_RIGRN.placeHolderList[1738]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[33]" "HumanMale_RIGRN.placeHolderList[1745]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[34]" "HumanMale_RIGRN.placeHolderList[1739]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[34]" "HumanMale_RIGRN.placeHolderList[1746]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[35]" "HumanMale_RIGRN.placeHolderList[1740]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[35]" "HumanMale_RIGRN.placeHolderList[1747]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[36]" "HumanMale_RIGRN.placeHolderList[1741]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[36]" "HumanMale_RIGRN.placeHolderList[1748]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[37]" "HumanMale_RIGRN.placeHolderList[1742]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[37]" "HumanMale_RIGRN.placeHolderList[1749]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[38]" "HumanMale_RIGRN.placeHolderList[1743]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[38]" "HumanMale_RIGRN.placeHolderList[1750]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[39]" "HumanMale_RIGRN.placeHolderList[1744]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[39]" "HumanMale_RIGRN.placeHolderList[1751]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[40]" "HumanMale_RIGRN.placeHolderList[1745]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[40]" "HumanMale_RIGRN.placeHolderList[1752]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[41]" "HumanMale_RIGRN.placeHolderList[1746]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[41]" "HumanMale_RIGRN.placeHolderList[1753]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[42]" "HumanMale_RIGRN.placeHolderList[1747]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[42]" "HumanMale_RIGRN.placeHolderList[1754]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[43]" "HumanMale_RIGRN.placeHolderList[1748]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[43]" "HumanMale_RIGRN.placeHolderList[1755]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[44]" "HumanMale_RIGRN.placeHolderList[1749]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[44]" "HumanMale_RIGRN.placeHolderList[1756]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[45]" "HumanMale_RIGRN.placeHolderList[1750]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[45]" "HumanMale_RIGRN.placeHolderList[1757]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[46]" "HumanMale_RIGRN.placeHolderList[1751]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[46]" "HumanMale_RIGRN.placeHolderList[1758]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[47]" "HumanMale_RIGRN.placeHolderList[1752]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[47]" "HumanMale_RIGRN.placeHolderList[1759]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[48]" "HumanMale_RIGRN.placeHolderList[1753]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[48]" "HumanMale_RIGRN.placeHolderList[1760]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[49]" "HumanMale_RIGRN.placeHolderList[1754]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[49]" "HumanMale_RIGRN.placeHolderList[1761]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[50]" "HumanMale_RIGRN.placeHolderList[1755]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[50]" "HumanMale_RIGRN.placeHolderList[1762]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[51]" "HumanMale_RIGRN.placeHolderList[1756]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[51]" "HumanMale_RIGRN.placeHolderList[1763]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[52]" "HumanMale_RIGRN.placeHolderList[1757]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[52]" "HumanMale_RIGRN.placeHolderList[1764]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[53]" "HumanMale_RIGRN.placeHolderList[1758]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[53]" "HumanMale_RIGRN.placeHolderList[1765]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[54]" "HumanMale_RIGRN.placeHolderList[1759]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[54]" "HumanMale_RIGRN.placeHolderList[1766]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[55]" "HumanMale_RIGRN.placeHolderList[1760]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[55]" "HumanMale_RIGRN.placeHolderList[1767]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[56]" "HumanMale_RIGRN.placeHolderList[1761]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[56]" "HumanMale_RIGRN.placeHolderList[1768]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[57]" "HumanMale_RIGRN.placeHolderList[1762]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[57]" "HumanMale_RIGRN.placeHolderList[1769]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[58]" "HumanMale_RIGRN.placeHolderList[1763]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[58]" "HumanMale_RIGRN.placeHolderList[1770]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[59]" "HumanMale_RIGRN.placeHolderList[1764]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[59]" "HumanMale_RIGRN.placeHolderList[1771]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[60]" "HumanMale_RIGRN.placeHolderList[1765]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[60]" "HumanMale_RIGRN.placeHolderList[1772]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[70]" "HumanMale_RIGRN.placeHolderList[1766]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[70]" "HumanMale_RIGRN.placeHolderList[1773]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[71]" "HumanMale_RIGRN.placeHolderList[1767]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[71]" "HumanMale_RIGRN.placeHolderList[1774]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[72]" "HumanMale_RIGRN.placeHolderList[1768]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[72]" "HumanMale_RIGRN.placeHolderList[1775]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[73]" "HumanMale_RIGRN.placeHolderList[1769]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[73]" "HumanMale_RIGRN.placeHolderList[1776]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[74]" "HumanMale_RIGRN.placeHolderList[1770]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[74]" "HumanMale_RIGRN.placeHolderList[1777]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[75]" "HumanMale_RIGRN.placeHolderList[1771]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[75]" "HumanMale_RIGRN.placeHolderList[1778]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[76]" "HumanMale_RIGRN.placeHolderList[1772]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[76]" "HumanMale_RIGRN.placeHolderList[1779]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[77]" "HumanMale_RIGRN.placeHolderList[1773]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[77]" "HumanMale_RIGRN.placeHolderList[1780]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[78]" "HumanMale_RIGRN.placeHolderList[1774]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[78]" "HumanMale_RIGRN.placeHolderList[1781]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[79]" "HumanMale_RIGRN.placeHolderList[1775]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[79]" "HumanMale_RIGRN.placeHolderList[1782]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[80]" "HumanMale_RIGRN.placeHolderList[1776]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[80]" "HumanMale_RIGRN.placeHolderList[1783]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[81]" "HumanMale_RIGRN.placeHolderList[1777]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[81]" "HumanMale_RIGRN.placeHolderList[1784]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[82]" "HumanMale_RIGRN.placeHolderList[1778]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[82]" "HumanMale_RIGRN.placeHolderList[1785]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[83]" "HumanMale_RIGRN.placeHolderList[1779]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[83]" "HumanMale_RIGRN.placeHolderList[1786]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[84]" "HumanMale_RIGRN.placeHolderList[1780]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[84]" "HumanMale_RIGRN.placeHolderList[1787]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[85]" "HumanMale_RIGRN.placeHolderList[1781]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[85]" "HumanMale_RIGRN.placeHolderList[1788]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[86]" "HumanMale_RIGRN.placeHolderList[1782]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[86]" "HumanMale_RIGRN.placeHolderList[1789]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[87]" "HumanMale_RIGRN.placeHolderList[1783]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[87]" "HumanMale_RIGRN.placeHolderList[1790]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[88]" "HumanMale_RIGRN.placeHolderList[1784]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[88]" "HumanMale_RIGRN.placeHolderList[1791]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[89]" "HumanMale_RIGRN.placeHolderList[1785]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[89]" "HumanMale_RIGRN.placeHolderList[1792]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[90]" "HumanMale_RIGRN.placeHolderList[1786]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[90]" "HumanMale_RIGRN.placeHolderList[1793]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[91]" "HumanMale_RIGRN.placeHolderList[1787]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[91]" "HumanMale_RIGRN.placeHolderList[1794]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[92]" "HumanMale_RIGRN.placeHolderList[1788]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[92]" "HumanMale_RIGRN.placeHolderList[1795]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[93]" "HumanMale_RIGRN.placeHolderList[1789]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[93]" "HumanMale_RIGRN.placeHolderList[1796]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[94]" "HumanMale_RIGRN.placeHolderList[1790]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[94]" "HumanMale_RIGRN.placeHolderList[1797]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[95]" "HumanMale_RIGRN.placeHolderList[1791]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[95]" "HumanMale_RIGRN.placeHolderList[1798]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[96]" "HumanMale_RIGRN.placeHolderList[1792]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[96]" "HumanMale_RIGRN.placeHolderList[1799]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[97]" "HumanMale_RIGRN.placeHolderList[1793]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[97]" "HumanMale_RIGRN.placeHolderList[1800]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[98]" "HumanMale_RIGRN.placeHolderList[1794]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[98]" "HumanMale_RIGRN.placeHolderList[1801]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[99]" "HumanMale_RIGRN.placeHolderList[1795]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[99]" "HumanMale_RIGRN.placeHolderList[1802]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[100]" "HumanMale_RIGRN.placeHolderList[1796]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[100]" "HumanMale_RIGRN.placeHolderList[1803]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[101]" "HumanMale_RIGRN.placeHolderList[1797]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[101]" "HumanMale_RIGRN.placeHolderList[1804]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[102]" "HumanMale_RIGRN.placeHolderList[1798]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[102]" "HumanMale_RIGRN.placeHolderList[1805]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[103]" "HumanMale_RIGRN.placeHolderList[1799]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[103]" "HumanMale_RIGRN.placeHolderList[1806]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[104]" "HumanMale_RIGRN.placeHolderList[1800]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[104]" "HumanMale_RIGRN.placeHolderList[1807]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[105]" "HumanMale_RIGRN.placeHolderList[1801]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[105]" "HumanMale_RIGRN.placeHolderList[1808]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[106]" "HumanMale_RIGRN.placeHolderList[1802]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[106]" "HumanMale_RIGRN.placeHolderList[1809]" 
 		"R:Shoulders_R_control.rx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[106]" "HumanMale_RIGRN.placeHolderList[1803]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[106]" "HumanMale_RIGRN.placeHolderList[1810]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[107]" "HumanMale_RIGRN.placeHolderList[1804]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[107]" "HumanMale_RIGRN.placeHolderList[1811]" 
 		"R:Shoulders_R_control.ry"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[107]" "HumanMale_RIGRN.placeHolderList[1805]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[107]" "HumanMale_RIGRN.placeHolderList[1812]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[108]" "HumanMale_RIGRN.placeHolderList[1806]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[108]" "HumanMale_RIGRN.placeHolderList[1813]" 
 		"R:Shoulders_R_control.rz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[108]" "HumanMale_RIGRN.placeHolderList[1807]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[108]" "HumanMale_RIGRN.placeHolderList[1814]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[109]" "HumanMale_RIGRN.placeHolderList[1808]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[109]" "HumanMale_RIGRN.placeHolderList[1815]" 
 		"R:Shoulders_L_control.rx"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[109]" "HumanMale_RIGRN.placeHolderList[1809]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[109]" "HumanMale_RIGRN.placeHolderList[1816]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[110]" "HumanMale_RIGRN.placeHolderList[1810]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[110]" "HumanMale_RIGRN.placeHolderList[1817]" 
 		"R:Shoulders_L_control.ry"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[110]" "HumanMale_RIGRN.placeHolderList[1811]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[110]" "HumanMale_RIGRN.placeHolderList[1818]" 
 		""
-		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[111]" "HumanMale_RIGRN.placeHolderList[1812]" 
+		5 3 "HumanMale_RIGRN" "R:HumanMale.angularValues[111]" "HumanMale_RIGRN.placeHolderList[1819]" 
 		"R:Shoulders_L_control.rz"
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[111]" "HumanMale_RIGRN.placeHolderList[1813]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[111]" "HumanMale_RIGRN.placeHolderList[1820]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[112]" "HumanMale_RIGRN.placeHolderList[1814]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[112]" "HumanMale_RIGRN.placeHolderList[1821]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[113]" "HumanMale_RIGRN.placeHolderList[1815]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[113]" "HumanMale_RIGRN.placeHolderList[1822]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[114]" "HumanMale_RIGRN.placeHolderList[1816]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[114]" "HumanMale_RIGRN.placeHolderList[1823]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[115]" "HumanMale_RIGRN.placeHolderList[1817]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[115]" "HumanMale_RIGRN.placeHolderList[1824]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[116]" "HumanMale_RIGRN.placeHolderList[1818]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[116]" "HumanMale_RIGRN.placeHolderList[1825]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[117]" "HumanMale_RIGRN.placeHolderList[1819]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[117]" "HumanMale_RIGRN.placeHolderList[1826]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[208]" "HumanMale_RIGRN.placeHolderList[1820]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[208]" "HumanMale_RIGRN.placeHolderList[1827]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[209]" "HumanMale_RIGRN.placeHolderList[1821]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[209]" "HumanMale_RIGRN.placeHolderList[1828]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[210]" "HumanMale_RIGRN.placeHolderList[1822]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[210]" "HumanMale_RIGRN.placeHolderList[1829]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[211]" "HumanMale_RIGRN.placeHolderList[1823]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[211]" "HumanMale_RIGRN.placeHolderList[1830]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[212]" "HumanMale_RIGRN.placeHolderList[1824]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[212]" "HumanMale_RIGRN.placeHolderList[1831]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[213]" "HumanMale_RIGRN.placeHolderList[1825]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[213]" "HumanMale_RIGRN.placeHolderList[1832]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[214]" "HumanMale_RIGRN.placeHolderList[1826]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[214]" "HumanMale_RIGRN.placeHolderList[1833]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[215]" "HumanMale_RIGRN.placeHolderList[1827]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[215]" "HumanMale_RIGRN.placeHolderList[1834]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[216]" "HumanMale_RIGRN.placeHolderList[1828]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[216]" "HumanMale_RIGRN.placeHolderList[1835]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[217]" "HumanMale_RIGRN.placeHolderList[1829]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[217]" "HumanMale_RIGRN.placeHolderList[1836]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[218]" "HumanMale_RIGRN.placeHolderList[1830]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[218]" "HumanMale_RIGRN.placeHolderList[1837]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[219]" "HumanMale_RIGRN.placeHolderList[1831]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[219]" "HumanMale_RIGRN.placeHolderList[1838]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[220]" "HumanMale_RIGRN.placeHolderList[1832]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[220]" "HumanMale_RIGRN.placeHolderList[1839]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[221]" "HumanMale_RIGRN.placeHolderList[1833]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[221]" "HumanMale_RIGRN.placeHolderList[1840]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[222]" "HumanMale_RIGRN.placeHolderList[1834]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[222]" "HumanMale_RIGRN.placeHolderList[1841]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[223]" "HumanMale_RIGRN.placeHolderList[1835]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[223]" "HumanMale_RIGRN.placeHolderList[1842]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[224]" "HumanMale_RIGRN.placeHolderList[1836]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[224]" "HumanMale_RIGRN.placeHolderList[1843]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[225]" "HumanMale_RIGRN.placeHolderList[1837]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[225]" "HumanMale_RIGRN.placeHolderList[1844]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[226]" "HumanMale_RIGRN.placeHolderList[1838]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[226]" "HumanMale_RIGRN.placeHolderList[1845]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[227]" "HumanMale_RIGRN.placeHolderList[1839]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[227]" "HumanMale_RIGRN.placeHolderList[1846]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[228]" "HumanMale_RIGRN.placeHolderList[1840]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[228]" "HumanMale_RIGRN.placeHolderList[1847]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[229]" "HumanMale_RIGRN.placeHolderList[1841]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[229]" "HumanMale_RIGRN.placeHolderList[1848]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[230]" "HumanMale_RIGRN.placeHolderList[1842]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[230]" "HumanMale_RIGRN.placeHolderList[1849]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[231]" "HumanMale_RIGRN.placeHolderList[1843]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[231]" "HumanMale_RIGRN.placeHolderList[1850]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[232]" "HumanMale_RIGRN.placeHolderList[1844]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[232]" "HumanMale_RIGRN.placeHolderList[1851]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[233]" "HumanMale_RIGRN.placeHolderList[1845]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[233]" "HumanMale_RIGRN.placeHolderList[1852]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[234]" "HumanMale_RIGRN.placeHolderList[1846]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[234]" "HumanMale_RIGRN.placeHolderList[1853]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[235]" "HumanMale_RIGRN.placeHolderList[1847]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[235]" "HumanMale_RIGRN.placeHolderList[1854]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[236]" "HumanMale_RIGRN.placeHolderList[1848]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[236]" "HumanMale_RIGRN.placeHolderList[1855]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[237]" "HumanMale_RIGRN.placeHolderList[1849]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[237]" "HumanMale_RIGRN.placeHolderList[1856]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[238]" "HumanMale_RIGRN.placeHolderList[1850]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[238]" "HumanMale_RIGRN.placeHolderList[1857]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[239]" "HumanMale_RIGRN.placeHolderList[1851]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[239]" "HumanMale_RIGRN.placeHolderList[1858]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[240]" "HumanMale_RIGRN.placeHolderList[1852]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[240]" "HumanMale_RIGRN.placeHolderList[1859]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[241]" "HumanMale_RIGRN.placeHolderList[1853]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[241]" "HumanMale_RIGRN.placeHolderList[1860]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[242]" "HumanMale_RIGRN.placeHolderList[1854]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[242]" "HumanMale_RIGRN.placeHolderList[1861]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[243]" "HumanMale_RIGRN.placeHolderList[1855]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[243]" "HumanMale_RIGRN.placeHolderList[1862]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[244]" "HumanMale_RIGRN.placeHolderList[1856]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[244]" "HumanMale_RIGRN.placeHolderList[1863]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[245]" "HumanMale_RIGRN.placeHolderList[1857]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[245]" "HumanMale_RIGRN.placeHolderList[1864]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[246]" "HumanMale_RIGRN.placeHolderList[1858]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[246]" "HumanMale_RIGRN.placeHolderList[1865]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[247]" "HumanMale_RIGRN.placeHolderList[1859]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[247]" "HumanMale_RIGRN.placeHolderList[1866]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[248]" "HumanMale_RIGRN.placeHolderList[1860]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[248]" "HumanMale_RIGRN.placeHolderList[1867]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[249]" "HumanMale_RIGRN.placeHolderList[1861]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[249]" "HumanMale_RIGRN.placeHolderList[1868]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[265]" "HumanMale_RIGRN.placeHolderList[1862]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[265]" "HumanMale_RIGRN.placeHolderList[1869]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[266]" "HumanMale_RIGRN.placeHolderList[1863]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[266]" "HumanMale_RIGRN.placeHolderList[1870]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[267]" "HumanMale_RIGRN.placeHolderList[1864]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[267]" "HumanMale_RIGRN.placeHolderList[1871]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[268]" "HumanMale_RIGRN.placeHolderList[1865]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[268]" "HumanMale_RIGRN.placeHolderList[1872]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[269]" "HumanMale_RIGRN.placeHolderList[1866]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[269]" "HumanMale_RIGRN.placeHolderList[1873]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[270]" "HumanMale_RIGRN.placeHolderList[1867]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[270]" "HumanMale_RIGRN.placeHolderList[1874]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[271]" "HumanMale_RIGRN.placeHolderList[1868]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[271]" "HumanMale_RIGRN.placeHolderList[1875]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[272]" "HumanMale_RIGRN.placeHolderList[1869]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[272]" "HumanMale_RIGRN.placeHolderList[1876]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[273]" "HumanMale_RIGRN.placeHolderList[1870]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[273]" "HumanMale_RIGRN.placeHolderList[1877]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[274]" "HumanMale_RIGRN.placeHolderList[1871]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[274]" "HumanMale_RIGRN.placeHolderList[1878]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[275]" "HumanMale_RIGRN.placeHolderList[1872]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[275]" "HumanMale_RIGRN.placeHolderList[1879]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[276]" "HumanMale_RIGRN.placeHolderList[1873]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[276]" "HumanMale_RIGRN.placeHolderList[1880]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[277]" "HumanMale_RIGRN.placeHolderList[1874]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[277]" "HumanMale_RIGRN.placeHolderList[1881]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[278]" "HumanMale_RIGRN.placeHolderList[1875]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[278]" "HumanMale_RIGRN.placeHolderList[1882]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[279]" "HumanMale_RIGRN.placeHolderList[1876]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[279]" "HumanMale_RIGRN.placeHolderList[1883]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[280]" "HumanMale_RIGRN.placeHolderList[1877]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[280]" "HumanMale_RIGRN.placeHolderList[1884]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[281]" "HumanMale_RIGRN.placeHolderList[1878]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[281]" "HumanMale_RIGRN.placeHolderList[1885]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[282]" "HumanMale_RIGRN.placeHolderList[1879]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[282]" "HumanMale_RIGRN.placeHolderList[1886]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[283]" "HumanMale_RIGRN.placeHolderList[1880]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[283]" "HumanMale_RIGRN.placeHolderList[1887]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[284]" "HumanMale_RIGRN.placeHolderList[1881]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[284]" "HumanMale_RIGRN.placeHolderList[1888]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[285]" "HumanMale_RIGRN.placeHolderList[1882]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[285]" "HumanMale_RIGRN.placeHolderList[1889]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[286]" "HumanMale_RIGRN.placeHolderList[1883]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[286]" "HumanMale_RIGRN.placeHolderList[1890]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[287]" "HumanMale_RIGRN.placeHolderList[1884]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[287]" "HumanMale_RIGRN.placeHolderList[1891]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[288]" "HumanMale_RIGRN.placeHolderList[1885]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[288]" "HumanMale_RIGRN.placeHolderList[1892]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[289]" "HumanMale_RIGRN.placeHolderList[1886]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[289]" "HumanMale_RIGRN.placeHolderList[1893]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[290]" "HumanMale_RIGRN.placeHolderList[1887]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[290]" "HumanMale_RIGRN.placeHolderList[1894]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[291]" "HumanMale_RIGRN.placeHolderList[1888]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[291]" "HumanMale_RIGRN.placeHolderList[1895]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[292]" "HumanMale_RIGRN.placeHolderList[1889]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[292]" "HumanMale_RIGRN.placeHolderList[1896]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[293]" "HumanMale_RIGRN.placeHolderList[1890]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[293]" "HumanMale_RIGRN.placeHolderList[1897]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[294]" "HumanMale_RIGRN.placeHolderList[1891]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[294]" "HumanMale_RIGRN.placeHolderList[1898]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[295]" "HumanMale_RIGRN.placeHolderList[1892]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[295]" "HumanMale_RIGRN.placeHolderList[1899]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[296]" "HumanMale_RIGRN.placeHolderList[1893]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[296]" "HumanMale_RIGRN.placeHolderList[1900]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[297]" "HumanMale_RIGRN.placeHolderList[1894]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[297]" "HumanMale_RIGRN.placeHolderList[1901]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[298]" "HumanMale_RIGRN.placeHolderList[1895]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[298]" "HumanMale_RIGRN.placeHolderList[1902]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[299]" "HumanMale_RIGRN.placeHolderList[1896]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[299]" "HumanMale_RIGRN.placeHolderList[1903]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[300]" "HumanMale_RIGRN.placeHolderList[1897]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[300]" "HumanMale_RIGRN.placeHolderList[1904]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[301]" "HumanMale_RIGRN.placeHolderList[1898]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[301]" "HumanMale_RIGRN.placeHolderList[1905]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[302]" "HumanMale_RIGRN.placeHolderList[1899]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[302]" "HumanMale_RIGRN.placeHolderList[1906]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[303]" "HumanMale_RIGRN.placeHolderList[1900]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[303]" "HumanMale_RIGRN.placeHolderList[1907]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[304]" "HumanMale_RIGRN.placeHolderList[1901]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[304]" "HumanMale_RIGRN.placeHolderList[1908]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[305]" "HumanMale_RIGRN.placeHolderList[1902]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[305]" "HumanMale_RIGRN.placeHolderList[1909]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[306]" "HumanMale_RIGRN.placeHolderList[1903]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[306]" "HumanMale_RIGRN.placeHolderList[1910]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[307]" "HumanMale_RIGRN.placeHolderList[1904]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[307]" "HumanMale_RIGRN.placeHolderList[1911]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[308]" "HumanMale_RIGRN.placeHolderList[1905]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[308]" "HumanMale_RIGRN.placeHolderList[1912]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[309]" "HumanMale_RIGRN.placeHolderList[1906]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[309]" "HumanMale_RIGRN.placeHolderList[1913]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[310]" "HumanMale_RIGRN.placeHolderList[1907]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[310]" "HumanMale_RIGRN.placeHolderList[1914]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[311]" "HumanMale_RIGRN.placeHolderList[1908]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[311]" "HumanMale_RIGRN.placeHolderList[1915]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[312]" "HumanMale_RIGRN.placeHolderList[1909]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[312]" "HumanMale_RIGRN.placeHolderList[1916]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[313]" "HumanMale_RIGRN.placeHolderList[1910]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[313]" "HumanMale_RIGRN.placeHolderList[1917]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[314]" "HumanMale_RIGRN.placeHolderList[1911]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[314]" "HumanMale_RIGRN.placeHolderList[1918]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[315]" "HumanMale_RIGRN.placeHolderList[1912]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[315]" "HumanMale_RIGRN.placeHolderList[1919]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[361]" "HumanMale_RIGRN.placeHolderList[1913]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[361]" "HumanMale_RIGRN.placeHolderList[1920]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[362]" "HumanMale_RIGRN.placeHolderList[1914]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[362]" "HumanMale_RIGRN.placeHolderList[1921]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[363]" "HumanMale_RIGRN.placeHolderList[1915]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[363]" "HumanMale_RIGRN.placeHolderList[1922]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[364]" "HumanMale_RIGRN.placeHolderList[1916]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[364]" "HumanMale_RIGRN.placeHolderList[1923]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[365]" "HumanMale_RIGRN.placeHolderList[1917]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[365]" "HumanMale_RIGRN.placeHolderList[1924]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[366]" "HumanMale_RIGRN.placeHolderList[1918]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[366]" "HumanMale_RIGRN.placeHolderList[1925]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[367]" "HumanMale_RIGRN.placeHolderList[1919]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[367]" "HumanMale_RIGRN.placeHolderList[1926]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[368]" "HumanMale_RIGRN.placeHolderList[1920]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[368]" "HumanMale_RIGRN.placeHolderList[1927]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[369]" "HumanMale_RIGRN.placeHolderList[1921]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[369]" "HumanMale_RIGRN.placeHolderList[1928]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[370]" "HumanMale_RIGRN.placeHolderList[1922]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[370]" "HumanMale_RIGRN.placeHolderList[1929]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[371]" "HumanMale_RIGRN.placeHolderList[1923]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[371]" "HumanMale_RIGRN.placeHolderList[1930]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[372]" "HumanMale_RIGRN.placeHolderList[1924]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[372]" "HumanMale_RIGRN.placeHolderList[1931]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[373]" "HumanMale_RIGRN.placeHolderList[1925]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[373]" "HumanMale_RIGRN.placeHolderList[1932]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[374]" "HumanMale_RIGRN.placeHolderList[1926]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[374]" "HumanMale_RIGRN.placeHolderList[1933]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[375]" "HumanMale_RIGRN.placeHolderList[1927]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[375]" "HumanMale_RIGRN.placeHolderList[1934]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[376]" "HumanMale_RIGRN.placeHolderList[1928]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[376]" "HumanMale_RIGRN.placeHolderList[1935]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[377]" "HumanMale_RIGRN.placeHolderList[1929]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[377]" "HumanMale_RIGRN.placeHolderList[1936]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[378]" "HumanMale_RIGRN.placeHolderList[1930]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[378]" "HumanMale_RIGRN.placeHolderList[1937]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[379]" "HumanMale_RIGRN.placeHolderList[1931]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[379]" "HumanMale_RIGRN.placeHolderList[1938]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[380]" "HumanMale_RIGRN.placeHolderList[1932]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[380]" "HumanMale_RIGRN.placeHolderList[1939]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[381]" "HumanMale_RIGRN.placeHolderList[1933]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[381]" "HumanMale_RIGRN.placeHolderList[1940]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[382]" "HumanMale_RIGRN.placeHolderList[1934]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[382]" "HumanMale_RIGRN.placeHolderList[1941]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[383]" "HumanMale_RIGRN.placeHolderList[1935]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[383]" "HumanMale_RIGRN.placeHolderList[1942]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[384]" "HumanMale_RIGRN.placeHolderList[1936]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[384]" "HumanMale_RIGRN.placeHolderList[1943]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[385]" "HumanMale_RIGRN.placeHolderList[1937]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[385]" "HumanMale_RIGRN.placeHolderList[1944]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[386]" "HumanMale_RIGRN.placeHolderList[1938]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[386]" "HumanMale_RIGRN.placeHolderList[1945]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[387]" "HumanMale_RIGRN.placeHolderList[1939]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[387]" "HumanMale_RIGRN.placeHolderList[1946]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[388]" "HumanMale_RIGRN.placeHolderList[1940]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[388]" "HumanMale_RIGRN.placeHolderList[1947]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[389]" "HumanMale_RIGRN.placeHolderList[1941]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[389]" "HumanMale_RIGRN.placeHolderList[1948]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[390]" "HumanMale_RIGRN.placeHolderList[1942]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[390]" "HumanMale_RIGRN.placeHolderList[1949]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[391]" "HumanMale_RIGRN.placeHolderList[1943]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[391]" "HumanMale_RIGRN.placeHolderList[1950]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[392]" "HumanMale_RIGRN.placeHolderList[1944]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[392]" "HumanMale_RIGRN.placeHolderList[1951]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[393]" "HumanMale_RIGRN.placeHolderList[1945]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[393]" "HumanMale_RIGRN.placeHolderList[1952]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[394]" "HumanMale_RIGRN.placeHolderList[1946]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[394]" "HumanMale_RIGRN.placeHolderList[1953]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[395]" "HumanMale_RIGRN.placeHolderList[1947]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[395]" "HumanMale_RIGRN.placeHolderList[1954]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[396]" "HumanMale_RIGRN.placeHolderList[1948]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[396]" "HumanMale_RIGRN.placeHolderList[1955]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[397]" "HumanMale_RIGRN.placeHolderList[1949]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[397]" "HumanMale_RIGRN.placeHolderList[1956]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[398]" "HumanMale_RIGRN.placeHolderList[1950]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[398]" "HumanMale_RIGRN.placeHolderList[1957]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[399]" "HumanMale_RIGRN.placeHolderList[1951]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[399]" "HumanMale_RIGRN.placeHolderList[1958]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[400]" "HumanMale_RIGRN.placeHolderList[1952]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[400]" "HumanMale_RIGRN.placeHolderList[1959]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[401]" "HumanMale_RIGRN.placeHolderList[1953]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[401]" "HumanMale_RIGRN.placeHolderList[1960]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[402]" "HumanMale_RIGRN.placeHolderList[1954]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[402]" "HumanMale_RIGRN.placeHolderList[1961]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[403]" "HumanMale_RIGRN.placeHolderList[1955]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[403]" "HumanMale_RIGRN.placeHolderList[1962]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[404]" "HumanMale_RIGRN.placeHolderList[1956]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[404]" "HumanMale_RIGRN.placeHolderList[1963]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[405]" "HumanMale_RIGRN.placeHolderList[1957]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[405]" "HumanMale_RIGRN.placeHolderList[1964]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[406]" "HumanMale_RIGRN.placeHolderList[1958]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[406]" "HumanMale_RIGRN.placeHolderList[1965]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[407]" "HumanMale_RIGRN.placeHolderList[1959]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[407]" "HumanMale_RIGRN.placeHolderList[1966]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[408]" "HumanMale_RIGRN.placeHolderList[1960]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[408]" "HumanMale_RIGRN.placeHolderList[1967]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[409]" "HumanMale_RIGRN.placeHolderList[1961]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[409]" "HumanMale_RIGRN.placeHolderList[1968]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[410]" "HumanMale_RIGRN.placeHolderList[1962]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[410]" "HumanMale_RIGRN.placeHolderList[1969]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[411]" "HumanMale_RIGRN.placeHolderList[1963]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[411]" "HumanMale_RIGRN.placeHolderList[1970]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[412]" "HumanMale_RIGRN.placeHolderList[1964]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[412]" "HumanMale_RIGRN.placeHolderList[1971]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[413]" "HumanMale_RIGRN.placeHolderList[1965]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[413]" "HumanMale_RIGRN.placeHolderList[1972]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[414]" "HumanMale_RIGRN.placeHolderList[1966]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[414]" "HumanMale_RIGRN.placeHolderList[1973]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[415]" "HumanMale_RIGRN.placeHolderList[1967]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[415]" "HumanMale_RIGRN.placeHolderList[1974]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[416]" "HumanMale_RIGRN.placeHolderList[1968]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[416]" "HumanMale_RIGRN.placeHolderList[1975]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[417]" "HumanMale_RIGRN.placeHolderList[1969]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[417]" "HumanMale_RIGRN.placeHolderList[1976]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[418]" "HumanMale_RIGRN.placeHolderList[1970]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[418]" "HumanMale_RIGRN.placeHolderList[1977]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[419]" "HumanMale_RIGRN.placeHolderList[1971]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[419]" "HumanMale_RIGRN.placeHolderList[1978]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[420]" "HumanMale_RIGRN.placeHolderList[1972]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[420]" "HumanMale_RIGRN.placeHolderList[1979]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[421]" "HumanMale_RIGRN.placeHolderList[1973]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[421]" "HumanMale_RIGRN.placeHolderList[1980]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[422]" "HumanMale_RIGRN.placeHolderList[1974]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[422]" "HumanMale_RIGRN.placeHolderList[1981]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[423]" "HumanMale_RIGRN.placeHolderList[1975]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[423]" "HumanMale_RIGRN.placeHolderList[1982]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[424]" "HumanMale_RIGRN.placeHolderList[1976]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[424]" "HumanMale_RIGRN.placeHolderList[1983]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[425]" "HumanMale_RIGRN.placeHolderList[1977]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[425]" "HumanMale_RIGRN.placeHolderList[1984]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[426]" "HumanMale_RIGRN.placeHolderList[1978]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[426]" "HumanMale_RIGRN.placeHolderList[1985]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[427]" "HumanMale_RIGRN.placeHolderList[1979]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[427]" "HumanMale_RIGRN.placeHolderList[1986]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[428]" "HumanMale_RIGRN.placeHolderList[1980]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[428]" "HumanMale_RIGRN.placeHolderList[1987]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[429]" "HumanMale_RIGRN.placeHolderList[1981]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[429]" "HumanMale_RIGRN.placeHolderList[1988]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[430]" "HumanMale_RIGRN.placeHolderList[1982]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[430]" "HumanMale_RIGRN.placeHolderList[1989]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[431]" "HumanMale_RIGRN.placeHolderList[1983]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[431]" "HumanMale_RIGRN.placeHolderList[1990]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[432]" "HumanMale_RIGRN.placeHolderList[1984]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[432]" "HumanMale_RIGRN.placeHolderList[1991]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[433]" "HumanMale_RIGRN.placeHolderList[1985]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[433]" "HumanMale_RIGRN.placeHolderList[1992]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[434]" "HumanMale_RIGRN.placeHolderList[1986]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[434]" "HumanMale_RIGRN.placeHolderList[1993]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[435]" "HumanMale_RIGRN.placeHolderList[1987]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[435]" "HumanMale_RIGRN.placeHolderList[1994]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[436]" "HumanMale_RIGRN.placeHolderList[1988]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[436]" "HumanMale_RIGRN.placeHolderList[1995]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[437]" "HumanMale_RIGRN.placeHolderList[1989]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[437]" "HumanMale_RIGRN.placeHolderList[1996]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[438]" "HumanMale_RIGRN.placeHolderList[1990]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[438]" "HumanMale_RIGRN.placeHolderList[1997]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[439]" "HumanMale_RIGRN.placeHolderList[1991]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[439]" "HumanMale_RIGRN.placeHolderList[1998]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[440]" "HumanMale_RIGRN.placeHolderList[1992]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[440]" "HumanMale_RIGRN.placeHolderList[1999]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[441]" "HumanMale_RIGRN.placeHolderList[1993]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[441]" "HumanMale_RIGRN.placeHolderList[2000]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[442]" "HumanMale_RIGRN.placeHolderList[1994]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[442]" "HumanMale_RIGRN.placeHolderList[2001]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[443]" "HumanMale_RIGRN.placeHolderList[1995]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[443]" "HumanMale_RIGRN.placeHolderList[2002]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[444]" "HumanMale_RIGRN.placeHolderList[1996]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[444]" "HumanMale_RIGRN.placeHolderList[2003]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[445]" "HumanMale_RIGRN.placeHolderList[1997]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[445]" "HumanMale_RIGRN.placeHolderList[2004]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[446]" "HumanMale_RIGRN.placeHolderList[1998]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[446]" "HumanMale_RIGRN.placeHolderList[2005]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[447]" "HumanMale_RIGRN.placeHolderList[1999]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[447]" "HumanMale_RIGRN.placeHolderList[2006]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[448]" "HumanMale_RIGRN.placeHolderList[2000]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[448]" "HumanMale_RIGRN.placeHolderList[2007]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[449]" "HumanMale_RIGRN.placeHolderList[2001]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[449]" "HumanMale_RIGRN.placeHolderList[2008]" 
 		""
-		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[450]" "HumanMale_RIGRN.placeHolderList[2002]" 
+		5 4 "HumanMale_RIGRN" "R:HumanMale.angularValues[450]" "HumanMale_RIGRN.placeHolderList[2009]" 
 		"";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
@@ -9104,9 +9129,9 @@ createNode animCurveTL -n "HumanMale_Foot_L_control_translateY";
 	rename -uid "E89C7EE3-49EC-58DA-90C9-38808DDEBC08";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 11 ".ktv[0:10]"  0 52.730726120379401 0.7692000425170068 44.520161022202529
+	setAttr -s 12 ".ktv[0:11]"  0 52.730726120379401 0.7692000425170068 44.520161022202529
 		 3.0768001700680272 23.77033136789975 4.6152002551020406 12.031593028361774 5.3844000850340139 9.2867455593938004
-		 6.9228001700680268 0.049029188569402748 9.9996003401360536 -1.5987211554602254e-14
+		 6 5.7991842281599943 6.9228001700680268 0.049029188569402748 9.9996003401360536 -1.5987211554602254e-14
 		 10.768800382653062 14.301533939392236 13.076400510204081 40.312038108890874 17.691600552721088 65.1593570147067
 		 19.999200680272107 51.850776902013983;
 	setAttr ".pre" 3;
@@ -9288,62 +9313,142 @@ createNode animCurveTA -n "HumanMale_Leg_L_Knee_FK_locator_rotateZ";
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Foot_R_control_translateX";
 	rename -uid "36A0A504-4FBE-68F4-2F65-12867C1BDB9B";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 10 ".ktv[0:9]"  0 1.5569615610244618 0.7692000425170068 1.878204759252819
-		 3.0768001700680272 1.9323491781568212 7.6920002125850342 1.5963357402828287 10.768800382653062 -3.0409465069480621
-		 13.076400510204081 -1.9594687733036213 14.614800595238096 -0.84273776104105358 15.384000425170068 -0.19181122365919556
-		 16.922400510204081 0.8941221616225139 19.999200680272107 1.5569615610244618;
+	setAttr -s 10 ".ktv[0:9]"  0 1.5569615610244618 1 1.8928801742346102
+		 3 1.9323471821658178 8 1.424279911083068 11 -3.0224668576742846 13 -2.0037703042388508
+		 15 -0.51603061864543731 17 0.92594091053806471 18 1.2697439055315827 19.999200680272107 1.5569615610244618;
+	setAttr -s 10 ".kit[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kot[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kix[1:9]"  0.0076933319160997667 0.99999726444131154 
+		0.010266659580498994 0.20871862719375228 0.056621491921207627 0.012839980158730224 
+		0.0025866496598636601 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[1:9]"  0.013158865101851491 0.0023390403788267327 
+		-0.26954913940130965 0.97797573316639896 0.99839571646347558 0.34327888968824716 
+		0.031458927123766411 0.28049371873008488 0;
+	setAttr -s 10 ".kox[1:9]"  0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 0.0025466836734694964 0.012800014172335561 
+		0.081946534306249166 0.066640022675736876 1;
+	setAttr -s 10 ".koy[1:9]"  0.11402831478269193 5.9879730101020101e-06 
+		-2.6254804426681098 0.31237452587579151 0.044905176188530849 0.34221039275404364 
+		0.9966367269548092 0.56076323329724054 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Foot_R_control_translateY";
 	rename -uid "8B736E90-40E0-709F-6431-68AA943A9283";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 10 ".ktv[0:9]"  0 -1.5987211554602254e-14 0.7692000425170068 14.30153806190831
-		 3.0768001700680272 40.31205470009364 7.6920002125850342 65.159400486958702 10.768800382653062 44.520180465998926
-		 13.076400510204081 23.770333062272186 14.614800595238096 11.967624610859128 15.384000425170068 9.2867487940593811
-		 16.922400510204081 0.04902909629606178 19.999200680272107 -1.5987211554602254e-14;
+	setAttr -s 11 ".ktv[0:10]"  0 -1.5987211554602254e-14 1 17.334198884486135
+		 3 39.758409424704766 8 64.825763713106312 11 42.674545500887895 13 24.422805844301642
+		 15 13.483166041385877 16 8.1776871951262731 17 1.2363676586344459 18 0.013450089938349605
+		 19.999200680272107 -1.5987211554602254e-14;
+	setAttr -s 11 ".kit[0:10]"  18 1 1 1 1 1 1 18 
+		1 1 1;
+	setAttr -s 11 ".kot[0:10]"  18 1 1 1 1 1 1 18 
+		1 1 1;
+	setAttr -s 11 ".kix[1:10]"  0.0076933319160997667 0.0044876411996581196 
+		0.010266659580498994 0.0040352460996026891 0.0038694998143783263 0.012839980158730224 
+		0.0054435189382471324 0.0025866496598636601 0.033333333333333548 1;
+	setAttr -s 11 ".kiy[1:10]"  3.035728295881885 0.99998993048753415 -0.65303213352214584 
+		-0.99999185836131455 -0.99999251345756901 -0.90464721851462926 -0.99998518394102676 
+		-0.0035249031440945031 -0.02018320132304309 0;
+	setAttr -s 11 ".kox[1:10]"  0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 0.0025466836734694964 0.012800014172335561 
+		0.0054435189382471324 0.59161955921772402 0.066640022675736876 1;
+	setAttr -s 11 ".koy[1:10]"  26.306142591950636 0.57045110716968139 
+		-6.3607069894724404 -16.520956156136329 -0.65813793249222741 -0.90183139497128195 
+		-0.99998518394102676 -0.80621727663888831 -0.040350269815096707 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Foot_R_control_translateZ";
 	rename -uid "DE8D78DB-4AC2-9791-B8F0-97908FD394C0";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 10 ".ktv[0:9]"  0 -36.70633469611812 0.7692000425170068 -52.128320467235746
-		 3.0768001700680272 -65.98340740489347 7.6920002125850342 -52.073220202939069 10.768800382653062 -22.14800525413283
-		 13.076400510204081 26.70617445821382 14.614800595238096 40.35611902082087 15.384000425170068 41.317126978693928
-		 16.922400510204081 28.295405258340388 19.999200680272107 -36.70633469611812;
+	setAttr -s 10 ".ktv[0:9]"  0 -36.70633469611812 1 -54.295214034379633
+		 3 -65.961901227311756 8 -50.19445509224262 11 -18.37497560828642 13 25.424065200348981
+		 15 41.197561843015819 17 27.024423597652813 18 2.8706772146287101 19.999200680272107 -36.70633469611812;
+	setAttr -s 10 ".kit[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kot[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kix[1:9]"  0.0076933319160997667 0.059706093181272936 
+		0.010266659580498994 0.0018629595192498549 0.0019269387659565881 0.012839980158730224 
+		0.0025866496598636601 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[1:9]"  -2.1318712328396359 -0.99821599989031906 
+		1.9162590743284085 0.99999826468940911 0.99999814345177274 0.35981537577532663 -1.3313930627904291 
+		-28.333056770619542 0;
+	setAttr -s 10 ".kox[1:9]"  0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 0.0025466836734694964 0.012800014172335561 
+		0.001942810767517251 0.066640022675736876 1;
+	setAttr -s 10 ".koy[1:9]"  -18.473757587210407 -0.042800298635881973 
+		18.664873996292471 35.785292321401371 1.3216190313987966 0.35869540703432534 -0.99999811274137984 
+		-56.643466370010898 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_Foot_R_control_rotateX";
 	rename -uid "BCC90DC9-4A72-46BA-E4DF-8C935298526D";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 9 ".ktv[0:8]"  0 0 0.7692000425170068 42.704362287454828
-		 3.0768001700680272 76.167368440586486 7.6920002125850342 132.74054615892882 10.768800382653062 82.308394671504743
-		 13.076400510204081 15.085096409884718 15.384000425170068 -19.490981298515738 16.922400510204081 1.1496914583028937
-		 19.999200680272107 0;
+	setAttr -s 10 ".ktv[0:9]"  0 0 1 48.012739100836086 3 75.23300513097891
+		 8 132.04550869016501 11 76.788594527281376 13 16.823293196853438 15 -18.18372298553474
+		 17 -3.9558576906633549 18 0.82539888635639225 19.999200680272107 0;
+	setAttr -s 10 ".kit[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kot[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kix[1:9]"  0.0076933319160997667 0.15736002635751631 
+		0.010266659580498994 0.073954821177693086 0.081247113636324225 0.066666666666666596 
+		0.0025866496598636601 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[1:9]"  0.085903940792452227 0.98754130146782315 
+		-0.023885111471204201 -0.99726159277522342 -0.9966939884065551 -0.23129396841269506 
+		-7.4650944632589922e-05 -0.0089048337964767587 0;
+	setAttr -s 10 ".kox[1:9]"  0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 0.081247113636327487 0.012800014172335561 
+		0.9995838075415252 0.066640022675736876 1;
+	setAttr -s 10 ".koy[1:9]"  0.74440170378958803 0.016065778511758388 
+		-0.23264735023037897 -0.89898271845283761 -0.99669398840655488 -0.044408491104873327 
+		-0.028848079672428518 -0.017802549783626415 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_Foot_R_control_rotateY";
 	rename -uid "21FC325F-42EE-8151-641C-C08307EF7589";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 9 ".ktv[0:8]"  0 -5.3376622081909844 0.7692000425170068 -5.3376622081909844
-		 3.0768001700680272 -5.3376622081909826 7.6920002125850342 -5.3376622081909844 10.768800382653062 -5.3376622081909844
-		 13.076400510204081 -5.3376622081909844 15.384000425170068 -5.3376622081909844 16.922400510204081 -5.3376622081909817
-		 19.999200680272107 -5.3376622081909844;
+	setAttr -s 10 ".ktv[0:9]"  0 -5.3376622081909844 1 -5.3376622081909844
+		 3 -5.3376622081909826 8 -5.3376622081909844 11 -5.3376622081909844 13 -5.3376622081909844
+		 15 -5.3376622081909844 17 -5.3376622081909817 18 -5.3376622081909826 19.999200680272107 -5.3376622081909844;
+	setAttr -s 10 ".kit[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kot[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kix[1:9]"  0.0076933319160997667 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.0025866496598636601 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[1:9]"  0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[1:9]"  0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 0.012800014172335561 1 0.066640022675736876 
+		1;
+	setAttr -s 10 ".koy[1:9]"  0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_Foot_R_control_rotateZ";
 	rename -uid "1D6DF08E-4C86-D1DA-63F3-2DA41D1B5AE3";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 9 ".ktv[0:8]"  0 0 0.7692000425170068 0 3.0768001700680272 0
-		 7.6920002125850342 0 10.768800382653062 0 13.076400510204081 9.9825199303251918e-17
-		 15.384000425170068 -3.9930079721300758e-16 16.922400510204081 -2.2460669843231666e-16
-		 19.999200680272107 0;
+	setAttr -s 10 ".ktv[0:9]"  0 0 1 0 3 0 8 0 11 0 13 0 15 -3.7155881369180537e-16
+		 17 -2.2418529425039085e-16 18 -1.6603662456673696e-16 19.999200680272107 0;
+	setAttr -s 10 ".kit[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kot[0:9]"  18 1 1 1 1 1 1 1 
+		1 1;
+	setAttr -s 10 ".kix[1:9]"  0.0076933319160997667 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.0025866496598636601 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[1:9]"  0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[1:9]"  0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 0.012800014172335561 1 0.066640022675736876 
+		1;
+	setAttr -s 10 ".koy[1:9]"  0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Leg_R_Knee_locator_translateX";
@@ -9369,42 +9474,72 @@ createNode animCurveTL -n "HumanMale_Leg_R_Knee_locator_translateZ";
 	setAttr ".pst" 3;
 createNode animCurveTU -n "HumanMale_Foot_R_control_FKBlend";
 	rename -uid "0F34AE1E-422A-0728-96F9-9DAABC38D707";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 6 ".ktv[0:5]"  0 0 3.0768001700680272 0 7.6920002125850342 0
-		 10.768800382653062 0 15.384000425170068 0 19.999200680272107 0;
+	setAttr -s 10 ".ktv[0:9]"  0 0 1 0 3 0 8 0 11 0 13 0 15 0 17 0 18 0
+		 19.999200680272107 0;
+	setAttr -s 10 ".kix[0:9]"  1 0.033333333333333326 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.06666666666666643 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[0:9]"  0 0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[0:9]"  1 0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 1 1 0.066640022675736876 1;
+	setAttr -s 10 ".koy[0:9]"  0 0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTU -n "HumanMale_Foot_R_control_ParentOnHips";
 	rename -uid "9A42AF6E-48B3-1746-5058-8880F9FD1254";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 6 ".ktv[0:5]"  0 0 3.0768001700680272 0 7.6920002125850342 0
-		 10.768800382653062 0 15.384000425170068 0 19.999200680272107 0;
+	setAttr -s 10 ".ktv[0:9]"  0 0 1 0 3 0 8 0 11 0 13 0 15 0 17 0 18 0
+		 19.999200680272107 0;
+	setAttr -s 10 ".kix[0:9]"  1 0.033333333333333326 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.06666666666666643 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[0:9]"  0 0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[0:9]"  1 0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 1 1 0.066640022675736876 1;
+	setAttr -s 10 ".koy[0:9]"  0 0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTU -n "HumanMale_Foot_R_control_Stretch";
 	rename -uid "A7286965-42A2-DBD4-B2E3-2EA67C55F117";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 6 ".ktv[0:5]"  0 0 3.0768001700680272 0 7.6920002125850342 0
-		 10.768800382653062 0 15.384000425170068 0 19.999200680272107 0;
+	setAttr -s 10 ".ktv[0:9]"  0 0 1 0 3 0 8 0 11 0 13 0 15 0 17 0 18 0
+		 19.999200680272107 0;
+	setAttr -s 10 ".kix[0:9]"  1 0.033333333333333326 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.06666666666666643 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[0:9]"  0 0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[0:9]"  1 0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 1 1 0.066640022675736876 1;
+	setAttr -s 10 ".koy[0:9]"  0 0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTU -n "HumanMale_Foot_R_control_StretchMin";
 	rename -uid "C038D314-4FD9-E645-6BBB-15B64F1AD458";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 6 ".ktv[0:5]"  0 2.4 3.0768001700680272 2.4 7.6920002125850342 2.4
-		 10.768800382653062 2.4 15.384000425170068 2.4 19.999200680272107 2.4;
+	setAttr -s 10 ".ktv[0:9]"  0 2.4 1 2.4 3 2.4 8 2.4 11 2.4 13 2.4 15 2.4
+		 17 2.4 18 2.4 19.999200680272107 2.4;
+	setAttr -s 10 ".kix[0:9]"  1 0.033333333333333326 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.06666666666666643 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[0:9]"  0 0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[0:9]"  1 0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 1 1 0.066640022675736876 1;
+	setAttr -s 10 ".koy[0:9]"  0 0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTU -n "HumanMale_Foot_R_control_StretchMax";
 	rename -uid "857B4EDE-4A51-E5EB-6431-879B128ADF13";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 6 ".ktv[0:5]"  0 2.7 3.0768001700680272 2.7 7.6920002125850342 2.7
-		 10.768800382653062 2.7 15.384000425170068 2.7 19.999200680272107 2.7;
+	setAttr -s 10 ".ktv[0:9]"  0 2.7 1 2.7 3 2.7 8 2.7 11 2.7 13 2.7 15 2.7
+		 17 2.7 18 2.7 19.999200680272107 2.7;
+	setAttr -s 10 ".kix[0:9]"  1 0.033333333333333326 1 0.010266659580498994 
+		1 1 0.066666666666666596 0.06666666666666643 0.033333333333333548 1;
+	setAttr -s 10 ".kiy[0:9]"  0 0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[0:9]"  1 0.06666666666666668 0.0025600056689342315 
+		0.099999999999999811 0.066666666666666596 1 1 1 0.066640022675736876 1;
+	setAttr -s 10 ".koy[0:9]"  0 0 0 0 0 0 0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_LegUpper_R_FK_locator_rotateX";
@@ -9734,7 +9869,7 @@ createNode animCurveTA -n "HumanMale_CloackBackHand_R_control_rotateX";
 	setAttr ".wgt" no;
 	setAttr -s 8 ".ktv[0:7]"  0 66.903758740542941 1.5384000850340136 66.392026059373677
 		 3.8460002125850341 59.097731133949999 6.1536001275510204 54.540217786193473 9.2304002976190471 58.078636205933066
-		 13.076400510204081 64.920881564957867 16.153200467687075 68.973266488836828 19.999200680272107 66.903758740542926;
+		 13.076400510204081 64.920881564957867 16.153200467687075 68.973266488836828 19.999200680272107 66.903758740542941;
 	setAttr -s 8 ".kit[0:7]"  1 18 18 18 18 18 18 18;
 	setAttr -s 8 ".kot[0:7]"  1 18 18 18 18 18 18 18;
 	setAttr -s 8 ".kix[0:7]"  0.96991173793311314 0.8863048714536409 
@@ -9973,7 +10108,7 @@ createNode animCurveTA -n "HumanMale_Shoulders_R_control_rotateY";
 	rename -uid "6DD34AA8-4979-97B7-6280-4488F174B139";
 	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 -3.1302591540025517;
+	setAttr ".ktv[0]"  0 -3.1302591540025522;
 	setAttr ".kix[0]"  1;
 	setAttr ".kiy[0]"  0;
 	setAttr ".kox[0]"  1;
@@ -11582,44 +11717,80 @@ createNode animCurveTA -n "HumanMale_Toe1_R_control_rotateZ";
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Ball_R_translateX";
 	rename -uid "49073A31-4DBD-929F-BE82-DD86C6EABD1A";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 0;
+	setAttr -s 4 ".ktv[0:3]"  0 0 2 0 19 0 20 0;
+	setAttr -s 4 ".kit[3]"  18;
+	setAttr -s 4 ".kot[2:3]"  18 18;
+	setAttr -s 4 ".kix[0:3]"  1 1 1 1;
+	setAttr -s 4 ".kiy[0:3]"  0 0 0 0;
+	setAttr -s 4 ".kox[0:3]"  1 1 1 1;
+	setAttr -s 4 ".koy[0:3]"  0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Ball_R_translateY";
 	rename -uid "C26E8E12-4DA2-9C66-FE6B-B784B4457E17";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 0;
+	setAttr -s 4 ".ktv[0:3]"  0 0 2 0 19 0 20 0;
+	setAttr -s 4 ".kit[3]"  18;
+	setAttr -s 4 ".kot[2:3]"  18 18;
+	setAttr -s 4 ".kix[0:3]"  1 1 1 1;
+	setAttr -s 4 ".kiy[0:3]"  0 0 0 0;
+	setAttr -s 4 ".kox[0:3]"  1 1 1 1;
+	setAttr -s 4 ".koy[0:3]"  0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Ball_R_translateZ";
 	rename -uid "045B287D-4F73-0E05-C43A-BCA70D6176CB";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 0;
+	setAttr -s 4 ".ktv[0:3]"  0 0 2 0 19 0 20 0;
+	setAttr -s 4 ".kit[3]"  18;
+	setAttr -s 4 ".kot[2:3]"  18 18;
+	setAttr -s 4 ".kix[0:3]"  1 1 1 1;
+	setAttr -s 4 ".kiy[0:3]"  0 0 0 0;
+	setAttr -s 4 ".kox[0:3]"  1 1 1 1;
+	setAttr -s 4 ".koy[0:3]"  0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_Ball_R_rotateX";
 	rename -uid "93905414-4327-7EB2-344E-E48E700DC5DB";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 0;
+	setAttr -s 4 ".ktv[0:3]"  0 23.150494754193787 2 0 19 0 20 23.150494754193787;
+	setAttr -s 4 ".kit[3]"  18;
+	setAttr -s 4 ".kot[2:3]"  18 18;
+	setAttr -s 4 ".kix[0:3]"  1 1 1 1;
+	setAttr -s 4 ".kiy[0:3]"  0 0 0 0;
+	setAttr -s 4 ".kox[0:3]"  1 1 1 1;
+	setAttr -s 4 ".koy[0:3]"  0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_Ball_R_rotateY";
 	rename -uid "79CF54D4-45A1-2F9A-677A-3A9593C8F71A";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 0;
+	setAttr -s 4 ".ktv[0:3]"  0 0 2 0 19 0 20 0;
+	setAttr -s 4 ".kit[3]"  18;
+	setAttr -s 4 ".kot[2:3]"  18 18;
+	setAttr -s 4 ".kix[0:3]"  1 1 1 1;
+	setAttr -s 4 ".kiy[0:3]"  0 0 0 0;
+	setAttr -s 4 ".kox[0:3]"  1 1 1 1;
+	setAttr -s 4 ".koy[0:3]"  0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTA -n "HumanMale_Ball_R_rotateZ";
 	rename -uid "1EE62EDB-4CE7-850B-E51B-48AA6EFD9F4F";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 0;
+	setAttr -s 4 ".ktv[0:3]"  0 0 2 0 19 0 20 0;
+	setAttr -s 4 ".kit[3]"  18;
+	setAttr -s 4 ".kot[2:3]"  18 18;
+	setAttr -s 4 ".kix[0:3]"  1 1 1 1;
+	setAttr -s 4 ".kiy[0:3]"  0 0 0 0;
+	setAttr -s 4 ".kox[0:3]"  1 1 1 1;
+	setAttr -s 4 ".koy[0:3]"  0 0 0 0;
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode animCurveTL -n "HumanMale_Swivel_R_control_translateX";
@@ -13233,10 +13404,8 @@ createNode objectSet -n "aToolsSet_green_Head";
 	setAttr ".an" -type "string" "gCharacterSet";
 createNode animLayer -n "BaseAnimation";
 	rename -uid "8B376D75-48AC-E796-E429-4A8C68C69B3A";
-	setAttr -s 2 ".cdly";
-	setAttr -s 2 ".chsl";
-	setAttr ".pref" yes;
-	setAttr ".slct" yes;
+	setAttr -s 3 ".cdly";
+	setAttr -s 3 ".chsl";
 	setAttr ".ovrd" yes;
 createNode unknown -s -n "mentalrayItemsList";
 	rename -uid "ACE54138-42D8-FAF3-903F-CAA1D29CDA6B";
@@ -14002,7 +14171,7 @@ createNode animCurveTA -n "HumanMale_CloackBack1_R_control_rotateX";
 	setAttr ".wgt" no;
 	setAttr -s 6 ".ktv[0:5]"  0 12.799479122098161 1.5384000850340136 9.6070777270758239
 		 9.9996003401360536 4.5014584078588404 13.076400510204081 -10.422200601395486 17.691600552721088 17.069668447197653
-		 20 12.797343748766313;
+		 20 12.797343748766314;
 	setAttr -s 6 ".kit[3:5]"  18 1 1;
 	setAttr -s 6 ".kot[3:5]"  18 1 1;
 	setAttr -s 6 ".kix[0:5]"  0.076920004251700674 0.88185084327328112 
@@ -14050,9 +14219,9 @@ createNode animCurveTA -n "HumanMale_CloackBack1_R_control_rotateZ";
 	setAttr ".pre" 3;
 	setAttr ".pst" 3;
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "6FECD3AB-454E-B3DC-DA47-25AE56A8AF93";
+	rename -uid "06E2761E-422D-479E-4D9B-66B18B11DE40";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "0255341F-4BBE-EEAB-970A-1AB068CEF5A4";
+	rename -uid "243AB7B9-4911-EAAF-2189-809F0093E3B2";
 createNode animCurveTA -n "Hips_control_rotate_Merged_Layer_inputBX";
 	rename -uid "B2411591-49FE-A83A-A7C0-A795BE597168";
 	setAttr ".tan" 1;
@@ -14087,9 +14256,9 @@ createNode animCurveTA -n "Hips_control_rotate_Merged_Layer_inputBY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 18 ".ktv[0:17]"  0 -6.9514111000429404 1.5384000850340136 -10.760142537731745
-		 3.0767999574829932 -12.420310296986482 3.0768001700680272 -12.420310296986525 5.3844000850340139 -11.420822457855532
+		 3.0767999574829932 -12.420310296986484 3.0768001700680272 -12.420310296986525 5.3844000850340139 -11.420822457855532
 		 6.9228001700680268 -8.4318925744916999 6.9228003826530609 -8.4318918591523584 8.4612002551020407 -1.0675254392819338
-		 9.9996003401360536 8.0143791360938241 12.307200467687075 11.595814687797189 13.076400510204081 11.75508526723736
+		 9.9996003401360536 8.0143791360938241 12.307200467687075 11.595814687797189 13.076400510204081 11.755085267237362
 		 13.076400722789115 11.755085299358498 15.384000425170068 11.871309730235909 16.922400510204081 11.411264001078004
 		 16.922400722789117 11.411263810362462 19.999200680272107 -6.9514111000429404 19.999200892857143 -6.9514117447287118
 		 20 -6.9538349460617157;
@@ -14121,12 +14290,12 @@ createNode animCurveTA -n "Hips_control_rotate_Merged_Layer_inputBZ";
 	rename -uid "7BE9E9BE-4A6C-EEF8-F4C6-E19A24AAEA87";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 19 ".ktv[0:18]"  0 0.78461088648423682 1.5384000850340136 1.7246940467168013
+	setAttr -s 19 ".ktv[0:18]"  0 0.78461088648423694 1.5384000850340136 1.7246940467168013
 		 3.0767999574829932 1.7585273614588917 3.0768001700680272 1.7585273614588917 5.3844000850340139 -0.88211673049741446
 		 6.9228001700680268 -1.0004377079008344 6.9228003826530609 -1.0004377079007285 8.4612002551020407 0.89625067089245414
 		 9.9996003401360536 0.26376271895573267 12.307200467687075 -1.6680374203066695 13.076400510204081 -1.6437105973244142
 		 13.076400722789115 -1.6437105845597439 15.384000425170068 -1.3972257636790983 16.922400510204081 -1.0924373572270496
-		 16.922400722789117 -1.0924373572270936 18.460800595238094 -1.8798537104952309 19.999200680272107 0.78461088648423682
+		 16.922400722789117 -1.0924373572270936 18.460800595238094 -1.8798537104952309 19.999200680272107 0.78461088648423694
 		 19.999200892857143 0.78461111154749597 20 0.78545697894744948;
 	setAttr -s 19 ".kit[0:18]"  1 18 18 18 18 18 2 18 
 		18 18 1 18 18 18 2 18 1 1 18;
@@ -14250,7 +14419,7 @@ createNode animCurveTA -n "Chest_control_rotate_Merged_Layer_inputBY1";
 	setAttr -s 16 ".ktv[0:15]"  0 -12.625463311490558 3.0768001700680272 -4.0642420060111553
 		 4.6152002551020406 -5.5099342600138144 5.3844002976190479 -6.962152976170974 6.9228001700680268 -11.761969622873053
 		 7.6920002125850342 -14.57836845996944 9.9996003401360536 -22.735447324627788 10 -22.736640626901835
-		 12.307200467687075 -28.358939655605042 13.076400510204081 -28.89963775584469 14.614800595238096 -27.99719809189348
+		 12.307200467687075 -28.358939655605045 13.076400510204081 -28.89963775584469 14.614800595238096 -27.99719809189348
 		 16.922400510204081 -24.635126299613322 17.691600552721088 -22.304531997730667 19.999200680272107 -12.625463311490558
 		 20 -12.625458845363653 20.003046768707485 -12.625423300642488;
 	setAttr -s 16 ".kit[9:15]"  1 18 18 18 1 1 1;
@@ -14276,7 +14445,7 @@ createNode animCurveTA -n "Chest_control_rotate_Merged_Layer_inputBZ1";
 	setAttr ".tan" 1;
 	setAttr ".wgt" no;
 	setAttr -s 16 ".ktv[0:15]"  0 -17.125396204134262 3.0768001700680272 -17.895888911555453
-		 4.6152002551020406 -20.1307353636019 5.3844002976190479 -21.11340534185744 6.9228001700680268 -21.894340200202745
+		 4.6152002551020406 -20.1307353636019 5.3844002976190479 -21.113405341857444 6.9228001700680268 -21.894340200202745
 		 7.6920002125850342 -22.424530854523478 9.9996003401360536 -23.630086535726473 10 -23.629764163759354
 		 12.307200467687075 -22.29520931417419 13.076400510204081 -22.092291674239352 14.614800595238096 -20.807480625903242
 		 16.922400510204081 -19.831428074922691 17.691600552721088 -19.28008095568368 19.999200680272107 -17.125396204134262
@@ -14483,7 +14652,7 @@ createNode animCurveTA -n "Clavicle_R_control_rotate_Merged_Layer_inputBX";
 	rename -uid "0736DF66-4CF0-CBD8-076A-4597BFC5A749";
 	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 -6.3123397615975696;
+	setAttr ".ktv[0]"  0 -6.3123397615975705;
 	setAttr ".kix[0]"  1;
 	setAttr ".kiy[0]"  0;
 	setAttr ".kox[0]"  1;
@@ -14547,7 +14716,7 @@ createNode animCurveTA -n "CloackBackHand_L_control_rotate_Merged_Layer_inputBY"
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 11 ".ktv[0:10]"  0 15.533331884460072 3.0768001700680272 -10.854901925086915
-		 6.1536001275510204 -12.495711188236486 9.9996003401360536 16.26994036929262 11.538000425170068 20.874270136887827
+		 6.1536001275510204 -12.495711188236488 9.9996003401360536 16.26994036929262 11.538000425170068 20.874270136887827
 		 13.845600552721088 18.607722225585906 16.153200467687075 15.786086989905529 19.230000637755101 16.40489807126675
 		 19.999200680272107 13.805087099412228 19.999200892857143 15.533330762271465 20.003046768707485 15.512964062400036;
 	setAttr -s 11 ".kit[0:10]"  1 18 18 18 18 18 18 18 
@@ -14854,9 +15023,9 @@ createNode animCurveTA -n "Shoulders1_L_control_rotate_Merged_Layer_inputBZ";
 	setAttr ".tan" 1;
 	setAttr ".wgt" no;
 	setAttr -s 10 ".ktv[0:9]"  0 2.9439972610821776 0.7692000425170068 0.50077453617980205
-		 3.0768001700680272 0.50077453617980205 6.9228001700680268 24.166097010350033 10.768800382653062 0.50077453617980205
-		 13.076400510204081 0.50077453617980205 16.922400510204081 24.166097010350033 20 2.9572482519522061
-		 20.000000212585032 2.9619668177324856 20.003046768707485 2.9439972610821776;
+		 3.0768001700680272 0.50077453617980205 6.9228001700680268 24.166097010350036 10.768800382653062 0.50077453617980205
+		 13.076400510204081 0.50077453617980205 16.922400510204081 24.166097010350036 20 2.9572482519522061
+		 20.000000212585032 2.961966817732486 20.003046768707485 2.9439972610821776;
 	setAttr -s 10 ".kit[2:9]"  18 1 1 18 1 1 1 18;
 	setAttr -s 10 ".kot[2:9]"  18 1 1 18 1 1 1 18;
 	setAttr -s 10 ".kix[0:9]"  0.011111111380159855 0.0085466671735048294 
@@ -14940,7 +15109,7 @@ createNode animCurveTA -n "Shoulders_L_control_rotate_Merged_Layer_inputBX";
 	rename -uid "E3B7F3D4-4EF6-47B0-9C83-9E822498A77D";
 	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 10 ".ktv[0:9]"  0 -4.8083719302528376 0.7692000425170068 -4.8368972223186137
+	setAttr -s 10 ".ktv[0:9]"  0 -4.8083719302528385 0.7692000425170068 -4.8368972223186137
 		 3.0768001700680272 -4.6931371190551268 6.9228001700680268 -4.5626155678399929 10.768800382653062 -4.8368972223186137
 		 13.076400510204081 -4.6931371190551268 16.922400510204081 -4.5626155678399929 20 -4.808426633097584
 		 20.000000212585032 -4.8083719448071376 20.003046768707485 -4.808580212399252;
@@ -15083,16 +15252,16 @@ createNode animLayer -n "AnimLayer1";
 	setAttr ".lo" yes;
 createNode animBlendNodeAdditiveDL -n "R:Shoulders_L_control_translateX_AnimLayer1";
 	rename -uid "73EC3B46-4109-0544-85CC-7293577193C8";
-	setAttr ".o" -0.021196432945192828;
+	setAttr ".o" 0.46044627345191569;
 createNode animBlendNodeAdditiveDL -n "R:Shoulders_L_control_translateY_AnimLayer1";
 	rename -uid "86E5FB77-4BF5-25EC-B213-D89E49F2FDC8";
-	setAttr ".o" 2.4105566796288587;
+	setAttr ".o" 3.0863377918259554;
 createNode animBlendNodeAdditiveDL -n "R:Shoulders_L_control_translateZ_AnimLayer1";
 	rename -uid "D22ADEFC-449E-1E51-0F17-7B9B508A9E40";
-	setAttr ".o" 0.66115931083381818;
+	setAttr ".o" 0.63738098199962434;
 createNode animBlendNodeAdditiveRotation -n "R:Shoulders_L_control_rotate_AnimLayer1";
 	rename -uid "1C9D306C-405A-9BEF-0D5B-75B1D4EF3497";
-	setAttr ".o" -type "double3" -4.8083719302528376 -4.8561329700546558 1.9232714695902957 ;
+	setAttr ".o" -type "double3" -4.5743051820925524 -4.4403423465059628 3.9828231132631275 ;
 createNode animBlendNodeAdditiveDL -n "R:Shoulders_R_control_translateX_AnimLayer1";
 	rename -uid "ACA05719-40F6-28D6-E63E-59962AA98444";
 	setAttr ".o" -0.14013272485610537;
@@ -15104,95 +15273,107 @@ createNode animBlendNodeAdditiveDL -n "R:Shoulders_R_control_translateZ_AnimLaye
 	setAttr ".o" 0.77149649936394937;
 createNode animBlendNodeAdditiveRotation -n "R:Shoulders_R_control_rotate_AnimLayer1";
 	rename -uid "4426D550-44F2-8DD7-3263-B3ABA0861B7C";
-	setAttr ".o" -type "double3" -3.7639586891230228 -3.1302591540025517 -5.4894898216673393 ;
+	setAttr ".o" -type "double3" -3.7639586891230228 -3.1302591540025522 -5.4894898216673393 ;
 createNode animCurveTL -n "Shoulders_L_control_translateX_AnimLayer1_inputB";
 	rename -uid "9F934C2E-4FE9-AD40-8D32-D08B725C9FCC";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 -43.726604693110524;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTL -n "Shoulders_L_control_translateY_AnimLayer1_inputB";
 	rename -uid "152DD422-4459-2CF9-6DD7-A3A96FC35DAD";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 121.17206478506074;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTL -n "Shoulders_L_control_translateZ_AnimLayer1_inputB";
 	rename -uid "A9881C85-4983-304E-8F38-16ABC1CE9B8A";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 -121.31714899989986;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTL -n "Shoulders_R_control_translateX_AnimLayer1_inputB";
 	rename -uid "7637AB0B-4B15-9A28-F9CE-C8BA6E8C8100";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 -33.234451247961914;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTL -n "Shoulders_R_control_translateY_AnimLayer1_inputB";
 	rename -uid "71748ADC-47CC-C298-095C-69B9B7115515";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 -124.63052685466292;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTL -n "Shoulders_R_control_translateZ_AnimLayer1_inputB";
 	rename -uid "1AD3EBF0-498B-89F8-4C3D-77B71E9B07FF";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 121.14140047854158;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTA -n "Shoulders_L_control_rotate_AnimLayer1_inputBX";
 	rename -uid "3884DDFB-4700-78BB-4AF9-5EB76B0B50D0";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 0;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTA -n "Shoulders_L_control_rotate_AnimLayer1_inputBY";
 	rename -uid "41C75713-4623-D7D5-AAFC-519B9FBB7352";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 0;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTA -n "Shoulders_L_control_rotate_AnimLayer1_inputBZ";
 	rename -uid "71BA1CCB-44ED-A426-287F-21895A00A387";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 0;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTA -n "Shoulders_R_control_rotate_AnimLayer1_inputBX";
 	rename -uid "979757C5-4E5A-B41F-F9FE-F38BE6C5A189";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 0;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTA -n "Shoulders_R_control_rotate_AnimLayer1_inputBY";
 	rename -uid "5A7E1654-46D8-F74E-19F9-27B10D2BDDBD";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 0;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animCurveTA -n "Shoulders_R_control_rotate_AnimLayer1_inputBZ";
 	rename -uid "70985647-4E7F-37C4-5EA1-088CB2196D04";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -l on ".ktv[0]"  0 0;
 	setAttr -l on ".ktv";
+	setAttr -l on ".ktv[0]";
 createNode animLayer -n "AnimLayer2";
 	rename -uid "66074357-4A37-429F-BDAD-578786EE412F";
 	setAttr -s 18 ".dsm";
 	setAttr -s 14 ".bnds";
 createNode animBlendNodeAdditiveDL -n "R:Chest_control_translateX_AnimLayer2";
 	rename -uid "B666C2DB-404E-61C4-75B9-0090B15D3CF9";
-	setAttr ".o" 1.567112212985184;
+	setAttr ".o" 0.86371067466019924;
 createNode animBlendNodeAdditiveDL -n "R:Chest_control_translateY_AnimLayer2";
 	rename -uid "C043906F-4952-9982-94D4-B1BD87E47C73";
-	setAttr ".o" -2.7061477641301606;
+	setAttr ".o" 0.060317230765998486;
 createNode animBlendNodeAdditiveDL -n "R:Chest_control_translateZ_AnimLayer2";
 	rename -uid "A1235684-4FB2-97E8-F1AF-E8B7A17CA83D";
-	setAttr ".o" 1.9486128208874416;
+	setAttr ".o" 0.32559387274677931;
 createNode animBlendNodeAdditiveRotation -n "R:Chest_control_rotate_AnimLayer2";
 	rename -uid "1D37F10D-4C0F-D643-536A-D08C135FD240";
-	setAttr ".o" -type "double3" 29.708887862305961 -12.625463311490558 -17.125396204134262 ;
+	setAttr ".o" -type "double3" 15.045322630001523 -26.186774853114045 -20.209500891777431 ;
 createNode animCurveTA -n "Chest_control_rotate_AnimLayer2_inputBX";
 	rename -uid "E89FC70D-4C8E-8735-B67A-24AA6CCA553A";
 	setAttr ".tan" 18;
@@ -15272,13 +15453,13 @@ createNode animCurveTU -n "Spine1_control_Orient_AnimLayer2_inputB";
 	setAttr ".ktv[0]"  0 0;
 createNode animBlendNodeAdditiveDL -n "R:Hand_R_control_translateX_AnimLayer2";
 	rename -uid "C28804D3-4BC2-64F9-886C-CC8877605620";
-	setAttr ".o" 33.095880286208313;
+	setAttr ".o" 31.883807386139978;
 createNode animBlendNodeAdditiveDL -n "R:Hand_R_control_translateY_AnimLayer2";
 	rename -uid "313EF184-4DA4-2B5E-3DD5-83B07F7FB653";
-	setAttr ".o" -26.771337740205468;
+	setAttr ".o" -23.835289486149804;
 createNode animBlendNodeAdditiveDL -n "R:Hand_R_control_translateZ_AnimLayer2";
 	rename -uid "2FFA2E03-48F8-F59C-40A6-E0AAB44058D0";
-	setAttr ".o" -37.104351453027029;
+	setAttr ".o" -36.288164645575591;
 createNode animBlendNodeAdditive -n "R:Hand_R_control_ParentOnClavicle_AnimLayer2";
 	rename -uid "972456EE-42BF-0051-82F4-0F8C07D6F39F";
 	setAttr ".o" 1;
@@ -15429,13 +15610,97 @@ createNode animCurveTL -n "Hips_Overall_control_translateZ_Merged_Layer_inputB1"
 		0.95773682863536735 0.92480427441707913 0 -0.97051216445943222 -0.99597106574712047 
 		0 0.9785948131126545 0.98187859105181485 0.76223631794857238 0 -0.99118557279263453 
 		-0.99113822470405744 -0.99116286438975554;
+createNode animLayer -n "AnimLayer3";
+	rename -uid "EF45DCCD-4C40-3827-8FE9-DA946911FAA6";
+	setAttr -s 6 ".dsm";
+	setAttr -s 4 ".bnds";
+	setAttr ".pref" yes;
+	setAttr ".slct" yes;
+createNode animBlendNodeAdditiveDL -n "R:Hips_control_translateX_AnimLayer3";
+	rename -uid "F2DADA65-4DA0-A44C-6275-94B4DCF1E2F5";
+createNode animBlendNodeAdditiveDL -n "R:Hips_control_translateY_AnimLayer3";
+	rename -uid "62B0ED8A-4665-2F0C-B13F-EF9F0AA8C472";
+createNode animBlendNodeAdditiveDL -n "R:Hips_control_translateZ_AnimLayer3";
+	rename -uid "1828FA7C-4C17-1A80-1DFA-FA8E781F73E8";
+createNode animBlendNodeAdditiveRotation -n "R:Hips_control_rotate_AnimLayer3";
+	rename -uid "FE121FCA-4721-580E-45E1-7EA172D18C67";
+	setAttr ".o" -type "double3" -0.74530123229621781 22.065746061716649 3.5624544516817487 ;
+createNode animCurveTL -n "Hips_control_translateX_AnimLayer3_inputB";
+	rename -uid "7F5E1C91-4F42-2121-162E-B3AA3CFA02EB";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 5 ".ktv[0:4]"  0 0 7 0 12 0 17 0 20 0;
+	setAttr -s 5 ".kit[2:4]"  1 18 18;
+	setAttr -s 5 ".kot[2:4]"  1 18 18;
+	setAttr -s 5 ".kix[2:4]"  1 1 1;
+	setAttr -s 5 ".kiy[2:4]"  0 0 0;
+	setAttr -s 5 ".kox[2:4]"  1 1 1;
+	setAttr -s 5 ".koy[2:4]"  0 0 0;
+createNode animCurveTL -n "Hips_control_translateY_AnimLayer3_inputB";
+	rename -uid "A051D96F-4DDF-CA6C-7E82-E5A9710E3600";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 5 ".ktv[0:4]"  0 0 7 0 12 0 17 0 20 0;
+	setAttr -s 5 ".kit[2:4]"  1 18 18;
+	setAttr -s 5 ".kot[2:4]"  1 18 18;
+	setAttr -s 5 ".kix[2:4]"  1 1 1;
+	setAttr -s 5 ".kiy[2:4]"  0 0 0;
+	setAttr -s 5 ".kox[2:4]"  1 1 1;
+	setAttr -s 5 ".koy[2:4]"  0 0 0;
+createNode animCurveTL -n "Hips_control_translateZ_AnimLayer3_inputB";
+	rename -uid "085D8DD2-41C2-A263-6AE7-8397F7F01C78";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 5 ".ktv[0:4]"  0 0 7 0 12 0 17 0 20 0;
+	setAttr -s 5 ".kit[2:4]"  1 18 18;
+	setAttr -s 5 ".kot[2:4]"  1 18 18;
+	setAttr -s 5 ".kix[2:4]"  1 1 1;
+	setAttr -s 5 ".kiy[2:4]"  0 0 0;
+	setAttr -s 5 ".kox[2:4]"  1 1 1;
+	setAttr -s 5 ".koy[2:4]"  0 0 0;
+createNode animCurveTA -n "Hips_control_rotate_AnimLayer3_inputBX";
+	rename -uid "0987F2A3-40E6-7E06-8EE8-D98E0C3AB78D";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 5 ".ktv[0:4]"  0 0 7 0 12 -0.67042908129118084 17 -0.67042908129118084
+		 20 0;
+	setAttr -s 5 ".kit[2:4]"  1 18 18;
+	setAttr -s 5 ".kot[2:4]"  1 18 18;
+	setAttr -s 5 ".kix[2:4]"  1 1 1;
+	setAttr -s 5 ".kiy[2:4]"  0 0 0;
+	setAttr -s 5 ".kox[2:4]"  1 1 1;
+	setAttr -s 5 ".koy[2:4]"  0 0 0;
+createNode animCurveTA -n "Hips_control_rotate_AnimLayer3_inputBY";
+	rename -uid "366979E0-4DAC-A8EB-D8EF-3E8ABE964CC5";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 5 ".ktv[0:4]"  0 0 7 0 12 10.226856264617888 17 10.226856264617888
+		 20 0;
+	setAttr -s 5 ".kit[2:4]"  1 18 18;
+	setAttr -s 5 ".kot[2:4]"  1 18 18;
+	setAttr -s 5 ".kix[2:4]"  1 1 1;
+	setAttr -s 5 ".kiy[2:4]"  0 0 0;
+	setAttr -s 5 ".kox[2:4]"  1 1 1;
+	setAttr -s 5 ".koy[2:4]"  0 0 0;
+createNode animCurveTA -n "Hips_control_rotate_AnimLayer3_inputBZ";
+	rename -uid "343B35B1-4586-A69B-F6DD-3395BCDB7CCD";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 5 ".ktv[0:4]"  0 0 7 0 12 4.8204698974238536 17 4.8204698974238536
+		 20 0;
+	setAttr -s 5 ".kit[2:4]"  1 18 18;
+	setAttr -s 5 ".kot[2:4]"  1 18 18;
+	setAttr -s 5 ".kix[2:4]"  1 1 1;
+	setAttr -s 5 ".kiy[2:4]"  0 0 0;
+	setAttr -s 5 ".kox[2:4]"  1 1 1;
+	setAttr -s 5 ".koy[2:4]"  0 0 0;
 select -ne :time1;
 	setAttr -av -k on ".cch";
 	setAttr -av -k on ".ihi";
 	setAttr -av -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr -k on ".o" 0;
-	setAttr -av -k on ".unw";
+	setAttr -k on ".o" 16;
+	setAttr -av -k on ".unw" 16;
 	setAttr -av -k on ".etw";
 	setAttr -av -k on ".tps";
 	setAttr -av -k on ".tms";
@@ -15444,6 +15709,7 @@ select -ne :hardwareRenderingGlobals;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
 		 1 1 1 0 0 0 0 0 0 0 0 0
 		 0 0 0 0 ;
+	setAttr ".ta" 3;
 	setAttr ".etmr" no;
 	setAttr ".tmr" 4096;
 	setAttr ".fprt" yes;
@@ -15682,1892 +15948,1908 @@ connectAttr "HumanMale_RIGRN.phl[18]" "HumanMale_RIGRN.phl[19]";
 connectAttr "HumanMale_RIGRN.phl[20]" "HumanMale_RIGRN.phl[21]";
 connectAttr "HumanMale_RIGRN.phl[22]" "HumanMale_RIGRN.phl[23]";
 connectAttr "HumanMale_RIGRN.phl[24]" "HumanMale_RIGRN.phl[25]";
-connectAttr "HumanMale_RIGRN.phl[26]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[27]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[28]" "HumanMale_RIGRN.phl[29]";
-connectAttr "HumanMale_RIGRN.phl[30]" "HumanMale_RIGRN.phl[31]";
-connectAttr "HumanMale_RIGRN.phl[32]" "HumanMale_RIGRN.phl[33]";
-connectAttr "HumanMale_RIGRN.phl[34]" "HumanMale_RIGRN.phl[35]";
-connectAttr "HumanMale_RIGRN.phl[36]" "HumanMale_RIGRN.phl[37]";
-connectAttr "HumanMale_RIGRN.phl[38]" "HumanMale_RIGRN.phl[39]";
-connectAttr "HumanMale_RIGRN.phl[40]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[26]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[27]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[28]" "AnimLayer3.dsm" -na;
+connectAttr "R:Hips_control_translateX_AnimLayer3.o" "HumanMale_RIGRN.phl[29]";
+connectAttr "HumanMale_RIGRN.phl[30]" "AnimLayer3.dsm" -na;
+connectAttr "R:Hips_control_translateY_AnimLayer3.o" "HumanMale_RIGRN.phl[31]";
+connectAttr "HumanMale_RIGRN.phl[32]" "AnimLayer3.dsm" -na;
+connectAttr "R:Hips_control_translateZ_AnimLayer3.o" "HumanMale_RIGRN.phl[33]";
+connectAttr "HumanMale_RIGRN.phl[34]" "AnimLayer3.dsm" -na;
+connectAttr "R:Hips_control_rotate_AnimLayer3.ox" "HumanMale_RIGRN.phl[35]";
+connectAttr "HumanMale_RIGRN.phl[36]" "AnimLayer3.dsm" -na;
+connectAttr "R:Hips_control_rotate_AnimLayer3.oy" "HumanMale_RIGRN.phl[37]";
+connectAttr "HumanMale_RIGRN.phl[38]" "AnimLayer3.dsm" -na;
+connectAttr "R:Hips_control_rotate_AnimLayer3.oz" "HumanMale_RIGRN.phl[39]";
+connectAttr "HumanMale_RIGRN.phl[40]" "R:Hips_control_rotate_AnimLayer3.ro";
 connectAttr "HumanMale_RIGRN.phl[41]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[42]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_translateX_AnimLayer2.o" "HumanMale_RIGRN.phl[43]"
+connectAttr "HumanMale_RIGRN.phl[42]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[43]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_translateX_AnimLayer2.o" "HumanMale_RIGRN.phl[44]"
 		;
-connectAttr "HumanMale_RIGRN.phl[44]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_translateY_AnimLayer2.o" "HumanMale_RIGRN.phl[45]"
+connectAttr "HumanMale_RIGRN.phl[45]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_translateY_AnimLayer2.o" "HumanMale_RIGRN.phl[46]"
 		;
-connectAttr "HumanMale_RIGRN.phl[46]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_translateZ_AnimLayer2.o" "HumanMale_RIGRN.phl[47]"
+connectAttr "HumanMale_RIGRN.phl[47]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_translateZ_AnimLayer2.o" "HumanMale_RIGRN.phl[48]"
 		;
-connectAttr "HumanMale_RIGRN.phl[48]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_rotate_AnimLayer2.ox" "HumanMale_RIGRN.phl[49]";
-connectAttr "HumanMale_RIGRN.phl[50]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_rotate_AnimLayer2.oy" "HumanMale_RIGRN.phl[51]";
-connectAttr "HumanMale_RIGRN.phl[52]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_rotate_AnimLayer2.oz" "HumanMale_RIGRN.phl[53]";
-connectAttr "HumanMale_RIGRN.phl[54]" "AnimLayer2.dsm" -na;
-connectAttr "R:Spine1_control_Orient_AnimLayer2.o" "HumanMale_RIGRN.phl[55]";
-connectAttr "HumanMale_RIGRN.phl[56]" "R:Spine1_control_rotate_AnimLayer2.ro";
-connectAttr "HumanMale_RIGRN.phl[57]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[49]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_rotate_AnimLayer2.ox" "HumanMale_RIGRN.phl[50]";
+connectAttr "HumanMale_RIGRN.phl[51]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_rotate_AnimLayer2.oy" "HumanMale_RIGRN.phl[52]";
+connectAttr "HumanMale_RIGRN.phl[53]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_rotate_AnimLayer2.oz" "HumanMale_RIGRN.phl[54]";
+connectAttr "HumanMale_RIGRN.phl[55]" "AnimLayer2.dsm" -na;
+connectAttr "R:Spine1_control_Orient_AnimLayer2.o" "HumanMale_RIGRN.phl[56]";
+connectAttr "HumanMale_RIGRN.phl[57]" "R:Spine1_control_rotate_AnimLayer2.ro";
 connectAttr "HumanMale_RIGRN.phl[58]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[59]" "HumanMale_RIGRN.phl[60]";
-connectAttr "HumanMale_RIGRN.phl[61]" "HumanMale_RIGRN.phl[62]";
-connectAttr "HumanMale_RIGRN.phl[63]" "HumanMale_RIGRN.phl[64]";
-connectAttr "HumanMale_RIGRN.phl[65]" "HumanMale_RIGRN.phl[66]";
-connectAttr "HumanMale_RIGRN.phl[67]" "HumanMale_RIGRN.phl[68]";
-connectAttr "HumanMale_RIGRN.phl[69]" "HumanMale_RIGRN.phl[70]";
-connectAttr "HumanMale_RIGRN.phl[71]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[59]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[60]" "HumanMale_RIGRN.phl[61]";
+connectAttr "HumanMale_RIGRN.phl[62]" "HumanMale_RIGRN.phl[63]";
+connectAttr "HumanMale_RIGRN.phl[64]" "HumanMale_RIGRN.phl[65]";
+connectAttr "HumanMale_RIGRN.phl[66]" "HumanMale_RIGRN.phl[67]";
+connectAttr "HumanMale_RIGRN.phl[68]" "HumanMale_RIGRN.phl[69]";
+connectAttr "HumanMale_RIGRN.phl[70]" "HumanMale_RIGRN.phl[71]";
 connectAttr "HumanMale_RIGRN.phl[72]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[73]" "AnimLayer2.dsm" -na;
-connectAttr "R:Chest_control_translateX_AnimLayer2.o" "HumanMale_RIGRN.phl[74]";
-connectAttr "HumanMale_RIGRN.phl[75]" "AnimLayer2.dsm" -na;
-connectAttr "R:Chest_control_translateY_AnimLayer2.o" "HumanMale_RIGRN.phl[76]";
-connectAttr "HumanMale_RIGRN.phl[77]" "AnimLayer2.dsm" -na;
-connectAttr "R:Chest_control_translateZ_AnimLayer2.o" "HumanMale_RIGRN.phl[78]";
-connectAttr "HumanMale_RIGRN.phl[79]" "AnimLayer2.dsm" -na;
-connectAttr "R:Chest_control_rotate_AnimLayer2.ox" "HumanMale_RIGRN.phl[80]";
-connectAttr "HumanMale_RIGRN.phl[81]" "AnimLayer2.dsm" -na;
-connectAttr "R:Chest_control_rotate_AnimLayer2.oy" "HumanMale_RIGRN.phl[82]";
-connectAttr "HumanMale_RIGRN.phl[83]" "AnimLayer2.dsm" -na;
-connectAttr "R:Chest_control_rotate_AnimLayer2.oz" "HumanMale_RIGRN.phl[84]";
-connectAttr "HumanMale_RIGRN.phl[85]" "R:Chest_control_rotate_AnimLayer2.ro";
-connectAttr "HumanMale_RIGRN.phl[86]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[73]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[74]" "AnimLayer2.dsm" -na;
+connectAttr "R:Chest_control_translateX_AnimLayer2.o" "HumanMale_RIGRN.phl[75]";
+connectAttr "HumanMale_RIGRN.phl[76]" "AnimLayer2.dsm" -na;
+connectAttr "R:Chest_control_translateY_AnimLayer2.o" "HumanMale_RIGRN.phl[77]";
+connectAttr "HumanMale_RIGRN.phl[78]" "AnimLayer2.dsm" -na;
+connectAttr "R:Chest_control_translateZ_AnimLayer2.o" "HumanMale_RIGRN.phl[79]";
+connectAttr "HumanMale_RIGRN.phl[80]" "AnimLayer2.dsm" -na;
+connectAttr "R:Chest_control_rotate_AnimLayer2.ox" "HumanMale_RIGRN.phl[81]";
+connectAttr "HumanMale_RIGRN.phl[82]" "AnimLayer2.dsm" -na;
+connectAttr "R:Chest_control_rotate_AnimLayer2.oy" "HumanMale_RIGRN.phl[83]";
+connectAttr "HumanMale_RIGRN.phl[84]" "AnimLayer2.dsm" -na;
+connectAttr "R:Chest_control_rotate_AnimLayer2.oz" "HumanMale_RIGRN.phl[85]";
+connectAttr "HumanMale_RIGRN.phl[86]" "R:Chest_control_rotate_AnimLayer2.ro";
 connectAttr "HumanMale_RIGRN.phl[87]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[88]" "HumanMale_RIGRN.phl[89]";
-connectAttr "HumanMale_RIGRN.phl[90]" "HumanMale_RIGRN.phl[91]";
-connectAttr "HumanMale_RIGRN.phl[92]" "HumanMale_RIGRN.phl[93]";
-connectAttr "HumanMale_RIGRN.phl[94]" "HumanMale_RIGRN.phl[95]";
-connectAttr "HumanMale_RIGRN.phl[96]" "HumanMale_RIGRN.phl[97]";
-connectAttr "HumanMale_RIGRN.phl[98]" "HumanMale_RIGRN.phl[99]";
-connectAttr "HumanMale_RIGRN.phl[100]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[88]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[89]" "HumanMale_RIGRN.phl[90]";
+connectAttr "HumanMale_RIGRN.phl[91]" "HumanMale_RIGRN.phl[92]";
+connectAttr "HumanMale_RIGRN.phl[93]" "HumanMale_RIGRN.phl[94]";
+connectAttr "HumanMale_RIGRN.phl[95]" "HumanMale_RIGRN.phl[96]";
+connectAttr "HumanMale_RIGRN.phl[97]" "HumanMale_RIGRN.phl[98]";
+connectAttr "HumanMale_RIGRN.phl[99]" "HumanMale_RIGRN.phl[100]";
 connectAttr "HumanMale_RIGRN.phl[101]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[102]" "HumanMale_RIGRN.phl[103]";
-connectAttr "HumanMale_RIGRN.phl[104]" "HumanMale_RIGRN.phl[105]";
-connectAttr "HumanMale_RIGRN.phl[106]" "HumanMale_RIGRN.phl[107]";
-connectAttr "HumanMale_RIGRN.phl[108]" "HumanMale_RIGRN.phl[109]";
-connectAttr "HumanMale_RIGRN.phl[110]" "HumanMale_RIGRN.phl[111]";
-connectAttr "HumanMale_RIGRN.phl[112]" "HumanMale_RIGRN.phl[113]";
-connectAttr "HumanMale_RIGRN.phl[114]" "HumanMale_RIGRN.phl[115]";
-connectAttr "HumanMale_RIGRN.phl[116]" "aToolsSet_green_Head.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[102]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[103]" "HumanMale_RIGRN.phl[104]";
+connectAttr "HumanMale_RIGRN.phl[105]" "HumanMale_RIGRN.phl[106]";
+connectAttr "HumanMale_RIGRN.phl[107]" "HumanMale_RIGRN.phl[108]";
+connectAttr "HumanMale_RIGRN.phl[109]" "HumanMale_RIGRN.phl[110]";
+connectAttr "HumanMale_RIGRN.phl[111]" "HumanMale_RIGRN.phl[112]";
+connectAttr "HumanMale_RIGRN.phl[113]" "HumanMale_RIGRN.phl[114]";
+connectAttr "HumanMale_RIGRN.phl[115]" "HumanMale_RIGRN.phl[116]";
 connectAttr "HumanMale_RIGRN.phl[117]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[118]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[119]" "HumanMale_RIGRN.phl[120]";
-connectAttr "HumanMale_RIGRN.phl[121]" "HumanMale_RIGRN.phl[122]";
-connectAttr "HumanMale_RIGRN.phl[123]" "HumanMale_RIGRN.phl[124]";
-connectAttr "HumanMale_RIGRN.phl[125]" "HumanMale_RIGRN.phl[126]";
-connectAttr "HumanMale_RIGRN.phl[127]" "HumanMale_RIGRN.phl[128]";
-connectAttr "HumanMale_RIGRN.phl[129]" "HumanMale_RIGRN.phl[130]";
-connectAttr "HumanMale_RIGRN.phl[131]" "HumanMale_RIGRN.phl[132]";
-connectAttr "HumanMale_RIGRN.phl[133]" "aToolsSet_green_Head.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[118]" "aToolsSet_green_Head.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[119]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[120]" "HumanMale_RIGRN.phl[121]";
+connectAttr "HumanMale_RIGRN.phl[122]" "HumanMale_RIGRN.phl[123]";
+connectAttr "HumanMale_RIGRN.phl[124]" "HumanMale_RIGRN.phl[125]";
+connectAttr "HumanMale_RIGRN.phl[126]" "HumanMale_RIGRN.phl[127]";
+connectAttr "HumanMale_RIGRN.phl[128]" "HumanMale_RIGRN.phl[129]";
+connectAttr "HumanMale_RIGRN.phl[130]" "HumanMale_RIGRN.phl[131]";
+connectAttr "HumanMale_RIGRN.phl[132]" "HumanMale_RIGRN.phl[133]";
 connectAttr "HumanMale_RIGRN.phl[134]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[135]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[136]" "HumanMale_RIGRN.phl[137]";
-connectAttr "HumanMale_RIGRN.phl[138]" "HumanMale_RIGRN.phl[139]";
-connectAttr "HumanMale_RIGRN.phl[140]" "HumanMale_RIGRN.phl[141]";
-connectAttr "HumanMale_RIGRN.phl[142]" "HumanMale_RIGRN.phl[143]";
-connectAttr "HumanMale_RIGRN.phl[144]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[135]" "aToolsSet_green_Head.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[136]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[137]" "HumanMale_RIGRN.phl[138]";
+connectAttr "HumanMale_RIGRN.phl[139]" "HumanMale_RIGRN.phl[140]";
+connectAttr "HumanMale_RIGRN.phl[141]" "HumanMale_RIGRN.phl[142]";
+connectAttr "HumanMale_RIGRN.phl[143]" "HumanMale_RIGRN.phl[144]";
 connectAttr "HumanMale_RIGRN.phl[145]" "aToolsSet_yellow_LHand.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[146]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[147]" "HumanMale_RIGRN.phl[148]";
-connectAttr "HumanMale_RIGRN.phl[149]" "HumanMale_RIGRN.phl[150]";
-connectAttr "HumanMale_RIGRN.phl[151]" "HumanMale_RIGRN.phl[152]";
-connectAttr "HumanMale_RIGRN.phl[153]" "HumanMale_RIGRN.phl[154]";
-connectAttr "HumanMale_RIGRN.phl[155]" "HumanMale_RIGRN.phl[156]";
-connectAttr "HumanMale_RIGRN.phl[157]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[146]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[147]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[148]" "HumanMale_RIGRN.phl[149]";
+connectAttr "HumanMale_RIGRN.phl[150]" "HumanMale_RIGRN.phl[151]";
+connectAttr "HumanMale_RIGRN.phl[152]" "HumanMale_RIGRN.phl[153]";
+connectAttr "HumanMale_RIGRN.phl[154]" "HumanMale_RIGRN.phl[155]";
+connectAttr "HumanMale_RIGRN.phl[156]" "HumanMale_RIGRN.phl[157]";
 connectAttr "HumanMale_RIGRN.phl[158]" "aToolsSet_yellow_LHand.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[159]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[160]" "HumanMale_RIGRN.phl[161]";
-connectAttr "HumanMale_RIGRN.phl[162]" "HumanMale_RIGRN.phl[163]";
-connectAttr "HumanMale_RIGRN.phl[164]" "HumanMale_RIGRN.phl[165]";
-connectAttr "HumanMale_RIGRN.phl[166]" "HumanMale_RIGRN.phl[167]";
-connectAttr "HumanMale_RIGRN.phl[168]" "HumanMale_RIGRN.phl[169]";
-connectAttr "HumanMale_RIGRN.phl[170]" "HumanMale_RIGRN.phl[171]";
-connectAttr "HumanMale_RIGRN.phl[172]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[159]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[160]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[161]" "HumanMale_RIGRN.phl[162]";
+connectAttr "HumanMale_RIGRN.phl[163]" "HumanMale_RIGRN.phl[164]";
+connectAttr "HumanMale_RIGRN.phl[165]" "HumanMale_RIGRN.phl[166]";
+connectAttr "HumanMale_RIGRN.phl[167]" "HumanMale_RIGRN.phl[168]";
+connectAttr "HumanMale_RIGRN.phl[169]" "HumanMale_RIGRN.phl[170]";
+connectAttr "HumanMale_RIGRN.phl[171]" "HumanMale_RIGRN.phl[172]";
 connectAttr "HumanMale_RIGRN.phl[173]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[174]" "HumanMale_RIGRN.phl[175]";
-connectAttr "HumanMale_RIGRN.phl[176]" "HumanMale_RIGRN.phl[177]";
-connectAttr "HumanMale_RIGRN.phl[178]" "HumanMale_RIGRN.phl[179]";
-connectAttr "HumanMale_RIGRN.phl[180]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[174]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[175]" "HumanMale_RIGRN.phl[176]";
+connectAttr "HumanMale_RIGRN.phl[177]" "HumanMale_RIGRN.phl[178]";
+connectAttr "HumanMale_RIGRN.phl[179]" "HumanMale_RIGRN.phl[180]";
 connectAttr "HumanMale_RIGRN.phl[181]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[182]" "HumanMale_RIGRN.phl[183]";
-connectAttr "HumanMale_RIGRN.phl[184]" "HumanMale_RIGRN.phl[185]";
-connectAttr "HumanMale_RIGRN.phl[186]" "HumanMale_RIGRN.phl[187]";
-connectAttr "HumanMale_RIGRN.phl[188]" "HumanMale_RIGRN.phl[189]";
-connectAttr "HumanMale_RIGRN.phl[190]" "HumanMale_RIGRN.phl[191]";
-connectAttr "HumanMale_RIGRN.phl[192]" "HumanMale_RIGRN.phl[193]";
-connectAttr "HumanMale_RIGRN.phl[194]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[195]" "HumanMale_RIGRN.phl[196]";
-connectAttr "HumanMale_RIGRN.phl[197]" "HumanMale_RIGRN.phl[198]";
-connectAttr "HumanMale_RIGRN.phl[199]" "HumanMale_RIGRN.phl[200]";
-connectAttr "HumanMale_RIGRN.phl[201]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[202]" "HumanMale_RIGRN.phl[203]";
-connectAttr "HumanMale_RIGRN.phl[204]" "HumanMale_RIGRN.phl[205]";
-connectAttr "HumanMale_RIGRN.phl[206]" "HumanMale_RIGRN.phl[207]";
-connectAttr "HumanMale_RIGRN.phl[208]" "HumanMale_RIGRN.phl[209]";
-connectAttr "HumanMale_RIGRN.phl[210]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[182]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[183]" "HumanMale_RIGRN.phl[184]";
+connectAttr "HumanMale_RIGRN.phl[185]" "HumanMale_RIGRN.phl[186]";
+connectAttr "HumanMale_RIGRN.phl[187]" "HumanMale_RIGRN.phl[188]";
+connectAttr "HumanMale_RIGRN.phl[189]" "HumanMale_RIGRN.phl[190]";
+connectAttr "HumanMale_RIGRN.phl[191]" "HumanMale_RIGRN.phl[192]";
+connectAttr "HumanMale_RIGRN.phl[193]" "HumanMale_RIGRN.phl[194]";
+connectAttr "HumanMale_RIGRN.phl[195]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[196]" "HumanMale_RIGRN.phl[197]";
+connectAttr "HumanMale_RIGRN.phl[198]" "HumanMale_RIGRN.phl[199]";
+connectAttr "HumanMale_RIGRN.phl[200]" "HumanMale_RIGRN.phl[201]";
+connectAttr "HumanMale_RIGRN.phl[202]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[203]" "HumanMale_RIGRN.phl[204]";
+connectAttr "HumanMale_RIGRN.phl[205]" "HumanMale_RIGRN.phl[206]";
+connectAttr "HumanMale_RIGRN.phl[207]" "HumanMale_RIGRN.phl[208]";
+connectAttr "HumanMale_RIGRN.phl[209]" "HumanMale_RIGRN.phl[210]";
 connectAttr "HumanMale_RIGRN.phl[211]" "aToolsSet_yellow_RHand.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[212]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[213]" "AnimLayer2.dsm" -na;
-connectAttr "R:Hand_R_control_translateX_AnimLayer2.o" "HumanMale_RIGRN.phl[214]"
+connectAttr "HumanMale_RIGRN.phl[212]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[213]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[214]" "AnimLayer2.dsm" -na;
+connectAttr "R:Hand_R_control_translateX_AnimLayer2.o" "HumanMale_RIGRN.phl[215]"
 		;
-connectAttr "HumanMale_RIGRN.phl[215]" "AnimLayer2.dsm" -na;
-connectAttr "R:Hand_R_control_translateY_AnimLayer2.o" "HumanMale_RIGRN.phl[216]"
+connectAttr "HumanMale_RIGRN.phl[216]" "AnimLayer2.dsm" -na;
+connectAttr "R:Hand_R_control_translateY_AnimLayer2.o" "HumanMale_RIGRN.phl[217]"
 		;
-connectAttr "HumanMale_RIGRN.phl[217]" "AnimLayer2.dsm" -na;
-connectAttr "R:Hand_R_control_translateZ_AnimLayer2.o" "HumanMale_RIGRN.phl[218]"
+connectAttr "HumanMale_RIGRN.phl[218]" "AnimLayer2.dsm" -na;
+connectAttr "R:Hand_R_control_translateZ_AnimLayer2.o" "HumanMale_RIGRN.phl[219]"
 		;
-connectAttr "HumanMale_RIGRN.phl[219]" "AnimLayer2.dsm" -na;
-connectAttr "R:Hand_R_control_ParentOnClavicle_AnimLayer2.o" "HumanMale_RIGRN.phl[220]"
+connectAttr "HumanMale_RIGRN.phl[220]" "AnimLayer2.dsm" -na;
+connectAttr "R:Hand_R_control_ParentOnClavicle_AnimLayer2.o" "HumanMale_RIGRN.phl[221]"
 		;
-connectAttr "HumanMale_RIGRN.phl[221]" "AnimLayer2.dsm" -na;
-connectAttr "R:Hand_R_control_ParentOnSpine_AnimLayer2.o" "HumanMale_RIGRN.phl[222]"
+connectAttr "HumanMale_RIGRN.phl[222]" "AnimLayer2.dsm" -na;
+connectAttr "R:Hand_R_control_ParentOnSpine_AnimLayer2.o" "HumanMale_RIGRN.phl[223]"
 		;
-connectAttr "HumanMale_RIGRN.phl[223]" "aToolsSet_red_All.dsm" -na;
 connectAttr "HumanMale_RIGRN.phl[224]" "aToolsSet_yellow_RHand.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[225]" "aToolsSet_red_Almost_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[226]" "HumanMale_RIGRN.phl[227]";
-connectAttr "HumanMale_RIGRN.phl[228]" "HumanMale_RIGRN.phl[229]";
-connectAttr "HumanMale_RIGRN.phl[230]" "HumanMale_RIGRN.phl[231]";
-connectAttr "HumanMale_RIGRN.phl[232]" "HumanMale_RIGRN.phl[233]";
-connectAttr "HumanMale_RIGRN.phl[234]" "HumanMale_RIGRN.phl[235]";
-connectAttr "HumanMale_RIGRN.phl[236]" "HumanMale_RIGRN.phl[237]";
-connectAttr "HumanMale_RIGRN.phl[238]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[225]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[226]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[227]" "HumanMale_RIGRN.phl[228]";
+connectAttr "HumanMale_RIGRN.phl[229]" "HumanMale_RIGRN.phl[230]";
+connectAttr "HumanMale_RIGRN.phl[231]" "HumanMale_RIGRN.phl[232]";
+connectAttr "HumanMale_RIGRN.phl[233]" "HumanMale_RIGRN.phl[234]";
+connectAttr "HumanMale_RIGRN.phl[235]" "HumanMale_RIGRN.phl[236]";
+connectAttr "HumanMale_RIGRN.phl[237]" "HumanMale_RIGRN.phl[238]";
 connectAttr "HumanMale_RIGRN.phl[239]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[240]" "HumanMale_RIGRN.phl[241]";
-connectAttr "HumanMale_RIGRN.phl[242]" "HumanMale_RIGRN.phl[243]";
-connectAttr "HumanMale_RIGRN.phl[244]" "HumanMale_RIGRN.phl[245]";
-connectAttr "HumanMale_RIGRN.phl[246]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[240]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[241]" "HumanMale_RIGRN.phl[242]";
+connectAttr "HumanMale_RIGRN.phl[243]" "HumanMale_RIGRN.phl[244]";
+connectAttr "HumanMale_RIGRN.phl[245]" "HumanMale_RIGRN.phl[246]";
 connectAttr "HumanMale_RIGRN.phl[247]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[248]" "HumanMale_RIGRN.phl[249]";
-connectAttr "HumanMale_RIGRN.phl[250]" "HumanMale_RIGRN.phl[251]";
-connectAttr "HumanMale_RIGRN.phl[252]" "HumanMale_RIGRN.phl[253]";
-connectAttr "HumanMale_RIGRN.phl[254]" "HumanMale_RIGRN.phl[255]";
-connectAttr "HumanMale_RIGRN.phl[256]" "HumanMale_RIGRN.phl[257]";
-connectAttr "HumanMale_RIGRN.phl[258]" "HumanMale_RIGRN.phl[259]";
-connectAttr "HumanMale_RIGRN.phl[260]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[261]" "HumanMale_RIGRN.phl[262]";
-connectAttr "HumanMale_RIGRN.phl[263]" "HumanMale_RIGRN.phl[264]";
-connectAttr "HumanMale_RIGRN.phl[265]" "HumanMale_RIGRN.phl[266]";
-connectAttr "HumanMale_RIGRN.phl[267]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[268]" "HumanMale_RIGRN.phl[269]";
-connectAttr "HumanMale_RIGRN.phl[270]" "HumanMale_RIGRN.phl[271]";
-connectAttr "HumanMale_RIGRN.phl[272]" "HumanMale_RIGRN.phl[273]";
-connectAttr "HumanMale_RIGRN.phl[274]" "HumanMale_RIGRN.phl[275]";
-connectAttr "HumanMale_RIGRN.phl[276]" "HumanMale_RIGRN.phl[277]";
-connectAttr "HumanMale_RIGRN.phl[278]" "HumanMale_RIGRN.phl[279]";
-connectAttr "HumanMale_RIGRN.phl[280]" "HumanMale_RIGRN.phl[281]";
-connectAttr "HumanMale_RIGRN.phl[282]" "HumanMale_RIGRN.phl[283]";
-connectAttr "HumanMale_RIGRN.phl[284]" "HumanMale_RIGRN.phl[285]";
-connectAttr "HumanMale_RIGRN.phl[286]" "HumanMale_RIGRN.phl[287]";
-connectAttr "HumanMale_RIGRN.phl[288]" "HumanMale_RIGRN.phl[289]";
-connectAttr "HumanMale_RIGRN.phl[290]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[248]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[249]" "HumanMale_RIGRN.phl[250]";
+connectAttr "HumanMale_RIGRN.phl[251]" "HumanMale_RIGRN.phl[252]";
+connectAttr "HumanMale_RIGRN.phl[253]" "HumanMale_RIGRN.phl[254]";
+connectAttr "HumanMale_RIGRN.phl[255]" "HumanMale_RIGRN.phl[256]";
+connectAttr "HumanMale_RIGRN.phl[257]" "HumanMale_RIGRN.phl[258]";
+connectAttr "HumanMale_RIGRN.phl[259]" "HumanMale_RIGRN.phl[260]";
+connectAttr "HumanMale_RIGRN.phl[261]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[262]" "HumanMale_RIGRN.phl[263]";
+connectAttr "HumanMale_RIGRN.phl[264]" "HumanMale_RIGRN.phl[265]";
+connectAttr "HumanMale_RIGRN.phl[266]" "HumanMale_RIGRN.phl[267]";
+connectAttr "HumanMale_RIGRN.phl[268]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[269]" "HumanMale_RIGRN.phl[270]";
+connectAttr "HumanMale_RIGRN.phl[271]" "HumanMale_RIGRN.phl[272]";
+connectAttr "HumanMale_RIGRN.phl[273]" "HumanMale_RIGRN.phl[274]";
+connectAttr "HumanMale_RIGRN.phl[275]" "HumanMale_RIGRN.phl[276]";
+connectAttr "HumanMale_RIGRN.phl[277]" "HumanMale_RIGRN.phl[278]";
+connectAttr "HumanMale_RIGRN.phl[279]" "HumanMale_RIGRN.phl[280]";
+connectAttr "HumanMale_RIGRN.phl[281]" "HumanMale_RIGRN.phl[282]";
+connectAttr "HumanMale_RIGRN.phl[283]" "HumanMale_RIGRN.phl[284]";
+connectAttr "HumanMale_RIGRN.phl[285]" "HumanMale_RIGRN.phl[286]";
+connectAttr "HumanMale_RIGRN.phl[287]" "HumanMale_RIGRN.phl[288]";
+connectAttr "HumanMale_RIGRN.phl[289]" "HumanMale_RIGRN.phl[290]";
 connectAttr "HumanMale_RIGRN.phl[291]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[292]" "HumanMale_RIGRN.phl[293]";
-connectAttr "HumanMale_RIGRN.phl[294]" "HumanMale_RIGRN.phl[295]";
-connectAttr "HumanMale_RIGRN.phl[296]" "HumanMale_RIGRN.phl[297]";
-connectAttr "HumanMale_RIGRN.phl[298]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[292]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[293]" "HumanMale_RIGRN.phl[294]";
+connectAttr "HumanMale_RIGRN.phl[295]" "HumanMale_RIGRN.phl[296]";
+connectAttr "HumanMale_RIGRN.phl[297]" "HumanMale_RIGRN.phl[298]";
 connectAttr "HumanMale_RIGRN.phl[299]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[300]" "HumanMale_RIGRN.phl[301]";
-connectAttr "HumanMale_RIGRN.phl[302]" "HumanMale_RIGRN.phl[303]";
-connectAttr "HumanMale_RIGRN.phl[304]" "HumanMale_RIGRN.phl[305]";
-connectAttr "HumanMale_RIGRN.phl[306]" "HumanMale_RIGRN.phl[307]";
-connectAttr "HumanMale_RIGRN.phl[308]" "HumanMale_RIGRN.phl[309]";
-connectAttr "HumanMale_RIGRN.phl[310]" "HumanMale_RIGRN.phl[311]";
-connectAttr "HumanMale_RIGRN.phl[312]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[313]" "HumanMale_RIGRN.phl[314]";
-connectAttr "HumanMale_RIGRN.phl[315]" "HumanMale_RIGRN.phl[316]";
-connectAttr "HumanMale_RIGRN.phl[317]" "HumanMale_RIGRN.phl[318]";
-connectAttr "HumanMale_RIGRN.phl[319]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[320]" "HumanMale_RIGRN.phl[321]";
-connectAttr "HumanMale_RIGRN.phl[322]" "HumanMale_RIGRN.phl[323]";
-connectAttr "HumanMale_RIGRN.phl[324]" "HumanMale_RIGRN.phl[325]";
-connectAttr "HumanMale_RIGRN.phl[326]" "HumanMale_RIGRN.phl[327]";
-connectAttr "HumanMale_RIGRN.phl[328]" "HumanMale_RIGRN.phl[329]";
-connectAttr "HumanMale_RIGRN.phl[330]" "HumanMale_RIGRN.phl[331]";
-connectAttr "HumanMale_RIGRN.phl[332]" "HumanMale_RIGRN.phl[333]";
-connectAttr "HumanMale_RIGRN.phl[334]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[335]" "HumanMale_RIGRN.phl[336]";
-connectAttr "HumanMale_RIGRN.phl[337]" "HumanMale_RIGRN.phl[338]";
-connectAttr "HumanMale_RIGRN.phl[339]" "HumanMale_RIGRN.phl[340]";
-connectAttr "HumanMale_RIGRN.phl[341]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[342]" "HumanMale_RIGRN.phl[343]";
-connectAttr "HumanMale_RIGRN.phl[344]" "HumanMale_RIGRN.phl[345]";
-connectAttr "HumanMale_RIGRN.phl[346]" "HumanMale_RIGRN.phl[347]";
-connectAttr "HumanMale_RIGRN.phl[348]" "HumanMale_RIGRN.phl[349]";
-connectAttr "HumanMale_RIGRN.phl[350]" "HumanMale_RIGRN.phl[351]";
-connectAttr "HumanMale_RIGRN.phl[352]" "HumanMale_RIGRN.phl[353]";
-connectAttr "HumanMale_RIGRN.phl[354]" "HumanMale_RIGRN.phl[355]";
-connectAttr "HumanMale_RIGRN.phl[356]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[357]" "HumanMale_RIGRN.phl[358]";
-connectAttr "HumanMale_RIGRN.phl[359]" "HumanMale_RIGRN.phl[360]";
-connectAttr "HumanMale_RIGRN.phl[361]" "HumanMale_RIGRN.phl[362]";
-connectAttr "HumanMale_RIGRN.phl[363]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[364]" "HumanMale_RIGRN.phl[365]";
-connectAttr "HumanMale_RIGRN.phl[366]" "HumanMale_RIGRN.phl[367]";
-connectAttr "HumanMale_RIGRN.phl[368]" "HumanMale_RIGRN.phl[369]";
-connectAttr "HumanMale_RIGRN.phl[370]" "HumanMale_RIGRN.phl[371]";
-connectAttr "HumanMale_RIGRN.phl[372]" "HumanMale_RIGRN.phl[373]";
-connectAttr "HumanMale_RIGRN.phl[374]" "HumanMale_RIGRN.phl[375]";
-connectAttr "HumanMale_RIGRN.phl[376]" "HumanMale_RIGRN.phl[377]";
-connectAttr "HumanMale_RIGRN.phl[378]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[379]" "HumanMale_RIGRN.phl[380]";
-connectAttr "HumanMale_RIGRN.phl[381]" "HumanMale_RIGRN.phl[382]";
-connectAttr "HumanMale_RIGRN.phl[383]" "HumanMale_RIGRN.phl[384]";
-connectAttr "HumanMale_RIGRN.phl[385]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[386]" "HumanMale_RIGRN.phl[387]";
-connectAttr "HumanMale_RIGRN.phl[388]" "HumanMale_RIGRN.phl[389]";
-connectAttr "HumanMale_RIGRN.phl[390]" "HumanMale_RIGRN.phl[391]";
-connectAttr "HumanMale_RIGRN.phl[392]" "HumanMale_RIGRN.phl[393]";
-connectAttr "HumanMale_RIGRN.phl[394]" "HumanMale_RIGRN.phl[395]";
-connectAttr "HumanMale_RIGRN.phl[396]" "HumanMale_RIGRN.phl[397]";
-connectAttr "HumanMale_RIGRN.phl[398]" "HumanMale_RIGRN.phl[399]";
-connectAttr "HumanMale_RIGRN.phl[400]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[401]" "HumanMale_RIGRN.phl[402]";
-connectAttr "HumanMale_RIGRN.phl[403]" "HumanMale_RIGRN.phl[404]";
-connectAttr "HumanMale_RIGRN.phl[405]" "HumanMale_RIGRN.phl[406]";
-connectAttr "HumanMale_RIGRN.phl[407]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[408]" "HumanMale_RIGRN.phl[409]";
-connectAttr "HumanMale_RIGRN.phl[410]" "HumanMale_RIGRN.phl[411]";
-connectAttr "HumanMale_RIGRN.phl[412]" "HumanMale_RIGRN.phl[413]";
-connectAttr "HumanMale_RIGRN.phl[414]" "HumanMale_RIGRN.phl[415]";
-connectAttr "HumanMale_RIGRN.phl[416]" "HumanMale_RIGRN.phl[417]";
-connectAttr "HumanMale_RIGRN.phl[418]" "HumanMale_RIGRN.phl[419]";
-connectAttr "HumanMale_RIGRN.phl[420]" "HumanMale_RIGRN.phl[421]";
-connectAttr "HumanMale_RIGRN.phl[422]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[423]" "HumanMale_RIGRN.phl[424]";
-connectAttr "HumanMale_RIGRN.phl[425]" "HumanMale_RIGRN.phl[426]";
-connectAttr "HumanMale_RIGRN.phl[427]" "HumanMale_RIGRN.phl[428]";
-connectAttr "HumanMale_RIGRN.phl[429]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[430]" "HumanMale_RIGRN.phl[431]";
-connectAttr "HumanMale_RIGRN.phl[432]" "HumanMale_RIGRN.phl[433]";
-connectAttr "HumanMale_RIGRN.phl[434]" "HumanMale_RIGRN.phl[435]";
-connectAttr "HumanMale_RIGRN.phl[436]" "HumanMale_RIGRN.phl[437]";
-connectAttr "HumanMale_RIGRN.phl[438]" "HumanMale_RIGRN.phl[439]";
-connectAttr "HumanMale_RIGRN.phl[440]" "HumanMale_RIGRN.phl[441]";
-connectAttr "HumanMale_RIGRN.phl[442]" "HumanMale_RIGRN.phl[443]";
-connectAttr "HumanMale_RIGRN.phl[444]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[445]" "HumanMale_RIGRN.phl[446]";
-connectAttr "HumanMale_RIGRN.phl[447]" "HumanMale_RIGRN.phl[448]";
-connectAttr "HumanMale_RIGRN.phl[449]" "HumanMale_RIGRN.phl[450]";
-connectAttr "HumanMale_RIGRN.phl[451]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[452]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_R_control_translateX_AnimLayer1.o" "HumanMale_RIGRN.phl[453]"
+connectAttr "HumanMale_RIGRN.phl[300]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[301]" "HumanMale_RIGRN.phl[302]";
+connectAttr "HumanMale_RIGRN.phl[303]" "HumanMale_RIGRN.phl[304]";
+connectAttr "HumanMale_RIGRN.phl[305]" "HumanMale_RIGRN.phl[306]";
+connectAttr "HumanMale_RIGRN.phl[307]" "HumanMale_RIGRN.phl[308]";
+connectAttr "HumanMale_RIGRN.phl[309]" "HumanMale_RIGRN.phl[310]";
+connectAttr "HumanMale_RIGRN.phl[311]" "HumanMale_RIGRN.phl[312]";
+connectAttr "HumanMale_RIGRN.phl[313]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[314]" "HumanMale_RIGRN.phl[315]";
+connectAttr "HumanMale_RIGRN.phl[316]" "HumanMale_RIGRN.phl[317]";
+connectAttr "HumanMale_RIGRN.phl[318]" "HumanMale_RIGRN.phl[319]";
+connectAttr "HumanMale_RIGRN.phl[320]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[321]" "HumanMale_RIGRN.phl[322]";
+connectAttr "HumanMale_RIGRN.phl[323]" "HumanMale_RIGRN.phl[324]";
+connectAttr "HumanMale_RIGRN.phl[325]" "HumanMale_RIGRN.phl[326]";
+connectAttr "HumanMale_RIGRN.phl[327]" "HumanMale_RIGRN.phl[328]";
+connectAttr "HumanMale_RIGRN.phl[329]" "HumanMale_RIGRN.phl[330]";
+connectAttr "HumanMale_RIGRN.phl[331]" "HumanMale_RIGRN.phl[332]";
+connectAttr "HumanMale_RIGRN.phl[333]" "HumanMale_RIGRN.phl[334]";
+connectAttr "HumanMale_RIGRN.phl[335]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[336]" "HumanMale_RIGRN.phl[337]";
+connectAttr "HumanMale_RIGRN.phl[338]" "HumanMale_RIGRN.phl[339]";
+connectAttr "HumanMale_RIGRN.phl[340]" "HumanMale_RIGRN.phl[341]";
+connectAttr "HumanMale_RIGRN.phl[342]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[343]" "HumanMale_RIGRN.phl[344]";
+connectAttr "HumanMale_RIGRN.phl[345]" "HumanMale_RIGRN.phl[346]";
+connectAttr "HumanMale_RIGRN.phl[347]" "HumanMale_RIGRN.phl[348]";
+connectAttr "HumanMale_RIGRN.phl[349]" "HumanMale_RIGRN.phl[350]";
+connectAttr "HumanMale_RIGRN.phl[351]" "HumanMale_RIGRN.phl[352]";
+connectAttr "HumanMale_RIGRN.phl[353]" "HumanMale_RIGRN.phl[354]";
+connectAttr "HumanMale_RIGRN.phl[355]" "HumanMale_RIGRN.phl[356]";
+connectAttr "HumanMale_RIGRN.phl[357]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[358]" "HumanMale_RIGRN.phl[359]";
+connectAttr "HumanMale_RIGRN.phl[360]" "HumanMale_RIGRN.phl[361]";
+connectAttr "HumanMale_RIGRN.phl[362]" "HumanMale_RIGRN.phl[363]";
+connectAttr "HumanMale_RIGRN.phl[364]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[365]" "HumanMale_RIGRN.phl[366]";
+connectAttr "HumanMale_RIGRN.phl[367]" "HumanMale_RIGRN.phl[368]";
+connectAttr "HumanMale_RIGRN.phl[369]" "HumanMale_RIGRN.phl[370]";
+connectAttr "HumanMale_RIGRN.phl[371]" "HumanMale_RIGRN.phl[372]";
+connectAttr "HumanMale_RIGRN.phl[373]" "HumanMale_RIGRN.phl[374]";
+connectAttr "HumanMale_RIGRN.phl[375]" "HumanMale_RIGRN.phl[376]";
+connectAttr "HumanMale_RIGRN.phl[377]" "HumanMale_RIGRN.phl[378]";
+connectAttr "HumanMale_RIGRN.phl[379]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[380]" "HumanMale_RIGRN.phl[381]";
+connectAttr "HumanMale_RIGRN.phl[382]" "HumanMale_RIGRN.phl[383]";
+connectAttr "HumanMale_RIGRN.phl[384]" "HumanMale_RIGRN.phl[385]";
+connectAttr "HumanMale_RIGRN.phl[386]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[387]" "HumanMale_RIGRN.phl[388]";
+connectAttr "HumanMale_RIGRN.phl[389]" "HumanMale_RIGRN.phl[390]";
+connectAttr "HumanMale_RIGRN.phl[391]" "HumanMale_RIGRN.phl[392]";
+connectAttr "HumanMale_RIGRN.phl[393]" "HumanMale_RIGRN.phl[394]";
+connectAttr "HumanMale_RIGRN.phl[395]" "HumanMale_RIGRN.phl[396]";
+connectAttr "HumanMale_RIGRN.phl[397]" "HumanMale_RIGRN.phl[398]";
+connectAttr "HumanMale_RIGRN.phl[399]" "HumanMale_RIGRN.phl[400]";
+connectAttr "HumanMale_RIGRN.phl[401]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[402]" "HumanMale_RIGRN.phl[403]";
+connectAttr "HumanMale_RIGRN.phl[404]" "HumanMale_RIGRN.phl[405]";
+connectAttr "HumanMale_RIGRN.phl[406]" "HumanMale_RIGRN.phl[407]";
+connectAttr "HumanMale_RIGRN.phl[408]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[409]" "HumanMale_RIGRN.phl[410]";
+connectAttr "HumanMale_RIGRN.phl[411]" "HumanMale_RIGRN.phl[412]";
+connectAttr "HumanMale_RIGRN.phl[413]" "HumanMale_RIGRN.phl[414]";
+connectAttr "HumanMale_RIGRN.phl[415]" "HumanMale_RIGRN.phl[416]";
+connectAttr "HumanMale_RIGRN.phl[417]" "HumanMale_RIGRN.phl[418]";
+connectAttr "HumanMale_RIGRN.phl[419]" "HumanMale_RIGRN.phl[420]";
+connectAttr "HumanMale_RIGRN.phl[421]" "HumanMale_RIGRN.phl[422]";
+connectAttr "HumanMale_RIGRN.phl[423]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[424]" "HumanMale_RIGRN.phl[425]";
+connectAttr "HumanMale_RIGRN.phl[426]" "HumanMale_RIGRN.phl[427]";
+connectAttr "HumanMale_RIGRN.phl[428]" "HumanMale_RIGRN.phl[429]";
+connectAttr "HumanMale_RIGRN.phl[430]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[431]" "HumanMale_RIGRN.phl[432]";
+connectAttr "HumanMale_RIGRN.phl[433]" "HumanMale_RIGRN.phl[434]";
+connectAttr "HumanMale_RIGRN.phl[435]" "HumanMale_RIGRN.phl[436]";
+connectAttr "HumanMale_RIGRN.phl[437]" "HumanMale_RIGRN.phl[438]";
+connectAttr "HumanMale_RIGRN.phl[439]" "HumanMale_RIGRN.phl[440]";
+connectAttr "HumanMale_RIGRN.phl[441]" "HumanMale_RIGRN.phl[442]";
+connectAttr "HumanMale_RIGRN.phl[443]" "HumanMale_RIGRN.phl[444]";
+connectAttr "HumanMale_RIGRN.phl[445]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[446]" "HumanMale_RIGRN.phl[447]";
+connectAttr "HumanMale_RIGRN.phl[448]" "HumanMale_RIGRN.phl[449]";
+connectAttr "HumanMale_RIGRN.phl[450]" "HumanMale_RIGRN.phl[451]";
+connectAttr "HumanMale_RIGRN.phl[452]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[453]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_R_control_translateX_AnimLayer1.o" "HumanMale_RIGRN.phl[454]"
 		;
-connectAttr "HumanMale_RIGRN.phl[454]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_R_control_translateY_AnimLayer1.o" "HumanMale_RIGRN.phl[455]"
+connectAttr "HumanMale_RIGRN.phl[455]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_R_control_translateY_AnimLayer1.o" "HumanMale_RIGRN.phl[456]"
 		;
-connectAttr "HumanMale_RIGRN.phl[456]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_R_control_translateZ_AnimLayer1.o" "HumanMale_RIGRN.phl[457]"
+connectAttr "HumanMale_RIGRN.phl[457]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_R_control_translateZ_AnimLayer1.o" "HumanMale_RIGRN.phl[458]"
 		;
-connectAttr "HumanMale_RIGRN.phl[458]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_R_control_rotate_AnimLayer1.ox" "HumanMale_RIGRN.phl[459]"
+connectAttr "HumanMale_RIGRN.phl[459]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_R_control_rotate_AnimLayer1.ox" "HumanMale_RIGRN.phl[460]"
 		;
-connectAttr "HumanMale_RIGRN.phl[460]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_R_control_rotate_AnimLayer1.oy" "HumanMale_RIGRN.phl[461]"
+connectAttr "HumanMale_RIGRN.phl[461]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_R_control_rotate_AnimLayer1.oy" "HumanMale_RIGRN.phl[462]"
 		;
-connectAttr "HumanMale_RIGRN.phl[462]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_R_control_rotate_AnimLayer1.oz" "HumanMale_RIGRN.phl[463]"
+connectAttr "HumanMale_RIGRN.phl[463]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_R_control_rotate_AnimLayer1.oz" "HumanMale_RIGRN.phl[464]"
 		;
-connectAttr "HumanMale_RIGRN.phl[464]" "R:Shoulders_R_control_rotate_AnimLayer1.ro"
+connectAttr "HumanMale_RIGRN.phl[465]" "R:Shoulders_R_control_rotate_AnimLayer1.ro"
 		;
-connectAttr "HumanMale_RIGRN.phl[465]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[466]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_L_control_translateX_AnimLayer1.o" "HumanMale_RIGRN.phl[467]"
+connectAttr "HumanMale_RIGRN.phl[466]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[467]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_L_control_translateX_AnimLayer1.o" "HumanMale_RIGRN.phl[468]"
 		;
-connectAttr "HumanMale_RIGRN.phl[468]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_L_control_translateY_AnimLayer1.o" "HumanMale_RIGRN.phl[469]"
+connectAttr "HumanMale_RIGRN.phl[469]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_L_control_translateY_AnimLayer1.o" "HumanMale_RIGRN.phl[470]"
 		;
-connectAttr "HumanMale_RIGRN.phl[470]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_L_control_translateZ_AnimLayer1.o" "HumanMale_RIGRN.phl[471]"
+connectAttr "HumanMale_RIGRN.phl[471]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_L_control_translateZ_AnimLayer1.o" "HumanMale_RIGRN.phl[472]"
 		;
-connectAttr "HumanMale_RIGRN.phl[472]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_L_control_rotate_AnimLayer1.ox" "HumanMale_RIGRN.phl[473]"
+connectAttr "HumanMale_RIGRN.phl[473]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_L_control_rotate_AnimLayer1.ox" "HumanMale_RIGRN.phl[474]"
 		;
-connectAttr "HumanMale_RIGRN.phl[474]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_L_control_rotate_AnimLayer1.oy" "HumanMale_RIGRN.phl[475]"
+connectAttr "HumanMale_RIGRN.phl[475]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_L_control_rotate_AnimLayer1.oy" "HumanMale_RIGRN.phl[476]"
 		;
-connectAttr "HumanMale_RIGRN.phl[476]" "AnimLayer1.dsm" -na;
-connectAttr "R:Shoulders_L_control_rotate_AnimLayer1.oz" "HumanMale_RIGRN.phl[477]"
+connectAttr "HumanMale_RIGRN.phl[477]" "AnimLayer1.dsm" -na;
+connectAttr "R:Shoulders_L_control_rotate_AnimLayer1.oz" "HumanMale_RIGRN.phl[478]"
 		;
-connectAttr "HumanMale_RIGRN.phl[478]" "R:Shoulders_L_control_rotate_AnimLayer1.ro"
+connectAttr "HumanMale_RIGRN.phl[479]" "R:Shoulders_L_control_rotate_AnimLayer1.ro"
 		;
-connectAttr "HumanMale_RIGRN.phl[479]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[480]" "HumanMale_RIGRN.phl[481]";
-connectAttr "HumanMale_RIGRN.phl[482]" "HumanMale_RIGRN.phl[483]";
-connectAttr "HumanMale_RIGRN.phl[484]" "HumanMale_RIGRN.phl[485]";
-connectAttr "HumanMale_RIGRN.phl[486]" "HumanMale_RIGRN.phl[487]";
-connectAttr "HumanMale_RIGRN.phl[488]" "HumanMale_RIGRN.phl[489]";
-connectAttr "HumanMale_RIGRN.phl[490]" "HumanMale_RIGRN.phl[491]";
-connectAttr "HumanMale_RIGRN.phl[492]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[493]" "HumanMale_RIGRN.phl[494]";
-connectAttr "HumanMale_RIGRN.phl[495]" "HumanMale_RIGRN.phl[496]";
-connectAttr "HumanMale_RIGRN.phl[497]" "HumanMale_RIGRN.phl[498]";
-connectAttr "HumanMale_RIGRN.phl[499]" "HumanMale_RIGRN.phl[500]";
-connectAttr "HumanMale_RIGRN.phl[501]" "HumanMale_RIGRN.phl[502]";
-connectAttr "HumanMale_RIGRN.phl[503]" "HumanMale_RIGRN.phl[504]";
-connectAttr "HumanMale_RIGRN.phl[505]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[506]" "HumanMale_RIGRN.phl[507]";
-connectAttr "HumanMale_RIGRN.phl[508]" "HumanMale_RIGRN.phl[509]";
-connectAttr "HumanMale_RIGRN.phl[510]" "HumanMale_RIGRN.phl[511]";
-connectAttr "HumanMale_RIGRN.phl[512]" "HumanMale_RIGRN.phl[513]";
-connectAttr "HumanMale_RIGRN.phl[514]" "HumanMale_RIGRN.phl[515]";
-connectAttr "HumanMale_RIGRN.phl[516]" "HumanMale_RIGRN.phl[517]";
-connectAttr "HumanMale_RIGRN.phl[518]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[519]" "HumanMale_RIGRN.phl[520]";
-connectAttr "HumanMale_RIGRN.phl[521]" "HumanMale_RIGRN.phl[522]";
-connectAttr "HumanMale_RIGRN.phl[523]" "HumanMale_RIGRN.phl[524]";
-connectAttr "HumanMale_RIGRN.phl[525]" "HumanMale_RIGRN.phl[526]";
-connectAttr "HumanMale_RIGRN.phl[527]" "HumanMale_RIGRN.phl[528]";
-connectAttr "HumanMale_RIGRN.phl[529]" "HumanMale_RIGRN.phl[530]";
-connectAttr "HumanMale_RIGRN.phl[531]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[532]" "HumanMale_RIGRN.phl[533]";
-connectAttr "HumanMale_RIGRN.phl[534]" "HumanMale_RIGRN.phl[535]";
-connectAttr "HumanMale_RIGRN.phl[536]" "HumanMale_RIGRN.phl[537]";
-connectAttr "HumanMale_RIGRN.phl[538]" "HumanMale_RIGRN.phl[539]";
-connectAttr "HumanMale_RIGRN.phl[540]" "HumanMale_RIGRN.phl[541]";
-connectAttr "HumanMale_RIGRN.phl[542]" "HumanMale_RIGRN.phl[543]";
-connectAttr "HumanMale_RIGRN.phl[544]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[545]" "HumanMale_RIGRN.phl[546]";
-connectAttr "HumanMale_RIGRN.phl[547]" "HumanMale_RIGRN.phl[548]";
-connectAttr "HumanMale_RIGRN.phl[549]" "HumanMale_RIGRN.phl[550]";
-connectAttr "HumanMale_RIGRN.phl[551]" "HumanMale_RIGRN.phl[552]";
-connectAttr "HumanMale_RIGRN.phl[553]" "HumanMale_RIGRN.phl[554]";
-connectAttr "HumanMale_RIGRN.phl[555]" "HumanMale_RIGRN.phl[556]";
-connectAttr "HumanMale_RIGRN.phl[557]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[480]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[481]" "HumanMale_RIGRN.phl[482]";
+connectAttr "HumanMale_RIGRN.phl[483]" "HumanMale_RIGRN.phl[484]";
+connectAttr "HumanMale_RIGRN.phl[485]" "HumanMale_RIGRN.phl[486]";
+connectAttr "HumanMale_RIGRN.phl[487]" "HumanMale_RIGRN.phl[488]";
+connectAttr "HumanMale_RIGRN.phl[489]" "HumanMale_RIGRN.phl[490]";
+connectAttr "HumanMale_RIGRN.phl[491]" "HumanMale_RIGRN.phl[492]";
+connectAttr "HumanMale_RIGRN.phl[493]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[494]" "HumanMale_RIGRN.phl[495]";
+connectAttr "HumanMale_RIGRN.phl[496]" "HumanMale_RIGRN.phl[497]";
+connectAttr "HumanMale_RIGRN.phl[498]" "HumanMale_RIGRN.phl[499]";
+connectAttr "HumanMale_RIGRN.phl[500]" "HumanMale_RIGRN.phl[501]";
+connectAttr "HumanMale_RIGRN.phl[502]" "HumanMale_RIGRN.phl[503]";
+connectAttr "HumanMale_RIGRN.phl[504]" "HumanMale_RIGRN.phl[505]";
+connectAttr "HumanMale_RIGRN.phl[506]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[507]" "HumanMale_RIGRN.phl[508]";
+connectAttr "HumanMale_RIGRN.phl[509]" "HumanMale_RIGRN.phl[510]";
+connectAttr "HumanMale_RIGRN.phl[511]" "HumanMale_RIGRN.phl[512]";
+connectAttr "HumanMale_RIGRN.phl[513]" "HumanMale_RIGRN.phl[514]";
+connectAttr "HumanMale_RIGRN.phl[515]" "HumanMale_RIGRN.phl[516]";
+connectAttr "HumanMale_RIGRN.phl[517]" "HumanMale_RIGRN.phl[518]";
+connectAttr "HumanMale_RIGRN.phl[519]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[520]" "HumanMale_RIGRN.phl[521]";
+connectAttr "HumanMale_RIGRN.phl[522]" "HumanMale_RIGRN.phl[523]";
+connectAttr "HumanMale_RIGRN.phl[524]" "HumanMale_RIGRN.phl[525]";
+connectAttr "HumanMale_RIGRN.phl[526]" "HumanMale_RIGRN.phl[527]";
+connectAttr "HumanMale_RIGRN.phl[528]" "HumanMale_RIGRN.phl[529]";
+connectAttr "HumanMale_RIGRN.phl[530]" "HumanMale_RIGRN.phl[531]";
+connectAttr "HumanMale_RIGRN.phl[532]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[533]" "HumanMale_RIGRN.phl[534]";
+connectAttr "HumanMale_RIGRN.phl[535]" "HumanMale_RIGRN.phl[536]";
+connectAttr "HumanMale_RIGRN.phl[537]" "HumanMale_RIGRN.phl[538]";
+connectAttr "HumanMale_RIGRN.phl[539]" "HumanMale_RIGRN.phl[540]";
+connectAttr "HumanMale_RIGRN.phl[541]" "HumanMale_RIGRN.phl[542]";
+connectAttr "HumanMale_RIGRN.phl[543]" "HumanMale_RIGRN.phl[544]";
+connectAttr "HumanMale_RIGRN.phl[545]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[546]" "HumanMale_RIGRN.phl[547]";
+connectAttr "HumanMale_RIGRN.phl[548]" "HumanMale_RIGRN.phl[549]";
+connectAttr "HumanMale_RIGRN.phl[550]" "HumanMale_RIGRN.phl[551]";
+connectAttr "HumanMale_RIGRN.phl[552]" "HumanMale_RIGRN.phl[553]";
+connectAttr "HumanMale_RIGRN.phl[554]" "HumanMale_RIGRN.phl[555]";
+connectAttr "HumanMale_RIGRN.phl[556]" "HumanMale_RIGRN.phl[557]";
 connectAttr "HumanMale_RIGRN.phl[558]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[559]" "HumanMale_RIGRN.phl[560]";
-connectAttr "HumanMale_RIGRN.phl[561]" "HumanMale_RIGRN.phl[562]";
-connectAttr "HumanMale_RIGRN.phl[563]" "HumanMale_RIGRN.phl[564]";
-connectAttr "HumanMale_RIGRN.phl[565]" "HumanMale_RIGRN.phl[566]";
-connectAttr "HumanMale_RIGRN.phl[567]" "HumanMale_RIGRN.phl[568]";
-connectAttr "HumanMale_RIGRN.phl[569]" "HumanMale_RIGRN.phl[570]";
-connectAttr "HumanMale_RIGRN.phl[571]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[572]" "HumanMale_RIGRN.phl[573]";
-connectAttr "HumanMale_RIGRN.phl[574]" "HumanMale_RIGRN.phl[575]";
-connectAttr "HumanMale_RIGRN.phl[576]" "HumanMale_RIGRN.phl[577]";
-connectAttr "HumanMale_RIGRN.phl[578]" "HumanMale_RIGRN.phl[579]";
-connectAttr "HumanMale_RIGRN.phl[580]" "HumanMale_RIGRN.phl[581]";
-connectAttr "HumanMale_RIGRN.phl[582]" "HumanMale_RIGRN.phl[583]";
-connectAttr "HumanMale_RIGRN.phl[584]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[585]" "HumanMale_RIGRN.phl[586]";
-connectAttr "HumanMale_RIGRN.phl[587]" "HumanMale_RIGRN.phl[588]";
-connectAttr "HumanMale_RIGRN.phl[589]" "HumanMale_RIGRN.phl[590]";
-connectAttr "HumanMale_RIGRN.phl[591]" "HumanMale_RIGRN.phl[592]";
-connectAttr "HumanMale_RIGRN.phl[593]" "HumanMale_RIGRN.phl[594]";
-connectAttr "HumanMale_RIGRN.phl[595]" "HumanMale_RIGRN.phl[596]";
-connectAttr "HumanMale_RIGRN.phl[597]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[598]" "HumanMale_RIGRN.phl[599]";
-connectAttr "HumanMale_RIGRN.phl[600]" "HumanMale_RIGRN.phl[601]";
-connectAttr "HumanMale_RIGRN.phl[602]" "HumanMale_RIGRN.phl[603]";
-connectAttr "HumanMale_RIGRN.phl[604]" "HumanMale_RIGRN.phl[605]";
-connectAttr "HumanMale_RIGRN.phl[606]" "HumanMale_RIGRN.phl[607]";
-connectAttr "HumanMale_RIGRN.phl[608]" "HumanMale_RIGRN.phl[609]";
-connectAttr "HumanMale_RIGRN.phl[610]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[611]" "HumanMale_RIGRN.phl[612]";
-connectAttr "HumanMale_RIGRN.phl[613]" "HumanMale_RIGRN.phl[614]";
-connectAttr "HumanMale_RIGRN.phl[615]" "HumanMale_RIGRN.phl[616]";
-connectAttr "HumanMale_RIGRN.phl[617]" "HumanMale_RIGRN.phl[618]";
-connectAttr "HumanMale_RIGRN.phl[619]" "HumanMale_RIGRN.phl[620]";
-connectAttr "HumanMale_RIGRN.phl[621]" "HumanMale_RIGRN.phl[622]";
-connectAttr "HumanMale_RIGRN.phl[623]" "HumanMale_RIGRN.phl[624]";
-connectAttr "HumanMale_RIGRN.phl[625]" "HumanMale_RIGRN.phl[626]";
-connectAttr "HumanMale_RIGRN.phl[627]" "HumanMale_RIGRN.phl[628]";
-connectAttr "HumanMale_RIGRN.phl[629]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[630]" "HumanMale_RIGRN.phl[631]";
-connectAttr "HumanMale_RIGRN.phl[632]" "HumanMale_RIGRN.phl[633]";
-connectAttr "HumanMale_RIGRN.phl[634]" "HumanMale_RIGRN.phl[635]";
-connectAttr "HumanMale_RIGRN.phl[636]" "HumanMale_RIGRN.phl[637]";
-connectAttr "HumanMale_RIGRN.phl[638]" "HumanMale_RIGRN.phl[639]";
-connectAttr "HumanMale_RIGRN.phl[640]" "HumanMale_RIGRN.phl[641]";
-connectAttr "HumanMale_RIGRN.phl[642]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[559]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[560]" "HumanMale_RIGRN.phl[561]";
+connectAttr "HumanMale_RIGRN.phl[562]" "HumanMale_RIGRN.phl[563]";
+connectAttr "HumanMale_RIGRN.phl[564]" "HumanMale_RIGRN.phl[565]";
+connectAttr "HumanMale_RIGRN.phl[566]" "HumanMale_RIGRN.phl[567]";
+connectAttr "HumanMale_RIGRN.phl[568]" "HumanMale_RIGRN.phl[569]";
+connectAttr "HumanMale_RIGRN.phl[570]" "HumanMale_RIGRN.phl[571]";
+connectAttr "HumanMale_RIGRN.phl[572]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[573]" "HumanMale_RIGRN.phl[574]";
+connectAttr "HumanMale_RIGRN.phl[575]" "HumanMale_RIGRN.phl[576]";
+connectAttr "HumanMale_RIGRN.phl[577]" "HumanMale_RIGRN.phl[578]";
+connectAttr "HumanMale_RIGRN.phl[579]" "HumanMale_RIGRN.phl[580]";
+connectAttr "HumanMale_RIGRN.phl[581]" "HumanMale_RIGRN.phl[582]";
+connectAttr "HumanMale_RIGRN.phl[583]" "HumanMale_RIGRN.phl[584]";
+connectAttr "HumanMale_RIGRN.phl[585]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[586]" "HumanMale_RIGRN.phl[587]";
+connectAttr "HumanMale_RIGRN.phl[588]" "HumanMale_RIGRN.phl[589]";
+connectAttr "HumanMale_RIGRN.phl[590]" "HumanMale_RIGRN.phl[591]";
+connectAttr "HumanMale_RIGRN.phl[592]" "HumanMale_RIGRN.phl[593]";
+connectAttr "HumanMale_RIGRN.phl[594]" "HumanMale_RIGRN.phl[595]";
+connectAttr "HumanMale_RIGRN.phl[596]" "HumanMale_RIGRN.phl[597]";
+connectAttr "HumanMale_RIGRN.phl[598]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[599]" "HumanMale_RIGRN.phl[600]";
+connectAttr "HumanMale_RIGRN.phl[601]" "HumanMale_RIGRN.phl[602]";
+connectAttr "HumanMale_RIGRN.phl[603]" "HumanMale_RIGRN.phl[604]";
+connectAttr "HumanMale_RIGRN.phl[605]" "HumanMale_RIGRN.phl[606]";
+connectAttr "HumanMale_RIGRN.phl[607]" "HumanMale_RIGRN.phl[608]";
+connectAttr "HumanMale_RIGRN.phl[609]" "HumanMale_RIGRN.phl[610]";
+connectAttr "HumanMale_RIGRN.phl[611]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[612]" "HumanMale_RIGRN.phl[613]";
+connectAttr "HumanMale_RIGRN.phl[614]" "HumanMale_RIGRN.phl[615]";
+connectAttr "HumanMale_RIGRN.phl[616]" "HumanMale_RIGRN.phl[617]";
+connectAttr "HumanMale_RIGRN.phl[618]" "HumanMale_RIGRN.phl[619]";
+connectAttr "HumanMale_RIGRN.phl[620]" "HumanMale_RIGRN.phl[621]";
+connectAttr "HumanMale_RIGRN.phl[622]" "HumanMale_RIGRN.phl[623]";
+connectAttr "HumanMale_RIGRN.phl[624]" "HumanMale_RIGRN.phl[625]";
+connectAttr "HumanMale_RIGRN.phl[626]" "HumanMale_RIGRN.phl[627]";
+connectAttr "HumanMale_RIGRN.phl[628]" "HumanMale_RIGRN.phl[629]";
+connectAttr "HumanMale_RIGRN.phl[630]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[631]" "HumanMale_RIGRN.phl[632]";
+connectAttr "HumanMale_RIGRN.phl[633]" "HumanMale_RIGRN.phl[634]";
+connectAttr "HumanMale_RIGRN.phl[635]" "HumanMale_RIGRN.phl[636]";
+connectAttr "HumanMale_RIGRN.phl[637]" "HumanMale_RIGRN.phl[638]";
+connectAttr "HumanMale_RIGRN.phl[639]" "HumanMale_RIGRN.phl[640]";
+connectAttr "HumanMale_RIGRN.phl[641]" "HumanMale_RIGRN.phl[642]";
 connectAttr "HumanMale_RIGRN.phl[643]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[644]" "HumanMale_RIGRN.phl[645]";
-connectAttr "HumanMale_RIGRN.phl[646]" "HumanMale_RIGRN.phl[647]";
-connectAttr "HumanMale_RIGRN.phl[648]" "HumanMale_RIGRN.phl[649]";
-connectAttr "HumanMale_RIGRN.phl[650]" "HumanMale_RIGRN.phl[651]";
-connectAttr "HumanMale_RIGRN.phl[652]" "HumanMale_RIGRN.phl[653]";
-connectAttr "HumanMale_RIGRN.phl[654]" "HumanMale_RIGRN.phl[655]";
-connectAttr "HumanMale_RIGRN.phl[656]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[644]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[645]" "HumanMale_RIGRN.phl[646]";
+connectAttr "HumanMale_RIGRN.phl[647]" "HumanMale_RIGRN.phl[648]";
+connectAttr "HumanMale_RIGRN.phl[649]" "HumanMale_RIGRN.phl[650]";
+connectAttr "HumanMale_RIGRN.phl[651]" "HumanMale_RIGRN.phl[652]";
+connectAttr "HumanMale_RIGRN.phl[653]" "HumanMale_RIGRN.phl[654]";
+connectAttr "HumanMale_RIGRN.phl[655]" "HumanMale_RIGRN.phl[656]";
 connectAttr "HumanMale_RIGRN.phl[657]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[658]" "HumanMale_RIGRN.phl[659]";
-connectAttr "HumanMale_RIGRN.phl[660]" "HumanMale_RIGRN.phl[661]";
-connectAttr "HumanMale_RIGRN.phl[662]" "HumanMale_RIGRN.phl[663]";
-connectAttr "HumanMale_RIGRN.phl[664]" "HumanMale_RIGRN.phl[665]";
-connectAttr "HumanMale_RIGRN.phl[666]" "HumanMale_RIGRN.phl[667]";
-connectAttr "HumanMale_RIGRN.phl[668]" "HumanMale_RIGRN.phl[669]";
-connectAttr "HumanMale_RIGRN.phl[670]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[671]" "HumanMale_RIGRN.phl[672]";
-connectAttr "HumanMale_RIGRN.phl[673]" "HumanMale_RIGRN.phl[674]";
-connectAttr "HumanMale_RIGRN.phl[675]" "HumanMale_RIGRN.phl[676]";
-connectAttr "HumanMale_RIGRN.phl[677]" "HumanMale_RIGRN.phl[678]";
-connectAttr "HumanMale_RIGRN.phl[679]" "HumanMale_RIGRN.phl[680]";
-connectAttr "HumanMale_RIGRN.phl[681]" "HumanMale_RIGRN.phl[682]";
-connectAttr "HumanMale_RIGRN.phl[683]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[658]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[659]" "HumanMale_RIGRN.phl[660]";
+connectAttr "HumanMale_RIGRN.phl[661]" "HumanMale_RIGRN.phl[662]";
+connectAttr "HumanMale_RIGRN.phl[663]" "HumanMale_RIGRN.phl[664]";
+connectAttr "HumanMale_RIGRN.phl[665]" "HumanMale_RIGRN.phl[666]";
+connectAttr "HumanMale_RIGRN.phl[667]" "HumanMale_RIGRN.phl[668]";
+connectAttr "HumanMale_RIGRN.phl[669]" "HumanMale_RIGRN.phl[670]";
+connectAttr "HumanMale_RIGRN.phl[671]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[672]" "HumanMale_RIGRN.phl[673]";
+connectAttr "HumanMale_RIGRN.phl[674]" "HumanMale_RIGRN.phl[675]";
+connectAttr "HumanMale_RIGRN.phl[676]" "HumanMale_RIGRN.phl[677]";
+connectAttr "HumanMale_RIGRN.phl[678]" "HumanMale_RIGRN.phl[679]";
+connectAttr "HumanMale_RIGRN.phl[680]" "HumanMale_RIGRN.phl[681]";
+connectAttr "HumanMale_RIGRN.phl[682]" "HumanMale_RIGRN.phl[683]";
 connectAttr "HumanMale_RIGRN.phl[684]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[685]" "HumanMale_RIGRN.phl[686]";
-connectAttr "HumanMale_RIGRN.phl[687]" "HumanMale_RIGRN.phl[688]";
-connectAttr "HumanMale_RIGRN.phl[689]" "HumanMale_RIGRN.phl[690]";
-connectAttr "HumanMale_RIGRN.phl[691]" "HumanMale_RIGRN.phl[692]";
-connectAttr "HumanMale_RIGRN.phl[693]" "HumanMale_RIGRN.phl[694]";
-connectAttr "HumanMale_RIGRN.phl[695]" "HumanMale_RIGRN.phl[696]";
-connectAttr "HumanMale_RIGRN.phl[697]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[685]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[686]" "HumanMale_RIGRN.phl[687]";
+connectAttr "HumanMale_RIGRN.phl[688]" "HumanMale_RIGRN.phl[689]";
+connectAttr "HumanMale_RIGRN.phl[690]" "HumanMale_RIGRN.phl[691]";
+connectAttr "HumanMale_RIGRN.phl[692]" "HumanMale_RIGRN.phl[693]";
+connectAttr "HumanMale_RIGRN.phl[694]" "HumanMale_RIGRN.phl[695]";
+connectAttr "HumanMale_RIGRN.phl[696]" "HumanMale_RIGRN.phl[697]";
 connectAttr "HumanMale_RIGRN.phl[698]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[699]" "HumanMale_RIGRN.phl[700]";
-connectAttr "HumanMale_RIGRN.phl[701]" "HumanMale_RIGRN.phl[702]";
-connectAttr "HumanMale_RIGRN.phl[703]" "HumanMale_RIGRN.phl[704]";
-connectAttr "HumanMale_RIGRN.phl[705]" "HumanMale_RIGRN.phl[706]";
-connectAttr "HumanMale_RIGRN.phl[707]" "HumanMale_RIGRN.phl[708]";
-connectAttr "HumanMale_RIGRN.phl[709]" "HumanMale_RIGRN.phl[710]";
-connectAttr "HumanMale_RIGRN.phl[711]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[712]" "HumanMale_RIGRN.phl[713]";
-connectAttr "HumanMale_RIGRN.phl[714]" "HumanMale_RIGRN.phl[715]";
-connectAttr "HumanMale_RIGRN.phl[716]" "HumanMale_RIGRN.phl[717]";
-connectAttr "HumanMale_RIGRN.phl[718]" "HumanMale_RIGRN.phl[719]";
-connectAttr "HumanMale_RIGRN.phl[720]" "HumanMale_RIGRN.phl[721]";
-connectAttr "HumanMale_RIGRN.phl[722]" "HumanMale_RIGRN.phl[723]";
-connectAttr "HumanMale_RIGRN.phl[724]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[725]" "HumanMale_RIGRN.phl[726]";
-connectAttr "HumanMale_RIGRN.phl[727]" "HumanMale_RIGRN.phl[728]";
-connectAttr "HumanMale_RIGRN.phl[729]" "HumanMale_RIGRN.phl[730]";
-connectAttr "HumanMale_RIGRN.phl[731]" "HumanMale_RIGRN.phl[732]";
-connectAttr "HumanMale_RIGRN.phl[733]" "HumanMale_RIGRN.phl[734]";
-connectAttr "HumanMale_RIGRN.phl[735]" "HumanMale_RIGRN.phl[736]";
-connectAttr "HumanMale_RIGRN.phl[737]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[738]" "HumanMale_RIGRN.phl[739]";
-connectAttr "HumanMale_RIGRN.phl[740]" "HumanMale_RIGRN.phl[741]";
-connectAttr "HumanMale_RIGRN.phl[742]" "HumanMale_RIGRN.phl[743]";
-connectAttr "HumanMale_RIGRN.phl[744]" "HumanMale_RIGRN.phl[745]";
-connectAttr "HumanMale_RIGRN.phl[746]" "HumanMale_RIGRN.phl[747]";
-connectAttr "HumanMale_RIGRN.phl[748]" "HumanMale_RIGRN.phl[749]";
-connectAttr "HumanMale_RIGRN.phl[750]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[751]" "HumanMale_RIGRN.phl[752]";
-connectAttr "HumanMale_RIGRN.phl[753]" "HumanMale_RIGRN.phl[754]";
-connectAttr "HumanMale_RIGRN.phl[755]" "HumanMale_RIGRN.phl[756]";
-connectAttr "HumanMale_RIGRN.phl[757]" "HumanMale_RIGRN.phl[758]";
-connectAttr "HumanMale_RIGRN.phl[759]" "HumanMale_RIGRN.phl[760]";
-connectAttr "HumanMale_RIGRN.phl[761]" "HumanMale_RIGRN.phl[762]";
-connectAttr "HumanMale_RIGRN.phl[763]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[764]" "HumanMale_RIGRN.phl[765]";
-connectAttr "HumanMale_RIGRN.phl[766]" "HumanMale_RIGRN.phl[767]";
-connectAttr "HumanMale_RIGRN.phl[768]" "HumanMale_RIGRN.phl[769]";
-connectAttr "HumanMale_RIGRN.phl[770]" "HumanMale_RIGRN.phl[771]";
-connectAttr "HumanMale_RIGRN.phl[772]" "HumanMale_RIGRN.phl[773]";
-connectAttr "HumanMale_RIGRN.phl[774]" "HumanMale_RIGRN.phl[775]";
-connectAttr "HumanMale_RIGRN.phl[776]" "HumanMale_RIGRN.phl[777]";
-connectAttr "HumanMale_RIGRN.phl[778]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[779]" "HumanMale_RIGRN.phl[780]";
-connectAttr "HumanMale_RIGRN.phl[781]" "HumanMale_RIGRN.phl[782]";
-connectAttr "HumanMale_RIGRN.phl[783]" "HumanMale_RIGRN.phl[784]";
-connectAttr "HumanMale_RIGRN.phl[785]" "HumanMale_RIGRN.phl[786]";
-connectAttr "HumanMale_RIGRN.phl[787]" "HumanMale_RIGRN.phl[788]";
-connectAttr "HumanMale_RIGRN.phl[789]" "HumanMale_RIGRN.phl[790]";
-connectAttr "HumanMale_RIGRN.phl[791]" "HumanMale_RIGRN.phl[792]";
-connectAttr "HumanMale_RIGRN.phl[793]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[794]" "HumanMale_RIGRN.phl[795]";
-connectAttr "HumanMale_RIGRN.phl[796]" "HumanMale_RIGRN.phl[797]";
-connectAttr "HumanMale_RIGRN.phl[798]" "HumanMale_RIGRN.phl[799]";
-connectAttr "HumanMale_RIGRN.phl[800]" "HumanMale_RIGRN.phl[801]";
-connectAttr "HumanMale_RIGRN.phl[802]" "HumanMale_RIGRN.phl[803]";
-connectAttr "HumanMale_RIGRN.phl[804]" "HumanMale_RIGRN.phl[805]";
-connectAttr "HumanMale_RIGRN.phl[806]" "HumanMale_RIGRN.phl[807]";
-connectAttr "HumanMale_RIGRN.phl[808]" "HumanMale_RIGRN.phl[809]";
-connectAttr "HumanMale_RIGRN.phl[810]" "HumanMale_RIGRN.phl[811]";
-connectAttr "HumanMale_RIGRN.phl[812]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[813]" "HumanMale_RIGRN.phl[814]";
-connectAttr "HumanMale_RIGRN.phl[815]" "HumanMale_RIGRN.phl[816]";
-connectAttr "HumanMale_RIGRN.phl[817]" "HumanMale_RIGRN.phl[818]";
-connectAttr "HumanMale_RIGRN.phl[819]" "HumanMale_RIGRN.phl[820]";
-connectAttr "HumanMale_RIGRN.phl[821]" "HumanMale_RIGRN.phl[822]";
-connectAttr "HumanMale_RIGRN.phl[823]" "HumanMale_RIGRN.phl[824]";
-connectAttr "HumanMale_RIGRN.phl[825]" "HumanMale_RIGRN.phl[826]";
-connectAttr "HumanMale_RIGRN.phl[827]" "HumanMale_RIGRN.phl[828]";
-connectAttr "HumanMale_RIGRN.phl[829]" "HumanMale_RIGRN.phl[830]";
-connectAttr "HumanMale_RIGRN.phl[831]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[832]" "HumanMale_RIGRN.phl[833]";
-connectAttr "HumanMale_RIGRN.phl[834]" "HumanMale_RIGRN.phl[835]";
-connectAttr "HumanMale_RIGRN.phl[836]" "HumanMale_RIGRN.phl[837]";
-connectAttr "HumanMale_RIGRN.phl[838]" "HumanMale_RIGRN.phl[839]";
-connectAttr "HumanMale_RIGRN.phl[840]" "HumanMale_RIGRN.phl[841]";
-connectAttr "HumanMale_RIGRN.phl[842]" "HumanMale_RIGRN.phl[843]";
-connectAttr "HumanMale_RIGRN.phl[844]" "HumanMale_RIGRN.phl[845]";
-connectAttr "HumanMale_RIGRN.phl[846]" "HumanMale_RIGRN.phl[847]";
-connectAttr "HumanMale_RIGRN.phl[848]" "HumanMale_RIGRN.phl[849]";
-connectAttr "HumanMale_RIGRN.phl[850]" "HumanMale_RIGRN.phl[851]";
-connectAttr "HumanMale_RIGRN.phl[852]" "HumanMale_RIGRN.phl[853]";
-connectAttr "HumanMale_RIGRN.phl[854]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[699]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[700]" "HumanMale_RIGRN.phl[701]";
+connectAttr "HumanMale_RIGRN.phl[702]" "HumanMale_RIGRN.phl[703]";
+connectAttr "HumanMale_RIGRN.phl[704]" "HumanMale_RIGRN.phl[705]";
+connectAttr "HumanMale_RIGRN.phl[706]" "HumanMale_RIGRN.phl[707]";
+connectAttr "HumanMale_RIGRN.phl[708]" "HumanMale_RIGRN.phl[709]";
+connectAttr "HumanMale_RIGRN.phl[710]" "HumanMale_RIGRN.phl[711]";
+connectAttr "HumanMale_RIGRN.phl[712]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[713]" "HumanMale_RIGRN.phl[714]";
+connectAttr "HumanMale_RIGRN.phl[715]" "HumanMale_RIGRN.phl[716]";
+connectAttr "HumanMale_RIGRN.phl[717]" "HumanMale_RIGRN.phl[718]";
+connectAttr "HumanMale_RIGRN.phl[719]" "HumanMale_RIGRN.phl[720]";
+connectAttr "HumanMale_RIGRN.phl[721]" "HumanMale_RIGRN.phl[722]";
+connectAttr "HumanMale_RIGRN.phl[723]" "HumanMale_RIGRN.phl[724]";
+connectAttr "HumanMale_RIGRN.phl[725]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[726]" "HumanMale_RIGRN.phl[727]";
+connectAttr "HumanMale_RIGRN.phl[728]" "HumanMale_RIGRN.phl[729]";
+connectAttr "HumanMale_RIGRN.phl[730]" "HumanMale_RIGRN.phl[731]";
+connectAttr "HumanMale_RIGRN.phl[732]" "HumanMale_RIGRN.phl[733]";
+connectAttr "HumanMale_RIGRN.phl[734]" "HumanMale_RIGRN.phl[735]";
+connectAttr "HumanMale_RIGRN.phl[736]" "HumanMale_RIGRN.phl[737]";
+connectAttr "HumanMale_RIGRN.phl[738]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[739]" "HumanMale_RIGRN.phl[740]";
+connectAttr "HumanMale_RIGRN.phl[741]" "HumanMale_RIGRN.phl[742]";
+connectAttr "HumanMale_RIGRN.phl[743]" "HumanMale_RIGRN.phl[744]";
+connectAttr "HumanMale_RIGRN.phl[745]" "HumanMale_RIGRN.phl[746]";
+connectAttr "HumanMale_RIGRN.phl[747]" "HumanMale_RIGRN.phl[748]";
+connectAttr "HumanMale_RIGRN.phl[749]" "HumanMale_RIGRN.phl[750]";
+connectAttr "HumanMale_RIGRN.phl[751]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[752]" "HumanMale_RIGRN.phl[753]";
+connectAttr "HumanMale_RIGRN.phl[754]" "HumanMale_RIGRN.phl[755]";
+connectAttr "HumanMale_RIGRN.phl[756]" "HumanMale_RIGRN.phl[757]";
+connectAttr "HumanMale_RIGRN.phl[758]" "HumanMale_RIGRN.phl[759]";
+connectAttr "HumanMale_RIGRN.phl[760]" "HumanMale_RIGRN.phl[761]";
+connectAttr "HumanMale_RIGRN.phl[762]" "HumanMale_RIGRN.phl[763]";
+connectAttr "HumanMale_RIGRN.phl[764]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[765]" "HumanMale_RIGRN.phl[766]";
+connectAttr "HumanMale_RIGRN.phl[767]" "HumanMale_RIGRN.phl[768]";
+connectAttr "HumanMale_RIGRN.phl[769]" "HumanMale_RIGRN.phl[770]";
+connectAttr "HumanMale_RIGRN.phl[771]" "HumanMale_RIGRN.phl[772]";
+connectAttr "HumanMale_RIGRN.phl[773]" "HumanMale_RIGRN.phl[774]";
+connectAttr "HumanMale_RIGRN.phl[775]" "HumanMale_RIGRN.phl[776]";
+connectAttr "HumanMale_RIGRN.phl[777]" "HumanMale_RIGRN.phl[778]";
+connectAttr "HumanMale_RIGRN.phl[779]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[780]" "HumanMale_RIGRN.phl[781]";
+connectAttr "HumanMale_RIGRN.phl[782]" "HumanMale_RIGRN.phl[783]";
+connectAttr "HumanMale_RIGRN.phl[784]" "HumanMale_RIGRN.phl[785]";
+connectAttr "HumanMale_RIGRN.phl[786]" "HumanMale_RIGRN.phl[787]";
+connectAttr "HumanMale_RIGRN.phl[788]" "HumanMale_RIGRN.phl[789]";
+connectAttr "HumanMale_RIGRN.phl[790]" "HumanMale_RIGRN.phl[791]";
+connectAttr "HumanMale_RIGRN.phl[792]" "HumanMale_RIGRN.phl[793]";
+connectAttr "HumanMale_RIGRN.phl[794]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[795]" "HumanMale_RIGRN.phl[796]";
+connectAttr "HumanMale_RIGRN.phl[797]" "HumanMale_RIGRN.phl[798]";
+connectAttr "HumanMale_RIGRN.phl[799]" "HumanMale_RIGRN.phl[800]";
+connectAttr "HumanMale_RIGRN.phl[801]" "HumanMale_RIGRN.phl[802]";
+connectAttr "HumanMale_RIGRN.phl[803]" "HumanMale_RIGRN.phl[804]";
+connectAttr "HumanMale_RIGRN.phl[805]" "HumanMale_RIGRN.phl[806]";
+connectAttr "HumanMale_RIGRN.phl[807]" "HumanMale_RIGRN.phl[808]";
+connectAttr "HumanMale_RIGRN.phl[809]" "HumanMale_RIGRN.phl[810]";
+connectAttr "HumanMale_RIGRN.phl[811]" "HumanMale_RIGRN.phl[812]";
+connectAttr "HumanMale_RIGRN.phl[813]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[814]" "HumanMale_RIGRN.phl[815]";
+connectAttr "HumanMale_RIGRN.phl[816]" "HumanMale_RIGRN.phl[817]";
+connectAttr "HumanMale_RIGRN.phl[818]" "HumanMale_RIGRN.phl[819]";
+connectAttr "HumanMale_RIGRN.phl[820]" "HumanMale_RIGRN.phl[821]";
+connectAttr "HumanMale_RIGRN.phl[822]" "HumanMale_RIGRN.phl[823]";
+connectAttr "HumanMale_RIGRN.phl[824]" "HumanMale_RIGRN.phl[825]";
+connectAttr "HumanMale_RIGRN.phl[826]" "HumanMale_RIGRN.phl[827]";
+connectAttr "HumanMale_RIGRN.phl[828]" "HumanMale_RIGRN.phl[829]";
+connectAttr "HumanMale_RIGRN.phl[830]" "HumanMale_RIGRN.phl[831]";
+connectAttr "HumanMale_RIGRN.phl[832]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[833]" "HumanMale_RIGRN.phl[834]";
+connectAttr "HumanMale_RIGRN.phl[835]" "HumanMale_RIGRN.phl[836]";
+connectAttr "HumanMale_RIGRN.phl[837]" "HumanMale_RIGRN.phl[838]";
+connectAttr "HumanMale_RIGRN.phl[839]" "HumanMale_RIGRN.phl[840]";
+connectAttr "HumanMale_RIGRN.phl[841]" "HumanMale_RIGRN.phl[842]";
+connectAttr "HumanMale_RIGRN.phl[843]" "HumanMale_RIGRN.phl[844]";
+connectAttr "HumanMale_RIGRN.phl[845]" "HumanMale_RIGRN.phl[846]";
+connectAttr "HumanMale_RIGRN.phl[847]" "HumanMale_RIGRN.phl[848]";
+connectAttr "HumanMale_RIGRN.phl[849]" "HumanMale_RIGRN.phl[850]";
+connectAttr "HumanMale_RIGRN.phl[851]" "HumanMale_RIGRN.phl[852]";
+connectAttr "HumanMale_RIGRN.phl[853]" "HumanMale_RIGRN.phl[854]";
 connectAttr "HumanMale_RIGRN.phl[855]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[856]" "HumanMale_RIGRN.phl[857]";
-connectAttr "HumanMale_RIGRN.phl[858]" "HumanMale_RIGRN.phl[859]";
-connectAttr "HumanMale_RIGRN.phl[860]" "HumanMale_RIGRN.phl[861]";
-connectAttr "HumanMale_RIGRN.phl[862]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[856]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[857]" "HumanMale_RIGRN.phl[858]";
+connectAttr "HumanMale_RIGRN.phl[859]" "HumanMale_RIGRN.phl[860]";
+connectAttr "HumanMale_RIGRN.phl[861]" "HumanMale_RIGRN.phl[862]";
 connectAttr "HumanMale_RIGRN.phl[863]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[864]" "HumanMale_RIGRN.phl[865]";
-connectAttr "HumanMale_RIGRN.phl[866]" "HumanMale_RIGRN.phl[867]";
-connectAttr "HumanMale_RIGRN.phl[868]" "HumanMale_RIGRN.phl[869]";
-connectAttr "HumanMale_RIGRN.phl[870]" "HumanMale_RIGRN.phl[871]";
-connectAttr "HumanMale_RIGRN.phl[872]" "HumanMale_RIGRN.phl[873]";
-connectAttr "HumanMale_RIGRN.phl[874]" "HumanMale_RIGRN.phl[875]";
-connectAttr "HumanMale_RIGRN.phl[876]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[877]" "HumanMale_RIGRN.phl[878]";
-connectAttr "HumanMale_RIGRN.phl[879]" "HumanMale_RIGRN.phl[880]";
-connectAttr "HumanMale_RIGRN.phl[881]" "HumanMale_RIGRN.phl[882]";
-connectAttr "HumanMale_RIGRN.phl[883]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[884]" "HumanMale_RIGRN.phl[885]";
-connectAttr "HumanMale_RIGRN.phl[886]" "HumanMale_RIGRN.phl[887]";
-connectAttr "HumanMale_RIGRN.phl[888]" "HumanMale_RIGRN.phl[889]";
-connectAttr "HumanMale_RIGRN.phl[890]" "HumanMale_RIGRN.phl[891]";
-connectAttr "HumanMale_RIGRN.phl[892]" "HumanMale_RIGRN.phl[893]";
-connectAttr "HumanMale_RIGRN.phl[894]" "HumanMale_RIGRN.phl[895]";
-connectAttr "HumanMale_RIGRN.phl[896]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[864]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[865]" "HumanMale_RIGRN.phl[866]";
+connectAttr "HumanMale_RIGRN.phl[867]" "HumanMale_RIGRN.phl[868]";
+connectAttr "HumanMale_RIGRN.phl[869]" "HumanMale_RIGRN.phl[870]";
+connectAttr "HumanMale_RIGRN.phl[871]" "HumanMale_RIGRN.phl[872]";
+connectAttr "HumanMale_RIGRN.phl[873]" "HumanMale_RIGRN.phl[874]";
+connectAttr "HumanMale_RIGRN.phl[875]" "HumanMale_RIGRN.phl[876]";
+connectAttr "HumanMale_RIGRN.phl[877]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[878]" "HumanMale_RIGRN.phl[879]";
+connectAttr "HumanMale_RIGRN.phl[880]" "HumanMale_RIGRN.phl[881]";
+connectAttr "HumanMale_RIGRN.phl[882]" "HumanMale_RIGRN.phl[883]";
+connectAttr "HumanMale_RIGRN.phl[884]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[885]" "HumanMale_RIGRN.phl[886]";
+connectAttr "HumanMale_RIGRN.phl[887]" "HumanMale_RIGRN.phl[888]";
+connectAttr "HumanMale_RIGRN.phl[889]" "HumanMale_RIGRN.phl[890]";
+connectAttr "HumanMale_RIGRN.phl[891]" "HumanMale_RIGRN.phl[892]";
+connectAttr "HumanMale_RIGRN.phl[893]" "HumanMale_RIGRN.phl[894]";
+connectAttr "HumanMale_RIGRN.phl[895]" "HumanMale_RIGRN.phl[896]";
 connectAttr "HumanMale_RIGRN.phl[897]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[898]" "HumanMale_RIGRN.phl[899]";
-connectAttr "HumanMale_RIGRN.phl[900]" "HumanMale_RIGRN.phl[901]";
-connectAttr "HumanMale_RIGRN.phl[902]" "HumanMale_RIGRN.phl[903]";
-connectAttr "HumanMale_RIGRN.phl[904]" "HumanMale_RIGRN.phl[905]";
-connectAttr "HumanMale_RIGRN.phl[906]" "HumanMale_RIGRN.phl[907]";
-connectAttr "HumanMale_RIGRN.phl[908]" "HumanMale_RIGRN.phl[909]";
-connectAttr "HumanMale_RIGRN.phl[910]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[898]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[899]" "HumanMale_RIGRN.phl[900]";
+connectAttr "HumanMale_RIGRN.phl[901]" "HumanMale_RIGRN.phl[902]";
+connectAttr "HumanMale_RIGRN.phl[903]" "HumanMale_RIGRN.phl[904]";
+connectAttr "HumanMale_RIGRN.phl[905]" "HumanMale_RIGRN.phl[906]";
+connectAttr "HumanMale_RIGRN.phl[907]" "HumanMale_RIGRN.phl[908]";
+connectAttr "HumanMale_RIGRN.phl[909]" "HumanMale_RIGRN.phl[910]";
 connectAttr "HumanMale_RIGRN.phl[911]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[912]" "HumanMale_RIGRN.phl[913]";
-connectAttr "HumanMale_RIGRN.phl[914]" "HumanMale_RIGRN.phl[915]";
-connectAttr "HumanMale_RIGRN.phl[916]" "HumanMale_RIGRN.phl[917]";
-connectAttr "HumanMale_RIGRN.phl[918]" "HumanMale_RIGRN.phl[919]";
-connectAttr "HumanMale_RIGRN.phl[920]" "HumanMale_RIGRN.phl[921]";
-connectAttr "HumanMale_RIGRN.phl[922]" "HumanMale_RIGRN.phl[923]";
-connectAttr "HumanMale_RIGRN.phl[924]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[925]" "HumanMale_RIGRN.phl[926]";
-connectAttr "HumanMale_RIGRN.phl[927]" "HumanMale_RIGRN.phl[928]";
-connectAttr "HumanMale_RIGRN.phl[929]" "HumanMale_RIGRN.phl[930]";
-connectAttr "HumanMale_RIGRN.phl[931]" "HumanMale_RIGRN.phl[932]";
-connectAttr "HumanMale_RIGRN.phl[933]" "HumanMale_RIGRN.phl[934]";
-connectAttr "HumanMale_RIGRN.phl[935]" "HumanMale_RIGRN.phl[936]";
-connectAttr "HumanMale_RIGRN.phl[937]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[912]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[913]" "HumanMale_RIGRN.phl[914]";
+connectAttr "HumanMale_RIGRN.phl[915]" "HumanMale_RIGRN.phl[916]";
+connectAttr "HumanMale_RIGRN.phl[917]" "HumanMale_RIGRN.phl[918]";
+connectAttr "HumanMale_RIGRN.phl[919]" "HumanMale_RIGRN.phl[920]";
+connectAttr "HumanMale_RIGRN.phl[921]" "HumanMale_RIGRN.phl[922]";
+connectAttr "HumanMale_RIGRN.phl[923]" "HumanMale_RIGRN.phl[924]";
+connectAttr "HumanMale_RIGRN.phl[925]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[926]" "HumanMale_RIGRN.phl[927]";
+connectAttr "HumanMale_RIGRN.phl[928]" "HumanMale_RIGRN.phl[929]";
+connectAttr "HumanMale_RIGRN.phl[930]" "HumanMale_RIGRN.phl[931]";
+connectAttr "HumanMale_RIGRN.phl[932]" "HumanMale_RIGRN.phl[933]";
+connectAttr "HumanMale_RIGRN.phl[934]" "HumanMale_RIGRN.phl[935]";
+connectAttr "HumanMale_RIGRN.phl[936]" "HumanMale_RIGRN.phl[937]";
 connectAttr "HumanMale_RIGRN.phl[938]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[939]" "HumanMale_RIGRN.phl[940]";
-connectAttr "HumanMale_RIGRN.phl[941]" "HumanMale_RIGRN.phl[942]";
-connectAttr "HumanMale_RIGRN.phl[943]" "HumanMale_RIGRN.phl[944]";
-connectAttr "HumanMale_RIGRN.phl[945]" "HumanMale_RIGRN.phl[946]";
-connectAttr "HumanMale_RIGRN.phl[947]" "HumanMale_RIGRN.phl[948]";
-connectAttr "HumanMale_RIGRN.phl[949]" "HumanMale_RIGRN.phl[950]";
-connectAttr "HumanMale_RIGRN.phl[951]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[939]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[940]" "HumanMale_RIGRN.phl[941]";
+connectAttr "HumanMale_RIGRN.phl[942]" "HumanMale_RIGRN.phl[943]";
+connectAttr "HumanMale_RIGRN.phl[944]" "HumanMale_RIGRN.phl[945]";
+connectAttr "HumanMale_RIGRN.phl[946]" "HumanMale_RIGRN.phl[947]";
+connectAttr "HumanMale_RIGRN.phl[948]" "HumanMale_RIGRN.phl[949]";
+connectAttr "HumanMale_RIGRN.phl[950]" "HumanMale_RIGRN.phl[951]";
 connectAttr "HumanMale_RIGRN.phl[952]" "aToolsSet_red_All.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[953]" "HumanMale_RIGRN.phl[954]";
-connectAttr "HumanMale_RIGRN.phl[955]" "HumanMale_RIGRN.phl[956]";
-connectAttr "HumanMale_RIGRN.phl[957]" "HumanMale_RIGRN.phl[958]";
-connectAttr "HumanMale_RIGRN.phl[959]" "HumanMale_RIGRN.phl[960]";
-connectAttr "HumanMale_RIGRN.phl[961]" "HumanMale_RIGRN.phl[962]";
-connectAttr "HumanMale_RIGRN.phl[963]" "HumanMale_RIGRN.phl[964]";
-connectAttr "HumanMale_RIGRN.phl[965]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[953]" "aToolsSet_red_Almost_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[954]" "HumanMale_RIGRN.phl[955]";
+connectAttr "HumanMale_RIGRN.phl[956]" "HumanMale_RIGRN.phl[957]";
+connectAttr "HumanMale_RIGRN.phl[958]" "HumanMale_RIGRN.phl[959]";
+connectAttr "HumanMale_RIGRN.phl[960]" "HumanMale_RIGRN.phl[961]";
+connectAttr "HumanMale_RIGRN.phl[962]" "HumanMale_RIGRN.phl[963]";
+connectAttr "HumanMale_RIGRN.phl[964]" "HumanMale_RIGRN.phl[965]";
 connectAttr "HumanMale_RIGRN.phl[966]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[967]" "HumanMale_RIGRN.phl[968]";
-connectAttr "HumanMale_RIGRN.phl[969]" "HumanMale_RIGRN.phl[970]";
-connectAttr "HumanMale_RIGRN.phl[971]" "HumanMale_RIGRN.phl[972]";
-connectAttr "HumanMale_RIGRN.phl[973]" "HumanMale_RIGRN.phl[974]";
-connectAttr "HumanMale_RIGRN.phl[975]" "HumanMale_RIGRN.phl[976]";
-connectAttr "HumanMale_RIGRN.phl[977]" "HumanMale_RIGRN.phl[978]";
-connectAttr "HumanMale_RIGRN.phl[979]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[967]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[968]" "HumanMale_RIGRN.phl[969]";
+connectAttr "HumanMale_RIGRN.phl[970]" "HumanMale_RIGRN.phl[971]";
+connectAttr "HumanMale_RIGRN.phl[972]" "HumanMale_RIGRN.phl[973]";
+connectAttr "HumanMale_RIGRN.phl[974]" "HumanMale_RIGRN.phl[975]";
+connectAttr "HumanMale_RIGRN.phl[976]" "HumanMale_RIGRN.phl[977]";
+connectAttr "HumanMale_RIGRN.phl[978]" "HumanMale_RIGRN.phl[979]";
 connectAttr "HumanMale_RIGRN.phl[980]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[981]" "HumanMale_RIGRN.phl[982]";
-connectAttr "HumanMale_RIGRN.phl[983]" "HumanMale_RIGRN.phl[984]";
-connectAttr "HumanMale_RIGRN.phl[985]" "HumanMale_RIGRN.phl[986]";
-connectAttr "HumanMale_RIGRN.phl[987]" "HumanMale_RIGRN.phl[988]";
-connectAttr "HumanMale_RIGRN.phl[989]" "HumanMale_RIGRN.phl[990]";
-connectAttr "HumanMale_RIGRN.phl[991]" "HumanMale_RIGRN.phl[992]";
-connectAttr "HumanMale_RIGRN.phl[993]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[981]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[982]" "HumanMale_RIGRN.phl[983]";
+connectAttr "HumanMale_RIGRN.phl[984]" "HumanMale_RIGRN.phl[985]";
+connectAttr "HumanMale_RIGRN.phl[986]" "HumanMale_RIGRN.phl[987]";
+connectAttr "HumanMale_RIGRN.phl[988]" "HumanMale_RIGRN.phl[989]";
+connectAttr "HumanMale_RIGRN.phl[990]" "HumanMale_RIGRN.phl[991]";
+connectAttr "HumanMale_RIGRN.phl[992]" "HumanMale_RIGRN.phl[993]";
 connectAttr "HumanMale_RIGRN.phl[994]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[995]" "HumanMale_RIGRN.phl[996]";
-connectAttr "HumanMale_RIGRN.phl[997]" "HumanMale_RIGRN.phl[998]";
-connectAttr "HumanMale_RIGRN.phl[999]" "HumanMale_RIGRN.phl[1000]";
-connectAttr "HumanMale_RIGRN.phl[1001]" "HumanMale_RIGRN.phl[1002]";
-connectAttr "HumanMale_RIGRN.phl[1003]" "HumanMale_RIGRN.phl[1004]";
-connectAttr "HumanMale_RIGRN.phl[1005]" "HumanMale_RIGRN.phl[1006]";
-connectAttr "HumanMale_RIGRN.phl[1007]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[995]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[996]" "HumanMale_RIGRN.phl[997]";
+connectAttr "HumanMale_RIGRN.phl[998]" "HumanMale_RIGRN.phl[999]";
+connectAttr "HumanMale_RIGRN.phl[1000]" "HumanMale_RIGRN.phl[1001]";
+connectAttr "HumanMale_RIGRN.phl[1002]" "HumanMale_RIGRN.phl[1003]";
+connectAttr "HumanMale_RIGRN.phl[1004]" "HumanMale_RIGRN.phl[1005]";
+connectAttr "HumanMale_RIGRN.phl[1006]" "HumanMale_RIGRN.phl[1007]";
 connectAttr "HumanMale_RIGRN.phl[1008]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1009]" "HumanMale_RIGRN.phl[1010]";
-connectAttr "HumanMale_RIGRN.phl[1011]" "HumanMale_RIGRN.phl[1012]";
-connectAttr "HumanMale_RIGRN.phl[1013]" "HumanMale_RIGRN.phl[1014]";
-connectAttr "HumanMale_RIGRN.phl[1015]" "HumanMale_RIGRN.phl[1016]";
-connectAttr "HumanMale_RIGRN.phl[1017]" "HumanMale_RIGRN.phl[1018]";
-connectAttr "HumanMale_RIGRN.phl[1019]" "HumanMale_RIGRN.phl[1020]";
-connectAttr "HumanMale_RIGRN.phl[1021]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1009]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1010]" "HumanMale_RIGRN.phl[1011]";
+connectAttr "HumanMale_RIGRN.phl[1012]" "HumanMale_RIGRN.phl[1013]";
+connectAttr "HumanMale_RIGRN.phl[1014]" "HumanMale_RIGRN.phl[1015]";
+connectAttr "HumanMale_RIGRN.phl[1016]" "HumanMale_RIGRN.phl[1017]";
+connectAttr "HumanMale_RIGRN.phl[1018]" "HumanMale_RIGRN.phl[1019]";
+connectAttr "HumanMale_RIGRN.phl[1020]" "HumanMale_RIGRN.phl[1021]";
 connectAttr "HumanMale_RIGRN.phl[1022]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1023]" "HumanMale_RIGRN.phl[1024]";
-connectAttr "HumanMale_RIGRN.phl[1025]" "HumanMale_RIGRN.phl[1026]";
-connectAttr "HumanMale_RIGRN.phl[1027]" "HumanMale_RIGRN.phl[1028]";
-connectAttr "HumanMale_RIGRN.phl[1029]" "HumanMale_RIGRN.phl[1030]";
-connectAttr "HumanMale_RIGRN.phl[1031]" "HumanMale_RIGRN.phl[1032]";
-connectAttr "HumanMale_RIGRN.phl[1033]" "HumanMale_RIGRN.phl[1034]";
-connectAttr "HumanMale_RIGRN.phl[1035]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1023]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1024]" "HumanMale_RIGRN.phl[1025]";
+connectAttr "HumanMale_RIGRN.phl[1026]" "HumanMale_RIGRN.phl[1027]";
+connectAttr "HumanMale_RIGRN.phl[1028]" "HumanMale_RIGRN.phl[1029]";
+connectAttr "HumanMale_RIGRN.phl[1030]" "HumanMale_RIGRN.phl[1031]";
+connectAttr "HumanMale_RIGRN.phl[1032]" "HumanMale_RIGRN.phl[1033]";
+connectAttr "HumanMale_RIGRN.phl[1034]" "HumanMale_RIGRN.phl[1035]";
 connectAttr "HumanMale_RIGRN.phl[1036]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1037]" "HumanMale_RIGRN.phl[1038]";
-connectAttr "HumanMale_RIGRN.phl[1039]" "HumanMale_RIGRN.phl[1040]";
-connectAttr "HumanMale_RIGRN.phl[1041]" "HumanMale_RIGRN.phl[1042]";
-connectAttr "HumanMale_RIGRN.phl[1043]" "HumanMale_RIGRN.phl[1044]";
-connectAttr "HumanMale_RIGRN.phl[1045]" "HumanMale_RIGRN.phl[1046]";
-connectAttr "HumanMale_RIGRN.phl[1047]" "HumanMale_RIGRN.phl[1048]";
-connectAttr "HumanMale_RIGRN.phl[1049]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1037]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1038]" "HumanMale_RIGRN.phl[1039]";
+connectAttr "HumanMale_RIGRN.phl[1040]" "HumanMale_RIGRN.phl[1041]";
+connectAttr "HumanMale_RIGRN.phl[1042]" "HumanMale_RIGRN.phl[1043]";
+connectAttr "HumanMale_RIGRN.phl[1044]" "HumanMale_RIGRN.phl[1045]";
+connectAttr "HumanMale_RIGRN.phl[1046]" "HumanMale_RIGRN.phl[1047]";
+connectAttr "HumanMale_RIGRN.phl[1048]" "HumanMale_RIGRN.phl[1049]";
 connectAttr "HumanMale_RIGRN.phl[1050]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1051]" "HumanMale_RIGRN.phl[1052]";
-connectAttr "HumanMale_RIGRN.phl[1053]" "HumanMale_RIGRN.phl[1054]";
-connectAttr "HumanMale_RIGRN.phl[1055]" "HumanMale_RIGRN.phl[1056]";
-connectAttr "HumanMale_RIGRN.phl[1057]" "HumanMale_RIGRN.phl[1058]";
-connectAttr "HumanMale_RIGRN.phl[1059]" "HumanMale_RIGRN.phl[1060]";
-connectAttr "HumanMale_RIGRN.phl[1061]" "HumanMale_RIGRN.phl[1062]";
-connectAttr "HumanMale_RIGRN.phl[1063]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1051]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1052]" "HumanMale_RIGRN.phl[1053]";
+connectAttr "HumanMale_RIGRN.phl[1054]" "HumanMale_RIGRN.phl[1055]";
+connectAttr "HumanMale_RIGRN.phl[1056]" "HumanMale_RIGRN.phl[1057]";
+connectAttr "HumanMale_RIGRN.phl[1058]" "HumanMale_RIGRN.phl[1059]";
+connectAttr "HumanMale_RIGRN.phl[1060]" "HumanMale_RIGRN.phl[1061]";
+connectAttr "HumanMale_RIGRN.phl[1062]" "HumanMale_RIGRN.phl[1063]";
 connectAttr "HumanMale_RIGRN.phl[1064]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1065]" "HumanMale_RIGRN.phl[1066]";
-connectAttr "HumanMale_RIGRN.phl[1067]" "HumanMale_RIGRN.phl[1068]";
-connectAttr "HumanMale_RIGRN.phl[1069]" "HumanMale_RIGRN.phl[1070]";
-connectAttr "HumanMale_RIGRN.phl[1071]" "HumanMale_RIGRN.phl[1072]";
-connectAttr "HumanMale_RIGRN.phl[1073]" "HumanMale_RIGRN.phl[1074]";
-connectAttr "HumanMale_RIGRN.phl[1075]" "HumanMale_RIGRN.phl[1076]";
-connectAttr "HumanMale_RIGRN.phl[1077]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1065]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1066]" "HumanMale_RIGRN.phl[1067]";
+connectAttr "HumanMale_RIGRN.phl[1068]" "HumanMale_RIGRN.phl[1069]";
+connectAttr "HumanMale_RIGRN.phl[1070]" "HumanMale_RIGRN.phl[1071]";
+connectAttr "HumanMale_RIGRN.phl[1072]" "HumanMale_RIGRN.phl[1073]";
+connectAttr "HumanMale_RIGRN.phl[1074]" "HumanMale_RIGRN.phl[1075]";
+connectAttr "HumanMale_RIGRN.phl[1076]" "HumanMale_RIGRN.phl[1077]";
 connectAttr "HumanMale_RIGRN.phl[1078]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1079]" "HumanMale_RIGRN.phl[1080]";
-connectAttr "HumanMale_RIGRN.phl[1081]" "HumanMale_RIGRN.phl[1082]";
-connectAttr "HumanMale_RIGRN.phl[1083]" "HumanMale_RIGRN.phl[1084]";
-connectAttr "HumanMale_RIGRN.phl[1085]" "HumanMale_RIGRN.phl[1086]";
-connectAttr "HumanMale_RIGRN.phl[1087]" "HumanMale_RIGRN.phl[1088]";
-connectAttr "HumanMale_RIGRN.phl[1089]" "HumanMale_RIGRN.phl[1090]";
-connectAttr "HumanMale_RIGRN.phl[1091]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1079]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1080]" "HumanMale_RIGRN.phl[1081]";
+connectAttr "HumanMale_RIGRN.phl[1082]" "HumanMale_RIGRN.phl[1083]";
+connectAttr "HumanMale_RIGRN.phl[1084]" "HumanMale_RIGRN.phl[1085]";
+connectAttr "HumanMale_RIGRN.phl[1086]" "HumanMale_RIGRN.phl[1087]";
+connectAttr "HumanMale_RIGRN.phl[1088]" "HumanMale_RIGRN.phl[1089]";
+connectAttr "HumanMale_RIGRN.phl[1090]" "HumanMale_RIGRN.phl[1091]";
 connectAttr "HumanMale_RIGRN.phl[1092]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1093]" "HumanMale_RIGRN.phl[1094]";
-connectAttr "HumanMale_RIGRN.phl[1095]" "HumanMale_RIGRN.phl[1096]";
-connectAttr "HumanMale_RIGRN.phl[1097]" "HumanMale_RIGRN.phl[1098]";
-connectAttr "HumanMale_RIGRN.phl[1099]" "HumanMale_RIGRN.phl[1100]";
-connectAttr "HumanMale_RIGRN.phl[1101]" "HumanMale_RIGRN.phl[1102]";
-connectAttr "HumanMale_RIGRN.phl[1103]" "HumanMale_RIGRN.phl[1104]";
-connectAttr "HumanMale_RIGRN.phl[1105]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1093]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1094]" "HumanMale_RIGRN.phl[1095]";
+connectAttr "HumanMale_RIGRN.phl[1096]" "HumanMale_RIGRN.phl[1097]";
+connectAttr "HumanMale_RIGRN.phl[1098]" "HumanMale_RIGRN.phl[1099]";
+connectAttr "HumanMale_RIGRN.phl[1100]" "HumanMale_RIGRN.phl[1101]";
+connectAttr "HumanMale_RIGRN.phl[1102]" "HumanMale_RIGRN.phl[1103]";
+connectAttr "HumanMale_RIGRN.phl[1104]" "HumanMale_RIGRN.phl[1105]";
 connectAttr "HumanMale_RIGRN.phl[1106]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1107]" "HumanMale_RIGRN.phl[1108]";
-connectAttr "HumanMale_RIGRN.phl[1109]" "HumanMale_RIGRN.phl[1110]";
-connectAttr "HumanMale_RIGRN.phl[1111]" "HumanMale_RIGRN.phl[1112]";
-connectAttr "HumanMale_RIGRN.phl[1113]" "HumanMale_RIGRN.phl[1114]";
-connectAttr "HumanMale_RIGRN.phl[1115]" "HumanMale_RIGRN.phl[1116]";
-connectAttr "HumanMale_RIGRN.phl[1117]" "HumanMale_RIGRN.phl[1118]";
-connectAttr "HumanMale_RIGRN.phl[1119]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1107]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1108]" "HumanMale_RIGRN.phl[1109]";
+connectAttr "HumanMale_RIGRN.phl[1110]" "HumanMale_RIGRN.phl[1111]";
+connectAttr "HumanMale_RIGRN.phl[1112]" "HumanMale_RIGRN.phl[1113]";
+connectAttr "HumanMale_RIGRN.phl[1114]" "HumanMale_RIGRN.phl[1115]";
+connectAttr "HumanMale_RIGRN.phl[1116]" "HumanMale_RIGRN.phl[1117]";
+connectAttr "HumanMale_RIGRN.phl[1118]" "HumanMale_RIGRN.phl[1119]";
 connectAttr "HumanMale_RIGRN.phl[1120]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1121]" "HumanMale_RIGRN.phl[1122]";
-connectAttr "HumanMale_RIGRN.phl[1123]" "HumanMale_RIGRN.phl[1124]";
-connectAttr "HumanMale_RIGRN.phl[1125]" "HumanMale_RIGRN.phl[1126]";
-connectAttr "HumanMale_RIGRN.phl[1127]" "HumanMale_RIGRN.phl[1128]";
-connectAttr "HumanMale_RIGRN.phl[1129]" "HumanMale_RIGRN.phl[1130]";
-connectAttr "HumanMale_RIGRN.phl[1131]" "HumanMale_RIGRN.phl[1132]";
-connectAttr "HumanMale_RIGRN.phl[1133]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1121]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1122]" "HumanMale_RIGRN.phl[1123]";
+connectAttr "HumanMale_RIGRN.phl[1124]" "HumanMale_RIGRN.phl[1125]";
+connectAttr "HumanMale_RIGRN.phl[1126]" "HumanMale_RIGRN.phl[1127]";
+connectAttr "HumanMale_RIGRN.phl[1128]" "HumanMale_RIGRN.phl[1129]";
+connectAttr "HumanMale_RIGRN.phl[1130]" "HumanMale_RIGRN.phl[1131]";
+connectAttr "HumanMale_RIGRN.phl[1132]" "HumanMale_RIGRN.phl[1133]";
 connectAttr "HumanMale_RIGRN.phl[1134]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1135]" "HumanMale_RIGRN.phl[1136]";
-connectAttr "HumanMale_RIGRN.phl[1137]" "HumanMale_RIGRN.phl[1138]";
-connectAttr "HumanMale_RIGRN.phl[1139]" "HumanMale_RIGRN.phl[1140]";
-connectAttr "HumanMale_RIGRN.phl[1141]" "HumanMale_RIGRN.phl[1142]";
-connectAttr "HumanMale_RIGRN.phl[1143]" "HumanMale_RIGRN.phl[1144]";
-connectAttr "HumanMale_RIGRN.phl[1145]" "HumanMale_RIGRN.phl[1146]";
-connectAttr "HumanMale_RIGRN.phl[1147]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1135]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1136]" "HumanMale_RIGRN.phl[1137]";
+connectAttr "HumanMale_RIGRN.phl[1138]" "HumanMale_RIGRN.phl[1139]";
+connectAttr "HumanMale_RIGRN.phl[1140]" "HumanMale_RIGRN.phl[1141]";
+connectAttr "HumanMale_RIGRN.phl[1142]" "HumanMale_RIGRN.phl[1143]";
+connectAttr "HumanMale_RIGRN.phl[1144]" "HumanMale_RIGRN.phl[1145]";
+connectAttr "HumanMale_RIGRN.phl[1146]" "HumanMale_RIGRN.phl[1147]";
 connectAttr "HumanMale_RIGRN.phl[1148]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1149]" "HumanMale_RIGRN.phl[1150]";
-connectAttr "HumanMale_RIGRN.phl[1151]" "HumanMale_RIGRN.phl[1152]";
-connectAttr "HumanMale_RIGRN.phl[1153]" "HumanMale_RIGRN.phl[1154]";
-connectAttr "HumanMale_RIGRN.phl[1155]" "HumanMale_RIGRN.phl[1156]";
-connectAttr "HumanMale_RIGRN.phl[1157]" "HumanMale_RIGRN.phl[1158]";
-connectAttr "HumanMale_RIGRN.phl[1159]" "HumanMale_RIGRN.phl[1160]";
-connectAttr "HumanMale_RIGRN.phl[1161]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1149]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1150]" "HumanMale_RIGRN.phl[1151]";
+connectAttr "HumanMale_RIGRN.phl[1152]" "HumanMale_RIGRN.phl[1153]";
+connectAttr "HumanMale_RIGRN.phl[1154]" "HumanMale_RIGRN.phl[1155]";
+connectAttr "HumanMale_RIGRN.phl[1156]" "HumanMale_RIGRN.phl[1157]";
+connectAttr "HumanMale_RIGRN.phl[1158]" "HumanMale_RIGRN.phl[1159]";
+connectAttr "HumanMale_RIGRN.phl[1160]" "HumanMale_RIGRN.phl[1161]";
 connectAttr "HumanMale_RIGRN.phl[1162]" "aToolsSet_orange_RFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1163]" "HumanMale_RIGRN.phl[1164]";
-connectAttr "HumanMale_RIGRN.phl[1165]" "HumanMale_RIGRN.phl[1166]";
-connectAttr "HumanMale_RIGRN.phl[1167]" "HumanMale_RIGRN.phl[1168]";
-connectAttr "HumanMale_RIGRN.phl[1169]" "HumanMale_RIGRN.phl[1170]";
-connectAttr "HumanMale_RIGRN.phl[1171]" "HumanMale_RIGRN.phl[1172]";
-connectAttr "HumanMale_RIGRN.phl[1173]" "HumanMale_RIGRN.phl[1174]";
-connectAttr "HumanMale_RIGRN.phl[1175]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1163]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1164]" "HumanMale_RIGRN.phl[1165]";
+connectAttr "HumanMale_RIGRN.phl[1166]" "HumanMale_RIGRN.phl[1167]";
+connectAttr "HumanMale_RIGRN.phl[1168]" "HumanMale_RIGRN.phl[1169]";
+connectAttr "HumanMale_RIGRN.phl[1170]" "HumanMale_RIGRN.phl[1171]";
+connectAttr "HumanMale_RIGRN.phl[1172]" "HumanMale_RIGRN.phl[1173]";
+connectAttr "HumanMale_RIGRN.phl[1174]" "HumanMale_RIGRN.phl[1175]";
 connectAttr "HumanMale_RIGRN.phl[1176]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1177]" "HumanMale_RIGRN.phl[1178]";
-connectAttr "HumanMale_RIGRN.phl[1179]" "HumanMale_RIGRN.phl[1180]";
-connectAttr "HumanMale_RIGRN.phl[1181]" "HumanMale_RIGRN.phl[1182]";
-connectAttr "HumanMale_RIGRN.phl[1183]" "HumanMale_RIGRN.phl[1184]";
-connectAttr "HumanMale_RIGRN.phl[1185]" "HumanMale_RIGRN.phl[1186]";
-connectAttr "HumanMale_RIGRN.phl[1187]" "HumanMale_RIGRN.phl[1188]";
-connectAttr "HumanMale_RIGRN.phl[1189]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1177]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1178]" "HumanMale_RIGRN.phl[1179]";
+connectAttr "HumanMale_RIGRN.phl[1180]" "HumanMale_RIGRN.phl[1181]";
+connectAttr "HumanMale_RIGRN.phl[1182]" "HumanMale_RIGRN.phl[1183]";
+connectAttr "HumanMale_RIGRN.phl[1184]" "HumanMale_RIGRN.phl[1185]";
+connectAttr "HumanMale_RIGRN.phl[1186]" "HumanMale_RIGRN.phl[1187]";
+connectAttr "HumanMale_RIGRN.phl[1188]" "HumanMale_RIGRN.phl[1189]";
 connectAttr "HumanMale_RIGRN.phl[1190]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1191]" "HumanMale_RIGRN.phl[1192]";
-connectAttr "HumanMale_RIGRN.phl[1193]" "HumanMale_RIGRN.phl[1194]";
-connectAttr "HumanMale_RIGRN.phl[1195]" "HumanMale_RIGRN.phl[1196]";
-connectAttr "HumanMale_RIGRN.phl[1197]" "HumanMale_RIGRN.phl[1198]";
-connectAttr "HumanMale_RIGRN.phl[1199]" "HumanMale_RIGRN.phl[1200]";
-connectAttr "HumanMale_RIGRN.phl[1201]" "HumanMale_RIGRN.phl[1202]";
-connectAttr "HumanMale_RIGRN.phl[1203]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1191]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1192]" "HumanMale_RIGRN.phl[1193]";
+connectAttr "HumanMale_RIGRN.phl[1194]" "HumanMale_RIGRN.phl[1195]";
+connectAttr "HumanMale_RIGRN.phl[1196]" "HumanMale_RIGRN.phl[1197]";
+connectAttr "HumanMale_RIGRN.phl[1198]" "HumanMale_RIGRN.phl[1199]";
+connectAttr "HumanMale_RIGRN.phl[1200]" "HumanMale_RIGRN.phl[1201]";
+connectAttr "HumanMale_RIGRN.phl[1202]" "HumanMale_RIGRN.phl[1203]";
 connectAttr "HumanMale_RIGRN.phl[1204]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1205]" "HumanMale_RIGRN.phl[1206]";
-connectAttr "HumanMale_RIGRN.phl[1207]" "HumanMale_RIGRN.phl[1208]";
-connectAttr "HumanMale_RIGRN.phl[1209]" "HumanMale_RIGRN.phl[1210]";
-connectAttr "HumanMale_RIGRN.phl[1211]" "HumanMale_RIGRN.phl[1212]";
-connectAttr "HumanMale_RIGRN.phl[1213]" "HumanMale_RIGRN.phl[1214]";
-connectAttr "HumanMale_RIGRN.phl[1215]" "HumanMale_RIGRN.phl[1216]";
-connectAttr "HumanMale_RIGRN.phl[1217]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1205]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1206]" "HumanMale_RIGRN.phl[1207]";
+connectAttr "HumanMale_RIGRN.phl[1208]" "HumanMale_RIGRN.phl[1209]";
+connectAttr "HumanMale_RIGRN.phl[1210]" "HumanMale_RIGRN.phl[1211]";
+connectAttr "HumanMale_RIGRN.phl[1212]" "HumanMale_RIGRN.phl[1213]";
+connectAttr "HumanMale_RIGRN.phl[1214]" "HumanMale_RIGRN.phl[1215]";
+connectAttr "HumanMale_RIGRN.phl[1216]" "HumanMale_RIGRN.phl[1217]";
 connectAttr "HumanMale_RIGRN.phl[1218]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1219]" "HumanMale_RIGRN.phl[1220]";
-connectAttr "HumanMale_RIGRN.phl[1221]" "HumanMale_RIGRN.phl[1222]";
-connectAttr "HumanMale_RIGRN.phl[1223]" "HumanMale_RIGRN.phl[1224]";
-connectAttr "HumanMale_RIGRN.phl[1225]" "HumanMale_RIGRN.phl[1226]";
-connectAttr "HumanMale_RIGRN.phl[1227]" "HumanMale_RIGRN.phl[1228]";
-connectAttr "HumanMale_RIGRN.phl[1229]" "HumanMale_RIGRN.phl[1230]";
-connectAttr "HumanMale_RIGRN.phl[1231]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1219]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1220]" "HumanMale_RIGRN.phl[1221]";
+connectAttr "HumanMale_RIGRN.phl[1222]" "HumanMale_RIGRN.phl[1223]";
+connectAttr "HumanMale_RIGRN.phl[1224]" "HumanMale_RIGRN.phl[1225]";
+connectAttr "HumanMale_RIGRN.phl[1226]" "HumanMale_RIGRN.phl[1227]";
+connectAttr "HumanMale_RIGRN.phl[1228]" "HumanMale_RIGRN.phl[1229]";
+connectAttr "HumanMale_RIGRN.phl[1230]" "HumanMale_RIGRN.phl[1231]";
 connectAttr "HumanMale_RIGRN.phl[1232]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1233]" "HumanMale_RIGRN.phl[1234]";
-connectAttr "HumanMale_RIGRN.phl[1235]" "HumanMale_RIGRN.phl[1236]";
-connectAttr "HumanMale_RIGRN.phl[1237]" "HumanMale_RIGRN.phl[1238]";
-connectAttr "HumanMale_RIGRN.phl[1239]" "HumanMale_RIGRN.phl[1240]";
-connectAttr "HumanMale_RIGRN.phl[1241]" "HumanMale_RIGRN.phl[1242]";
-connectAttr "HumanMale_RIGRN.phl[1243]" "HumanMale_RIGRN.phl[1244]";
-connectAttr "HumanMale_RIGRN.phl[1245]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1233]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1234]" "HumanMale_RIGRN.phl[1235]";
+connectAttr "HumanMale_RIGRN.phl[1236]" "HumanMale_RIGRN.phl[1237]";
+connectAttr "HumanMale_RIGRN.phl[1238]" "HumanMale_RIGRN.phl[1239]";
+connectAttr "HumanMale_RIGRN.phl[1240]" "HumanMale_RIGRN.phl[1241]";
+connectAttr "HumanMale_RIGRN.phl[1242]" "HumanMale_RIGRN.phl[1243]";
+connectAttr "HumanMale_RIGRN.phl[1244]" "HumanMale_RIGRN.phl[1245]";
 connectAttr "HumanMale_RIGRN.phl[1246]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1247]" "HumanMale_RIGRN.phl[1248]";
-connectAttr "HumanMale_RIGRN.phl[1249]" "HumanMale_RIGRN.phl[1250]";
-connectAttr "HumanMale_RIGRN.phl[1251]" "HumanMale_RIGRN.phl[1252]";
-connectAttr "HumanMale_RIGRN.phl[1253]" "HumanMale_RIGRN.phl[1254]";
-connectAttr "HumanMale_RIGRN.phl[1255]" "HumanMale_RIGRN.phl[1256]";
-connectAttr "HumanMale_RIGRN.phl[1257]" "HumanMale_RIGRN.phl[1258]";
-connectAttr "HumanMale_RIGRN.phl[1259]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1247]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1248]" "HumanMale_RIGRN.phl[1249]";
+connectAttr "HumanMale_RIGRN.phl[1250]" "HumanMale_RIGRN.phl[1251]";
+connectAttr "HumanMale_RIGRN.phl[1252]" "HumanMale_RIGRN.phl[1253]";
+connectAttr "HumanMale_RIGRN.phl[1254]" "HumanMale_RIGRN.phl[1255]";
+connectAttr "HumanMale_RIGRN.phl[1256]" "HumanMale_RIGRN.phl[1257]";
+connectAttr "HumanMale_RIGRN.phl[1258]" "HumanMale_RIGRN.phl[1259]";
 connectAttr "HumanMale_RIGRN.phl[1260]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1261]" "HumanMale_RIGRN.phl[1262]";
-connectAttr "HumanMale_RIGRN.phl[1263]" "HumanMale_RIGRN.phl[1264]";
-connectAttr "HumanMale_RIGRN.phl[1265]" "HumanMale_RIGRN.phl[1266]";
-connectAttr "HumanMale_RIGRN.phl[1267]" "HumanMale_RIGRN.phl[1268]";
-connectAttr "HumanMale_RIGRN.phl[1269]" "HumanMale_RIGRN.phl[1270]";
-connectAttr "HumanMale_RIGRN.phl[1271]" "HumanMale_RIGRN.phl[1272]";
-connectAttr "HumanMale_RIGRN.phl[1273]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1261]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1262]" "HumanMale_RIGRN.phl[1263]";
+connectAttr "HumanMale_RIGRN.phl[1264]" "HumanMale_RIGRN.phl[1265]";
+connectAttr "HumanMale_RIGRN.phl[1266]" "HumanMale_RIGRN.phl[1267]";
+connectAttr "HumanMale_RIGRN.phl[1268]" "HumanMale_RIGRN.phl[1269]";
+connectAttr "HumanMale_RIGRN.phl[1270]" "HumanMale_RIGRN.phl[1271]";
+connectAttr "HumanMale_RIGRN.phl[1272]" "HumanMale_RIGRN.phl[1273]";
 connectAttr "HumanMale_RIGRN.phl[1274]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1275]" "HumanMale_RIGRN.phl[1276]";
-connectAttr "HumanMale_RIGRN.phl[1277]" "HumanMale_RIGRN.phl[1278]";
-connectAttr "HumanMale_RIGRN.phl[1279]" "HumanMale_RIGRN.phl[1280]";
-connectAttr "HumanMale_RIGRN.phl[1281]" "HumanMale_RIGRN.phl[1282]";
-connectAttr "HumanMale_RIGRN.phl[1283]" "HumanMale_RIGRN.phl[1284]";
-connectAttr "HumanMale_RIGRN.phl[1285]" "HumanMale_RIGRN.phl[1286]";
-connectAttr "HumanMale_RIGRN.phl[1287]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1275]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1276]" "HumanMale_RIGRN.phl[1277]";
+connectAttr "HumanMale_RIGRN.phl[1278]" "HumanMale_RIGRN.phl[1279]";
+connectAttr "HumanMale_RIGRN.phl[1280]" "HumanMale_RIGRN.phl[1281]";
+connectAttr "HumanMale_RIGRN.phl[1282]" "HumanMale_RIGRN.phl[1283]";
+connectAttr "HumanMale_RIGRN.phl[1284]" "HumanMale_RIGRN.phl[1285]";
+connectAttr "HumanMale_RIGRN.phl[1286]" "HumanMale_RIGRN.phl[1287]";
 connectAttr "HumanMale_RIGRN.phl[1288]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1289]" "HumanMale_RIGRN.phl[1290]";
-connectAttr "HumanMale_RIGRN.phl[1291]" "HumanMale_RIGRN.phl[1292]";
-connectAttr "HumanMale_RIGRN.phl[1293]" "HumanMale_RIGRN.phl[1294]";
-connectAttr "HumanMale_RIGRN.phl[1295]" "HumanMale_RIGRN.phl[1296]";
-connectAttr "HumanMale_RIGRN.phl[1297]" "HumanMale_RIGRN.phl[1298]";
-connectAttr "HumanMale_RIGRN.phl[1299]" "HumanMale_RIGRN.phl[1300]";
-connectAttr "HumanMale_RIGRN.phl[1301]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1289]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1290]" "HumanMale_RIGRN.phl[1291]";
+connectAttr "HumanMale_RIGRN.phl[1292]" "HumanMale_RIGRN.phl[1293]";
+connectAttr "HumanMale_RIGRN.phl[1294]" "HumanMale_RIGRN.phl[1295]";
+connectAttr "HumanMale_RIGRN.phl[1296]" "HumanMale_RIGRN.phl[1297]";
+connectAttr "HumanMale_RIGRN.phl[1298]" "HumanMale_RIGRN.phl[1299]";
+connectAttr "HumanMale_RIGRN.phl[1300]" "HumanMale_RIGRN.phl[1301]";
 connectAttr "HumanMale_RIGRN.phl[1302]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1303]" "HumanMale_RIGRN.phl[1304]";
-connectAttr "HumanMale_RIGRN.phl[1305]" "HumanMale_RIGRN.phl[1306]";
-connectAttr "HumanMale_RIGRN.phl[1307]" "HumanMale_RIGRN.phl[1308]";
-connectAttr "HumanMale_RIGRN.phl[1309]" "HumanMale_RIGRN.phl[1310]";
-connectAttr "HumanMale_RIGRN.phl[1311]" "HumanMale_RIGRN.phl[1312]";
-connectAttr "HumanMale_RIGRN.phl[1313]" "HumanMale_RIGRN.phl[1314]";
-connectAttr "HumanMale_RIGRN.phl[1315]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1303]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1304]" "HumanMale_RIGRN.phl[1305]";
+connectAttr "HumanMale_RIGRN.phl[1306]" "HumanMale_RIGRN.phl[1307]";
+connectAttr "HumanMale_RIGRN.phl[1308]" "HumanMale_RIGRN.phl[1309]";
+connectAttr "HumanMale_RIGRN.phl[1310]" "HumanMale_RIGRN.phl[1311]";
+connectAttr "HumanMale_RIGRN.phl[1312]" "HumanMale_RIGRN.phl[1313]";
+connectAttr "HumanMale_RIGRN.phl[1314]" "HumanMale_RIGRN.phl[1315]";
 connectAttr "HumanMale_RIGRN.phl[1316]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1317]" "HumanMale_RIGRN.phl[1318]";
-connectAttr "HumanMale_RIGRN.phl[1319]" "HumanMale_RIGRN.phl[1320]";
-connectAttr "HumanMale_RIGRN.phl[1321]" "HumanMale_RIGRN.phl[1322]";
-connectAttr "HumanMale_RIGRN.phl[1323]" "HumanMale_RIGRN.phl[1324]";
-connectAttr "HumanMale_RIGRN.phl[1325]" "HumanMale_RIGRN.phl[1326]";
-connectAttr "HumanMale_RIGRN.phl[1327]" "HumanMale_RIGRN.phl[1328]";
-connectAttr "HumanMale_RIGRN.phl[1329]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1317]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1318]" "HumanMale_RIGRN.phl[1319]";
+connectAttr "HumanMale_RIGRN.phl[1320]" "HumanMale_RIGRN.phl[1321]";
+connectAttr "HumanMale_RIGRN.phl[1322]" "HumanMale_RIGRN.phl[1323]";
+connectAttr "HumanMale_RIGRN.phl[1324]" "HumanMale_RIGRN.phl[1325]";
+connectAttr "HumanMale_RIGRN.phl[1326]" "HumanMale_RIGRN.phl[1327]";
+connectAttr "HumanMale_RIGRN.phl[1328]" "HumanMale_RIGRN.phl[1329]";
 connectAttr "HumanMale_RIGRN.phl[1330]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1331]" "HumanMale_RIGRN.phl[1332]";
-connectAttr "HumanMale_RIGRN.phl[1333]" "HumanMale_RIGRN.phl[1334]";
-connectAttr "HumanMale_RIGRN.phl[1335]" "HumanMale_RIGRN.phl[1336]";
-connectAttr "HumanMale_RIGRN.phl[1337]" "HumanMale_RIGRN.phl[1338]";
-connectAttr "HumanMale_RIGRN.phl[1339]" "HumanMale_RIGRN.phl[1340]";
-connectAttr "HumanMale_RIGRN.phl[1341]" "HumanMale_RIGRN.phl[1342]";
-connectAttr "HumanMale_RIGRN.phl[1343]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1331]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1332]" "HumanMale_RIGRN.phl[1333]";
+connectAttr "HumanMale_RIGRN.phl[1334]" "HumanMale_RIGRN.phl[1335]";
+connectAttr "HumanMale_RIGRN.phl[1336]" "HumanMale_RIGRN.phl[1337]";
+connectAttr "HumanMale_RIGRN.phl[1338]" "HumanMale_RIGRN.phl[1339]";
+connectAttr "HumanMale_RIGRN.phl[1340]" "HumanMale_RIGRN.phl[1341]";
+connectAttr "HumanMale_RIGRN.phl[1342]" "HumanMale_RIGRN.phl[1343]";
 connectAttr "HumanMale_RIGRN.phl[1344]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1345]" "HumanMale_RIGRN.phl[1346]";
-connectAttr "HumanMale_RIGRN.phl[1347]" "HumanMale_RIGRN.phl[1348]";
-connectAttr "HumanMale_RIGRN.phl[1349]" "HumanMale_RIGRN.phl[1350]";
-connectAttr "HumanMale_RIGRN.phl[1351]" "HumanMale_RIGRN.phl[1352]";
-connectAttr "HumanMale_RIGRN.phl[1353]" "HumanMale_RIGRN.phl[1354]";
-connectAttr "HumanMale_RIGRN.phl[1355]" "HumanMale_RIGRN.phl[1356]";
-connectAttr "HumanMale_RIGRN.phl[1357]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1345]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1346]" "HumanMale_RIGRN.phl[1347]";
+connectAttr "HumanMale_RIGRN.phl[1348]" "HumanMale_RIGRN.phl[1349]";
+connectAttr "HumanMale_RIGRN.phl[1350]" "HumanMale_RIGRN.phl[1351]";
+connectAttr "HumanMale_RIGRN.phl[1352]" "HumanMale_RIGRN.phl[1353]";
+connectAttr "HumanMale_RIGRN.phl[1354]" "HumanMale_RIGRN.phl[1355]";
+connectAttr "HumanMale_RIGRN.phl[1356]" "HumanMale_RIGRN.phl[1357]";
 connectAttr "HumanMale_RIGRN.phl[1358]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1359]" "HumanMale_RIGRN.phl[1360]";
-connectAttr "HumanMale_RIGRN.phl[1361]" "HumanMale_RIGRN.phl[1362]";
-connectAttr "HumanMale_RIGRN.phl[1363]" "HumanMale_RIGRN.phl[1364]";
-connectAttr "HumanMale_RIGRN.phl[1365]" "HumanMale_RIGRN.phl[1366]";
-connectAttr "HumanMale_RIGRN.phl[1367]" "HumanMale_RIGRN.phl[1368]";
-connectAttr "HumanMale_RIGRN.phl[1369]" "HumanMale_RIGRN.phl[1370]";
-connectAttr "HumanMale_RIGRN.phl[1371]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1359]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1360]" "HumanMale_RIGRN.phl[1361]";
+connectAttr "HumanMale_RIGRN.phl[1362]" "HumanMale_RIGRN.phl[1363]";
+connectAttr "HumanMale_RIGRN.phl[1364]" "HumanMale_RIGRN.phl[1365]";
+connectAttr "HumanMale_RIGRN.phl[1366]" "HumanMale_RIGRN.phl[1367]";
+connectAttr "HumanMale_RIGRN.phl[1368]" "HumanMale_RIGRN.phl[1369]";
+connectAttr "HumanMale_RIGRN.phl[1370]" "HumanMale_RIGRN.phl[1371]";
 connectAttr "HumanMale_RIGRN.phl[1372]" "aToolsSet_orange_LFings.dsm" -na;
-connectAttr "HumanMale_RIGRN.phl[1373]" "R:Spine1_control_Orient_AnimLayer2.ia";
-connectAttr "HumanMale_Spine1_control_Orient.o" "HumanMale_RIGRN.phl[1374]";
-connectAttr "HumanMale_Neck_control_Orient.o" "HumanMale_RIGRN.phl[1375]";
-connectAttr "HumanMale_Head_control_Orient.o" "HumanMale_RIGRN.phl[1376]";
-connectAttr "HumanMale_Hand_L_R_control_Orient.o" "HumanMale_RIGRN.phl[1377]";
-connectAttr "HumanMale_Hand_L_control_ParentOnClavicle.o" "HumanMale_RIGRN.phl[1378]"
+connectAttr "HumanMale_RIGRN.phl[1373]" "aToolsSet_red_All.dsm" -na;
+connectAttr "HumanMale_RIGRN.phl[1374]" "R:Spine1_control_Orient_AnimLayer2.ia";
+connectAttr "HumanMale_Spine1_control_Orient.o" "HumanMale_RIGRN.phl[1375]";
+connectAttr "HumanMale_Neck_control_Orient.o" "HumanMale_RIGRN.phl[1376]";
+connectAttr "HumanMale_Head_control_Orient.o" "HumanMale_RIGRN.phl[1377]";
+connectAttr "HumanMale_Hand_L_R_control_Orient.o" "HumanMale_RIGRN.phl[1378]";
+connectAttr "HumanMale_Hand_L_control_ParentOnClavicle.o" "HumanMale_RIGRN.phl[1379]"
 		;
-connectAttr "HumanMale_Hand_L_control_ParentOnSpine.o" "HumanMale_RIGRN.phl[1379]"
+connectAttr "HumanMale_Hand_L_control_ParentOnSpine.o" "HumanMale_RIGRN.phl[1380]"
 		;
-connectAttr "Hand_R_R_control_Orient_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1380]"
+connectAttr "Hand_R_R_control_Orient_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1381]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1381]" "R:Hand_R_control_ParentOnClavicle_AnimLayer2.ia"
+connectAttr "HumanMale_RIGRN.phl[1382]" "R:Hand_R_control_ParentOnClavicle_AnimLayer2.ia"
 		;
-connectAttr "Hand_R_control_ParentOnClavicle_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1382]"
+connectAttr "Hand_R_control_ParentOnClavicle_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1383]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1383]" "R:Hand_R_control_ParentOnSpine_AnimLayer2.ia"
+connectAttr "HumanMale_RIGRN.phl[1384]" "R:Hand_R_control_ParentOnSpine_AnimLayer2.ia"
 		;
-connectAttr "Hand_R_control_ParentOnSpine_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1384]"
+connectAttr "Hand_R_control_ParentOnSpine_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1385]"
 		;
-connectAttr "HumanMale_Foot_L_control_FKBlend.o" "HumanMale_RIGRN.phl[1385]";
-connectAttr "HumanMale_Foot_L_control_ParentOnHips.o" "HumanMale_RIGRN.phl[1386]"
+connectAttr "HumanMale_Foot_L_control_FKBlend.o" "HumanMale_RIGRN.phl[1386]";
+connectAttr "HumanMale_Foot_L_control_ParentOnHips.o" "HumanMale_RIGRN.phl[1387]"
 		;
-connectAttr "HumanMale_Foot_L_control_Stretch.o" "HumanMale_RIGRN.phl[1387]";
-connectAttr "HumanMale_Foot_L_control_StretchMin.o" "HumanMale_RIGRN.phl[1388]";
-connectAttr "HumanMale_Foot_L_control_StretchMax.o" "HumanMale_RIGRN.phl[1389]";
-connectAttr "HumanMale_CloackFrontHand_L_control_Orient.o" "HumanMale_RIGRN.phl[1390]"
+connectAttr "HumanMale_Foot_L_control_Stretch.o" "HumanMale_RIGRN.phl[1388]";
+connectAttr "HumanMale_Foot_L_control_StretchMin.o" "HumanMale_RIGRN.phl[1389]";
+connectAttr "HumanMale_Foot_L_control_StretchMax.o" "HumanMale_RIGRN.phl[1390]";
+connectAttr "HumanMale_CloackFrontHand_L_control_Orient.o" "HumanMale_RIGRN.phl[1391]"
 		;
-connectAttr "CloackBackHand_L_control_Orient_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1391]"
+connectAttr "CloackBackHand_L_control_Orient_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1392]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_Orient.o" "HumanMale_RIGRN.phl[1392]"
+connectAttr "HumanMale_CloackBack_L_control_Orient.o" "HumanMale_RIGRN.phl[1393]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_Orient.o" "HumanMale_RIGRN.phl[1393]"
+connectAttr "HumanMale_CloackBack_R_control_Orient.o" "HumanMale_RIGRN.phl[1394]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_Orient.o" "HumanMale_RIGRN.phl[1394]"
+connectAttr "HumanMale_CloackBackHand_R_control_Orient.o" "HumanMale_RIGRN.phl[1395]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_Orient.o" "HumanMale_RIGRN.phl[1395]"
+connectAttr "HumanMale_CloackFrontHand_R_control_Orient.o" "HumanMale_RIGRN.phl[1396]"
 		;
-connectAttr "HumanMale_Breath_control_scaleX.o" "HumanMale_RIGRN.phl[1396]";
-connectAttr "HumanMale_Breath_control_scaleY.o" "HumanMale_RIGRN.phl[1397]";
-connectAttr "HumanMale_Breath_control_scaleZ.o" "HumanMale_RIGRN.phl[1398]";
-connectAttr "HumanMale_Slot_Hand_R_locator_scaleZ.o" "HumanMale_RIGRN.phl[1399]"
+connectAttr "HumanMale_Breath_control_scaleX.o" "HumanMale_RIGRN.phl[1397]";
+connectAttr "HumanMale_Breath_control_scaleY.o" "HumanMale_RIGRN.phl[1398]";
+connectAttr "HumanMale_Breath_control_scaleZ.o" "HumanMale_RIGRN.phl[1399]";
+connectAttr "HumanMale_Slot_Hand_R_locator_scaleZ.o" "HumanMale_RIGRN.phl[1400]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_scaleY.o" "HumanMale_RIGRN.phl[1400]"
+connectAttr "HumanMale_Slot_Hand_R_locator_scaleY.o" "HumanMale_RIGRN.phl[1401]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_scaleX.o" "HumanMale_RIGRN.phl[1401]"
+connectAttr "HumanMale_Slot_Hand_R_locator_scaleX.o" "HumanMale_RIGRN.phl[1402]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_scaleZ.o" "HumanMale_RIGRN.phl[1402]"
+connectAttr "HumanMale_Slot_Hand_L_locator_scaleZ.o" "HumanMale_RIGRN.phl[1403]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_scaleY.o" "HumanMale_RIGRN.phl[1403]"
+connectAttr "HumanMale_Slot_Hand_L_locator_scaleY.o" "HumanMale_RIGRN.phl[1404]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_scaleX.o" "HumanMale_RIGRN.phl[1404]"
+connectAttr "HumanMale_Slot_Hand_L_locator_scaleX.o" "HumanMale_RIGRN.phl[1405]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_ParentSpace.o" "HumanMale_RIGRN.phl[1405]"
+connectAttr "HumanMale_Slot_Hand_R_control_ParentSpace.o" "HumanMale_RIGRN.phl[1406]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_ParentSpace.o" "HumanMale_RIGRN.phl[1406]"
+connectAttr "HumanMale_Slot_Hand_L_control_ParentSpace.o" "HumanMale_RIGRN.phl[1407]"
 		;
-connectAttr "HumanMale_Foot_R_control_FKBlend.o" "HumanMale_RIGRN.phl[1407]";
-connectAttr "HumanMale_Foot_R_control_ParentOnHips.o" "HumanMale_RIGRN.phl[1408]"
+connectAttr "HumanMale_Foot_R_control_FKBlend.o" "HumanMale_RIGRN.phl[1408]";
+connectAttr "HumanMale_Foot_R_control_ParentOnHips.o" "HumanMale_RIGRN.phl[1409]"
 		;
-connectAttr "HumanMale_Foot_R_control_Stretch.o" "HumanMale_RIGRN.phl[1409]";
-connectAttr "HumanMale_Foot_R_control_StretchMin.o" "HumanMale_RIGRN.phl[1410]";
-connectAttr "HumanMale_Foot_R_control_StretchMax.o" "HumanMale_RIGRN.phl[1411]";
-connectAttr "HumanMale_Global_TR_translateX.o" "HumanMale_RIGRN.phl[1412]";
-connectAttr "HumanMale_Global_TR_translateY.o" "HumanMale_RIGRN.phl[1413]";
-connectAttr "HumanMale_Global_TR_translateZ.o" "HumanMale_RIGRN.phl[1414]";
-connectAttr "Hips_Overall_control_translateX_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1415]"
+connectAttr "HumanMale_Foot_R_control_Stretch.o" "HumanMale_RIGRN.phl[1410]";
+connectAttr "HumanMale_Foot_R_control_StretchMin.o" "HumanMale_RIGRN.phl[1411]";
+connectAttr "HumanMale_Foot_R_control_StretchMax.o" "HumanMale_RIGRN.phl[1412]";
+connectAttr "HumanMale_Global_TR_translateX.o" "HumanMale_RIGRN.phl[1413]";
+connectAttr "HumanMale_Global_TR_translateY.o" "HumanMale_RIGRN.phl[1414]";
+connectAttr "HumanMale_Global_TR_translateZ.o" "HumanMale_RIGRN.phl[1415]";
+connectAttr "Hips_Overall_control_translateX_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1416]"
 		;
-connectAttr "Hips_Overall_control_translateY_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1416]"
+connectAttr "Hips_Overall_control_translateY_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1417]"
 		;
-connectAttr "Hips_Overall_control_translateZ_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1417]"
+connectAttr "Hips_Overall_control_translateZ_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1418]"
 		;
-connectAttr "Hips_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1418]"
+connectAttr "HumanMale_RIGRN.phl[1419]" "R:Hips_control_translateX_AnimLayer3.ia"
 		;
-connectAttr "Hips_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1419]"
+connectAttr "Hips_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1420]"
 		;
-connectAttr "Hips_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1420]"
+connectAttr "HumanMale_RIGRN.phl[1421]" "R:Hips_control_translateY_AnimLayer3.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1421]" "R:Spine1_control_translateX_AnimLayer2.ia"
+connectAttr "Hips_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1422]"
 		;
-connectAttr "HumanMale_Spine1_control_translateX.o" "HumanMale_RIGRN.phl[1422]";
-connectAttr "HumanMale_RIGRN.phl[1423]" "R:Spine1_control_translateY_AnimLayer2.ia"
+connectAttr "HumanMale_RIGRN.phl[1423]" "R:Hips_control_translateZ_AnimLayer3.ia"
 		;
-connectAttr "HumanMale_Spine1_control_translateY.o" "HumanMale_RIGRN.phl[1424]";
-connectAttr "HumanMale_RIGRN.phl[1425]" "R:Spine1_control_translateZ_AnimLayer2.ia"
+connectAttr "Hips_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1424]"
 		;
-connectAttr "HumanMale_Spine1_control_translateZ.o" "HumanMale_RIGRN.phl[1426]";
-connectAttr "HumanMale_Spine2_control_translateX.o" "HumanMale_RIGRN.phl[1427]";
-connectAttr "HumanMale_Spine2_control_translateY.o" "HumanMale_RIGRN.phl[1428]";
-connectAttr "HumanMale_Spine2_control_translateZ.o" "HumanMale_RIGRN.phl[1429]";
-connectAttr "HumanMale_RIGRN.phl[1430]" "R:Chest_control_translateX_AnimLayer2.ia"
+connectAttr "HumanMale_RIGRN.phl[1425]" "R:Spine1_control_translateX_AnimLayer2.ia"
 		;
-connectAttr "Chest_control_translateX_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1431]"
+connectAttr "HumanMale_Spine1_control_translateX.o" "HumanMale_RIGRN.phl[1426]";
+connectAttr "HumanMale_RIGRN.phl[1427]" "R:Spine1_control_translateY_AnimLayer2.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1432]" "R:Chest_control_translateY_AnimLayer2.ia"
+connectAttr "HumanMale_Spine1_control_translateY.o" "HumanMale_RIGRN.phl[1428]";
+connectAttr "HumanMale_RIGRN.phl[1429]" "R:Spine1_control_translateZ_AnimLayer2.ia"
 		;
-connectAttr "Chest_control_translateY_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1433]"
+connectAttr "HumanMale_Spine1_control_translateZ.o" "HumanMale_RIGRN.phl[1430]";
+connectAttr "HumanMale_Spine2_control_translateX.o" "HumanMale_RIGRN.phl[1431]";
+connectAttr "HumanMale_Spine2_control_translateY.o" "HumanMale_RIGRN.phl[1432]";
+connectAttr "HumanMale_Spine2_control_translateZ.o" "HumanMale_RIGRN.phl[1433]";
+connectAttr "HumanMale_RIGRN.phl[1434]" "R:Chest_control_translateX_AnimLayer2.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1434]" "R:Chest_control_translateZ_AnimLayer2.ia"
+connectAttr "Chest_control_translateX_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1435]"
 		;
-connectAttr "Chest_control_translateZ_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1435]"
+connectAttr "HumanMale_RIGRN.phl[1436]" "R:Chest_control_translateY_AnimLayer2.ia"
 		;
-connectAttr "HumanMale_Chest1_control_translateX.o" "HumanMale_RIGRN.phl[1436]";
-connectAttr "HumanMale_Chest1_control_translateY.o" "HumanMale_RIGRN.phl[1437]";
-connectAttr "HumanMale_Chest1_control_translateZ.o" "HumanMale_RIGRN.phl[1438]";
-connectAttr "HumanMale_Neck_control_translateX.o" "HumanMale_RIGRN.phl[1439]";
-connectAttr "HumanMale_Neck_control_translateY.o" "HumanMale_RIGRN.phl[1440]";
-connectAttr "HumanMale_Neck_control_translateZ.o" "HumanMale_RIGRN.phl[1441]";
-connectAttr "HumanMale_Head_control_translateX.o" "HumanMale_RIGRN.phl[1442]";
-connectAttr "HumanMale_Head_control_translateY.o" "HumanMale_RIGRN.phl[1443]";
-connectAttr "HumanMale_Head_control_translateZ.o" "HumanMale_RIGRN.phl[1444]";
-connectAttr "HumanMale_Hand_L_control_translateX.o" "HumanMale_RIGRN.phl[1445]";
-connectAttr "HumanMale_Hand_L_control_translateY.o" "HumanMale_RIGRN.phl[1446]";
-connectAttr "HumanMale_Hand_L_control_translateZ.o" "HumanMale_RIGRN.phl[1447]";
-connectAttr "Clavicle_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1448]"
+connectAttr "Chest_control_translateY_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1437]"
 		;
-connectAttr "Clavicle_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1449]"
+connectAttr "HumanMale_RIGRN.phl[1438]" "R:Chest_control_translateZ_AnimLayer2.ia"
 		;
-connectAttr "Clavicle_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1450]"
+connectAttr "Chest_control_translateZ_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1439]"
 		;
-connectAttr "Hand_L_Elbow_locator_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1451]"
+connectAttr "HumanMale_Chest1_control_translateX.o" "HumanMale_RIGRN.phl[1440]";
+connectAttr "HumanMale_Chest1_control_translateY.o" "HumanMale_RIGRN.phl[1441]";
+connectAttr "HumanMale_Chest1_control_translateZ.o" "HumanMale_RIGRN.phl[1442]";
+connectAttr "HumanMale_Neck_control_translateX.o" "HumanMale_RIGRN.phl[1443]";
+connectAttr "HumanMale_Neck_control_translateY.o" "HumanMale_RIGRN.phl[1444]";
+connectAttr "HumanMale_Neck_control_translateZ.o" "HumanMale_RIGRN.phl[1445]";
+connectAttr "HumanMale_Head_control_translateX.o" "HumanMale_RIGRN.phl[1446]";
+connectAttr "HumanMale_Head_control_translateY.o" "HumanMale_RIGRN.phl[1447]";
+connectAttr "HumanMale_Head_control_translateZ.o" "HumanMale_RIGRN.phl[1448]";
+connectAttr "HumanMale_Hand_L_control_translateX.o" "HumanMale_RIGRN.phl[1449]";
+connectAttr "HumanMale_Hand_L_control_translateY.o" "HumanMale_RIGRN.phl[1450]";
+connectAttr "HumanMale_Hand_L_control_translateZ.o" "HumanMale_RIGRN.phl[1451]";
+connectAttr "Clavicle_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1452]"
 		;
-connectAttr "Hand_L_Elbow_locator_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1452]"
+connectAttr "Clavicle_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1453]"
 		;
-connectAttr "Hand_L_Elbow_locator_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1453]"
+connectAttr "Clavicle_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1454]"
 		;
-connectAttr "HumanMale_Arm_L_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1454]"
+connectAttr "Hand_L_Elbow_locator_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1455]"
 		;
-connectAttr "HumanMale_Arm_L_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1455]"
+connectAttr "Hand_L_Elbow_locator_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1456]"
 		;
-connectAttr "HumanMale_Arm_L_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1456]"
+connectAttr "Hand_L_Elbow_locator_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1457]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1457]" "R:Hand_R_control_translateX_AnimLayer2.ia"
+connectAttr "HumanMale_Arm_L_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1458]"
 		;
-connectAttr "Hand_R_control_translateX_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1458]"
+connectAttr "HumanMale_Arm_L_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1459]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1459]" "R:Hand_R_control_translateY_AnimLayer2.ia"
+connectAttr "HumanMale_Arm_L_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1460]"
 		;
-connectAttr "Hand_R_control_translateY_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1460]"
+connectAttr "HumanMale_RIGRN.phl[1461]" "R:Hand_R_control_translateX_AnimLayer2.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1461]" "R:Hand_R_control_translateZ_AnimLayer2.ia"
+connectAttr "Hand_R_control_translateX_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1462]"
 		;
-connectAttr "Hand_R_control_translateZ_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1462]"
+connectAttr "HumanMale_RIGRN.phl[1463]" "R:Hand_R_control_translateY_AnimLayer2.ia"
 		;
-connectAttr "Clavicle_R_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1463]"
+connectAttr "Hand_R_control_translateY_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1464]"
 		;
-connectAttr "Clavicle_R_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1464]"
+connectAttr "HumanMale_RIGRN.phl[1465]" "R:Hand_R_control_translateZ_AnimLayer2.ia"
 		;
-connectAttr "Clavicle_R_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1465]"
+connectAttr "Hand_R_control_translateZ_Merged_Layer_inputB1.o" "HumanMale_RIGRN.phl[1466]"
 		;
-connectAttr "HumanMale_Hand_R_Elbow_locator_translateX.o" "HumanMale_RIGRN.phl[1466]"
+connectAttr "Clavicle_R_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1467]"
 		;
-connectAttr "HumanMale_Hand_R_Elbow_locator_translateY.o" "HumanMale_RIGRN.phl[1467]"
+connectAttr "Clavicle_R_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1468]"
 		;
-connectAttr "HumanMale_Hand_R_Elbow_locator_translateZ.o" "HumanMale_RIGRN.phl[1468]"
+connectAttr "Clavicle_R_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1469]"
 		;
-connectAttr "HumanMale_Arm_R_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1469]"
+connectAttr "HumanMale_Hand_R_Elbow_locator_translateX.o" "HumanMale_RIGRN.phl[1470]"
 		;
-connectAttr "HumanMale_Arm_R_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1470]"
+connectAttr "HumanMale_Hand_R_Elbow_locator_translateY.o" "HumanMale_RIGRN.phl[1471]"
 		;
-connectAttr "HumanMale_Arm_R_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1471]"
+connectAttr "HumanMale_Hand_R_Elbow_locator_translateZ.o" "HumanMale_RIGRN.phl[1472]"
 		;
-connectAttr "HumanMale_Foot_L_control_translateX.o" "HumanMale_RIGRN.phl[1472]";
-connectAttr "HumanMale_Foot_L_control_translateY.o" "HumanMale_RIGRN.phl[1473]";
-connectAttr "HumanMale_Foot_L_control_translateZ.o" "HumanMale_RIGRN.phl[1474]";
-connectAttr "HumanMale_Leg_L_Knee_locator_translateX.o" "HumanMale_RIGRN.phl[1475]"
+connectAttr "HumanMale_Arm_R_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1473]"
 		;
-connectAttr "HumanMale_Leg_L_Knee_locator_translateY.o" "HumanMale_RIGRN.phl[1476]"
+connectAttr "HumanMale_Arm_R_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1474]"
 		;
-connectAttr "HumanMale_Leg_L_Knee_locator_translateZ.o" "HumanMale_RIGRN.phl[1477]"
+connectAttr "HumanMale_Arm_R_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1475]"
 		;
-connectAttr "HumanMale_LegUpper_L_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1478]"
+connectAttr "HumanMale_Foot_L_control_translateX.o" "HumanMale_RIGRN.phl[1476]";
+connectAttr "HumanMale_Foot_L_control_translateY.o" "HumanMale_RIGRN.phl[1477]";
+connectAttr "HumanMale_Foot_L_control_translateZ.o" "HumanMale_RIGRN.phl[1478]";
+connectAttr "HumanMale_Leg_L_Knee_locator_translateX.o" "HumanMale_RIGRN.phl[1479]"
 		;
-connectAttr "HumanMale_LegUpper_L_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1479]"
+connectAttr "HumanMale_Leg_L_Knee_locator_translateY.o" "HumanMale_RIGRN.phl[1480]"
 		;
-connectAttr "HumanMale_LegUpper_L_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1480]"
+connectAttr "HumanMale_Leg_L_Knee_locator_translateZ.o" "HumanMale_RIGRN.phl[1481]"
 		;
-connectAttr "HumanMale_CloackFrontHand_L_control_translateX.o" "HumanMale_RIGRN.phl[1481]"
+connectAttr "HumanMale_LegUpper_L_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1482]"
 		;
-connectAttr "HumanMale_CloackFrontHand_L_control_translateY.o" "HumanMale_RIGRN.phl[1482]"
+connectAttr "HumanMale_LegUpper_L_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1483]"
 		;
-connectAttr "HumanMale_CloackFrontHand_L_control_translateZ.o" "HumanMale_RIGRN.phl[1483]"
+connectAttr "HumanMale_LegUpper_L_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1484]"
 		;
-connectAttr "CloackBackHand_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1484]"
+connectAttr "HumanMale_CloackFrontHand_L_control_translateX.o" "HumanMale_RIGRN.phl[1485]"
 		;
-connectAttr "CloackBackHand_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1485]"
+connectAttr "HumanMale_CloackFrontHand_L_control_translateY.o" "HumanMale_RIGRN.phl[1486]"
 		;
-connectAttr "CloackBackHand_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1486]"
+connectAttr "HumanMale_CloackFrontHand_L_control_translateZ.o" "HumanMale_RIGRN.phl[1487]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_translateX.o" "HumanMale_RIGRN.phl[1487]"
+connectAttr "CloackBackHand_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1488]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_translateY.o" "HumanMale_RIGRN.phl[1488]"
+connectAttr "CloackBackHand_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1489]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_translateZ.o" "HumanMale_RIGRN.phl[1489]"
+connectAttr "CloackBackHand_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1490]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_translateX.o" "HumanMale_RIGRN.phl[1490]"
+connectAttr "HumanMale_CloackBack_L_control_translateX.o" "HumanMale_RIGRN.phl[1491]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_translateY.o" "HumanMale_RIGRN.phl[1491]"
+connectAttr "HumanMale_CloackBack_L_control_translateY.o" "HumanMale_RIGRN.phl[1492]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_translateZ.o" "HumanMale_RIGRN.phl[1492]"
+connectAttr "HumanMale_CloackBack_L_control_translateZ.o" "HumanMale_RIGRN.phl[1493]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_translateX.o" "HumanMale_RIGRN.phl[1493]"
+connectAttr "HumanMale_CloackBack_R_control_translateX.o" "HumanMale_RIGRN.phl[1494]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_translateY.o" "HumanMale_RIGRN.phl[1494]"
+connectAttr "HumanMale_CloackBack_R_control_translateY.o" "HumanMale_RIGRN.phl[1495]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_translateZ.o" "HumanMale_RIGRN.phl[1495]"
+connectAttr "HumanMale_CloackBack_R_control_translateZ.o" "HumanMale_RIGRN.phl[1496]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_translateX.o" "HumanMale_RIGRN.phl[1496]"
+connectAttr "HumanMale_CloackBackHand_R_control_translateX.o" "HumanMale_RIGRN.phl[1497]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_translateY.o" "HumanMale_RIGRN.phl[1497]"
+connectAttr "HumanMale_CloackBackHand_R_control_translateY.o" "HumanMale_RIGRN.phl[1498]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_translateZ.o" "HumanMale_RIGRN.phl[1498]"
+connectAttr "HumanMale_CloackBackHand_R_control_translateZ.o" "HumanMale_RIGRN.phl[1499]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1499]" "R:Shoulders_R_control_translateX_AnimLayer1.ia"
+connectAttr "HumanMale_CloackFrontHand_R_control_translateX.o" "HumanMale_RIGRN.phl[1500]"
 		;
-connectAttr "HumanMale_Shoulders_R_control_translateX.o" "HumanMale_RIGRN.phl[1500]"
+connectAttr "HumanMale_CloackFrontHand_R_control_translateY.o" "HumanMale_RIGRN.phl[1501]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1501]" "R:Shoulders_R_control_translateY_AnimLayer1.ia"
+connectAttr "HumanMale_CloackFrontHand_R_control_translateZ.o" "HumanMale_RIGRN.phl[1502]"
 		;
-connectAttr "HumanMale_Shoulders_R_control_translateY.o" "HumanMale_RIGRN.phl[1502]"
+connectAttr "HumanMale_RIGRN.phl[1503]" "R:Shoulders_R_control_translateX_AnimLayer1.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1503]" "R:Shoulders_R_control_translateZ_AnimLayer1.ia"
+connectAttr "HumanMale_Shoulders_R_control_translateX.o" "HumanMale_RIGRN.phl[1504]"
 		;
-connectAttr "HumanMale_Shoulders_R_control_translateZ.o" "HumanMale_RIGRN.phl[1504]"
+connectAttr "HumanMale_RIGRN.phl[1505]" "R:Shoulders_R_control_translateY_AnimLayer1.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1505]" "R:Shoulders_L_control_translateX_AnimLayer1.ia"
+connectAttr "HumanMale_Shoulders_R_control_translateY.o" "HumanMale_RIGRN.phl[1506]"
 		;
-connectAttr "Shoulders_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1506]"
+connectAttr "HumanMale_RIGRN.phl[1507]" "R:Shoulders_R_control_translateZ_AnimLayer1.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1507]" "R:Shoulders_L_control_translateY_AnimLayer1.ia"
+connectAttr "HumanMale_Shoulders_R_control_translateZ.o" "HumanMale_RIGRN.phl[1508]"
 		;
-connectAttr "Shoulders_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1508]"
+connectAttr "HumanMale_RIGRN.phl[1509]" "R:Shoulders_L_control_translateX_AnimLayer1.ia"
 		;
-connectAttr "HumanMale_RIGRN.phl[1509]" "R:Shoulders_L_control_translateZ_AnimLayer1.ia"
+connectAttr "Shoulders_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1510]"
 		;
-connectAttr "Shoulders_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1510]"
+connectAttr "HumanMale_RIGRN.phl[1511]" "R:Shoulders_L_control_translateY_AnimLayer1.ia"
 		;
-connectAttr "Shoulders1_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1511]"
+connectAttr "Shoulders_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1512]"
 		;
-connectAttr "Shoulders1_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1512]"
+connectAttr "HumanMale_RIGRN.phl[1513]" "R:Shoulders_L_control_translateZ_AnimLayer1.ia"
 		;
-connectAttr "Shoulders1_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1513]"
+connectAttr "Shoulders_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1514]"
 		;
-connectAttr "HumanMale_Shoulders1_R_control_translateX.o" "HumanMale_RIGRN.phl[1514]"
+connectAttr "Shoulders1_L_control_translateX_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1515]"
 		;
-connectAttr "HumanMale_Shoulders1_R_control_translateY.o" "HumanMale_RIGRN.phl[1515]"
+connectAttr "Shoulders1_L_control_translateY_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1516]"
 		;
-connectAttr "HumanMale_Shoulders1_R_control_translateZ.o" "HumanMale_RIGRN.phl[1516]"
+connectAttr "Shoulders1_L_control_translateZ_Merged_Layer_inputB.o" "HumanMale_RIGRN.phl[1517]"
 		;
-connectAttr "HumanMale_Collar_control_translateX.o" "HumanMale_RIGRN.phl[1517]";
-connectAttr "HumanMale_Collar_control_translateY.o" "HumanMale_RIGRN.phl[1518]";
-connectAttr "HumanMale_Collar_control_translateZ.o" "HumanMale_RIGRN.phl[1519]";
-connectAttr "HumanMale_Collar1_control_translateX.o" "HumanMale_RIGRN.phl[1520]"
+connectAttr "HumanMale_Shoulders1_R_control_translateX.o" "HumanMale_RIGRN.phl[1518]"
 		;
-connectAttr "HumanMale_Collar1_control_translateY.o" "HumanMale_RIGRN.phl[1521]"
+connectAttr "HumanMale_Shoulders1_R_control_translateY.o" "HumanMale_RIGRN.phl[1519]"
 		;
-connectAttr "HumanMale_Collar1_control_translateZ.o" "HumanMale_RIGRN.phl[1522]"
+connectAttr "HumanMale_Shoulders1_R_control_translateZ.o" "HumanMale_RIGRN.phl[1520]"
 		;
-connectAttr "HumanMale_HatSide_control_translateX.o" "HumanMale_RIGRN.phl[1523]"
+connectAttr "HumanMale_Collar_control_translateX.o" "HumanMale_RIGRN.phl[1521]";
+connectAttr "HumanMale_Collar_control_translateY.o" "HumanMale_RIGRN.phl[1522]";
+connectAttr "HumanMale_Collar_control_translateZ.o" "HumanMale_RIGRN.phl[1523]";
+connectAttr "HumanMale_Collar1_control_translateX.o" "HumanMale_RIGRN.phl[1524]"
 		;
-connectAttr "HumanMale_HatSide_control_translateY.o" "HumanMale_RIGRN.phl[1524]"
+connectAttr "HumanMale_Collar1_control_translateY.o" "HumanMale_RIGRN.phl[1525]"
 		;
-connectAttr "HumanMale_HatSide_control_translateZ.o" "HumanMale_RIGRN.phl[1525]"
+connectAttr "HumanMale_Collar1_control_translateZ.o" "HumanMale_RIGRN.phl[1526]"
 		;
-connectAttr "HumanMale_Hat_control_translateX.o" "HumanMale_RIGRN.phl[1526]";
-connectAttr "HumanMale_Hat_control_translateY.o" "HumanMale_RIGRN.phl[1527]";
-connectAttr "HumanMale_Hat_control_translateZ.o" "HumanMale_RIGRN.phl[1528]";
-connectAttr "HumanMale_Hat1_control_translateX.o" "HumanMale_RIGRN.phl[1529]";
-connectAttr "HumanMale_Hat1_control_translateY.o" "HumanMale_RIGRN.phl[1530]";
-connectAttr "HumanMale_Hat1_control_translateZ.o" "HumanMale_RIGRN.phl[1531]";
-connectAttr "HumanMale_Hat2_control_translateX.o" "HumanMale_RIGRN.phl[1532]";
-connectAttr "HumanMale_Hat2_control_translateY.o" "HumanMale_RIGRN.phl[1533]";
-connectAttr "HumanMale_Hat2_control_translateZ.o" "HumanMale_RIGRN.phl[1534]";
-connectAttr "HumanMale_Feather_control_translateX.o" "HumanMale_RIGRN.phl[1535]"
+connectAttr "HumanMale_HatSide_control_translateX.o" "HumanMale_RIGRN.phl[1527]"
 		;
-connectAttr "HumanMale_Feather_control_translateY.o" "HumanMale_RIGRN.phl[1536]"
+connectAttr "HumanMale_HatSide_control_translateY.o" "HumanMale_RIGRN.phl[1528]"
 		;
-connectAttr "HumanMale_Feather_control_translateZ.o" "HumanMale_RIGRN.phl[1537]"
+connectAttr "HumanMale_HatSide_control_translateZ.o" "HumanMale_RIGRN.phl[1529]"
 		;
-connectAttr "HumanMale_Feather1_control_translateX.o" "HumanMale_RIGRN.phl[1538]"
+connectAttr "HumanMale_Hat_control_translateX.o" "HumanMale_RIGRN.phl[1530]";
+connectAttr "HumanMale_Hat_control_translateY.o" "HumanMale_RIGRN.phl[1531]";
+connectAttr "HumanMale_Hat_control_translateZ.o" "HumanMale_RIGRN.phl[1532]";
+connectAttr "HumanMale_Hat1_control_translateX.o" "HumanMale_RIGRN.phl[1533]";
+connectAttr "HumanMale_Hat1_control_translateY.o" "HumanMale_RIGRN.phl[1534]";
+connectAttr "HumanMale_Hat1_control_translateZ.o" "HumanMale_RIGRN.phl[1535]";
+connectAttr "HumanMale_Hat2_control_translateX.o" "HumanMale_RIGRN.phl[1536]";
+connectAttr "HumanMale_Hat2_control_translateY.o" "HumanMale_RIGRN.phl[1537]";
+connectAttr "HumanMale_Hat2_control_translateZ.o" "HumanMale_RIGRN.phl[1538]";
+connectAttr "HumanMale_Feather_control_translateX.o" "HumanMale_RIGRN.phl[1539]"
 		;
-connectAttr "HumanMale_Feather1_control_translateY.o" "HumanMale_RIGRN.phl[1539]"
+connectAttr "HumanMale_Feather_control_translateY.o" "HumanMale_RIGRN.phl[1540]"
 		;
-connectAttr "HumanMale_Feather1_control_translateZ.o" "HumanMale_RIGRN.phl[1540]"
+connectAttr "HumanMale_Feather_control_translateZ.o" "HumanMale_RIGRN.phl[1541]"
 		;
-connectAttr "HumanMale_Breath_control_translateX.o" "HumanMale_RIGRN.phl[1541]";
-connectAttr "HumanMale_Breath_control_translateY.o" "HumanMale_RIGRN.phl[1542]";
-connectAttr "HumanMale_Breath_control_translateZ.o" "HumanMale_RIGRN.phl[1543]";
-connectAttr "HumanMale_Heel_L_control_translateX.o" "HumanMale_RIGRN.phl[1544]";
-connectAttr "HumanMale_Heel_L_control_translateY.o" "HumanMale_RIGRN.phl[1545]";
-connectAttr "HumanMale_Heel_L_control_translateZ.o" "HumanMale_RIGRN.phl[1546]";
-connectAttr "HumanMale_ToeEnd_L_control_translateX.o" "HumanMale_RIGRN.phl[1547]"
+connectAttr "HumanMale_Feather1_control_translateX.o" "HumanMale_RIGRN.phl[1542]"
 		;
-connectAttr "HumanMale_ToeEnd_L_control_translateY.o" "HumanMale_RIGRN.phl[1548]"
+connectAttr "HumanMale_Feather1_control_translateY.o" "HumanMale_RIGRN.phl[1543]"
 		;
-connectAttr "HumanMale_ToeEnd_L_control_translateZ.o" "HumanMale_RIGRN.phl[1549]"
+connectAttr "HumanMale_Feather1_control_translateZ.o" "HumanMale_RIGRN.phl[1544]"
 		;
-connectAttr "HumanMale_Toe1_L_control_translateX.o" "HumanMale_RIGRN.phl[1550]";
-connectAttr "HumanMale_Toe1_L_control_translateY.o" "HumanMale_RIGRN.phl[1551]";
-connectAttr "HumanMale_Toe1_L_control_translateZ.o" "HumanMale_RIGRN.phl[1552]";
-connectAttr "HumanMale_Ball_L_translateX.o" "HumanMale_RIGRN.phl[1553]";
-connectAttr "HumanMale_Ball_L_translateY.o" "HumanMale_RIGRN.phl[1554]";
-connectAttr "HumanMale_Ball_L_translateZ.o" "HumanMale_RIGRN.phl[1555]";
-connectAttr "HumanMale_Swivel_L_control_translateX.o" "HumanMale_RIGRN.phl[1556]"
+connectAttr "HumanMale_Breath_control_translateX.o" "HumanMale_RIGRN.phl[1545]";
+connectAttr "HumanMale_Breath_control_translateY.o" "HumanMale_RIGRN.phl[1546]";
+connectAttr "HumanMale_Breath_control_translateZ.o" "HumanMale_RIGRN.phl[1547]";
+connectAttr "HumanMale_Heel_L_control_translateX.o" "HumanMale_RIGRN.phl[1548]";
+connectAttr "HumanMale_Heel_L_control_translateY.o" "HumanMale_RIGRN.phl[1549]";
+connectAttr "HumanMale_Heel_L_control_translateZ.o" "HumanMale_RIGRN.phl[1550]";
+connectAttr "HumanMale_ToeEnd_L_control_translateX.o" "HumanMale_RIGRN.phl[1551]"
 		;
-connectAttr "HumanMale_Swivel_L_control_translateY.o" "HumanMale_RIGRN.phl[1557]"
+connectAttr "HumanMale_ToeEnd_L_control_translateY.o" "HumanMale_RIGRN.phl[1552]"
 		;
-connectAttr "HumanMale_Swivel_L_control_translateZ.o" "HumanMale_RIGRN.phl[1558]"
+connectAttr "HumanMale_ToeEnd_L_control_translateZ.o" "HumanMale_RIGRN.phl[1553]"
 		;
-connectAttr "HumanMale_EyeLids_control_translateX.o" "HumanMale_RIGRN.phl[1559]"
+connectAttr "HumanMale_Toe1_L_control_translateX.o" "HumanMale_RIGRN.phl[1554]";
+connectAttr "HumanMale_Toe1_L_control_translateY.o" "HumanMale_RIGRN.phl[1555]";
+connectAttr "HumanMale_Toe1_L_control_translateZ.o" "HumanMale_RIGRN.phl[1556]";
+connectAttr "HumanMale_Ball_L_translateX.o" "HumanMale_RIGRN.phl[1557]";
+connectAttr "HumanMale_Ball_L_translateY.o" "HumanMale_RIGRN.phl[1558]";
+connectAttr "HumanMale_Ball_L_translateZ.o" "HumanMale_RIGRN.phl[1559]";
+connectAttr "HumanMale_Swivel_L_control_translateX.o" "HumanMale_RIGRN.phl[1560]"
 		;
-connectAttr "HumanMale_EyeLids_control_translateY.o" "HumanMale_RIGRN.phl[1560]"
+connectAttr "HumanMale_Swivel_L_control_translateY.o" "HumanMale_RIGRN.phl[1561]"
 		;
-connectAttr "HumanMale_EyeLids_control_translateZ.o" "HumanMale_RIGRN.phl[1561]"
+connectAttr "HumanMale_Swivel_L_control_translateZ.o" "HumanMale_RIGRN.phl[1562]"
 		;
-connectAttr "HumanMale_Eye_R_control_translateX.o" "HumanMale_RIGRN.phl[1562]";
-connectAttr "HumanMale_Eye_R_control_translateY.o" "HumanMale_RIGRN.phl[1563]";
-connectAttr "HumanMale_Eye_R_control_translateZ.o" "HumanMale_RIGRN.phl[1564]";
-connectAttr "HumanMale_Eye_L_control_translateX.o" "HumanMale_RIGRN.phl[1565]";
-connectAttr "HumanMale_Eye_L_control_translateY.o" "HumanMale_RIGRN.phl[1566]";
-connectAttr "HumanMale_Eye_L_control_translateZ.o" "HumanMale_RIGRN.phl[1567]";
-connectAttr "HumanMale_WeaponWorld_L_control_translateX.o" "HumanMale_RIGRN.phl[1568]"
+connectAttr "HumanMale_EyeLids_control_translateX.o" "HumanMale_RIGRN.phl[1563]"
 		;
-connectAttr "HumanMale_WeaponWorld_L_control_translateY.o" "HumanMale_RIGRN.phl[1569]"
+connectAttr "HumanMale_EyeLids_control_translateY.o" "HumanMale_RIGRN.phl[1564]"
 		;
-connectAttr "HumanMale_WeaponWorld_L_control_translateZ.o" "HumanMale_RIGRN.phl[1570]"
+connectAttr "HumanMale_EyeLids_control_translateZ.o" "HumanMale_RIGRN.phl[1565]"
 		;
-connectAttr "HumanMale_WeaponWorld_R_control_translateX.o" "HumanMale_RIGRN.phl[1571]"
+connectAttr "HumanMale_Eye_R_control_translateX.o" "HumanMale_RIGRN.phl[1566]";
+connectAttr "HumanMale_Eye_R_control_translateY.o" "HumanMale_RIGRN.phl[1567]";
+connectAttr "HumanMale_Eye_R_control_translateZ.o" "HumanMale_RIGRN.phl[1568]";
+connectAttr "HumanMale_Eye_L_control_translateX.o" "HumanMale_RIGRN.phl[1569]";
+connectAttr "HumanMale_Eye_L_control_translateY.o" "HumanMale_RIGRN.phl[1570]";
+connectAttr "HumanMale_Eye_L_control_translateZ.o" "HumanMale_RIGRN.phl[1571]";
+connectAttr "HumanMale_WeaponWorld_L_control_translateX.o" "HumanMale_RIGRN.phl[1572]"
 		;
-connectAttr "HumanMale_WeaponWorld_R_control_translateY.o" "HumanMale_RIGRN.phl[1572]"
+connectAttr "HumanMale_WeaponWorld_L_control_translateY.o" "HumanMale_RIGRN.phl[1573]"
 		;
-connectAttr "HumanMale_WeaponWorld_R_control_translateZ.o" "HumanMale_RIGRN.phl[1573]"
+connectAttr "HumanMale_WeaponWorld_L_control_translateZ.o" "HumanMale_RIGRN.phl[1574]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_translateX.o" "HumanMale_RIGRN.phl[1574]"
+connectAttr "HumanMale_WeaponWorld_R_control_translateX.o" "HumanMale_RIGRN.phl[1575]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_translateY.o" "HumanMale_RIGRN.phl[1575]"
+connectAttr "HumanMale_WeaponWorld_R_control_translateY.o" "HumanMale_RIGRN.phl[1576]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_translateZ.o" "HumanMale_RIGRN.phl[1576]"
+connectAttr "HumanMale_WeaponWorld_R_control_translateZ.o" "HumanMale_RIGRN.phl[1577]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_translateX.o" "HumanMale_RIGRN.phl[1577]"
+connectAttr "HumanMale_Slot_Hand_R_control_translateX.o" "HumanMale_RIGRN.phl[1578]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_translateY.o" "HumanMale_RIGRN.phl[1578]"
+connectAttr "HumanMale_Slot_Hand_R_control_translateY.o" "HumanMale_RIGRN.phl[1579]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_translateZ.o" "HumanMale_RIGRN.phl[1579]"
+connectAttr "HumanMale_Slot_Hand_R_control_translateZ.o" "HumanMale_RIGRN.phl[1580]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_translateZ.o" "HumanMale_RIGRN.phl[1580]"
+connectAttr "HumanMale_Slot_Hand_L_control_translateX.o" "HumanMale_RIGRN.phl[1581]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_translateY.o" "HumanMale_RIGRN.phl[1581]"
+connectAttr "HumanMale_Slot_Hand_L_control_translateY.o" "HumanMale_RIGRN.phl[1582]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_translateX.o" "HumanMale_RIGRN.phl[1582]"
+connectAttr "HumanMale_Slot_Hand_L_control_translateZ.o" "HumanMale_RIGRN.phl[1583]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_translateZ.o" "HumanMale_RIGRN.phl[1583]"
+connectAttr "HumanMale_Slot_Hand_R_locator_translateZ.o" "HumanMale_RIGRN.phl[1584]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_translateY.o" "HumanMale_RIGRN.phl[1584]"
+connectAttr "HumanMale_Slot_Hand_R_locator_translateY.o" "HumanMale_RIGRN.phl[1585]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_translateX.o" "HumanMale_RIGRN.phl[1585]"
+connectAttr "HumanMale_Slot_Hand_R_locator_translateX.o" "HumanMale_RIGRN.phl[1586]"
 		;
-connectAttr "HumanMale_Foot_R_control_translateX.o" "HumanMale_RIGRN.phl[1586]";
-connectAttr "HumanMale_Foot_R_control_translateY.o" "HumanMale_RIGRN.phl[1587]";
-connectAttr "HumanMale_Foot_R_control_translateZ.o" "HumanMale_RIGRN.phl[1588]";
-connectAttr "HumanMale_Leg_R_Knee_locator_translateX.o" "HumanMale_RIGRN.phl[1589]"
+connectAttr "HumanMale_Slot_Hand_L_locator_translateZ.o" "HumanMale_RIGRN.phl[1587]"
 		;
-connectAttr "HumanMale_Leg_R_Knee_locator_translateY.o" "HumanMale_RIGRN.phl[1590]"
+connectAttr "HumanMale_Slot_Hand_L_locator_translateY.o" "HumanMale_RIGRN.phl[1588]"
 		;
-connectAttr "HumanMale_Leg_R_Knee_locator_translateZ.o" "HumanMale_RIGRN.phl[1591]"
+connectAttr "HumanMale_Slot_Hand_L_locator_translateX.o" "HumanMale_RIGRN.phl[1589]"
 		;
-connectAttr "HumanMale_LegUpper_R_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1592]"
+connectAttr "HumanMale_Foot_R_control_translateX.o" "HumanMale_RIGRN.phl[1590]";
+connectAttr "HumanMale_Foot_R_control_translateY.o" "HumanMale_RIGRN.phl[1591]";
+connectAttr "HumanMale_Foot_R_control_translateZ.o" "HumanMale_RIGRN.phl[1592]";
+connectAttr "HumanMale_Leg_R_Knee_locator_translateX.o" "HumanMale_RIGRN.phl[1593]"
 		;
-connectAttr "HumanMale_LegUpper_R_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1593]"
+connectAttr "HumanMale_Leg_R_Knee_locator_translateY.o" "HumanMale_RIGRN.phl[1594]"
 		;
-connectAttr "HumanMale_LegUpper_R_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1594]"
+connectAttr "HumanMale_Leg_R_Knee_locator_translateZ.o" "HumanMale_RIGRN.phl[1595]"
 		;
-connectAttr "HumanMale_Heel_R_control_translateX.o" "HumanMale_RIGRN.phl[1595]";
-connectAttr "HumanMale_Heel_R_control_translateY.o" "HumanMale_RIGRN.phl[1596]";
-connectAttr "HumanMale_Heel_R_control_translateZ.o" "HumanMale_RIGRN.phl[1597]";
-connectAttr "HumanMale_ToeEnd_R_control_translateX.o" "HumanMale_RIGRN.phl[1598]"
+connectAttr "HumanMale_LegUpper_R_FK_locator_translateX.o" "HumanMale_RIGRN.phl[1596]"
 		;
-connectAttr "HumanMale_ToeEnd_R_control_translateY.o" "HumanMale_RIGRN.phl[1599]"
+connectAttr "HumanMale_LegUpper_R_FK_locator_translateY.o" "HumanMale_RIGRN.phl[1597]"
 		;
-connectAttr "HumanMale_ToeEnd_R_control_translateZ.o" "HumanMale_RIGRN.phl[1600]"
+connectAttr "HumanMale_LegUpper_R_FK_locator_translateZ.o" "HumanMale_RIGRN.phl[1598]"
 		;
-connectAttr "HumanMale_Toe1_R_control_translateX.o" "HumanMale_RIGRN.phl[1601]";
-connectAttr "HumanMale_Toe1_R_control_translateY.o" "HumanMale_RIGRN.phl[1602]";
-connectAttr "HumanMale_Toe1_R_control_translateZ.o" "HumanMale_RIGRN.phl[1603]";
-connectAttr "HumanMale_Ball_R_translateX.o" "HumanMale_RIGRN.phl[1604]";
-connectAttr "HumanMale_Ball_R_translateY.o" "HumanMale_RIGRN.phl[1605]";
-connectAttr "HumanMale_Ball_R_translateZ.o" "HumanMale_RIGRN.phl[1606]";
-connectAttr "HumanMale_Swivel_R_control_translateX.o" "HumanMale_RIGRN.phl[1607]"
+connectAttr "HumanMale_Heel_R_control_translateX.o" "HumanMale_RIGRN.phl[1599]";
+connectAttr "HumanMale_Heel_R_control_translateY.o" "HumanMale_RIGRN.phl[1600]";
+connectAttr "HumanMale_Heel_R_control_translateZ.o" "HumanMale_RIGRN.phl[1601]";
+connectAttr "HumanMale_ToeEnd_R_control_translateX.o" "HumanMale_RIGRN.phl[1602]"
 		;
-connectAttr "HumanMale_Swivel_R_control_translateY.o" "HumanMale_RIGRN.phl[1608]"
+connectAttr "HumanMale_ToeEnd_R_control_translateY.o" "HumanMale_RIGRN.phl[1603]"
 		;
-connectAttr "HumanMale_Swivel_R_control_translateZ.o" "HumanMale_RIGRN.phl[1609]"
+connectAttr "HumanMale_ToeEnd_R_control_translateZ.o" "HumanMale_RIGRN.phl[1604]"
 		;
-connectAttr "HumanMale_Finger21_R_control_translateX.o" "HumanMale_RIGRN.phl[1610]"
+connectAttr "HumanMale_Toe1_R_control_translateX.o" "HumanMale_RIGRN.phl[1605]";
+connectAttr "HumanMale_Toe1_R_control_translateY.o" "HumanMale_RIGRN.phl[1606]";
+connectAttr "HumanMale_Toe1_R_control_translateZ.o" "HumanMale_RIGRN.phl[1607]";
+connectAttr "HumanMale_Ball_R_translateX.o" "HumanMale_RIGRN.phl[1608]";
+connectAttr "HumanMale_Ball_R_translateY.o" "HumanMale_RIGRN.phl[1609]";
+connectAttr "HumanMale_Ball_R_translateZ.o" "HumanMale_RIGRN.phl[1610]";
+connectAttr "HumanMale_Swivel_R_control_translateX.o" "HumanMale_RIGRN.phl[1611]"
 		;
-connectAttr "HumanMale_Finger21_R_control_translateY.o" "HumanMale_RIGRN.phl[1611]"
+connectAttr "HumanMale_Swivel_R_control_translateY.o" "HumanMale_RIGRN.phl[1612]"
 		;
-connectAttr "HumanMale_Finger21_R_control_translateZ.o" "HumanMale_RIGRN.phl[1612]"
+connectAttr "HumanMale_Swivel_R_control_translateZ.o" "HumanMale_RIGRN.phl[1613]"
 		;
-connectAttr "HumanMale_Finger22_R_control_translateX.o" "HumanMale_RIGRN.phl[1613]"
+connectAttr "HumanMale_Finger21_R_control_translateX.o" "HumanMale_RIGRN.phl[1614]"
 		;
-connectAttr "HumanMale_Finger22_R_control_translateY.o" "HumanMale_RIGRN.phl[1614]"
+connectAttr "HumanMale_Finger21_R_control_translateY.o" "HumanMale_RIGRN.phl[1615]"
 		;
-connectAttr "HumanMale_Finger22_R_control_translateZ.o" "HumanMale_RIGRN.phl[1615]"
+connectAttr "HumanMale_Finger21_R_control_translateZ.o" "HumanMale_RIGRN.phl[1616]"
 		;
-connectAttr "HumanMale_Finger23_R_control_translateX.o" "HumanMale_RIGRN.phl[1616]"
+connectAttr "HumanMale_Finger22_R_control_translateX.o" "HumanMale_RIGRN.phl[1617]"
 		;
-connectAttr "HumanMale_Finger23_R_control_translateY.o" "HumanMale_RIGRN.phl[1617]"
+connectAttr "HumanMale_Finger22_R_control_translateY.o" "HumanMale_RIGRN.phl[1618]"
 		;
-connectAttr "HumanMale_Finger23_R_control_translateZ.o" "HumanMale_RIGRN.phl[1618]"
+connectAttr "HumanMale_Finger22_R_control_translateZ.o" "HumanMale_RIGRN.phl[1619]"
 		;
-connectAttr "HumanMale_Finger31_R_control_translateX.o" "HumanMale_RIGRN.phl[1619]"
+connectAttr "HumanMale_Finger23_R_control_translateX.o" "HumanMale_RIGRN.phl[1620]"
 		;
-connectAttr "HumanMale_Finger31_R_control_translateY.o" "HumanMale_RIGRN.phl[1620]"
+connectAttr "HumanMale_Finger23_R_control_translateY.o" "HumanMale_RIGRN.phl[1621]"
 		;
-connectAttr "HumanMale_Finger31_R_control_translateZ.o" "HumanMale_RIGRN.phl[1621]"
+connectAttr "HumanMale_Finger23_R_control_translateZ.o" "HumanMale_RIGRN.phl[1622]"
 		;
-connectAttr "HumanMale_Finger32_R_control_translateX.o" "HumanMale_RIGRN.phl[1622]"
+connectAttr "HumanMale_Finger31_R_control_translateX.o" "HumanMale_RIGRN.phl[1623]"
 		;
-connectAttr "HumanMale_Finger32_R_control_translateY.o" "HumanMale_RIGRN.phl[1623]"
+connectAttr "HumanMale_Finger31_R_control_translateY.o" "HumanMale_RIGRN.phl[1624]"
 		;
-connectAttr "HumanMale_Finger32_R_control_translateZ.o" "HumanMale_RIGRN.phl[1624]"
+connectAttr "HumanMale_Finger31_R_control_translateZ.o" "HumanMale_RIGRN.phl[1625]"
 		;
-connectAttr "HumanMale_Finger33_R_control_translateX.o" "HumanMale_RIGRN.phl[1625]"
+connectAttr "HumanMale_Finger32_R_control_translateX.o" "HumanMale_RIGRN.phl[1626]"
 		;
-connectAttr "HumanMale_Finger33_R_control_translateY.o" "HumanMale_RIGRN.phl[1626]"
+connectAttr "HumanMale_Finger32_R_control_translateY.o" "HumanMale_RIGRN.phl[1627]"
 		;
-connectAttr "HumanMale_Finger33_R_control_translateZ.o" "HumanMale_RIGRN.phl[1627]"
+connectAttr "HumanMale_Finger32_R_control_translateZ.o" "HumanMale_RIGRN.phl[1628]"
 		;
-connectAttr "HumanMale_Finger41_R_control_translateX.o" "HumanMale_RIGRN.phl[1628]"
+connectAttr "HumanMale_Finger33_R_control_translateX.o" "HumanMale_RIGRN.phl[1629]"
 		;
-connectAttr "HumanMale_Finger41_R_control_translateY.o" "HumanMale_RIGRN.phl[1629]"
+connectAttr "HumanMale_Finger33_R_control_translateY.o" "HumanMale_RIGRN.phl[1630]"
 		;
-connectAttr "HumanMale_Finger41_R_control_translateZ.o" "HumanMale_RIGRN.phl[1630]"
+connectAttr "HumanMale_Finger33_R_control_translateZ.o" "HumanMale_RIGRN.phl[1631]"
 		;
-connectAttr "HumanMale_Finger42_R_control_translateX.o" "HumanMale_RIGRN.phl[1631]"
+connectAttr "HumanMale_Finger41_R_control_translateX.o" "HumanMale_RIGRN.phl[1632]"
 		;
-connectAttr "HumanMale_Finger42_R_control_translateY.o" "HumanMale_RIGRN.phl[1632]"
+connectAttr "HumanMale_Finger41_R_control_translateY.o" "HumanMale_RIGRN.phl[1633]"
 		;
-connectAttr "HumanMale_Finger42_R_control_translateZ.o" "HumanMale_RIGRN.phl[1633]"
+connectAttr "HumanMale_Finger41_R_control_translateZ.o" "HumanMale_RIGRN.phl[1634]"
 		;
-connectAttr "HumanMale_Finger43_R_control_translateX.o" "HumanMale_RIGRN.phl[1634]"
+connectAttr "HumanMale_Finger42_R_control_translateX.o" "HumanMale_RIGRN.phl[1635]"
 		;
-connectAttr "HumanMale_Finger43_R_control_translateY.o" "HumanMale_RIGRN.phl[1635]"
+connectAttr "HumanMale_Finger42_R_control_translateY.o" "HumanMale_RIGRN.phl[1636]"
 		;
-connectAttr "HumanMale_Finger43_R_control_translateZ.o" "HumanMale_RIGRN.phl[1636]"
+connectAttr "HumanMale_Finger42_R_control_translateZ.o" "HumanMale_RIGRN.phl[1637]"
 		;
-connectAttr "HumanMale_Finger51_R_control_translateX.o" "HumanMale_RIGRN.phl[1637]"
+connectAttr "HumanMale_Finger43_R_control_translateX.o" "HumanMale_RIGRN.phl[1638]"
 		;
-connectAttr "HumanMale_Finger51_R_control_translateY.o" "HumanMale_RIGRN.phl[1638]"
+connectAttr "HumanMale_Finger43_R_control_translateY.o" "HumanMale_RIGRN.phl[1639]"
 		;
-connectAttr "HumanMale_Finger51_R_control_translateZ.o" "HumanMale_RIGRN.phl[1639]"
+connectAttr "HumanMale_Finger43_R_control_translateZ.o" "HumanMale_RIGRN.phl[1640]"
 		;
-connectAttr "HumanMale_Finger52_R_control_translateX.o" "HumanMale_RIGRN.phl[1640]"
+connectAttr "HumanMale_Finger51_R_control_translateX.o" "HumanMale_RIGRN.phl[1641]"
 		;
-connectAttr "HumanMale_Finger52_R_control_translateY.o" "HumanMale_RIGRN.phl[1641]"
+connectAttr "HumanMale_Finger51_R_control_translateY.o" "HumanMale_RIGRN.phl[1642]"
 		;
-connectAttr "HumanMale_Finger52_R_control_translateZ.o" "HumanMale_RIGRN.phl[1642]"
+connectAttr "HumanMale_Finger51_R_control_translateZ.o" "HumanMale_RIGRN.phl[1643]"
 		;
-connectAttr "HumanMale_Finger53_R_control_translateX.o" "HumanMale_RIGRN.phl[1643]"
+connectAttr "HumanMale_Finger52_R_control_translateX.o" "HumanMale_RIGRN.phl[1644]"
 		;
-connectAttr "HumanMale_Finger53_R_control_translateY.o" "HumanMale_RIGRN.phl[1644]"
+connectAttr "HumanMale_Finger52_R_control_translateY.o" "HumanMale_RIGRN.phl[1645]"
 		;
-connectAttr "HumanMale_Finger53_R_control_translateZ.o" "HumanMale_RIGRN.phl[1645]"
+connectAttr "HumanMale_Finger52_R_control_translateZ.o" "HumanMale_RIGRN.phl[1646]"
 		;
-connectAttr "HumanMale_Finger11_R_control_translateX.o" "HumanMale_RIGRN.phl[1646]"
+connectAttr "HumanMale_Finger53_R_control_translateX.o" "HumanMale_RIGRN.phl[1647]"
 		;
-connectAttr "HumanMale_Finger11_R_control_translateY.o" "HumanMale_RIGRN.phl[1647]"
+connectAttr "HumanMale_Finger53_R_control_translateY.o" "HumanMale_RIGRN.phl[1648]"
 		;
-connectAttr "HumanMale_Finger11_R_control_translateZ.o" "HumanMale_RIGRN.phl[1648]"
+connectAttr "HumanMale_Finger53_R_control_translateZ.o" "HumanMale_RIGRN.phl[1649]"
 		;
-connectAttr "HumanMale_Finger12_R_control_translateX.o" "HumanMale_RIGRN.phl[1649]"
+connectAttr "HumanMale_Finger11_R_control_translateX.o" "HumanMale_RIGRN.phl[1650]"
 		;
-connectAttr "HumanMale_Finger12_R_control_translateY.o" "HumanMale_RIGRN.phl[1650]"
+connectAttr "HumanMale_Finger11_R_control_translateY.o" "HumanMale_RIGRN.phl[1651]"
 		;
-connectAttr "HumanMale_Finger12_R_control_translateZ.o" "HumanMale_RIGRN.phl[1651]"
+connectAttr "HumanMale_Finger11_R_control_translateZ.o" "HumanMale_RIGRN.phl[1652]"
 		;
-connectAttr "HumanMale_Finger13_R_control_translateX.o" "HumanMale_RIGRN.phl[1652]"
+connectAttr "HumanMale_Finger12_R_control_translateX.o" "HumanMale_RIGRN.phl[1653]"
 		;
-connectAttr "HumanMale_Finger13_R_control_translateY.o" "HumanMale_RIGRN.phl[1653]"
+connectAttr "HumanMale_Finger12_R_control_translateY.o" "HumanMale_RIGRN.phl[1654]"
 		;
-connectAttr "HumanMale_Finger13_R_control_translateZ.o" "HumanMale_RIGRN.phl[1654]"
+connectAttr "HumanMale_Finger12_R_control_translateZ.o" "HumanMale_RIGRN.phl[1655]"
 		;
-connectAttr "HumanMale_Finger51_L_control_translateX.o" "HumanMale_RIGRN.phl[1655]"
+connectAttr "HumanMale_Finger13_R_control_translateX.o" "HumanMale_RIGRN.phl[1656]"
 		;
-connectAttr "HumanMale_Finger51_L_control_translateY.o" "HumanMale_RIGRN.phl[1656]"
+connectAttr "HumanMale_Finger13_R_control_translateY.o" "HumanMale_RIGRN.phl[1657]"
 		;
-connectAttr "HumanMale_Finger51_L_control_translateZ.o" "HumanMale_RIGRN.phl[1657]"
+connectAttr "HumanMale_Finger13_R_control_translateZ.o" "HumanMale_RIGRN.phl[1658]"
 		;
-connectAttr "HumanMale_Finger52_L_control_translateX.o" "HumanMale_RIGRN.phl[1658]"
+connectAttr "HumanMale_Finger51_L_control_translateX.o" "HumanMale_RIGRN.phl[1659]"
 		;
-connectAttr "HumanMale_Finger52_L_control_translateY.o" "HumanMale_RIGRN.phl[1659]"
+connectAttr "HumanMale_Finger51_L_control_translateY.o" "HumanMale_RIGRN.phl[1660]"
 		;
-connectAttr "HumanMale_Finger52_L_control_translateZ.o" "HumanMale_RIGRN.phl[1660]"
+connectAttr "HumanMale_Finger51_L_control_translateZ.o" "HumanMale_RIGRN.phl[1661]"
 		;
-connectAttr "HumanMale_Finger53_L_control_translateX.o" "HumanMale_RIGRN.phl[1661]"
+connectAttr "HumanMale_Finger52_L_control_translateX.o" "HumanMale_RIGRN.phl[1662]"
 		;
-connectAttr "HumanMale_Finger53_L_control_translateY.o" "HumanMale_RIGRN.phl[1662]"
+connectAttr "HumanMale_Finger52_L_control_translateY.o" "HumanMale_RIGRN.phl[1663]"
 		;
-connectAttr "HumanMale_Finger53_L_control_translateZ.o" "HumanMale_RIGRN.phl[1663]"
+connectAttr "HumanMale_Finger52_L_control_translateZ.o" "HumanMale_RIGRN.phl[1664]"
 		;
-connectAttr "HumanMale_Finger41_L_control_translateX.o" "HumanMale_RIGRN.phl[1664]"
+connectAttr "HumanMale_Finger53_L_control_translateX.o" "HumanMale_RIGRN.phl[1665]"
 		;
-connectAttr "HumanMale_Finger41_L_control_translateY.o" "HumanMale_RIGRN.phl[1665]"
+connectAttr "HumanMale_Finger53_L_control_translateY.o" "HumanMale_RIGRN.phl[1666]"
 		;
-connectAttr "HumanMale_Finger41_L_control_translateZ.o" "HumanMale_RIGRN.phl[1666]"
+connectAttr "HumanMale_Finger53_L_control_translateZ.o" "HumanMale_RIGRN.phl[1667]"
 		;
-connectAttr "HumanMale_Finger42_L_control_translateX.o" "HumanMale_RIGRN.phl[1667]"
+connectAttr "HumanMale_Finger41_L_control_translateX.o" "HumanMale_RIGRN.phl[1668]"
 		;
-connectAttr "HumanMale_Finger42_L_control_translateY.o" "HumanMale_RIGRN.phl[1668]"
+connectAttr "HumanMale_Finger41_L_control_translateY.o" "HumanMale_RIGRN.phl[1669]"
 		;
-connectAttr "HumanMale_Finger42_L_control_translateZ.o" "HumanMale_RIGRN.phl[1669]"
+connectAttr "HumanMale_Finger41_L_control_translateZ.o" "HumanMale_RIGRN.phl[1670]"
 		;
-connectAttr "HumanMale_Finger43_L_control_translateX.o" "HumanMale_RIGRN.phl[1670]"
+connectAttr "HumanMale_Finger42_L_control_translateX.o" "HumanMale_RIGRN.phl[1671]"
 		;
-connectAttr "HumanMale_Finger43_L_control_translateY.o" "HumanMale_RIGRN.phl[1671]"
+connectAttr "HumanMale_Finger42_L_control_translateY.o" "HumanMale_RIGRN.phl[1672]"
 		;
-connectAttr "HumanMale_Finger43_L_control_translateZ.o" "HumanMale_RIGRN.phl[1672]"
+connectAttr "HumanMale_Finger42_L_control_translateZ.o" "HumanMale_RIGRN.phl[1673]"
 		;
-connectAttr "HumanMale_Finger31_L_control_translateX.o" "HumanMale_RIGRN.phl[1673]"
+connectAttr "HumanMale_Finger43_L_control_translateX.o" "HumanMale_RIGRN.phl[1674]"
 		;
-connectAttr "HumanMale_Finger31_L_control_translateY.o" "HumanMale_RIGRN.phl[1674]"
+connectAttr "HumanMale_Finger43_L_control_translateY.o" "HumanMale_RIGRN.phl[1675]"
 		;
-connectAttr "HumanMale_Finger31_L_control_translateZ.o" "HumanMale_RIGRN.phl[1675]"
+connectAttr "HumanMale_Finger43_L_control_translateZ.o" "HumanMale_RIGRN.phl[1676]"
 		;
-connectAttr "HumanMale_Finger32_L_control_translateX.o" "HumanMale_RIGRN.phl[1676]"
+connectAttr "HumanMale_Finger31_L_control_translateX.o" "HumanMale_RIGRN.phl[1677]"
 		;
-connectAttr "HumanMale_Finger32_L_control_translateY.o" "HumanMale_RIGRN.phl[1677]"
+connectAttr "HumanMale_Finger31_L_control_translateY.o" "HumanMale_RIGRN.phl[1678]"
 		;
-connectAttr "HumanMale_Finger32_L_control_translateZ.o" "HumanMale_RIGRN.phl[1678]"
+connectAttr "HumanMale_Finger31_L_control_translateZ.o" "HumanMale_RIGRN.phl[1679]"
 		;
-connectAttr "HumanMale_Finger33_L_control_translateX.o" "HumanMale_RIGRN.phl[1679]"
+connectAttr "HumanMale_Finger32_L_control_translateX.o" "HumanMale_RIGRN.phl[1680]"
 		;
-connectAttr "HumanMale_Finger33_L_control_translateY.o" "HumanMale_RIGRN.phl[1680]"
+connectAttr "HumanMale_Finger32_L_control_translateY.o" "HumanMale_RIGRN.phl[1681]"
 		;
-connectAttr "HumanMale_Finger33_L_control_translateZ.o" "HumanMale_RIGRN.phl[1681]"
+connectAttr "HumanMale_Finger32_L_control_translateZ.o" "HumanMale_RIGRN.phl[1682]"
 		;
-connectAttr "HumanMale_Finger21_L_control_translateX.o" "HumanMale_RIGRN.phl[1682]"
+connectAttr "HumanMale_Finger33_L_control_translateX.o" "HumanMale_RIGRN.phl[1683]"
 		;
-connectAttr "HumanMale_Finger21_L_control_translateY.o" "HumanMale_RIGRN.phl[1683]"
+connectAttr "HumanMale_Finger33_L_control_translateY.o" "HumanMale_RIGRN.phl[1684]"
 		;
-connectAttr "HumanMale_Finger21_L_control_translateZ.o" "HumanMale_RIGRN.phl[1684]"
+connectAttr "HumanMale_Finger33_L_control_translateZ.o" "HumanMale_RIGRN.phl[1685]"
 		;
-connectAttr "HumanMale_Finger22_L_control_translateX.o" "HumanMale_RIGRN.phl[1685]"
+connectAttr "HumanMale_Finger21_L_control_translateX.o" "HumanMale_RIGRN.phl[1686]"
 		;
-connectAttr "HumanMale_Finger22_L_control_translateY.o" "HumanMale_RIGRN.phl[1686]"
+connectAttr "HumanMale_Finger21_L_control_translateY.o" "HumanMale_RIGRN.phl[1687]"
 		;
-connectAttr "HumanMale_Finger22_L_control_translateZ.o" "HumanMale_RIGRN.phl[1687]"
+connectAttr "HumanMale_Finger21_L_control_translateZ.o" "HumanMale_RIGRN.phl[1688]"
 		;
-connectAttr "HumanMale_Finger23_L_control_translateX.o" "HumanMale_RIGRN.phl[1688]"
+connectAttr "HumanMale_Finger22_L_control_translateX.o" "HumanMale_RIGRN.phl[1689]"
 		;
-connectAttr "HumanMale_Finger23_L_control_translateY.o" "HumanMale_RIGRN.phl[1689]"
+connectAttr "HumanMale_Finger22_L_control_translateY.o" "HumanMale_RIGRN.phl[1690]"
 		;
-connectAttr "HumanMale_Finger23_L_control_translateZ.o" "HumanMale_RIGRN.phl[1690]"
+connectAttr "HumanMale_Finger22_L_control_translateZ.o" "HumanMale_RIGRN.phl[1691]"
 		;
-connectAttr "HumanMale_Finger11_L_control_translateX.o" "HumanMale_RIGRN.phl[1691]"
+connectAttr "HumanMale_Finger23_L_control_translateX.o" "HumanMale_RIGRN.phl[1692]"
 		;
-connectAttr "HumanMale_Finger11_L_control_translateY.o" "HumanMale_RIGRN.phl[1692]"
+connectAttr "HumanMale_Finger23_L_control_translateY.o" "HumanMale_RIGRN.phl[1693]"
 		;
-connectAttr "HumanMale_Finger11_L_control_translateZ.o" "HumanMale_RIGRN.phl[1693]"
+connectAttr "HumanMale_Finger23_L_control_translateZ.o" "HumanMale_RIGRN.phl[1694]"
 		;
-connectAttr "HumanMale_Finger12_L_control_translateX.o" "HumanMale_RIGRN.phl[1694]"
+connectAttr "HumanMale_Finger11_L_control_translateX.o" "HumanMale_RIGRN.phl[1695]"
 		;
-connectAttr "HumanMale_Finger12_L_control_translateY.o" "HumanMale_RIGRN.phl[1695]"
+connectAttr "HumanMale_Finger11_L_control_translateY.o" "HumanMale_RIGRN.phl[1696]"
 		;
-connectAttr "HumanMale_Finger12_L_control_translateZ.o" "HumanMale_RIGRN.phl[1696]"
+connectAttr "HumanMale_Finger11_L_control_translateZ.o" "HumanMale_RIGRN.phl[1697]"
 		;
-connectAttr "HumanMale_Finger13_L_control_translateX.o" "HumanMale_RIGRN.phl[1697]"
+connectAttr "HumanMale_Finger12_L_control_translateX.o" "HumanMale_RIGRN.phl[1698]"
 		;
-connectAttr "HumanMale_Finger13_L_control_translateY.o" "HumanMale_RIGRN.phl[1698]"
+connectAttr "HumanMale_Finger12_L_control_translateY.o" "HumanMale_RIGRN.phl[1699]"
 		;
-connectAttr "HumanMale_Finger13_L_control_translateZ.o" "HumanMale_RIGRN.phl[1699]"
+connectAttr "HumanMale_Finger12_L_control_translateZ.o" "HumanMale_RIGRN.phl[1700]"
 		;
-connectAttr "HumanMale_Global_TR_rotateX.o" "HumanMale_RIGRN.phl[1700]";
-connectAttr "HumanMale_Global_TR_rotateY.o" "HumanMale_RIGRN.phl[1701]";
-connectAttr "HumanMale_Global_TR_rotateZ.o" "HumanMale_RIGRN.phl[1702]";
-connectAttr "Hips_Overall_control_rotate_Merged_Layer_inputBX1.o" "HumanMale_RIGRN.phl[1703]"
+connectAttr "HumanMale_Finger13_L_control_translateX.o" "HumanMale_RIGRN.phl[1701]"
 		;
-connectAttr "Hips_Overall_control_rotate_Merged_Layer_inputBY1.o" "HumanMale_RIGRN.phl[1704]"
+connectAttr "HumanMale_Finger13_L_control_translateY.o" "HumanMale_RIGRN.phl[1702]"
 		;
-connectAttr "Hips_Overall_control_rotate_Merged_Layer_inputBZ1.o" "HumanMale_RIGRN.phl[1705]"
+connectAttr "HumanMale_Finger13_L_control_translateZ.o" "HumanMale_RIGRN.phl[1703]"
 		;
-connectAttr "Hips_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1706]"
+connectAttr "HumanMale_Global_TR_rotateX.o" "HumanMale_RIGRN.phl[1704]";
+connectAttr "HumanMale_Global_TR_rotateY.o" "HumanMale_RIGRN.phl[1705]";
+connectAttr "HumanMale_Global_TR_rotateZ.o" "HumanMale_RIGRN.phl[1706]";
+connectAttr "Hips_Overall_control_rotate_Merged_Layer_inputBX1.o" "HumanMale_RIGRN.phl[1707]"
 		;
-connectAttr "Hips_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1707]"
+connectAttr "Hips_Overall_control_rotate_Merged_Layer_inputBY1.o" "HumanMale_RIGRN.phl[1708]"
 		;
-connectAttr "Hips_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1708]"
+connectAttr "Hips_Overall_control_rotate_Merged_Layer_inputBZ1.o" "HumanMale_RIGRN.phl[1709]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1709]" "R:Spine1_control_rotate_AnimLayer2.iax"
+connectAttr "HumanMale_RIGRN.phl[1710]" "R:Hips_control_rotate_AnimLayer3.iax";
+connectAttr "Hips_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1711]"
 		;
-connectAttr "HumanMale_Spine1_control_rotateX.o" "HumanMale_RIGRN.phl[1710]";
-connectAttr "HumanMale_RIGRN.phl[1711]" "R:Spine1_control_rotate_AnimLayer2.iay"
+connectAttr "HumanMale_RIGRN.phl[1712]" "R:Hips_control_rotate_AnimLayer3.iay";
+connectAttr "Hips_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1713]"
 		;
-connectAttr "HumanMale_Spine1_control_rotateY.o" "HumanMale_RIGRN.phl[1712]";
-connectAttr "HumanMale_RIGRN.phl[1713]" "R:Spine1_control_rotate_AnimLayer2.iaz"
+connectAttr "HumanMale_RIGRN.phl[1714]" "R:Hips_control_rotate_AnimLayer3.iaz";
+connectAttr "Hips_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1715]"
 		;
-connectAttr "HumanMale_Spine1_control_rotateZ.o" "HumanMale_RIGRN.phl[1714]";
-connectAttr "HumanMale_Spine2_control_rotateX.o" "HumanMale_RIGRN.phl[1715]";
-connectAttr "HumanMale_Spine2_control_rotateY.o" "HumanMale_RIGRN.phl[1716]";
-connectAttr "HumanMale_Spine2_control_rotateZ.o" "HumanMale_RIGRN.phl[1717]";
-connectAttr "HumanMale_RIGRN.phl[1718]" "R:Chest_control_rotate_AnimLayer2.iax";
-connectAttr "Chest_control_rotate_Merged_Layer_inputBX1.o" "HumanMale_RIGRN.phl[1719]"
+connectAttr "HumanMale_RIGRN.phl[1716]" "R:Spine1_control_rotate_AnimLayer2.iax"
 		;
-connectAttr "HumanMale_RIGRN.phl[1720]" "R:Chest_control_rotate_AnimLayer2.iay";
-connectAttr "Chest_control_rotate_Merged_Layer_inputBY1.o" "HumanMale_RIGRN.phl[1721]"
+connectAttr "HumanMale_Spine1_control_rotateX.o" "HumanMale_RIGRN.phl[1717]";
+connectAttr "HumanMale_RIGRN.phl[1718]" "R:Spine1_control_rotate_AnimLayer2.iay"
 		;
-connectAttr "HumanMale_RIGRN.phl[1722]" "R:Chest_control_rotate_AnimLayer2.iaz";
-connectAttr "Chest_control_rotate_Merged_Layer_inputBZ1.o" "HumanMale_RIGRN.phl[1723]"
+connectAttr "HumanMale_Spine1_control_rotateY.o" "HumanMale_RIGRN.phl[1719]";
+connectAttr "HumanMale_RIGRN.phl[1720]" "R:Spine1_control_rotate_AnimLayer2.iaz"
 		;
-connectAttr "HumanMale_Chest1_control_rotateX.o" "HumanMale_RIGRN.phl[1724]";
-connectAttr "HumanMale_Chest1_control_rotateY.o" "HumanMale_RIGRN.phl[1725]";
-connectAttr "HumanMale_Chest1_control_rotateZ.o" "HumanMale_RIGRN.phl[1726]";
-connectAttr "HumanMale_Neck_control_rotateX.o" "HumanMale_RIGRN.phl[1727]";
-connectAttr "HumanMale_Neck_control_rotateY.o" "HumanMale_RIGRN.phl[1728]";
-connectAttr "HumanMale_Neck_control_rotateZ.o" "HumanMale_RIGRN.phl[1729]";
-connectAttr "HumanMale_Head_control_rotateX.o" "HumanMale_RIGRN.phl[1730]";
-connectAttr "HumanMale_Head_control_rotateY.o" "HumanMale_RIGRN.phl[1731]";
-connectAttr "HumanMale_Head_control_rotateZ.o" "HumanMale_RIGRN.phl[1732]";
-connectAttr "HumanMale_Hand_L_R_control_rotateX.o" "HumanMale_RIGRN.phl[1733]";
-connectAttr "HumanMale_Hand_L_R_control_rotateY.o" "HumanMale_RIGRN.phl[1734]";
-connectAttr "HumanMale_Hand_L_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1735]";
-connectAttr "Clavicle_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1736]"
+connectAttr "HumanMale_Spine1_control_rotateZ.o" "HumanMale_RIGRN.phl[1721]";
+connectAttr "HumanMale_Spine2_control_rotateX.o" "HumanMale_RIGRN.phl[1722]";
+connectAttr "HumanMale_Spine2_control_rotateY.o" "HumanMale_RIGRN.phl[1723]";
+connectAttr "HumanMale_Spine2_control_rotateZ.o" "HumanMale_RIGRN.phl[1724]";
+connectAttr "HumanMale_RIGRN.phl[1725]" "R:Chest_control_rotate_AnimLayer2.iax";
+connectAttr "Chest_control_rotate_Merged_Layer_inputBX1.o" "HumanMale_RIGRN.phl[1726]"
 		;
-connectAttr "Clavicle_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1737]"
+connectAttr "HumanMale_RIGRN.phl[1727]" "R:Chest_control_rotate_AnimLayer2.iay";
+connectAttr "Chest_control_rotate_Merged_Layer_inputBY1.o" "HumanMale_RIGRN.phl[1728]"
 		;
-connectAttr "Clavicle_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1738]"
+connectAttr "HumanMale_RIGRN.phl[1729]" "R:Chest_control_rotate_AnimLayer2.iaz";
+connectAttr "Chest_control_rotate_Merged_Layer_inputBZ1.o" "HumanMale_RIGRN.phl[1730]"
 		;
-connectAttr "HumanMale_Arm_L_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1739]";
-connectAttr "HumanMale_Arm_L_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1740]";
-connectAttr "HumanMale_Arm_L_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1741]";
-connectAttr "HumanMale_Hand_L_Elbow_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1742]"
+connectAttr "HumanMale_Chest1_control_rotateX.o" "HumanMale_RIGRN.phl[1731]";
+connectAttr "HumanMale_Chest1_control_rotateY.o" "HumanMale_RIGRN.phl[1732]";
+connectAttr "HumanMale_Chest1_control_rotateZ.o" "HumanMale_RIGRN.phl[1733]";
+connectAttr "HumanMale_Neck_control_rotateX.o" "HumanMale_RIGRN.phl[1734]";
+connectAttr "HumanMale_Neck_control_rotateY.o" "HumanMale_RIGRN.phl[1735]";
+connectAttr "HumanMale_Neck_control_rotateZ.o" "HumanMale_RIGRN.phl[1736]";
+connectAttr "HumanMale_Head_control_rotateX.o" "HumanMale_RIGRN.phl[1737]";
+connectAttr "HumanMale_Head_control_rotateY.o" "HumanMale_RIGRN.phl[1738]";
+connectAttr "HumanMale_Head_control_rotateZ.o" "HumanMale_RIGRN.phl[1739]";
+connectAttr "HumanMale_Hand_L_R_control_rotateX.o" "HumanMale_RIGRN.phl[1740]";
+connectAttr "HumanMale_Hand_L_R_control_rotateY.o" "HumanMale_RIGRN.phl[1741]";
+connectAttr "HumanMale_Hand_L_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1742]";
+connectAttr "Clavicle_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1743]"
 		;
-connectAttr "HumanMale_Hand_L_Elbow_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1743]"
+connectAttr "Clavicle_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1744]"
 		;
-connectAttr "HumanMale_Hand_L_Elbow_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1744]"
+connectAttr "Clavicle_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1745]"
 		;
-connectAttr "Hand_R_R_control_rotate_Merged_Layer_inputBX1.o" "HumanMale_RIGRN.phl[1745]"
+connectAttr "HumanMale_Arm_L_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1746]";
+connectAttr "HumanMale_Arm_L_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1747]";
+connectAttr "HumanMale_Arm_L_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1748]";
+connectAttr "HumanMale_Hand_L_Elbow_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1749]"
 		;
-connectAttr "Hand_R_R_control_rotate_Merged_Layer_inputBY1.o" "HumanMale_RIGRN.phl[1746]"
+connectAttr "HumanMale_Hand_L_Elbow_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1750]"
 		;
-connectAttr "Hand_R_R_control_rotate_Merged_Layer_inputBZ1.o" "HumanMale_RIGRN.phl[1747]"
+connectAttr "HumanMale_Hand_L_Elbow_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1751]"
 		;
-connectAttr "Clavicle_R_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1748]"
+connectAttr "Hand_R_R_control_rotate_Merged_Layer_inputBX1.o" "HumanMale_RIGRN.phl[1752]"
 		;
-connectAttr "Clavicle_R_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1749]"
+connectAttr "Hand_R_R_control_rotate_Merged_Layer_inputBY1.o" "HumanMale_RIGRN.phl[1753]"
 		;
-connectAttr "Clavicle_R_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1750]"
+connectAttr "Hand_R_R_control_rotate_Merged_Layer_inputBZ1.o" "HumanMale_RIGRN.phl[1754]"
 		;
-connectAttr "HumanMale_Arm_R_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1751]";
-connectAttr "HumanMale_Arm_R_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1752]";
-connectAttr "HumanMale_Arm_R_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1753]";
-connectAttr "HumanMale_Hand_R_Elbow_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1754]"
+connectAttr "Clavicle_R_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1755]"
 		;
-connectAttr "HumanMale_Hand_R_Elbow_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1755]"
+connectAttr "Clavicle_R_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1756]"
 		;
-connectAttr "HumanMale_Hand_R_Elbow_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1756]"
+connectAttr "Clavicle_R_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1757]"
 		;
-connectAttr "HumanMale_Foot_L_control_rotateX.o" "HumanMale_RIGRN.phl[1757]";
-connectAttr "HumanMale_Foot_L_control_rotateY.o" "HumanMale_RIGRN.phl[1758]";
-connectAttr "HumanMale_Foot_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1759]";
-connectAttr "HumanMale_LegUpper_L_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1760]"
+connectAttr "HumanMale_Arm_R_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1758]";
+connectAttr "HumanMale_Arm_R_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1759]";
+connectAttr "HumanMale_Arm_R_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1760]";
+connectAttr "HumanMale_Hand_R_Elbow_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1761]"
 		;
-connectAttr "HumanMale_LegUpper_L_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1761]"
+connectAttr "HumanMale_Hand_R_Elbow_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1762]"
 		;
-connectAttr "HumanMale_LegUpper_L_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1762]"
+connectAttr "HumanMale_Hand_R_Elbow_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1763]"
 		;
-connectAttr "HumanMale_Leg_L_Knee_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1763]"
+connectAttr "HumanMale_Foot_L_control_rotateX.o" "HumanMale_RIGRN.phl[1764]";
+connectAttr "HumanMale_Foot_L_control_rotateY.o" "HumanMale_RIGRN.phl[1765]";
+connectAttr "HumanMale_Foot_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1766]";
+connectAttr "HumanMale_LegUpper_L_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1767]"
 		;
-connectAttr "HumanMale_Leg_L_Knee_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1764]"
+connectAttr "HumanMale_LegUpper_L_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1768]"
 		;
-connectAttr "HumanMale_Leg_L_Knee_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1765]"
+connectAttr "HumanMale_LegUpper_L_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1769]"
 		;
-connectAttr "HumanMale_CloackFrontHand_L_control_rotateX.o" "HumanMale_RIGRN.phl[1766]"
+connectAttr "HumanMale_Leg_L_Knee_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1770]"
 		;
-connectAttr "HumanMale_CloackFrontHand_L_control_rotateY.o" "HumanMale_RIGRN.phl[1767]"
+connectAttr "HumanMale_Leg_L_Knee_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1771]"
 		;
-connectAttr "HumanMale_CloackFrontHand_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1768]"
+connectAttr "HumanMale_Leg_L_Knee_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1772]"
 		;
-connectAttr "HumanMale_CloackFrontHand1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1769]"
+connectAttr "HumanMale_CloackFrontHand_L_control_rotateX.o" "HumanMale_RIGRN.phl[1773]"
 		;
-connectAttr "HumanMale_CloackFrontHand1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1770]"
+connectAttr "HumanMale_CloackFrontHand_L_control_rotateY.o" "HumanMale_RIGRN.phl[1774]"
 		;
-connectAttr "HumanMale_CloackFrontHand1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1771]"
+connectAttr "HumanMale_CloackFrontHand_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1775]"
 		;
-connectAttr "CloackBackHand_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1772]"
+connectAttr "HumanMale_CloackFrontHand1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1776]"
 		;
-connectAttr "CloackBackHand_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1773]"
+connectAttr "HumanMale_CloackFrontHand1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1777]"
 		;
-connectAttr "CloackBackHand_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1774]"
+connectAttr "HumanMale_CloackFrontHand1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1778]"
 		;
-connectAttr "HumanMale_CloackBackHand1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1775]"
+connectAttr "CloackBackHand_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1779]"
 		;
-connectAttr "HumanMale_CloackBackHand1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1776]"
+connectAttr "CloackBackHand_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1780]"
 		;
-connectAttr "HumanMale_CloackBackHand1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1777]"
+connectAttr "CloackBackHand_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1781]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_rotateX.o" "HumanMale_RIGRN.phl[1778]"
+connectAttr "HumanMale_CloackBackHand1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1782]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_rotateY.o" "HumanMale_RIGRN.phl[1779]"
+connectAttr "HumanMale_CloackBackHand1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1783]"
 		;
-connectAttr "HumanMale_CloackBack_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1780]"
+connectAttr "HumanMale_CloackBackHand1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1784]"
 		;
-connectAttr "HumanMale_CloackBack1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1781]"
+connectAttr "HumanMale_CloackBack_L_control_rotateX.o" "HumanMale_RIGRN.phl[1785]"
 		;
-connectAttr "HumanMale_CloackBack1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1782]"
+connectAttr "HumanMale_CloackBack_L_control_rotateY.o" "HumanMale_RIGRN.phl[1786]"
 		;
-connectAttr "HumanMale_CloackBack1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1783]"
+connectAttr "HumanMale_CloackBack_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1787]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_rotateX.o" "HumanMale_RIGRN.phl[1784]"
+connectAttr "HumanMale_CloackBack1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1788]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_rotateY.o" "HumanMale_RIGRN.phl[1785]"
+connectAttr "HumanMale_CloackBack1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1789]"
 		;
-connectAttr "HumanMale_CloackBack_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1786]"
+connectAttr "HumanMale_CloackBack1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1790]"
 		;
-connectAttr "HumanMale_CloackBack1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1787]"
+connectAttr "HumanMale_CloackBack_R_control_rotateX.o" "HumanMale_RIGRN.phl[1791]"
 		;
-connectAttr "HumanMale_CloackBack1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1788]"
+connectAttr "HumanMale_CloackBack_R_control_rotateY.o" "HumanMale_RIGRN.phl[1792]"
 		;
-connectAttr "HumanMale_CloackBack1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1789]"
+connectAttr "HumanMale_CloackBack_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1793]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_rotateX.o" "HumanMale_RIGRN.phl[1790]"
+connectAttr "HumanMale_CloackBack1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1794]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_rotateY.o" "HumanMale_RIGRN.phl[1791]"
+connectAttr "HumanMale_CloackBack1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1795]"
 		;
-connectAttr "HumanMale_CloackBackHand_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1792]"
+connectAttr "HumanMale_CloackBack1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1796]"
 		;
-connectAttr "HumanMale_CloackBackHand1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1793]"
+connectAttr "HumanMale_CloackBackHand_R_control_rotateX.o" "HumanMale_RIGRN.phl[1797]"
 		;
-connectAttr "HumanMale_CloackBackHand1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1794]"
+connectAttr "HumanMale_CloackBackHand_R_control_rotateY.o" "HumanMale_RIGRN.phl[1798]"
 		;
-connectAttr "HumanMale_CloackBackHand1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1795]"
+connectAttr "HumanMale_CloackBackHand_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1799]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_rotateX.o" "HumanMale_RIGRN.phl[1796]"
+connectAttr "HumanMale_CloackBackHand1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1800]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_rotateY.o" "HumanMale_RIGRN.phl[1797]"
+connectAttr "HumanMale_CloackBackHand1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1801]"
 		;
-connectAttr "HumanMale_CloackFrontHand_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1798]"
+connectAttr "HumanMale_CloackBackHand1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1802]"
 		;
-connectAttr "HumanMale_CloackFrontHand1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1799]"
+connectAttr "HumanMale_CloackFrontHand_R_control_rotateX.o" "HumanMale_RIGRN.phl[1803]"
 		;
-connectAttr "HumanMale_CloackFrontHand1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1800]"
+connectAttr "HumanMale_CloackFrontHand_R_control_rotateY.o" "HumanMale_RIGRN.phl[1804]"
 		;
-connectAttr "HumanMale_CloackFrontHand1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1801]"
+connectAttr "HumanMale_CloackFrontHand_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1805]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1802]" "R:Shoulders_R_control_rotate_AnimLayer1.iax"
+connectAttr "HumanMale_CloackFrontHand1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1806]"
 		;
-connectAttr "HumanMale_Shoulders_R_control_rotateX.o" "HumanMale_RIGRN.phl[1803]"
+connectAttr "HumanMale_CloackFrontHand1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1807]"
 		;
-connectAttr "HumanMale_RIGRN.phl[1804]" "R:Shoulders_R_control_rotate_AnimLayer1.iay"
+connectAttr "HumanMale_CloackFrontHand1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1808]"
 		;
-connectAttr "HumanMale_Shoulders_R_control_rotateY.o" "HumanMale_RIGRN.phl[1805]"
+connectAttr "HumanMale_RIGRN.phl[1809]" "R:Shoulders_R_control_rotate_AnimLayer1.iax"
 		;
-connectAttr "HumanMale_RIGRN.phl[1806]" "R:Shoulders_R_control_rotate_AnimLayer1.iaz"
+connectAttr "HumanMale_Shoulders_R_control_rotateX.o" "HumanMale_RIGRN.phl[1810]"
 		;
-connectAttr "HumanMale_Shoulders_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1807]"
+connectAttr "HumanMale_RIGRN.phl[1811]" "R:Shoulders_R_control_rotate_AnimLayer1.iay"
 		;
-connectAttr "HumanMale_RIGRN.phl[1808]" "R:Shoulders_L_control_rotate_AnimLayer1.iax"
+connectAttr "HumanMale_Shoulders_R_control_rotateY.o" "HumanMale_RIGRN.phl[1812]"
 		;
-connectAttr "Shoulders_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1809]"
+connectAttr "HumanMale_RIGRN.phl[1813]" "R:Shoulders_R_control_rotate_AnimLayer1.iaz"
 		;
-connectAttr "HumanMale_RIGRN.phl[1810]" "R:Shoulders_L_control_rotate_AnimLayer1.iay"
+connectAttr "HumanMale_Shoulders_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1814]"
 		;
-connectAttr "Shoulders_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1811]"
+connectAttr "HumanMale_RIGRN.phl[1815]" "R:Shoulders_L_control_rotate_AnimLayer1.iax"
 		;
-connectAttr "HumanMale_RIGRN.phl[1812]" "R:Shoulders_L_control_rotate_AnimLayer1.iaz"
+connectAttr "Shoulders_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1816]"
 		;
-connectAttr "Shoulders_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1813]"
+connectAttr "HumanMale_RIGRN.phl[1817]" "R:Shoulders_L_control_rotate_AnimLayer1.iay"
 		;
-connectAttr "Shoulders1_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1814]"
+connectAttr "Shoulders_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1818]"
 		;
-connectAttr "Shoulders1_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1815]"
+connectAttr "HumanMale_RIGRN.phl[1819]" "R:Shoulders_L_control_rotate_AnimLayer1.iaz"
 		;
-connectAttr "Shoulders1_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1816]"
+connectAttr "Shoulders_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1820]"
 		;
-connectAttr "HumanMale_Shoulders1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1817]"
+connectAttr "Shoulders1_L_control_rotate_Merged_Layer_inputBX.o" "HumanMale_RIGRN.phl[1821]"
 		;
-connectAttr "HumanMale_Shoulders1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1818]"
+connectAttr "Shoulders1_L_control_rotate_Merged_Layer_inputBY.o" "HumanMale_RIGRN.phl[1822]"
 		;
-connectAttr "HumanMale_Shoulders1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1819]"
+connectAttr "Shoulders1_L_control_rotate_Merged_Layer_inputBZ.o" "HumanMale_RIGRN.phl[1823]"
 		;
-connectAttr "HumanMale_Collar_control_rotateX.o" "HumanMale_RIGRN.phl[1820]";
-connectAttr "HumanMale_Collar_control_rotateY.o" "HumanMale_RIGRN.phl[1821]";
-connectAttr "HumanMale_Collar_control_rotateZ.o" "HumanMale_RIGRN.phl[1822]";
-connectAttr "HumanMale_Collar1_control_rotateX.o" "HumanMale_RIGRN.phl[1823]";
-connectAttr "HumanMale_Collar1_control_rotateY.o" "HumanMale_RIGRN.phl[1824]";
-connectAttr "HumanMale_Collar1_control_rotateZ.o" "HumanMale_RIGRN.phl[1825]";
-connectAttr "HumanMale_HatSide_control_rotateX.o" "HumanMale_RIGRN.phl[1826]";
-connectAttr "HumanMale_HatSide_control_rotateY.o" "HumanMale_RIGRN.phl[1827]";
-connectAttr "HumanMale_HatSide_control_rotateZ.o" "HumanMale_RIGRN.phl[1828]";
-connectAttr "HumanMale_Hat_control_rotateX.o" "HumanMale_RIGRN.phl[1829]";
-connectAttr "HumanMale_Hat_control_rotateY.o" "HumanMale_RIGRN.phl[1830]";
-connectAttr "HumanMale_Hat_control_rotateZ.o" "HumanMale_RIGRN.phl[1831]";
-connectAttr "HumanMale_Hat1_control_rotateX.o" "HumanMale_RIGRN.phl[1832]";
-connectAttr "HumanMale_Hat1_control_rotateY.o" "HumanMale_RIGRN.phl[1833]";
-connectAttr "HumanMale_Hat1_control_rotateZ.o" "HumanMale_RIGRN.phl[1834]";
-connectAttr "HumanMale_Hat2_control_rotateX.o" "HumanMale_RIGRN.phl[1835]";
-connectAttr "HumanMale_Hat2_control_rotateY.o" "HumanMale_RIGRN.phl[1836]";
-connectAttr "HumanMale_Hat2_control_rotateZ.o" "HumanMale_RIGRN.phl[1837]";
-connectAttr "HumanMale_Feather_control_rotateX.o" "HumanMale_RIGRN.phl[1838]";
-connectAttr "HumanMale_Feather_control_rotateY.o" "HumanMale_RIGRN.phl[1839]";
-connectAttr "HumanMale_Feather_control_rotateZ.o" "HumanMale_RIGRN.phl[1840]";
-connectAttr "HumanMale_Feather1_control_rotateX.o" "HumanMale_RIGRN.phl[1841]";
-connectAttr "HumanMale_Feather1_control_rotateY.o" "HumanMale_RIGRN.phl[1842]";
-connectAttr "HumanMale_Feather1_control_rotateZ.o" "HumanMale_RIGRN.phl[1843]";
-connectAttr "HumanMale_Breath_control_rotateX.o" "HumanMale_RIGRN.phl[1844]";
-connectAttr "HumanMale_Breath_control_rotateY.o" "HumanMale_RIGRN.phl[1845]";
-connectAttr "HumanMale_Breath_control_rotateZ.o" "HumanMale_RIGRN.phl[1846]";
-connectAttr "HumanMale_Heel_L_control_rotateX.o" "HumanMale_RIGRN.phl[1847]";
-connectAttr "HumanMale_Heel_L_control_rotateY.o" "HumanMale_RIGRN.phl[1848]";
-connectAttr "HumanMale_Heel_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1849]";
-connectAttr "HumanMale_ToeEnd_L_control_rotateX.o" "HumanMale_RIGRN.phl[1850]";
-connectAttr "HumanMale_ToeEnd_L_control_rotateY.o" "HumanMale_RIGRN.phl[1851]";
-connectAttr "HumanMale_ToeEnd_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1852]";
-connectAttr "HumanMale_Toe1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1853]";
-connectAttr "HumanMale_Toe1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1854]";
-connectAttr "HumanMale_Toe1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1855]";
-connectAttr "HumanMale_Ball_L_rotateX.o" "HumanMale_RIGRN.phl[1856]";
-connectAttr "HumanMale_Ball_L_rotateY.o" "HumanMale_RIGRN.phl[1857]";
-connectAttr "HumanMale_Ball_L_rotateZ.o" "HumanMale_RIGRN.phl[1858]";
-connectAttr "HumanMale_Swivel_L_control_rotateX.o" "HumanMale_RIGRN.phl[1859]";
-connectAttr "HumanMale_Swivel_L_control_rotateY.o" "HumanMale_RIGRN.phl[1860]";
-connectAttr "HumanMale_Swivel_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1861]";
-connectAttr "HumanMale_EyeLids_control_rotateX.o" "HumanMale_RIGRN.phl[1862]";
-connectAttr "HumanMale_EyeLids_control_rotateY.o" "HumanMale_RIGRN.phl[1863]";
-connectAttr "HumanMale_EyeLids_control_rotateZ.o" "HumanMale_RIGRN.phl[1864]";
-connectAttr "HumanMale_Eye_R_control_rotateX.o" "HumanMale_RIGRN.phl[1865]";
-connectAttr "HumanMale_Eye_R_control_rotateY.o" "HumanMale_RIGRN.phl[1866]";
-connectAttr "HumanMale_Eye_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1867]";
-connectAttr "HumanMale_Eye_L_control_rotateX.o" "HumanMale_RIGRN.phl[1868]";
-connectAttr "HumanMale_Eye_L_control_rotateY.o" "HumanMale_RIGRN.phl[1869]";
-connectAttr "HumanMale_Eye_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1870]";
-connectAttr "HumanMale_WeaponWorld_L_control_rotateX.o" "HumanMale_RIGRN.phl[1871]"
+connectAttr "HumanMale_Shoulders1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1824]"
 		;
-connectAttr "HumanMale_WeaponWorld_L_control_rotateY.o" "HumanMale_RIGRN.phl[1872]"
+connectAttr "HumanMale_Shoulders1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1825]"
 		;
-connectAttr "HumanMale_WeaponWorld_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1873]"
+connectAttr "HumanMale_Shoulders1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1826]"
 		;
-connectAttr "HumanMale_WeaponWorld_R_control_rotateX.o" "HumanMale_RIGRN.phl[1874]"
+connectAttr "HumanMale_Collar_control_rotateX.o" "HumanMale_RIGRN.phl[1827]";
+connectAttr "HumanMale_Collar_control_rotateY.o" "HumanMale_RIGRN.phl[1828]";
+connectAttr "HumanMale_Collar_control_rotateZ.o" "HumanMale_RIGRN.phl[1829]";
+connectAttr "HumanMale_Collar1_control_rotateX.o" "HumanMale_RIGRN.phl[1830]";
+connectAttr "HumanMale_Collar1_control_rotateY.o" "HumanMale_RIGRN.phl[1831]";
+connectAttr "HumanMale_Collar1_control_rotateZ.o" "HumanMale_RIGRN.phl[1832]";
+connectAttr "HumanMale_HatSide_control_rotateX.o" "HumanMale_RIGRN.phl[1833]";
+connectAttr "HumanMale_HatSide_control_rotateY.o" "HumanMale_RIGRN.phl[1834]";
+connectAttr "HumanMale_HatSide_control_rotateZ.o" "HumanMale_RIGRN.phl[1835]";
+connectAttr "HumanMale_Hat_control_rotateX.o" "HumanMale_RIGRN.phl[1836]";
+connectAttr "HumanMale_Hat_control_rotateY.o" "HumanMale_RIGRN.phl[1837]";
+connectAttr "HumanMale_Hat_control_rotateZ.o" "HumanMale_RIGRN.phl[1838]";
+connectAttr "HumanMale_Hat1_control_rotateX.o" "HumanMale_RIGRN.phl[1839]";
+connectAttr "HumanMale_Hat1_control_rotateY.o" "HumanMale_RIGRN.phl[1840]";
+connectAttr "HumanMale_Hat1_control_rotateZ.o" "HumanMale_RIGRN.phl[1841]";
+connectAttr "HumanMale_Hat2_control_rotateX.o" "HumanMale_RIGRN.phl[1842]";
+connectAttr "HumanMale_Hat2_control_rotateY.o" "HumanMale_RIGRN.phl[1843]";
+connectAttr "HumanMale_Hat2_control_rotateZ.o" "HumanMale_RIGRN.phl[1844]";
+connectAttr "HumanMale_Feather_control_rotateX.o" "HumanMale_RIGRN.phl[1845]";
+connectAttr "HumanMale_Feather_control_rotateY.o" "HumanMale_RIGRN.phl[1846]";
+connectAttr "HumanMale_Feather_control_rotateZ.o" "HumanMale_RIGRN.phl[1847]";
+connectAttr "HumanMale_Feather1_control_rotateX.o" "HumanMale_RIGRN.phl[1848]";
+connectAttr "HumanMale_Feather1_control_rotateY.o" "HumanMale_RIGRN.phl[1849]";
+connectAttr "HumanMale_Feather1_control_rotateZ.o" "HumanMale_RIGRN.phl[1850]";
+connectAttr "HumanMale_Breath_control_rotateX.o" "HumanMale_RIGRN.phl[1851]";
+connectAttr "HumanMale_Breath_control_rotateY.o" "HumanMale_RIGRN.phl[1852]";
+connectAttr "HumanMale_Breath_control_rotateZ.o" "HumanMale_RIGRN.phl[1853]";
+connectAttr "HumanMale_Heel_L_control_rotateX.o" "HumanMale_RIGRN.phl[1854]";
+connectAttr "HumanMale_Heel_L_control_rotateY.o" "HumanMale_RIGRN.phl[1855]";
+connectAttr "HumanMale_Heel_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1856]";
+connectAttr "HumanMale_ToeEnd_L_control_rotateX.o" "HumanMale_RIGRN.phl[1857]";
+connectAttr "HumanMale_ToeEnd_L_control_rotateY.o" "HumanMale_RIGRN.phl[1858]";
+connectAttr "HumanMale_ToeEnd_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1859]";
+connectAttr "HumanMale_Toe1_L_control_rotateX.o" "HumanMale_RIGRN.phl[1860]";
+connectAttr "HumanMale_Toe1_L_control_rotateY.o" "HumanMale_RIGRN.phl[1861]";
+connectAttr "HumanMale_Toe1_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1862]";
+connectAttr "HumanMale_Ball_L_rotateX.o" "HumanMale_RIGRN.phl[1863]";
+connectAttr "HumanMale_Ball_L_rotateY.o" "HumanMale_RIGRN.phl[1864]";
+connectAttr "HumanMale_Ball_L_rotateZ.o" "HumanMale_RIGRN.phl[1865]";
+connectAttr "HumanMale_Swivel_L_control_rotateX.o" "HumanMale_RIGRN.phl[1866]";
+connectAttr "HumanMale_Swivel_L_control_rotateY.o" "HumanMale_RIGRN.phl[1867]";
+connectAttr "HumanMale_Swivel_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1868]";
+connectAttr "HumanMale_EyeLids_control_rotateX.o" "HumanMale_RIGRN.phl[1869]";
+connectAttr "HumanMale_EyeLids_control_rotateY.o" "HumanMale_RIGRN.phl[1870]";
+connectAttr "HumanMale_EyeLids_control_rotateZ.o" "HumanMale_RIGRN.phl[1871]";
+connectAttr "HumanMale_Eye_R_control_rotateX.o" "HumanMale_RIGRN.phl[1872]";
+connectAttr "HumanMale_Eye_R_control_rotateY.o" "HumanMale_RIGRN.phl[1873]";
+connectAttr "HumanMale_Eye_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1874]";
+connectAttr "HumanMale_Eye_L_control_rotateX.o" "HumanMale_RIGRN.phl[1875]";
+connectAttr "HumanMale_Eye_L_control_rotateY.o" "HumanMale_RIGRN.phl[1876]";
+connectAttr "HumanMale_Eye_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1877]";
+connectAttr "HumanMale_WeaponWorld_L_control_rotateX.o" "HumanMale_RIGRN.phl[1878]"
 		;
-connectAttr "HumanMale_WeaponWorld_R_control_rotateY.o" "HumanMale_RIGRN.phl[1875]"
+connectAttr "HumanMale_WeaponWorld_L_control_rotateY.o" "HumanMale_RIGRN.phl[1879]"
 		;
-connectAttr "HumanMale_WeaponWorld_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1876]"
+connectAttr "HumanMale_WeaponWorld_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1880]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_rotateX.o" "HumanMale_RIGRN.phl[1877]"
+connectAttr "HumanMale_WeaponWorld_R_control_rotateX.o" "HumanMale_RIGRN.phl[1881]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_rotateY.o" "HumanMale_RIGRN.phl[1878]"
+connectAttr "HumanMale_WeaponWorld_R_control_rotateY.o" "HumanMale_RIGRN.phl[1882]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1879]"
+connectAttr "HumanMale_WeaponWorld_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1883]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_rotateX.o" "HumanMale_RIGRN.phl[1880]"
+connectAttr "HumanMale_Slot_Hand_R_control_rotateX.o" "HumanMale_RIGRN.phl[1884]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_rotateY.o" "HumanMale_RIGRN.phl[1881]"
+connectAttr "HumanMale_Slot_Hand_R_control_rotateY.o" "HumanMale_RIGRN.phl[1885]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1882]"
+connectAttr "HumanMale_Slot_Hand_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1886]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_rotateZ.o" "HumanMale_RIGRN.phl[1883]"
+connectAttr "HumanMale_Slot_Hand_L_control_rotateX.o" "HumanMale_RIGRN.phl[1887]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_rotateY.o" "HumanMale_RIGRN.phl[1884]"
+connectAttr "HumanMale_Slot_Hand_L_control_rotateY.o" "HumanMale_RIGRN.phl[1888]"
 		;
-connectAttr "HumanMale_Slot_Hand_R_locator_rotateX.o" "HumanMale_RIGRN.phl[1885]"
+connectAttr "HumanMale_Slot_Hand_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1889]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_rotateZ.o" "HumanMale_RIGRN.phl[1886]"
+connectAttr "HumanMale_Slot_Hand_R_locator_rotateZ.o" "HumanMale_RIGRN.phl[1890]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_rotateY.o" "HumanMale_RIGRN.phl[1887]"
+connectAttr "HumanMale_Slot_Hand_R_locator_rotateY.o" "HumanMale_RIGRN.phl[1891]"
 		;
-connectAttr "HumanMale_Slot_Hand_L_locator_rotateX.o" "HumanMale_RIGRN.phl[1888]"
+connectAttr "HumanMale_Slot_Hand_R_locator_rotateX.o" "HumanMale_RIGRN.phl[1892]"
 		;
-connectAttr "HumanMale_Foot_R_control_rotateX.o" "HumanMale_RIGRN.phl[1889]";
-connectAttr "HumanMale_Foot_R_control_rotateY.o" "HumanMale_RIGRN.phl[1890]";
-connectAttr "HumanMale_Foot_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1891]";
-connectAttr "HumanMale_LegUpper_R_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1892]"
+connectAttr "HumanMale_Slot_Hand_L_locator_rotateZ.o" "HumanMale_RIGRN.phl[1893]"
 		;
-connectAttr "HumanMale_LegUpper_R_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1893]"
+connectAttr "HumanMale_Slot_Hand_L_locator_rotateY.o" "HumanMale_RIGRN.phl[1894]"
 		;
-connectAttr "HumanMale_LegUpper_R_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1894]"
+connectAttr "HumanMale_Slot_Hand_L_locator_rotateX.o" "HumanMale_RIGRN.phl[1895]"
 		;
-connectAttr "HumanMale_Leg_R_Knee_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1895]"
+connectAttr "HumanMale_Foot_R_control_rotateX.o" "HumanMale_RIGRN.phl[1896]";
+connectAttr "HumanMale_Foot_R_control_rotateY.o" "HumanMale_RIGRN.phl[1897]";
+connectAttr "HumanMale_Foot_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1898]";
+connectAttr "HumanMale_LegUpper_R_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1899]"
 		;
-connectAttr "HumanMale_Leg_R_Knee_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1896]"
+connectAttr "HumanMale_LegUpper_R_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1900]"
 		;
-connectAttr "HumanMale_Leg_R_Knee_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1897]"
+connectAttr "HumanMale_LegUpper_R_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1901]"
 		;
-connectAttr "HumanMale_Heel_R_control_rotateX.o" "HumanMale_RIGRN.phl[1898]";
-connectAttr "HumanMale_Heel_R_control_rotateY.o" "HumanMale_RIGRN.phl[1899]";
-connectAttr "HumanMale_Heel_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1900]";
-connectAttr "HumanMale_ToeEnd_R_control_rotateX.o" "HumanMale_RIGRN.phl[1901]";
-connectAttr "HumanMale_ToeEnd_R_control_rotateY.o" "HumanMale_RIGRN.phl[1902]";
-connectAttr "HumanMale_ToeEnd_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1903]";
-connectAttr "HumanMale_Toe1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1904]";
-connectAttr "HumanMale_Toe1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1905]";
-connectAttr "HumanMale_Toe1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1906]";
-connectAttr "HumanMale_Ball_R_rotateX.o" "HumanMale_RIGRN.phl[1907]";
-connectAttr "HumanMale_Ball_R_rotateY.o" "HumanMale_RIGRN.phl[1908]";
-connectAttr "HumanMale_Ball_R_rotateZ.o" "HumanMale_RIGRN.phl[1909]";
-connectAttr "HumanMale_Swivel_R_control_rotateX.o" "HumanMale_RIGRN.phl[1910]";
-connectAttr "HumanMale_Swivel_R_control_rotateY.o" "HumanMale_RIGRN.phl[1911]";
-connectAttr "HumanMale_Swivel_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1912]";
-connectAttr "HumanMale_Finger21_R_control_rotateX.o" "HumanMale_RIGRN.phl[1913]"
+connectAttr "HumanMale_Leg_R_Knee_FK_locator_rotateX.o" "HumanMale_RIGRN.phl[1902]"
 		;
-connectAttr "HumanMale_Finger21_R_control_rotateY.o" "HumanMale_RIGRN.phl[1914]"
+connectAttr "HumanMale_Leg_R_Knee_FK_locator_rotateY.o" "HumanMale_RIGRN.phl[1903]"
 		;
-connectAttr "HumanMale_Finger21_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1915]"
+connectAttr "HumanMale_Leg_R_Knee_FK_locator_rotateZ.o" "HumanMale_RIGRN.phl[1904]"
 		;
-connectAttr "HumanMale_Finger22_R_control_rotateX.o" "HumanMale_RIGRN.phl[1916]"
+connectAttr "HumanMale_Heel_R_control_rotateX.o" "HumanMale_RIGRN.phl[1905]";
+connectAttr "HumanMale_Heel_R_control_rotateY.o" "HumanMale_RIGRN.phl[1906]";
+connectAttr "HumanMale_Heel_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1907]";
+connectAttr "HumanMale_ToeEnd_R_control_rotateX.o" "HumanMale_RIGRN.phl[1908]";
+connectAttr "HumanMale_ToeEnd_R_control_rotateY.o" "HumanMale_RIGRN.phl[1909]";
+connectAttr "HumanMale_ToeEnd_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1910]";
+connectAttr "HumanMale_Toe1_R_control_rotateX.o" "HumanMale_RIGRN.phl[1911]";
+connectAttr "HumanMale_Toe1_R_control_rotateY.o" "HumanMale_RIGRN.phl[1912]";
+connectAttr "HumanMale_Toe1_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1913]";
+connectAttr "HumanMale_Ball_R_rotateX.o" "HumanMale_RIGRN.phl[1914]";
+connectAttr "HumanMale_Ball_R_rotateY.o" "HumanMale_RIGRN.phl[1915]";
+connectAttr "HumanMale_Ball_R_rotateZ.o" "HumanMale_RIGRN.phl[1916]";
+connectAttr "HumanMale_Swivel_R_control_rotateX.o" "HumanMale_RIGRN.phl[1917]";
+connectAttr "HumanMale_Swivel_R_control_rotateY.o" "HumanMale_RIGRN.phl[1918]";
+connectAttr "HumanMale_Swivel_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1919]";
+connectAttr "HumanMale_Finger21_R_control_rotateX.o" "HumanMale_RIGRN.phl[1920]"
 		;
-connectAttr "HumanMale_Finger22_R_control_rotateY.o" "HumanMale_RIGRN.phl[1917]"
+connectAttr "HumanMale_Finger21_R_control_rotateY.o" "HumanMale_RIGRN.phl[1921]"
 		;
-connectAttr "HumanMale_Finger22_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1918]"
+connectAttr "HumanMale_Finger21_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1922]"
 		;
-connectAttr "HumanMale_Finger23_R_control_rotateX.o" "HumanMale_RIGRN.phl[1919]"
+connectAttr "HumanMale_Finger22_R_control_rotateX.o" "HumanMale_RIGRN.phl[1923]"
 		;
-connectAttr "HumanMale_Finger23_R_control_rotateY.o" "HumanMale_RIGRN.phl[1920]"
+connectAttr "HumanMale_Finger22_R_control_rotateY.o" "HumanMale_RIGRN.phl[1924]"
 		;
-connectAttr "HumanMale_Finger23_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1921]"
+connectAttr "HumanMale_Finger22_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1925]"
 		;
-connectAttr "HumanMale_Finger31_R_control_rotateX.o" "HumanMale_RIGRN.phl[1922]"
+connectAttr "HumanMale_Finger23_R_control_rotateX.o" "HumanMale_RIGRN.phl[1926]"
 		;
-connectAttr "HumanMale_Finger31_R_control_rotateY.o" "HumanMale_RIGRN.phl[1923]"
+connectAttr "HumanMale_Finger23_R_control_rotateY.o" "HumanMale_RIGRN.phl[1927]"
 		;
-connectAttr "HumanMale_Finger31_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1924]"
+connectAttr "HumanMale_Finger23_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1928]"
 		;
-connectAttr "HumanMale_Finger32_R_control_rotateX.o" "HumanMale_RIGRN.phl[1925]"
+connectAttr "HumanMale_Finger31_R_control_rotateX.o" "HumanMale_RIGRN.phl[1929]"
 		;
-connectAttr "HumanMale_Finger32_R_control_rotateY.o" "HumanMale_RIGRN.phl[1926]"
+connectAttr "HumanMale_Finger31_R_control_rotateY.o" "HumanMale_RIGRN.phl[1930]"
 		;
-connectAttr "HumanMale_Finger32_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1927]"
+connectAttr "HumanMale_Finger31_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1931]"
 		;
-connectAttr "HumanMale_Finger33_R_control_rotateX.o" "HumanMale_RIGRN.phl[1928]"
+connectAttr "HumanMale_Finger32_R_control_rotateX.o" "HumanMale_RIGRN.phl[1932]"
 		;
-connectAttr "HumanMale_Finger33_R_control_rotateY.o" "HumanMale_RIGRN.phl[1929]"
+connectAttr "HumanMale_Finger32_R_control_rotateY.o" "HumanMale_RIGRN.phl[1933]"
 		;
-connectAttr "HumanMale_Finger33_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1930]"
+connectAttr "HumanMale_Finger32_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1934]"
 		;
-connectAttr "HumanMale_Finger41_R_control_rotateX.o" "HumanMale_RIGRN.phl[1931]"
+connectAttr "HumanMale_Finger33_R_control_rotateX.o" "HumanMale_RIGRN.phl[1935]"
 		;
-connectAttr "HumanMale_Finger41_R_control_rotateY.o" "HumanMale_RIGRN.phl[1932]"
+connectAttr "HumanMale_Finger33_R_control_rotateY.o" "HumanMale_RIGRN.phl[1936]"
 		;
-connectAttr "HumanMale_Finger41_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1933]"
+connectAttr "HumanMale_Finger33_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1937]"
 		;
-connectAttr "HumanMale_Finger42_R_control_rotateX.o" "HumanMale_RIGRN.phl[1934]"
+connectAttr "HumanMale_Finger41_R_control_rotateX.o" "HumanMale_RIGRN.phl[1938]"
 		;
-connectAttr "HumanMale_Finger42_R_control_rotateY.o" "HumanMale_RIGRN.phl[1935]"
+connectAttr "HumanMale_Finger41_R_control_rotateY.o" "HumanMale_RIGRN.phl[1939]"
 		;
-connectAttr "HumanMale_Finger42_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1936]"
+connectAttr "HumanMale_Finger41_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1940]"
 		;
-connectAttr "HumanMale_Finger43_R_control_rotateX.o" "HumanMale_RIGRN.phl[1937]"
+connectAttr "HumanMale_Finger42_R_control_rotateX.o" "HumanMale_RIGRN.phl[1941]"
 		;
-connectAttr "HumanMale_Finger43_R_control_rotateY.o" "HumanMale_RIGRN.phl[1938]"
+connectAttr "HumanMale_Finger42_R_control_rotateY.o" "HumanMale_RIGRN.phl[1942]"
 		;
-connectAttr "HumanMale_Finger43_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1939]"
+connectAttr "HumanMale_Finger42_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1943]"
 		;
-connectAttr "HumanMale_Finger51_R_control_rotateX.o" "HumanMale_RIGRN.phl[1940]"
+connectAttr "HumanMale_Finger43_R_control_rotateX.o" "HumanMale_RIGRN.phl[1944]"
 		;
-connectAttr "HumanMale_Finger51_R_control_rotateY.o" "HumanMale_RIGRN.phl[1941]"
+connectAttr "HumanMale_Finger43_R_control_rotateY.o" "HumanMale_RIGRN.phl[1945]"
 		;
-connectAttr "HumanMale_Finger51_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1942]"
+connectAttr "HumanMale_Finger43_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1946]"
 		;
-connectAttr "HumanMale_Finger52_R_control_rotateX.o" "HumanMale_RIGRN.phl[1943]"
+connectAttr "HumanMale_Finger51_R_control_rotateX.o" "HumanMale_RIGRN.phl[1947]"
 		;
-connectAttr "HumanMale_Finger52_R_control_rotateY.o" "HumanMale_RIGRN.phl[1944]"
+connectAttr "HumanMale_Finger51_R_control_rotateY.o" "HumanMale_RIGRN.phl[1948]"
 		;
-connectAttr "HumanMale_Finger52_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1945]"
+connectAttr "HumanMale_Finger51_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1949]"
 		;
-connectAttr "HumanMale_Finger53_R_control_rotateX.o" "HumanMale_RIGRN.phl[1946]"
+connectAttr "HumanMale_Finger52_R_control_rotateX.o" "HumanMale_RIGRN.phl[1950]"
 		;
-connectAttr "HumanMale_Finger53_R_control_rotateY.o" "HumanMale_RIGRN.phl[1947]"
+connectAttr "HumanMale_Finger52_R_control_rotateY.o" "HumanMale_RIGRN.phl[1951]"
 		;
-connectAttr "HumanMale_Finger53_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1948]"
+connectAttr "HumanMale_Finger52_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1952]"
 		;
-connectAttr "HumanMale_Finger11_R_control_rotateX.o" "HumanMale_RIGRN.phl[1949]"
+connectAttr "HumanMale_Finger53_R_control_rotateX.o" "HumanMale_RIGRN.phl[1953]"
 		;
-connectAttr "HumanMale_Finger11_R_control_rotateY.o" "HumanMale_RIGRN.phl[1950]"
+connectAttr "HumanMale_Finger53_R_control_rotateY.o" "HumanMale_RIGRN.phl[1954]"
 		;
-connectAttr "HumanMale_Finger11_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1951]"
+connectAttr "HumanMale_Finger53_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1955]"
 		;
-connectAttr "HumanMale_Finger12_R_control_rotateX.o" "HumanMale_RIGRN.phl[1952]"
+connectAttr "HumanMale_Finger11_R_control_rotateX.o" "HumanMale_RIGRN.phl[1956]"
 		;
-connectAttr "HumanMale_Finger12_R_control_rotateY.o" "HumanMale_RIGRN.phl[1953]"
+connectAttr "HumanMale_Finger11_R_control_rotateY.o" "HumanMale_RIGRN.phl[1957]"
 		;
-connectAttr "HumanMale_Finger12_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1954]"
+connectAttr "HumanMale_Finger11_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1958]"
 		;
-connectAttr "HumanMale_Finger13_R_control_rotateX.o" "HumanMale_RIGRN.phl[1955]"
+connectAttr "HumanMale_Finger12_R_control_rotateX.o" "HumanMale_RIGRN.phl[1959]"
 		;
-connectAttr "HumanMale_Finger13_R_control_rotateY.o" "HumanMale_RIGRN.phl[1956]"
+connectAttr "HumanMale_Finger12_R_control_rotateY.o" "HumanMale_RIGRN.phl[1960]"
 		;
-connectAttr "HumanMale_Finger13_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1957]"
+connectAttr "HumanMale_Finger12_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1961]"
 		;
-connectAttr "HumanMale_Finger51_L_control_rotateX.o" "HumanMale_RIGRN.phl[1958]"
+connectAttr "HumanMale_Finger13_R_control_rotateX.o" "HumanMale_RIGRN.phl[1962]"
 		;
-connectAttr "HumanMale_Finger51_L_control_rotateY.o" "HumanMale_RIGRN.phl[1959]"
+connectAttr "HumanMale_Finger13_R_control_rotateY.o" "HumanMale_RIGRN.phl[1963]"
 		;
-connectAttr "HumanMale_Finger51_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1960]"
+connectAttr "HumanMale_Finger13_R_control_rotateZ.o" "HumanMale_RIGRN.phl[1964]"
 		;
-connectAttr "HumanMale_Finger52_L_control_rotateX.o" "HumanMale_RIGRN.phl[1961]"
+connectAttr "HumanMale_Finger51_L_control_rotateX.o" "HumanMale_RIGRN.phl[1965]"
 		;
-connectAttr "HumanMale_Finger52_L_control_rotateY.o" "HumanMale_RIGRN.phl[1962]"
+connectAttr "HumanMale_Finger51_L_control_rotateY.o" "HumanMale_RIGRN.phl[1966]"
 		;
-connectAttr "HumanMale_Finger52_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1963]"
+connectAttr "HumanMale_Finger51_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1967]"
 		;
-connectAttr "HumanMale_Finger53_L_control_rotateX.o" "HumanMale_RIGRN.phl[1964]"
+connectAttr "HumanMale_Finger52_L_control_rotateX.o" "HumanMale_RIGRN.phl[1968]"
 		;
-connectAttr "HumanMale_Finger53_L_control_rotateY.o" "HumanMale_RIGRN.phl[1965]"
+connectAttr "HumanMale_Finger52_L_control_rotateY.o" "HumanMale_RIGRN.phl[1969]"
 		;
-connectAttr "HumanMale_Finger53_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1966]"
+connectAttr "HumanMale_Finger52_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1970]"
 		;
-connectAttr "HumanMale_Finger41_L_control_rotateX.o" "HumanMale_RIGRN.phl[1967]"
+connectAttr "HumanMale_Finger53_L_control_rotateX.o" "HumanMale_RIGRN.phl[1971]"
 		;
-connectAttr "HumanMale_Finger41_L_control_rotateY.o" "HumanMale_RIGRN.phl[1968]"
+connectAttr "HumanMale_Finger53_L_control_rotateY.o" "HumanMale_RIGRN.phl[1972]"
 		;
-connectAttr "HumanMale_Finger41_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1969]"
+connectAttr "HumanMale_Finger53_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1973]"
 		;
-connectAttr "HumanMale_Finger42_L_control_rotateX.o" "HumanMale_RIGRN.phl[1970]"
+connectAttr "HumanMale_Finger41_L_control_rotateX.o" "HumanMale_RIGRN.phl[1974]"
 		;
-connectAttr "HumanMale_Finger42_L_control_rotateY.o" "HumanMale_RIGRN.phl[1971]"
+connectAttr "HumanMale_Finger41_L_control_rotateY.o" "HumanMale_RIGRN.phl[1975]"
 		;
-connectAttr "HumanMale_Finger42_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1972]"
+connectAttr "HumanMale_Finger41_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1976]"
 		;
-connectAttr "HumanMale_Finger43_L_control_rotateX.o" "HumanMale_RIGRN.phl[1973]"
+connectAttr "HumanMale_Finger42_L_control_rotateX.o" "HumanMale_RIGRN.phl[1977]"
 		;
-connectAttr "HumanMale_Finger43_L_control_rotateY.o" "HumanMale_RIGRN.phl[1974]"
+connectAttr "HumanMale_Finger42_L_control_rotateY.o" "HumanMale_RIGRN.phl[1978]"
 		;
-connectAttr "HumanMale_Finger43_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1975]"
+connectAttr "HumanMale_Finger42_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1979]"
 		;
-connectAttr "HumanMale_Finger31_L_control_rotateX.o" "HumanMale_RIGRN.phl[1976]"
+connectAttr "HumanMale_Finger43_L_control_rotateX.o" "HumanMale_RIGRN.phl[1980]"
 		;
-connectAttr "HumanMale_Finger31_L_control_rotateY.o" "HumanMale_RIGRN.phl[1977]"
+connectAttr "HumanMale_Finger43_L_control_rotateY.o" "HumanMale_RIGRN.phl[1981]"
 		;
-connectAttr "HumanMale_Finger31_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1978]"
+connectAttr "HumanMale_Finger43_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1982]"
 		;
-connectAttr "HumanMale_Finger32_L_control_rotateX.o" "HumanMale_RIGRN.phl[1979]"
+connectAttr "HumanMale_Finger31_L_control_rotateX.o" "HumanMale_RIGRN.phl[1983]"
 		;
-connectAttr "HumanMale_Finger32_L_control_rotateY.o" "HumanMale_RIGRN.phl[1980]"
+connectAttr "HumanMale_Finger31_L_control_rotateY.o" "HumanMale_RIGRN.phl[1984]"
 		;
-connectAttr "HumanMale_Finger32_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1981]"
+connectAttr "HumanMale_Finger31_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1985]"
 		;
-connectAttr "HumanMale_Finger33_L_control_rotateX.o" "HumanMale_RIGRN.phl[1982]"
+connectAttr "HumanMale_Finger32_L_control_rotateX.o" "HumanMale_RIGRN.phl[1986]"
 		;
-connectAttr "HumanMale_Finger33_L_control_rotateY.o" "HumanMale_RIGRN.phl[1983]"
+connectAttr "HumanMale_Finger32_L_control_rotateY.o" "HumanMale_RIGRN.phl[1987]"
 		;
-connectAttr "HumanMale_Finger33_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1984]"
+connectAttr "HumanMale_Finger32_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1988]"
 		;
-connectAttr "HumanMale_Finger21_L_control_rotateX.o" "HumanMale_RIGRN.phl[1985]"
+connectAttr "HumanMale_Finger33_L_control_rotateX.o" "HumanMale_RIGRN.phl[1989]"
 		;
-connectAttr "HumanMale_Finger21_L_control_rotateY.o" "HumanMale_RIGRN.phl[1986]"
+connectAttr "HumanMale_Finger33_L_control_rotateY.o" "HumanMale_RIGRN.phl[1990]"
 		;
-connectAttr "HumanMale_Finger21_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1987]"
+connectAttr "HumanMale_Finger33_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1991]"
 		;
-connectAttr "HumanMale_Finger22_L_control_rotateX.o" "HumanMale_RIGRN.phl[1988]"
+connectAttr "HumanMale_Finger21_L_control_rotateX.o" "HumanMale_RIGRN.phl[1992]"
 		;
-connectAttr "HumanMale_Finger22_L_control_rotateY.o" "HumanMale_RIGRN.phl[1989]"
+connectAttr "HumanMale_Finger21_L_control_rotateY.o" "HumanMale_RIGRN.phl[1993]"
 		;
-connectAttr "HumanMale_Finger22_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1990]"
+connectAttr "HumanMale_Finger21_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1994]"
 		;
-connectAttr "HumanMale_Finger23_L_control_rotateX.o" "HumanMale_RIGRN.phl[1991]"
+connectAttr "HumanMale_Finger22_L_control_rotateX.o" "HumanMale_RIGRN.phl[1995]"
 		;
-connectAttr "HumanMale_Finger23_L_control_rotateY.o" "HumanMale_RIGRN.phl[1992]"
+connectAttr "HumanMale_Finger22_L_control_rotateY.o" "HumanMale_RIGRN.phl[1996]"
 		;
-connectAttr "HumanMale_Finger23_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1993]"
+connectAttr "HumanMale_Finger22_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1997]"
 		;
-connectAttr "HumanMale_Finger11_L_control_rotateX.o" "HumanMale_RIGRN.phl[1994]"
+connectAttr "HumanMale_Finger23_L_control_rotateX.o" "HumanMale_RIGRN.phl[1998]"
 		;
-connectAttr "HumanMale_Finger11_L_control_rotateY.o" "HumanMale_RIGRN.phl[1995]"
+connectAttr "HumanMale_Finger23_L_control_rotateY.o" "HumanMale_RIGRN.phl[1999]"
 		;
-connectAttr "HumanMale_Finger11_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1996]"
+connectAttr "HumanMale_Finger23_L_control_rotateZ.o" "HumanMale_RIGRN.phl[2000]"
 		;
-connectAttr "HumanMale_Finger12_L_control_rotateX.o" "HumanMale_RIGRN.phl[1997]"
+connectAttr "HumanMale_Finger11_L_control_rotateX.o" "HumanMale_RIGRN.phl[2001]"
 		;
-connectAttr "HumanMale_Finger12_L_control_rotateY.o" "HumanMale_RIGRN.phl[1998]"
+connectAttr "HumanMale_Finger11_L_control_rotateY.o" "HumanMale_RIGRN.phl[2002]"
 		;
-connectAttr "HumanMale_Finger12_L_control_rotateZ.o" "HumanMale_RIGRN.phl[1999]"
+connectAttr "HumanMale_Finger11_L_control_rotateZ.o" "HumanMale_RIGRN.phl[2003]"
 		;
-connectAttr "HumanMale_Finger13_L_control_rotateX.o" "HumanMale_RIGRN.phl[2000]"
+connectAttr "HumanMale_Finger12_L_control_rotateX.o" "HumanMale_RIGRN.phl[2004]"
 		;
-connectAttr "HumanMale_Finger13_L_control_rotateY.o" "HumanMale_RIGRN.phl[2001]"
+connectAttr "HumanMale_Finger12_L_control_rotateY.o" "HumanMale_RIGRN.phl[2005]"
 		;
-connectAttr "HumanMale_Finger13_L_control_rotateZ.o" "HumanMale_RIGRN.phl[2002]"
+connectAttr "HumanMale_Finger12_L_control_rotateZ.o" "HumanMale_RIGRN.phl[2006]"
+		;
+connectAttr "HumanMale_Finger13_L_control_rotateX.o" "HumanMale_RIGRN.phl[2007]"
+		;
+connectAttr "HumanMale_Finger13_L_control_rotateY.o" "HumanMale_RIGRN.phl[2008]"
+		;
+connectAttr "HumanMale_Finger13_L_control_rotateZ.o" "HumanMale_RIGRN.phl[2009]"
 		;
 connectAttr "locator1_rotateX.o" "Cmera_locator.rx";
 connectAttr "locator1_rotateY.o" "Cmera_locator.ry";
@@ -17602,8 +17884,10 @@ connectAttr "defaultRenderLayer.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.t
 connectAttr "sharedReferenceNode.sr" "HumanMale_RIGRN.sr";
 connectAttr "AnimLayer1.sl" "BaseAnimation.chsl[12]";
 connectAttr "AnimLayer2.sl" "BaseAnimation.chsl[14]";
+connectAttr "AnimLayer3.sl" "BaseAnimation.chsl[15]";
 connectAttr "AnimLayer2.play" "BaseAnimation.cdly[15]";
 connectAttr "AnimLayer1.play" "BaseAnimation.cdly[16]";
+connectAttr "AnimLayer3.play" "BaseAnimation.cdly[17]";
 connectAttr "BaseAnimation.csol" "AnimLayer1.sslo";
 connectAttr "BaseAnimation.fgwt" "AnimLayer1.pwth";
 connectAttr "BaseAnimation.omte" "AnimLayer1.pmte";
@@ -17747,6 +18031,34 @@ connectAttr "Hand_R_control_ParentOnClavicle_AnimLayer2_inputB.o" "R:Hand_R_cont
 connectAttr "AnimLayer2.bgwt" "R:Hand_R_control_ParentOnSpine_AnimLayer2.wa";
 connectAttr "AnimLayer2.fgwt" "R:Hand_R_control_ParentOnSpine_AnimLayer2.wb";
 connectAttr "Hand_R_control_ParentOnSpine_AnimLayer2_inputB.o" "R:Hand_R_control_ParentOnSpine_AnimLayer2.ib"
+		;
+connectAttr "BaseAnimation.csol" "AnimLayer3.sslo";
+connectAttr "BaseAnimation.fgwt" "AnimLayer3.pwth";
+connectAttr "BaseAnimation.omte" "AnimLayer3.pmte";
+connectAttr "R:Hips_control_translateX_AnimLayer3.msg" "AnimLayer3.bnds[0]";
+connectAttr "R:Hips_control_translateY_AnimLayer3.msg" "AnimLayer3.bnds[1]";
+connectAttr "R:Hips_control_translateZ_AnimLayer3.msg" "AnimLayer3.bnds[2]";
+connectAttr "R:Hips_control_rotate_AnimLayer3.msg" "AnimLayer3.bnds[6]";
+connectAttr "AnimLayer3.bgwt" "R:Hips_control_translateX_AnimLayer3.wa";
+connectAttr "AnimLayer3.fgwt" "R:Hips_control_translateX_AnimLayer3.wb";
+connectAttr "Hips_control_translateX_AnimLayer3_inputB.o" "R:Hips_control_translateX_AnimLayer3.ib"
+		;
+connectAttr "AnimLayer3.bgwt" "R:Hips_control_translateY_AnimLayer3.wa";
+connectAttr "AnimLayer3.fgwt" "R:Hips_control_translateY_AnimLayer3.wb";
+connectAttr "Hips_control_translateY_AnimLayer3_inputB.o" "R:Hips_control_translateY_AnimLayer3.ib"
+		;
+connectAttr "AnimLayer3.bgwt" "R:Hips_control_translateZ_AnimLayer3.wa";
+connectAttr "AnimLayer3.fgwt" "R:Hips_control_translateZ_AnimLayer3.wb";
+connectAttr "Hips_control_translateZ_AnimLayer3_inputB.o" "R:Hips_control_translateZ_AnimLayer3.ib"
+		;
+connectAttr "AnimLayer3.oram" "R:Hips_control_rotate_AnimLayer3.acm";
+connectAttr "AnimLayer3.bgwt" "R:Hips_control_rotate_AnimLayer3.wa";
+connectAttr "AnimLayer3.fgwt" "R:Hips_control_rotate_AnimLayer3.wb";
+connectAttr "Hips_control_rotate_AnimLayer3_inputBX.o" "R:Hips_control_rotate_AnimLayer3.ibx"
+		;
+connectAttr "Hips_control_rotate_AnimLayer3_inputBY.o" "R:Hips_control_rotate_AnimLayer3.iby"
+		;
+connectAttr "Hips_control_rotate_AnimLayer3_inputBZ.o" "R:Hips_control_rotate_AnimLayer3.ibz"
 		;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 // End of HumanMale_RunFront.ma
