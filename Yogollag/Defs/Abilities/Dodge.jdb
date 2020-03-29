@@ -1,18 +1,19 @@
 {
     "$type": "Spell",
     "Duration": 0.85,
-    "Cooldown": 0.8,
+    "Cooldown": 0.5,
     "Slot": "/AttackSlot",
     "Effects": [
         {
             "$type": "EffectMotion",
             "CurveName": "DodgeCurve",
             "Speed": 30,
+            "FaceActionDir":false,
             "OverrideActionDirWithMotionDir":true,
         },
         {
             "$type": "EffectAnimate",
-            "AnimationName": "SwordAttack"
+            "AnimationName": "DodgeFront"
         },
         {
             "$type": "EffectChangeStat",
@@ -22,7 +23,29 @@
         {
             "$type": "EffectIgnoreInput",
             "Inputs": [
-                "/AttackSlot"
+                "/AttackSlot",
+                "./SpaceAbility"
+            ]
+        },
+        {
+            "$type": "SubEffect",
+            "StartOffset":0.5,
+            "EndOffset": 0.85,
+            "Effects": [
+                {
+                    "$type": "EffectAllowInput",
+                    "Inputs": [
+                        "/AttackSpell",
+                        "./SpaceAbility"
+                    ]
+                },
+                {
+                    "$type": "EffectBreakOnInput",
+                    "Inputs": [
+                        "/AttackSpell",
+                        "./SpaceAbility"
+                    ]
+                }
             ]
         }
     ]

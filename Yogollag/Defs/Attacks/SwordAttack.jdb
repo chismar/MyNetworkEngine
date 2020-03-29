@@ -74,13 +74,15 @@
                 {
                     "$type": "EffectAllowInput",
                     "Inputs": [
-                        "/AttackSpell"
+                        "/AttackSpell",
+                        "/Abilities/SpaceAbility"
                     ]
                 },
                 {
                     "$type": "EffectBreakOnInput",
                     "Inputs": [
-                        "/AttackSpell"
+                        "/AttackSpell",
+                        "/Abilities/SpaceAbility"
                     ]
                 }
             ]
