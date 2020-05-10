@@ -14,35 +14,8 @@
 // если в анимациях не нужны меши, то надо поставить переменную $exportShapes в ноль
 // 
 
-// ==================================== блок с переменными, начальные установки ==================================== 
-    int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
-    int $doFBXExport = 1;
-        int $exportAnimation = 1; //
-        int $exportShapes = 0;
-        int $exportCameras = 0;
-        int $exportLights = 0;
-    string $fbxfold = "FBX/";
-    string $excludeFileMask01 = "_Skin.";
-    string $excludeFileMask02 = "_RIG.";
-	string $fExt = "*.ma"; // расширение файлов для обработки
-	int $doBake = 1; // надо ли бейкать?
-	string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
-//    string $GlobalGroup = "Group"; // group to delete, without namespace!
-    
-    int $doImportRefs = 1; // импортить ли референсы?
-	int $doEulerFilter = 1; // надо ли фильтровать кривые?
-	int $doReplaceRef = 0; // надо ли заменять старый реф на новый?
-	    string $newRef = "HumanMale_RIG.mb"; // имя нового рефа - обязательно с расширением и формат MB!
-	int $doRename = 0; // надо ли переименовывать? - если да, то в блоке переименования надо собрать себе нужное имя и расширение
-	int $doSave = 0;
-    int $deleteLayers = 1;
-	
-string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
-                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
-	string $Files[] = {}; //тут список клипов в папке выбраной выше, только имена файлов с расширением
-	
 // ==================================== функции ============================================
-global proc selectOnlyJoints() // select only joints in hierarchy of selected object
+proc selectOnlyJoints() // select only joints in hierarchy of selected object
 {
         
     string $joints[] = `ls -sl -typ joint -dag`;
@@ -52,17 +25,23 @@ global proc selectOnlyJoints() // select only joints in hierarchy of selected ob
 }
 
 proc string[] getSkinnedMeshesInScene()
-{	
+{    
     $sceneMeshes = `ls -type mesh`;
     string $skinedMeshes[] = {};
     $i = 0;
-    for ($sm in $sceneMeshes) // $sm = $sceneMeshes[1];
+    for ($sm in $sceneMeshes) // $sm = $sceneMeshes[0];
     {
         string $isSkined[] = `listConnections -type skinCluster $sm`;
+        if (size($isSkined) == 0 ) 
+        {
+            $isSkined = `listConnections $sm`;
+            $isSkined = `listConnections -type skinCluster $isSkined`;
+            $isSkined = `stringArrayRemoveDuplicates $isSkined`;
+        }
         if (size($isSkined) > 1) error ("Too much skin clusters - " + size($isSkined) + " on object " + $sm);
         if ($isSkined[0] != "") // print $isSkined[0];
         {
-            string $parents[] = `listRelatives -parent $sm`;
+            $parents = `listRelatives -parent $sm`;
             if (size($parents) > 1) { error ("Too much parents! - " + size($parents) + " on object " + $sm);}
             string $mmm = $parents[0];
             $mt = `match "^NE_" $mmm`;
@@ -112,6 +91,39 @@ proc trySelect (string $obj)
     if (objExists($obj)) select -add $obj;
 }
 
+proc ExportAnimationFBX_TW(string $arg)
+{
+
+// ==================================== блок с переменными, начальные установки ==================================== 
+    int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
+    if ($arg == "all") $exportAllFilesInFolder = 1; 
+    int $doFBXExport = 1;
+        int $exportAnimation = 1; //
+
+        int $exportShapes = 0;
+        int $exportCameras = 0;
+        int $exportLights = 0;
+    string $fbxfold = "FBX/";
+    string $excludeFileMask01 = "_Skin.";
+    string $excludeFileMask02 = "_RIG.";
+	string $fExt = "*.ma"; // расширение файлов для обработки
+	int $doBake = 1; // надо ли бейкать?
+	string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
+//    string $GlobalGroup = "Group"; // group to delete, without namespace!
+    
+    int $doImportRefs = 1; // импортить ли референсы?
+	int $doEulerFilter = 1; // надо ли фильтровать кривые?
+	int $doReplaceRef = 0; // надо ли заменять старый реф на новый?
+	    string $newRef = "HumanMale_RIG.mb"; // имя нового рефа - обязательно с расширением и формат MB!
+	int $doRename = 0; // надо ли переименовывать? - если да, то в блоке переименования надо собрать себе нужное имя и расширение
+	int $doSave = 0;
+    int $deleteLayers = 1;
+    int $doDeleteKeysFromGlobal	= 1;
+    
+string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
+                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
+	string $Files[] = {}; //тут список клипов в папке выбраной выше, только имена файлов с расширением
+	
 // ==================================== START SCRIPT ==================================== 
     string $path = `file -q -sn`; if ($path == "") error ("Save current scene, or open smething that exist!");
 	string $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
@@ -170,12 +182,11 @@ proc trySelect (string $obj)
                 $message = ("More than ONE namespace in scene - " + $nsps[2] + " | " + $nsps[3] + " | " + $c + "\n"); print $message; $log = $log + $message;
                 continue;
             }
-            if(size($nsps) < 3) 
+            string $NS = "";
+            if(size($nsps) == 3) 
             {
-                $message = ("No namespaces found in scene - " + $c + "\n"); print $message; $log = $log + $message;
-                continue;
+                $NS = $nsps[0] + ":";
             }
-            $NS = $nsps[0] + ":";
 
             if ( `objExists "GameMove"` )
                 if ( `nodeType "GameMove"` == "animLayer" )
@@ -216,7 +227,6 @@ proc trySelect (string $obj)
 				currentTime $start;
 			}
 
-
             // ============================== Rename file (if needed) ============================== 
     	    if ($doRename)
     	    {
@@ -238,22 +248,9 @@ proc trySelect (string $obj)
             if(size(`listRelatives -parent ($NS + $ssHips)`)>0)
                 parent -w ($NS + $ssHips);
 
-            namespace -mergeNamespaceWithRoot -removeNamespace $nsps[0];
-/*
-            select -cl;
-            select (`ls -type character`);
-            trySelect pCylinder1;
-            trySelect pCylinder2;
-            trySelect HumanMale ;
-            trySelect $GlobalGroup ;
-            trySelect Chest_Orient_locator;
-            trySelect Chest1_Orient_locator;
-            trySelect "aTools*";
-            trySelect "NE_*";
-            trySelect "Overlapper*";
-            doDelete; */
-            select (`ls -type expression`);
-            doDelete;
+            if ($NS != "") namespace -mergeNamespaceWithRoot -removeNamespace $nsps[0];
+
+//            select (`ls -type expression`); if ( size(`ls -sl`) > 0 ) doDelete;
 
             if ($deleteLayers)
             {
@@ -263,25 +260,38 @@ proc trySelect (string $obj)
                 delete (`ls -sl`); 
             }
 
-    // ========================== Delete NonJoints from Hierarchy ====================
-    select -r $ssHips ;
-    select_hierarhy;
-    string $joints[] = `ls -sl`;
-    select -tgl $joints[0];
-    $joints = `ls -sl`;
-    string $nonJoints[] = {};
-    for ($j in $joints)
-    {
-        if ( `nodeType $j` != "joint" ) 
-        {
-            $nonJoints[size($nonJoints)] = $j;
-        }
-    }
-    //    print $nonJoints;
-    delete $nonJoints;
-    
-// ============================== Export to FBX ============================== 
+            // ========================== Delete NonJoints from Hierarchy ====================
+            select -r $ssHips ;
+            select_hierarhy;
+            string $joints[] = `ls -sl`;
+            select -tgl $joints[0];
+            $joints = `ls -sl`;
+            string $nonJoints[] = {};
+            for ($j in $joints)
+            {
+                if ( `nodeType $j` != "joint" ) 
+                {
+                    $nonJoints[size($nonJoints)] = $j;
+                }
+            }
+            //    print $nonJoints;
+            delete $nonJoints;
 
+            // ========================== Delete Keys from Global(root) =======================
+    	    if ($doDeleteKeysFromGlobal)
+    	    {
+                select -r $ssHips ;
+                string $joints[] = `ls -sl`;
+                for ($j in $joints)
+                {
+                    string $ac[] = `listAttachedAnimCurves $j`;
+                    if (size ($ac) > 0 )delete $ac;
+                }
+                source resetToDefaultValues.mel;
+                resetToDefaultValuesList $joints;
+            }
+            
+            // ============================== Export to FBX ============================== 
     	    if ($doFBXExport)
     	    {
                 FBXProperty Export|IncludeGrp|Geometry|SmoothingGroups -v 1;
@@ -290,7 +300,7 @@ proc trySelect (string $obj)
                 FBXExportAnimationOnly -v 0;
                 FBXExportSkeletonDefinitions -v 1;
                 FBXExportSmoothingGroups -v 1;
-                FBXExportSmoothMesh -v 0;
+                FBXExportSmoothMesh -v 1;
                 FBXExportTangents -v 1;
                 FBXExportUpAxis y;
                 FBXExportShapes -v $exportShapes;
@@ -337,4 +347,8 @@ proc trySelect (string $obj)
     }
 	print ($log + "\n");
 	
+}
+FBXProperty "Import|IncludeGrp|Geometry|OverrideNormalsLock" -v 1; // включает правилшьную загрузку нормалей, при импорте фбх, иначе нормали будут сбрасываться на обычное сглаживание
+global string $ssnExpArg; // "current" or "all" - exports current animations only or all animations in folder where placed opened file. Set this in shelf button call
+ExportAnimationFBX_TW($ssnExpArg);
 	

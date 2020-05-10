@@ -1,0 +1,47 @@
+
+// ======================= Individual tweaks ========================
+
+if (objExists("fingerThumb_L0_fk0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerThumb_L0_fk0_ctl";
+if (objExists("fingerThumb_L0_fk1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerThumb_L0_fk1_ctl";
+if (objExists("arm_L0_thickness_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "arm_L0_thickness_ctl";
+if (objExists("arm_L0_mid_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "arm_L0_mid_ctl";
+if (objExists("leg_L0_mid_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "leg_L0_mid_ctl";
+if (objExists("lipsup_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "lipsup_R0_ctl";
+if (objExists("lipscorner_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "lipscorner_R0_ctl";
+if (objExists("arm_R0_mid_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "arm_R0_mid_ctl";
+if (objExists("arm_R0_thickness_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "arm_R0_thickness_ctl";
+if (objExists("finShoulderRoot_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "finShoulderRoot_R0_ctl";
+if (objExists("spine_C0_tan0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "spine_C0_tan0_ctl";
+if (objExists("spine_C0_tan1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "spine_C0_tan1_ctl";
+if (objExists("legUI_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "legUI_L0_ctl";
+if (objExists("finHipsRoot_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "finHipsRoot_L0_ctl";
+if (objExists("item_C0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "item_C0_ctl";
+if (objExists("spineUI_C0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "spineUI_C0_ctl";
+if (objExists("finHipsRoot_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "finHipsRoot_R0_ctl";
+if (objExists("legUI_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "legUI_R0_ctl";
+if (objExists("leg_R0_mid_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "leg_R0_mid_ctl";
+if (objExists("hairsBackRoot_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "hairsBackRoot_L0_ctl";
+if (objExists("hairsFrontRoot_L1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "hairsFrontRoot_L1_ctl";
+if (objExists("hairsFrontRoot_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "hairsFrontRoot_R0_ctl";
+if (objExists("hairsBackRoot_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "hairsBackRoot_R0_ctl";
+if (objExists("hairsFrontRoot_R1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "hairsFrontRoot_R1_ctl";
+if (objExists("spine_C0_fk1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "spine_C0_fk1_ctl";
+if (objExists("spine_C0_fk2_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "spine_C0_fk2_ctl";
+if (objExists("spine_C0_fk0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "spine_C0_fk0_ctl";
+if (objExists("arm_R0_roll_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "arm_R0_roll_ctl";
+if (objExists("arm_L0_roll_ctl"))  editDisplayLayerMembers -noRecurse Controls_Unused "arm_L0_roll_ctl";
+if (objExists("armUI_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "armUI_R0_ctl";
+if (objExists("hairsFrontRoot_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Skirt "hairsFrontRoot_L0_ctl";
+if (objExists("fingerMiddle_L0_fk1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerMiddle_L0_fk1_ctl";
+if (objExists("fingerIndex_L0_fk0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerIndex_L0_fk0_ctl";
+if (objExists("fingerIndex_L0_fk1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerIndex_L0_fk1_ctl";
+if (objExists("fingerMiddle_L0_fk0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerMiddle_L0_fk0_ctl";
+if (objExists("fingerLittle_L0_fk0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerLittle_L0_fk0_ctl";
+if (objExists("armUI_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Second "armUI_L0_ctl";
+if (objExists("fingerLittle_L0_fk1_ctl"))  editDisplayLayerMembers -noRecurse Controls_Fingers "fingerLittle_L0_fk1_ctl";
+if (objExists("lipsdwn_R0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "lipsdwn_R0_ctl";
+if (objExists("lipsup_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "lipsup_L0_ctl";
+if (objExists("lipscorner_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "lipscorner_L0_ctl";
+if (objExists("lipsdwn_L0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "lipsdwn_L0_ctl";
+if (objExists("jaw_C0_ctl"))  editDisplayLayerMembers -noRecurse Controls_Face "jaw_C0_ctl";    
+print ("=== SUCCESS Ind 01: Objects spreaded out in layers!\n");

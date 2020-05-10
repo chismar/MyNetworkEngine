@@ -9,26 +9,9 @@
 // затем ищет все меши со скином и если они без префикса "NE_" то выбирает их и кость Global, и экспортит выделенное в FBX с нужными для проекта настройками, независимо от ручных настроек в экспорте.
 // экспортит в подпапку "FBX" текущей папки
 
-// ==================================== блок с переменными, начальные установки ==================================== 
-int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
-int $doFBXExport = 1;
-    int $exportAnimation = 0; //
-    int $exportShapes = 1;
-    int $exportCameras = 0;
-    int $exportLights = 0;
-string $fbxfold = "FBX/";
-string $fExt = "*.ma"; // расширение файлов для обработки
-string $includedFileMask = "_RIG.";
-string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
-int $deleteLayers = 1;
-string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
-                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
-int $doExport = 1;
-int $i = 0;
-
 // ==================================== функции ============================================
 
-global proc selectOnlyJoints() // select only joints in hierarchy of selected object
+proc selectOnlyJoints() // select only joints in hierarchy of selected object
 {
         
     string $joints[] = `ls -sl -typ joint -dag`;
@@ -44,7 +27,13 @@ proc string[] getSkinnedMeshesInScene()
     $i = 0;
     for ($sm in $sceneMeshes) // $sm = $sceneMeshes[0];
     {
-        $isSkined = `listConnections -type skinCluster $sm`;
+        string $isSkined[] = `listConnections -type skinCluster $sm`;
+        if (size($isSkined) == 0 ) 
+        {
+            $isSkined = `listConnections $sm`;
+            $isSkined = `listConnections -type skinCluster $isSkined`;
+            $isSkined = `stringArrayRemoveDuplicates $isSkined`;
+        }
         if (size($isSkined) > 1) error ("Too much skin clusters - " + size($isSkined) + " on object " + $sm);
         if ($isSkined[0] != "") // print $isSkined[0];
         {
@@ -93,6 +82,28 @@ proc string[] listAttachedAnimCurves(string $node)
 	return $curves;
 }
 
+proc ExportModelFBX_TW(string $arg)
+{
+// ==================================== блок с переменными, начальные установки ==================================== 
+int $exportAllFilesInFolder = 0; // 1 - exportAllFilesInFolder, 0 - export only current opened file
+if ($arg == "all") $exportAllFilesInFolder = 1; 
+
+int $doFBXExport = 1;
+    int $exportAnimation = 0; //
+    int $exportShapes = 1;
+    int $exportCameras = 0;
+    int $exportLights = 0;
+string $fbxfold = "FBX/";
+string $fExt = "*.ma"; // расширение файлов для обработки
+string $includedFileMask = "_RIG.";
+string $ssHips = "Global"; // Skin Skeleton Hips bone name - рут скелета на который всё прискинено - для бейка
+int $deleteLayers = 1;
+string $log = ""; // записываем сюда все успехи и ошибки вот таким образом - string $message = ("Scene " + $с + " exported Succesfully\n"); print $message; $log = $log + $message;
+                  // не забываем в конце скрипта выводить лог - print ($log + "\n");
+int $doExport = 1;
+int $i = 0;
+
+
 // ==================================== START SCRIPT ==================================== 
 string $path = `file -q -sn`; if ($path == "") error ("Save current scene, or open smething that exist!");
 string $fold = dirname( $path ) + "/"; // путь к нашей MB-шкае
@@ -139,7 +150,7 @@ for ($c in $Files)//$c = $Files[0];
             // ============================== DO Something ================================
             if(size(`listRelatives -parent $ssHips`)>0) parent -w $ssHips;
 
-            select (`ls -type expression`); doDelete;
+//            select (`ls -type expression`); if ( size(`ls -sl`) > 0 ) doDelete;
 
             if ($deleteLayers){ $lrs = `ls -type  displayLayer`; select -r $lrs; select -tgl defaultLayer; delete (`ls -sl`); }
             
@@ -168,7 +179,7 @@ for ($c in $Files)//$c = $Files[0];
                 }
             }
             //    print $nonJoints;
-            delete $nonJoints;
+            if ( size($nonJoints) > 0 ) delete $nonJoints;
             
             // ============================== Export to FBX ============================== 
             if ($doFBXExport)
@@ -224,3 +235,7 @@ for ($c in $Files)//$c = $Files[0];
 }
 print ($log + "\n");
 
+}
+FBXProperty "Import|IncludeGrp|Geometry|OverrideNormalsLock" -v 1; // включает правилшьную загрузку нормалей, при импорте фбх, иначе нормали будут сбрасываться на обычное сглаживание
+global string $ssnExpArg;
+ExportModelFBX_TW($ssnExpArg);

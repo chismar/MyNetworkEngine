@@ -1,0 +1,658 @@
+proc string getFirstObj (string $objs[]){ return $objs[0]; }
+
+proc moveToParentXform (string $obj, string $par) {
+	select $par;	float $trr[] = `xform -q -ws -rp`;	
+	setAttr ($obj + ".translateX") $trr[0];
+	setAttr ($obj + ".translateY") $trr[1];
+	setAttr ($obj + ".translateZ") $trr[2];
+	select -cl;	return;
+}
+
+proc moveToParent (string $obj, string $par, string $orient){
+	parent $obj $par;
+	if (`attributeExists "localPositionX" ($par + "Shape")`) {
+		float $dx = getAttr ($par + "Shape.localPositionX");
+		float $dy = getAttr ($par + "Shape.localPositionY");
+		float $dz = getAttr ($par + "Shape.localPositionZ");
+		setAttr ($obj + ".translateX") $dx;
+		setAttr ($obj + ".translateY") $dy;
+		setAttr ($obj + ".translateZ") $dz;
+		if ($orient != "") {
+			setAttr ($obj + ".rotateX") 0;
+			setAttr ($obj + ".rotateY") 0;
+			setAttr ($obj + ".rotateZ") 0;
+		}
+		parent -w $obj;
+	}
+	else {
+		if ( objExists("Global") ) parent $obj Global;
+		parent -w $obj;		float $trr[] = `xform -q -ws -rp $par`;
+		setAttr ($obj + ".translateX") $trr[0];
+		setAttr ($obj + ".translateY") $trr[1];
+		setAttr ($obj + ".translateZ") $trr[2];
+		parent $obj $par;
+		if ($orient != ""){
+			setAttr ($obj + ".rotateX") 0;
+			setAttr ($obj + ".rotateY") 0;
+			setAttr ($obj + ".rotateZ") 0;
+		}
+		parent -w $obj;	select -cl;
+	}
+	return;
+}
+
+proc moveToParentXform (string $obj, string $par) {
+	select $par;float $trr[] = `xform -q -ws -rp`;
+	setAttr ($obj + ".translateX") $trr[0];
+	setAttr ($obj + ".translateY") $trr[1];
+	setAttr ($obj + ".translateZ") $trr[2];
+	select -cl;	return;
+}
+
+proc string getShape( string $obj ) {
+   string $shapes[];   $shapes[0] = $obj;
+   if ( "transform" == `nodeType $obj` )   $shapes = `listRelatives -fullPath -shapes $obj`;
+   return $shapes[0];
+}
+
+proc setLocalScale (string $obj, float $scale) {
+	string $shape = getShape($obj);
+	setAttr ($shape + ".localScaleX") $scale;
+	setAttr ($shape + ".localScaleY") $scale;
+	setAttr ($shape + ".localScaleZ") $scale;
+	return;
+}
+
+proc selectOnlyJoints(){ // select only joints in hierarchy
+    string $joints[] = `ls -sl -typ joint -dag`;
+    if(size($joints) == 0) error("No joints in selected DAG");
+    select -r $joints;
+}
+
+proc addAttributeM( string $ctrl, string $attrName, string $charset, int $num ) {
+    global int $isAddInCharset;
+    addAttr -ln $attrName  -at double  -min 0 -max $num -dv 0 $ctrl;
+    setAttr -e-keyable true ($ctrl + "." + $attrName);
+	if ($charset != "")
+        if ($isAddInCharset)
+            character -forceElement $charset ($ctrl + "." + $attrName);
+}
+
+proc setParentDrivenKeysM( string $dobj, string $attrName, string $grp, string $conArg[] ) {// multyply driven keys
+	select -cl;
+	select -add $conArg;
+	select -add $grp;
+	string $con = getFirstObj(`parentConstraint -weight 1`);
+	string $conArgC[] = {};
+	for ($ci = 0; $ci<(size($conArg)); $ci++)
+	    $conArgC[$ci] = `match "[^\:]*$" $conArg[$ci]`;
+
+	for ($i = 0; $i<size($conArg); $i++)	{
+		setAttr ($dobj + "." + $attrName) $i;
+		for ($ci = 0; $ci<(size($conArg)); $ci++)
+			if ($ci == $i) parentConstraint -e -w 1 $conArg[$ci] $grp;
+			else parentConstraint -e -w 0 $conArg[$ci] $grp;
+
+		for ($ci = 0; $ci<(size($conArg)); $ci++)
+			setDrivenKeyframe -cd ($dobj + "." + $attrName) ($con + "." + $conArgC[$ci] + "W" + $ci);
+	}
+	setAttr ($dobj + "." + $attrName) 0;
+}
+
+proc string createHelperLocatorSimpleO( string $hlName, string $hlPoint, string $hlParent, string $hlLayer, float $hlScale ) //W/O group, Layers and Global parent, $hlName - name of locator, $hlPoint - object were wee place the helper, $hlParent - parent object for locator, $hlScale - local scale for locator
+{
+	if (objExists($hlName))  { print ("//Error: Locator " + $hlName + " already EXISTS!\n"); return $hlName; }
+	string $obj = getFirstObj(`spaceLocator -p 0 0 0 -n $hlName`);
+	setLocalScale($obj, $hlScale);
+	if ( $hlPoint != "" ) moveToParentXform($obj,$hlPoint);
+	moveToParent($obj,$hlPoint,"-o");
+	if ($hlLayer !="") editDisplayLayerMembers -noRecurse $hlLayer $obj;
+	if ( $hlParent != "" )
+		parentConstraint -mo $hlParent $obj;
+	return $obj;
+}
+
+proc A1_Setup_Parent_DrivenKeysWOffset(string $sel[]) // unlimited numbers of constraints  // maintain ofsset on default parent obj - create additional locator
+{
+	//$sel = `ls -sl`;
+	if (size($sel)<4) { 
+		print "Invalid Selection, select 4 objects, Group for Constraint, Control for setiing attribute, Default object, Second object to switch.\n"; 
+		return;
+	}
+	$baseLoc = createHelperLocatorSimpleO(( $sel[2] + $sel[0] + "_BaseLoc") , $sel[0], $sel[2], "", 0.04);
+	$sel[2] = $baseLoc;
+	int $numConst = size($sel) - 2;
+	for ($i = 2; $i<size($sel);$i++)
+		$arr[$i-2] = $sel[$i];
+	$charset = getFirstObj (`ls -type character`);
+	string $attrName = "ParentSpace";
+	if ( !`attributeExists $attrName $sel[1]` )
+		addAttributeM($sel[1], $attrName, $charset, ($numConst-1));
+	setParentDrivenKeysM($sel[1], $attrName, $sel[0], $arr );
+	select -r $sel[1];
+}
+
+proc A1_Setup_Parent_DrivenKeys() // unlimited numbers of constraints
+{
+	$sel = `ls -sl`;
+	if (size($sel)<4) { 
+		print "Invalid Selection, select 4 objects, Group for Constraint, Control for setiing attribute, Default object, Second object to switch.\n"; 
+		return;
+	}
+	int $numConst = size($sel) - 2;
+	for ($i = 2; $i<size($sel);$i++)
+		$arr[$i-2] = $sel[$i];
+	$charset = getFirstObj (`ls -type character`);
+	string $attrName = "ParentSpace";
+	//string $attrName = "Orient";
+	if ( !`attributeExists $attrName $sel[1]` )
+		addAttributeM($sel[1], $attrName, $charset, ($numConst-1));
+	setParentDrivenKeysM($sel[1], $attrName, $sel[0], $arr );
+	select -r $sel[1];
+
+}
+
+// ======================= УНИВЕРСАЛЬНЫЕ НАСТРОЙКИ ========================
+{
+
+////////////////////////////////////////////////////////////////////////
+// переименовать кости рук и ног в более менее нормальные имена для TW
+// руки
+if (objExists("arm_R0_3_jnt")) {
+    rename arm_R0_0_jnt upperArm_R0_jnt;
+    rename arm_R0_1_jnt upperArmTwist_R0_jnt;
+    rename arm_R0_2_jnt forearm_R0_jnt;
+    rename arm_R0_3_jnt forearmTwist_R0_jnt;
+    rename arm_R0_end_jnt hand_R0_jnt;
+}
+else if (objExists("arm_R0_2_jnt")) {
+    rename arm_R0_0_jnt upperArm_R0_jnt;
+    rename arm_R0_1_jnt forearm_R0_jnt;
+    rename arm_R0_2_jnt forearmTwist_R0_jnt;
+    rename arm_R0_end_jnt hand_R0_jnt;
+}
+else if (objExists("arm_R0_1_jnt")) {
+    rename arm_R0_0_jnt upperArm_R0_jnt;
+    rename arm_R0_1_jnt forearm_R0_jnt;
+    rename arm_R0_end_jnt hand_R0_jnt;
+}
+
+if (objExists("arm_L0_3_jnt")) {
+    rename arm_L0_0_jnt upperArm_L0_jnt;
+    rename arm_L0_1_jnt upperArmTwist_L0_jnt;
+    rename arm_L0_2_jnt forearm_L0_jnt;
+    rename arm_L0_3_jnt forearmTwist_L0_jnt;
+    rename arm_L0_end_jnt hand_L0_jnt;
+}
+else if (objExists("arm_L0_2_jnt")) {
+    rename arm_L0_0_jnt upperArm_L0_jnt;
+    rename arm_L0_1_jnt forearm_L0_jnt;
+    rename arm_L0_2_jnt forearmTwist_L0_jnt;
+    rename arm_L0_end_jnt hand_L0_jnt;
+}
+else if (objExists("arm_L0_1_jnt")) {
+    rename arm_L0_0_jnt upperArm_L0_jnt;
+    rename arm_L0_1_jnt forearm_L0_jnt;
+    rename arm_L0_end_jnt hand_L0_jnt;
+}
+
+
+// ноги
+if (objExists("leg_R0_0_jnt"))
+    rename leg_R0_0_jnt legUpper_R0_jnt;
+    
+if (objExists("leg_R0_3_jnt")){
+    rename leg_R0_1_jnt legUpperTwist_R0_jnt;
+    rename leg_R0_2_jnt legLower_R0_jnt;
+    rename leg_R0_3_jnt legLowerTwist_R0_jnt;
+    rename leg_R0_end_jnt foot_R0_jnt;
+}
+else if (objExists("leg_R0_2_jnt")){
+    rename leg_R0_1_jnt legUpperTwist_R0_jnt;
+    rename leg_R0_2_jnt legLower_R0_jnt;
+    rename leg_R0_end_jnt foot_R0_jnt;
+}
+else if (objExists("arm_R0_1_jnt")){
+    rename leg_R0_1_jnt legLower_R0_jnt;
+    rename leg_R0_end_jnt foot_R0_jnt;
+}
+if (objExists("foot_R0_0_jnt"))
+    rename foot_R0_0_jnt toe_R0_jnt;
+
+    
+if (objExists("leg_L0_0_jnt"))
+    rename leg_L0_0_jnt legUpper_L0_jnt;
+    
+if (objExists("leg_L0_3_jnt")){
+    rename leg_L0_1_jnt legUpperTwist_L0_jnt;
+    rename leg_L0_2_jnt legLower_L0_jnt;
+    rename leg_L0_3_jnt legLowerTwist_L0_jnt;
+    rename leg_L0_end_jnt foot_L0_jnt;
+}
+else if (objExists("leg_L0_2_jnt")){
+    rename leg_L0_1_jnt legUpperTwist_L0_jnt;
+    rename leg_L0_2_jnt legLower_L0_jnt;
+    rename leg_L0_end_jnt foot_L0_jnt;
+}
+else if (objExists("arm_L0_1_jnt")){
+    rename leg_L0_1_jnt legLower_L0_jnt;
+    rename leg_L0_end_jnt foot_L0_jnt;
+}
+if (objExists("foot_L0_0_jnt"))
+    rename foot_L0_0_jnt toe_L0_jnt;
+    
+// спина
+if (objExists("spine_C0_hip_jnt"))
+    rename spine_C0_hip_jnt hips_C0_jnt;
+else if (objExists("spine_C0_0_jnt"))
+    rename spine_C0_0_jnt hips_C0_jnt;
+
+// голова
+if (objExists("neck_C0_head_jnt"))
+    rename neck_C0_head_jnt head_C0_jnt;
+else if (objExists("head_C0_0_jnt"))
+    rename head_C0_0_jnt head_C0_jnt;
+
+for ($i=100; $i>1; $i--)
+{
+    if (objExists("spine_C0_" + $i + "_jnt"))
+    {
+        rename ("spine_C0_" + $i + "_jnt") "chest_C0_jnt";
+        break;
+    }
+}
+
+
+
+// делаем Global вместо world_root
+parent -w global_C0_0_jnt;
+rename global_C0_0_jnt Global;
+delete "world_root";
+setAttr "Global.radius" 1.8;
+print ("=== SUCCESS 05: Renamed Arms, Legs and Global joints, according to the required naming principles!\n");
+
+
+////////////////////////////////////////////////////////////////////////
+setAttr "rig.ctl_vis_on_playback" 0;
+
+////////////////////////////////////////////////////////////////////////
+// визибилити разлочить всем контролам и скрыть
+source generateChannelMenu.mel; // for maya 2018
+source channelBoxCommand.mel; // for maya 2019
+select -r -add rig_controllers_grp;
+select -add "|rig";
+
+string $sel[] = `ls -sl`;
+for ($obj in $sel)
+{
+  if (`attributeExists "visibility" $obj`)
+  {
+    setAttr -lock false ($obj + ".visibility");
+    CBdeleteConnection ($obj + ".visibility");
+    setAttr -keyable false -channelBox false ($obj + ".visibility");
+  }      
+}
+print ("=== SUCCESS 02: Controls Visibility unlocked and hidden!\n");
+
+
+////////////////////////////////////////////////////////////////////////
+// залочить вращение контролов перемещения рук ( если конрол разделен на ротейт и транслейт )
+$objs = {
+"arm_R0_ik_ctl",
+"arm_L0_ik_ctl"
+};
+
+resetToDefaultValuesList $objs;
+for ($obj in $objs)
+{
+	 setAttr -lock true -keyable false -channelBox false ($obj + ".rx");
+	 setAttr -lock true -keyable false -channelBox false ($obj + ".ry");
+	 setAttr -lock true -keyable false -channelBox false ($obj + ".rz");
+}
+print ("=== SUCCESS 03: Arms separated Controls rotion attributes reseted and locked!\n");
+
+// убрать шейпы ненужных контролов
+//  - дублирующих контролов рук и ног
+//  - контролов объединяющих компоненты лица
+
+if(objExists("*_ikcns_ctl"))
+{
+    select "*_ikcns_ctl";
+    $objs = `ls -sl`;
+    $shapes = `listRelatives -fullPath -shapes $objs`;
+    if ( size($shapes) > 0 ) delete $shapes;
+    if (objExists("rig_controllers_grp"))
+        sets -rm "rig_controllers_grp" $objs; // remove this shapeless controls from controls selection set
+}
+
+
+$objs = {
+"faceControls_L0_ctl",
+"faceControls_R0_ctl"
+};
+for ($obj in $objs)
+    if(objExists($obj))
+    {
+        $shapes = `listRelatives -fullPath -shapes $obj`;
+        if ( size($shapes) > 0 ) delete $shapes;
+        if (objExists("rig_controllers_grp"))
+            sets -rm "rig_controllers_grp" $obj; // remove this shapeless controls from controls selection set
+    }
+
+print ("=== SUCCESS 04: Removed Shapes of cross-controls Arms and Legs!\n");
+
+// залочить лишние ротейты второстепенных фаланг пальцев
+/*$objs = {
+"fingerIndex_L0_fk1_ctl",
+"fingerMiddle_L0_fk1_ctl",
+"fingerLittle_L0_fk1_ctl",
+"fingerThumb_L0_fk1_ctl",
+"fingerRing_L0_fk1_ctl",
+"fingerIndex_R0_fk1_ctl",
+"fingerMiddle_R0_fk1_ctl",
+"fingerLittle_R0_fk1_ctl",
+"fingerThumb_R0_fk1_ctl",
+"fingerRing_R0_fk1_ctl",
+"fingerIndex_L0_fk2_ctl",
+"fingerMiddle_L0_fk2_ctl",
+"fingerLittle_L0_fk2_ctl",
+"fingerThumb_L0_fk2_ctl",
+"fingerRing_L0_fk2_ctl",
+"fingerIndex_R0_fk2_ctl",
+"fingerMiddle_R0_fk2_ctl",
+"fingerLittle_R0_fk2_ctl",
+"fingerThumb_R0_fk2_ctl",
+"fingerRing_R0_fk2_ctl"
+};
+*/
+select -cl;
+if(objExists("finger*_*_fk1_ctl"))
+    select -add "finger*_*_fk1_ctl";
+if(objExists("finger*_*_fk2_ctl"))
+    select -add "finger*_*_fk2_ctl";
+
+$objs = `ls -sl`;
+if ( size($obj) > 0 ){
+    for ($obj in $objs)
+    {
+      if (`attributeExists "rotateX" $obj`) setAttr -lock true -keyable false -channelBox false ($obj + ".rx");
+      if (`attributeExists "rotateY" $obj`) setAttr -lock true -keyable false -channelBox false ($obj + ".ry");
+    }
+}
+print ("=== SUCCESS 05: Fingers unused rotation axis removed!\n");
+
+
+////////////////////////////////////////////////////////////////////////
+// убираем залочку аттрибутов костей, иначе ключи не бейкаются на кости
+select -r Global;
+select -hi;
+$sel = `ls -sl -typ joint -dag`;
+if(size($sel) > 0){
+    for ($obj in $sel)
+    {
+        setAttr -cb off ($obj + ".rotateX");
+        setAttr -cb off ($obj + ".rotateY");
+        setAttr -cb off ($obj + ".rotateZ");
+        setAttr -cb off ($obj + ".scaleX");
+        setAttr -cb off ($obj + ".scaleY");
+        setAttr -cb off ($obj + ".scaleZ");
+        setAttr -cb off ($obj + ".translateX");
+        setAttr -cb off ($obj + ".translateY");
+        setAttr -cb off ($obj + ".translateZ");
+        setAttr -k on ($obj + ".rotateX");
+        setAttr -k on ($obj + ".rotateY");
+        setAttr -k on ($obj + ".rotateZ");
+        setAttr -k on ($obj + ".scaleX");
+        setAttr -k on ($obj + ".scaleY");
+        setAttr -k on ($obj + ".scaleZ");
+        setAttr -k on ($obj + ".translateX");
+        setAttr -k on ($obj + ".translateY");
+        setAttr -k on ($obj + ".translateZ");
+    }
+}
+print ("=== SUCCESS 06: Joints attribute locking removed, now they can baked!\n");
+
+
+///////////////////////////////////////////////////////////////////////
+// проставляем  Mirror Labesl на кости
+select -r Global;
+$sel = `ls -sl`;
+int $count = 0;
+$obj = "";
+if (size($sel)>0) {
+    string $joints[] = `ls -sl -typ joint -dag`;
+    if(size($joints) > 0) {
+        for ($obj in $joints) {
+            setAttr ($obj + ".type") 18;
+            string $LabelName = `substitute "_L" $obj ""`;
+            if ($LabelName != $obj) 
+                setAttr ($obj + ".side") 1;
+            if ($LabelName == $obj) {
+                $LabelName = `substitute "_R" $obj ""`;
+                if ($LabelName != $obj) 
+                    setAttr ($obj + ".side") 2;
+            }
+            if ($LabelName == $obj) print ("=== INFO: " + $obj + " not sided.\n");
+            else {
+                if ((`match "_L" $LabelName` != "") || (`match "_R" $LabelName` != "") ) print ("!!! ERROR: " + $obj + " has to much side-suffixes!\n");
+                else {
+                    setAttr -type "string" ($obj + ".otherType") $LabelName; 
+                    $count++;
+                    //print ("    " + $obj + "\t\t\t\t replaced by " + $LabelName + "\n");
+                }
+            }
+        }
+        print ("\n=== SUCCESS 07: Labels setted to " + $count + " joints!\n");
+    }
+    else error "Sorry, in your selection joints not found!\n";
+}
+else error "Selection is empty! Select someting! Root or hierarchy, no matter.\n";
+
+}
+
+
+///////////////////////////////////////////////////////////////////////
+//  придрайвенкеить слоты оружия между кистью и предплечьем
+$objs = {
+"item_L0_ctl",
+"hand_L0_jnt",
+"forearm_L0_0_jnt"
+};
+
+for ($i=0; $i<size($objs); $i+=3)
+{
+    if ( objExists($objs[0]) )
+    {	
+        string $sel[] = {};
+        string $npo = `group -r $objs[0]`; 
+        xform -os -piv 0 0 0 $npo; 
+        rename $npo ($objs[0] + "_npo");
+        
+        $sel[0] = ($objs[0] + "_npo"); 
+        $sel[1] = $objs[0]; 
+        for ($i = 1; $i< size($objs); $i++ ) 
+            $sel[$i+1] = $objs[$i];
+
+        A1_Setup_Parent_DrivenKeysWOffset($sel);
+    }
+}
+
+
+$objs = {
+"item_R0_ctl",
+"hand_R0_jnt",
+"forearm_R0_0_jnt",
+"forearmTwist_R0_jnt"
+};
+
+for ($i=0; $i<size($objs); $i+=3)
+{
+    if ( objExists($objs[0]) )
+    {	
+        string $sel[] = {};
+        string $npo = `group -r $objs[0]`; 
+        xform -os -piv 0 0 0 $npo; 
+        rename $npo ($objs[0] + "_npo");
+        
+        $sel[0] = ($objs[0] + "_npo"); 
+        $sel[1] = $objs[0]; 
+        for ($i = 1; $i< size($objs); $i++ ) 
+            $sel[$i+1] = $objs[$i];
+
+        A1_Setup_Parent_DrivenKeysWOffset($sel);
+    }
+}
+
+print ("\n=== SUCCESS 08: Item controlsConstrained!\n");
+
+
+// переносим аттрибуты ног/рук и тп с UI контролов на соответствующие контролы ног и рук
+// проверить не поломается ли переключение IK/FK из синоптика
+
+// usage in scripting in MEL!!!
+// rsSubsAttributeCmd ( "legUI_R0_ctl.leg_reverse", "leg_R0_ik_ctl" );
+
+$objs = {
+// руки правые
+"armUI_R0_ctl","shoulder_rotRef","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_ikref","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_ikRotRef","arm_R0_ikRot_ctl",
+"armUI_R0_ctl","arm_upvref","arm_R0_upv_ctl",
+"armUI_R0_ctl","arm_elbowref","arm_R0_mid_ctl",       // проверить есть ли такой контрол в руках что используются для RJ
+"armUI_R0_ctl","arm_roll","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_aproll","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_ikscale","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_maxstretch","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_slide","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_softness","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_reverse","arm_R0_ik_ctl",
+"armUI_R0_ctl","arm_roundness","arm_R0_ik_ctl",
+
+// руки левые
+"armUI_L0_ctl","shoulder_rotRef","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_ikref","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_ikRotRef","arm_L0_ikRot_ctl",
+"armUI_L0_ctl","arm_upvref","arm_L0_upv_ctl",
+"armUI_L0_ctl","arm_elbowref","arm_L0_mid_ctl",
+
+"armUI_L0_ctl","arm_roll","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_aproll","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_ikscale","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_maxstretch","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_slide","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_softness","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_reverse","arm_L0_ik_ctl",
+"armUI_L0_ctl","arm_roundness","arm_L0_ik_ctl",
+
+// ноги правые
+"legUI_R0_ctl","leg_ikref","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_upvref","leg_R0_upv_ctl",
+"legUI_R0_ctl","leg_kneeref","leg_R0_mid_ctl",
+"legUI_R0_ctl","foot_angle_0","foot_R0_roll_ctl",
+"legUI_R0_ctl","leg_roll","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_ikscale","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_maxstretch","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_slide","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_softness","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_reverse","leg_R0_ik_ctl",
+"legUI_R0_ctl","leg_roundness","leg_R0_ik_ctl",
+
+// ноги левые
+"legUI_L0_ctl","leg_ikref","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_upvref","leg_L0_upv_ctl",
+"legUI_L0_ctl","leg_kneeref","leg_L0_mid_ctl",
+"legUI_L0_ctl","foot_angle_0","foot_L0_roll_ctl",
+"legUI_L0_ctl","leg_roll","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_ikscale","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_maxstretch","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_slide","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_softness","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_reverse","leg_L0_ik_ctl",
+"legUI_L0_ctl","leg_roundness","leg_L0_ik_ctl",
+
+// спина spine_S_shape_01
+"spineUI_C0_ctl","spine_maxstretch","spine_C0_ik1_ctl",
+"spineUI_C0_ctl","spine_maxsquash","spine_C0_ik1_ctl",
+"spineUI_C0_ctl","spine_softness","spine_C0_ik1_ctl",
+"spineUI_C0_ctl","spine_position","spine_C0_ik1_ctl",
+"spineUI_C0_ctl","spine_lock_ori1","spine_C0_ik1_ctl",
+"spineUI_C0_ctl","spine_tan1","spine_C0_ik1_ctl",
+"spineUI_C0_ctl","spine_lock_ori0","spine_C0_ik0_ctl",
+"spineUI_C0_ctl","spine_tan0","spine_C0_ik0_ctl"
+
+
+};
+
+for ($i = 0; $i< size($objs); $i+=3)
+{
+    $cc = 0;
+    $sobj = $objs[$i];
+    $attrName = $objs[$i+1];
+    $dobj = $objs[$i+2];
+    if ( objExists($sobj) ) {
+        if (!attributeExists( $attrName, $sobj) ) { print ("!!! Error: Attribute < " + $sobj + "." + $attrName + " >  not found!\n"); $cc = 1; }
+    }
+    else { print ("!!! Error: Source object  < " + $sobj + " >  not found\n"); $cc = 1; }
+    if ( !objExists($dobj) ) { print ("!!! Error: Destination object  < " + $dobj + " >  not found\n"); $cc = 1; }
+    if ($cc !=0 ) continue;
+    
+    rsSubsAttributeCmd ( ($sobj + "." + $attrName) , $dobj );
+
+}
+
+print ("=== SUCCESS 09: Attributes Transfered from UI to Arms, Legs and Spine controls!\n");
+
+// удаляем аттрибуты-разделители рук
+
+/*
+catch (`deleteAttr -attribute "arm_arm" "armUI_R0_ctl"`);
+catch (`deleteAttr -attribute "shoulder_shoulder" "armUI_R0_ctl"`);
+catch (`deleteAttr -attribute "arm_arm" "armUI_L0_ctl"`);
+catch (`deleteAttr -attribute "shoulder_shoulder" "armUI_L0_ctl"`);
+
+// ног
+catch (`deleteAttr -attribute "leg_leg" "legUI_R0_ctl"`);
+catch (`deleteAttr -attribute "foot_foot" "legUI_R0_ctl"`);
+catch (`deleteAttr -attribute "leg_leg" "legUI_L0_ctl"`);
+catch (`deleteAttr -attribute "foot_foot" "legUI_L0_ctl"`);
+*/
+
+$objs = {
+"arm_arm", "armUI_R0_ctl",
+"shoulder_shoulder", "armUI_R0_ctl",
+"arm_arm", "armUI_L0_ctl",
+"shoulder_shoulder", "armUI_L0_ctl",
+
+// ног
+"leg_leg", "legUI_R0_ctl",
+"foot_foot", "legUI_R0_ctl",
+"leg_leg", "legUI_L0_ctl",
+"foot_foot", "legUI_L0_ctl",
+"spine_spine", "spineUI_C0_ctl"
+};
+
+
+for ($i = 0; $i< size($objs); $i+=2)
+{
+    $cc = 0;
+    $sobj = $objs[$i+1];
+    $attrName = $objs[$i];
+
+    if ( objExists($sobj) ) {
+        if (!attributeExists( $attrName, $sobj) ) { print ("!!! Error: Attribute < " + $sobj + "." + $attrName + " >  not found!\n"); $cc = 1; }
+    }
+    else { print ("!!! Error: Source object  < " + $sobj + " >  not found\n"); $cc = 1; }
+    if ($cc !=0 ) continue;
+    
+    catch (`deleteAttr -attribute $attrName $sobj`);
+
+}
+
+print ("=== SUCCESS 10: Trash Attributes deleted!\n");
+
+
+// ======================= ИНДИВИДУАЛЬНЫЕ НАСТРОЙКИ ========================
+
+
+
+   
